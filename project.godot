@@ -13,7 +13,7 @@ config_version=5
 config/name="zancho"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.6", "Mobile")
-config/icon="uid://b0vv04dpirbdn"
+config/icon="uid://mf223lj1uiqf"
 config/windows_native_icon="res://assets/zancho.ico"
 
 [physics]
