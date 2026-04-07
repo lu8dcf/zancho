@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://b56mm61t18ovn"]
-
-[node name="Suelo" type="Node3D" unique_id=882600302]
-
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=373757835]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10311365, -0.8627894, -1.385448)
-use_collision = true
-size = Vector3(19.161957, 1, 15.177292)
