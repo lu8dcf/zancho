@@ -11,7 +11,6 @@ config_version=5
 [application]
 
 config/name="zancho"
-run/main_scene="uid://blr7p1nxk6ijq"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="uid://mf223lj1uiqf"
