@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://yawkta5sggjc"]
+
+[ext_resource type="PackedScene" uid="uid://dwokd3046i3ih" path="res://modelos/animal-cat.glb" id="1_q8c2j"]
+[ext_resource type="Script" uid="uid://dh4xisv0vnhf" path="res://objetos/animal_cat.gd" id="2_ux6hw"]
+
+[node name="animal-cat2" unique_id=1171871538 instance=ExtResource("1_q8c2j")]
+script = ExtResource("2_ux6hw")
+
+[node name="animal-cat" parent="." index="0" unique_id=1547537492]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="body" parent="animal-cat/root" parent_id_path=PackedInt32Array(1909010620) index="0" unique_id=2022792644]
+transform = Transform3D(0.9824088, 0.17322516, 0.069756456, -0.17364816, 0.9848077, -4.656613e-10, -0.0686967, -0.01211308, 0.9975641, 1.5731821e-08, 0.18124998, -3.8083503e-08)
+
+[node name="tail" parent="animal-cat/root/body" index="1" unique_id=2020926707]
+transform = Transform3D(0.9396926, -0.34202015, 0, 0.34202015, 0.9396926, 0, 0, 0, 1, 0, 0.6375, -0.5483935)

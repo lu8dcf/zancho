@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://uqd8nj5nco41"]
+
+[ext_resource type="Script" uid="uid://vawytnt5v4mq" path="res://objetos/jugador.gd" id="1_aj8vv"]
+[ext_resource type="PackedScene" uid="uid://yawkta5sggjc" path="res://objetos/animal_cat.tscn" id="2_3eei6"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0xj6y"]
+load_path = "res://.godot/imported/colormap.png-a8ce6dfdc704f89de39355696de036dd.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_30g6c"]
+albedo_texture = SubResource("CompressedTexture2D_0xj6y")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_aj8vv"]
+radius = 0.80908203
+height = 1.6181641
+
+[node name="Jugador" type="CharacterBody3D" unique_id=1624947792]
+script = ExtResource("1_aj8vv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=957050501]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0135451555, 0.0968177, 0.010062456)
+material_override = SubResource("StandardMaterial3D_30g6c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1463167965]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.70135844, 0)
+shape = SubResource("CapsuleShape3D_aj8vv")
+
+[node name="animal-cat2" parent="." unique_id=583317635 instance=ExtResource("2_3eei6")]
+
+[node name="Camera_controller" type="Node3D" parent="." unique_id=1923149615]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+top_level = true
+
+[node name="Camera_target" type="Node3D" parent="Camera_controller" unique_id=1306338086]
+transform = Transform3D(1, 0, 0, 0, 0.8476412, 0.53057045, 0, -0.53057045, 0.8476412, 0.24179089, 3.6117039, 7.1648946)
+
+[node name="Camera3D" type="Camera3D" parent="Camera_controller/Camera_target" unique_id=1819042816]
+transform = Transform3D(1, 0, 0, 0, 0.9988973, -0.046949595, 0, 0.046949595, 0.9988973, -0.20856291, 0.70764804, 0.3961029)
+fov = 49.0344
