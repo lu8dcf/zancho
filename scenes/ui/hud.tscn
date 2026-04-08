@@ -1,0 +1,162 @@
+[gd_scene format=3 uid="uid://deemj8v7vrxfr"]
+
+[ext_resource type="Script" uid="uid://jamx7xfkycmi" path="res://scenes/ui/hud.gd" id="1_hqnrr"]
+[ext_resource type="PackedScene" uid="uid://dw6tl6131xrlf" path="res://scenes/ui/components/label.tscn" id="2_bo48s"]
+[ext_resource type="PackedScene" uid="uid://bqni6dtq4ps16" path="res://scenes/ui/components/button_tienda.tscn" id="3_bo48s"]
+
+[node name="Hud" type="CanvasLayer" unique_id=1065574844]
+script = ExtResource("1_hqnrr")
+
+[node name="Control" type="Control" parent="." unique_id=2092851135]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelSuperior" type="Panel" parent="Control" unique_id=66414413]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 64.0
+grow_horizontal = 2
+
+[node name="oleada" parent="Control/PanelSuperior" unique_id=4063466 instance=ExtResource("2_bo48s")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = -17.0
+offset_right = 41.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Oleada"
+
+[node name="monedas" parent="Control/PanelSuperior" unique_id=2037219633 instance=ExtResource("2_bo48s")]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 44.0
+offset_top = -17.0
+offset_right = 163.0
+offset_bottom = 17.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Monedas: "
+
+[node name="PanelInferior" type="Panel" parent="Control" unique_id=1024435106]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 128.0
+offset_top = -72.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Button" type="Button" parent="Control/PanelInferior" unique_id=1947220232]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 256.0
+offset_top = -36.0
+offset_right = 320.0
+offset_bottom = 36.0
+grow_vertical = 2
+text = "Pieza torre"
+autowrap_mode = 3
+
+[node name="PanelRey" type="Panel" parent="Control" unique_id=1017658866]
+layout_mode = 0
+offset_top = 512.0
+offset_right = 128.0
+offset_bottom = 648.0
+
+[node name="Label" parent="Control/PanelRey" unique_id=668148732 instance=ExtResource("2_bo48s")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -28.0
+offset_right = 28.0
+offset_bottom = 45.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Rey"
+
+[node name="vida" parent="Control/PanelRey" unique_id=1469193767 instance=ExtResource("2_bo48s")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.5
+offset_top = -17.0
+offset_right = 25.5
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Vida"
+
+[node name="PanelTienda" type="Panel" parent="Control" unique_id=2079506037]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -324.0
+offset_bottom = 324.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Label" parent="Control/PanelTienda" unique_id=859360507 instance=ExtResource("2_bo48s")]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 72.0
+offset_right = 291.0
+offset_bottom = 117.0
+theme_override_font_sizes/font_size = 32
+text = "Tienda de Piezas"
+
+[node name="Button" parent="Control/PanelTienda" unique_id=188874307 instance=ExtResource("3_bo48s")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.22500001
+anchor_top = 0.30900002
+anchor_right = 0.8
+anchor_bottom = 0.88900006
+offset_left = -6.0
+offset_top = -8.23201
+offset_right = -126.0
+offset_bottom = -320.07202
+
+[node name="ButtonTienda" type="Button" parent="Control" unique_id=34876469]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -38.5
+offset_right = -5.0
+offset_bottom = 38.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = " + "
+
+[connection signal="pressed" from="Control/ButtonTienda" to="." method="_on_button_tienda_pressed"]

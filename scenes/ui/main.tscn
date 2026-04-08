@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://bjbqonwb7pnfh"]
+
+[ext_resource type="Script" uid="uid://by43q6vkxfn8n" path="res://main.gd" id="1_0ay0p"]
+
+[node name="main" type="Control" unique_id=1651978815]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0ay0p")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2037196894]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.41215247, 0.41215247, 0.41215247, 1)
+
+[node name="Panel" type="Panel" parent="." unique_id=1744240751]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_right = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="play" type="Button" parent="Panel" unique_id=32408282]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_top = 65.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Play"
+
+[node name="credits" type="Button" parent="Panel" unique_id=544760065]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_top = 448.0
+offset_right = 128.0
+offset_bottom = 511.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Credits"
+
+[node name="options" type="Button" parent="Panel" unique_id=455079258]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_top = 191.0
+offset_right = 128.0
+offset_bottom = 254.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Options"
+
+[node name="exit" type="Button" parent="Panel" unique_id=595325682]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_top = 319.0
+offset_right = 128.0
+offset_bottom = 382.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Exit"
+
+[connection signal="pressed" from="Panel/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Panel/credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="Panel/options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Panel/exit" to="." method="_on_exit_pressed"]
