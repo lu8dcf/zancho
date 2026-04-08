@@ -4,9 +4,8 @@ extends Node3D
 var hud_escena = preload("res://scenes/ui/hud.tscn")
 
 func _ready() -> void:
-	# 2. Instanciar el nodo
+	
 	var hud = hud_escena.instantiate()
-	# 4. Añadir al árbol de escenas (necesario)
 	add_child(hud)
 
 

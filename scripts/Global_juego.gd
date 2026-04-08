@@ -10,11 +10,17 @@ var vidaMax: int = 20
 var oleada_actual: int = 1       # numero de oleada actual
 
 # Configuración de tienda
-var piezas_disponibles: Array = [
-	{"nombre": "Torre Flecha", "precio": 100},
-	{"nombre": "Torre Magia", "precio": 200},
-	{"nombre": "Torre Cañón", "precio": 150},
-	{"nombre": "Torre Hielo", "precio": 180}
+
+var piezas_inventario: Array = [
+	{"nombre": "Torre"},
+	{"nombre": "Peon"}
+]
+
+var piezas_disponibles_tienda: Array = [
+	{"nombre": "Peon", "precio": 150, "cantidad":7},
+	{"nombre": "Torre", "precio": 100, "cantidad":2},
+	{"nombre": "Alfil", "precio": 200, "cantidad":2},
+	{"nombre": "Caballo", "precio": 180, "cantidad":2}
 ]
 
 # estado de la tienda (si esta desplegada o no)
@@ -34,9 +40,11 @@ func añadir_monedas(cantidad: int) -> void:
 	monedas += cantidad
 	emit_signal("monedas_cambiadas", monedas)  # Notificar al HUD que cambió
 
-func gastar_monedas(cantidad: int) -> bool:
-	if monedas >= cantidad:
-		monedas -= cantidad
+func comprar_pieza(pieza) -> bool:
+	if monedas >= pieza["precio"]:
+		monedas -= pieza["precio"]
+		piezas_inventario.append(pieza)
+		
 		emit_signal("monedas_cambiadas", monedas)
 		return true
 	return false  # No hay suficiente dinero
