@@ -1,5 +1,4 @@
-Zancho  - plataformero 3d de supervivencia
-
+Zancho  - Tower defense - Supervivencia
 primer cambio
 
 este cambio en un stage
