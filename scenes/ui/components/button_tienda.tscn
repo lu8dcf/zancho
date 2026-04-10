@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bqni6dtq4ps16"]
+
+[node name="Button" type="Button" unique_id=188874307]
+offset_left = 66.0
+offset_top = 192.0
+offset_right = 130.0
+offset_bottom = 256.0
+text = "Torre"
