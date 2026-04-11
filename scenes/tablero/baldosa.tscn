@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://dfyyiy6ccyjmr"]
+
+[ext_resource type="Script" uid="uid://3epx16lu8m3k" path="res://scenes/tablero/baldosa.gd" id="1_ug7nx"]
+[ext_resource type="PackedScene" uid="uid://cv1vvwtvmlv0n" path="res://assets/modelos/baldosa1.glb" id="2_ugxcp"]
+[ext_resource type="PackedScene" uid="uid://cxvwh4mp4bg43" path="res://assets/modelos/baldosa2.glb" id="3_e5ivh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lwq43"]
+size = Vector3(2.0007324, 0.3199768, 2.0076904)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n346q"]
+size = Vector3(1.9645996, 0.12835693, 1.9647217)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ug7nx"]
+albedo_color = Color(1, 0.27450982, 1, 1)
+metallic = 0.49
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ebrun"]
+material = SubResource("StandardMaterial3D_ug7nx")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ug7nx"]
+
+[node name="Baldosa" type="Node3D" unique_id=1604592932]
+script = ExtResource("1_ug7nx")
+modelo_glb_claro = ExtResource("2_ugxcp")
+modelo_glb_oscuro = ExtResource("3_e5ivh")
+
+[node name="ContenedorModelo" type="Node3D" parent="." unique_id=1648569848]
+
+[node name="CuerpoEstatico" type="StaticBody3D" parent="." unique_id=1066728879]
+
+[node name="ColisionBaldosa" type="CollisionShape3D" parent="CuerpoEstatico" unique_id=208345129]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008911133, 0.014877319, -0.0015258789)
+shape = SubResource("BoxShape3D_lwq43")
+
+[node name="AreaInteraccion" type="Area3D" parent="." unique_id=924440966]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1341964, 0)
+
+[node name="ColisionArea" type="CollisionShape3D" parent="AreaInteraccion" unique_id=203223308]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.005493164, 0.118011475, 0.00579834)
+shape = SubResource("BoxShape3D_n346q")
+
+[node name="IndicadorSeleccion" type="Node3D" parent="." unique_id=388152945]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="IndicadorSeleccion" unique_id=1152541481]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18509567, 0)
+mesh = SubResource("PlaneMesh_ebrun")
+
+[node name="IndicadorResaltado" type="Node3D" parent="." unique_id=1105113973]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="IndicadorResaltado" unique_id=1640828427]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2907591, 0)
+mesh = SubResource("PlaneMesh_ug7nx")
