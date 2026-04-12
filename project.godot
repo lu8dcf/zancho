@@ -19,7 +19,7 @@ config/windows_native_icon="res://assets/zancho.ico"
 
 [autoload]
 
-GlobalJuego="*uid://ddgt0astfx6o4"
+globalJuego="*uid://ddgt0astfx6o4"
 
 [input]
 
