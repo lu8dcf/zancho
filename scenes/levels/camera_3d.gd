@@ -26,7 +26,6 @@ func _ready():
 	add_to_group("camara_principal")
 		# Configurar posición inicial
 	posicion_objetivo = centro_tablero
-	
 	# Aplicar rotación inicial
 	rotation_degrees = Vector3(rotacion_actual.x, rotacion_actual.y, 0)
 	
@@ -43,17 +42,19 @@ func _calcular_centro_tablero() -> Vector3:
 		return gestor_tablero.obtener_centro_tablero()
 	
 	# Si no se encuentra, usar posición por defecto para tablero 16x16
-	return Vector3(-1.05, 20, 29.56)
- 
+	return Vector3(0.45, 7.19, 29.32)
+
 func _input(evento):
 	if Input.is_key_pressed(KEY_SPACE):
-		print("centro: ", centro_tablero)
+		
 		var info_texto = "CÁMARA DEBUG\n"
 		info_texto += "Posición: " + str(position.snapped(Vector3(0.01, 0.01, 0.01))) + "\n"
 		info_texto += "Rotación: " + str(rotation_degrees.snapped(Vector3(0.1, 0.1, 0.1))) + "\n"
 		info_texto += "Objetivo: " + str(posicion_objetivo.snapped(Vector3(0.01, 0.01, 0.01))) + "\n"
 		info_texto += "Zoom: " + str(zoom_actual).pad_decimals(1) + "\n"
 		print(info_texto)
+		posicion_objetivo = centro_tablero
+		
 		
 	# Manejar zoom con rueda del mouse
 	if evento is InputEventMouseButton:
@@ -99,31 +100,55 @@ func manejar_movimiento_teclado(delta):
 	# NOTA: En Godot, FORWARD es -Z, BACK es +Z, RIGHT es +X, LEFT es -X
 	if Input.is_key_pressed(KEY_W) or Input.is_key_pressed(KEY_UP):
 		direccion_movimiento.z -= 1.0  # Adelante
-	if Input.is_key_pressed(KEY_S) or Input.is_key_pressed(KEY_DOWN):
-		direccion_movimiento.z += 1.0  # Atrás
-	if Input.is_key_pressed(KEY_A) or Input.is_key_pressed(KEY_LEFT):
-		direccion_movimiento.x -= 1.0  # Izquierda
-	if Input.is_key_pressed(KEY_D) or Input.is_key_pressed(KEY_RIGHT):
-		direccion_movimiento.x += 1.0  # Derecha
+	#if Input.is_key_pressed(KEY_S) or Input.is_key_pressed(KEY_DOWN):
+		#direccion_movimiento.z += 1.0  # Atrás
+	#if Input.is_key_pressed(KEY_A) or Input.is_key_pressed(KEY_LEFT):
+		#direccion_movimiento.x -= 1.0  # Izquierda
+	#if Input.is_key_pressed(KEY_D) or Input.is_key_pressed(KEY_RIGHT):
+		#direccion_movimiento.x += 1.0  # Derecha
 	
-	# Velocidad aumentada con Shift
+	if direccion_movimiento.length() <= 0:
+		return
+	
+	# Normalizar dirección
+	direccion_movimiento = direccion_movimiento.normalized()
+	
+	# Velocidad con Shift
 	var velocidad_actual = velocidad_movimiento
 	if Input.is_key_pressed(KEY_SHIFT):
 		velocidad_actual *= 2.5
 	
-	# Aplicar movimiento si hay dirección
-	if direccion_movimiento.length() > 0:
-		direccion_movimiento = direccion_movimiento.normalized()
-		
-		# CORRECCIÓN: Transformar la dirección según la rotación Y de la cámara
-		var angulo_y = deg_to_rad(rotacion_actual.y)
-		var direccion_rotada = Vector3(
-			direccion_movimiento.x * cos(angulo_y) + direccion_movimiento.z * sin(angulo_y),
-			0,
-			-direccion_movimiento.x * sin(angulo_y) + direccion_movimiento.z * cos(angulo_y)
-		)
-		
-		posicion_objetivo += direccion_rotada * velocidad_actual * delta
+	# CORRECCIÓN: Transformar dirección según rotación de cámara
+	# Obtener vectores de dirección de la cámara
+	var forward = global_transform.basis.z  # Hacia donde mira la cámara
+	var right = global_transform.basis.x    # Derecha de la cámara
+	
+	# Proyectar sobre el plano horizontal (ignorar Y)
+	forward.y = 0
+	right.y = 0
+	forward = forward.normalized()
+	right = right.normalized()
+	
+	var direccion_mundo = Vector3.ZERO
+	
+	# Adelante / Atrás (W/S)
+	if direccion_movimiento.z > 0:  # W - Adelante
+		direccion_mundo += forward
+	elif direccion_movimiento.z < 0:  # S - Atrás
+		direccion_mundo -= forward
+	
+	# Izquierda / Derecha (A/D)
+	if direccion_movimiento.x < 0:  # A - Izquierda
+		direccion_mundo -= right
+	elif direccion_movimiento.x > 0:  # D - Derecha
+		direccion_mundo += right
+	
+	# Normalizar para movimiento diagonal consistente
+	if direccion_mundo.length() > 0:
+		direccion_mundo = direccion_mundo.normalized()
+	
+	# Aplicar movimiento
+	posicion_objetivo += direccion_mundo * velocidad_actual * delta
 
 func actualizar_posicion_camara(delta):
 	var angulo_h = deg_to_rad(rotacion_actual.y)

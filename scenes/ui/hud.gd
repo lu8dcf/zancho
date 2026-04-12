@@ -13,20 +13,24 @@ extends CanvasLayer
 # panel de la tienda
 @onready var tienda_boton = $Control/BotonTienda
 @onready var tienda_contenido = $Control/PanelTienda
-@onready var tienda_botones = $Control/PanelTienda/PanelContainer
+@onready var tienda_botones = $Control/PanelTienda/ContenedorTienda
 @onready var monedas_label = $Control/PanelTienda/monedas
+
+#señales
+signal reiniciarCamara()
 
 func _ready():
 	# ocultar la tienda
 	tienda_contenido.visible = false
 	# Conectar las señales globales para actualizar la UI automáticamente
-	globalJuego.monedas_cambiadas.connect(_actualizar_monedas)
+	economia.monedas_cambiadas.connect(_actualizar_monedas)
+
 	globalJuego.vidas_cambiadas.connect(_actualizar_vidas)
 	globalJuego.oleada_cambiada.connect(_actualizar_oleada)
 	#globalJuego.tienda_estado_cambiado.connect(_actualizar_tienda)
 	
 	# Actualizar valores iniciales
-	_actualizar_monedas(globalJuego.monedas)
+	_actualizar_monedas(economia.monedas_actual)
 	_actualizar_vidas(globalJuego.vidas)
 	_actualizar_oleada(globalJuego.oleada_actual)
 	
@@ -53,3 +57,7 @@ func _on_button_tienda_pressed() -> void:
 
 func _on_boton_menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/ui/main.tscn")
+
+
+func _on_boton_reiniciar_camara_pressed() -> void:
+	print("hola, trabajo en esto")

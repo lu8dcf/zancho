@@ -8,11 +8,12 @@ extends Panel
 
 func _ready():
 	# Conectar las señales globales para actualizar la UI automáticamente
-	globalJuego.monedas_cambiadas.connect(_actualizar_monedas)
+	economia.monedas_cambiadas.connect(_actualizar_monedas)
+	economia.pieza_vendida.connect(_crear_botones_piezas_tienda)
 	
 	
 	# Actualizar valores iniciales
-	_actualizar_monedas(globalJuego.monedas)
+	_actualizar_monedas(economia.monedas_actual)
 	
 	configurar_tienda()
 
@@ -27,7 +28,7 @@ func espaciado():
 	# Configurar espaciado para tienda
 	if tienda_botones and tienda_botones is GridContainer:
 		# Espaciado horizontal y vertical entre botones
-		tienda_botones.add_theme_constant_override("h_separation", 15)
+		tienda_botones.add_theme_constant_override("h_separation", 40)
 		tienda_botones.add_theme_constant_override("v_separation", 15)
 
 # Funcion de botones
@@ -36,7 +37,7 @@ func _crear_botones_piezas_tienda() -> void:
 	for hijo in tienda_botones.get_children():
 		hijo.queue_free()
 	
-	for pieza in globalJuego.piezas_disponibles_tienda:
+	for pieza in economia.piezas_disponibles_tienda:
 		# Crear un botón nuevo
 		var boton = Button.new()
 		
@@ -56,24 +57,31 @@ func _crear_botones_piezas_tienda() -> void:
 		
 		# Conectar la señal de click
 		boton.pressed.connect(_on_pieza_comprar_clicked.bind(pieza))
-		
+		if pieza["precio"] > economia.monedas_actual:
+			boton.disabled = true
+		if  _obtener_pieza_cant_max(pieza["nombre"]):
+			boton.disabled = true
+			boton.text = pieza["nombre"] + "\n" + str(pieza["precio"])+ "\n" + "MAX"
+			
 		# Agregar el botón al contenedor
 		tienda_botones.add_child(boton)
 
+func _obtener_pieza_cant_max(nombre_pieza:String) -> bool:
+	var cantidad_actual = 0
+	for pieza in economia.inventario_actual:
+		if pieza["nombre"] == nombre_pieza and  pieza["cantidad"] == pieza["max"]:
+			return true
+	return false
+
+
 # logica de botones
 func _on_pieza_comprar_clicked(pieza: Dictionary) -> void:
-	if globalJuego.monedas >= pieza["precio"]:
-		print("✅ Seleccionaste: ", pieza["nombre"])
-		print("💰 Precio: ", pieza["precio"])
-		globalJuego.comprar_pieza(pieza)
+	if economia.monedas_actual >= pieza["precio"]:
+		economia.comprar_pieza(pieza)
 		# SEÑAL AL JUEGO 3D PARA COLOCAR LA PIEZA
 		# emit_signal("torre_seleccionada", pieza["tipo"], pieza["precio"])
-	else:
-		print("❌ No tienes suficiente dinero para ", pieza["nombre"])
-		print("💰 Necesitas: ", pieza["precio"], " | Tienes: ", globalJuego.monedas)
-
-func _on_pieza_clicked(pieza: Dictionary) -> void:
-	print("clickeando")
+		_crear_botones_piezas_tienda()
+		
 
 
 func _on_boton_menu_pressed() -> void:

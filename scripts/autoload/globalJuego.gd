@@ -4,36 +4,18 @@ extends Node
 # Ejemplo: GameGlobal.monedas, GameGlobal.oleada_actual, etc.
 
 
-var monedas: int = 500           # dinero inicial para comprar torres
 var vidas: int = 20              # vidas del castillo/jugador
 var vidaMax: int = 20
 var oleada_actual: int = 1       # numero de oleada actual
 
-# Configuración de tienda
-
-var piezas_inventario: Array = [
-	{"nombre": "Torre"},
-	{"nombre": "Peon"}
-]
-
-var piezas_disponibles_tienda: Array = [
-	{"nombre": "Peon", "precio": 150, "cantidad":7},
-	{"nombre": "Torre", "precio": 100, "cantidad":2},
-	{"nombre": "Alfil", "precio": 200, "cantidad":2},
-	{"nombre": "Caballo", "precio": 180, "cantidad":2}
-]
-
 # estado de la tienda (si esta desplegada o no)
 var tienda_desplegada: bool = false
 
-
 # señales para modificar el hud
 
-signal monedas_cambiadas(nuevas_monedas)
 signal vidas_cambiadas(nuevas_vidas)
 signal oleada_cambiada(nueva_oleada)
 signal tienda_estado_cambiado(desplegada)
-
 
 
 func perder_vida(cantidad: int = 1) -> void:
