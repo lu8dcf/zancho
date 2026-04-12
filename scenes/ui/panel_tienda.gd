@@ -8,11 +8,11 @@ extends Panel
 
 func _ready():
 	# Conectar las señales globales para actualizar la UI automáticamente
-	GlobalJuego.monedas_cambiadas.connect(_actualizar_monedas)
+	globalJuego.monedas_cambiadas.connect(_actualizar_monedas)
 	
 	
 	# Actualizar valores iniciales
-	_actualizar_monedas(GlobalJuego.monedas)
+	_actualizar_monedas(globalJuego.monedas)
 	
 	configurar_tienda()
 
@@ -36,7 +36,7 @@ func _crear_botones_piezas_tienda() -> void:
 	for hijo in tienda_botones.get_children():
 		hijo.queue_free()
 	
-	for pieza in GlobalJuego.piezas_disponibles_tienda:
+	for pieza in globalJuego.piezas_disponibles_tienda:
 		# Crear un botón nuevo
 		var boton = Button.new()
 		
@@ -62,15 +62,15 @@ func _crear_botones_piezas_tienda() -> void:
 
 # logica de botones
 func _on_pieza_comprar_clicked(pieza: Dictionary) -> void:
-	if GlobalJuego.monedas >= pieza["precio"]:
+	if globalJuego.monedas >= pieza["precio"]:
 		print("✅ Seleccionaste: ", pieza["nombre"])
 		print("💰 Precio: ", pieza["precio"])
-		GlobalJuego.comprar_pieza(pieza)
+		globalJuego.comprar_pieza(pieza)
 		# SEÑAL AL JUEGO 3D PARA COLOCAR LA PIEZA
 		# emit_signal("torre_seleccionada", pieza["tipo"], pieza["precio"])
 	else:
 		print("❌ No tienes suficiente dinero para ", pieza["nombre"])
-		print("💰 Necesitas: ", pieza["precio"], " | Tienes: ", GlobalJuego.monedas)
+		print("💰 Necesitas: ", pieza["precio"], " | Tienes: ", globalJuego.monedas)
 
 func _on_pieza_clicked(pieza: Dictionary) -> void:
 	print("clickeando")

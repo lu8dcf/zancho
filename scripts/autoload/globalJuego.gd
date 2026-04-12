@@ -35,19 +35,6 @@ signal oleada_cambiada(nueva_oleada)
 signal tienda_estado_cambiado(desplegada)
 
 
-# funciones para modificar
-func añadir_monedas(cantidad: int) -> void:
-	monedas += cantidad
-	emit_signal("monedas_cambiadas", monedas)  # Notificar al HUD que cambió
-
-func comprar_pieza(pieza) -> bool:
-	if monedas >= pieza["precio"]:
-		monedas -= pieza["precio"]
-		piezas_inventario.append(pieza)
-		
-		emit_signal("monedas_cambiadas", monedas)
-		return true
-	return false  # No hay suficiente dinero
 
 func perder_vida(cantidad: int = 1) -> void:
 	vidas -= cantidad

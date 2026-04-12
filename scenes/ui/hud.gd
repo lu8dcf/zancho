@@ -20,21 +20,21 @@ func _ready():
 	# ocultar la tienda
 	tienda_contenido.visible = false
 	# Conectar las señales globales para actualizar la UI automáticamente
-	GlobalJuego.monedas_cambiadas.connect(_actualizar_monedas)
-	GlobalJuego.vidas_cambiadas.connect(_actualizar_vidas)
-	GlobalJuego.oleada_cambiada.connect(_actualizar_oleada)
-	#GlobalJuego.tienda_estado_cambiado.connect(_actualizar_tienda)
+	globalJuego.monedas_cambiadas.connect(_actualizar_monedas)
+	globalJuego.vidas_cambiadas.connect(_actualizar_vidas)
+	globalJuego.oleada_cambiada.connect(_actualizar_oleada)
+	#globalJuego.tienda_estado_cambiado.connect(_actualizar_tienda)
 	
 	# Actualizar valores iniciales
-	_actualizar_monedas(GlobalJuego.monedas)
-	_actualizar_vidas(GlobalJuego.vidas)
-	_actualizar_oleada(GlobalJuego.oleada_actual)
+	_actualizar_monedas(globalJuego.monedas)
+	_actualizar_vidas(globalJuego.vidas)
+	_actualizar_oleada(globalJuego.oleada_actual)
 	
 func _actualizar_monedas(nuevas_monedas: int) -> void:
 	monedas_label.text = "💰 " + str(nuevas_monedas)
 
 func _actualizar_vidas(nuevas_vidas: int) -> void:
-	vidas_label.text = "❤️ " + str(nuevas_vidas) + "/" + str(GlobalJuego.vidaMax)
+	vidas_label.text = "❤️ " + str(nuevas_vidas) + "/" + str(globalJuego.vidaMax)
 
 func _actualizar_oleada(nueva_oleada: int) -> void:
 	oleada_label.text = " OLEADA " + str(nueva_oleada)

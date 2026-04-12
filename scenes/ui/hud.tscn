@@ -64,19 +64,6 @@ grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("3_8qguk")
 
-[node name="Button" type="Button" parent="Control/PanelInferior" unique_id=1947220232]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 256.0
-offset_top = -36.0
-offset_right = 320.0
-offset_bottom = 36.0
-grow_vertical = 2
-text = "Pieza torre"
-autowrap_mode = 3
-
 [node name="ContenedorInventario" type="GridContainer" parent="Control/PanelInferior" unique_id=225476072]
 layout_mode = 1
 anchors_preset = 15
@@ -87,6 +74,7 @@ offset_top = 2.0
 offset_right = -324.0
 grow_horizontal = 2
 grow_vertical = 2
+columns = 8
 
 [node name="PanelRey" type="Panel" parent="Control" unique_id=1017658866]
 layout_mode = 0

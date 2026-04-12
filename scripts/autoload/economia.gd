@@ -26,3 +26,4 @@ func comprar_pieza(tipo_pieza, costo):
 	esencia_actual -= costo
 	inventario_actual[tipo_pieza] += 1
 	# Emitir señal para actualizar la UI de la tienda
+	

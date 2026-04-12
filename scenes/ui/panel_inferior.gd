@@ -14,7 +14,7 @@ func _ready():
 # Funcion de botones
 
 func _crear_botones_piezas_inventario() -> void:
-	for pieza in GlobalJuego.piezas_inventario:
+	for pieza in globalJuego.piezas_inventario:
 		# Crear un botón nuevo
 		var boton = Button.new()
 		
@@ -32,15 +32,15 @@ func _crear_botones_piezas_inventario() -> void:
 
 # logica de botones
 func _on_pieza_comprar_clicked(pieza: Dictionary) -> void:
-	if GlobalJuego.monedas >= pieza["precio"]:
+	if globalJuego.monedas >= pieza["precio"]:
 		print("✅ Seleccionaste: ", pieza["nombre"])
 		print("💰 Precio: ", pieza["precio"])
-		GlobalJuego.comprar_pieza(pieza)
+		globalJuego.comprar_pieza(pieza)
 		# SEÑAL AL JUEGO 3D PARA COLOCAR LA PIEZA
 		# emit_signal("torre_seleccionada", pieza["tipo"], pieza["precio"])
 	else:
 		print("❌ No tienes suficiente dinero para ", pieza["nombre"])
-		print("💰 Necesitas: ", pieza["precio"], " | Tienes: ", GlobalJuego.monedas)
+		print("💰 Necesitas: ", pieza["precio"], " | Tienes: ", globalJuego.monedas)
 
 func _on_pieza_clicked(pieza: Dictionary) -> void:
 	print("clickeando")
