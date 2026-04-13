@@ -16,8 +16,6 @@ extends CanvasLayer
 @onready var tienda_botones = $Control/PanelTienda/ContenedorTienda
 @onready var monedas_label = $Control/PanelTienda/monedas
 
-#señales
-signal reiniciarCamara()
 
 func _ready():
 	# ocultar la tienda
@@ -60,4 +58,7 @@ func _on_boton_menu_pressed() -> void:
 
 
 func _on_boton_reiniciar_camara_pressed() -> void:
-	print("hola, trabajo en esto")
+	var camara = get_tree().get_first_node_in_group("camara_principal")
+	
+	if camara and camara is CamaraLibre3D:
+		camara.reiniciar_posicion()
