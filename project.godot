@@ -14,8 +14,10 @@ config/name="zancho"
 run/main_scene="uid://bjbqonwb7pnfh"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.6", "Mobile")
-config/icon="uid://mf223lj1uiqf"
-config/windows_native_icon="res://assets/zancho.ico"
+boot_splash/image="uid://dwqo5hkdt3k6n"
+config/icon="uid://dvve3m7bmohh"
+config/windows_native_icon="res://assets/icon/zancho.ico"
+boot_splash/minimum_display_time=3000
 
 [autoload]
 
