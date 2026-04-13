@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cm64e14y2btcw"]
 
-[ext_resource type="Script" uid="uid://dahjxui65dc6g" path="res://scenes/tablero/gestorTablero.gd" id="1_0y281"]
+[ext_resource type="Script" uid="uid://dahjxui65dc6g" path="res://scenes/tablero/gestor_tablero.gd" id="1_0y281"]
 [ext_resource type="PackedScene" uid="uid://dfyyiy6ccyjmr" path="res://scenes/tablero/baldosa.tscn" id="2_se8t3"]
 [ext_resource type="PackedScene" uid="uid://cv1vvwtvmlv0n" path="res://assets/modelos/baldosa1.glb" id="3_2caju"]
 [ext_resource type="PackedScene" uid="uid://cxvwh4mp4bg43" path="res://assets/modelos/baldosa2.glb" id="4_dlwah"]
