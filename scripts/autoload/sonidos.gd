@@ -31,6 +31,12 @@ func impacto():
 	var death_sound = AudioStreamPlayer3D.new()
 	death_sound.stream = preload("res://assets/sound/sfx/pieza_cae.mp3")
 	add_child(death_sound)
+	death_sound.volume_db = -10 + randf_range(-5, 5)
+	death_sound.pitch_scale = 0.8 + randf_range(-0.2, 0.2)
 	death_sound.play()
 	await death_sound.finished
 	death_sound.queue_free()
+	
+	
+	
+	

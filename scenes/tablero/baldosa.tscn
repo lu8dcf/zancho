@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://dfyyiy6ccyjmr"]
 
 [ext_resource type="Script" uid="uid://3epx16lu8m3k" path="res://scenes/tablero/baldosa.gd" id="1_ug7nx"]
-[ext_resource type="PackedScene" uid="uid://1trh1e3yht8w" path="res://assets/modelos/baldosa1.glb" id="2_ugxcp"]
-[ext_resource type="PackedScene" uid="uid://cot546vn7e7vy" path="res://assets/modelos/baldosa2.glb" id="3_e5ivh"]
+[ext_resource type="PackedScene" uid="uid://bbmv3ko5ov07m" path="res://assets/modelos/baldosa1.glb" id="2_ugxcp"]
+[ext_resource type="PackedScene" uid="uid://dlhcg4f5w73vn" path="res://assets/modelos/baldosa2.glb" id="3_e5ivh"]
 [ext_resource type="PackedScene" uid="uid://bnd1ypt7081oc" path="res://assets/modelos/seleccionroja.glb" id="4_e5ivh"]
-[ext_resource type="PackedScene" uid="uid://bxdd8noqfb0hd" path="res://assets/modelos/seleccion.glb" id="4_ugxcp"]
+[ext_resource type="PackedScene" uid="uid://dj24eg4u2u2wa" path="res://assets/modelos/seleccion.glb" id="4_ugxcp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lwq43"]
-size = Vector3(2.0007324, 0.3199768, 2.0076904)
+size = Vector3(2.0007324, 0.4626007, 2.0076904)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n346q"]
 size = Vector3(1.9645996, 0.12835693, 1.9647217)
@@ -31,7 +31,7 @@ modelo_glb_oscuro = ExtResource("3_e5ivh")
 [node name="CuerpoEstatico" type="StaticBody3D" parent="." unique_id=1066728879]
 
 [node name="ColisionBaldosa" type="CollisionShape3D" parent="CuerpoEstatico" unique_id=208345129]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008911133, 0.014877319, -0.0015258789)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008911133, 0.0322302, -0.0015258789)
 shape = SubResource("BoxShape3D_lwq43")
 
 [node name="AreaInteraccion" type="Area3D" parent="." unique_id=924440966]

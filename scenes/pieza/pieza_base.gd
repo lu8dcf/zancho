@@ -11,7 +11,7 @@ extends RigidBody3D
 @onready var mesh_instance = $MeshInstance3D
 @onready var health_bar = $HealthBar
 @onready var dust_particles = $DustParticles
-@onready var impact_audio = $ImpactAudio
+
 @onready var collision_timer = $CollisionTimer
 @onready var attack_timer = $AttackTimer
 
@@ -20,17 +20,16 @@ var is_alive: bool = true
 var can_attack: bool = true
 var target_piece: RigidBody3D = null
 var initial_health: int
+var no_esta_en_tablero = true
 
 func _ready():
 	# Configurar física
 	gravity_scale = 2.0
 	#rebote
 	physics_material_override.bounce =.5
-
-	mass = 1.0
-	
+		
 	# Configurar colisiones
-	collision_layer = 2
+	collision_layer = 1
 	collision_mask = 1 | 2
 	
 	# Conectar señales
@@ -39,6 +38,8 @@ func _ready():
 	# Inicializar UI
 	initial_health = health
 	update_health_bar()
+	
+	
 	
 	# Iniciar visión
 	start_vision_check()
@@ -83,27 +84,21 @@ func set_mesh_color(color: Color):
 	mesh_instance.material_override = material
 
 func _on_body_entered(body):
-	# Efecto de polvo
-	create_dust_effect()
 	
-	# Sonido de golpe
-	play_impact_sound()
+	if no_esta_en_tablero:
+		# Efecto de polvo
+		create_dust_effect()
+		# Sonido de golpe
+		Sonidos.impacto()
+		no_esta_en_tablero = true
 	
-	# Aplicar impulso al cuerpo que golpeó
-	if body is RigidBody3D and body != self:
-		var impact_force = linear_velocity.length() * 2
-		if impact_force > 5:
-			body.apply_central_impulse(-linear_velocity.normalized() * impact_force)
-
+	
 func create_dust_effect():
 	dust_particles.emitting = true
 	await get_tree().create_timer(0.5).timeout
 	dust_particles.emitting = false
 
-func play_impact_sound():
-	impact_audio.volume_db = -10 + randf_range(-5, 5)
-	impact_audio.pitch_scale = 0.8 + randf_range(-0.2, 0.2)
-	impact_audio.play()
+
 
 func start_vision_check():
 	while is_alive:
@@ -200,3 +195,6 @@ func die():
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector3.ZERO, 0.5)
 	tween.tween_callback(queue_free)
+
+
+	
