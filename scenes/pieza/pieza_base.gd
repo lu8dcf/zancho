@@ -11,9 +11,12 @@ extends RigidBody3D
 @onready var mesh_instance = $MeshInstance3D
 @onready var health_bar = $HealthBar
 @onready var dust_particles = $DustParticles
-
+@onready var contenedor_modelo : Node3D = $ContenedorModelo # contenedor modelo glb
 @onready var collision_timer = $CollisionTimer
 @onready var attack_timer = $AttackTimer
+
+@export var peon_blanco : PackedScene  # Modelo GLB para baldosa clara
+@export var rey_blanco : PackedScene  # Modelo GLB para baldosa oscura
 
 # Variables de estado
 var is_alive: bool = true
@@ -28,60 +31,45 @@ func _ready():
 	#rebote
 	physics_material_override.bounce =.5
 		
-	# Configurar colisiones
-	collision_layer = 1
-	collision_mask = 1 | 2
-	
-	# Conectar señales
-	body_entered.connect(_on_body_entered)
-	
+			
 	# Inicializar UI
 	initial_health = health
 	update_health_bar()
-	
-	
-	
+		
 	# Iniciar visión
 	start_vision_check()
 	
 	initialize(piece_type,team)
-	
+	cargar_modelo_glb()
 
 func initialize(p_type: String, p_team: String):
 	piece_type = p_type
 	team = p_team
-	setup_piece_properties()
+	
+	
+func cargar_modelo_glb():
+	if not contenedor_modelo:
+		push_error("Falta el nodo ContenedorModelo")
+		return
+	
+	# Limpiar modelos anteriores
+	for hijo in contenedor_modelo.get_children():
+		hijo.queue_free()
+	
+	# Seleccionar el modelo según el tipo
+	var modelo_a_cargar = peon_blanco
+	
+	if modelo_a_cargar:
+		var instancia_modelo = modelo_a_cargar.instantiate()
+		contenedor_modelo.add_child(instancia_modelo)
+	else:
+		push_error("No se ha asignado modelo GLB para baldosa tipo: ")
 
-func setup_piece_properties():
-	match piece_type:
-		"pawn":
-			health = 50
-			attack_damage = 20
-			vision_range = 4.0
-			set_mesh_color(Color(0.8, 0.6, 0.4))
-			print ("pawn")
-		"rook":
-			health = 100
-			attack_damage = 35
-			vision_range = 8.0
-			set_mesh_color(Color(0.6, 0.4, 0.8))
-		"knight":
-			health = 80
-			attack_damage = 30
-			vision_range = 5.0
-			set_mesh_color(Color(0.4, 0.7, 0.8))
 	
 	initial_health = health
 	update_health_bar()
 
-func set_mesh_color(color: Color):
-	var material = StandardMaterial3D.new()
-	material.albedo_color = color
-	if team == "red":
-		material.albedo_color = Color(color.r, color.g, color.b, 1.0)
-	else:
-		material.albedo_color = Color(color.r * 0.6, color.g * 0.6, color.b * 1.0, 1.0)
-	mesh_instance.material_override = material
+
 
 func _on_body_entered(body):
 	

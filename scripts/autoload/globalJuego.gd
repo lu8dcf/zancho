@@ -17,7 +17,7 @@ var tamano_tablero : Vector2i = Vector2i(16, 16)
 var espaciado_baldosas : float = 2.0
 
 # mapa
-var mapa = 1
+var mapa = 0
 
 # las piezas que estan activas en la partida
 var piezas_activas: Array[RigidBody3D] = []

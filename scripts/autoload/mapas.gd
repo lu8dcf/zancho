@@ -15,8 +15,10 @@ func _ready():
 	# Inicializar los mapas
 	mapas.append([Vector2i(0, 0), Vector2i(1, 1)])  # mapa 0 (índice 0)
 	obstaculos.append([2,2]) # obstaculos del mapa 0
+	
 	mapas.append([Vector2i(2, 2), Vector2i(3, 3)])  # mapa 1
 	obstaculos.append([1,1])   # obstaculos del mapa 1
+	
 	mapas.append([Vector2i(4, 4), Vector2i(5, 5)])  # mapa 2
 	obstaculos.append([1,2])   # obstaculos del mapa 2
 	
