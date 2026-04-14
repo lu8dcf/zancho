@@ -1,6 +1,6 @@
 extends Node
 
-
+var nueva_pieza: RigidBody3D
 
 
 func colocar_pieza(sitio: Vector2i, tipo: int , blanca: bool):
@@ -21,6 +21,9 @@ func colocar_pieza(sitio: Vector2i, tipo: int , blanca: bool):
 			pass
 		6: # reina
 			pass
+	
+	globalJuego.piezas_activas.append(nueva_pieza)
+	
 	
 # verificacion que el sitio este vacio para colocar la pieza
 func lugar_disponible(sitio: Vector2i):
