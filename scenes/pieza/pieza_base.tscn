@@ -39,11 +39,7 @@ physics_material_override = SubResource("PhysicsMaterial_c11s1")
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_c11s1")
-piece_type = null
-team = null
 health = 65
-attack_damage = null
-vision_range = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1654384154]
 transform = Transform3D(1.5, 0, 0, 0, 3, 0, 0, 0, 1.5, 0, 0, -0.026245356)

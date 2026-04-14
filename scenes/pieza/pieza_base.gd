@@ -85,6 +85,7 @@ func set_mesh_color(color: Color):
 
 func _on_body_entered(body):
 	
+	# este if es para que solo tenga un efecto de sonido cuando rebota 
 	if no_esta_en_tablero:
 		# Efecto de polvo
 		create_dust_effect()
