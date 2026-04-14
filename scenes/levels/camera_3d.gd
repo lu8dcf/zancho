@@ -6,9 +6,9 @@ class_name CamaraLibre3D
 @export var velocidad_rotacion : float = 0.3
 @export var sensibilidad_zoom : float = 2.0
 @export var zoom_minimo : float = 1.0
-@export var zoom_maximo : float = 40.0
+@export var zoom_maximo : float = 20.0
 @export var altura_minima : float = 2.0
-@export var altura_maxima : float = 25.0
+@export var altura_maxima : float = 20.0
 @export var suavizado_movimiento : float = 8.0
 @export var suavizado_rotacion : float = 8.0
 @export var distancia_minima_suelo :float = 1.0
