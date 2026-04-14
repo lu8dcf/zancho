@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://3rr01i83xrlh"]
 
-[ext_resource type="Texture2D" uid="uid://c0l3iklepvlun" path="res://assets/modelos/texturas/qwantani_moon_noon_puresky_4k.exr" id="1_65f8h"]
+[ext_resource type="Texture2D" uid="uid://b8oju5ddteuuf" path="res://assets/modelos/texturas/cielo.png" id="1_65f8h"]
 [ext_resource type="PackedScene" uid="uid://b5d4fv4f6o5iw" path="res://assets/modelos/entorno_completo.glb" id="1_asphf"]
 [ext_resource type="PackedScene" uid="uid://xu6ocrh3m123" path="res://assets/modelos/bordes.glb" id="2_65f8h"]
 
@@ -34,8 +34,7 @@ fog_height_density = 0.2
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=873933903]
 environment = SubResource("Environment_3d5tn")
 
-[node name="entorno_completo" parent="." unique_id=1756204594 instance=ExtResource("1_asphf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.031539917, -0.4408741, 30.017155)
+[node name="entorno_completo" parent="." unique_id=791396320 instance=ExtResource("1_asphf")]
 
 [node name="bordes" parent="." unique_id=382742394 instance=ExtResource("2_65f8h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.031539917, -0.4408741, 30.017155)
