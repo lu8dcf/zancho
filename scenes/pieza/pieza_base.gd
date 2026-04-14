@@ -24,8 +24,10 @@ var initial_health: int
 func _ready():
 	# Configurar física
 	gravity_scale = 2.0
-	
-	mass = 5.0
+	#rebote
+	physics_material_override.bounce =.5
+
+	mass = 1.0
 	
 	# Configurar colisiones
 	collision_layer = 2
@@ -36,10 +38,13 @@ func _ready():
 	
 	# Inicializar UI
 	initial_health = health
-	#update_health_bar()
+	update_health_bar()
 	
 	# Iniciar visión
-	#start_vision_check()
+	start_vision_check()
+	
+	initialize(piece_type,team)
+	
 
 func initialize(p_type: String, p_team: String):
 	piece_type = p_type
@@ -53,6 +58,7 @@ func setup_piece_properties():
 			attack_damage = 20
 			vision_range = 4.0
 			set_mesh_color(Color(0.8, 0.6, 0.4))
+			print ("pawn")
 		"rook":
 			health = 100
 			attack_damage = 35

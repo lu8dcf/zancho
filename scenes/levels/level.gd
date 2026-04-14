@@ -4,6 +4,7 @@ extends Node3D
 var hud_escena = preload("res://scenes/ui/hud.tscn")
 var tablero_escena = preload("res://scenes/tablero/gestorTablero.tscn")
 var entorno = preload("res://scenes/entorno/escenario.tscn")
+var pieza = preload("res://scenes/pieza/pieza_base.tscn")
 
 
 func _ready() -> void:
@@ -18,3 +19,6 @@ func _ready() -> void:
 	add_child(mapa)
 	
 	add_child(tablero)
+	
+	var rey = pieza.instantiate()
+	add_child(rey)

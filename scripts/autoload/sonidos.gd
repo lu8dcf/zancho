@@ -26,3 +26,11 @@ func death():
 	death_sound.play()
 	await death_sound.finished
 	death_sound.queue_free()
+	
+func impacto():
+	var death_sound = AudioStreamPlayer3D.new()
+	death_sound.stream = preload("res://assets/sound/sfx/pieza_cae.mp3")
+	add_child(death_sound)
+	death_sound.play()
+	await death_sound.finished
+	death_sound.queue_free()
