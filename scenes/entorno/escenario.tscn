@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://3rr01i83xrlh"]
+
+[ext_resource type="Texture2D" uid="uid://c0l3iklepvlun" path="res://assets/modelos/texturas/qwantani_moon_noon_puresky_4k.exr" id="1_65f8h"]
+[ext_resource type="PackedScene" uid="uid://b5d4fv4f6o5iw" path="res://assets/modelos/entorno_completo.glb" id="1_asphf"]
+[ext_resource type="PackedScene" uid="uid://xu6ocrh3m123" path="res://assets/modelos/bordes.glb" id="2_65f8h"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_6mpwl"]
+panorama = ExtResource("1_65f8h")
+energy_multiplier = 1.59
+
+[sub_resource type="Sky" id="Sky_rawsq"]
+sky_material = SubResource("PanoramaSkyMaterial_6mpwl")
+process_mode = 1
+radiance_size = 6
+
+[sub_resource type="Environment" id="Environment_3d5tn"]
+background_mode = 2
+sky = SubResource("Sky_rawsq")
+tonemap_mode = 3
+tonemap_exposure = 0.75
+ssr_fade_in = 0.0011718746
+ssr_depth_tolerance = 128.0
+sdfgi_enabled = true
+glow_enabled = true
+glow_levels/2 = 5.08
+fog_light_energy = 0.78
+fog_density = 0.001
+fog_sky_affect = 0.115
+fog_height = -16.2
+fog_height_density = 0.2
+
+[node name="Escenario" type="Node3D" unique_id=654484435]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=873933903]
+environment = SubResource("Environment_3d5tn")
+
+[node name="entorno_completo" parent="." unique_id=1756204594 instance=ExtResource("1_asphf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.031539917, -0.4408741, 30.017155)
+
+[node name="bordes" parent="." unique_id=382742394 instance=ExtResource("2_65f8h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.031539917, -0.4408741, 30.017155)

@@ -11,6 +11,15 @@ var oleada_actual: int = 1       # numero de oleada actual
 # estado de la tienda (si esta desplegada o no)
 var tienda_desplegada: bool = false
 
+# tablero
+var tamano_tablero : Vector2i = Vector2i(16, 16)
+var espaciado_baldosas : float = 2.0
+
+# mapa
+var mapa = 1
+
+
+
 # señales para modificar el hud
 
 signal vidas_cambiadas(nuevas_vidas)

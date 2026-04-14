@@ -4,6 +4,7 @@ extends Panel
 # panel de la tienda
 @onready var texto = $Label
 @onready var tienda_botones = $ContenedorTienda
+@onready var tienda_botones_reposicion = $ContenedorReposicion
 @onready var monedas_label = $monedas
 
 func _ready():
@@ -23,6 +24,7 @@ func _actualizar_monedas(nuevas_monedas: int) -> void:
 func configurar_tienda():
 	espaciado()
 	_crear_botones_piezas_tienda()
+	_crear_botones_piezas_tienda_reposicion()
 
 func espaciado():
 	# Configurar espaciado para tienda
@@ -59,19 +61,16 @@ func _crear_botones_piezas_tienda() -> void:
 		boton.pressed.connect(_on_pieza_comprar_clicked.bind(pieza))
 		if pieza["precio"] > economia.monedas_actual:
 			boton.disabled = true
-		if  _obtener_pieza_cant_max(pieza["nombre"]):
+		if economia.llego_al_limite(pieza["nombre"], 0):
 			boton.disabled = true
 			boton.text = pieza["nombre"] + "\n" + str(pieza["precio"])+ "\n" + "MAX"
 			
 		# Agregar el botón al contenedor
 		tienda_botones.add_child(boton)
 
-func _obtener_pieza_cant_max(nombre_pieza:String) -> bool:
-	var cantidad_actual = 0
-	for pieza in economia.inventario_actual:
-		if pieza["nombre"] == nombre_pieza and  pieza["cantidad"] == pieza["max"]:
-			return true
-	return false
+func _crear_botones_piezas_tienda_reposicion():
+	pass
+
 
 
 # logica de botones

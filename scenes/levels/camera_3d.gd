@@ -37,12 +37,24 @@ func _ready():
 
 func _calcular_centro_tablero() -> Vector3:
 	# Intentar encontrar el tablero automáticamente
-	var gestor_tablero = get_tree().get_first_node_in_group("gestor_tablero")
-	if gestor_tablero and gestor_tablero.has_method("obtener_centro_tablero"):
-		return gestor_tablero.obtener_centro_tablero()
+	#var gestor_tablero = get_tree().get_first_node_in_group("gestor_tablero")
+	#if gestor_tablero and gestor_tablero.has_method("obtener_centro_tablero"):
+		#return gestor_tablero.obtener_centro_tablero()
 	
 	# Si no se encuentra, usar posición por defecto para tablero 16x16
-	return Vector3(0.45, 7.19, 29.32)
+
+	return Vector3(0.66, 5.19, 29.32)
+
+func reiniciar_posicion():
+	# Aplicar el centro del tablero
+	posicion_objetivo = centro_tablero
+	# Aplicar rotación inicial
+	rotation_degrees = Vector3(rotacion_actual.x, rotacion_actual.y, 0)
+	rotacion_actual  = Vector2(-53, -44)
+	zoom_actual = 8.0
+	# Capturar mouse para mejor control (opcional)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 
 func _input(evento):
 	if Input.is_key_pressed(KEY_SPACE):
@@ -98,7 +110,7 @@ func manejar_movimiento_teclado(delta):
 	
 	# Movimiento horizontal (WASD y Flechas)
 	# NOTA: En Godot, FORWARD es -Z, BACK es +Z, RIGHT es +X, LEFT es -X
-	if Input.is_key_pressed(KEY_W) or Input.is_key_pressed(KEY_UP):
+	if Input.is_key_pressed(KEY_W):
 		direccion_movimiento.z -= 1.0  # Adelante
 	#if Input.is_key_pressed(KEY_S) or Input.is_key_pressed(KEY_DOWN):
 		#direccion_movimiento.z += 1.0  # Atrás
@@ -182,7 +194,7 @@ func actualizar_rotacion_camara(delta):
 	rotation_degrees = rotation_degrees.lerp(rotacion_objetivo, suavizado_rotacion * delta)
 	
 	# Asegurar que la cámara siempre mire al punto objetivo
-	look_at(posicion_objetivo)
+	#look_at(posicion_objetivo)
 
 # Métodos públicos útiles
 func enfocar_posicion(posicion: Vector3, suave: bool = true):

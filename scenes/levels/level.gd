@@ -3,6 +3,8 @@ extends Node3D
 # 1. Precargar la escena (fuera de la función para mejor rendimiento)
 var hud_escena = preload("res://scenes/ui/hud.tscn")
 var tablero_escena = preload("res://scenes/tablero/gestorTablero.tscn")
+var entorno = preload("res://scenes/entorno/escenario.tscn")
+
 
 func _ready() -> void:
 	
@@ -10,4 +12,9 @@ func _ready() -> void:
 	add_child(hud)
 
 	var tablero = tablero_escena.instantiate()
+	add_child(tablero)
+	
+	var mapa = entorno.instantiate()
+	add_child(mapa)
+	
 	add_child(tablero)
