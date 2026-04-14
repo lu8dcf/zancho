@@ -14,9 +14,9 @@ class_name CamaraLibre3D
 @export var distancia_minima_suelo :float = 1.0
 
 # Variables de estado interno
-var rotacion_actual : Vector2 = Vector2(-53, -44)  # Ángulo inicial de la cámara
+var rotacion_actual : Vector2 = Vector2(-53, -46)  # Ángulo inicial de la cámara
 var posicion_objetivo : Vector3
-var zoom_actual : float = 8.0
+var zoom_actual : float = 12.0
 var mouse_capturado : bool = false
 
 # Referencias
@@ -42,15 +42,7 @@ func _calcular_centro_tablero() -> Vector3:
 		return gestor_tablero.obtener_centro_tablero()
 	
 	# Si no se encuentra, usar posición por defecto para tablero 16x16
-	return Vector3(0.66, 5.19, 29.32)
-
-func reiniciar_posicion():
-	posicion_objetivo = centro_tablero
-	# Aplicar rotación inicial
-	rotation_degrees = Vector3(rotacion_actual.x, rotacion_actual.y, 0)
-	
-	# Capturar mouse para mejor control (opcional)
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	return Vector3(0.45, 7.19, 29.32)
 
 func _input(evento):
 	if Input.is_key_pressed(KEY_SPACE):
@@ -61,7 +53,7 @@ func _input(evento):
 		info_texto += "Objetivo: " + str(posicion_objetivo.snapped(Vector3(0.01, 0.01, 0.01))) + "\n"
 		info_texto += "Zoom: " + str(zoom_actual).pad_decimals(1) + "\n"
 		print(info_texto)
-		
+		posicion_objetivo = centro_tablero
 		
 		
 	# Manejar zoom con rueda del mouse

@@ -8,7 +8,7 @@
 script = ExtResource("1_377w7")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=186131115]
-transform = Transform3D(1, 0, 0, 0, 0.8462397, 0.53280246, 0, -0.53280246, 0.8462397, 16.718485, 14.827033, 23.68975)
+transform = Transform3D(1, 0, 0, 0, 0.8462397, 0.53280246, 0, -0.53280246, 0.8462397, 16.718485, 14.827033, 40.35907)
 script = ExtResource("2_bovvr")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=921601678]
