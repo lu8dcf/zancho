@@ -89,6 +89,7 @@ func finalizar_turno():
 func on_nueva_ronda():
 	nro_ronda += 1
 	vidasDelRey -= 1 #TESTEO
+	spawnear_enemigos()
 	# spawnear_enemigo()
 	if (vidasDelRey <= 0):
 		detener_turnero()
@@ -103,3 +104,8 @@ func detener_turnero():
 	print("El rey fue derrocado")
 	print("Numeros de ronda: ", nro_ronda)
 	nro_ronda = 0
+	
+	
+func spawnear_enemigos(): #En caso de queres spawnear entre rondas
+	enemigos_falsos.append("Enemigo C") #TESTEO
+	
