@@ -21,6 +21,7 @@ config/windows_native_icon="res://assets/zancho.ico"
 
 globalJuego="*uid://ddgt0astfx6o4"
 economia="*uid://bx3m3e00xreoa"
+mapas="*uid://cx3yodnfc5g1l"
 
 [input]
 
