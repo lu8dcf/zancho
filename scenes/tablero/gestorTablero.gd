@@ -5,8 +5,8 @@ class_name GestorTablero
 @export var escena_baldosa : PackedScene
 @export var modelo_glb_claro : PackedScene
 @export var modelo_glb_oscuro : PackedScene
-@export var tamano_tablero : Vector2i = Vector2i(16, 16)
-@export var espaciado_baldosas : float = 2.0
+@export var tamano_tablero : Vector2i = globalJuego.tamano_tablero #(30:16)
+@export var espaciado_baldosas : float = globalJuego.espaciado_baldosas
 @export var altura_piezas : float = 0.2
 
 # Variables privadas
@@ -76,13 +76,12 @@ func _en_baldosa_presionada(baldosa: BaldosaBase):
 
 func _en_baldosa_click_derecho(baldosa: BaldosaBase):
 	print("Click derecho en baldosa: ", baldosa.obtener_coordenadas())
-	# Aquí puedes implementar menú contextual u otra acción
 
 func limpiar_seleccion():
 	if baldosa_seleccionada:
 		baldosa_seleccionada.seleccionar(false)
 		baldosa_seleccionada = null
-
+									# vector(3,2) posicion de la baldosa
 func obtener_punto_colocacion_pieza(coordenadas: Vector2i) -> Vector3:
 	var baldosa = obtener_baldosa_en_coordenadas(coordenadas)
 	if baldosa:

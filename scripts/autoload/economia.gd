@@ -9,7 +9,7 @@ var limite_piezas = {
 	"Reina": 1
 }
 var valor_reventa = {
-	"Peon": 80,
+	"Peon": 50,
 	"Torre": 250,
 	"Alfil": 150,
 	"Caballo": 175,
@@ -17,11 +17,11 @@ var valor_reventa = {
 }
 
 var inventario_actual = [
-	{"nombre": "Peon", "cantidad":7,"max":8},
-	{"nombre": "Torre", "cantidad":2, "max":2},
-	{"nombre": "Alfil",  "cantidad":0, "max":2},
-	{"nombre": "Caballo", "cantidad":2, "max":2},
-	{"nombre": "Reina", "cantidad":1, "max":1}
+	{"nombre": "Peon", "cantidad":7},
+	{"nombre": "Torre", "cantidad":2},
+	{"nombre": "Alfil",  "cantidad":0},
+	{"nombre": "Caballo", "cantidad":2},
+	{"nombre": "Reina", "cantidad":1}
 ]
 
 var piezas_disponibles_tienda: Array = [
@@ -32,8 +32,8 @@ var piezas_disponibles_tienda: Array = [
 	{"nombre": "Reina", "precio": 1200}
 ]
 
-# señales para modificar el hud
 
+# señales para modificar el hud
 signal monedas_cambiadas(nuevas_monedas) # Emite el cambio de moneda
 signal pieza_comprada(nueva_pieza)  # Emite la pieza comprada
 signal inventario_actualizado(inventario) # Emite el inventario actualizado
@@ -53,16 +53,11 @@ func comprar_pieza(pieza:Dictionary) -> bool:
 	for i in range(inventario_actual.size()):
 		if inventario_actual[i]["nombre"] == pieza["nombre"]:
 			# Verificar si no se ha alcanzado el límite
-			if inventario_actual[i]["cantidad"] >= inventario_actual[i]["max"]:
+			if llego_al_limite(pieza["nombre"], inventario_actual[i]["cantidad"]):
 				return false
-			
-			# Realizar la compra
+
 			monedas_actual -= pieza["precio"]
 			inventario_actual[i]["cantidad"] += 1
-			
-			#print("✅ Comprado: ", pieza["nombre"])
-			#print("📦 Nuevo inventario: ", inventario_actual[i]["cantidad"], "/", inventario_actual[i]["max"])
-			#print("💰 Monedas restantes: ", monedas_actual)
 			
 			# Emitir señales en orden correcto
 			monedas_cambiadas.emit(monedas_actual)
@@ -96,4 +91,13 @@ func vender_pieza(pieza:Dictionary, valor:int):
 			monedas_cambiadas.emit(monedas_actual)
 			pieza_comprada.emit(inventario_actual[i])  # Reutilizamos esta señal para actualizar UI
 			pieza_vendida.emit()
-			
+
+func llego_al_limite(pieza_nombre:String ,cantidad_piezas:int)-> bool:
+	if cantidad_piezas == 0:
+		for i in economia.inventario_actual:
+			if i["nombre"] == pieza_nombre:
+				cantidad_piezas = i["cantidad"]
+	if pieza_nombre in limite_piezas:
+		return cantidad_piezas >= limite_piezas[pieza_nombre]
+	else:
+		return false

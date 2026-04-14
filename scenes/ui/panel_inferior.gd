@@ -51,7 +51,7 @@ func _crear_botones_piezas_inventario() -> void:
 		
 		# Crear label de cantidad
 		var texto_cant = Label.new()
-		texto_cant.text = str(pieza["cantidad"]) + "/" + str(pieza["max"])
+		texto_cant.text = str(pieza["cantidad"]) + "/" + str( economia.limite_piezas[pieza["nombre"]])
 		texto_cant.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		texto_cant.add_theme_color_override("font_color", Color(1, 1, 0))
 		texto_cant.add_theme_font_size_override("font_size", 14)
@@ -107,7 +107,7 @@ func _on_boton_menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/ui/main.tscn")
 
 #var valor_reventa = {
-	#"Peon": 80,
+	#"Peon": 50,
 	#"Torre": 250,
 	#"Alfil": 150,
 	#"Caballo": 175,

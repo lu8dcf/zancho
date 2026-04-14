@@ -92,7 +92,7 @@ func actualizar_hover(nueva_baltosa: BaldosaBase):
 	# Quitar hover de la anterior
 	if baldosa_actual:
 		baldosa_actual.resaltar(false)
-		print("Hover OUT: ", baldosa_actual.obtener_coordenadas())
+		#print("Hover OUT: ", baldosa_actual.obtener_coordenadas())
 	
 	# Actualizar referencia
 	baldosa_actual = nueva_baltosa
@@ -101,7 +101,7 @@ func actualizar_hover(nueva_baltosa: BaldosaBase):
 	if baldosa_actual:
 		if not baldosa_actual.esta_ocupada:
 			baldosa_actual.resaltar(true)
-			print("Hover IN: ", baldosa_actual.obtener_coordenadas())
+			#print("Hover IN: ", baldosa_actual.obtener_coordenadas())
 			
 
 # Método público para obtener la baldosa actual
