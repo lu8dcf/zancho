@@ -1,6 +1,9 @@
 extends Node
 
 var nueva_pieza: RigidBody3D
+@export var espaciado_baldosas : float = globalJuego.espaciado_baldosas
+var pieza = preload("res://scenes/pieza/pieza_base.tscn")
+
 
 
 func colocar_pieza(sitio: Vector2i, tipo: int , blanca: bool):

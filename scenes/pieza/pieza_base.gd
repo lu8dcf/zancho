@@ -1,14 +1,14 @@
 extends RigidBody3D
 
 # Propiedades de la pieza
-@export var piece_type: String = "pawn"
-@export var team: String = "red"
+@export var piece_type: int = 2
+@export var team: String = "B"
 @export var health: int = 100
 @export var attack_damage: int = 25
 @export var vision_range: float = 5.0
 
 # Nodos
-@onready var mesh_instance = $MeshInstance3D
+
 @onready var health_bar = $HealthBar
 @onready var dust_particles = $DustParticles
 @onready var contenedor_modelo : Node3D = $ContenedorModelo # contenedor modelo glb
@@ -23,15 +23,14 @@ var is_alive: bool = true
 var can_attack: bool = true
 var target_piece: RigidBody3D = null
 var initial_health: int
-var no_esta_en_tablero = true
+
 
 func _ready():
 	# Configurar física
 	gravity_scale = 2.0
 	#rebote
 	physics_material_override.bounce =.5
-		
-			
+				
 	# Inicializar UI
 	initial_health = health
 	update_health_bar()
@@ -42,7 +41,7 @@ func _ready():
 	initialize(piece_type,team)
 	cargar_modelo_glb()
 
-func initialize(p_type: String, p_team: String):
+func initialize(p_type: int, p_team: String):
 	piece_type = p_type
 	team = p_team
 	
@@ -74,12 +73,10 @@ func cargar_modelo_glb():
 func _on_body_entered(body):
 	
 	# este if es para que solo tenga un efecto de sonido cuando rebota 
-	if no_esta_en_tablero:
-		# Efecto de polvo
-		create_dust_effect()
+	# Efecto de polvo
+	create_dust_effect()
 		# Sonido de golpe
-		Sonidos.impacto()
-		no_esta_en_tablero = true
+	Sonidos.impacto()
 	
 	
 func create_dust_effect():
@@ -158,10 +155,10 @@ func update_health_bar():
 		health_bar.modulate = Color(1, 0, 0, 1)  # Rojo
 
 func flash_red():
-	var original_color = mesh_instance.material_override.albedo_color
-	mesh_instance.material_override.albedo_color = Color.RED
+	#var original_color = mesh_instance.material_override.albedo_color
+	#mesh_instance.material_override.albedo_color = Color.RED
 	await get_tree().create_timer(0.1).timeout
-	mesh_instance.material_override.albedo_color = original_color
+	#mesh_instance.material_override.albedo_color = original_color
 
 func create_attack_effect():
 	# Crear línea de ataque visual

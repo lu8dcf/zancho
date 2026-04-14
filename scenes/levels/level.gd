@@ -21,4 +21,5 @@ func _ready() -> void:
 	add_child(tablero)
 	
 	var rey = pieza.instantiate()
+	rey.global_position = Vector3(0, 10, 0)
 	add_child(rey)
