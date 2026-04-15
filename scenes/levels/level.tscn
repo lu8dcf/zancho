@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bsfys0m80sjmg"]
 
 [ext_resource type="Script" uid="uid://ci5k6pqy2u8ix" path="res://scenes/levels/level.gd" id="1_377w7"]
-[ext_resource type="Script" uid="uid://rtpdhi3hlujc" path="res://scenes/levels/camera_3d.gd" id="2_bovvr"]
+[ext_resource type="PackedScene" uid="uid://dkxck3q07ef2a" path="res://scenes/entorno/ControlCamara.tscn" id="2_b2cq8"]
 [ext_resource type="Script" uid="uid://cvpxhxaq47bge" path="res://scenes/levels/gestor_hover.gd" id="3_b2cq8"]
 [ext_resource type="Script" uid="uid://c52bhkw0t5x8v" path="res://scenes/pieza/fabricaPiezas.gd" id="4_xb4v1"]
 [ext_resource type="Script" uid="uid://cihsl310tis1d" path="res://scenes/levels/marca_pasos.gd" id="5_urvlt"]
@@ -10,9 +10,7 @@
 [node name="Level" type="Node3D" unique_id=1370239507]
 script = ExtResource("1_377w7")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=186131115]
-transform = Transform3D(1, 0, 0, 0, 0.8462397, 0.53280246, 0, -0.53280246, 0.8462397, 16.718485, 14.827033, 40.35907)
-script = ExtResource("2_bovvr")
+[node name="ControlCamara" parent="." unique_id=2048121381 instance=ExtResource("2_b2cq8")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=921601678]
 transform = Transform3D(1, 0, 0, 0, 0.35931277, 0.93321717, 0, -0.93321717, 0.35931277, 0, 0, 0)
