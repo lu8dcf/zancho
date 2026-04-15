@@ -68,7 +68,6 @@ theme_override_font_sizes/font_size = 25
 text = "Debilidades"
 
 [node name="BotonReiniciarCamara" type="Button" parent="Control/PanelSuperior" unique_id=482577221]
-visible = false
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0

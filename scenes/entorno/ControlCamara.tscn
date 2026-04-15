@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dkxck3q07ef2a"]
 
-[ext_resource type="Script" uid="uid://cnkodlux01st0" path="res://scenes/entorno/control_camara.gd" id="1_xmuj0"]
+[ext_resource type="Script" path="res://scenes/entorno/control_camara.gd" id="1_xmuj0"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_nttae"]
 
@@ -15,4 +15,5 @@ script = ExtResource("1_xmuj0")
 transform = Transform3D(1, 0, 0, 0, 0.9992118, 0.0396958, 0, -0.0396958, 0.9992118, 0, 0.73156714, 3.2453604)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2101641467]
+visible = false
 mesh = SubResource("BoxMesh_nttae")
