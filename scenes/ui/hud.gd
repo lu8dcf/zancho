@@ -44,10 +44,8 @@ func _on_button_tienda_pressed() -> void:
 		tienda_contenido.visible = true
 		tienda_boton.position = Vector2(815, 285)
 		tienda_boton.text = " - "
-		imagen_debilidades.visible = false
-
+		#imagen_debilidades.visible = false
 	else:
 		tienda_contenido.visible = false
 		tienda_boton.position = Vector2(1110,285)
 		tienda_boton.text = " + "
-

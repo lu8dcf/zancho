@@ -52,3 +52,12 @@ func mensaje(texto: String):
 	
 func reiniciar_variables():
 	piezas_activas = []
+	economia.inventario_actual = [
+	{"nombre": "Peon", "cantidad":0},
+	{"nombre": "Torre", "cantidad":0},
+	{"nombre": "Alfil",  "cantidad":0},
+	{"nombre": "Caballo", "cantidad":0},
+	{"nombre": "Reina", "cantidad":0}
+]
+	economia.monedas_actual = 200
+	oleada_actual = 1
