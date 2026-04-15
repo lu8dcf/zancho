@@ -1,5 +1,5 @@
 extends RigidBody3D
-
+class_name PiezaBase
 # Propiedades de la pieza
 
 
@@ -30,21 +30,29 @@ var initial_health: int
 
 
 func _ready():
+	# Inicializar componentes
+	#giro_pieza.initialize(self)
+	
 	# Configurar física
 	linear_velocity = Vector3(0, linear_velocity.y, 0)  # que no se mueva a los costados
 	#rebote
 	physics_material_override.bounce =.3
 	gravity_scale = 2.0
 				
-	cargar_modelo_glb()
+	cargar_modelo_glb() #asigan el modelo 3d
+	cargar_parametros() # carga os parametors de la pieza
 	posicionamiento()
+	
+	
+	
 	
 func cargar_modelo_glb():
 	var color="N"
 	if pieza_blanca: color="B" 
 	
 	var armado = "res://assets/modelos/piezas/pieza" + str(pieza_tipo) + color + ".glb"
-	var modelo_pieza = preload("res://assets/modelos/piezas/pieza2B.glb")
+	print (armado)
+	var modelo_pieza = load(armado)
 	if not contenedor_modelo:
 		push_error("Falta el nodo ContenedorModelo")
 		return
@@ -59,6 +67,10 @@ func cargar_modelo_glb():
 	else:
 		push_error("No se ha asignado modelo GLB para la pieza: ")
 
+func cargar_parametros():
+	
+	pass
+	
 
 func posicionamiento():
 	#temporizador

@@ -7,6 +7,8 @@ var entorno = preload("res://scenes/entorno/escenario.tscn")
 
 var contador_externo = 0
 var contador_interno = 0
+var tipo_pieza=0
+
 @onready var timer = $Timer
 
 func _ready() -> void:
@@ -29,7 +31,7 @@ func _ready() -> void:
 	timer.start()
 	
 func prueba():
-	
+	GlobalSignal.emit_signal("crearPieza",Vector2i(contador_externo,contador_interno),tipo_pieza,true)
 		# Incrementa el contador interno
 	contador_interno += 1
 	
@@ -43,4 +45,7 @@ func prueba():
 			contador_externo = 0
 	
 		# Crear pieza de prueba esto se debe ejecutar en la oleadas
-	GlobalSignal.emit_signal("crearPieza",Vector2i(contador_externo,contador_interno),1,false)
+	
+	tipo_pieza +=1
+	if tipo_pieza == 6:
+		tipo_pieza=0

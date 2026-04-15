@@ -1,4 +1,5 @@
 extends Node
+class_name FabricaPiezas
 
 var nueva_pieza: RigidBody3D
 var espaciado_baldosas : float = globalJuego.espaciado_baldosas
@@ -9,7 +10,7 @@ func _ready() -> void:
 	GlobalSignal.connect("crearPieza",colocar_pieza)
 	
 	
-func colocar_pieza(sitio: Vector2i, tipo: int , blanca: bool):
+func colocar_pieza(sitio: Vector2i, tipo: int , pieza_blanca: bool):
 	
 	if lugar_disponible(sitio):
 		return
@@ -32,10 +33,10 @@ func colocar_pieza(sitio: Vector2i, tipo: int , blanca: bool):
 	var pieza = pieza.instantiate()
 	
 	pieza.pieza_tipo=tipo
-	pieza.pieza_blanca=blanca
+	pieza.pieza_blanca=pieza_blanca
 	
-	if blanca: 
-		pieza.angulo_frente = 135
+	if pieza_blanca: 
+		pieza.angulo_frente = 225
 	else:
 		pieza.angulo_frente = 45	
 		
