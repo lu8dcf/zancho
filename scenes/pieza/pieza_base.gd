@@ -1,20 +1,20 @@
 extends RigidBody3D
 
 # Propiedades de la pieza
-@export var piece_type: String = "pawn"
-@export var team: String = "red"
+@export var piece_type: int = 2
+@export var team: String = "B"
 @export var health: int = 100
 @export var attack_damage: int = 25
 @export var vision_range: float = 5.0
 
 # Nodos
-@onready var mesh_instance = $MeshInstance3D
+
 @onready var health_bar = $HealthBar
 @onready var dust_particles = $DustParticles
 @onready var contenedor_modelo : Node3D = $ContenedorModelo # contenedor modelo glb
-@onready var collision_timer = $CollisionTimer
-@onready var attack_timer = $AttackTimer
 
+@onready var attack_timer = $AttackTimer
+@onready var giro_inicial = $GiroInicial
 @export var peon_blanco : PackedScene  # Modelo GLB para baldosa clara
 @export var rey_blanco : PackedScene  # Modelo GLB para baldosa oscura
 
@@ -23,15 +23,15 @@ var is_alive: bool = true
 var can_attack: bool = true
 var target_piece: RigidBody3D = null
 var initial_health: int
-var no_esta_en_tablero = true
+
 
 func _ready():
 	# Configurar física
 	gravity_scale = 2.0
+	linear_velocity = Vector3(0, linear_velocity.y, 0)  # que no se mueva a los costados
 	#rebote
-	physics_material_override.bounce =.5
-		
-			
+	physics_material_override.bounce =.3
+				
 	# Inicializar UI
 	initial_health = health
 	update_health_bar()
@@ -41,8 +41,18 @@ func _ready():
 	
 	initialize(piece_type,team)
 	cargar_modelo_glb()
+	
+	#temporizador
+	giro_inicial.wait_time = 3.0   # 1 segundo
+	giro_inicial.connect("timeout",poso)
+	giro_inicial.start()
 
-func initialize(p_type: String, p_team: String):
+
+func poso():
+	giro(225, 1)
+	
+
+func initialize(p_type: int, p_team: String):
 	piece_type = p_type
 	team = p_team
 	
@@ -74,20 +84,16 @@ func cargar_modelo_glb():
 func _on_body_entered(body):
 	
 	# este if es para que solo tenga un efecto de sonido cuando rebota 
-	if no_esta_en_tablero:
-		# Efecto de polvo
-		create_dust_effect()
+	# Efecto de polvo
+	create_dust_effect()
 		# Sonido de golpe
-		Sonidos.impacto()
-		no_esta_en_tablero = true
+	Sonidos.impacto()
 	
-	
+	# Particulas al pegar con el tablero
 func create_dust_effect():
 	dust_particles.emitting = true
 	await get_tree().create_timer(0.5).timeout
 	dust_particles.emitting = false
-
-
 
 func start_vision_check():
 	while is_alive:
@@ -158,10 +164,10 @@ func update_health_bar():
 		health_bar.modulate = Color(1, 0, 0, 1)  # Rojo
 
 func flash_red():
-	var original_color = mesh_instance.material_override.albedo_color
-	mesh_instance.material_override.albedo_color = Color.RED
+	#var original_color = mesh_instance.material_override.albedo_color
+	#mesh_instance.material_override.albedo_color = Color.RED
 	await get_tree().create_timer(0.1).timeout
-	mesh_instance.material_override.albedo_color = original_color
+	#mesh_instance.material_override.albedo_color = original_color
 
 func create_attack_effect():
 	# Crear línea de ataque visual
@@ -185,5 +191,19 @@ func die():
 	tween.tween_property(self, "scale", Vector3.ZERO, 0.5)
 	tween.tween_callback(queue_free)
 
-
+func giro(angulo_grados: float, duracion: float = 1.0):
 	
+	"""
+    Gira la pieza en el eje horizontal (Y) usando Tween
+    
+    Parámetros:
+    - angulo_grados: Ángulo a rotar en grados (positivo = derecha, negativo = izquierda)
+    - duracion: Duración de la animación en segundos
+    """
+	var tween = create_tween()
+	var rotacion_actual = rotation_degrees.y
+	var rotacion_destino = rotacion_actual + angulo_grados
+	
+	tween.tween_property(self, "rotation_degrees:y", rotacion_destino, duracion)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_QUAD)
