@@ -25,7 +25,7 @@ func _ready() -> void:
 	add_child(mapa)
 	
 	add_child(tablero)
-	GlobalSignal.emit_signal("controlMarcaPaso",true)	
+	GlobalSignal.emit_signal("controlMarcaPaso",false)	
 	GlobalSignal.connect("marcaPaso",prueba)
 		
 func prueba():
