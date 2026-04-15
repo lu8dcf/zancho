@@ -4,8 +4,10 @@ extends Node3D
 var hud_escena = preload("res://scenes/ui/hud.tscn")
 var tablero_escena = preload("res://scenes/tablero/gestorTablero.tscn")
 var entorno = preload("res://scenes/entorno/escenario.tscn")
-var pieza = preload("res://scenes/pieza/pieza_base.tscn")
 
+var contador_externo = 0
+var contador_interno = 0
+@onready var timer = $Timer
 
 func _ready() -> void:
 	
@@ -19,7 +21,26 @@ func _ready() -> void:
 	add_child(mapa)
 	
 	add_child(tablero)
+		
 	
-	var rey = pieza.instantiate()
-	rey.global_position = Vector3(0, 10, 0)
-	add_child(rey)
+	#temporizador
+	timer.wait_time = 1.0   # 1 segundo
+	timer.connect("timeout",prueba)
+	timer.start()
+	
+func prueba():
+	
+		# Incrementa el contador interno
+	contador_interno += 1
+	
+	# Si llega a 16, reinicia y avanza el externo
+	if contador_interno > 15:
+		contador_interno = 0
+		contador_externo += 1
+		
+		# Si el externo también llega a 16, reinicia
+		if contador_externo > 15:
+			contador_externo = 0
+	
+		# Crear pieza de prueba esto se debe ejecutar en la oleadas
+	GlobalSignal.emit_signal("crearPieza",Vector2i(contador_externo,contador_interno),1,true)

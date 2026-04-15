@@ -12,9 +12,9 @@ extends RigidBody3D
 @onready var health_bar = $HealthBar
 @onready var dust_particles = $DustParticles
 @onready var contenedor_modelo : Node3D = $ContenedorModelo # contenedor modelo glb
-@onready var collision_timer = $CollisionTimer
-@onready var attack_timer = $AttackTimer
 
+@onready var attack_timer = $AttackTimer
+@onready var giro_inicial = $GiroInicial
 @export var peon_blanco : PackedScene  # Modelo GLB para baldosa clara
 @export var rey_blanco : PackedScene  # Modelo GLB para baldosa oscura
 
@@ -28,8 +28,9 @@ var initial_health: int
 func _ready():
 	# Configurar física
 	gravity_scale = 2.0
+	linear_velocity = Vector3(0, linear_velocity.y, 0)  # que no se mueva a los costados
 	#rebote
-	physics_material_override.bounce =.5
+	physics_material_override.bounce =.3
 				
 	# Inicializar UI
 	initial_health = health
@@ -40,6 +41,16 @@ func _ready():
 	
 	initialize(piece_type,team)
 	cargar_modelo_glb()
+	
+	#temporizador
+	giro_inicial.wait_time = 3.0   # 1 segundo
+	giro_inicial.connect("timeout",poso)
+	giro_inicial.start()
+
+
+func poso():
+	giro(225, 1)
+	
 
 func initialize(p_type: int, p_team: String):
 	piece_type = p_type
@@ -78,13 +89,11 @@ func _on_body_entered(body):
 		# Sonido de golpe
 	Sonidos.impacto()
 	
-	
+	# Particulas al pegar con el tablero
 func create_dust_effect():
 	dust_particles.emitting = true
 	await get_tree().create_timer(0.5).timeout
 	dust_particles.emitting = false
-
-
 
 func start_vision_check():
 	while is_alive:
@@ -182,5 +191,19 @@ func die():
 	tween.tween_property(self, "scale", Vector3.ZERO, 0.5)
 	tween.tween_callback(queue_free)
 
-
+func giro(angulo_grados: float, duracion: float = 1.0):
 	
+	"""
+    Gira la pieza en el eje horizontal (Y) usando Tween
+    
+    Parámetros:
+    - angulo_grados: Ángulo a rotar en grados (positivo = derecha, negativo = izquierda)
+    - duracion: Duración de la animación en segundos
+    """
+	var tween = create_tween()
+	var rotacion_actual = rotation_degrees.y
+	var rotacion_destino = rotacion_actual + angulo_grados
+	
+	tween.tween_property(self, "rotation_degrees:y", rotacion_destino, duracion)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_QUAD)

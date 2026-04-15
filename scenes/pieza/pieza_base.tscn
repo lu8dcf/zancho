@@ -35,7 +35,11 @@ physics_material_override = SubResource("PhysicsMaterial_c11s1")
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_c11s1")
+piece_type = null
+team = null
 health = 65
+attack_damage = null
+vision_range = null
 peon_blanco = ExtResource("2_4vkcs")
 rey_blanco = ExtResource("2_4vkcs")
 
@@ -53,17 +57,17 @@ process_material = SubResource("ParticleProcessMaterial_4vkcs")
 draw_pass_1 = SubResource("SphereMesh_krwjw")
 draw_skin = SubResource("Skin_xmeed")
 
-[node name="CollissionTimer" type="Timer" parent="." unique_id=1102472803]
-
 [node name="AttackTimer" type="Timer" parent="." unique_id=52186406]
 
 [node name="HealthBar" type="ProgressBar" parent="." unique_id=2010147779]
-visible = false
 offset_left = 82.0
 offset_top = 46.0
 offset_right = 168.0
 offset_bottom = 74.0
 
 [node name="ContenedorModelo" type="Node3D" parent="." unique_id=1845823207]
+
+[node name="GiroInicial" type="Timer" parent="." unique_id=994989931]
+one_shot = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
