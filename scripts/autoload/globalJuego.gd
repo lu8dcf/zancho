@@ -19,6 +19,8 @@ var espaciado_baldosas : float = 2.0
 # mapa
 var mapa = 0
 
+# Oleadas
+var tiempo_pasos = 1.0   # tiempo entre cada movimento
 
 # señales para modificar el hud
 

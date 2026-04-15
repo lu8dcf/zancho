@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://rtpdhi3hlujc" path="res://scenes/levels/camera_3d.gd" id="2_bovvr"]
 [ext_resource type="Script" uid="uid://cvpxhxaq47bge" path="res://scenes/levels/gestor_hover.gd" id="3_b2cq8"]
 [ext_resource type="Script" uid="uid://c52bhkw0t5x8v" path="res://scenes/pieza/fabricaPiezas.gd" id="4_xb4v1"]
+[ext_resource type="Script" uid="uid://cihsl310tis1d" path="res://scenes/levels/marca_pasos.gd" id="5_urvlt"]
 
 [node name="Level" type="Node3D" unique_id=1370239507]
 script = ExtResource("1_377w7")
@@ -21,5 +22,5 @@ script = ExtResource("3_b2cq8")
 [node name="FabricaPiezas" type="Node3D" parent="." unique_id=1119096291]
 script = ExtResource("4_xb4v1")
 
-[node name="Timer" type="Timer" parent="." unique_id=1871923658]
-autostart = true
+[node name="MarcaPasos" type="Timer" parent="." unique_id=601792043]
+script = ExtResource("5_urvlt")

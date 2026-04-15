@@ -1,5 +1,6 @@
 extends Node3D
 
+
 # 1. Precargar la escena (fuera de la función para mejor rendimiento)
 var hud_escena = preload("res://scenes/ui/hud.tscn")
 var tablero_escena = preload("res://scenes/tablero/gestorTablero.tscn")
@@ -9,7 +10,8 @@ var contador_externo = 0
 var contador_interno = 0
 var tipo_pieza=0
 
-@onready var timer = $Timer
+
+@onready var MarcaPasos = $MarcaPasos
 
 func _ready() -> void:
 	
@@ -23,13 +25,9 @@ func _ready() -> void:
 	add_child(mapa)
 	
 	add_child(tablero)
+	GlobalSignal.emit_signal("controlMarcaPaso",true)	
+	GlobalSignal.connect("marcaPaso",prueba)
 		
-	
-	#temporizador
-	timer.wait_time = 1.0   # 1 segundo
-	timer.connect("timeout",prueba)
-	timer.start()
-	
 func prueba():
 	GlobalSignal.emit_signal("crearPieza",Vector2i(contador_externo,contador_interno),tipo_pieza,true)
 		# Incrementa el contador interno
@@ -39,7 +37,7 @@ func prueba():
 	if contador_interno > 15:
 		contador_interno = 0
 		contador_externo += 1
-		
+		GlobalSignal.emit_signal("controlMarcaPaso",false)
 		# Si el externo también llega a 16, reinicia
 		if contador_externo > 15:
 			contador_externo = 0

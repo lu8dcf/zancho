@@ -51,7 +51,7 @@ func cargar_modelo_glb():
 	if pieza_blanca: color="B" 
 	
 	var armado = "res://assets/modelos/piezas/pieza" + str(pieza_tipo) + color + ".glb"
-	print (armado)
+	
 	var modelo_pieza = load(armado)
 	if not contenedor_modelo:
 		push_error("Falta el nodo ContenedorModelo")
