@@ -1,38 +1,56 @@
+# Mapas.gd - Autoload
 extends Node
-# diccionario de objetos posibles
 
+# Diccionario de objetos posibles
 var mapas: Array[Array] = []
 var obstaculos: Array[Array] = []
 
-
-var tipo_obstaculo :Array = [
-	{1: "res://assets/modelos/peon1.glb"},
-	{2: "res://assets/modelos/peon1.glb"},
-	{3: "res://assets/modelos/peon1.glb"},
-]
+var tipo_obstaculo : Dictionary = {
+	1: "res://assets/modelos/peon1.glb",
+	2: "res://assets/modelos/peon1.glb",
+	3: "res://assets/modelos/peon1.glb",
+	
+}
 
 func _ready():
-	# Inicializar los mapas
-	mapas.append([Vector2i(0, 0), Vector2i(1, 1)])  # mapa 0 (índice 0)
-	obstaculos.append([2,2]) # obstaculos del mapa 0
+	# Posiciones donde habrá obstáculos
+	mapas.append([
+		Vector2i(2, 3), 
+		Vector2i(5, 7),
+		Vector2i(10, 4),
+		Vector2i(8, 12)
+	])
 	
-	mapas.append([Vector2i(2, 2), Vector2i(3, 3)])  # mapa 1
-	obstaculos.append([1,1])   # obstaculos del mapa 1
+	#  obstáculos para el mapa 0 (deben coincidir en cantidad con las posiciones)
+	obstaculos.append([
+		1,  #  objeto 1 en posición (2,3)
+		2,  # objeto 2 en posición (5,7)
+		1,  # objeto 1 en posición (10,4)
+		3   # objeto 3 en posición (8,12)
+	])
+
+func obtener_mapa_actual(indice_mapa: int = 0) -> Dictionary:
+	if indice_mapa >= mapas.size():
+		return {"posiciones": [], "tipos": []}
 	
-	mapas.append([Vector2i(4, 4), Vector2i(5, 5)])  # mapa 2
-	obstaculos.append([1,2])   # obstaculos del mapa 2
+	return {
+		"posiciones": mapas[indice_mapa],
+		"tipos": obstaculos[indice_mapa]
+	}
+
+func es_posicion_bloqueada(posicion: Vector2i, indice_mapa: int = 0) -> bool:
+	if indice_mapa >= mapas.size():
+		return false
+	return posicion in mapas[indice_mapa]
+
+func obtener_tipo_obstaculo_en_posicion(posicion: Vector2i, indice_mapa: int = 0) -> int:
+	if indice_mapa >= mapas.size():
+		return 0
+	
+	var index = mapas[indice_mapa].find(posicion)
+	if index != -1 and index < obstaculos[indice_mapa].size():
+		return obstaculos[indice_mapa][index]
+	return 0
 	
 	
-
-
-
-
- # n mapa, Ubicacion objeto, tipo objeto
-var mapa1 = [
-	Vector2i(2,3),
-	Vector2i(2,4),
-	Vector2i(2,5),
-]
-var objeto1 = [
-	2,3,4
-]
+	
