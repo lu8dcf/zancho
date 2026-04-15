@@ -2,15 +2,20 @@ extends RigidBody3D
 class_name PiezaBase
 # Propiedades de la pieza
 
-
-@export var health: int = 100
-@export var attack_damage: int = 25
-@export var vision_range: float = 5.0
-@export var angulo_frente: int
-
 #clase de pieza
 @export var pieza_tipo: int
 @export var pieza_blanca: bool
+
+# CArga de parametros 
+var vida = Piezas.vida[pieza_tipo]
+var danio = Piezas.danio[pieza_tipo]
+var cadencia = Piezas.cadencia[pieza_tipo]
+var bonus_cantidad = Piezas.bonus_cantidad[pieza_tipo]
+var bonus_a = Piezas.bonus_a[pieza_tipo]
+@export var vision_range: float = 5.0
+@export var angulo_frente: int
+
+
 
 # Nodos
 
@@ -30,9 +35,7 @@ var initial_health: int
 
 
 func _ready():
-	# Inicializar componentes
-	#giro_pieza.initialize(self)
-	
+		
 	# Configurar física
 	linear_velocity = Vector3(0, linear_velocity.y, 0)  # que no se mueva a los costados
 	#rebote
@@ -42,6 +45,7 @@ func _ready():
 	cargar_modelo_glb() #asigan el modelo 3d
 	cargar_parametros() # carga os parametors de la pieza
 	posicionamiento()
+	
 	
 	
 	
@@ -127,7 +131,7 @@ func check_for_enemies():
 func attack_enemy():
 	if target_piece and target_piece.is_alive:
 		can_attack = false
-		target_piece.take_damage(attack_damage)
+		target_piece.take_damage(danio)
 		
 		# Efecto visual de ataque
 		create_attack_effect()
@@ -137,7 +141,7 @@ func attack_enemy():
 		can_attack = true
 
 func take_damage(amount: int):
-	health -= amount
+	vida -= amount
 	update_health_bar()
 	
 	# Efecto visual de daño
@@ -146,11 +150,11 @@ func take_damage(amount: int):
 	# Sonido de daño
 	Sonidos.hurt()
 	
-	if health <= 0:
+	if vida <= 0:
 		die()
 
 func update_health_bar():
-	var health_percentage = float(health) / float(initial_health)
+	var health_percentage = float(vida) / float(initial_health)
 	health_bar.value = health_percentage * 100
 	
 	# Cambiar color según salud
