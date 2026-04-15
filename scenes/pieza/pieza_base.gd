@@ -1,12 +1,16 @@
 extends RigidBody3D
 
 # Propiedades de la pieza
-@export var piece_type: int = 2
-@export var team: String = "B"
+
+
 @export var health: int = 100
 @export var attack_damage: int = 25
 @export var vision_range: float = 5.0
 @export var angulo_frente: int
+
+#clase de pieza
+@export var pieza_tipo: int
+@export var pieza_blanca: bool
 
 # Nodos
 
@@ -16,8 +20,7 @@ extends RigidBody3D
 
 @onready var attack_timer = $AttackTimer
 @onready var giro_inicial = $GiroInicial
-@export var peon_blanco : PackedScene  # Modelo GLB para baldosa clara
-@export var rey_blanco : PackedScene  # Modelo GLB para baldosa oscura
+
 
 # Variables de estado
 var is_alive: bool = true
@@ -28,58 +31,40 @@ var initial_health: int
 
 func _ready():
 	# Configurar física
-	gravity_scale = 2.0
 	linear_velocity = Vector3(0, linear_velocity.y, 0)  # que no se mueva a los costados
 	#rebote
 	physics_material_override.bounce =.3
+	gravity_scale = 2.0
 				
-	# Inicializar UI
-	initial_health = health
-	update_health_bar()
-		
-	# Iniciar visión
-	start_vision_check()
-	
-	initialize(piece_type,team)
 	cargar_modelo_glb()
 	posicionamiento()
 	
+func cargar_modelo_glb():
+	var color="N"
+	if pieza_blanca: color="B" 
+	
+	var armado = "res://assets/modelos/piezas/pieza" + str(pieza_tipo) + color + ".glb"
+	var modelo_pieza = preload("res://assets/modelos/piezas/pieza2B.glb")
+	if not contenedor_modelo:
+		push_error("Falta el nodo ContenedorModelo")
+		return
+	# Limpiar modelos anteriores
+	for hijo in contenedor_modelo.get_children():
+		hijo.queue_free()
+	
+	# Seleccionar el modelo según el tipo
+	if modelo_pieza:
+		var instancia_modelo = modelo_pieza.instantiate()
+		contenedor_modelo.add_child(instancia_modelo)
+	else:
+		push_error("No se ha asignado modelo GLB para la pieza: ")
+
 
 func posicionamiento():
 	#temporizador
 	giro_inicial.wait_time = 3.0   # 1 segundo
 	giro_inicial.connect("timeout",giro)
 	giro_inicial.start()
-
-	
-
-func initialize(p_type: int, p_team: String):
-	piece_type = p_type
-	team = p_team
-	
-	
-func cargar_modelo_glb():
-	if not contenedor_modelo:
-		push_error("Falta el nodo ContenedorModelo")
-		return
-	
-	# Limpiar modelos anteriores
-	for hijo in contenedor_modelo.get_children():
-		hijo.queue_free()
-	
-	# Seleccionar el modelo según el tipo
-	var modelo_a_cargar = peon_blanco
-	
-	if modelo_a_cargar:
-		var instancia_modelo = modelo_a_cargar.instantiate()
-		contenedor_modelo.add_child(instancia_modelo)
-	else:
-		push_error("No se ha asignado modelo GLB para baldosa tipo: ")
-
-	
-	initial_health = health
-	update_health_bar()
-
 
 
 func _on_body_entered(body):
@@ -179,8 +164,6 @@ func create_attack_effect():
 	# Animación de daño en el enemigo
 	if target_piece:
 		target_piece.flash_red()
-
-
 
 func die():
 	is_alive = false

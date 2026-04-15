@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://df6h7j1frxlw1"]
 
 [ext_resource type="Script" uid="uid://borpciaq4xf08" path="res://scenes/pieza/pieza_base.gd" id="1_c11s1"]
-[ext_resource type="PackedScene" uid="uid://s5yrdvrmwvye" path="res://assets/modelos/peon1.glb" id="2_4vkcs"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_c11s1"]
 
@@ -35,13 +34,7 @@ physics_material_override = SubResource("PhysicsMaterial_c11s1")
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_c11s1")
-piece_type = null
-team = null
 health = 65
-attack_damage = null
-vision_range = null
-peon_blanco = ExtResource("2_4vkcs")
-rey_blanco = ExtResource("2_4vkcs")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1624874680]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.530014, 0)

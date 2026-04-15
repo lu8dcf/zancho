@@ -31,6 +31,8 @@ func colocar_pieza(sitio: Vector2i, tipo: int , blanca: bool):
 	# instanciar		
 	var pieza = pieza.instantiate()
 	
+	pieza.pieza_tipo=tipo
+	pieza.pieza_blanca=blanca
 	
 	if blanca: 
 		pieza.angulo_frente = 135
