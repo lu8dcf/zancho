@@ -26,6 +26,7 @@ func reiniciar_posicion():
 	camera_3d.position.z = 9.7
 	position = Vector3(3.39, 0, 26.48)
 	pivot_y.rotation_degrees =  Vector3(rotacion_actual.x, rotacion_actual.y, 0)
+	pivot_x.rotation_degrees =  Vector3(9, 0, 0)
 	
 func _input(event) -> void:
 	if Input.is_key_pressed(KEY_SPACE):
@@ -33,6 +34,7 @@ func _input(event) -> void:
 		var info_texto = "CÁMARA DEBUG\n"
 		info_texto += "Posición: " + str(position.snapped(Vector3(0.01, 0.01, 0.01))) + "\n"
 		info_texto += "Rotación: " + str(pivot_y.rotation_degrees.snapped(Vector3(0.1, 0.1, 0.1))) + "\n"
+		info_texto += "Rotación x: " + str(pivot_x.rotation_degrees.snapped(Vector3(0.1, 0.1, 0.1))) + "\n"
 		info_texto += "Zoom: " + str(camera_3d.position.z).pad_decimals(1) + "\n"
 		print(info_texto)
 		
