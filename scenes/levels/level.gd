@@ -43,4 +43,4 @@ func prueba():
 			contador_externo = 0
 	
 		# Crear pieza de prueba esto se debe ejecutar en la oleadas
-	GlobalSignal.emit_signal("crearPieza",Vector2i(contador_externo,contador_interno),1,true)
+	GlobalSignal.emit_signal("crearPieza",Vector2i(contador_externo,contador_interno),1,false)

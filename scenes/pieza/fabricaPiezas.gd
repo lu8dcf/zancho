@@ -29,10 +29,16 @@ func colocar_pieza(sitio: Vector2i, tipo: int , blanca: bool):
 			pass
 	
 	# instanciar		
-	var rey = pieza.instantiate()
+	var pieza = pieza.instantiate()
 	
-	add_child(rey)
-	rey.global_position = Vector3(sitio.x * espaciado_baldosas, 10, sitio.y * espaciado_baldosas)
+	
+	if blanca: 
+		pieza.angulo_frente = 135
+	else:
+		pieza.angulo_frente = 45	
+		
+	add_child(pieza)
+	pieza.global_position = Vector3(sitio.x * espaciado_baldosas, 10, sitio.y * espaciado_baldosas)
 			
 	Piezas.piezas_activas.append(nueva_pieza)
 	

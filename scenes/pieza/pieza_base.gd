@@ -6,6 +6,7 @@ extends RigidBody3D
 @export var health: int = 100
 @export var attack_damage: int = 25
 @export var vision_range: float = 5.0
+@export var angulo_frente: int
 
 # Nodos
 
@@ -41,15 +42,15 @@ func _ready():
 	
 	initialize(piece_type,team)
 	cargar_modelo_glb()
+	posicionamiento()
 	
+
+func posicionamiento():
 	#temporizador
 	giro_inicial.wait_time = 3.0   # 1 segundo
-	giro_inicial.connect("timeout",poso)
+	giro_inicial.connect("timeout",giro)
 	giro_inicial.start()
 
-
-func poso():
-	giro(225, 1)
 	
 
 func initialize(p_type: int, p_team: String):
@@ -191,7 +192,7 @@ func die():
 	tween.tween_property(self, "scale", Vector3.ZERO, 0.5)
 	tween.tween_callback(queue_free)
 
-func giro(angulo_grados: float, duracion: float = 1.0):
+func giro():
 	
 	"""
     Gira la pieza en el eje horizontal (Y) usando Tween
@@ -202,8 +203,8 @@ func giro(angulo_grados: float, duracion: float = 1.0):
     """
 	var tween = create_tween()
 	var rotacion_actual = rotation_degrees.y
-	var rotacion_destino = rotacion_actual + angulo_grados
+	var rotacion_destino = rotacion_actual + angulo_frente
 	
-	tween.tween_property(self, "rotation_degrees:y", rotacion_destino, duracion)
+	tween.tween_property(self, "rotation_degrees:y", rotacion_destino, 1)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
