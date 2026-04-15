@@ -200,7 +200,7 @@ func giro():
     Parámetros:
     - angulo_grados: Ángulo a rotar en grados (positivo = derecha, negativo = izquierda)
     - duracion: Duración de la animación en segundos
-    """
+	"""
 	var tween = create_tween()
 	var rotacion_actual = rotation_degrees.y
 	var rotacion_destino = rotacion_actual + angulo_frente
