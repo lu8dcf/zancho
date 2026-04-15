@@ -19,8 +19,8 @@ var espaciado_baldosas : float = 2.0
 # mapa
 var mapa = 0
 
-# las piezas que estan activas en la partida
-var piezas_activas: Array[RigidBody3D] = []
+# Oleadas
+var tiempo_pasos = 1.0   # tiempo entre cada movimento
 
 # señales para modificar el hud
 
@@ -51,13 +51,4 @@ func mensaje(texto: String):
 	print (texto)
 	
 func reiniciar_variables():
-	piezas_activas = []
-	economia.inventario_actual = [
-	{"nombre": "Peon", "cantidad":0},
-	{"nombre": "Torre", "cantidad":0},
-	{"nombre": "Alfil",  "cantidad":0},
-	{"nombre": "Caballo", "cantidad":0},
-	{"nombre": "Reina", "cantidad":0}
-]
-	economia.monedas_actual = 200
-	oleada_actual = 1
+	Piezas.piezas_activas = []

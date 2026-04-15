@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://df6h7j1frxlw1"]
 
 [ext_resource type="Script" uid="uid://borpciaq4xf08" path="res://scenes/pieza/pieza_base.gd" id="1_c11s1"]
-[ext_resource type="PackedScene" uid="uid://s5yrdvrmwvye" path="res://assets/modelos/peon1.glb" id="2_4vkcs"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_c11s1"]
 
@@ -36,8 +35,6 @@ contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_c11s1")
 health = 65
-peon_blanco = ExtResource("2_4vkcs")
-rey_blanco = ExtResource("2_4vkcs")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1624874680]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.530014, 0)
@@ -46,24 +43,24 @@ shape = SubResource("CylinderShape3D_c11s1")
 [node name="DustParticles" type="GPUParticles3D" parent="." unique_id=725324837]
 emitting = false
 amount = 53
-lifetime = 0.5
+lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_4vkcs")
 draw_pass_1 = SubResource("SphereMesh_krwjw")
 draw_skin = SubResource("Skin_xmeed")
 
-[node name="CollissionTimer" type="Timer" parent="." unique_id=1102472803]
-
 [node name="AttackTimer" type="Timer" parent="." unique_id=52186406]
 
 [node name="HealthBar" type="ProgressBar" parent="." unique_id=2010147779]
-visible = false
 offset_left = 82.0
 offset_top = 46.0
 offset_right = 168.0
 offset_bottom = 74.0
 
 [node name="ContenedorModelo" type="Node3D" parent="." unique_id=1845823207]
+
+[node name="GiroInicial" type="Timer" parent="." unique_id=994989931]
+one_shot = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
