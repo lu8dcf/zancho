@@ -18,7 +18,8 @@ func _ready():
 		Vector2i(2, 3), 
 		Vector2i(5, 7),
 		Vector2i(10, 4),
-		Vector2i(8, 12)
+		Vector2i(8, 12),
+		Vector2i(8, 13)
 	])
 	
 	#  obstáculos para el mapa 0 (deben coincidir en cantidad con las posiciones)
