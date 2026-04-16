@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b5cx4ihx6mv2u"]
+
+[ext_resource type="Script" uid="uid://cxqt1a66k1a6c" path="res://scenes/objetos/fabrica_objetos.gd" id="1_08nxa"]
+
+[node name="FabricaObjetos" type="Node3D" unique_id=1272236271]
+script = ExtResource("1_08nxa")
