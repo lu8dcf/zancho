@@ -27,6 +27,8 @@ mapas="*uid://cx3yodnfc5g1l"
 Sonidos="*uid://13ju4at2w07"
 Piezas="*uid://xy2bf4ofjrkl"
 GlobalSignal="*uid://d3c860m45uhol"
+GlobalJuego="*uid://ddgt0astfx6o4"
+GlobalManager="*uid://d3sq5b342inc"
 
 [input]
 

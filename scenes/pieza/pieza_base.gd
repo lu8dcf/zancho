@@ -15,7 +15,8 @@ var bonus_a = Piezas.bonus_a[pieza_tipo]
 @export var vision_range: float = 5.0
 @export var angulo_frente: int
 
-
+# Componentes
+var movimiento_especifico = preload("res://scenes/pieza/movimiento.tscn")
 
 # Nodos
 
@@ -32,10 +33,11 @@ var is_alive: bool = true
 var can_attack: bool = true
 var target_piece: RigidBody3D = null
 var initial_health: int
+var color="N"
 
 
 func _ready():
-		
+	if pieza_blanca: color="B" 	
 	# Configurar física
 	linear_velocity = Vector3(0, linear_velocity.y, 0)  # que no se mueva a los costados
 	#rebote
@@ -45,15 +47,9 @@ func _ready():
 	cargar_modelo_glb() #asigan el modelo 3d
 	cargar_parametros() # carga os parametors de la pieza
 	posicionamiento()
-	
-	
-	
-	
-	
+	cargar_movimiento()
+		
 func cargar_modelo_glb():
-	var color="N"
-	if pieza_blanca: color="B" 
-	
 	var armado = "res://assets/modelos/piezas/pieza" + str(pieza_tipo) + color + ".glb"
 	
 	var modelo_pieza = load(armado)
@@ -74,6 +70,13 @@ func cargar_modelo_glb():
 func cargar_parametros():
 	
 	pass
+	
+func cargar_movimiento():
+	var movimiento = movimiento_especifico.instantiate()
+	var movimiento_script = "res://scenes/pieza/especifico"+str(pieza_tipo)+color+".gd"
+	var script = load(movimiento_script)
+	movimiento.set_script(script)
+	add_child(movimiento)
 	
 
 func posicionamiento():
