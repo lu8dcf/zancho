@@ -7,7 +7,7 @@ extends Node
 var vidas: int = 20              # vidas del castillo/jugador
 var vidaMax: int = 20
 var oleada_actual: int = 1       # numero de oleada actual
-var mapa_actual: int = 0         # numero de mapa activo
+var mapa_actual: int = 1         # numero de mapa activo
 
 # estado de la tienda (si esta desplegada o no)
 var tienda_desplegada: bool = false
@@ -48,7 +48,7 @@ func juego_terminado() -> void:
 
 # si cambia el mapa, cambian las ubicaciones de los objetos segun el mapa
 func cambiar_mapa(nuevo_indice: int) -> bool:
-	if nuevo_indice >= 0 and nuevo_indice < mapas.mapas.size():
+	if nuevo_indice > 0:
 		mapa_actual = nuevo_indice
 		mapa_cambiado.emit(nuevo_indice)
 		return true

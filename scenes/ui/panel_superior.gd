@@ -36,8 +36,7 @@ func _on_boton_reiniciar_camara_pressed() -> void:
 	if camara and camara is Node3D:
 		camara.reiniciar_posicion()
 
-	globalJuego.mapa_actual +=1
-	globalJuego.cambiar_mapa(globalJuego.mapa_actual)
+	mapas.siguiente_mapa()
 
 
 
