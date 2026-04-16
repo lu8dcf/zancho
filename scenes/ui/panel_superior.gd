@@ -25,9 +25,9 @@ func _on_boton_menu_pressed() -> void:
 
 
 func _on_boton_reiniciar_camara_pressed() -> void:
-	var camara = get_tree().get_first_node_in_group("camara_principal")
+	var camara = get_tree().root.find_child("ControlCamara", true, false)
 	
-	if camara and camara is CamaraLibre3D:
+	if camara and camara is Node3D:
 		camara.reiniciar_posicion()
 
 

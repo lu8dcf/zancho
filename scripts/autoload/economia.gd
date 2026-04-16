@@ -17,11 +17,11 @@ var valor_reventa = {
 }
 
 var inventario_actual = [
-	{"nombre": "Peon", "cantidad":7},
-	{"nombre": "Torre", "cantidad":2},
+	{"nombre": "Peon", "cantidad":0},
+	{"nombre": "Torre", "cantidad":0},
 	{"nombre": "Alfil",  "cantidad":0},
-	{"nombre": "Caballo", "cantidad":2},
-	{"nombre": "Reina", "cantidad":1}
+	{"nombre": "Caballo", "cantidad":0},
+	{"nombre": "Reina", "cantidad":0}
 ]
 
 var piezas_disponibles_tienda: Array = [

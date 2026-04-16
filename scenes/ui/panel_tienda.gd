@@ -24,7 +24,6 @@ func _actualizar_monedas(nuevas_monedas: int) -> void:
 func configurar_tienda():
 	espaciado()
 	_crear_botones_piezas_tienda()
-	_crear_botones_piezas_tienda_reposicion()
 
 func espaciado():
 	# Configurar espaciado para tienda
@@ -67,9 +66,6 @@ func _crear_botones_piezas_tienda() -> void:
 			
 		# Agregar el botón al contenedor
 		tienda_botones.add_child(boton)
-
-func _crear_botones_piezas_tienda_reposicion():
-	pass
 
 
 

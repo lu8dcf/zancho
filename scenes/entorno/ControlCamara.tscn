@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dkxck3q07ef2a"]
+
+[ext_resource type="Script" path="res://scenes/entorno/control_camara.gd" id="1_xmuj0"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_xmuj0"]
+exposure_multiplier = 1.072
+dof_blur_far_enabled = true
+dof_blur_near_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_nttae"]
+
+[node name="ControlCamara" type="Node3D" unique_id=2048121381]
+script = ExtResource("1_xmuj0")
+
+[node name="PivotY" type="Node3D" parent="." unique_id=1435673803]
+
+[node name="PivotX" type="Node3D" parent="PivotY" unique_id=884830031]
+
+[node name="Camera3D" type="Camera3D" parent="PivotY/PivotX" unique_id=970708950]
+transform = Transform3D(1, 0, 0, 0, 0.9992118, 0.0396958, 0, -0.0396958, 0.9992118, 0, 0.73156714, 3.2453604)
+attributes = SubResource("CameraAttributesPractical_xmuj0")
+doppler_tracking = 2
+fov = 62.530563
+
+[node name="Blur" type="RayCast3D" parent="PivotY/PivotX/Camera3D" unique_id=418429749]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2101641467]
+visible = false
+mesh = SubResource("BoxMesh_nttae")
