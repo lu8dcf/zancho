@@ -4,6 +4,14 @@ extends Node3D
 @onready var pivot_y: Node3D = $PivotY
 @onready var pivot_x: Node3D = $PivotY/PivotX
 @onready var camera_3d: Camera3D = $PivotY/PivotX/Camera3D
+@onready var blur_cerca_max:= 1
+@onready var blur_cerca_min:= 0
+@onready var blur_rango:= -2
+@onready var blur_lejos_max:= 32
+@onready var blur_lejos_min:= 20
+@onready var velocidad_de_refresco_blur:= -2
+@onready var blur: RayCast3D = $PivotY/PivotX/Camera3D/Blur
+
 
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 
@@ -56,3 +64,17 @@ func _physics_process(delta: float) -> void:
 	direccion_movimiento = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
 	global_position += Vector3(direccion_movimiento.x,0,direccion_movimiento.y).rotated(Vector3.UP, pivot_y.rotation.y) * rapidez_movimiento * delta
 	pivot_y.global_position = (global_position + pivot_y.global_position) * 0.5
+	
+	
+	blur.target_position.z = blur_rango
+	
+	
+	if blur.is_colliding():
+		var origin = blur.global_transform.origin
+		var collision_point = blur.get_collision_point()
+		var distance = origin.distance_to(collision_point)
+		camera_3d.attributes.dof_blur_far_distance =blur_lejos_min*distance
+		camera_3d.attributes.dof_blur_near_distance =blur_cerca_max
+	else:
+		camera_3d.attributes.dof_blur_far_distance = blur_lejos_max
+		camera_3d.attributes.dof_blur_near_distance = blur_cerca_max

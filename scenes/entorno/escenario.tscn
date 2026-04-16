@@ -6,18 +6,20 @@
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_6mpwl"]
 panorama = ExtResource("1_65f8h")
-energy_multiplier = 1.59
 
 [sub_resource type="Sky" id="Sky_rawsq"]
 sky_material = SubResource("PanoramaSkyMaterial_6mpwl")
-process_mode = 1
+process_mode = 3
 radiance_size = 6
 
 [sub_resource type="Environment" id="Environment_3d5tn"]
 background_mode = 2
+background_energy_multiplier = 2.28
 sky = SubResource("Sky_rawsq")
-tonemap_mode = 3
-tonemap_exposure = 0.75
+ambient_light_source = 3
+ambient_light_energy = 16.0
+tonemap_mode = 1
+tonemap_exposure = 0.76
 ssr_fade_in = 0.0011718746
 ssr_depth_tolerance = 128.0
 glow_levels/2 = 5.08
@@ -31,6 +33,10 @@ fog_height_density = 0.2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=873933903]
 environment = SubResource("Environment_3d5tn")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1537059610]
+transform = Transform3D(1, 0, 0, 0, -0.022722214, 0.9997419, 0, -0.9997419, -0.022722214, 0, 4.631231, 0)
+light_color = Color(0.90019417, 0.90956074, 0.9175537, 1)
 
 [node name="entorno_completo" parent="." unique_id=791396320 instance=ExtResource("1_asphf")]
 
