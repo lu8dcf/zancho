@@ -12,9 +12,6 @@ script = ExtResource("1_377w7")
 
 [node name="ControlCamara" parent="." unique_id=2048121381 instance=ExtResource("2_b2cq8")]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=921601678]
-transform = Transform3D(1, 0, 0, 0, 0.35931277, 0.93321717, 0, -0.93321717, 0.35931277, 0, 0, 0)
-
 [node name="GestorHover" type="Node3D" parent="." unique_id=1577176568]
 script = ExtResource("3_b2cq8")
 
