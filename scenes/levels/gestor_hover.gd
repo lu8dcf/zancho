@@ -28,7 +28,7 @@ func buscar_referencias():
 		camara_referencia = get_tree().get_first_node_in_group("camara_principal")
 	
 	# Buscar gestor de tablero
-	gestor_tablero = get_tree().get_first_node_in_group("gestor_tablero")
+	gestor_tablero = get_tree().root.find_child("gestorTablero", true, false)
 	if not gestor_tablero:
 		# Buscar por tipo
 		for nodo in get_tree().get_nodes_in_group("gestor_tablero"):

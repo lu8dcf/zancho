@@ -13,6 +13,8 @@ class_name GestorTablero
 var baldosas : Dictionary = {}  # Diccionario con clave Vector2i -> BaldosaBase
 var baldosa_seleccionada : BaldosaBase = null
 
+var mapa_actual :int = globalJuego.mapa_actual
+
 func _ready():
 	add_to_group("gestor_tablero")
 	generar_tablero()

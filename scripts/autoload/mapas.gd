@@ -6,14 +6,14 @@ var mapas: Array[Array] = []
 var obstaculos: Array[Array] = []
 
 var tipo_obstaculo : Dictionary = {
-	1: "res://assets/modelos/peon1.glb",
-	2: "res://assets/modelos/peon1.glb",
-	3: "res://assets/modelos/peon1.glb",
+	1: "res://assets/modelos/objetos/caja.glb",
+	2: "res://assets/modelos/objetos/caja.glb",
+	3: "res://assets/modelos/objetos/caja.glb",
 	
 }
 
 func _ready():
-	# Posiciones donde habrá obstáculos
+	# posiciones donde habrá obstáculos
 	mapas.append([
 		Vector2i(2, 3), 
 		Vector2i(5, 7),
