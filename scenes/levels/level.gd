@@ -5,6 +5,7 @@ extends Node3D
 var hud_escena = preload("res://scenes/ui/hud.tscn")
 var tablero_escena = preload("res://scenes/tablero/gestorTablero.tscn")
 var entorno = preload("res://scenes/entorno/escenario.tscn")
+var obstaculos_escena = preload("res://scenes/objetos/Objetos.tscn")
 
 var contador_externo = 0
 var contador_interno = 0
@@ -21,10 +22,12 @@ func _ready() -> void:
 	var tablero = tablero_escena.instantiate()
 	add_child(tablero)
 	
+	var obstaculos = obstaculos_escena.instantiate()
+	add_child(obstaculos)
+	
 	var mapa = entorno.instantiate()
 	add_child(mapa)
 	
-	add_child(tablero)
 	GlobalSignal.emit_signal("controlMarcaPaso",false)	
 	GlobalSignal.connect("marcaPaso",prueba)
 		

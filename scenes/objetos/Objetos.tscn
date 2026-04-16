@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c3wqeo7wry18j"]
+
+[ext_resource type="Script" uid="uid://nhw4c6143djv" path="res://scenes/objetos/ubicadorObjetos.gd" id="1_omie6"]
+
+[node name="Objetos" type="Node3D" unique_id=300983744]
+script = ExtResource("1_omie6")

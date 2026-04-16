@@ -7,7 +7,7 @@ extends Node
 var vidas: int = 20              # vidas del castillo/jugador
 var vidaMax: int = 20
 var oleada_actual: int = 1       # numero de oleada actual
-var mapa_actual: int = 1         # numero de mapa activo
+var mapa_actual: int = 0         # numero de mapa activo
 
 # estado de la tienda (si esta desplegada o no)
 var tienda_desplegada: bool = false
