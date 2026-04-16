@@ -21,7 +21,5 @@ func control(activa):
 	
 	if activa:
 		start()
-		print("Timer activado")
 	else:
 		stop()
-		print("MarcPaso detenido")
