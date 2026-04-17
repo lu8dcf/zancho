@@ -24,7 +24,7 @@ func cargar_obstaculos():
 	var datos_mapa = mapas.obtener_mapa_actual(indice_mapa)
 	var posiciones = datos_mapa["posiciones"]
 	var tipos = datos_mapa["tipos"]
-	print("Cargando obstáculos del mapa ", indice_mapa, " con ", posiciones.size(), " obstáculos")
+	#print("Cargando obstáculos del mapa ", indice_mapa, " con ", posiciones.size(), " obstáculos")
 	
 	# crear cada obstaculo
 	for i in range(posiciones.size()):
@@ -56,7 +56,7 @@ func crear_obstaculo_en_posicion(posicion: Vector2i, tipo_obstaculo: int) -> Nod
 		if modelo_resource:
 			var modelo_instance = modelo_resource.instantiate()
 			obstaculo.add_child(modelo_instance)
-		print("  ruta modelo: ", ruta_modelo, )
+		#print("  ruta modelo: ", ruta_modelo, )
 
 # Posicionar el obstáculo
 	obstaculo.position = Vector3(
@@ -71,7 +71,7 @@ func crear_obstaculo_en_posicion(posicion: Vector2i, tipo_obstaculo: int) -> Nod
 	obstaculo.set_meta("es_obstaculo", true)
 
 	add_child(obstaculo)
-	print("Obstáculo tipo ", tipo_obstaculo, " creado en posición ", posicion)
+	#print("Obstáculo tipo ", tipo_obstaculo, " creado en posición ", posicion)
 
 	return obstaculo
 
@@ -87,4 +87,4 @@ func limpiar_obstaculos():
 		if is_instance_valid(obstaculo):
 			obstaculo.queue_free()
 	obstaculos_instanciados.clear()
-	print("se limpio")
+	#print("se limpio")

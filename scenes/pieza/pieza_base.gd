@@ -16,7 +16,7 @@ var bonus_a = Piezas.bonus_a[pieza_tipo]
 @export var angulo_frente: int
 
 # Componentes
-var movimiento_especifico = preload("res://scenes/pieza/movimiento.tscn")
+var movimiento_especifico = preload("res://scenes/pieza/movimiento/movimiento.tscn") # define le movimiento caracteristico de la pieza
 
 # Nodos
 
@@ -71,9 +71,9 @@ func cargar_parametros():
 	
 	pass
 	
-func cargar_movimiento():
+func cargar_movimiento(): # agrega el nodo movimiento con el script correspondiente a la pieza
 	var movimiento = movimiento_especifico.instantiate()
-	var movimiento_script = "res://scenes/pieza/especifico"+str(pieza_tipo)+color+".gd"
+	var movimiento_script = "res://scenes/pieza/movimiento/mov"+str(pieza_tipo)+color+".gd"
 	var script = load(movimiento_script)
 	movimiento.set_script(script)
 	add_child(movimiento)

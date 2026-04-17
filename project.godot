@@ -35,6 +35,7 @@ GlobalManager="*uid://d3sq5b342inc"
 
 folder_colors={
 "res://assets/": "orange",
+"res://assets/sound/": "yellow",
 "res://scenes/": "teal",
 "res://scripts/": "purple"
 }

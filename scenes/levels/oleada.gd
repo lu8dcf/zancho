@@ -17,8 +17,11 @@ func _ready() -> void:
 	GlobalSignal.emit_signal("crearPieza",Vector2i(9,13),5,true) #reina blanco en posicion
 	
 	#negras
-	GlobalSignal.emit_signal("crearPieza",Vector2i(6,6),1,false) #peon blanco en posicion
+	GlobalSignal.emit_signal("crearPieza",Vector2i(10,3),1,false) #peon blanco en posicion
 	GlobalSignal.emit_signal("crearPieza",Vector2i(6,9),2,false) #rey blanco en posicion
 	GlobalSignal.emit_signal("crearPieza",Vector2i(6,13),3,false) #torre blanco en posicion
 	GlobalSignal.emit_signal("crearPieza",Vector2i(6,10),4,false) #caballo blanco en posicion
 	GlobalSignal.emit_signal("crearPieza",Vector2i(7,13),5,false) #reina blanco en posicion
+
+	# iniciar el marca paso
+	GlobalSignal.emit_signal("controlMarcaPaso",true)
