@@ -46,7 +46,7 @@ func _ready():
 				
 	cargar_modelo_glb() #asigan el modelo 3d
 	cargar_parametros() # carga os parametors de la pieza
-	posicionamiento()
+	posicionamiento_giro() # gira la pieza a su posicion en grados
 	cargar_movimiento()
 		
 func cargar_modelo_glb():
@@ -79,12 +79,11 @@ func cargar_movimiento():
 	add_child(movimiento)
 	
 
-func posicionamiento():
+func posicionamiento_giro():
 	#temporizador
 	giro_inicial.wait_time = 3.0   # 1 segundo
 	giro_inicial.connect("timeout",giro)
 	giro_inicial.start()
-
 
 func _on_body_entered(body):
 	
@@ -94,8 +93,7 @@ func _on_body_entered(body):
 		# Sonido de golpe
 	Sonidos.impacto()
 	
-	# Particulas al pegar con el tablero
-func create_dust_effect():
+func create_dust_effect(): # Particulas al pegar con el tablero
 	dust_particles.emitting = true
 	await get_tree().create_timer(0.5).timeout
 	dust_particles.emitting = false

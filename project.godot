@@ -14,8 +14,9 @@ config/name="zancho"
 run/main_scene="uid://bjbqonwb7pnfh"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.6", "Mobile")
-boot_splash/image="uid://dwqo5hkdt3k6n"
-config/icon="uid://dvve3m7bmohh"
+boot_splash/bg_color=Color(0.20631492, 0.11972933, 0.007608461, 1)
+boot_splash/image="uid://dexnmkh3r45ex"
+config/icon="uid://dbbuf43vlctt2"
 config/windows_native_icon="res://assets/icon/zancho.ico"
 boot_splash/minimum_display_time=3000
 
@@ -29,6 +30,14 @@ Piezas="*uid://xy2bf4ofjrkl"
 GlobalSignal="*uid://d3c860m45uhol"
 GlobalJuego="*uid://ddgt0astfx6o4"
 GlobalManager="*uid://d3sq5b342inc"
+
+[file_customization]
+
+folder_colors={
+"res://assets/": "orange",
+"res://scenes/": "teal",
+"res://scripts/": "purple"
+}
 
 [input]
 
