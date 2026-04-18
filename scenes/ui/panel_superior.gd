@@ -5,10 +5,13 @@ extends Panel
 @onready var boton_debilidades = $BotonDebilidades
 @onready var boton_reiniciar_camera = $BotonReiniciarCamara
 @onready var imagen_debilidades = $imagenDebilidades
+@onready var mapa_label: Label = $mapa
 
 func _ready() -> void:
 	globalJuego.oleada_cambiada.connect(_actualizar_oleada)
+	globalJuego.mapa_cambiado.connect(_actualizar_mapa)
 	_actualizar_oleada(globalJuego.oleada_actual)
+	_actualizar_mapa(globalJuego.mapa_actual)
 	imagen_debilidades.texture = load("res://assets/ui/debilidades.png")
 	imagen_debilidades.visible=false
 
@@ -16,6 +19,9 @@ func _ready() -> void:
 
 func _actualizar_oleada(nueva_oleada: int) -> void:
 	oleada_label.text = " OLEADA " + str(nueva_oleada)
+	
+func _actualizar_mapa(nueva_mapa: int) -> void:
+	mapa_label.text = " MAPA " + str(nueva_mapa)
 	
 
 
@@ -29,6 +35,9 @@ func _on_boton_reiniciar_camara_pressed() -> void:
 	
 	if camara and camara is Node3D:
 		camara.reiniciar_posicion()
+
+	mapas.siguiente_mapa()
+
 
 
 func _on_boton_debilidades_pressed() -> void:
