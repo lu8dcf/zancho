@@ -1,6 +1,96 @@
 [gd_scene format=3 uid="uid://c3wqeo7wry18j"]
 
-[ext_resource type="Script" uid="uid://nhw4c6143djv" path="res://scenes/objetos/ubicadorObjetos.gd" id="1_omie6"]
+[sub_resource type="GDScript" id="GDScript_n0wpk"]
+script/source = "extends Node3D
+class_name Objeto
+
+@export var  escena_obstaculo : PackedScene # escena base
+var altura_objetos :float = 0.2
+var espaciado_baldosas :float = globalJuego.espaciado_baldosas
+
+var gestor_tablero 
+var obstaculos_instanciados : Array = [] 
+
+func _ready():
+	await  get_tree().process_frame # esperar a que el tablero se instancie
+	gestor_tablero = get_tree().root.find_child(\"GestorTablero\", true, false)
+	cargar_obstaculos()
+
+func cargar_obstaculos():
+	limpiar_obstaculos()
+	
+	if not gestor_tablero:
+		push_error(\"no hay tablero\")
+		return
+		
+	var indice_mapa = globalJuego.mapa_actual 
+	var datos_mapa = mapas.obtener_mapa_actual(indice_mapa)
+	var posiciones = datos_mapa[\"posiciones\"]
+	var tipos = datos_mapa[\"tipos\"]
+	print(\"Cargando obstáculos del mapa \", indice_mapa, \" con \", posiciones.size(), \" obstáculos\")
+	
+	# crear cada obstaculo
+	for i in range(posiciones.size()):
+		var posicion = posiciones[i]
+		var tipo = tipos[i] if i < tipos.size() else 1
+		
+		var obstaculo = crear_obstaculo_en_posicion(posicion, tipo)
+		if obstaculo:
+			obstaculos_instanciados.append(obstaculo)
+			
+			# Opcional: Marcar la baldosa como bloqueada en el tablero
+			var baldosa = gestor_tablero.obtener_baldosa_en_coordenadas(posicion)
+			if baldosa and baldosa.has_method(\"marcar_como_bloqueada\"):
+				baldosa.marcar_como_bloqueada()
+
+func crear_obstaculo_en_posicion(posicion: Vector2i, tipo_obstaculo: int) -> Node3D:
+	var obstaculo : Node3D
+	
+	# Método 1: Usar escena de obstáculo si está asignada
+	
+	# Método 2: Crear nodo básico con modelo 3D
+	obstaculo = Node3D.new()
+	obstaculo.name = \"Obstaculo_\" + str(tipo_obstaculo) + \"_\" + str(posicion)
+	
+	# Cargar modelo desde Mapas
+	if mapas.tipo_obstaculo.has(tipo_obstaculo):
+		var ruta_modelo = mapas.tipo_obstaculo[tipo_obstaculo]
+		var modelo_resource = load(ruta_modelo)
+		if modelo_resource:
+			var modelo_instance = modelo_resource.instantiate()
+			obstaculo.add_child(modelo_instance)
+		print(\"  ruta modelo: \", ruta_modelo, )
+
+# Posicionar el obstáculo
+	obstaculo.position = Vector3(
+		posicion.x * espaciado_baldosas,
+		altura_objetos,
+		posicion.y * espaciado_baldosas
+	)
+
+	# Añadir metadata útil
+	obstaculo.set_meta(\"tipo_obstaculo\", tipo_obstaculo)
+	obstaculo.set_meta(\"posicion_tablero\", posicion)
+	obstaculo.set_meta(\"es_obstaculo\", true)
+
+	add_child(obstaculo)
+	print(\"Obstáculo tipo \", tipo_obstaculo, \" creado en posición \", posicion)
+
+	return obstaculo
+
+func recargar_mapa():
+	cargar_obstaculos()
+
+func es_posicion_ocupada_por_obstaculo(posicion: Vector2i) -> bool:
+	var indice_mapa = globalJuego.mapa_actual 
+	return mapas.es_posicion_bloqueada(posicion, indice_mapa)
+
+func limpiar_obstaculos():
+	for obstaculo in obstaculos_instanciados:
+		if is_instance_valid(obstaculo):
+			obstaculo.queue_free()
+	obstaculos_instanciados.clear()
+"
 
 [node name="Objetos" type="Node3D" unique_id=300983744]
-script = ExtResource("1_omie6")
+script = SubResource("GDScript_n0wpk")

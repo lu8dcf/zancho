@@ -5,7 +5,7 @@ extends Node3D
 var hud_escena = preload("res://scenes/ui/hud.tscn")
 var tablero_escena = preload("res://scenes/tablero/gestorTablero.tscn")
 var entorno = preload("res://scenes/entorno/escenario.tscn")
-var obstaculos_escena = preload("res://scenes/objetos/Objetos.tscn")
+var fabrica_obstaculos_escena = preload("res://scenes/objetos/fabrica_objetos.tscn")
 
 var contador_externo = 0
 var contador_interno = 0
@@ -22,7 +22,7 @@ func _ready() -> void:
 	var tablero = tablero_escena.instantiate()
 	add_child(tablero)
 	
-	var obstaculos = obstaculos_escena.instantiate()
+	var obstaculos = fabrica_obstaculos_escena.instantiate()
 	add_child(obstaculos)
 	
 	var mapa = entorno.instantiate()
@@ -30,6 +30,9 @@ func _ready() -> void:
 	
 	GlobalSignal.emit_signal("controlMarcaPaso",false)	
 	GlobalSignal.connect("marcaPaso",prueba)
+	
+	if not globalJuego.mapa_cambiado.is_connected(obstaculos._on_mapa_cambiado):
+		globalJuego.mapa_cambiado.connect(obstaculos._on_mapa_cambiado)
 		
 func prueba():
 	GlobalSignal.emit_signal("crearPieza",Vector2i(contador_externo,contador_interno),tipo_pieza,true)
