@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="zancho"
-run/main_scene="uid://bjbqonwb7pnfh"
+run/main_scene="uid://by07m0vkdl2rf"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.6", "Mobile")
 boot_splash/image="uid://dwqo5hkdt3k6n"

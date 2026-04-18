@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://n4pbdigclwtp"]
+
+[ext_resource type="PackedScene" uid="uid://nxu8f265xj1t" path="res://assets/modelos/piezas/pieza2N.glb" id="1_2prw6"]
+
+[node name="pieza2N" unique_id=9865738 instance=ExtResource("1_2prw6")]
+
+[node name="Skeleton3D" parent="Esqueleto_009" parent_id_path=PackedInt32Array(1462415510) index="0" unique_id=1659277390]
+bones/0/position = Vector3(0, 0.07419778, 0)
+bones/0/rotation = Quaternion(-2.9802326e-08, 1.1920928e-07, -2.5243543e-29, 1)
+bones/1/rotation = Quaternion(-3.5527105e-15, 1.7763568e-14, -4.038968e-28, 1)
+bones/2/rotation = Quaternion(-0.76347697, -0.07604944, 0.03411561, 0.6404339)
+bones/3/rotation = Quaternion(-0.17683436, -0.33287883, 0.40633422, 0.8323545)
+bones/4/rotation = Quaternion(0.36492643, -0.16062906, 0.41839886, 0.8160694)
+bones/5/rotation = Quaternion(0.23244151, -0.02943317, 0.2781304, 0.93152994)
+bones/6/rotation = Quaternion(0.7061989, -6.049778e-08, 0.035821784, 0.70710677)
+bones/7/rotation = Quaternion(0.43520695, 0.21353133, 0.40645796, 0.7744618)
+bones/7/scale = Vector3(0.99999994, 0.99999994, 0.99999994)
+bones/8/rotation = Quaternion(-0.24118555, 0.34045216, 0.31417525, 0.8527695)
+bones/8/scale = Vector3(1.0000002, 1.0000002, 1.0000004)
+bones/9/rotation = Quaternion(-0.20954964, 0.08923464, 0.2854626, 0.93093354)
+bones/9/scale = Vector3(0.99999946, 0.9999998, 0.9999998)
+bones/10/rotation = Quaternion(-3.5527105e-15, 0, -4.038968e-28, 1)
+bones/11/position = Vector3(-0.53248465, 0.84166, 0.026814159)
+bones/11/rotation = Quaternion(0.002201561, 0.9578233, -0.12223369, 0.26005515)
+bones/12/rotation = Quaternion(-0.10703151, -0.048488162, 0.13904226, 0.9832906)
