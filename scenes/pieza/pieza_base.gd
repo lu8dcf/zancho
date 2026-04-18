@@ -34,9 +34,11 @@ var can_attack: bool = true
 var target_piece: RigidBody3D = null
 var initial_health: int
 var color="N"
+var pieza_colocada=false
 
 
 func _ready():
+	print (pieza_tipo)
 	if pieza_blanca: color="B" 	
 	# Configurar física
 	linear_velocity = Vector3(0, linear_velocity.y, 0)  # que no se mueva a los costados
@@ -48,6 +50,7 @@ func _ready():
 	cargar_parametros() # carga os parametors de la pieza
 	posicionamiento_giro() # gira la pieza a su posicion en grados
 	cargar_movimiento()
+	
 		
 func cargar_modelo_glb():
 	var armado = "res://assets/modelos/piezas/pieza" + str(pieza_tipo) + color + ".glb"
@@ -73,11 +76,11 @@ func cargar_parametros():
 	
 func cargar_movimiento(): # agrega el nodo movimiento con el script correspondiente a la pieza
 	var movimiento = movimiento_especifico.instantiate()
-	var movimiento_script = "res://scenes/pieza/movimiento/mov"+str(pieza_tipo)+color+".gd"
+	var movimiento_script = "res://scenes/pieza/movimiento/mov1N.gd"
 	var script = load(movimiento_script)
 	movimiento.set_script(script)
 	add_child(movimiento)
-	
+	movimiento.owner = self  # ← IMPORTANTE: Establece el owner manualmente
 
 func posicionamiento_giro():
 	#temporizador
@@ -87,9 +90,11 @@ func posicionamiento_giro():
 
 func _on_body_entered(body):
 	
+	if pieza_colocada : return # solo se ejecuta en el inicio
 	# este if es para que solo tenga un efecto de sonido cuando rebota 
 	# Efecto de polvo
 	create_dust_effect()
+	
 		# Sonido de golpe
 	Sonidos.impacto()
 	
@@ -208,3 +213,7 @@ func giro():
 	tween.tween_property(self, "rotation_degrees:y", rotacion_destino, 1)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
+	
+	pieza_colocada = true
+	physics_material_override.bounce = 0
+	gravity_scale=1
