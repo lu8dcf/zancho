@@ -1,5 +1,5 @@
 extends Node
-class_name Alfil
+class_name Torre
 
 # Referencia a la pieza base (el RigidBody3D que contiene este componente)
 var pieza: PiezaBase
@@ -18,7 +18,7 @@ func _ready():
 	
 func movimiento():
 	# peon
-	var cambio = Vector3(-1,0,1)*GlobalJuego.espaciado_baldosas
+	var cambio = Vector3(0,0,1)*GlobalJuego.espaciado_baldosas
 	var tween = create_tween()
 	tween.tween_property(owner, "global_position", owner.global_position + cambio , 1) \
 	.set_trans(Tween.TRANS_SINE) \

@@ -23,7 +23,7 @@ func _ready() -> void:
 	#negras
 	
 	GlobalSignal.emit_signal("crearPieza",Vector2i(6,9),2,false) #rey blanco en posicion
-	GlobalSignal.emit_signal("crearPieza",Vector2i(6,13),3,false) #torre blanco en posicion
+	GlobalSignal.emit_signal("crearPieza",Vector2i(6,1),3,false) #torre blanco en posicion
 	GlobalSignal.emit_signal("crearPieza",Vector2i(6,10),4,false) #caballo blanco en posicion
 	GlobalSignal.emit_signal("crearPieza",Vector2i(7,13),5,false) #reina blanco en posicion
 
