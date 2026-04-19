@@ -27,9 +27,8 @@ func _ready() -> void:
 	var mapa = entorno.instantiate()
 	add_child(mapa)
 
-	GlobalSignal.emit_signal("controlMarcaPaso",false)	
-	GlobalSignal.connect("marcaPaso",prueba)
+	GlobalSignal.emit_signal("controlMarcaPaso",true)	
+	#GlobalSignal.connect("marcaPaso",prueba)
 	
 	if not globalJuego.mapa_cambiado.is_connected(obstaculos._on_mapa_cambiado):
 		globalJuego.mapa_cambiado.connect(obstaculos._on_mapa_cambiado)
-

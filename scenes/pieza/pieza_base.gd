@@ -45,13 +45,19 @@ func _ready():
 	#rebote
 	physics_material_override.bounce =.3
 	gravity_scale = 2.0
-				
+	
+	cargar_objeto() # Asigna el modelo y objero con sus animaciones			
 	cargar_modelo_glb() #asigan el modelo 3d
 	cargar_parametros() # carga os parametors de la pieza
 	posicionamiento_giro() # gira la pieza a su posicion en grados
 	cargar_movimiento()
 	
-		
+func cargar_objeto():
+	var objeto = "res://assets/modelos/piezas/pieza_"+ str(pieza_tipo) + color +".tscn"
+	var modelo_objeto = load(objeto)
+	if not modelo_objeto:
+		print ("No se puede cargar la escena del objeto pieza")
+			
 func cargar_modelo_glb():
 	var armado = "res://assets/modelos/piezas/pieza" + str(pieza_tipo) + color + ".glb"
 	
@@ -76,7 +82,7 @@ func cargar_parametros():
 	
 func cargar_movimiento(): # agrega el nodo movimiento con el script correspondiente a la pieza
 	var movimiento = movimiento_especifico.instantiate()
-	var movimiento_script = "res://scenes/pieza/movimiento/mov1N.gd"
+	var movimiento_script = "res://scenes/pieza/movimiento/mov"+str(pieza_tipo)+ color+".gd"
 	var script = load(movimiento_script)
 	movimiento.set_script(script)
 	add_child(movimiento)
