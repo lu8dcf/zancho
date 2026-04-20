@@ -38,7 +38,7 @@ var pieza_colocada=false
 
 
 func _ready():
-	print (pieza_tipo)
+	#print (pieza_tipo)
 	if pieza_blanca: color="B" 	
 	# Configurar física
 	linear_velocity = Vector3(0, linear_velocity.y, 0)  # que no se mueva a los costados
@@ -91,8 +91,11 @@ func cargar_movimiento(): # agrega el nodo movimiento con el script correspondie
 func posicionamiento_giro():
 	#temporizador
 	giro_inicial.wait_time = 3.0   # 1 segundo
-	giro_inicial.connect("timeout",giro)
+	giro_inicial.connect("timeout",llego_al_piso)
 	giro_inicial.start()
+
+func llego_al_piso():
+	giro(angulo_frente)
 
 func _on_body_entered(body):
 	
@@ -203,7 +206,7 @@ func die():
 	tween.tween_property(self, "scale", Vector3.ZERO, 0.5)
 	tween.tween_callback(queue_free)
 
-func giro():
+func giro(angulo):
 	
 	"""
     Gira la pieza en el eje horizontal (Y) usando Tween
@@ -214,7 +217,9 @@ func giro():
 	"""
 	var tween = create_tween()
 	var rotacion_actual = rotation_degrees.y
-	var rotacion_destino = rotacion_actual + angulo_frente
+	var rotacion_destino =-angulo
+	print ("actual ",rotacion_actual,"ang ",angulo)
+	#calcular el giro mas corto
 	
 	tween.tween_property(self, "rotation_degrees:y", rotacion_destino, 1)
 	tween.set_ease(Tween.EASE_IN_OUT)
