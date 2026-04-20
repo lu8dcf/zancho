@@ -11,5 +11,5 @@ shader_parameter/force_srgb = false
 shader_parameter/light_yaw = 0.0
 shader_parameter/light_pitch = 45.0
 shader_parameter/min_brightness = 0.3
-shader_parameter/max_brightness = 1.0
+shader_parameter/max_brightness = 1.150000054625
 shader_parameter/light_strength = 1.0
