@@ -4,8 +4,9 @@
 [ext_resource type="Material" uid="uid://e2oyjpkuf1qo" path="res://assets/modelos/texturas/material_malos.tres" id="2_borny"]
 
 [node name="pieza4N" unique_id=611664907 instance=ExtResource("1_gwupi")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 
-[node name="Skeleton3D" parent="Esqueleto_018" parent_id_path=PackedInt32Array(802369155) index="0" unique_id=225639421]
+[node name="Skeleton3D" parent="Esqueleto_018" parent_id_path=PackedInt32Array(286613767) index="0" unique_id=1332009513]
 bones/0/position = Vector3(0.4128762, 0.6264829, 5.884182e-15)
 bones/1/rotation = Quaternion(3.725289e-09, -7.391692e-08, -6.7055225e-08, 1)
 bones/2/rotation = Quaternion(-3.129647e-08, 2.5092739e-08, -0.6612571, 0.7501594)
@@ -35,5 +36,5 @@ bones/27/rotation = Quaternion(0.9845647, -0.064134225, -0.05575277, 0.15300575)
 bones/28/rotation = Quaternion(0.015663821, 0.0066404436, 0.008876427, 0.9998159)
 bones/29/rotation = Quaternion(0.9890629, -0.14749438, 1.1152326e-08, 2.4482151e-08)
 
-[node name="Círculo_035" parent="Esqueleto_018/Skeleton3D" index="0" unique_id=189563226]
+[node name="Círculo_035" parent="Esqueleto_018/Skeleton3D" index="0" unique_id=637250934]
 material_override = ExtResource("2_borny")
