@@ -7,8 +7,7 @@ var tablero_escena = preload("res://scenes/tablero/gestorTablero.tscn")
 var entorno = preload("res://scenes/entorno/escenario.tscn")
 var fabrica_obstaculos_escena = preload("res://scenes/objetos/fabrica_objetos.tscn")
 
-var contador_externo = 0
-var contador_interno = 0
+
 var tipo_pieza=0
 
 
@@ -27,29 +26,11 @@ func _ready() -> void:
 	
 	var mapa = entorno.instantiate()
 	add_child(mapa)
-	
-	#GlobalSignal.emit_signal("controlMarcaPaso",false)
+
+
+	GlobalSignal.emit_signal("controlMarcaPaso",true)	
+
 	#GlobalSignal.connect("marcaPaso",prueba)
 	
 	if not globalJuego.mapa_cambiado.is_connected(obstaculos._on_mapa_cambiado):
 		globalJuego.mapa_cambiado.connect(obstaculos._on_mapa_cambiado)
-		
-func prueba():
-	GlobalSignal.emit_signal("crearPieza",Vector2i(contador_externo,contador_interno),tipo_pieza,true)
-		# Incrementa el contador interno
-	contador_interno += 1
-	
-	# Si llega a 16, reinicia y avanza el externo
-	if contador_interno > 15:
-		contador_interno = 0
-		contador_externo += 1
-		GlobalSignal.emit_signal("controlMarcaPaso",false)
-		# Si el externo también llega a 16, reinicia
-		if contador_externo > 15:
-			contador_externo = 0
-	
-		# Crear pieza de prueba esto se debe ejecutar en la oleadas
-	
-	tipo_pieza +=1
-	if tipo_pieza == 6:
-		tipo_pieza=0
