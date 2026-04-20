@@ -1,5 +1,5 @@
 extends Node
-class_name Alfil
+class_name Torre
 
 var pasos=0 #cantidad dee pasos que dara para cambio de  secuencia 
 
@@ -7,9 +7,9 @@ var pasos=0 #cantidad dee pasos que dara para cambio de  secuencia
 var pieza: PiezaBase
 var proxima_posicion : Vector3
 
-# desplazamiento alfil
+# desplazamiento Torre
 var direccion= Vector3i(0,0,0)
-var secuencia = [0,3,2,3,4,3,4]
+var secuencia = [0,3,4,3,2,3,4]
 var paso = 0
 
 # Referencia al AnimationPlayer
@@ -56,16 +56,16 @@ func cambio_estado(cambio):
 			direccion = Vector3i(0,0,0)
 			owner.giro(45)
 		1: # arriba
-			direccion = Vector3i(1,0,-1)
-			owner.giro(225)
+			direccion = Vector3i(0,0,-1)
+			owner.giro(-90)
 		2:# derecha
-			direccion = Vector3i(1,0,1)
-			owner.giro(135)
+			direccion = Vector3i(1,0,0)
+			owner.giro(179)
 		3: # abajo
-			direccion = Vector3i(-1,0,1)
-			owner.giro(45)
+			direccion = Vector3i(0,0,1)
+			owner.giro(90)
 		4: # izquierda
-			direccion = Vector3i(-1,0,-1)
-			owner.giro(-45)
+			direccion = Vector3i(-1,0,0)
+			owner.giro(0)
 			
 	
