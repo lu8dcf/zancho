@@ -22,10 +22,15 @@ var movimiento_especifico = preload("res://scenes/pieza/movimiento/movimiento.ts
 
 @onready var health_bar = $HealthBar
 @onready var dust_particles = $DustParticles
-@onready var contenedor_modelo : Node3D = $ContenedorModelo # contenedor modelo glb
-
 @onready var attack_timer = $AttackTimer
 @onready var giro_inicial = $GiroInicial
+
+# Contenedor par acargar escena del modelo
+@onready var contenedor_modelo : Node3D = $ContenedorModelo # contenedor modelo imagen y funciones
+
+# Referencia a la instancia de la pieza (con AnimationPlayer)
+var instancia_objeto_pieza: Node3D
+var animation_player : AnimationPlayer
 
 
 # Variables de estado
@@ -35,10 +40,9 @@ var target_piece: RigidBody3D = null
 var initial_health: int
 var color="N"
 var pieza_colocada=false
-
+var animacion=false
 
 func _ready():
-	#print (pieza_tipo)
 	if pieza_blanca: color="B" 	
 	# Configurar física
 	linear_velocity = Vector3(0, linear_velocity.y, 0)  # que no se mueva a los costados
@@ -47,38 +51,42 @@ func _ready():
 	gravity_scale = 2.0
 	
 	cargar_objeto() # Asigna el modelo y objero con sus animaciones			
-	cargar_modelo_glb() #asigan el modelo 3d
-	cargar_parametros() # carga os parametors de la pieza
+	#cargar_modelo_glb() #asigan el modelo 3d
+	
 	posicionamiento_giro() # gira la pieza a su posicion en grados
-	cargar_movimiento()
+	cargar_movimiento() # Script de movimiento y estados
+
+func _physics_process(delta: float) -> void:
+	if animacion:
+		animation_player.play("ataque_rey")
 	
 func cargar_objeto():
 	var objeto = "res://assets/modelos/piezas/pieza_"+ str(pieza_tipo) + color +".tscn"
 	var modelo_objeto = load(objeto)
 	if not modelo_objeto:
 		print ("No se puede cargar la escena del objeto pieza")
-			
-func cargar_modelo_glb():
-	var armado = "res://assets/modelos/piezas/pieza" + str(pieza_tipo) + color + ".glb"
-	
-	var modelo_pieza = load(armado)
-	if not contenedor_modelo:
-		push_error("Falta el nodo ContenedorModelo")
 		return
-	# Limpiar modelos anteriores
-	for hijo in contenedor_modelo.get_children():
-		hijo.queue_free()
+		
+	# Instanciar y agregar al contenedor
+	instancia_objeto_pieza = modelo_objeto.instantiate()
+	contenedor_modelo.add_child(instancia_objeto_pieza)
 	
-	# Seleccionar el modelo según el tipo
-	if modelo_pieza:
-		var instancia_modelo = modelo_pieza.instantiate()
-		contenedor_modelo.add_child(instancia_modelo)
-	else:
-		push_error("No se ha asignado modelo GLB para la pieza: ")
+	# Buscar el AnimationPlayer dentro de esta instancia
+	animation_player = _find_animation_player(instancia_objeto_pieza)
 
-func cargar_parametros():
-	
-	pass
+func _find_animation_player(node: Node) -> AnimationPlayer:
+	for child in node.get_children():
+		if child is AnimationPlayer:
+			return child
+		var found = _find_animation_player(child)
+		if found:
+			return found
+	return null
+
+# Método público para acceder a la animación desde los scripts de movimiento
+func get_animation_player() -> AnimationPlayer:
+	return animation_player
+			
 	
 func cargar_movimiento(): # agrega el nodo movimiento con el script correspondiente a la pieza
 	var movimiento = movimiento_especifico.instantiate()
@@ -87,6 +95,8 @@ func cargar_movimiento(): # agrega el nodo movimiento con el script correspondie
 	movimiento.set_script(script)
 	add_child(movimiento)
 	movimiento.owner = self  # ← IMPORTANTE: Establece el owner manualmente
+	
+			
 
 func posicionamiento_giro():
 	#temporizador
@@ -96,6 +106,7 @@ func posicionamiento_giro():
 
 func llego_al_piso():
 	giro(angulo_frente)
+	
 
 func _on_body_entered(body):
 	
@@ -217,11 +228,11 @@ func giro(angulo):
 	"""
 	var tween = create_tween()
 	var rotacion_actual = rotation_degrees.y
-	var rotacion_destino =-angulo
-	print ("actual ",rotacion_actual,"ang ",angulo)
+	var rotacion_destino = angulo
+	#print ("actual ",rotacion_actual,"ang ",angulo)
 	#calcular el giro mas corto
 	
-	tween.tween_property(self, "rotation_degrees:y", rotacion_destino, 1)
+	tween.tween_property(self, "rotation_degrees:y", rotacion_destino, 0.5)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
 	
