@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://yvwwtxa42htj"]
+
+[ext_resource type="PackedScene" uid="uid://b5d4fv4f6o5iw" path="res://assets/modelos/entorno_completo.glb" id="1_ewjn0"]
+
+[node name="entorno_completo" unique_id=791396320 instance=ExtResource("1_ewjn0")]

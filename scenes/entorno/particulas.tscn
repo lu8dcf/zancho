@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b7gb2ttvbq0ot"]
+
+[ext_resource type="PackedScene" uid="uid://o8dxtmmia2ud" path="res://assets/modelos/particulas/particulas.fbx" id="1_y0hfh"]
+
+[node name="particula" type="Node3D" unique_id=498636856]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=673540204]
+
+[node name="particulas" parent="." unique_id=1574343053 instance=ExtResource("1_y0hfh")]
