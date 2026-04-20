@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://scenes/entorno/control_camara.gd" id="1_xmuj0"]
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_xmuj0"]
-exposure_multiplier = 1.072
 dof_blur_far_enabled = true
 dof_blur_near_enabled = true
 

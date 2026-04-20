@@ -7,7 +7,7 @@ extends Node3D
 @onready var blur_cerca_max:= 1
 @onready var blur_cerca_min:= 0
 @onready var blur_rango:= -2
-@onready var blur_lejos_max:= 32
+@onready var blur_lejos_max:= 50
 @onready var blur_lejos_min:= 20
 @onready var velocidad_de_refresco_blur:= -2
 @onready var blur: RayCast3D = $PivotY/PivotX/Camera3D/Blur

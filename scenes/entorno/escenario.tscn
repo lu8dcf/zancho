@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b8oju5ddteuuf" path="res://assets/modelos/texturas/cielo.png" id="1_65f8h"]
 [ext_resource type="PackedScene" uid="uid://xu6ocrh3m123" path="res://assets/modelos/bordes.glb" id="2_65f8h"]
 [ext_resource type="PackedScene" uid="uid://yvwwtxa42htj" path="res://assets/modelos/entorno/entorno_completo.tscn" id="3_65f8h"]
+[ext_resource type="PackedScene" uid="uid://b7gb2ttvbq0ot" path="res://scenes/entorno/particulas.tscn" id="4_6mpwl"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_6mpwl"]
 panorama = ExtResource("1_65f8h")
@@ -45,3 +46,12 @@ light_color = Color(0.90019417, 0.90956074, 0.9175537, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.031539917, -0.4408741, 30.017155)
 
 [node name="entorno_completo" parent="." unique_id=791396320 instance=ExtResource("3_65f8h")]
+
+[node name="particula" parent="." unique_id=498636856 instance=ExtResource("4_6mpwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.233458, 20.6045, 47.251747)
+
+[node name="particula" parent="particula" unique_id=1604816551 instance=ExtResource("4_6mpwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.2138, 10.063183, 7.757324)
+
+[node name="particula" parent="particula/particula" unique_id=1210484234 instance=ExtResource("4_6mpwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3070507, -1.2841301, -24.177551)
