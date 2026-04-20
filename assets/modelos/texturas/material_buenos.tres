@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bo3dgaal0nxtp"]
+
+[ext_resource type="Shader" uid="uid://b1qxxcb7tq3l6" path="res://assets/modelos/texturas/Light.gdshader" id="1_cui4x"]
+[ext_resource type="Texture2D" uid="uid://ba4r2p3427prd" path="res://assets/modelos/texturas/paleta.png" id="2_sca83"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_cui4x")
+shader_parameter/albedo_tex = ExtResource("2_sca83")
+shader_parameter/force_srgb = false
+shader_parameter/light_yaw = 0.0
+shader_parameter/light_pitch = 45.0
+shader_parameter/min_brightness = 0.3
+shader_parameter/max_brightness = 1.0
+shader_parameter/light_strength = 1.0

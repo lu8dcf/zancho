@@ -1,5 +1,34 @@
 [gd_scene format=3 uid="uid://ru3041u0t815"]
 
 [ext_resource type="PackedScene" uid="uid://dwl2p0f6w4y4h" path="res://assets/modelos/piezas/pieza1B.glb" id="1_lt3jm"]
+[ext_resource type="Material" uid="uid://bo3dgaal0nxtp" path="res://assets/modelos/texturas/material_buenos.tres" id="2_p7u6r"]
 
 [node name="pieza1B" unique_id=1676057629 instance=ExtResource("1_lt3jm")]
+
+[node name="Skeleton3D" parent="Esqueleto" parent_id_path=PackedInt32Array(447763869) index="0" unique_id=341889064]
+bones/0/position = Vector3(-0.013436406, 0.8785581, -0.02427345)
+bones/0/rotation = Quaternion(-0.6291436, 0.03799561, 0.037690632, 0.7754445)
+bones/1/rotation = Quaternion(-0.23207252, -0.050776664, 0.10677696, 0.9654858)
+bones/1/scale = Vector3(1.0000005, 0.9999999, 1.0000001)
+bones/2/rotation = Quaternion(-0.040409695, -0.13558644, 0.32500285, 0.9350704)
+bones/2/scale = Vector3(1.0000001, 0.9999999, 1.0000001)
+bones/3/rotation = Quaternion(0.14718647, -0.017428234, 0.22377652, 0.96330506)
+bones/3/scale = Vector3(0.99999976, 0.99999964, 0.9999999)
+bones/4/rotation = Quaternion(-0.15895368, 0.06302029, 0.43708178, 0.8830185)
+bones/4/scale = Vector3(1.0000002, 1.0000001, 1.0000004)
+bones/5/position = Vector3(-0.00794374, 0.034564152, -0.0249675)
+bones/5/rotation = Quaternion(0.6718237, 0.087259345, 0.44054428, 0.5890327)
+bones/5/scale = Vector3(0.9999998, 0.99999976, 0.9999998)
+bones/6/position = Vector3(-0.4526705, 0.74552995, -0.58136)
+bones/6/rotation = Quaternion(0.5594364, -0.5594363, -0.43247083, -0.4324708)
+bones/7/rotation = Quaternion(-0.050878987, 0.7399106, 0.6684097, 0.056320842)
+bones/8/rotation = Quaternion(-0.26610985, 0.121806175, -0.48046297, 0.82674307)
+
+[node name="Cubo" parent="Esqueleto/Skeleton3D" index="0" unique_id=238676314]
+material_override = ExtResource("2_p7u6r")
+
+[node name="Cubo_015" parent="Esqueleto/Skeleton3D" index="1" unique_id=1055927918]
+material_override = ExtResource("2_p7u6r")
+
+[node name="Círculo_001" parent="Esqueleto/Skeleton3D" index="2" unique_id=1180073476]
+material_override = ExtResource("2_p7u6r")
