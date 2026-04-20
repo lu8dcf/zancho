@@ -2,15 +2,4 @@
 
 [ext_resource type="PackedScene" uid="uid://bobwdfylpdnbd" path="res://assets/modelos/piezas/pieza3N.glb" id="1_eiqkk"]
 
-[node name="pieza3N" unique_id=940862195 instance=ExtResource("1_eiqkk")]
-
-[node name="Skeleton3D" parent="Esqueleto_010" parent_id_path=PackedInt32Array(764066898) index="1" unique_id=149737002]
-bones/0/position = Vector3(-4.750755e-07, 0.2687618, 2.4066373e-17)
-bones/0/rotation = Quaternion(1.1424234e-08, -5.555391e-08, 0.052125167, 0.99864054)
-bones/1/rotation = Quaternion(-3.4197438e-08, 4.0005858e-08, -0.74300355, 0.6692875)
-bones/2/position = Vector3(0.29811135, 1.4356232, -0.15541916)
-bones/2/rotation = Quaternion(-5.1054997e-08, 5.8720147e-08, -0.74300355, 0.6692875)
-bones/3/rotation = Quaternion(-0.4987529, -0.48647466, -0.5130478, 0.501368)
-bones/4/rotation = Quaternion(0.018790018, -0.0018491953, -0.70719224, 0.70676917)
-bones/5/rotation = Quaternion(0.018790018, -0.001849196, -0.7071921, 0.7067693)
-bones/6/rotation = Quaternion(0.018790018, -0.001849196, -0.7071921, 0.7067693)
+[node name="pieza3N" unique_id=524695566 instance=ExtResource("1_eiqkk")]

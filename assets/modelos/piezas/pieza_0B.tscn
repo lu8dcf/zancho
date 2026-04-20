@@ -1,9 +1,5 @@
 [gd_scene format=3 uid="uid://bbm28kn2275j3"]
 
 [ext_resource type="PackedScene" uid="uid://by07m0vkdl2rf" path="res://assets/modelos/piezas/pieza0B.glb" id="1_rjh5o"]
-[ext_resource type="Material" uid="uid://bo3dgaal0nxtp" path="res://assets/modelos/texturas/material_para_todo.tres" id="2_mx0ug"]
 
-[node name="pieza0B" unique_id=1213927756 instance=ExtResource("1_rjh5o")]
-
-[node name="Círculo_002" parent="Esqueleto_005/Skeleton3D" parent_id_path=PackedInt32Array(843202501) index="1" unique_id=1289541230]
-material_override = ExtResource("2_mx0ug")
+[node name="pieza0B" unique_id=175033513 instance=ExtResource("1_rjh5o")]
