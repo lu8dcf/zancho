@@ -12,25 +12,27 @@ func _ready() -> void:
 	# Blanca  true piezas blancas   -  False Piezas negras
 	GlobalSignal.emit_signal("crearPieza",Vector2i(1,14),0,true) #rey blanco en posicion
 	globalJuego.oleada_cambiada.connect(ejecuto_oleada,get_oleada_actual())
-	#globalJuego.siguiente_oleada() #Testeo de conexion, funciona.
-
-	#GlobalSignal.marcaPaso.connect(_testeo_oleada)
-	#if !(pausarOleada):
-		#ejecuto_oleada(globalJuego.oleada_actual)
+	if !(pausarOleada):
+		ejecuto_oleada(globalJuego.oleada_actual)
 
 func get_oleada_actual():
 	return globalJuego.oleada_actual
+
 	
 func ejecuto_oleada(nivel):
 	if !DATA_OLEADAS.estructura_por_nivel.has(nivel):
-		print("Ese nivel no esta desarrollado.")
+		print("Este nivel aun no esta desarrollado: ", nivel)
 		return
-	#GlobalSignal.emit_signal("controlMarcaPaso",true) #tiempo!
 	if estadoOleada:# que no se ejecute una oleada dentro de oleada
 		return
 	estadoOleada = true
 	for pieza in DATA_OLEADAS.estructura_por_nivel[nivel]:
 		GlobalSignal.emit_signal("crearPieza",pieza["pos"],pieza["tipo"], pieza["blancas"])
+	await get_tree().create_timer(1).timeout #tiempo en que se acomodan las piezas
+	GlobalSignal.emit_signal("controlMarcaPaso",true) #inicio tiempo oleada
+	
+	#para que no quede corriendo el tiempo, lo detengo.
+	detenerOleada() #esto se debe comentar para probar el uso de tiempo/oleada
 	estadoOleada = false
 	
 	
