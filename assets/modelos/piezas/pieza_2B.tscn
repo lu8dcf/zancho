@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://bjhslamg2nhpu"]
 
-[ext_resource type="PackedScene" uid="uid://c3c3jc1cdo2db" path="res://assets/modelos/piezas/pieza2B.glb" id="1_yp0r7"]
+[ext_resource type="PackedScene" uid="uid://dvbcy7jk2vuo3" path="res://assets/modelos/piezas/pieza2B.glb" id="1_yp0r7"]
 
 [node name="pieza2B" unique_id=1979203158 instance=ExtResource("1_yp0r7")]
 
-[node name="Skeleton3D" parent="Esqueleto_001" parent_id_path=PackedInt32Array(1973678142) index="0" unique_id=116241633]
+[node name="Skeleton3D" parent="Esqueleto_001" parent_id_path=PackedInt32Array(156143722) index="0" unique_id=1444643343]
 bones/0/position = Vector3(0, 0.07419778, 0)
 bones/0/rotation = Quaternion(-2.9802326e-08, 1.1920928e-07, -2.5243543e-29, 1)
 bones/1/rotation = Quaternion(-3.5527105e-15, 1.7763568e-14, -4.038968e-28, 1)
