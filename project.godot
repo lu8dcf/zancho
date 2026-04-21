@@ -33,6 +33,11 @@ GlobalSignal="*uid://d3c860m45uhol"
 GlobalJuego="*uid://ddgt0astfx6o4"
 GlobalManager="*uid://d3sq5b342inc"
 
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
 [file_customization]
 
 folder_colors={
