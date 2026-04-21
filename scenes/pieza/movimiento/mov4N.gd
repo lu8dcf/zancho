@@ -9,7 +9,7 @@ var proxima_posicion : Vector3
 
 # desplazamiento Caballo
 var direccion= Vector3i(0,0,0)
-var secuencia = [0,3,4,5,6,7,8]
+var secuencia = [0,3,4,5,6,7,8,4,6]
 var paso = 0
 
 # Referencia al AnimationPlayer
