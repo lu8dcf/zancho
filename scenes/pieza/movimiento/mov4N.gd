@@ -33,6 +33,8 @@ func _ready():
 
 	
 func movimiento():
+	if paso == 8:
+		paso=0
 	if animation_player:
 		if animation_player.has_animation("ataque_rey"):
 			animation_player.play("ataque_rey")

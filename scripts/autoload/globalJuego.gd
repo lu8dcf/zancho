@@ -56,3 +56,6 @@ func cambiar_mapa(nuevo_indice: int) -> bool:
 
 func reiniciar_variables():
 	Piezas.piezas_activas = []
+	
+func mensaje(texto):
+	print (texto)

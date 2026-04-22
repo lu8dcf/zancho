@@ -7,35 +7,19 @@ var pieza = preload("res://scenes/pieza/pieza_base.tscn")
 var velocidad: float = 1.0
 
 func _ready() -> void:
-	GlobalSignal.connect("crearPieza",colocar_pieza)
+	GlobalSignal.connect("crearPieza",colocar_pieza)  # Señal que activa la fabricacion e instancia de pieza
 	
 	
 func colocar_pieza(sitio: Vector2i, tipo: int , pieza_blanca: bool):
 	
-	if lugar_disponible(sitio):
+	if lugar_disponible(sitio)==false:
 		return
 		
-	match tipo:
-		1: # rey
-			pass
-		2: # peon
-			pass
-		3: # alfil
-			pass
-		4: # torre
-			pass
-		5: # caballlo
-			pass
-		6: # reina
-			pass
-	
+		
 	# instanciar		
 	var pieza = pieza.instantiate()
-	
-	
-	
+		
 	# Seleccion del script especifico
-	
 	var script_especifico = load("res://scenes/pieza/movimiento/mov1N.gd")
 	
 	#pieza.set_script(script_especifico)
@@ -54,14 +38,15 @@ func colocar_pieza(sitio: Vector2i, tipo: int , pieza_blanca: bool):
 	Piezas.piezas_activas.append(pieza)
 	
 	
-# verificacion que el sitio este vacio para colocar la pieza
+# verificacion que el sitio este vacio psra colocar la pieza
 func lugar_disponible(sitio: Vector2i):
-	return
+	
 	# Verificacion de obstaculos en el mapa
-	if sitio in mapas.mapa[globalJuego.mapa_actual]:
+	if sitio in mapas.mapas[globalJuego.mapa_actual]:
 		globalJuego.mensaje("No se puede insertar sobre un obstaculo")
 		return false	
 	# verificar si esta ocupado por otra pieza	
+	return
 	if sitio in mapas.mapa[globalJuego.mapa_actual]:
 		globalJuego.mensaje("No se puede insertar sobre un obstaculo")
 		return false	

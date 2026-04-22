@@ -11,10 +11,10 @@ func _ready() -> void:
 	# Tipo  0-Rey  1-Peon  2-Alfil  3-Torre  4-Caballo  5- Reina
 	# Blanca  true piezas blancas   -  False Piezas negras
 
-	GlobalSignal.emit_signal("crearPieza",Vector2i(10,3),1,false) #peon NEGRO en posicion
+	GlobalSignal.emit_signal("crearPieza",Vector2i(2,3),1,false) #peon NEGRO en posicion
 	GlobalSignal.emit_signal("crearPieza",Vector2i(11,4),2,false) #peon NEGRO en posicion
 	GlobalSignal.emit_signal("crearPieza",Vector2i(13,5),3,false) #peon NEGRO en posicion
-	GlobalSignal.emit_signal("crearPieza",Vector2i(14,1),4,false) #peon NEGRO en posicion
+	GlobalSignal.emit_signal("crearPieza",Vector2i(4,1),4,false) #peon NEGRO en posicion
 	
 	GlobalSignal.emit_signal("crearPieza",Vector2i(5,6),1,true) #peon blanco en posicion
 	GlobalSignal.emit_signal("crearPieza",Vector2i(3,9),2,true) #rey blanco en posicion
