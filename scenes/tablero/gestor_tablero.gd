@@ -66,18 +66,23 @@ func obtener_baldosa_en_posicion(columna: int, fila: int) -> BaldosaBase:
 	return obtener_baldosa_en_coordenadas(Vector2i(columna, fila))
 
 func _en_baldosa_presionada(baldosa: BaldosaBase):
-	print("Baldosa presionada en: ", baldosa.obtener_coordenadas())
-	
-	# Quitar selección de baldosa anterior
-	if baldosa_seleccionada:
-		baldosa_seleccionada.seleccionar(false)
-	
-	# Seleccionar nueva baldosa
-	baldosa_seleccionada = baldosa
-	baldosa.seleccionar(true)
-
-func _en_baldosa_click_derecho(baldosa: BaldosaBase):
-	print("Click derecho en baldosa: ", baldosa.obtener_coordenadas())
+	#print("Baldosa presionada en: ", baldosa.obtener_coordenadas())
+	#
+	## Quitar selección de baldosa anterior
+	#if baldosa_seleccionada:
+		#baldosa_seleccionada.seleccionar(false)
+	#
+	## Seleccionar nueva baldosa
+	#baldosa_seleccionada = baldosa
+	#baldosa.seleccionar(true)
+	if not Piezas.modo_colocacion_activo:
+		print("Baldosa presionada en: ", baldosa.obtener_coordenadas())
+		
+		if baldosa_seleccionada:
+			baldosa_seleccionada.seleccionar(false)
+		
+		baldosa_seleccionada = baldosa
+		baldosa.seleccionar(true)
 
 func limpiar_seleccion():
 	if baldosa_seleccionada:

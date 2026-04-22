@@ -46,18 +46,28 @@ shape = SubResource("BoxShape3D_n346q")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="IndicadorSeleccion" unique_id=1152541481]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18509567, 0)
-visible = false
 mesh = SubResource("PlaneMesh_ebrun")
 
 [node name="seleccionroja" parent="IndicadorSeleccion" unique_id=490922839 instance=ExtResource("4_e5ivh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.861033, 0)
+visible = false
 
-[node name="IndicadorResaltado" type="Node3D" parent="." unique_id=1105113973]
+[node name="IndicadorInvalido2" type="Node3D" parent="." unique_id=1716336308]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="IndicadorResaltado" unique_id=1640828427]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="IndicadorInvalido2" unique_id=1769442854]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18509567, 0)
+visible = false
+mesh = SubResource("PlaneMesh_ebrun")
+
+[node name="seleccionroja" parent="IndicadorInvalido2" unique_id=1092005711 instance=ExtResource("4_e5ivh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.861033, 0)
+
+[node name="IndicadorValido" type="Node3D" parent="." unique_id=1105113973]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="IndicadorValido" unique_id=1640828427]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2907591, 0)
 visible = false
 mesh = SubResource("PlaneMesh_ug7nx")
 
-[node name="seleccion" parent="IndicadorResaltado" unique_id=966364859 instance=ExtResource("4_ugxcp")]
+[node name="seleccion" parent="IndicadorValido" unique_id=966364859 instance=ExtResource("4_ugxcp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.0369458, 0)

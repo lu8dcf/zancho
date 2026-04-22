@@ -106,13 +106,7 @@ func _resaltar_boton(boton_vender_pieza: Button, resaltar: bool):
 func _on_boton_menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/ui/main.tscn")
 
-#var valor_reventa = {
-	#"Peon": 50,
-	#"Torre": 250,
-	#"Alfil": 150,
-	#"Caballo": 175,
-	#"Reina": 600
-#}
+
 func _on_boton_vender_pressed() -> void:
 	if economia.has_method("vender_pieza"):
 		economia.vender_pieza(pieza_seleccionada_actual,valor)

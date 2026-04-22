@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b1o4yb7rkodhx"]
+
+[ext_resource type="Script" uid="uid://dp2q86vurryrb" path="res://scenes/tablero/pieza_flotante.gd" id="1_2gxjj"]
+
+[node name="PiezaFlotante" type="Node3D" unique_id=1117153794]
+script = ExtResource("1_2gxjj")
+
+[node name="Modelo3D" type="Node3D" parent="." unique_id=2014228985]

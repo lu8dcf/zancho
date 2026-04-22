@@ -28,17 +28,27 @@ var esta_seleccionada : bool = false
 @onready var contenedor_modelo : Node3D = $ContenedorModelo
 @onready var area_interaccion : Area3D = $AreaInteraccion
 @onready var cuerpo_estatico : StaticBody3D = $CuerpoEstatico
-@onready var indicador_seleccion : Node3D = $IndicadorSeleccion
-@onready var indicador_resaltado : Node3D = $IndicadorResaltado
+@onready var indicador_invalido: Node3D = $IndicadorInvalido
+@onready var indicador_valido: Node3D = $IndicadorValido
+@onready var indicador_seleccion: Node3D = $IndicadorSeleccion # al pasar el mouse por encima
+
 
 # variable publica para el gestor de hover
 var mouse_sobre_baltosa : bool = false
+
+# variables para el sistema de colcocion
+var es_valido_colocar:bool = false
+var modo_colocacion_activo:bool = false
 
 func _ready():
 	configurar_colision()
 	cargar_modelo_glb()
 	conectar_señales()
 	configurar_indicadores()
+	
+	#Piezas.modo_colocacion_inicia.connect(_on_modo_colocacion_iniciado)
+	#Piezas.modo_colocacion_cancelado.connect(_on_modo_colocacion_cancelado)
+	#Piezas.pieza_colocada.connect(_on_pieza_colocada)
 
 func configurar_colision():
 	# Aseguramos que el StaticBody3D tenga su CollisionShape3D
@@ -80,10 +90,13 @@ func conectar_señales():
 		area_interaccion.input_event.connect(_al_evento_input)
 
 func configurar_indicadores():
-	if indicador_seleccion:
+	if indicador_seleccion: # al pasar el mouse por encima
 		indicador_seleccion.visible = false
-	if indicador_resaltado:
-		indicador_resaltado.visible = false
+	if indicador_invalido: # si es imposible colocar la pieza s
+		indicador_invalido.visible = false
+	if indicador_valido: # si es posible colocar la pieza
+		indicador_valido.visible = false
+	
 
 func establecer_coordenadas(columna: int, fila: int):
 	coordenadas_tablero = Vector2i(columna, fila)
@@ -94,14 +107,14 @@ func obtener_coordenadas() -> Vector2i:
 
 func resaltar(estado: bool):
 	esta_resaltada = estado
-	if indicador_resaltado:
-		indicador_resaltado.visible = estado
+	if indicador_valido:
+		indicador_valido.visible = estado
 	baldosa_resaltada.emit(self, estado)
 
 func seleccionar(estado: bool):
 	esta_seleccionada = estado
-	if indicador_seleccion:
-		indicador_seleccion.visible = estado
+	if indicador_invalido:
+		indicador_invalido.visible = estado
 
 func _al_entrar_mouse():
 	if not esta_ocupada:
