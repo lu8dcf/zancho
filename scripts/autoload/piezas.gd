@@ -20,4 +20,5 @@ var pieza_n_tipo = []
 
 
 # las piezas que estan activas en la partida
-var piezas_activas: Array[RigidBody3D] = []
+var pieza_activa: Array[RigidBody3D] = []
+var pieza_n_activa: Array[RigidBody3D] = []

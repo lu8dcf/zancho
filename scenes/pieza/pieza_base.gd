@@ -6,6 +6,7 @@ class_name PiezaBase
 @export var pieza_tipo: int
 @export var pieza_blanca: bool
 @export var id:int # id de registro en base de datos
+@export var pieza_sitio:Vector2i
 
 # CArga de parametros 
 var vida = Piezas.vida[pieza_tipo]
@@ -44,6 +45,7 @@ var pieza_colocada=false
 var animacion=false
 
 func _ready():
+	print (pieza_sitio)
 	if pieza_blanca: color="B" 	
 	# Configurar física
 	linear_velocity = Vector3(0, linear_velocity.y, 0)  # que no se mueva a los costados

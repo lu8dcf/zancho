@@ -55,27 +55,43 @@ func cambiar_mapa(nuevo_indice: int) -> bool:
 	return false
 
 func lugar_disponible(sitio: Vector2i):
+	var sitio3d = Vector3i(sitio.x,5,sitio.y)
 	
 	# Verificacion de obstaculos en el mapa
 	if sitio in mapas.mapas[globalJuego.mapa_actual]:
 		mensaje("No se puede insertar sobre un obstaculo")
 		return false	
 	# verificar si esta ocupado por otra pieza	
+	if sitio3d in Piezas.pieza_activa:
+		mensaje("No se puede insertar sobre una pieza")
+		return false	
 	if sitio in Piezas.pieza_b_sitio:
 		mensaje("No se puede insertar sobre una pieza blanca")
 		return false	
 	
 	if sitio in Piezas.pieza_n_sitio:
 		mensaje("No se puede insertar sobre una pieza negra")
-		return false	
+		return false
+		
+	if sitio.x > 15 or sitio.x < 0 or sitio.y >15 or sitio.y <0:
+		mensaje(" La posición esta fuera del tablero ")	
+		return false
 	
 	return true
 
 func reiniciar_variables():
 	Piezas.piezas_activas = []
+	reiniciar_piezas()
+	
 	
 func reiniciar_piezas():
-	pass
+	Piezas.pieza_b_id = 0
+	Piezas.pieza_n_id = 0
+	Piezas.pieza_b_sitio = [] 
+	Piezas.pieza_n_sitio = [] 
+	Piezas.pieza_b_tipo =[]
+	Piezas.pieza_n_tipo = []
+	Piezas.piezas_activas = []
 	
 func mensaje(texto):
 	print (texto)
