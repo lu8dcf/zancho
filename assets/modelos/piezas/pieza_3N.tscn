@@ -1,16 +1,56 @@
 [gd_scene format=3 uid="uid://e0wcoqnj4cjm"]
 
-[ext_resource type="PackedScene" uid="uid://bobwdfylpdnbd" path="res://assets/modelos/piezas/pieza3N.glb" id="1_eiqkk"]
+[ext_resource type="PackedScene" uid="uid://dxtjdkcg4wndj" path="res://assets/modelos/piezas/pieza3N.glb" id="1_eiqkk"]
+[ext_resource type="Material" uid="uid://e2oyjpkuf1qo" path="res://assets/modelos/texturas/material_malos.tres" id="2_1buuo"]
 
-[node name="pieza3N" unique_id=940862195 instance=ExtResource("1_eiqkk")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1buuo"]
+albedo_color = Color(1, 0.5882353, 0.34509805, 1)
+heightmap_scale = 2.751
 
-[node name="Skeleton3D" parent="Esqueleto_010" parent_id_path=PackedInt32Array(764066898) index="1" unique_id=149737002]
+[sub_resource type="SphereMesh" id="SphereMesh_wd8xo"]
+radius = 0.2
+height = 0.5
+radial_segments = 10
+rings = 6
+
+[sub_resource type="Curve" id="Curve_7se5t"]
+_data = [Vector2(0.020408165, 0.9664373), 0.0, 0.0, 0, 0, Vector2(0.77551025, 0), -0.1834074, 0.0, 0, 0]
+point_count = 2
+
+[node name="pieza3N" unique_id=2108475682 instance=ExtResource("1_eiqkk")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Esqueleto_017" parent_id_path=PackedInt32Array(560136943) index="1" unique_id=439712994]
 bones/0/position = Vector3(-4.750755e-07, 0.2687618, 2.4066373e-17)
-bones/0/rotation = Quaternion(1.1424234e-08, -5.555391e-08, 0.052125167, 0.99864054)
+bones/0/rotation = Quaternion(1.1424234e-08, -5.5553915e-08, 0.05212517, 0.9986406)
 bones/1/rotation = Quaternion(-3.4197438e-08, 4.0005858e-08, -0.74300355, 0.6692875)
-bones/2/position = Vector3(0.29811135, 1.4356232, -0.15541916)
+bones/2/position = Vector3(0.3458002, 1.3291743, -0.17694797)
 bones/2/rotation = Quaternion(-5.1054997e-08, 5.8720147e-08, -0.74300355, 0.6692875)
+bones/2/scale = Vector3(0, 0, 0)
 bones/3/rotation = Quaternion(-0.4987529, -0.48647466, -0.5130478, 0.501368)
-bones/4/rotation = Quaternion(0.018790018, -0.0018491953, -0.70719224, 0.70676917)
-bones/5/rotation = Quaternion(0.018790018, -0.001849196, -0.7071921, 0.7067693)
-bones/6/rotation = Quaternion(0.018790018, -0.001849196, -0.7071921, 0.7067693)
+bones/3/scale = Vector3(0.99999994, 0.9999999, 1.0000001)
+bones/4/rotation = Quaternion(0.7052909, 0.702716, -0.055124115, 0.07560643)
+bones/5/rotation = Quaternion(0.7052909, 0.702716, -0.0551241, 0.07560643)
+bones/6/rotation = Quaternion(0.7052909, 0.702716, -0.0551241, 0.07560643)
+
+[node name="Círculo_038" parent="Esqueleto_017/Skeleton3D" index="3" unique_id=1596950553]
+material_override = ExtResource("2_1buuo")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="." index="1" unique_id=1972248935]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.41750702, 1.7981294, 0)
+material_override = SubResource("StandardMaterial3D_1buuo")
+emitting = false
+amount = 18
+lifetime = 0.16
+one_shot = true
+speed_scale = 0.67
+explosiveness = 1.0
+mesh = SubResource("SphereMesh_wd8xo")
+emission_shape = 1
+emission_sphere_radius = 0.05
+direction = Vector3(-4.565, 0, 0)
+spread = 12.69
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 20.51
+damping_max = 5.641
+scale_amount_curve = SubResource("Curve_7se5t")

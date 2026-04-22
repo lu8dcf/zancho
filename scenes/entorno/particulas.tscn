@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://b7gb2ttvbq0ot"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_cr8lf"]
+radius = 1.397
+height = 1.896
+radial_segments = 8
+rings = 5
+
+[sub_resource type="Curve" id="Curve_y0hfh"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 200), 0.0, 0.0, 0, 0, Vector2(0.9206349, -200), -222.01808, -222.01808, 0, 0, Vector2(1, -200), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_cgdl7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.57823133, 0.84337354), -2.3051052, -2.3051052, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="particula" type="Node3D" unique_id=498636856]
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=1395653705]
+amount = 20
+lifetime = 2.6399999999999997
+speed_scale = 0.44
+randomness = 0.52
+draw_order = 1
+mesh = SubResource("SphereMesh_cr8lf")
+gravity = Vector3(0, 3, 0)
+initial_velocity_max = 1.0
+tangential_accel_curve = SubResource("Curve_y0hfh")
+scale_amount_min = 0.6
+scale_amount_curve = SubResource("Curve_cgdl7")

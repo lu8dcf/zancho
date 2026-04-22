@@ -7,7 +7,7 @@ extends Node3D
 @onready var blur_cerca_max:= 1
 @onready var blur_cerca_min:= 0
 @onready var blur_rango:= -2
-@onready var blur_lejos_max:= 32
+@onready var blur_lejos_max:= 50
 @onready var blur_lejos_min:= 20
 @onready var velocidad_de_refresco_blur:= -2
 @onready var blur: RayCast3D = $PivotY/PivotX/Camera3D/Blur
@@ -24,17 +24,17 @@ var rapidez_zoom = 0.3
 
 var direccion_movimiento
 var rapidez_movimiento : float = 15.0
-var rotacion_actual : Vector2 = Vector2(-53, -46) 
+var rotacion_actual : Vector2 = Vector2(-53, -44.4) 
 func _ready() -> void:
 	#suave
 	pivot_y.top_level = true
 	reiniciar_posicion()
 	
 func reiniciar_posicion():
-	camera_3d.position.z = 9.7
+	camera_3d.position.z = 12.1
 	position = Vector3(3.39, 0, 26.48)
 	pivot_y.rotation_degrees =  Vector3(rotacion_actual.x, rotacion_actual.y, 0)
-	pivot_x.rotation_degrees =  Vector3(9, 0, 0)
+	pivot_x.rotation_degrees =  Vector3(18.4, 0, 0)
 	
 func _input(event) -> void:
 	if Input.is_key_pressed(KEY_SPACE):
@@ -58,7 +58,7 @@ func _input(event) -> void:
 		if boton_mouse_rueda_presionada:
 			pivot_y.rotation_degrees.y -= event.relative.x * rapidez_rotacion # se puede poner + para que gire al reves
 			pivot_x.rotation_degrees.x -= event.relative.y * rapidez_rotacion
-			pivot_x.rotation_degrees.x = clamp(pivot_x.rotation_degrees.x,-50,39)
+			pivot_x.rotation_degrees.x = clamp(pivot_x.rotation_degrees.x,-40,50)
 			
 func _physics_process(delta: float) -> void:
 	direccion_movimiento = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
