@@ -15,13 +15,16 @@ func _ready() -> void:
 	GlobalSignal.emit_signal("crearPieza",Vector2i(2,3),2,false) #alfil NEGRO en posicion
 	
 	GlobalSignal.emit_signal("crearPieza",Vector2i(5,6),1,true) #peon blanco en posicion
-	GlobalSignal.emit_signal("crearPieza",Vector2i(3,9),2,true) #rey blanco en posicion
+	GlobalSignal.emit_signal("crearPieza",Vector2i(3,9),2,true) #alfil blanco en posicion
 	GlobalSignal.emit_signal("crearPieza",Vector2i(4,13),3,true) #torre blanco en posicion
 	GlobalSignal.emit_signal("crearPieza",Vector2i(7,10),4,true) #caballo blanco en posicion
 	GlobalSignal.emit_signal("crearPieza",Vector2i(9,13),5,true) #reina blanco en posicion
 	GlobalSignal.emit_signal("crearPieza",Vector2i(1,14),0,true) #rey blanco en posicion
-
+	GlobalSignal.emit_signal("crearPieza",Vector2i(10,3),0,true) #pieza solapada
+	GlobalSignal.emit_signal("crearPieza",Vector2i(9,13),0,true) #pieza solapada 
 	globalJuego.oleada_cambiada.connect(ejecuto_oleada,get_oleada_actual())
+	print (Piezas.pieza_b_sitio)
+	print (Piezas.pieza_n_sitio)
 	if !(pausarOleada):
 		ejecuto_oleada(globalJuego.oleada_actual)
 
@@ -48,5 +51,5 @@ func ejecuto_oleada(nivel):
 	
 func detenerOleada():
 	pausarOleada =true
-	GlobalSignal.emit_signal("controlMarcaPaso",false)
+	GlobalSignal.emit_signal("controlMarcaPaso",true) # lo cambie ppara que se muevan
 	

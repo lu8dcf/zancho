@@ -13,8 +13,8 @@ var bonus_a=[0,4,3,1,5,2]
 # Variables de la partida
 var pieza_b_id = 0
 var pieza_n_id = 0
-var pieza_b_sitio = []  
-var pieza_n_sitio = []
+var pieza_b_sitio : Array[Vector2i] = [] 
+var pieza_n_sitio : Array[Vector2i] = [] 
 var pieza_b_tipo =[]
 var pieza_n_tipo = []
 
