@@ -45,7 +45,7 @@ var pieza_colocada=false
 var animacion=false
 
 func _ready():
-	print (pieza_sitio)
+	#print (pieza_sitio)
 	if pieza_blanca: color="B" 	
 	# Configurar física
 	linear_velocity = Vector3(0, linear_velocity.y, 0)  # que no se mueva a los costados

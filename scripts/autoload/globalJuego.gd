@@ -64,7 +64,7 @@ func lugar_disponible(sitio: Vector2i):
 	
 	for pieza in Piezas.pieza_activa:
 		if pieza.pieza_sitio == sitio:
-			print ("lugar ocupado")
+			#print ("lugar ocupado")
 			return false
 		
 			
@@ -74,6 +74,15 @@ func lugar_disponible(sitio: Vector2i):
 		return false
 	
 	return true
+
+func colocar_blanca(sitio: Vector2i):
+	lugar_disponible(sitio)
+	
+	if (sitio.y<2 and sitio.x>7) or  (sitio.y==2 and sitio.x>8) or (sitio.y==3 and sitio.x>9) or (sitio.y==4 and sitio.x>10) or (sitio.y==5 and sitio.x>11) or (sitio.y==6 and sitio.x>12) or (sitio.y==7 and sitio.x>13):
+		return false
+	return true
+		  
+
 
 func reiniciar_variables():
 	Piezas.piezas_activas = []
