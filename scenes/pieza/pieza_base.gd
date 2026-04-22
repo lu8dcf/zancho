@@ -5,6 +5,7 @@ class_name PiezaBase
 #clase de pieza
 @export var pieza_tipo: int
 @export var pieza_blanca: bool
+@export var id:int # id de registro en base de datos
 
 # CArga de parametros 
 var vida = Piezas.vida[pieza_tipo]

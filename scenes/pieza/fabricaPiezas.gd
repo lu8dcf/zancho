@@ -23,10 +23,10 @@ func colocar_pieza(sitio: Vector2i, tipo: int , pieza_blanca: bool):
 	pieza.pieza_tipo=tipo
 	pieza.pieza_blanca=pieza_blanca 
 	
-	if pieza_blanca: 
-		pieza.angulo_frente = 225
-	else:
-		pieza.angulo_frente = 45	
+	#if pieza_blanca: 
+	#	pieza.angulo_frente = 225
+	#else:
+	#	pieza.angulo_frente = 45	
 	
 	# agregara datos de piezas
 	if pieza_blanca:
@@ -43,7 +43,7 @@ func colocar_pieza(sitio: Vector2i, tipo: int , pieza_blanca: bool):
 		Piezas.pieza_n_sitio.insert(id,sitio)
 		Piezas.pieza_n_tipo.insert(id,tipo)
 		
-		
+	pieza.id=id	
 		
 	add_child(pieza)
 	pieza.global_position = Vector3(sitio.x * espaciado_baldosas, 10, sitio.y * espaciado_baldosas)
