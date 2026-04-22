@@ -58,7 +58,7 @@ func movimiento():
 
 
 	
-	print (owner.pieza_sitio)
+	#rint (owner.pieza_sitio)
 
 func dar_paso():
 	paso+=1

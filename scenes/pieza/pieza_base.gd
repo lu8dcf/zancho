@@ -219,8 +219,8 @@ func verificar_proximo_paso(cambio):
 	# proximo sitio a ocupar
 	var sitio3d = round(global_position+cambio)/globalJuego.espaciado_baldosas # en 3d
 	# convierto la proxima posicion en 2Di para 
-	pieza_sitio = Vector2i(sitio3d.x,sitio3d.z)  # en 2d
-	if globalJuego.lugar_disponible(pieza_sitio)==false:
+	var nuevo_sitio = Vector2i(sitio3d.x,sitio3d.z)  # en 2d
+	if globalJuego.lugar_disponible(nuevo_sitio)==false:
 		#print (pieza_sitio," ocupado")
 		return false
 	return true

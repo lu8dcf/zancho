@@ -56,16 +56,18 @@ func cambiar_mapa(nuevo_indice: int) -> bool:
 
 func lugar_disponible(sitio: Vector2i):
 	
-	
 	# Verificacion de obstaculos en el mapa
 	if sitio in mapas.mapas[globalJuego.mapa_actual]:
 		mensaje("No se puede insertar sobre un obstaculo")
 		return false	
-	# verificar si esta ocupado por otra pieza	
-	if sitio in Piezas.pieza_activa:
-		mensaje("No se puede insertar sobre una pieza")
-		return false	
+	
+	
+	for pieza in Piezas.pieza_activa:
+		if pieza.pieza_sitio == sitio:
+			print ("lugar ocupado")
+			return false
 		
+			
 	
 	if sitio.x > 15 or sitio.x < 0 or sitio.y >15 or sitio.y <0:
 		mensaje(" La posición esta fuera del tablero ")	
