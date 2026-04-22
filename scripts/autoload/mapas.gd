@@ -47,7 +47,7 @@ func cargar_todos_mapas():
 func cargar_cada_mapa(mapa_numero:int):
 	var posiciones = []
 	var tipos = []
-	print("mapa: ", mapa_numero)
+	#print("mapa: ", mapa_numero)
 	match mapa_numero:
 		
 		1:
