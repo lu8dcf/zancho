@@ -5,41 +5,21 @@ var nueva_pieza: RigidBody3D
 var espaciado_baldosas : float = globalJuego.espaciado_baldosas
 var pieza = preload("res://scenes/pieza/pieza_base.tscn")
 var velocidad: float = 1.0
+var id:int  # id de la pieza
 
 func _ready() -> void:
-	GlobalSignal.connect("crearPieza",colocar_pieza)
+	GlobalSignal.connect("crearPieza",colocar_pieza) # Singleton
 	
 	
 func colocar_pieza(sitio: Vector2i, tipo: int , pieza_blanca: bool):
 	
-	if lugar_disponible(sitio):
+	if globalJuego.lugar_disponible(sitio)==false: # verifica que el lugar a instanciar este libre
 		return
 		
-	match tipo:
-		1: # rey
-			pass
-		2: # peon
-			pass
-		3: # alfil
-			pass
-		4: # torre
-			pass
-		5: # caballlo
-			pass
-		6: # reina
-			pass
-	
 	# instanciar		
 	var pieza = pieza.instantiate()
 	
-	
-	
-	# Seleccion del script especifico
-	
-	var script_especifico = load("res://scenes/pieza/movimiento/mov1N.gd")
-	
-	#pieza.set_script(script_especifico)
-	#add_child(movimiento)
+		
 	pieza.pieza_tipo=tipo
 	pieza.pieza_blanca=pieza_blanca 
 	
@@ -47,21 +27,28 @@ func colocar_pieza(sitio: Vector2i, tipo: int , pieza_blanca: bool):
 		pieza.angulo_frente = 225
 	else:
 		pieza.angulo_frente = 45	
+	
+	# agregara datos de piezas
+	if pieza_blanca:
+		id=Piezas.pieza_b_id  # tomo el id actual
+		Piezas.pieza_b_id +=1 # id de la proxima pieza
+		# guardo la ubicacion
+		Piezas.pieza_b_sitio.insert(id,sitio)
+		Piezas.pieza_b_tipo.insert(id,tipo)
+		
+	else:
+		id=Piezas.pieza_n_id  # tomo el id actual
+		Piezas.pieza_n_id +=1 # id de la proxima pieza
+		# guardo la ubicacion
+		Piezas.pieza_n_sitio.insert(id,sitio)
+		Piezas.pieza_n_tipo.insert(id,tipo)
+		
+		
 		
 	add_child(pieza)
 	pieza.global_position = Vector3(sitio.x * espaciado_baldosas, 10, sitio.y * espaciado_baldosas)
-			
+		
+		
 	Piezas.piezas_activas.append(pieza)
 	
 	
-# verificacion que el sitio este vacio para colocar la pieza
-func lugar_disponible(sitio: Vector2i):
-	return
-	# Verificacion de obstaculos en el mapa
-	if sitio in mapas.mapa[globalJuego.mapa_actual]:
-		globalJuego.mensaje("No se puede insertar sobre un obstaculo")
-		return false	
-	# verificar si esta ocupado por otra pieza	
-	if sitio in mapas.mapa[globalJuego.mapa_actual]:
-		globalJuego.mensaje("No se puede insertar sobre un obstaculo")
-		return false	

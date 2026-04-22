@@ -97,7 +97,6 @@ func cargar_movimiento(): # agrega el nodo movimiento con el script correspondie
 	movimiento.owner = self  # ← IMPORTANTE: Establece el owner manualmente
 	
 			
-
 func posicionamiento_giro():
 	#temporizador
 	giro_inicial.wait_time = 3.0   # 1 segundo
@@ -109,14 +108,10 @@ func llego_al_piso():
 	
 
 func _on_body_entered(body):
-	
 	if pieza_colocada : return # solo se ejecuta en el inicio
 	# este if es para que solo tenga un efecto de sonido cuando rebota 
-	# Efecto de polvo
-	create_dust_effect()
-	
-		# Sonido de golpe
-	Sonidos.impacto()
+	create_dust_effect()# Efecto de polvo
+	Sonidos.impacto()# Sonido de golpe
 	
 func create_dust_effect(): # Particulas al pegar con el tablero
 	dust_particles.emitting = true
