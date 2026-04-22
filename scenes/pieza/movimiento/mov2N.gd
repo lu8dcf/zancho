@@ -7,6 +7,7 @@ var pasos=0 #cantidad dee pasos que dara para cambio de  secuencia
 var pieza: PiezaBase
 var proxima_posicion : Vector3
 
+
 # desplazamiento alfil
 var direccion= Vector3i(0,0,0)
 var secuencia = [0,3,2,3,4,3,4]
@@ -31,22 +32,45 @@ func _ready():
 	# Obtener referencia al AnimationPlayer desde la pieza base
 	animation_player = pieza.get_animation_player()
 
+func saltar_paso(): # volver a iniciar en otra posicion d esalto
+	movimiento()  
 	
 func movimiento():
-	if animation_player:
-		if animation_player.has_animation("ataque_rey"):
-			animation_player.play("ataque_rey")
 	
-	paso+=1
-	if paso ==12: paso=1
-	if int(paso/2.0) == paso/2.0:   # pasos pares
-		cambio_estado(paso/2)
-		
-	var cambio = direccion*GlobalJuego.espaciado_baldosas
+	dar_paso()
+	
+	# actualizacion de posicion
+	var cambio = direccion*GlobalJuego.espaciado_baldosas # # vector de cambio de la pieza
+	
+	if owner.verificar_proximo_paso(cambio)==false:
+		saltar_paso()
+		return
+	
+	
+	
+	animacion_caminata()
+	
 	var tween = create_tween()
 	tween.tween_property(owner, "global_position", owner.global_position + cambio , 1) \
 	.set_trans(Tween.TRANS_SINE) \
 	.set_ease(Tween.EASE_IN_OUT)
+	
+
+
+	
+	#rint (owner.pieza_sitio)
+
+func dar_paso():
+	paso+=1
+	if paso ==12: paso=1
+	if int(paso/2.0) == paso/2.0:   # pasos pares
+		cambio_estado(paso/2)
+	
+func animacion_caminata():
+	if animation_player:
+		if animation_player.has_animation("ataque_rey"):
+			animation_player.play("ataque_rey")
+		
 	
 # Estadod de la pieza
 func cambio_estado(cambio):
