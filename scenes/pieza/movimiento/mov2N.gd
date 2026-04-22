@@ -32,6 +32,8 @@ func _ready():
 	# Obtener referencia al AnimationPlayer desde la pieza base
 	animation_player = pieza.get_animation_player()
 
+func saltar_paso(): # volver a iniciar en otra posicion d esalto
+	movimiento()  
 	
 func movimiento():
 	
@@ -40,10 +42,11 @@ func movimiento():
 	# actualizacion de posicion
 	var cambio = direccion*GlobalJuego.espaciado_baldosas # # vector de cambio de la pieza
 	
-	verificar_proximo_paso(cambio)
+	if owner.verificar_proximo_paso(cambio)==false:
+		saltar_paso()
+		return
 	
-	# consulto si esta ocupado
-	globalJuego.lugar_disponible(owner.sitio2d)
+	
 	
 	animacion_caminata()
 	
@@ -51,17 +54,11 @@ func movimiento():
 	tween.tween_property(owner, "global_position", owner.global_position + cambio , 1) \
 	.set_trans(Tween.TRANS_SINE) \
 	.set_ease(Tween.EASE_IN_OUT)
-	owner.sitio3d=owner.global_position
-
-func verificar_proximo_paso(cambio):
-	# proximo sitio a ocupar
-	var sitio3d = round(owner.global_position+cambio)/globalJuego.espaciado_baldosas # en 3d
-	# convierto la proxima posicion en 2Di para 
-	owner.sitio = Vector2i(sitio3d.x,sitio3d.z)  # en 2d
-	if globalJuego.lugar_disponible(owner.sitio2d)==false:
-		dar_paso()
 	
-	print (round(owner.sitio2d))
+
+
+	
+	print (owner.pieza_sitio)
 
 func dar_paso():
 	paso+=1
