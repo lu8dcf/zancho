@@ -20,32 +20,13 @@ func colocar_pieza(sitio: Vector2i, tipo: int , pieza_blanca: bool):
 	# instanciar		
 	var pieza = pieza.instantiate()
 			
-	pieza.pieza_tipo=tipo
-	pieza.pieza_blanca=pieza_blanca 
+	pieza.pieza_tipo = tipo
+	pieza.pieza_blanca = pieza_blanca 
 	pieza.pieza_sitio = sitio 
 	
 	sitio3d = Vector3i(sitio.x * espaciado_baldosas, 10, sitio.y * espaciado_baldosas)
 	
-	#if pieza_blanca: 
-	#	pieza.angulo_frente = 225
-	#else:
-	#	pieza.angulo_frente = 45	
 	
-	# agregara datos de piezas
-	if pieza_blanca:
-		id=Piezas.pieza_b_id  # tomo el id actual
-		Piezas.pieza_b_id +=1 # id de la proxima pieza
-		# guardo la ubicacion
-		Piezas.pieza_b_sitio.insert(id,sitio)
-		Piezas.pieza_b_tipo.insert(id,tipo)
-		
-	else:
-		id=Piezas.pieza_n_id  # tomo el id actual
-		Piezas.pieza_n_id +=1 # id de la proxima pieza
-		# guardo la ubicacion
-		Piezas.pieza_n_sitio.insert(id,sitio)
-		Piezas.pieza_n_tipo.insert(id,tipo)
-		
 	pieza.id=id	
 		
 	add_child(pieza)

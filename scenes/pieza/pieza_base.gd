@@ -15,7 +15,7 @@ var cadencia = Piezas.cadencia[pieza_tipo]
 var bonus_cantidad = Piezas.bonus_cantidad[pieza_tipo]
 var bonus_a = Piezas.bonus_a[pieza_tipo]
 @export var vision_range: float = 5.0
-@export var angulo_frente: int
+var angulo_frente: int = 225
 
 # Componentes
 var movimiento_especifico = preload("res://scenes/pieza/movimiento/movimiento.tscn") # define le movimiento caracteristico de la pieza
@@ -221,7 +221,7 @@ func verificar_proximo_paso(cambio):
 	# convierto la proxima posicion en 2Di para 
 	pieza_sitio = Vector2i(sitio3d.x,sitio3d.z)  # en 2d
 	if globalJuego.lugar_disponible(pieza_sitio)==false:
-		print (pieza_sitio," ocupado")
+		#print (pieza_sitio," ocupado")
 		return false
 	return true
 		
