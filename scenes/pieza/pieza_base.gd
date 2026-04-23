@@ -247,3 +247,9 @@ func giro(angulo):
 	pieza_colocada = true
 	physics_material_override.bounce = 0
 	gravity_scale=1
+
+func animacion_caminata(anima):
+	if animation_player:
+		anima = str(pieza_tipo)+anima
+		if animation_player.has_animation(anima):
+			animation_player.play(anima)

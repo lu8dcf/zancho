@@ -55,42 +55,42 @@ func cambiar_mapa(nuevo_indice: int) -> bool:
 	return false
 
 func lugar_disponible(sitio: Vector2i):
-	
-	# Verificacion de obstaculos en el mapa
-	if sitio in mapas.mapas[globalJuego.mapa_actual]:
-		mensaje("No se puede insertar sobre un obstaculo")
-		return false	
-	
-	
+	if verifica_obstaculos(sitio)==false: return false
+	if verifica_extremos(sitio)==false: return false
+	if verifica_piezas(sitio)==false: return false	
+	return true
+
+
+func verifica_piezas(sitio: Vector2i):	
 	for pieza in Piezas.pieza_activa:
 		if pieza.pieza_sitio == sitio:
 			#print ("lugar ocupado")
 			return false
-		
 			
-	
+func verifica_extremos(sitio: Vector2i):	
 	if sitio.x > 15 or sitio.x < 0 or sitio.y >15 or sitio.y <0:
-		mensaje(" La posición esta fuera del tablero ")	
+		#mensaje(" La posición esta fuera del tablero ")	
 		return false
 	
-	return true
-
+	
+func verifica_obstaculos(sitio: Vector2i):
+	# Verificacion de obstaculos en el mapa
+	if sitio in mapas.mapas[globalJuego.mapa_actual]:
+		#mensaje("No se puede insertar sobre un obstaculo")
+		return false
+		
 func colocar_blanca(sitio: Vector2i):
 	lugar_disponible(sitio)
 	
+	# sector de spawn negras
 	if (sitio.y<2 and sitio.x>7) or  (sitio.y==2 and sitio.x>8) or (sitio.y==3 and sitio.x>9) or (sitio.y==4 and sitio.x>10) or (sitio.y==5 and sitio.x>11) or (sitio.y==6 and sitio.x>12) or (sitio.y==7 and sitio.x>13):
 		return false
 	return true
 		  
 
-
 func reiniciar_variables():
 	Piezas.piezas_activas = []
-	reiniciar_piezas()
 	
-	
-func reiniciar_piezas():
-	pass
 	
 func mensaje(texto):
 	print (texto)

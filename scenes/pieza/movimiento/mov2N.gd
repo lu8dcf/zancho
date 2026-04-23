@@ -1,5 +1,5 @@
 extends Node
-class_name Alfil
+class_name AlfilN
 
 var pasos=0 #cantidad dee pasos que dara para cambio de  secuencia 
 
@@ -10,11 +10,11 @@ var proxima_posicion : Vector3
 
 # desplazamiento alfil
 var direccion= Vector3i(0,0,0)
-var secuencia = [0,3,2,3,4,3,4]
+var secuencia = [0,3,3,2,2,3,3,4,4,3,3,4,4]
 var paso = 0
 
 # Referencia al AnimationPlayer
-var animation_player: AnimationPlayer
+#var animation_player: AnimationPlayer
 
 func _ready():
 	# Obtener la referencia a la pieza base (el owner del componente)
@@ -30,15 +30,12 @@ func _ready():
 	GlobalSignal.connect("marcaPaso",movimiento	)
 	
 	# Obtener referencia al AnimationPlayer desde la pieza base
-	animation_player = pieza.get_animation_player()
+	#animation_player = pieza.get_animation_player()
 
-func saltar_paso(): # volver a iniciar en otra posicion d esalto
-	movimiento()  
+
 	
 func movimiento():
-	
 	dar_paso()
-	
 	# actualizacion de posicion
 	var cambio = direccion*GlobalJuego.espaciado_baldosas # # vector de cambio de la pieza
 	
@@ -46,31 +43,23 @@ func movimiento():
 		saltar_paso()
 		return
 	
-	
-	
-	animacion_caminata()
+	owner.animacion_caminata("Bidle")
 	
 	var tween = create_tween()
 	tween.tween_property(owner, "global_position", owner.global_position + cambio , 1) \
 	.set_trans(Tween.TRANS_SINE) \
 	.set_ease(Tween.EASE_IN_OUT)
 	
-
-
 	
-	#rint (owner.pieza_sitio)
 
 func dar_paso():
 	paso+=1
-	if paso ==12: paso=1
-	if int(paso/2.0) == paso/2.0:   # pasos pares
-		cambio_estado(paso/2)
+	if paso==len(secuencia): paso=1
+	cambio_estado(paso)
 	
-func animacion_caminata():
-	if animation_player:
-		if animation_player.has_animation("ataque_rey"):
-			animation_player.play("ataque_rey")
-		
+func saltar_paso(): # volver a iniciar en otra posicion d esalto
+	movimiento()  	
+
 	
 # Estadod de la pieza
 func cambio_estado(cambio):
