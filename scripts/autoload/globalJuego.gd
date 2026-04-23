@@ -58,7 +58,7 @@ func lugar_disponible(sitio: Vector2i):
 	
 	# Verificacion de obstaculos en el mapa
 	if sitio in mapas.mapas[globalJuego.mapa_actual]:
-		mensaje("No se puede insertar sobre un obstaculo")
+		#mensaje("No se puede insertar sobre un obstaculo")
 		return false	
 	
 	
@@ -70,7 +70,7 @@ func lugar_disponible(sitio: Vector2i):
 			
 	
 	if sitio.x > 15 or sitio.x < 0 or sitio.y >15 or sitio.y <0:
-		mensaje(" La posición esta fuera del tablero ")	
+		#mensaje(" La posición esta fuera del tablero ")	
 		return false
 	
 	return true
@@ -83,14 +83,9 @@ func colocar_blanca(sitio: Vector2i):
 	return true
 		  
 
-
 func reiniciar_variables():
 	Piezas.piezas_activas = []
-	reiniciar_piezas()
 	
-	
-func reiniciar_piezas():
-	pass
 	
 func mensaje(texto):
 	print (texto)
