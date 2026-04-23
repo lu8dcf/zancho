@@ -83,16 +83,35 @@ func _crear_botones_piezas_inventario() -> void:
 #]
 
 func _on_pieza_clicked(pieza: Dictionary) -> void:
+	print("Panel: Pieza clickeada: ", pieza)
 	boton_vender_pieza.visible = true
 	
 	pieza_seleccionada_actual = pieza
-	if boton_vender_pieza:
+	if Piezas.modo_colocacion:
+		Piezas.cancelar_modo_colocacion()
+	
+	if pieza["cantidad"]>0:
+		var tipo_pieza = _obtener_tipo_por_nombre(pieza["nombre"])
+		Piezas.iniciar_modo_colocacion(tipo_pieza,pieza["nombre"])
+		boton_vender_pieza.text = "COLOCANDO " + pieza["nombre"] + "\nClick derecho para cancelar"
+		
+	#if boton_vender_pieza:
 		_resaltar_boton(boton_vender_pieza, false)
 		valor = _obtener_valor_reventa(pieza["nombre"])
-		boton_vender_pieza.text = "VENDER " + pieza["nombre"] + "\n💰 +" + str(valor)
+		#boton_vender_pieza.text = "VENDER " + pieza["nombre"] + "\n💰 +" + str(valor)
 	
 	_resaltar_boton(boton_vender_pieza, true)
 	
+func _obtener_tipo_por_nombre(nombre: String) -> int:
+	var tipos = {
+		"Rey": 1,
+		"Peon": 2,
+		"Alfil": 3,
+		"Torre": 4,
+		"Caballo": 5,
+		"Reina": 6
+	}
+	return tipos.get(nombre, 1)
 
 func _resaltar_boton(boton_vender_pieza: Button, resaltar: bool):
 	if resaltar:
@@ -101,6 +120,17 @@ func _resaltar_boton(boton_vender_pieza: Button, resaltar: bool):
 	else:
 		boton_vender_pieza.modulate = Color(1, 1, 1, 1)
 		boton_vender_pieza.add_theme_color_override("font_color", Color(1, 1, 1))
+
+func _input(event):
+	if Piezas.modo_colocacion:
+		if event is InputEventMouseButton:
+			if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+				Piezas.cancelar_modo_colocacion()
+				boton_vender_pieza.visible = false
+				get_viewport().set_input_as_handled()
+			elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+				# La colocación se maneja en GestorTablero
+				pass
 
 
 func _on_boton_menu_pressed() -> void:

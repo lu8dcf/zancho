@@ -53,6 +53,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.861033, 0)
 visible = false
 
 [node name="IndicadorInvalido2" type="Node3D" parent="." unique_id=1716336308]
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="IndicadorInvalido2" unique_id=1769442854]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18509567, 0)
@@ -63,6 +64,7 @@ mesh = SubResource("PlaneMesh_ebrun")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.861033, 0)
 
 [node name="IndicadorValido" type="Node3D" parent="." unique_id=1105113973]
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="IndicadorValido" unique_id=1640828427]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2907591, 0)

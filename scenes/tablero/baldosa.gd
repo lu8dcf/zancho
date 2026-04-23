@@ -46,9 +46,9 @@ func _ready():
 	conectar_señales()
 	configurar_indicadores()
 	
-	#Piezas.modo_colocacion_inicia.connect(_on_modo_colocacion_iniciado)
-	#Piezas.modo_colocacion_cancelado.connect(_on_modo_colocacion_cancelado)
-	#Piezas.pieza_colocada.connect(_on_pieza_colocada)
+	Piezas.modo_colocacion_inicia.connect(_on_modo_colocacion_iniciado)
+	Piezas.modo_colocacion_cancelado.connect(_on_modo_colocacion_cancelado)
+	Piezas.pieza_colocada.connect(_on_pieza_colocada)
 
 func configurar_colision():
 	# Aseguramos que el StaticBody3D tenga su CollisionShape3D
@@ -83,11 +83,32 @@ func cargar_modelo_glb():
 	else:
 		push_error("No se ha asignado modelo GLB para baldosa tipo: ", tipo)
 
+
+
 func conectar_señales():
 	if area_interaccion:
 		area_interaccion.mouse_entered.connect(_al_entrar_mouse)
 		area_interaccion.mouse_exited.connect(_al_salir_mouse)
 		area_interaccion.input_event.connect(_al_evento_input)
+
+func _on_modo_colocacion_iniciado(tipo_pieza: int, nombre: String):
+	modo_colocacion_activo = true
+	
+	es_valido_colocar = true
+	# esta variable es la que hay que modificar a futuro
+
+func _on_modo_colocacion_cancelado():
+	modo_colocacion_activo = false
+	es_valido_colocar = false
+	
+	# Ocultar todos los indicadores de colocación
+	if indicador_valido:
+		indicador_valido.visible = false
+	if indicador_invalido:
+		indicador_invalido.visible = false
+	
+	if not esta_ocupada:
+		resaltar(false)
 
 func configurar_indicadores():
 	if indicador_seleccion: # al pasar el mouse por encima
@@ -117,26 +138,66 @@ func seleccionar(estado: bool):
 		indicador_invalido.visible = estado
 
 func _al_entrar_mouse():
-	if not esta_ocupada:
-		resaltar(true)
+	if modo_colocacion_activo:
+		if es_valido_colocar:
+			# Mostrar indicador verde
+			if indicador_valido:
+				indicador_valido.visible = true
+			if indicador_invalido:
+				indicador_invalido.visible = false
+			
+			# También resaltar la baldosa
+			resaltar(true)
+		else:
+			# Mostrar indicador rojo
+			if indicador_invalido:
+				indicador_invalido.visible = true
+			if indicador_valido:
+				indicador_valido.visible = false
+			
+			# No resaltar la baldosa
+			resaltar(false)
+	else:
+		if not esta_ocupada:
+			resaltar(true)
 
 func _al_salir_mouse():
 	if not esta_ocupada:
 		resaltar(false)
 
+
+func _on_pieza_colocada(tipo:int, posicion:Vector2i):
+	if posicion == coordenadas_tablero:
+		esta_ocupada = true
+		modo_colocacion_activo = false
+		es_valido_colocar = false
+		
+		if indicador_valido:
+			indicador_valido.visible = false
+		if indicador_invalido:
+			indicador_invalido.visible = false
+
 func _al_evento_input(camara, evento, posicion_click, normal_click, indice_forma):
 	if evento is InputEventMouseButton:
 		if evento.button_index == MOUSE_BUTTON_LEFT and evento.pressed:
-			baldosa_presionada.emit(self)
+			if modo_colocacion_activo:
+				if es_valido_colocar:
+					_intentar_colocar_pieza()
+			else:
+				baldosa_presionada.emit(self)
 		elif evento.button_index == MOUSE_BUTTON_RIGHT and evento.pressed:
-			baldosa_click_derecho.emit(self)
-
+			if modo_colocacion_activo:
+				Piezas.cancelar_modo_colocacion()
+			else:
+				baldosa_click_derecho.emit(self)
+			
+func _intentar_colocar_pieza():
+	print("Intentando colocar en: ", coordenadas_tablero)
+	if Piezas.colocar_pieza_en_posicion(coordenadas_tablero):
+		print("Pieza colocada exitosamente")
+		esta_ocupada = true
+	else:
+		print("Error al colocar pieza")
 # Método para obtener el punto de colocación de piezas (útil para posicionar piezas sobre la baldosa)
 func obtener_punto_colocacion() -> Vector3:
 	return position + Vector3(0, 0.2, 0)  # Altura ajustable según el modelo
-
-# Método para verificar si una posición 3D está dentro de esta baldosa
-func contiene_punto(punto: Vector3) -> bool:
-	var local = to_local(punto)
-	var margen = 0.5  # Mitad del tamaño de la baldosa
-	return abs(local.x) <= margen and abs(local.z) <= margen
