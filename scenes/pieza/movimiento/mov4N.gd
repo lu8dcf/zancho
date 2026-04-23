@@ -12,8 +12,6 @@ var direccion= Vector3i(0,0,0)
 var secuencia = [0,3,4,5,6,7,8]
 var paso = 0
 
-# Referencia al AnimationPlayer
-var animation_player: AnimationPlayer
 
 func _ready():
 	# Obtener la referencia a la pieza base (el owner del componente)
@@ -28,23 +26,32 @@ func _ready():
 	await pieza.ready
 	GlobalSignal.connect("marcaPaso",movimiento	)
 	
-	# Obtener referencia al AnimationPlayer desde la pieza base
-	animation_player = pieza.get_animation_player()
+	
 
 	
 func movimiento():
-	if animation_player:
-		if animation_player.has_animation("ataque_rey"):
-			animation_player.play("ataque_rey")
+	dar_paso()
+	# actualizacion de posicion
+	var cambio = direccion*GlobalJuego.espaciado_baldosas # # vector de cambio de la pieza
 	
-	paso+=1
-	cambio_estado(paso)
-		
-	var cambio = direccion*GlobalJuego.espaciado_baldosas
+	if owner.verificar_proximo_paso(cambio)==false:
+		saltar_paso()
+		return
+	
+	owner.animacion_caminata("Bidle")
+	
 	var tween = create_tween()
 	tween.tween_property(owner, "global_position", owner.global_position + cambio , 1) \
 	.set_trans(Tween.TRANS_SINE) \
 	.set_ease(Tween.EASE_IN_OUT)
+	
+func dar_paso():
+	paso+=1
+	if paso ==12: paso=1
+	if int(paso/2.0) == paso/2.0:   # pasos pares
+		cambio_estado(paso/2)
+func saltar_paso(): # volver a iniciar en otra posicion d esalto
+	movimiento()  	
 	
 # Estadod de la pieza
 func cambio_estado(cambio):
