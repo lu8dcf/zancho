@@ -12,9 +12,10 @@ func _ready() -> void:
 	# Blanca  true piezas blancas   -  False Piezas negras
 
 	GlobalSignal.emit_signal("crearPieza",Vector2i(10,3),1,false) #peon NEGRO en posicion
-	GlobalSignal.emit_signal("crearPieza",Vector2i(11,4),2,false) #alfil NEGRO en posicion
-	GlobalSignal.emit_signal("crearPieza",Vector2i(14,5),3,false) #alfil NEGRO en posicion
-	GlobalSignal.emit_signal("crearPieza",Vector2i(12,6),4,false) #alfil NEGRO en posicion
+	#GlobalSignal.emit_signal("crearPieza",Vector2i(11,4),2,false) #alfil NEGRO en posicion
+	#GlobalSignal.emit_signal("crearPieza",Vector2i(14,5),3,false) #alfil NEGRO en posicion
+	#GlobalSignal.emit_signal("crearPieza",Vector2i(12,6),4,false) #alfil NEGRO en posicion
+	#GlobalSignal.emit_signal("crearPieza",Vector2i(12,3),5,false) #alfil NEGRO en posicion
 	
 	
 	

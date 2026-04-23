@@ -1,5 +1,5 @@
 extends Node
-class_name Torre
+class_name TorreN
 
 var pasos=0 #cantidad dee pasos que dara para cambio de  secuencia 
 
@@ -9,7 +9,7 @@ var proxima_posicion : Vector3
 
 # desplazamiento Torre
 var direccion= Vector3i(0,0,0)
-var secuencia = [0,3,4,3,2,3,4]
+var secuencia = [0,3,3,2,2,3,3,4,4,3,3,4,4]
 var paso = 0
 
 
@@ -46,9 +46,9 @@ func movimiento():
 	
 func dar_paso():
 	paso+=1
-	if paso ==12: paso=1
-	if int(paso/2.0) == paso/2.0:   # pasos pares
-		cambio_estado(paso/2)
+	if paso==len(secuencia): paso=1
+	cambio_estado(paso)
+	
 func saltar_paso(): # volver a iniciar en otra posicion d esalto
 	movimiento()  	
 	
