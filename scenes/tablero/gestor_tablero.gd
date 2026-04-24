@@ -18,7 +18,6 @@ var mapa_actual :int = globalJuego.mapa_actual
 func _ready():
 	add_to_group("gestor_tablero")
 	generar_tablero()
-	Piezas.modo_colocacion_cancelado.connect(_on_modo_colocacion_cancelado)
 
 func generar_tablero():
 	# Limpiar tablero existente
@@ -27,17 +26,15 @@ func generar_tablero():
 			hijo.queue_free()
 	baldosas.clear()
 	
-	# Generar nuevo tablero
+	# generar  tablero
 	for fila in range(tamano_tablero.y):
 		for columna in range(tamano_tablero.x):
 			var baldosa = crear_baldosa(columna, fila)
 			if baldosa:
 				baldosas[Vector2i(columna, fila)] = baldosa
-				baldosa.baldosa_presionada.connect(_en_baldosa_presionada)
 
 func crear_baldosa(columna: int, fila: int) -> BaldosaBase:
 	if not escena_baldosa:
-		push_error("No se ha asignado la escena de baldosa")
 		return null
 	
 	var baldosa = escena_baldosa.instantiate() as BaldosaBase
@@ -66,32 +63,16 @@ func obtener_baldosa_en_posicion(columna: int, fila: int) -> BaldosaBase:
 	return obtener_baldosa_en_coordenadas(Vector2i(columna, fila))
 
 func _en_baldosa_presionada(baldosa: BaldosaBase):
-	#
-	## Quitar selección de baldosa anterior
-	#if baldosa_seleccionada:
-		#baldosa_seleccionada.seleccionar(false)
-	#
-	## Seleccionar nueva baldosa
-	#baldosa_seleccionada = baldosa
-	#baldosa.seleccionar(true)
-	print("tocando",  Piezas.modo_colocacion )
+
+	print("Baldosa presionada en: ", baldosa.obtener_coordenadas())
+	
 	if baldosa_seleccionada:
 		baldosa_seleccionada.seleccionar(false)
-
-	baldosa_seleccionada = baldosa
-	baldosa.seleccionar(true)
-		
-
-func _intentar_colocar_pieza(coordenadas: Vector2i):
-	# aca verificar si es correcta la ubicacion
+		return
 	
-	if Piezas.colocar_pieza_en_posicion(coordenadas):
-		limpiar_seleccion()
-	else:
-		print("error")
+	baldosa_seleccionada = baldosa
 
-func _on_modo_colocacion_cancelado():
-	limpiar_seleccion()
+		
 
 func limpiar_seleccion():
 	if baldosa_seleccionada:
