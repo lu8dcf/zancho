@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://bjbqonwb7pnfh"]
 
 [ext_resource type="Script" uid="uid://by43q6vkxfn8n" path="res://scenes/ui/main.gd" id="1_0ay0p"]
-[ext_resource type="Texture2D" uid="uid://rf316ffkjwtt" path="res://assets/menu/menu.png" id="2_2p1s2"]
-[ext_resource type="Texture2D" uid="uid://deam4qk6byf2b" path="res://assets/menu/salir.png" id="3_02nsg"]
-[ext_resource type="Texture2D" uid="uid://cqf4aqigwwqd8" path="res://assets/menu/boton4.png" id="3_7n028"]
+[ext_resource type="Texture2D" uid="uid://vhos8f4cc3kk" path="res://assets/menu/menu.png" id="2_2p1s2"]
+[ext_resource type="Texture2D" uid="uid://bekhv8mvdp844" path="res://assets/menu/salir.png" id="3_02nsg"]
+[ext_resource type="Texture2D" uid="uid://e0ld2q14lx52" path="res://assets/menu/boton4.png" id="3_7n028"]
 [ext_resource type="LabelSettings" uid="uid://c64snqitwil5t" path="res://assets/fuentes/textos.tres" id="4_jvuow"]
-[ext_resource type="Texture2D" uid="uid://ct704grnjc3v4" path="res://assets/menu/boton5.png" id="6_aain1"]
-[ext_resource type="Texture2D" uid="uid://dp4342bo0wi3" path="res://assets/menu/boton2.png" id="7_f8067"]
-[ext_resource type="Texture2D" uid="uid://d3nkpo21nvyl6" path="res://assets/menu/boton3.png" id="8_yiij1"]
-[ext_resource type="AudioStream" uid="uid://nwucwbfr3w3j" path="res://assets/audio/music/TheTrueStoryofBeelzebub.ogg" id="9_yiij1"]
+[ext_resource type="Texture2D" uid="uid://cyclvtl3uoh4" path="res://assets/menu/boton5.png" id="6_aain1"]
+[ext_resource type="Texture2D" uid="uid://bdnuhb2lowa5h" path="res://assets/menu/boton2.png" id="7_f8067"]
+[ext_resource type="Texture2D" uid="uid://c5wfquab4f2c2" path="res://assets/menu/boton3.png" id="8_yiij1"]
+[ext_resource type="AudioStream" uid="uid://720ndc28kfc5" path="res://assets/audio/music/TheTrueStoryofBeelzebub.ogg" id="9_yiij1"]
 
 [node name="main" type="Control" unique_id=1651978815]
 layout_mode = 3

@@ -24,7 +24,7 @@ func colocar_pieza(sitio: Vector2i, tipo: int , pieza_blanca: bool):
 	pieza.pieza_blanca = pieza_blanca 
 	pieza.pieza_sitio = sitio 
 	
-	sitio3d = Vector3i(sitio.x * espaciado_baldosas, 10, sitio.y * espaciado_baldosas)
+	sitio3d = Vector3i(round(sitio.x * espaciado_baldosas), 10,round(sitio.y * espaciado_baldosas))
 	
 	
 	pieza.id=id	

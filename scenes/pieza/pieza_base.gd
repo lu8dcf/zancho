@@ -60,7 +60,7 @@ func _ready():
 	cargar_movimiento() # Script de movimiento y estados
 	GlobalSignal.connect("marcaPaso",anima_idle)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if animacion:
 		animation_player.play("ataque_rey")
 	
@@ -111,7 +111,7 @@ func llego_al_piso():
 	giro(angulo_frente)
 	
 
-func _on_body_entered(body):
+func _on_body_entered(_body):
 	if pieza_colocada : return # solo se ejecuta en el inicio
 	# este if es para que solo tenga un efecto de sonido cuando rebota 
 	create_dust_effect()# Efecto de polvo
@@ -138,10 +138,10 @@ func check_for_enemies():
 	var results = space_state.intersect_shape(query)
 	
 	var nearest_enemy = null
-	var nearest_distance = vision_range + 1
+	
 	
 	for result in results:
-		var body = result.collider
+		pass
 		#if body is ChessPiece and body.team != team and body.is_alive:
 		#	var distance = global_position.distance_to(body.global_position)
 		#	if distance < nearest_distance:

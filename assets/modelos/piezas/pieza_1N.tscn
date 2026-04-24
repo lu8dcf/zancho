@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bkjumbx3qqrgu"]
+[gd_scene format=3 ]
 
 [ext_resource type="PackedScene" uid="uid://b88k20lwxbtbh" path="res://assets/modelos/piezas/pieza1N.glb" id="1_nafqa"]
 [ext_resource type="Material" uid="uid://e2oyjpkuf1qo" path="res://assets/modelos/texturas/material_malos.tres" id="2_rj6by"]
