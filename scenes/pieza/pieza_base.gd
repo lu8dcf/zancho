@@ -58,6 +58,7 @@ func _ready():
 	
 	posicionamiento_giro() # gira la pieza a su posicion en grados
 	cargar_movimiento() # Script de movimiento y estados
+	GlobalSignal.connect("marcaPaso",anima_idle)
 
 func _physics_process(delta: float) -> void:
 	if animacion:
@@ -248,6 +249,10 @@ func giro(angulo):
 	physics_material_override.bounce = 0
 	gravity_scale=1
 
+func anima_idle(): # animacion de idle
+	var anima="Bidle"
+	animacion_caminata(anima)
+			
 func animacion_caminata(anima):
 	if animation_player:
 		anima = str(pieza_tipo)+anima

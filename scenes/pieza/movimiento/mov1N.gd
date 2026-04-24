@@ -51,7 +51,7 @@ func movimiento():
 		paso=0
 		return
 	
-	owner.animacion_caminata("Bidle")
+	#owner.animacion_caminata("Bidle")
 	
 	var tween = create_tween()
 	tween.tween_property(owner, "global_position", owner.global_position + cambio , 1) \
