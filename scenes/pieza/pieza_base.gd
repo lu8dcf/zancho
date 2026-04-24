@@ -237,7 +237,7 @@ func giro(angulo):
     - duracion: Duración de la animación en segundos
 	"""
 	var tween = create_tween()
-	var rotacion_actual = rotation_degrees.y
+	var _rotacion_actual = rotation_degrees.y
 	var rotacion_destino = angulo
 	#print ("actual ",rotacion_actual,"ang ",angulo)
 	#calcular el giro mas corto

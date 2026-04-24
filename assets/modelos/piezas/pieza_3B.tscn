@@ -1,15 +1,15 @@
-[gd_scene format=3 ]
+[gd_scene format=3 uid="uid://cqrs8dqxvupe"]
 
-[ext_resource type="PackedScene" uid="uid://dy0m1h6y6uif7" path="res://assets/modelos/piezas/pieza3B.glb" id="1_m5kwi"]
-[ext_resource type="Material" uid="uid://bo3dgaal0nxtp" path="res://assets/modelos/texturas/material_buenos.tres" id="2_83a24"]
+[ext_resource type="PackedScene" uid="uid://dcp7ter4dwbj1" path="res://assets/modelos/piezas/pieza3B.glb" id="1_m5kwi"]
+[ext_resource type="Material" uid="uid://1nkj30ff7sq7" path="res://assets/modelos/texturas/material_buenos.tres" id="2_83a24"]
 
 [node name="pieza3B" unique_id=1838788182 instance=ExtResource("1_m5kwi")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 
-[node name="Círculo_011" parent="Esqueleto_004" parent_id_path=PackedInt32Array(887333621) index="0" unique_id=279276430]
+[node name="Círculo_011" parent="Esqueleto_004" parent_id_path=PackedInt32Array(814006199) index="0" unique_id=489314916]
 material_override = ExtResource("2_83a24")
 
-[node name="Skeleton3D" parent="Esqueleto_004" parent_id_path=PackedInt32Array(887333621) index="1" unique_id=1761871697]
+[node name="Skeleton3D" parent="Esqueleto_004" parent_id_path=PackedInt32Array(814006199) index="1" unique_id=671922491]
 bones/0/position = Vector3(-4.750755e-07, 0.2687618, 2.4066373e-17)
 bones/0/rotation = Quaternion(1.1424234e-08, -5.555391e-08, 0.052125167, 0.99864054)
 bones/1/rotation = Quaternion(-3.4197438e-08, 4.0005858e-08, -0.74300355, 0.6692875)
@@ -21,20 +21,20 @@ bones/4/rotation = Quaternion(0.018790018, -0.0018491953, -0.70719224, 0.7067691
 bones/5/rotation = Quaternion(0.018790018, -0.001849196, -0.7071921, 0.7067693)
 bones/6/rotation = Quaternion(0.018790018, -0.001849196, -0.7071921, 0.7067693)
 
-[node name="Cilindro_006" parent="Esqueleto_004/Skeleton3D" index="0" unique_id=323459540]
+[node name="Cilindro_006" parent="Esqueleto_004/Skeleton3D" index="0" unique_id=1758601344]
 material_override = ExtResource("2_83a24")
 
-[node name="Cilindro_016" parent="Esqueleto_004/Skeleton3D" index="1" unique_id=958311422]
+[node name="Cilindro_016" parent="Esqueleto_004/Skeleton3D" index="1" unique_id=564133972]
 material_override = ExtResource("2_83a24")
 
-[node name="Cubo_023" parent="Esqueleto_004/Skeleton3D" index="2" unique_id=269535469]
+[node name="Cubo_023" parent="Esqueleto_004/Skeleton3D" index="2" unique_id=2101408801]
 material_override = ExtResource("2_83a24")
 
-[node name="Círculo_003" parent="Esqueleto_004/Skeleton3D" index="3" unique_id=140823248]
+[node name="Círculo_003" parent="Esqueleto_004/Skeleton3D" index="3" unique_id=898036058]
 material_override = ExtResource("2_83a24")
 
-[node name="Esfera geodésica_005" parent="Esqueleto_004/Skeleton3D" index="4" unique_id=503132405]
+[node name="Esfera geodésica_005" parent="Esqueleto_004/Skeleton3D" index="4" unique_id=1818773634]
 material_override = ExtResource("2_83a24")
 
-[node name="Esfera geodésica_006" parent="Esqueleto_004/Skeleton3D" index="5" unique_id=1821606453]
+[node name="Esfera geodésica_006" parent="Esqueleto_004/Skeleton3D" index="5" unique_id=1090447239]
 material_override = ExtResource("2_83a24")
