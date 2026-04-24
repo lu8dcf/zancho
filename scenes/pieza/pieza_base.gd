@@ -58,7 +58,8 @@ func _ready():
 	
 	posicionamiento_giro() # gira la pieza a su posicion en grados
 	cargar_movimiento() # Script de movimiento y estados
-	GlobalSignal.connect("marcaPaso",anima_idle)
+	#GlobalSignal.connect("marcaPaso",anima_idle)
+	anima_idle()
 
 func _physics_process(_delta: float) -> void:
 	if animacion:
