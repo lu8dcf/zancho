@@ -25,7 +25,7 @@ func _ready() -> void:
 	GlobalSignal.emit_signal("crearPieza",Vector2i(9,10),4,true) #caballo blanco en posicion
 	GlobalSignal.emit_signal("crearPieza",Vector2i(9,13),5,true) #reina blanco en posicion
 	GlobalSignal.emit_signal("crearPieza",Vector2i(1,14),0,true) #rey blanco en posicion
-	
+	GlobalSignal.emit_signal("crearPieza",Vector2i(2,9),1,true) #rey blanco en posicion
 	globalJuego.oleada_cambiada.connect(ejecuto_oleada,get_oleada_actual())
 	
 	if !(pausarOleada):
