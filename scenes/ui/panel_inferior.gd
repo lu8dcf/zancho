@@ -22,7 +22,7 @@ func _ready():
 	_actualizar_inventario(economia.inventario_actual)
 	
 
-func _actualizar_inventario(pieza_nueva) -> void:
+func _actualizar_inventario(_pieza_nueva) -> void:
 	_crear_botones_piezas_inventario()
 # Funcion de botones
 

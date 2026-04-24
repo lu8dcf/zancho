@@ -3,7 +3,7 @@ class_name FabricaPiezas
 
 var nueva_pieza: RigidBody3D
 var espaciado_baldosas : float = globalJuego.espaciado_baldosas
-var pieza = preload("res://scenes/pieza/pieza_base.tscn")
+var pieza_escena = preload("res://scenes/pieza/pieza_base.tscn")
 var velocidad: float = 1.0
 var id:int  # id de la pieza
 var sitio3d: Vector3i
@@ -18,7 +18,7 @@ func colocar_pieza(sitio: Vector2i, tipo: int , pieza_blanca: bool):
 		return
 		
 	# instanciar		
-	var pieza = pieza.instantiate()
+	var pieza = pieza_escena.instantiate()
 			
 	pieza.pieza_tipo = tipo
 	pieza.pieza_blanca = pieza_blanca 
