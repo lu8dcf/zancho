@@ -22,6 +22,10 @@ boot_splash/minimum_display_time=3000
 config/image="uid://dwqo5hkdt3k6n"
 config/bg_color=Color(0.14, 0.14, 0.14, 1)
 
+[audio]
+
+buses/default_bus_layout="uid://bvc55uhqxn66k"
+
 [autoload]
 
 globalJuego="*uid://ddgt0astfx6o4"
