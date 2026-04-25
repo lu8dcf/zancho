@@ -1,5 +1,5 @@
 extends Node
-class_name PeonN
+class_name ReinaN
 
 var pasos=0 #cantidad dee pasos que dara para cambio de  secuencia 
 
@@ -7,11 +7,10 @@ var pasos=0 #cantidad dee pasos que dara para cambio de  secuencia
 var pieza: PiezaBase
 var proxima_posicion : Vector3
 
-# desplazamiento Torre
+# desplazamiento Caballo
 var direccion= Vector3i(0,0,0)
-var secuencia = [0,1,2,3,4]
-var paso = 3
-
+var secuencia = [0,3,4,5,6,7,8,2,1,6,7,4]
+var paso = 0
 
 
 func _ready():
@@ -27,28 +26,16 @@ func _ready():
 	await pieza.ready
 	GlobalSignal.connect("marcaPaso",movimiento	)
 	
-		
-func movimiento():
 	
-	cambio_estado(paso)
+
+	
+func movimiento():
+	dar_paso()
 	# actualizacion de posicion
 	var cambio = direccion*GlobalJuego.espaciado_baldosas # # vector de cambio de la pieza
 	
-	# proximo sitio a ocupar
-	var sitio3d = round(owner.global_position+cambio)/globalJuego.espaciado_baldosas # en 3d
-	# convierto la proxima posicion en 2Di para 
-	var nuevo_sitio = Vector2i(sitio3d.x,sitio3d.z)  # en 2d
-	
-	if globalJuego.verifica_extremos(nuevo_sitio)==false:
+	if owner.verificar_proximo_paso(cambio)==false:
 		saltar_paso()
-		return
-	
-	if globalJuego.verifica_obstaculos(nuevo_sitio)==false:
-		saltar_paso()
-		return
-		
-	if globalJuego.verifica_piezas(nuevo_sitio)==false:
-		paso=0
 		return
 	
 	#owner.animacion_caminata("Bidle")
@@ -57,12 +44,12 @@ func movimiento():
 	tween.tween_property(owner, "global_position", owner.global_position + cambio , 1) \
 	.set_trans(Tween.TRANS_SINE) \
 	.set_ease(Tween.EASE_IN_OUT)
-	paso = 3
-
 	
+func dar_paso():
+	paso+=1
+	if paso==len(secuencia): paso=1
+	cambio_estado(paso)
 func saltar_paso(): # volver a iniciar en otra posicion d esalto
-	paso +=1
-	if paso==5: paso=2
 	movimiento()  	
 	
 # Estadod de la pieza
@@ -72,18 +59,27 @@ func cambio_estado(cambio):
 		0: # Quieto
 			direccion = Vector3i(0,0,0)
 			owner.giro(45)
-		1: # arriba
-			direccion = Vector3i(1,0,-1)
+		1: # arriba 1
+			direccion = Vector3i(0,0,-1)
 			owner.giro(225)
-		2:# derecha
-			direccion = Vector3i(1,0,1)
+		2:# arriba 2
+			direccion = Vector3i(0,0,1)
+			owner.giro(225)
+		3: # derecha 1
+			direccion = Vector3i(1,0,0)
 			owner.giro(135)
-		3: # abajo
+		4: # derecha 2
+			direccion = Vector3i(-1,0,0)
+			owner.giro(135)
+		5: # abajo 1
+			direccion = Vector3i(1,0,1)
+			owner.giro(45)
+		6:# adelante 2
 			direccion = Vector3i(-1,0,1)
 			owner.giro(45)
-		4: # izquierda
+		7: # izquierda 1
 			direccion = Vector3i(-1,0,-1)
-			owner.giro(-45)
-
-
-	
+			owner.giro(-90)
+		8: # izquierda 2
+			direccion = Vector3i(1,0,-1)
+			owner.giro(-90)

@@ -57,7 +57,6 @@ func producir_objetos_desde_mapa(indice_mapa: int = -1) -> void:
 	var posiciones = datos_mapa["posiciones"]
 	var tipos = datos_mapa["tipos"]
 	
-	print("FabricaObjetos: Produciendo ", posiciones.size(), " objetos para mapa ", indice_mapa)
 	
 	for i in range(posiciones.size()):
 		var posicion = posiciones[i]
@@ -119,7 +118,6 @@ func limpiar_todos_objetos() -> void:
 		if is_instance_valid(objeto):
 			objeto.queue_free()
 	objetos_instanciados.clear()
-	print("FabricaObjetos: Todos los objetos limpiados")
 
 func cargar_objetos_del_mapa() -> void:
 	limpiar_todos_objetos()
@@ -132,6 +130,5 @@ func cargar_objetos_del_mapa() -> void:
 
 # SEÑALES Y EVENTOS
 
-func _on_mapa_cambiado(nuevo_mapa: int) -> void:
-	print("FabricaObjetos: Cambiando a mapa ", nuevo_mapa)
+func _on_mapa_cambiado(_nuevo_mapa: int) -> void:
 	cargar_objetos_del_mapa()

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dfyyiy6ccyjmr"]
 
 [ext_resource type="Script" uid="uid://3epx16lu8m3k" path="res://scenes/tablero/baldosa.gd" id="1_ug7nx"]
-[ext_resource type="PackedScene" uid="uid://cv1vvwtvmlv0n" path="res://assets/modelos/baldosa1.glb" id="2_ugxcp"]
-[ext_resource type="PackedScene" uid="uid://cxvwh4mp4bg43" path="res://assets/modelos/baldosa2.glb" id="3_e5ivh"]
+[ext_resource type="PackedScene" uid="uid://bbmv3ko5ov07m" path="res://assets/modelos/baldosa1.glb" id="2_ugxcp"]
+[ext_resource type="PackedScene" uid="uid://dlhcg4f5w73vn" path="res://assets/modelos/baldosa2.glb" id="3_e5ivh"]
 [ext_resource type="PackedScene" uid="uid://bnd1ypt7081oc" path="res://assets/modelos/seleccionroja.glb" id="4_e5ivh"]
 [ext_resource type="PackedScene" uid="uid://dj24eg4u2u2wa" path="res://assets/modelos/seleccion.glb" id="4_ugxcp"]
 
@@ -39,25 +39,37 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1341964, 0)
 
 [node name="ColisionArea" type="CollisionShape3D" parent="AreaInteraccion" unique_id=203223308]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.005493164, 0.118011475, 0.00579834)
-visible = false
 shape = SubResource("BoxShape3D_n346q")
 
 [node name="IndicadorSeleccion" type="Node3D" parent="." unique_id=388152945]
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="IndicadorSeleccion" unique_id=1152541481]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18509567, 0)
-visible = false
 mesh = SubResource("PlaneMesh_ebrun")
 
 [node name="seleccionroja" parent="IndicadorSeleccion" unique_id=490922839 instance=ExtResource("4_e5ivh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.861033, 0)
+visible = false
 
-[node name="IndicadorResaltado" type="Node3D" parent="." unique_id=1105113973]
+[node name="IndicadorInvalido" type="Node3D" parent="." unique_id=1716336308]
+visible = false
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="IndicadorResaltado" unique_id=1640828427]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="IndicadorInvalido" unique_id=1769442854]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18509567, 0)
+visible = false
+mesh = SubResource("PlaneMesh_ebrun")
+
+[node name="seleccionroja" parent="IndicadorInvalido" unique_id=1092005711 instance=ExtResource("4_e5ivh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.861033, 0)
+
+[node name="IndicadorValido" type="Node3D" parent="." unique_id=1105113973]
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="IndicadorValido" unique_id=1640828427]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2907591, 0)
 visible = false
 mesh = SubResource("PlaneMesh_ug7nx")
 
-[node name="seleccion" parent="IndicadorResaltado" unique_id=966364859 instance=ExtResource("4_ugxcp")]
+[node name="seleccion" parent="IndicadorValido" unique_id=966364859 instance=ExtResource("4_ugxcp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.0369458, 0)

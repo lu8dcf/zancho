@@ -1,5 +1,5 @@
 extends Node
-class_name PeonN
+class_name CaballoB
 
 var pasos=0 #cantidad dee pasos que dara para cambio de  secuencia 
 
@@ -25,7 +25,7 @@ func _ready():
 
 	# Conectar señal después de que la pieza esté lista
 	await pieza.ready
-	GlobalSignal.connect("marcaPaso",movimiento	)
+	#GlobalSignal.connect("marcaPaso",movimiento	)
 	
 		
 func movimiento():
@@ -51,7 +51,7 @@ func movimiento():
 		paso=0
 		return
 	
-	#owner.animacion_caminata("Bidle")
+	owner.animacion_caminata("Bidle")
 	
 	var tween = create_tween()
 	tween.tween_property(owner, "global_position", owner.global_position + cambio , 1) \

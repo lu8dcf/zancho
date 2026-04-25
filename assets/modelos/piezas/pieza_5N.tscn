@@ -1,11 +1,11 @@
-[gd_scene format=3 uid="uid://box1nno6dfdj6"]
+[gd_scene format=3 uid="uid://6yvobem00xvg"]
 
-[ext_resource type="PackedScene" uid="uid://4j4b20kot6po" path="res://assets/modelos/piezas/pieza5N.glb" id="1_5cfba"]
+[ext_resource type="PackedScene" uid="uid://4uog56x761c8" path="res://assets/modelos/piezas/pieza5N.glb" id="1_5cfba"]
 [ext_resource type="Material" uid="uid://e2oyjpkuf1qo" path="res://assets/modelos/texturas/material_malos.tres" id="2_fl67d"]
 
 [node name="pieza5N" unique_id=1616019532 instance=ExtResource("1_5cfba")]
 
-[node name="Skeleton3D" parent="Esqueleto_007" parent_id_path=PackedInt32Array(1176067043) index="0" unique_id=2102191336]
+[node name="Skeleton3D" parent="Esqueleto_007" parent_id_path=PackedInt32Array(1832403563) index="0" unique_id=1521539381]
 bones/5/rotation = Quaternion(-2.4584276e-07, 2.252332e-08, 0.88017213, -0.47465464)
 bones/6/rotation = Quaternion(1.6420798e-07, 4.0020723e-08, -0.37673968, 0.9263192)
 bones/8/rotation = Quaternion(9.72772e-09, 9.9366844e-08, -0.070417985, 0.9975176)
@@ -37,14 +37,14 @@ bones/22/rotation = Quaternion(0.6456136, -0.6443031, 0.28841594, 0.29132965)
 bones/23/position = Vector3(-0.5116834, 0.90226775, -0.44029224)
 bones/23/rotation = Quaternion(0.6449604, -0.6449596, 0.28987366, 0.28987333)
 
-[node name="Cubo_890" parent="Esqueleto_007/Skeleton3D" index="0" unique_id=1535128103]
+[node name="Cubo_890" parent="Esqueleto_007/Skeleton3D" index="0" unique_id=1835242015]
 material_override = ExtResource("2_fl67d")
 
-[node name="Cubo_891" parent="Esqueleto_007/Skeleton3D" index="1" unique_id=897735494]
+[node name="Cubo_891" parent="Esqueleto_007/Skeleton3D" index="1" unique_id=791386952]
 material_override = ExtResource("2_fl67d")
 
-[node name="Círculo_039" parent="Esqueleto_007/Skeleton3D" index="2" unique_id=452762288]
+[node name="Círculo_039" parent="Esqueleto_007/Skeleton3D" index="2" unique_id=19635011]
 material_override = ExtResource("2_fl67d")
 
-[node name="Círculo_041" parent="Esqueleto_007/Skeleton3D" index="4" unique_id=1582769113]
+[node name="Círculo_041" parent="Esqueleto_007/Skeleton3D" index="4" unique_id=634524769]
 material_override = ExtResource("2_fl67d")

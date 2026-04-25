@@ -1,5 +1,5 @@
 extends Node
-class_name PeonN
+class_name PeonB
 
 var pasos=0 #cantidad dee pasos que dara para cambio de  secuencia 
 
@@ -25,7 +25,7 @@ func _ready():
 
 	# Conectar señal después de que la pieza esté lista
 	await pieza.ready
-	GlobalSignal.connect("marcaPaso",movimiento	)
+	#GlobalSignal.connect("marcaPaso",movimiento	)
 	
 		
 func movimiento():

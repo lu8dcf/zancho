@@ -26,18 +26,15 @@ func generar_tablero():
 			hijo.queue_free()
 	baldosas.clear()
 	
-	# Generar nuevo tablero
+	# generar  tablero
 	for fila in range(tamano_tablero.y):
 		for columna in range(tamano_tablero.x):
 			var baldosa = crear_baldosa(columna, fila)
 			if baldosa:
 				baldosas[Vector2i(columna, fila)] = baldosa
-				baldosa.baldosa_presionada.connect(_en_baldosa_presionada)
-				baldosa.baldosa_click_derecho.connect(_en_baldosa_click_derecho)
 
 func crear_baldosa(columna: int, fila: int) -> BaldosaBase:
 	if not escena_baldosa:
-		push_error("No se ha asignado la escena de baldosa")
 		return null
 	
 	var baldosa = escena_baldosa.instantiate() as BaldosaBase
@@ -66,18 +63,16 @@ func obtener_baldosa_en_posicion(columna: int, fila: int) -> BaldosaBase:
 	return obtener_baldosa_en_coordenadas(Vector2i(columna, fila))
 
 func _en_baldosa_presionada(baldosa: BaldosaBase):
+
 	print("Baldosa presionada en: ", baldosa.obtener_coordenadas())
 	
-	# Quitar selección de baldosa anterior
 	if baldosa_seleccionada:
 		baldosa_seleccionada.seleccionar(false)
+		return
 	
-	# Seleccionar nueva baldosa
 	baldosa_seleccionada = baldosa
-	baldosa.seleccionar(true)
 
-func _en_baldosa_click_derecho(baldosa: BaldosaBase):
-	print("Click derecho en baldosa: ", baldosa.obtener_coordenadas())
+		
 
 func limpiar_seleccion():
 	if baldosa_seleccionada:

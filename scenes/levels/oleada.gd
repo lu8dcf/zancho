@@ -12,19 +12,22 @@ func _ready() -> void:
 	# Blanca  true piezas blancas   -  False Piezas negras
 
 	GlobalSignal.emit_signal("crearPieza",Vector2i(10,3),1,false) #peon NEGRO en posicion
-	GlobalSignal.emit_signal("crearPieza",Vector2i(2,3),2,false) #alfil NEGRO en posicion
+	GlobalSignal.emit_signal("crearPieza",Vector2i(11,4),2,false) #alfil NEGRO en posicion
+	GlobalSignal.emit_signal("crearPieza",Vector2i(14,5),3,false) #alfil NEGRO en posicion
+	GlobalSignal.emit_signal("crearPieza",Vector2i(12,6),4,false) #alfil NEGRO en posicion
+	GlobalSignal.emit_signal("crearPieza",Vector2i(12,3),5,false) #alfil NEGRO en posicion
+	
+	
 	
 	GlobalSignal.emit_signal("crearPieza",Vector2i(5,6),1,true) #peon blanco en posicion
 	GlobalSignal.emit_signal("crearPieza",Vector2i(3,9),2,true) #alfil blanco en posicion
 	GlobalSignal.emit_signal("crearPieza",Vector2i(4,13),3,true) #torre blanco en posicion
-	GlobalSignal.emit_signal("crearPieza",Vector2i(7,10),4,true) #caballo blanco en posicion
+	GlobalSignal.emit_signal("crearPieza",Vector2i(9,10),4,true) #caballo blanco en posicion
 	GlobalSignal.emit_signal("crearPieza",Vector2i(9,13),5,true) #reina blanco en posicion
 	GlobalSignal.emit_signal("crearPieza",Vector2i(1,14),0,true) #rey blanco en posicion
-	GlobalSignal.emit_signal("crearPieza",Vector2i(10,3),0,true) #pieza solapada
-	GlobalSignal.emit_signal("crearPieza",Vector2i(9,13),0,true) #pieza solapada 
+	GlobalSignal.emit_signal("crearPieza",Vector2i(2,9),1,true) #rey blanco en posicion
 	globalJuego.oleada_cambiada.connect(ejecuto_oleada,get_oleada_actual())
-	print (Piezas.pieza_b_sitio)
-	print (Piezas.pieza_n_sitio)
+	
 	if !(pausarOleada):
 		ejecuto_oleada(globalJuego.oleada_actual)
 

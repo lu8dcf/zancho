@@ -6,7 +6,7 @@ var hud_escena = preload("res://scenes/ui/hud.tscn")
 var tablero_escena = preload("res://scenes/tablero/gestorTablero.tscn")
 var entorno = preload("res://scenes/entorno/escenario.tscn")
 var fabrica_obstaculos_escena = preload("res://scenes/objetos/fabrica_objetos.tscn")
-
+var pieza_flotante = preload("res://scenes/tablero/pieza_flotante.tscn")
 
 var tipo_pieza=0
 
@@ -26,7 +26,10 @@ func _ready() -> void:
 	
 	var mapa = entorno.instantiate()
 	add_child(mapa)
-
+	
+	var pieza = pieza_flotante.instantiate()
+	add_child(pieza)
+	pieza.visible = false
 
 	GlobalSignal.emit_signal("controlMarcaPaso",true)	
 
