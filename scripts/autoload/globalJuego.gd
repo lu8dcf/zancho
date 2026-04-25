@@ -73,6 +73,8 @@ func lugar_disponible(sitio: Vector2i):
 
 func reiniciar_variables():
 	Piezas.piezas_activas = []
+	oleada_actual = 1
+	mapa_actual = 1
 	
 func reiniciar_piezas():
 	pass
