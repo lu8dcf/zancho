@@ -23,13 +23,6 @@ var inventario_actual = [
 	{"nombre": "Caballo", "cantidad":0},
 	{"nombre": "Reina", "cantidad":0}
 ]
-var piezas_colocadas = [
-	{"nombre": "Peon", "cantidad":0},
-	{"nombre": "Torre", "cantidad":0},
-	{"nombre": "Alfil",  "cantidad":0},
-	{"nombre": "Caballo", "cantidad":0},
-	{"nombre": "Reina", "cantidad":0}
-]
 
 var piezas_disponibles_tienda: Array = [
 	{"nombre": "Peon", "precio": 100},
@@ -99,17 +92,9 @@ func vender_pieza(pieza:Dictionary, valor:int):
 			pieza_comprada.emit(inventario_actual[i])  # Reutilizamos esta señal para actualizar UI
 			pieza_vendida.emit()
 
-func usar_pieza(pieza_nombre:String):
-	for i in inventario_actual:
-		if i["nombre"] == pieza_nombre:
-			i["cantidad"] -= 1
-	for i in piezas_colocadas:
-		if i["nombre"] == pieza_nombre:
-			i["cantidad"] += 1
-
 func llego_al_limite(pieza_nombre:String ,cantidad_piezas:int)-> bool:
 	if cantidad_piezas == 0:
-		for i in inventario_actual:
+		for i in economia.inventario_actual:
 			if i["nombre"] == pieza_nombre:
 				cantidad_piezas = i["cantidad"]
 	if pieza_nombre in limite_piezas:

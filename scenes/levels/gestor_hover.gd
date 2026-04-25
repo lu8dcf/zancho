@@ -8,17 +8,17 @@ var baldosa_actual : BaldosaBase = null
 var camara_referencia : Camera3D = null
 var gestor_tablero : GestorTablero = null
 
-var ultima_baldosa_clickeada = null
-
 func _ready():
 	# Buscar referencias automáticamente
 	buscar_referencias()
 	
-	if Piezas.has_signal("modo_colocacion_inicia"):
-		Piezas.modo_colocacion_inicia.connect(_on_modo_colocacion_iniciado)
-	if Piezas.has_signal("modo_colocacion_cancelado"):
-		Piezas.modo_colocacion_cancelado.connect(_on_modo_colocacion_cancelado)
+	# Verificar que todo esté configurado
+	if not camara_referencia:
+		push_warning("GestorHover: No se encontró cámara")
+	if not gestor_tablero:
+		push_warning("GestorHover: No se encontró GestorTablero")
 	
+	print("GestorHover inicializado correctamente")
 
 func buscar_referencias():
 	# Buscar cámara
@@ -30,66 +30,20 @@ func buscar_referencias():
 	# Buscar gestor de tablero
 	gestor_tablero = get_tree().root.find_child("gestorTablero", true, false)
 	if not gestor_tablero:
-		gestor_tablero = get_tree().root.find_child("GestorTablero", true, false)
+		# Buscar por tipo
+		for nodo in get_tree().get_nodes_in_group("gestor_tablero"):
+			if nodo is GestorTablero:
+				gestor_tablero = nodo
+				break
 
 func _process(_delta):
-	detectar_baldosa_bajo_mouse()
-
-func _input(event):
-	if event is InputEventMouseButton:
-		_manejar_click_mouse(event)
-
-func _manejar_click_mouse(event: InputEventMouseButton):
-	if not event.pressed:
+	if not camara_referencia:
+		buscar_referencias()
 		return
 	
-	var baldosa = _obtener_baldosa_bajo_mouse()
-	if not baldosa:
-		return
-	
-	match event.button_index:
-		MOUSE_BUTTON_LEFT:
-			_manejar_click_izquierdo(baldosa)
-		MOUSE_BUTTON_RIGHT:
-			_manejar_click_derecho(baldosa)
+	detectar_baltosa_bajo_mouse()
 
-
-# manejo de clicks
-func _manejar_click_izquierdo(baldosa: BaldosaBase):
-	print("Click izquierdo en baldosa: ", baldosa.obtener_coordenadas())
-	
-	if Piezas.modo_colocacion:
-		# Modo colocación activo
-		if baldosa.es_valido_colocar:
-			print("Intentando colocar pieza...")
-			baldosa._intentar_colocar_pieza()
-		else:
-			print("Posición no válida para colocar")
-	else:
-		# Modo normal - seleccionar baldosa
-		ultima_baldosa_clickeada = baldosa
-		baldosa.baldosa_presionada.emit(baldosa)
-		
-		# También notificar al GestorTablero si existe
-		if gestor_tablero and gestor_tablero.has_method("_en_baldosa_presionada"):
-			gestor_tablero._en_baldosa_presionada(baldosa)
-
-func _manejar_click_derecho(baldosa: BaldosaBase):
-	print("Click derecho en baldosa: ", baldosa.obtener_coordenadas())
-	
-	if Piezas.modo_colocacion:
-		# Cancelar modo colocación
-		print("Cancelando modo colocación")
-		Piezas.cancelar_modo_colocacion()
-	else:
-		# Comportamiento normal de click derecho
-		baldosa.baldosa_click_derecho.emit(baldosa)
-
-func detectar_baldosa_bajo_mouse():
-	var baldosa_detectada = _obtener_baldosa_bajo_mouse()
-	actualizar_hover(baldosa_detectada)
-
-func _obtener_baldosa_bajo_mouse() -> BaldosaBase:
+func detectar_baltosa_bajo_mouse():
 	var posicion_mouse = get_viewport().get_mouse_position()
 	var espacio = get_world_3d().direct_space_state
 	
@@ -99,22 +53,28 @@ func _obtener_baldosa_bajo_mouse() -> BaldosaBase:
 	
 	var consulta = PhysicsRayQueryParameters3D.create(origen, destino)
 	consulta.collide_with_areas = true
-	consulta.collide_with_bodies = true  # También detectar StaticBody3D
+	consulta.collide_with_bodies = false
+	# Excluir la cámara y otros objetos no relevantes
 	consulta.exclude = [camara_referencia]
 	
+
 	var resultado = espacio.intersect_ray(consulta)
+	var baldosa_detectada : BaldosaBase = null
 	
 	if not resultado.is_empty():
 		var nodo_golpeado = resultado.get("collider")
-		if nodo_golpeado:
-			return encontrar_baldosa_padre(nodo_golpeado)
+		
+		if nodo_golpeado and nodo_golpeado is Area3D:
+			# Buscar la baldosa padre del Area3D
+			baldosa_detectada = encontrar_baltosa_padre(nodo_golpeado)
 	
-	return null
+	# Manejar cambios de hover
+	actualizar_hover(baldosa_detectada)
 
-func encontrar_baldosa_padre(nodo: Node) -> BaldosaBase:
-	var padre = nodo
+func encontrar_baltosa_padre(nodo: Node) -> BaldosaBase:
+	var padre = nodo.get_parent()
 	var intentos = 0
-	var max_intentos = 10
+	var max_intentos = 10  # Evitar bucle infinito
 	
 	while padre and intentos < max_intentos:
 		if padre is BaldosaBase:
@@ -124,30 +84,25 @@ func encontrar_baldosa_padre(nodo: Node) -> BaldosaBase:
 	
 	return null
 
-func actualizar_hover(nueva_baldosa: BaldosaBase):
+func actualizar_hover(nueva_baltosa: BaldosaBase):
 	# Si es la misma baldosa, no hacer nada
-	if nueva_baldosa == baldosa_actual:
+	if nueva_baltosa == baldosa_actual:
 		return
 	
 	# Quitar hover de la anterior
 	if baldosa_actual:
-		baldosa_actual._al_salir_mouse()
+		baldosa_actual.resaltar(false)
+		#print("Hover OUT: ", baldosa_actual.obtener_coordenadas())
 	
 	# Actualizar referencia
-	baldosa_actual = nueva_baldosa
+	baldosa_actual = nueva_baltosa
 	
 	# Poner hover en la nueva
 	if baldosa_actual:
-		baldosa_actual._al_entrar_mouse()			
-
-
-func _on_modo_colocacion_iniciado(_tipo_pieza: int, _nombre: String):
-	if baldosa_actual:
-		baldosa_actual._al_entrar_mouse()
-
-func _on_modo_colocacion_cancelado():
-	if baldosa_actual:
-		baldosa_actual._al_salir_mouse()
+		if not baldosa_actual.esta_ocupada:
+			baldosa_actual.resaltar(true)
+			#print("Hover IN: ", baldosa_actual.obtener_coordenadas())
+			
 
 # Método público para obtener la baldosa actual
 func obtener_baltosa_actual() -> BaldosaBase:
@@ -156,5 +111,5 @@ func obtener_baltosa_actual() -> BaldosaBase:
 # Método para limpiar el hover
 func limpiar_hover():
 	if baldosa_actual:
-		baldosa_actual._al_salir_mouse()
+		baldosa_actual.resaltar(false)
 		baldosa_actual = null
