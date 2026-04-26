@@ -3,6 +3,7 @@ extends Node3D
 var pausarOleada :bool = false
 var estadoOleada :bool = false
 var DATA_OLEADAS = preload("res://scenes/levels/data_oleada.gd").new()
+var nivel : int
 
 # este archivo muestra como crear las piezas en el tablero
 func _ready() -> void:
@@ -11,31 +12,37 @@ func _ready() -> void:
 	# Tipo  0-Rey  1-Peon  2-Alfil  3-Torre  4-Caballo  5- Reina
 	# Blanca  true piezas blancas   -  False Piezas negras
 
-	GlobalSignal.emit_signal("crearPieza",Vector2i(10,3),1,false) #peon NEGRO en posicion
-	GlobalSignal.emit_signal("crearPieza",Vector2i(11,4),2,false) #alfil NEGRO en posicion
-	GlobalSignal.emit_signal("crearPieza",Vector2i(14,5),3,false) #alfil NEGRO en posicion
-	GlobalSignal.emit_signal("crearPieza",Vector2i(12,6),4,false) #alfil NEGRO en posicion
-	GlobalSignal.emit_signal("crearPieza",Vector2i(12,3),5,false) #alfil NEGRO en posicion
-	
-	
-	
-	GlobalSignal.emit_signal("crearPieza",Vector2i(5,6),1,true) #peon blanco en posicion
-	GlobalSignal.emit_signal("crearPieza",Vector2i(3,9),2,true) #alfil blanco en posicion
-	GlobalSignal.emit_signal("crearPieza",Vector2i(4,13),3,true) #torre blanco en posicion
-	GlobalSignal.emit_signal("crearPieza",Vector2i(9,10),4,true) #caballo blanco en posicion
-	GlobalSignal.emit_signal("crearPieza",Vector2i(9,13),5,true) #reina blanco en posicion
+	#GlobalSignal.emit_signal("crearPieza",Vector2i(10,3),1,false) #peon NEGRO en posicion
+	#GlobalSignal.emit_signal("crearPieza",Vector2i(11,4),2,false) #alfil NEGRO en posicion
+	#GlobalSignal.emit_signal("crearPieza",Vector2i(14,5),3,false) #alfil NEGRO en posicion
+	#GlobalSignal.emit_signal("crearPieza",Vector2i(12,6),4,false) #alfil NEGRO en posicion
+	#GlobalSignal.emit_signal("crearPieza",Vector2i(12,3),5,false) #alfil NEGRO en posicion
+	#
+	GlobalSignal.comienzoOleada.connect(ejecuto_oleada)
+	#
+	#GlobalSignal.emit_signal("crearPieza",Vector2i(5,6),1,true) #peon blanco en posicion
+	#GlobalSignal.emit_signal("crearPieza",Vector2i(3,9),2,true) #alfil blanco en posicion
+	#GlobalSignal.emit_signal("crearPieza",Vector2i(4,13),3,true) #torre blanco en posicion
+	#GlobalSignal.emit_signal("crearPieza",Vector2i(9,10),4,true) #caballo blanco en posicion
+	#GlobalSignal.emit_signal("crearPieza",Vector2i(9,13),5,true) #reina blanco en posicion
 	GlobalSignal.emit_signal("crearPieza",Vector2i(1,14),0,true) #rey blanco en posicion
-	GlobalSignal.emit_signal("crearPieza",Vector2i(2,9),1,true) #rey blanco en posicion
-	globalJuego.oleada_cambiada.connect(ejecuto_oleada,get_oleada_actual())
+	#GlobalSignal.emit_signal("crearPieza",Vector2i(2,9),1,true) #rey blanco en posicion
+	#globalJuego.oleada_cambiada.connect(ejecuto_oleada,get_oleada_actual())
 	
-	if !(pausarOleada):
-		ejecuto_oleada(globalJuego.oleada_actual)
+	#TESTEO
+	await get_tree().create_timer(2).timeout
+	GlobalSignal.emit_signal("comienzoOleada")
+	
+	
+	#if !(pausarOleada):
+		#ejecuto_oleada(globalJuego.oleada_actual)
 
 func get_oleada_actual():
 	return globalJuego.oleada_actual
 
 	
-func ejecuto_oleada(nivel):
+func ejecuto_oleada():
+	nivel = get_oleada_actual()
 	if !DATA_OLEADAS.estructura_por_nivel.has(nivel):
 		print("Este nivel aun no esta desarrollado: ", nivel)
 		return
