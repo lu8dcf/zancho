@@ -24,7 +24,7 @@ func _ready() -> void:
 	#GlobalSignal.emit_signal("crearPieza",Vector2i(3,9),2,true) #alfil blanco en posicion
 	#GlobalSignal.emit_signal("crearPieza",Vector2i(4,13),3,true) #torre blanco en posicion
 	#GlobalSignal.emit_signal("crearPieza",Vector2i(9,10),4,true) #caballo blanco en posicion
-	#GlobalSignal.emit_signal("crearPieza",Vector2i(9,13),5,true) #reina blanco en posicion
+	GlobalSignal.emit_signal("crearPieza",Vector2i(9,13),5,true) #reina blanco en posicion
 	GlobalSignal.emit_signal("crearPieza",Vector2i(1,14),0,true) #rey blanco en posicion
 	#GlobalSignal.emit_signal("crearPieza",Vector2i(2,9),1,true) #rey blanco en posicion
 	#globalJuego.oleada_cambiada.connect(ejecuto_oleada,get_oleada_actual())
@@ -39,7 +39,9 @@ func _ready() -> void:
 
 func get_oleada_actual():
 	return globalJuego.oleada_actual
-
+	
+	
+#	GlobalJuego.espaciado_baldosas
 	
 func ejecuto_oleada():
 	nivel = get_oleada_actual()
