@@ -1,10 +1,10 @@
-[gd_scene format=3 uid="uid://dpry2hn5r7hjx"]
+[gd_scene format=3 uid="uid://xqou610pj0tg"]
 
-[ext_resource type="Texture2D" path="res://assets/menu/perder.png" id="1_2yglj"]
+[ext_resource type="Texture2D" uid="uid://dqvok4wc6s7fy" path="res://assets/ui/perder.png" id="1_b55oh"]
 [ext_resource type="Script" path="res://scenes/ui/derrota.gd" id="1_ry7db"]
-[ext_resource type="Texture2D" path="res://assets/menu/Boton6.png" id="2_b55oh"]
-[ext_resource type="Texture2D" path="res://assets/menu/Boton7.png" id="3_ry7db"]
-[ext_resource type="LabelSettings" path="res://assets/fuentes/textos grandes.tres" id="4_jwdiw"]
+[ext_resource type="Texture2D" uid="uid://couaobhhkqc78" path="res://assets/menu/Boton6.png" id="2_b55oh"]
+[ext_resource type="Texture2D" uid="uid://by412hpyptahi" path="res://assets/menu/Boton7.png" id="3_ry7db"]
+[ext_resource type="LabelSettings" uid="uid://5mxd2sj4000t" path="res://assets/fuentes/textosgrande.tres" id="4_ry7db"]
 [ext_resource type="FontFile" uid="uid://ljgupmacmpki" path="res://assets/fuentes/Enchanted Land DS D.otf" id="6_jwdiw"]
 
 [sub_resource type="Animation" id="Animation_vo5nr"]
@@ -213,7 +213,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_2yglj")
+texture = ExtResource("1_b55oh")
 expand_mode = 1
 
 [node name="TextureButton2" type="TextureButton" parent="TextureRect" unique_id=75973102]
@@ -236,13 +236,15 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.047944
-anchor_right = 0.015981335
+anchor_top = -0.0487801
+anchor_right = 0.029299112
+anchor_bottom = -0.0487801
 offset_left = 149.0
 offset_top = 22.0
 offset_right = 239.0
 offset_bottom = 63.0
 text = "Reintentar"
-label_settings = ExtResource("4_jwdiw")
+label_settings = ExtResource("4_ry7db")
 metadata/_edit_use_anchors_ = true
 
 [node name="TextureButton" type="TextureButton" parent="TextureRect" unique_id=1734945723]
@@ -261,14 +263,16 @@ metadata/_edit_use_anchors_ = true
 [node name="Label" type="Label" parent="TextureRect/TextureButton" unique_id=519093524]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.07990667
-anchor_right = 0.06658889
+anchor_left = -0.07724312
+anchor_top = -0.0121951215
+anchor_right = 0.082570225
+anchor_bottom = -0.0121951215
 offset_left = 149.0
 offset_top = 22.0
 offset_right = 239.0
 offset_bottom = 63.0
 text = "Volver a menu"
-label_settings = ExtResource("4_jwdiw")
+label_settings = ExtResource("4_ry7db")
 metadata/_edit_use_anchors_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TextureRect" unique_id=634188511]
