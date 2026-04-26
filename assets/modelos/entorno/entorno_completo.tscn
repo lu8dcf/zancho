@@ -1,5 +1,26 @@
 [gd_scene format=3 uid="uid://yvwwtxa42htj"]
 
-[ext_resource type="PackedScene" uid="uid://b5d4fv4f6o5iw" path="res://assets/modelos/entorno_completo.glb" id="1_ewjn0"]
+[ext_resource type="PackedScene" uid="uid://dap1b72ekprxq" path="res://assets/modelos/entorno/entorno_completo.glb" id="1_su2m8"]
+[ext_resource type="Texture2D" uid="uid://rcgrbaqc11qd" path="res://assets/modelos/texturas/Paletaentornodegradeprueba.png" id="2_kbdlx"]
+[ext_resource type="Texture2D" uid="uid://dmdk311cry085" path="res://assets/modelos/texturas/entorno_completo_ladrillos.png" id="3_kbdlx"]
+[ext_resource type="Texture2D" uid="uid://bl52ivb5b5ex4" path="res://assets/modelos/texturas/entorno_completo_tejas.png" id="4_w00ve"]
 
-[node name="entorno_completo" unique_id=791396320 instance=ExtResource("1_ewjn0")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w00ve"]
+albedo_texture = ExtResource("2_kbdlx")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3dm3b"]
+albedo_texture = ExtResource("3_kbdlx")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rfulq"]
+albedo_texture = ExtResource("4_w00ve")
+
+[node name="entorno_completo" unique_id=584504039 instance=ExtResource("1_su2m8")]
+
+[node name="Cubo_009" parent="." index="0" unique_id=299976851]
+material_override = SubResource("StandardMaterial3D_w00ve")
+
+[node name="ladrillos" parent="." index="3" unique_id=2030873120]
+material_override = SubResource("StandardMaterial3D_3dm3b")
+
+[node name="tejas" parent="." index="4" unique_id=1242550926]
+material_override = SubResource("StandardMaterial3D_rfulq")

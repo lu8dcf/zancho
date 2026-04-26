@@ -5,8 +5,8 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_c11s1"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_c11s1"]
-height = 1.2026215
-radius = 0.6303711
+height = 3.0519714
+radius = 0.9003906
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4vkcs"]
 emission_shape_scale = Vector3(0.1, 1, 0.1)
@@ -36,7 +36,7 @@ max_contacts_reported = 1
 script = ExtResource("1_c11s1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1624874680]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60533905, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.530014, 0)
 shape = SubResource("CylinderShape3D_c11s1")
 
 [node name="DustParticles" type="GPUParticles3D" parent="." unique_id=725324837]

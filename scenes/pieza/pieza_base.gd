@@ -5,8 +5,6 @@ class_name PiezaBase
 #clase de pieza
 @export var pieza_tipo: int
 @export var pieza_blanca: bool
-@export var id:int # id de registro en base de datos
-@export var pieza_sitio:Vector2i
 
 # CArga de parametros 
 var vida = Piezas.vida[pieza_tipo]
@@ -15,7 +13,7 @@ var cadencia = Piezas.cadencia[pieza_tipo]
 var bonus_cantidad = Piezas.bonus_cantidad[pieza_tipo]
 var bonus_a = Piezas.bonus_a[pieza_tipo]
 @export var vision_range: float = 5.0
-var angulo_frente: int = 225
+@export var angulo_frente: int
 
 # Componentes
 var movimiento_especifico = preload("res://scenes/pieza/movimiento/movimiento.tscn") # define le movimiento caracteristico de la pieza
@@ -45,7 +43,6 @@ var pieza_colocada=false
 var animacion=false
 
 func _ready():
-	#print (pieza_sitio)
 	if pieza_blanca: color="B" 	
 	# Configurar física
 	linear_velocity = Vector3(0, linear_velocity.y, 0)  # que no se mueva a los costados
@@ -58,10 +55,8 @@ func _ready():
 	
 	posicionamiento_giro() # gira la pieza a su posicion en grados
 	cargar_movimiento() # Script de movimiento y estados
-	#GlobalSignal.connect("marcaPaso",anima_idle)
-	anima_idle()
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if animacion:
 		animation_player.play("ataque_rey")
 	
@@ -112,7 +107,7 @@ func llego_al_piso():
 	giro(angulo_frente)
 	
 
-func _on_body_entered(_body):
+func _on_body_entered(body):
 	if pieza_colocada : return # solo se ejecuta en el inicio
 	# este if es para que solo tenga un efecto de sonido cuando rebota 
 	create_dust_effect()# Efecto de polvo
@@ -139,10 +134,10 @@ func check_for_enemies():
 	var results = space_state.intersect_shape(query)
 	
 	var nearest_enemy = null
-	
+	var nearest_distance = vision_range + 1
 	
 	for result in results:
-		pass
+		var body = result.collider
 		#if body is ChessPiece and body.team != team and body.is_alive:
 		#	var distance = global_position.distance_to(body.global_position)
 		#	if distance < nearest_distance:
@@ -217,16 +212,6 @@ func die():
 	tween.tween_property(self, "scale", Vector3.ZERO, 0.5)
 	tween.tween_callback(queue_free)
 
-func verificar_proximo_paso(cambio):
-	# proximo sitio a ocupar
-	var sitio3d = round(global_position+cambio)/globalJuego.espaciado_baldosas # en 3d
-	# convierto la proxima posicion en 2Di para 
-	var nuevo_sitio = Vector2i(sitio3d.x,sitio3d.z)  # en 2d
-	if globalJuego.lugar_disponible(nuevo_sitio)==false:
-		#print (pieza_sitio," ocupado")
-		return false
-	return true
-		
 func giro(angulo):
 	
 	"""
@@ -237,7 +222,7 @@ func giro(angulo):
     - duracion: Duración de la animación en segundos
 	"""
 	var tween = create_tween()
-	var _rotacion_actual = rotation_degrees.y
+	var rotacion_actual = rotation_degrees.y
 	var rotacion_destino = angulo
 	#print ("actual ",rotacion_actual,"ang ",angulo)
 	#calcular el giro mas corto
@@ -249,13 +234,3 @@ func giro(angulo):
 	pieza_colocada = true
 	physics_material_override.bounce = 0
 	gravity_scale=1
-
-func anima_idle(): # animacion de idle
-	var anima="Bidle"
-	animacion_caminata(anima)
-			
-func animacion_caminata(anima):
-	if animation_player:
-		anima = str(pieza_tipo)+anima
-		if animation_player.has_animation(anima):
-			animation_player.play(anima)
