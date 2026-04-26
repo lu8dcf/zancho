@@ -19,6 +19,7 @@ var angulo_frente: int = 225
 
 # Componentes
 var movimiento_especifico = preload("res://scenes/pieza/movimiento/movimiento.tscn") # define le movimiento caracteristico de la pieza
+var ataque_especifico = preload("res://scenes/pieza/movimiento/movimiento.tscn") # define le movimiento caracteristico de la pieza
 
 # Nodos
 
@@ -100,7 +101,15 @@ func cargar_movimiento(): # agrega el nodo movimiento con el script correspondie
 	movimiento.set_script(script)
 	add_child(movimiento)
 	movimiento.owner = self  # ← IMPORTANTE: Establece el owner manualmente
-	
+
+func cargar_ataque(): # agrega el nodo ataque con el script correspondiente a la pieza
+	var ataque = ataque_especifico.instantiate()
+	var ataque_script = "res://scenes/pieza/movimiento/mov"+str(pieza_tipo)+ color+".gd"
+	var script = load(ataque_script)
+	ataque.set_script(script)
+	add_child(ataque)
+	ataque.owner = self  # ← IMPORTANTE: Establece el owner manualmente
+		
 			
 func posicionamiento_giro():
 	#temporizador
