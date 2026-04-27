@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://3rr01i83xrlh"]
 
 [ext_resource type="Texture2D" uid="uid://b8oju5ddteuuf" path="res://assets/modelos/texturas/cielo.png" id="1_65f8h"]
-[ext_resource type="PackedScene" uid="uid://xu6ocrh3m123" path="res://assets/modelos/bordes.glb" id="2_65f8h"]
 [ext_resource type="PackedScene" uid="uid://yvwwtxa42htj" path="res://assets/modelos/entorno/entorno_completo.tscn" id="3_65f8h"]
 [ext_resource type="PackedScene" uid="uid://b7gb2ttvbq0ot" path="res://scenes/entorno/particulas.tscn" id="4_6mpwl"]
 
@@ -41,9 +40,6 @@ compositor = SubResource("Compositor_6mpwl")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1537059610]
 transform = Transform3D(1, 0, 0, 0, -0.022722214, 0.9997419, 0, -0.9997419, -0.022722214, 0, 4.631231, 0)
 light_color = Color(0.90019417, 0.90956074, 0.9175537, 1)
-
-[node name="bordes" parent="." unique_id=382742394 instance=ExtResource("2_65f8h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.031539917, -0.4408741, 30.017155)
 
 [node name="entorno_completo" parent="." unique_id=791396320 instance=ExtResource("3_65f8h")]
 
