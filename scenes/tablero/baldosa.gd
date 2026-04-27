@@ -193,6 +193,7 @@ func _on_pieza_colocada(_tipo:int, posicion:Vector2i):
 func _intentar_colocar_pieza():
 	if Piezas.colocar_pieza_en_posicion(coordenadas_tablero):
 		esta_ocupada = true
+		
 	else:
 		print("Error al colocar pieza")
 

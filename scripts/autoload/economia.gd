@@ -103,9 +103,11 @@ func usar_pieza(pieza_nombre:String):
 	for i in inventario_actual:
 		if i["nombre"] == pieza_nombre:
 			i["cantidad"] -= 1
+			inventario_actualizado.emit(inventario_actual)
 	for i in piezas_colocadas:
 		if i["nombre"] == pieza_nombre:
 			i["cantidad"] += 1
+			
 
 func llego_al_limite(pieza_nombre:String ,cantidad_piezas:int)-> bool:
 	if cantidad_piezas == 0:
