@@ -4,6 +4,7 @@
 [ext_resource type="Material" uid="uid://bo3dgaal0nxtp" path="res://assets/modelos/texturas/material_buenos.tres" id="2_x4nsx"]
 
 [node name="pieza0B" unique_id=1272621004 instance=ExtResource("1_rjh5o")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Esqueleto_008" parent_id_path=PackedInt32Array(288103738) index="0" unique_id=10965168]
 bones/0/position = Vector3(0, 0.07419682, -9.536743e-07)
