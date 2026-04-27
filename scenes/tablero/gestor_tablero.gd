@@ -62,6 +62,7 @@ func obtener_baldosa_en_coordenadas(coordenadas: Vector2i) -> BaldosaBase:
 func obtener_baldosa_en_posicion(columna: int, fila: int) -> BaldosaBase:
 	return obtener_baldosa_en_coordenadas(Vector2i(columna, fila))
 
+# revisar esta linea de codigo
 func _en_baldosa_presionada(baldosa: BaldosaBase):
 
 	print("Baldosa presionada en: ", baldosa.obtener_coordenadas())

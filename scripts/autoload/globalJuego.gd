@@ -78,15 +78,16 @@ func verifica_obstaculos(sitio: Vector2i):
 	if sitio in mapas.mapas[globalJuego.mapa_actual]:
 		#mensaje("No se puede insertar sobre un obstaculo")
 		return false
-		
+
 func colocar_blanca(sitio: Vector2i):
-	lugar_disponible(sitio)
+	if not lugar_disponible(sitio):
+		return false
 	
 	# sector de spawn negras
 	if (sitio.y<2 and sitio.x>7) or  (sitio.y==2 and sitio.x>8) or (sitio.y==3 and sitio.x>9) or (sitio.y==4 and sitio.x>10) or (sitio.y==5 and sitio.x>11) or (sitio.y==6 and sitio.x>12) or (sitio.y==7 and sitio.x>13):
 		return false
 	return true
-		  
+
 
 func reiniciar_variables():
 	Piezas.piezas_activas = []
