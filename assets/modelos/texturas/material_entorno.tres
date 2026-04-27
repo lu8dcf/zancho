@@ -1,13 +1,15 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://bg70lqvwct7ri"]
 
 [ext_resource type="Shader" uid="uid://b1qxxcb7tq3l6" path="res://assets/modelos/texturas/Light.gdshader" id="1_mu8et"]
+[ext_resource type="Texture2D" uid="uid://jkc5yhdh1d5j" path="res://assets/modelos/texturas/Paletaentornodegradeprueba.png" id="2_0o644"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_mu8et")
+shader_parameter/albedo_tex = ExtResource("2_0o644")
 shader_parameter/force_srgb = false
 shader_parameter/light_yaw = 0.0
-shader_parameter/light_pitch = 45.0
+shader_parameter/light_pitch = 27.4800055803
 shader_parameter/min_brightness = 0.3
-shader_parameter/max_brightness = 1.0
-shader_parameter/light_strength = 1.0
+shader_parameter/max_brightness = 2.10000009975
+shader_parameter/light_strength = 1.34400006384

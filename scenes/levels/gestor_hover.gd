@@ -144,8 +144,8 @@ func actualizar_hover(nueva_baldosa: BaldosaBase):
 		baldosa_actual._al_entrar_mouse()	
 #
 
-func _on_modo_colocacion_iniciado(tipo_pieza: int, nombre: String):
-	pass
+
+func _on_modo_colocacion_iniciado(_tipo_pieza: int, _nombre: String):
 	if baldosa_actual:
 		baldosa_actual._al_entrar_mouse()
 

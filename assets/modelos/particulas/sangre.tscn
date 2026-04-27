@@ -1,0 +1,148 @@
+[gd_scene format=3 uid="uid://chof4nbcho4wr"]
+
+[ext_resource type="Shader" path="res://assets/modelos/particulas/sangre.gdshader" id="1_mrbbd"]
+[ext_resource type="Texture2D" uid="uid://d1e0ot27pjt7r" path="res://assets/modelos/particulas/T_Decal_Blood651aas.png" id="2_r78l6"]
+[ext_resource type="Texture2D" uid="uid://bt5xdr1bgegs" path="res://assets/modelos/particulas/T_Decal_Blood651aas_N.png" id="3_6kyup"]
+
+[sub_resource type="Gradient" id="Gradient_fe5f8"]
+colors = PackedColorArray(0.7670248, 1.4920532e-06, 3.85046e-07, 1, 0.5901515, 0.09768335, 0.22067273, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_855cp"]
+gradient = SubResource("Gradient_fe5f8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_reoqx"]
+render_priority = 0
+shader = ExtResource("1_mrbbd")
+shader_parameter/Scale = Vector2(1, 1)
+shader_parameter/Color_1D_gradient = SubResource("GradientTexture1D_855cp")
+shader_parameter/Albedo = ExtResource("2_r78l6")
+shader_parameter/Normal = ExtResource("3_6kyup")
+shader_parameter/cube_half_size = 0.5
+shader_parameter/enable_y_fade = false
+shader_parameter/fade_start = 0.105
+shader_parameter/fade_end = 24.235
+shader_parameter/fade_power = 2.0
+shader_parameter/use_red_channel_as_alpha = false
+shader_parameter/normal_intensity = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1dyh1"]
+
+[sub_resource type="Curve" id="Curve_xyxw2"]
+_data = [Vector2(0, 0.08346045), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.7423781), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_taobe"]
+transparency = 2
+alpha_scissor_threshold = 0.425
+alpha_antialiasing_mode = 0
+albedo_color = Color(0.8178309, 0.12101521, 0.14226806, 1)
+albedo_texture = ExtResource("2_r78l6")
+normal_enabled = true
+normal_scale = 0.34
+normal_texture = ExtResource("3_6kyup")
+billboard_mode = 2
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_b1dri"]
+
+[sub_resource type="Animation" id="Animation_mrbbd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("vertical:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("plano:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_r78l6"]
+resource_name = "Sangre"
+length = 5.005
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("vertical:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("plano:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6kyup"]
+_data = {
+&"RESET": SubResource("Animation_mrbbd"),
+&"Sangre": SubResource("Animation_r78l6")
+}
+
+[node name="sangre" type="Node3D" unique_id=1014549941]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0014019012, 0.25885206, 0.0008209348)
+
+[node name="plano" type="CPUParticles3D" parent="." unique_id=1339521529]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2526231, 0.07494211)
+material_override = SubResource("ShaderMaterial_reoqx")
+amount = 13
+lifetime = 4.04
+one_shot = true
+explosiveness = 0.9
+randomness = 1.0
+mesh = SubResource("PlaneMesh_1dyh1")
+emission_shape = 3
+emission_box_extents = Vector3(0.64, 0, 0.58)
+direction = Vector3(0, 18, 0)
+spread = 20.71
+gravity = Vector3(0, 0, 0)
+scale_amount_min = 0.5
+scale_amount_max = 4.3
+scale_amount_curve = SubResource("Curve_xyxw2")
+
+[node name="vertical" type="CPUParticles3D" parent="." unique_id=147027554]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.045178294, 0.5372278, -0.021173418)
+material_override = SubResource("StandardMaterial3D_taobe")
+emitting = false
+amount = 17
+one_shot = true
+explosiveness = 0.97
+mesh = SubResource("QuadMesh_b1dri")
+emission_shape = 1
+emission_sphere_radius = 0.4
+direction = Vector3(0, 18, 0)
+spread = 20.71
+initial_velocity_min = 1.0
+initial_velocity_max = 2.9
+scale_amount_min = 0.5
+scale_amount_curve = SubResource("Curve_xyxw2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=649544887]
+libraries/ = SubResource("AnimationLibrary_6kyup")

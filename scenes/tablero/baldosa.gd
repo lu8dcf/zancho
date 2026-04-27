@@ -2,8 +2,11 @@ extends Node3D
 class_name BaldosaBase
 
 # Señales
+@warning_ignore("unused_signal")
 signal baldosa_presionada(baldosa)
+@warning_ignore("unused_signal")
 signal baldosa_resaltada(baldosa, estado)
+@warning_ignore("unused_signal")
 signal baldosa_click_derecho(baldosa)
 
 # Enumeración para el tipo de baldosa
@@ -91,7 +94,8 @@ func conectar_señales():
 		area_interaccion.mouse_exited.connect(_al_salir_mouse)
 		#area_interaccion.input_event.connect(_al_evento_input)
 
-func _on_modo_colocacion_iniciado(tipo_pieza: int, nombre: String):	
+
+func _on_modo_colocacion_iniciado(_tipo_pieza: int, _nombre: String):
 	modo_colocacion_activo = true
 	es_valido_colocar = true
 
@@ -161,7 +165,7 @@ func _ocultar_indicadores_colocacion():
 		indicador_invalido.visible = false
 
 
-func _on_pieza_colocada(tipo:int, posicion:Vector2i):
+func _on_pieza_colocada(_tipo:int, posicion:Vector2i):
 	if posicion == coordenadas_tablero:
 		esta_ocupada = true
 		modo_colocacion_activo = false

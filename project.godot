@@ -16,11 +16,15 @@ config/use_custom_user_dir=true
 config/features=PackedStringArray("4.6", "Mobile")
 boot_splash/bg_color=Color(0.20631492, 0.11972933, 0.007608461, 1)
 boot_splash/image="uid://dexnmkh3r45ex"
-config/icon="uid://qnx4kpprt1v0"
+config/icon="uid://bxi1lq23wq54p"
 config/windows_native_icon="res://assets/icon/zancho.ico"
 boot_splash/minimum_display_time=3000
 config/image="uid://dwqo5hkdt3k6n"
 config/bg_color=Color(0.14, 0.14, 0.14, 1)
+
+[audio]
+
+buses/default_bus_layout="uid://bvc55uhqxn66k"
 
 [autoload]
 
@@ -31,7 +35,6 @@ Sonidos="*uid://13ju4at2w07"
 Piezas="*uid://xy2bf4ofjrkl"
 GlobalSignal="*uid://d3c860m45uhol"
 GlobalJuego="*uid://ddgt0astfx6o4"
-GlobalManager="*uid://d3sq5b342inc"
 
 [display]
 

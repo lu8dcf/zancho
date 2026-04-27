@@ -19,6 +19,7 @@ var angulo_frente: int = 225
 
 # Componentes
 var movimiento_especifico = preload("res://scenes/pieza/movimiento/movimiento.tscn") # define le movimiento caracteristico de la pieza
+var ataque_especifico = preload("res://scenes/pieza/movimiento/movimiento.tscn") # define le movimiento caracteristico de la pieza
 
 # Nodos
 
@@ -58,9 +59,10 @@ func _ready():
 	
 	posicionamiento_giro() # gira la pieza a su posicion en grados
 	cargar_movimiento() # Script de movimiento y estados
-	GlobalSignal.connect("marcaPaso",anima_idle)
+	#GlobalSignal.connect("marcaPaso",anima_idle)
+	anima_idle()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if animacion:
 		animation_player.play("ataque_rey")
 	
@@ -99,7 +101,15 @@ func cargar_movimiento(): # agrega el nodo movimiento con el script correspondie
 	movimiento.set_script(script)
 	add_child(movimiento)
 	movimiento.owner = self  # ← IMPORTANTE: Establece el owner manualmente
-	
+
+func cargar_ataque(): # agrega el nodo ataque con el script correspondiente a la pieza
+	var ataque = ataque_especifico.instantiate()
+	var ataque_script = "res://scenes/pieza/movimiento/mov"+str(pieza_tipo)+ color+".gd"
+	var script = load(ataque_script)
+	ataque.set_script(script)
+	add_child(ataque)
+	ataque.owner = self  # ← IMPORTANTE: Establece el owner manualmente
+		
 			
 func posicionamiento_giro():
 	#temporizador
@@ -111,7 +121,7 @@ func llego_al_piso():
 	giro(angulo_frente)
 	
 
-func _on_body_entered(body):
+func _on_body_entered(_body):
 	if pieza_colocada : return # solo se ejecuta en el inicio
 	# este if es para que solo tenga un efecto de sonido cuando rebota 
 	create_dust_effect()# Efecto de polvo
@@ -138,10 +148,10 @@ func check_for_enemies():
 	var results = space_state.intersect_shape(query)
 	
 	var nearest_enemy = null
-	var nearest_distance = vision_range + 1
+	
 	
 	for result in results:
-		var body = result.collider
+		pass
 		#if body is ChessPiece and body.team != team and body.is_alive:
 		#	var distance = global_position.distance_to(body.global_position)
 		#	if distance < nearest_distance:
@@ -236,7 +246,7 @@ func giro(angulo):
     - duracion: Duración de la animación en segundos
 	"""
 	var tween = create_tween()
-	var rotacion_actual = rotation_degrees.y
+	var _rotacion_actual = rotation_degrees.y
 	var rotacion_destino = angulo
 	#print ("actual ",rotacion_actual,"ang ",angulo)
 	#calcular el giro mas corto

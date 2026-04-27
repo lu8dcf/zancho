@@ -36,6 +36,7 @@ var modo_colocacion : bool = false # activar o desactivar el modo colcoacion
 signal modo_colocacion_inicia(tipo_pieza:int,nombre:String)
 signal modo_colocacion_cancelado
 signal pieza_colocada(tipo:int, posicion:Vector2i)
+@warning_ignore("unused_signal")
 signal  pieza_flotante_actualizada(posicion_3d :Vector3, es_valido:bool)
 
 

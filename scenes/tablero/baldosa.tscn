@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dfyyiy6ccyjmr"]
 
 [ext_resource type="Script" uid="uid://3epx16lu8m3k" path="res://scenes/tablero/baldosa.gd" id="1_ug7nx"]
-[ext_resource type="PackedScene" uid="uid://cv1vvwtvmlv0n" path="res://assets/modelos/baldosa1.glb" id="2_ugxcp"]
-[ext_resource type="PackedScene" uid="uid://cxvwh4mp4bg43" path="res://assets/modelos/baldosa2.glb" id="3_e5ivh"]
+[ext_resource type="PackedScene" uid="uid://bbmv3ko5ov07m" path="res://assets/modelos/baldosa1.glb" id="2_ugxcp"]
+[ext_resource type="PackedScene" uid="uid://dlhcg4f5w73vn" path="res://assets/modelos/baldosa2.glb" id="3_e5ivh"]
 [ext_resource type="PackedScene" uid="uid://bnd1ypt7081oc" path="res://assets/modelos/seleccionroja.glb" id="4_e5ivh"]
 [ext_resource type="PackedScene" uid="uid://dj24eg4u2u2wa" path="res://assets/modelos/seleccion.glb" id="4_ugxcp"]
 

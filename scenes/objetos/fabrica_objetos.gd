@@ -130,5 +130,5 @@ func cargar_objetos_del_mapa() -> void:
 
 # SEÑALES Y EVENTOS
 
-func _on_mapa_cambiado(nuevo_mapa: int) -> void:
+func _on_mapa_cambiado(_nuevo_mapa: int) -> void:
 	cargar_objetos_del_mapa()

@@ -1,0 +1,11 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://5mxd2sj4000t"]
+
+[ext_resource type="FontFile" uid="uid://ljgupmacmpki" path="res://assets/fuentes/Enchanted Land DS D.otf" id="1_bxqo6"]
+
+[resource]
+line_spacing = 3.095
+font = ExtResource("1_bxqo6")
+font_size = 26
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.92156863)
+shadow_offset = Vector2(4.33, 2.475)
