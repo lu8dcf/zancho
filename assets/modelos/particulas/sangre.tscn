@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://chof4nbcho4wr"]
 
-[ext_resource type="Shader" path="res://assets/modelos/particulas/sangre.gdshader" id="1_mrbbd"]
+[ext_resource type="Shader" uid="uid://mqrjfb1ykinh" path="res://assets/modelos/particulas/sangre.gdshader" id="1_mrbbd"]
 [ext_resource type="Texture2D" uid="uid://d1e0ot27pjt7r" path="res://assets/modelos/particulas/T_Decal_Blood651aas.png" id="2_r78l6"]
 [ext_resource type="Texture2D" uid="uid://bt5xdr1bgegs" path="res://assets/modelos/particulas/T_Decal_Blood651aas_N.png" id="3_6kyup"]
 
@@ -28,8 +28,8 @@ shader_parameter/normal_intensity = 1.0
 [sub_resource type="PlaneMesh" id="PlaneMesh_1dyh1"]
 
 [sub_resource type="Curve" id="Curve_xyxw2"]
-_data = [Vector2(0, 0.08346045), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.7423781), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 0.08346045), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(0.5234216, 0.6779726), -1.060341, -1.060341, 0, 0, Vector2(0.9551934, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_taobe"]
 transparency = 2
@@ -74,7 +74,8 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_r78l6"]
 resource_name = "Sangre"
-length = 5.005
+length = 2.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -107,14 +108,13 @@ _data = {
 }
 
 [node name="sangre" type="Node3D" unique_id=1014549941]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0014019012, 0.25885206, 0.0008209348)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.0014019012, 0.25885206, 0.0008209348)
 
 [node name="plano" type="CPUParticles3D" parent="." unique_id=1339521529]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2526231, 0.07494211)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0005316436, -0.008441985)
 material_override = SubResource("ShaderMaterial_reoqx")
 amount = 13
-lifetime = 4.04
-one_shot = true
+lifetime = 2.0
 explosiveness = 0.9
 randomness = 1.0
 mesh = SubResource("PlaneMesh_1dyh1")
@@ -124,25 +124,29 @@ direction = Vector3(0, 18, 0)
 spread = 20.71
 gravity = Vector3(0, 0, 0)
 scale_amount_min = 0.5
-scale_amount_max = 4.3
+scale_amount_max = 8.5
 scale_amount_curve = SubResource("Curve_xyxw2")
 
 [node name="vertical" type="CPUParticles3D" parent="." unique_id=147027554]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.045178294, 0.5372278, -0.021173418)
 material_override = SubResource("StandardMaterial3D_taobe")
 emitting = false
-amount = 17
-one_shot = true
+amount = 34
+lifetime = 2.0
 explosiveness = 0.97
 mesh = SubResource("QuadMesh_b1dri")
 emission_shape = 1
-emission_sphere_radius = 0.4
+emission_sphere_radius = 0.01
 direction = Vector3(0, 18, 0)
 spread = 20.71
+gravity = Vector3(0, -22.47, 0)
 initial_velocity_min = 1.0
 initial_velocity_max = 2.9
+angle_max = 188.6
 scale_amount_min = 0.5
+scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_xyxw2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=649544887]
 libraries/ = SubResource("AnimationLibrary_6kyup")
+autoplay = &"Sangre"
