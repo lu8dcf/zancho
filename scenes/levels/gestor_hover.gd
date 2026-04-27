@@ -13,9 +13,9 @@ var ultima_baldosa_clickeada = null
 func _ready():
 	# Buscar referencias automáticamente
 	buscar_referencias()
-	
-	if Piezas.has_signal("modo_colocacion_inicia"):
-		Piezas.modo_colocacion_inicia.connect(_on_modo_colocacion_iniciado)
+	#
+	#if Piezas.has_signal("modo_colocacion_inicia"):
+		#Piezas.modo_colocacion_inicia.connect(_on_modo_colocacion_iniciado)
 	if Piezas.has_signal("modo_colocacion_cancelado"):
 		Piezas.modo_colocacion_cancelado.connect(_on_modo_colocacion_cancelado)
 	
@@ -145,9 +145,9 @@ func actualizar_hover(nueva_baldosa: BaldosaBase):
 #
 
 
-func _on_modo_colocacion_iniciado(_tipo_pieza: int, _nombre: String):
-	if baldosa_actual:
-		baldosa_actual._al_entrar_mouse()
+#func _on_modo_colocacion_iniciado(_tipo_pieza: int, _nombre: String):
+	#if baldosa_actual:
+		#baldosa_actual._al_entrar_mouse()
 
 func _on_modo_colocacion_cancelado():
 	if baldosa_actual:
