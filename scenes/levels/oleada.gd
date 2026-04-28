@@ -52,16 +52,16 @@ func ejecuto_oleada():
 		return
 	estadoOleada = true
 	for pieza in DATA_OLEADAS.estructura_por_nivel[nivel]:
+		await get_tree().create_timer(.1).timeout
 		GlobalSignal.emit_signal("crearPieza",pieza["pos"],pieza["tipo"], pieza["blancas"])
-	await get_tree().create_timer(1).timeout #tiempo en que se acomodan las piezas
+	await get_tree().create_timer(2).timeout #tiempo en que se acomodan las piezas
+	Sonidos.comienzoOleada()
 	GlobalSignal.emit_signal("controlMarcaPaso",true) #inicio tiempo oleada
-	
-	#para que no quede corriendo el tiempo, lo detengo.
-	detenerOleada() #esto se debe comentar para probar el uso de tiempo/oleada
+
 	estadoOleada = false
 	
 	
 func detenerOleada():
 	pausarOleada =true
-	GlobalSignal.emit_signal("controlMarcaPaso",true) # lo cambie ppara que se muevan
+	GlobalSignal.emit_signal("controlMarcaPaso",false) # lo cambie ppara que se muevan
 	

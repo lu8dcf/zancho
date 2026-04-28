@@ -11,5 +11,5 @@ signal marcaPaso
 @warning_ignore("unused_signal")
 signal controlMarcaPaso (activa : bool)
 
-#Senial que debe emitir cuando comienza la oleada
-signal comienzoOleada
+@warning_ignore("unused_signal")
+signal comienzoOleada #Senial que debe emitir cuando comienza la oleada
