@@ -63,7 +63,10 @@ func _crear_botones_piezas_tienda() -> void:
 		if economia.llego_al_limite(pieza["nombre"], 0):
 			boton.disabled = true
 			boton.text = pieza["nombre"] + "\n" + str(pieza["precio"])+ "\n" + "MAX"
-			
+		if 	economia.verificar_orden_aparicion(pieza["nombre"]):
+			boton.disabled = true
+			boton.text = pieza["nombre"] + "\n" + "DESHABILITADO"
+
 		# Agregar el botón al contenedor
 		tienda_botones.add_child(boton)
 
