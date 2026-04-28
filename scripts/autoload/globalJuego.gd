@@ -7,7 +7,7 @@ extends Node
 var vidas: int = 20              # vidas del castillo/jugador
 var vidaMax: int = 20
 var oleada_actual: int = 1       # numero de oleada actual
-var mapa_actual: int = 1         # numero de mapa activo
+var mapa_actual: int = 1        # numero de mapa activo
 
 # estado de la tienda (si esta desplegada o no)
 var tienda_desplegada: bool = false
@@ -19,7 +19,7 @@ var espaciado_baldosas : float = 2.0
 
 # Oleadas
 var tiempo_pasos = 3.0   # tiempo entre cada movimento
-
+var empezo_oleada = false # si es que empezo la oleada
 # señales para modificar el hud
 
 signal vidas_cambiadas(nuevas_vidas)

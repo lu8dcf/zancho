@@ -38,7 +38,13 @@ var piezas_disponibles_tienda: Array = [
 	{"nombre": "Caballo", "precio": 350},
 	{"nombre": "Reina", "precio": 1200}
 ]
-
+var orden_aparicion: Dictionary = {
+	"Peon": 1,
+	"Torre": 3,
+	"Alfil": 2,
+	"Caballo": 4,
+	"Reina": 5
+}
 
 # señales para modificar el hud
 signal monedas_cambiadas(nuevas_monedas) # Emite el cambio de moneda
@@ -118,3 +124,8 @@ func llego_al_limite(pieza_nombre:String ,cantidad_piezas:int)-> bool:
 		return cantidad_piezas >= limite_piezas[pieza_nombre]
 	else:
 		return false
+
+func verificar_orden_aparicion(pieza_nombre:String)->bool:
+	if pieza_nombre in orden_aparicion:
+		return globalJuego.oleada_actual < orden_aparicion[pieza_nombre]
+	return false

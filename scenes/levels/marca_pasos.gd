@@ -5,7 +5,7 @@ func _ready():
 	# inicializar 
 	wait_time = globalJuego.tiempo_pasos  # duracion
 	one_shot = false  # Repetitivo (ciclos infinitos)
-	autostart = true  # No inicia solo, control manual
+	autostart = false  # No inicia solo, control manual
 	
 	# Conectar la señal timeout a una función
 	timeout.connect(_on_mi_timer_timeout)

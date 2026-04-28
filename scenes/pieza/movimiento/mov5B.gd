@@ -1,89 +1,157 @@
 extends Node
 class_name ReinaB
 
-var pasos=0 #cantidad dee pasos que dara para cambio de  secuencia 
-
 # Referencia a la pieza base (el RigidBody3D que contiene este componente)
 var pieza: PiezaBase
-var proxima_posicion : Vector3
+
+#baldosas vecinas
+const DIRECCIONES = [ #Son las 8 direccions qque tiene a su alrededor
+	Vector3i(1,0,0), Vector3i(-1,0,0),
+	Vector3i(0,0,1), Vector3i(0,0,-1),
+	Vector3i(1,0,1), Vector3i(-1,0,1),
+	Vector3i(-1,0,-1), Vector3i(1,0,-1)
+]
+
+var fin = null
+var tiene_objetivo := false
+var en_movimiento := false
 
 # desplazamiento Torre
 var direccion= Vector3i(0,0,0)
-var secuencia = [0,1,2,3,4]
-var paso = 3
-
-
 
 func _ready():
 	# Obtener la referencia a la pieza base (el owner del componente)
 	pieza = get_parent() as PiezaBase
-	
 	# Verificar que se obtuvo correctamente
 	if not pieza:
-		print ("El componente Peon debe ser hijo directo de una PiezaBase")
+		print ("El componente Reina debe ser hijo directo de una PiezaBase")
 		return
-
 	# Conectar señal después de que la pieza esté lista
 	await pieza.ready
-	#GlobalSignal.connect("marcaPaso",movimiento	)
-	
-		
-func movimiento():
-	
-	cambio_estado(paso)
-	# actualizacion de posicion
-	var cambio = direccion*GlobalJuego.espaciado_baldosas # # vector de cambio de la pieza
-	
-	# proximo sitio a ocupar
-	var sitio3d = round(owner.global_position+cambio)/globalJuego.espaciado_baldosas # en 3d
-	# convierto la proxima posicion en 2Di para 
-	var nuevo_sitio = Vector2i(sitio3d.x,sitio3d.z)  # en 2d
-	
-	if globalJuego.verifica_extremos(nuevo_sitio)==false:
-		saltar_paso()
+	GlobalSignal.connect("marcaPaso", puedoAvanzar)
+
+func _input(event):
+	if event is InputEventMouseButton and event.pressed: #revisar esto para que solo ande
+		if event.button_index ==MOUSE_BUTTON_LEFT: #solo ocn el mouse izquierdo
+			fin = obtengo_posicion_baldosa()   #con click izqui	rdo
+			tiene_objetivo = true #tiene un punto donde ir, es fin
+			
+
+func puedoAvanzar(): #funcion que se sincroniza con el marcapaso, veo si tengo objetivo
+	if (tiene_objetivo and fin != null):
+		avanzoEnTiempo(fin)
+
+func avanzoEnTiempo(fin : Vector3i):
+	if en_movimiento: 
 		return
-	
-	if globalJuego.verifica_obstaculos(nuevo_sitio)==false:
-		saltar_paso()
+	var posActual = calculoPosActual()
+	if(posActual != fin): #si aun no llegue al objetivo, repito
+		analizar_siguientePaso(posActual, fin)
+
+func calculoPosActual() -> Vector3i:
+	var actual = Vector3i(
+	round(owner.global_position.x / GlobalJuego.espaciado_baldosas),
+	0,
+	round(owner.global_position.z / GlobalJuego.espaciado_baldosas))
+	return actual
+
+func analizar_siguientePaso(inicio: Vector3i, fin: Vector3i): #
+	var actual = inicio #posicion atual
+	var mejor_vecino = null
+	var mejor_dist = INF
+	for dir in DIRECCIONES: # de todas las direcciones
+		var vecino = actual + dir
+		if  not es_valido(vecino):
+			continue
+		var dist = (fin - vecino).length_squared()
+		if dist < mejor_dist: #comparo
+			mejor_dist = dist
+			mejor_vecino = vecino #obtengo la que mas me acerca al clickeado
+	if mejor_vecino != null:
+		var dir = mejor_vecino - actual
+		girar(dir)
+		moverPaso(mejor_vecino) #avanzo a la mejor posicion
+
+func moverPaso(destino:Vector3i): #desplazo la pieza a la sieguiente
+	if (en_movimiento):
 		return
-		
-	if globalJuego.verifica_piezas(nuevo_sitio)==false:
-		paso=0
-		return
-	
-	owner.animacion_caminata("Bidle")
-	
-	var tween = create_tween()
-	tween.tween_property(owner, "global_position", owner.global_position + cambio , 1) \
+	var avanzo = Vector3(
+		destino.x * GlobalJuego.espaciado_baldosas,
+		owner.global_position.y,
+		destino.z * GlobalJuego.espaciado_baldosas
+	)
+	en_movimiento = true
+
+	var tween = create_tween() #animacion y muevo
+	tween.tween_property(owner, "global_position", avanzo , 1) \
 	.set_trans(Tween.TRANS_SINE) \
 	.set_ease(Tween.EASE_IN_OUT)
-	paso = 3
+	
+	tween.finished.connect(func():
+		en_movimiento = false
+	)
 
+func es_valido(pos: Vector3i) -> bool: #me aseguro que se pueda usar la baldosa
+	var pos2d = Vector2i(pos.x, pos.z)
+	if globalJuego.verifica_extremos(pos2d)==false:
+		return false
+	if globalJuego.verifica_obstaculos(pos2d)==false:
+		return false
+	if globalJuego.verifica_piezas(pos2d)==false:
+		return false
+	return true
+
+func obtengo_posicion_baldosa() -> Vector3:
+	var max_distancia := 1000.0
+	var camera = get_viewport().get_camera_3d() #obtengo la camara
+	var mouse_pos = get_viewport().get_mouse_position() # y la posición del mouse
+
+	var ray_origin = camera.project_ray_origin(mouse_pos) #origen del rayo, camara
+	var ray_direction = camera.project_ray_normal(mouse_pos) #fin del rayo, posicion del click
 	
-func saltar_paso(): # volver a iniciar en otra posicion d esalto
-	paso +=1
-	if paso==5: paso=2
-	movimiento()  	
+	var space_state = camera.get_world_3d().direct_space_state #obtengo las fisicas para usar un raycast
 	
-# Estadod de la pieza
-func cambio_estado(cambio):
+	var query = PhysicsRayQueryParameters3D.create(ray_origin,
+	ray_origin + ray_direction * max_distancia) #creo el rayo
 	
-	match secuencia[cambio]:
-		0: # Quieto
-			direccion = Vector3i(0,0,0)
+	var result = space_state.intersect_ray(query)
+	if result:
+		var nodo_golpeado = result.get("collider")
+		if nodo_golpeado:
+			var nodo = descubroPadre(nodo_golpeado) #funcion del hover
+			return nodo.global_position
+	return self.global_position #mantengo posicion si no selecciono baldosa
+
+func descubroPadre(nodo: Node) -> BaldosaBase: #de la misma manera que el hover
+	var padre = nodo
+	var intentos = 0
+	var max_intentos = 10
+	
+	while padre and intentos < max_intentos:
+		if padre is BaldosaBase:
+			return padre
+		padre = padre.get_parent()
+		intentos += 1
+	
+	return null
+
+func girar(direccion: Vector3i): #giro la reina en base a la direccion del objetivo
+	match direccion:
+		Vector3i(0,0,0):#
 			owner.giro(45)
-		1: # arriba
-			direccion = Vector3i(1,0,-1)
-			owner.giro(225)
-		2:# derecha
-			direccion = Vector3i(1,0,1)
+		Vector3i(1,0,0):
+			owner.giro(90)
+		Vector3i(0,0,1):
+			owner.giro(70)
+		Vector3i(1,0,-1):
+			owner.giro(225)#
+		Vector3i(1,0,1):#
 			owner.giro(135)
-		3: # abajo
-			direccion = Vector3i(-1,0,1)
+		Vector3i(-1,0,1):#
 			owner.giro(45)
-		4: # izquierda
-			direccion = Vector3i(-1,0,-1)
+		Vector3i(-1,0,0):
+			owner.giro(-90)
+		Vector3i(0,0,-1):
+			owner.giro(-135)
+		Vector3i(-1,0,-1):
 			owner.giro(-45)
-
-
-	
