@@ -93,6 +93,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("cachos:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_r78l6"]
 resource_name = "Sangre"
@@ -122,6 +134,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("cachos:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6kyup"]
 _data = {
@@ -137,6 +161,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0005316436, -0.008441985
 material_override = SubResource("ShaderMaterial_reoqx")
 amount = 13
 lifetime = 5.3
+one_shot = true
 explosiveness = 0.9
 randomness = 1.0
 mesh = SubResource("PlaneMesh_1dyh1")
@@ -154,7 +179,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.045178294, 0.5372278, -0.0
 material_override = SubResource("StandardMaterial3D_taobe")
 emitting = false
 amount = 34
-lifetime = 2.0
+lifetime = 1.55
+one_shot = true
 explosiveness = 0.97
 mesh = SubResource("QuadMesh_b1dri")
 emission_shape = 1
@@ -172,8 +198,10 @@ scale_amount_curve = SubResource("Curve_xyxw2")
 [node name="cachos" type="CPUParticles3D" parent="." unique_id=726937862]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.045624346, 0.53647244, -0.01759082)
 material_override = SubResource("StandardMaterial3D_mrbbd")
+emitting = false
 amount = 23
 lifetime = 2.0
+one_shot = true
 explosiveness = 0.9
 randomness = 1.0
 mesh = SubResource("BoxMesh_mrbbd")

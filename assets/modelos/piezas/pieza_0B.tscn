@@ -143,6 +143,7 @@ tracks/18/keys = PackedFloat32Array(0, 1, -0.5765446, 1.2061274, 0.28441417, 0.0
 [sub_resource type="Animation" id="Animation_ka1io"]
 resource_name = "0Bidle"
 length = 1.875
+loop_mode = 1
 tracks/0/type = "rotation_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -285,29 +286,28 @@ _data = {
 
 [node name="pieza0B" unique_id=298628559 instance=ExtResource("1_rjh5o")]
 
-[node name="Skeleton3D" parent="Esqueleto_008" parent_id_path=PackedInt32Array(25216991) index="0" unique_id=1274481636]
-bones/1/rotation = Quaternion(-3.5527103e-15, 1.7763568e-14, -2.7544773e-24, 1)
-bones/1/scale = Vector3(1.003262, 1, 1)
-bones/2/rotation = Quaternion(0.0046021505, 0.017326059, -0.0034628385, 0.9998334)
-bones/5/rotation = Quaternion(0.5529122, -0.119720906, 0.18592547, 0.8033597)
-bones/5/scale = Vector3(0.9998779, 1.000254, 0.9999958)
-bones/6/rotation = Quaternion(0.14530364, 0.0024528594, 0.026056046, 0.989041)
-bones/6/scale = Vector3(1.0002735, 0.999804, 0.99999857)
-bones/7/rotation = Quaternion(0.3067202, 0.061752867, 0.68473524, 0.65821505)
-bones/7/scale = Vector3(1.0004169, 1.001, 0.99870324)
-bones/9/rotation = Quaternion(-0.4890272, -0.0027649004, 0.23980936, 0.83865154)
-bones/10/rotation = Quaternion(-0.11577721, 0.08673614, 0.23487799, 0.9611997)
-bones/11/rotation = Quaternion(-0.40023124, 0.01284409, 0.052365415, 0.91482675)
-bones/12/scale = Vector3(0.99674857, 1, 1)
-bones/13/scale = Vector3(0.99674857, 1, 1)
-bones/16/rotation = Quaternion(0.0673594, 4.3447337e-13, 2.6230715e-08, 0.99772877)
-bones/17/rotation = Quaternion(-0.035376392, -0.022700612, 0.010329241, 0.99906284)
-bones/18/rotation = Quaternion(0.9716307, 0.0023398323, -0.0096209785, 0.23629615)
-bones/20/rotation = Quaternion(0.97347, -0.0021900702, -0.009325378, -0.22861433)
+[node name="Skeleton3D" parent="Esqueleto_008" parent_id_path=PackedInt32Array(1109082087) index="0" unique_id=2100224250]
+bones/1/rotation = Quaternion(-3.5527103e-15, 1.7763568e-14, -4.0389676e-28, 1)
+bones/2/rotation = Quaternion(0.0046021505, 0.017326057, -0.0034628385, 0.9998334)
+bones/5/rotation = Quaternion(0.553173, -0.12040104, 0.18670455, 0.80289763)
+bones/5/scale = Vector3(1.0000002, 1.0000002, 1)
+bones/6/rotation = Quaternion(0.14472502, 0.002178965, 0.025511768, 0.98914057)
+bones/6/scale = Vector3(1.0000001, 0.9999999, 1.0000002)
+bones/7/rotation = Quaternion(0.30603817, 0.061467748, 0.68407494, 0.65924495)
+bones/7/scale = Vector3(1, 0.9999998, 0.99999964)
+bones/9/rotation = Quaternion(-0.4890272, -0.0027649046, 0.23980936, 0.8386514)
+bones/10/rotation = Quaternion(-0.115777165, 0.08673612, 0.23487799, 0.9611997)
+bones/11/rotation = Quaternion(-0.40023115, 0.012844105, 0.052365363, 0.91482675)
+bones/12/scale = Vector3(1, 1.0000001, 1.0000001)
+bones/13/scale = Vector3(1, 1.0000001, 1.0000001)
+bones/16/rotation = Quaternion(3.552661e-15, 2.1316282e-14, -5.7739364e-21, 1)
+bones/17/rotation = Quaternion(3.552661e-15, 7.1054274e-15, -5.9292306e-21, 1)
+bones/18/rotation = Quaternion(0.97167826, 4.467562e-14, 2.3166633e-07, 0.23630774)
+bones/20/rotation = Quaternion(0.9735146, 1.4406724e-14, 2.3210387e-07, -0.2286248)
 bones/22/position = Vector3(-0.5765446, 1.2061274, 0.28441417)
 
-[node name="Círculo_037" parent="Esqueleto_008/Skeleton3D" index="0" unique_id=305356422]
+[node name="Círculo_037" parent="Esqueleto_008/Skeleton3D" index="0" unique_id=1882590049]
 material_override = ExtResource("2_x4nsx")
 
-[node name="AnimationPlayer" parent="." index="1" unique_id=426472846]
+[node name="AnimationPlayer" parent="." index="1" unique_id=876057984]
 libraries/ = SubResource("AnimationLibrary_vhwcj")
