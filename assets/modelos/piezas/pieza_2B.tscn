@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bjhslamg2nhpu"]
 
-[ext_resource type="PackedScene" uid="uid://c3c3jc1cdo2db" path="res://assets/modelos/piezas/pieza2B.glb" id="1_yp0r7"]
+[ext_resource type="PackedScene" uid="uid://cs1rio81woey7" path="res://assets/modelos/piezas/pieza2B.glb" id="1_yp0r7"]
 [ext_resource type="Material" uid="uid://bo3dgaal0nxtp" path="res://assets/modelos/texturas/material_buenos.tres" id="2_65it0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_65it0"]
@@ -338,7 +338,7 @@ _data = {
 
 [node name="pieza2B" unique_id=1397864609 instance=ExtResource("1_yp0r7")]
 
-[node name="Skeleton3D" parent="Esqueleto_001" parent_id_path=PackedInt32Array(1632160390) index="0" unique_id=1224025479]
+[node name="Skeleton3D" parent="Esqueleto_001" parent_id_path=PackedInt32Array(1177902863) index="0" unique_id=1126835204]
 bones/1/rotation = Quaternion(-3.5527103e-15, 1.7763568e-14, -4.0389676e-28, 1)
 bones/2/rotation = Quaternion(-0.76347697, -0.07604944, 0.03411561, 0.6404339)
 bones/3/rotation = Quaternion(-0.17683436, -0.3328788, 0.40633416, 0.8323544)
@@ -358,7 +358,7 @@ bones/10/rotation = Quaternion(-3.5527103e-15, 0, -4.038968e-28, 1)
 bones/11/position = Vector3(-0.53248465, 0.84166, 0.026814159)
 bones/11/rotation = Quaternion(0.002201561, 0.9578233, -0.12223369, 0.26005515)
 
-[node name="alfil" parent="Esqueleto_001/Skeleton3D" index="0" unique_id=1991349827]
+[node name="alfil" parent="Esqueleto_001/Skeleton3D" index="0" unique_id=452051364]
 material_override = ExtResource("2_65it0")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Esqueleto_001/Skeleton3D" index="1" unique_id=1141427468]
@@ -383,5 +383,5 @@ scale_amount_min = 0.0
 scale_amount_max = 0.5
 scale_amount_curve = SubResource("Curve_dorn6")
 
-[node name="AnimationPlayer" parent="." index="1" unique_id=816760615]
+[node name="AnimationPlayer" parent="." index="1" unique_id=1343027154]
 libraries/ = SubResource("AnimationLibrary_130qa")

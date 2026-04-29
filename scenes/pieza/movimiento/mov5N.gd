@@ -59,28 +59,28 @@ func cambio_estado(cambio):
 	match secuencia[cambio]:
 		0: # Quieto
 			direccion = Vector3i(0,0,0)
-			owner.giro(45)
+			owner.giro(45)  # la balaca debe tener 225
 		1: # arriba 1
 			direccion = Vector3i(0,0,-1)
-			owner.giro(225)
+			owner.giro(-90)
 		2:# arriba 2
 			direccion = Vector3i(0,0,1)
-			owner.giro(225)
+			owner.giro(90)
 		3: # derecha 1
 			direccion = Vector3i(1,0,0)
-			owner.giro(135)
+			owner.giro(180)
 		4: # derecha 2
 			direccion = Vector3i(-1,0,0)
-			owner.giro(135)
+			owner.giro(0)
 		5: # abajo 1
 			direccion = Vector3i(1,0,1)
-			owner.giro(45)
+			owner.giro(135)
 		6:# adelante 2
 			direccion = Vector3i(-1,0,1)
 			owner.giro(45)
 		7: # izquierda 1
 			direccion = Vector3i(-1,0,-1)
-			owner.giro(-90)
+			owner.giro(-45)
 		8: # izquierda 2
 			direccion = Vector3i(1,0,-1)
-			owner.giro(-90)
+			owner.giro(-135)
