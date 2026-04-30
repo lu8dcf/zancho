@@ -216,7 +216,7 @@ material_override = ExtResource("2_83a24")
 libraries/ = SubResource("AnimationLibrary_83a24")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="AnimationPlayer" index="0" unique_id=1894834540]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33547235, 1.8048375, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33547235, 2.7204309, 0)
 material_override = SubResource("StandardMaterial3D_yevw6")
 amount = 140
 lifetime = 1.8

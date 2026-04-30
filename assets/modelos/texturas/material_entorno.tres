@@ -7,7 +7,11 @@
 render_priority = 0
 shader = ExtResource("1_mu8et")
 shader_parameter/shadow_softness = 0.5
+shader_parameter/light_intensity = 0.6
 shader_parameter/ambient_strength = 0.2
+shader_parameter/shadow_color_tint = Color(0.1, 0.1, 0.2, 1)
+shader_parameter/saturation = 1.1
+shader_parameter/contrast = 1.0
 
 [resource]
 render_priority = 0
@@ -15,4 +19,8 @@ next_pass = SubResource("ShaderMaterial_0o644")
 shader = ExtResource("1_mu8et")
 shader_parameter/albedo_tex = ExtResource("2_0o644")
 shader_parameter/shadow_softness = 0.07600000361
+shader_parameter/light_intensity = 0.6
 shader_parameter/ambient_strength = 0.0750000035625
+shader_parameter/shadow_color_tint = Color(0.1, 0.1, 0.2, 1)
+shader_parameter/saturation = 1.1
+shader_parameter/contrast = 1.0
