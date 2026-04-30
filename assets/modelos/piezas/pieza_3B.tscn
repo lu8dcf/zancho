@@ -209,6 +209,7 @@ bones/5/rotation = Quaternion(0.7052909, 0.702716, -0.0551241, 0.07560643)
 bones/6/rotation = Quaternion(0.7052909, 0.702716, -0.0551241, 0.07560643)
 
 [node name="Círculo_003" parent="Esqueleto_004/Skeleton3D" index="0" unique_id=1104416448]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 material_override = ExtResource("2_83a24")
 
 [node name="AnimationPlayer" parent="." index="1" unique_id=2123251665]

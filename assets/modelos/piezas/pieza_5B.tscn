@@ -362,6 +362,7 @@ _data = {
 }
 
 [node name="pieza5B" unique_id=659826326 instance=ExtResource("1_mv6n7")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Esqueleto_007" parent_id_path=PackedInt32Array(1221121789) index="0" unique_id=250429534]
 bones/2/rotation = Quaternion(0, 0.02461363, 0, 0.9996971)
