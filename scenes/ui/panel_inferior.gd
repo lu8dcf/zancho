@@ -72,15 +72,6 @@ func _crear_botones_piezas_inventario() -> void:
 		contenedor_boton.add_child(texto_cant)
 		contenedor_piezas.add_child(contenedor_boton)
 
-# ejemplo de inventario
-#
-#var inventario_actual = [
-	#{"nombre": "Peon", "cantidad":8},
-	#{"nombre": "Torre", "cantidad":2},
-	#{"nombre": "Alfil",  "cantidad":2},
-	#{"nombre": "Caballo", "cantidad":2},
-	#{"nombre": "Reina", "cantidad":1}
-#]
 
 func _on_pieza_clicked(pieza: Dictionary) -> void:
 	print("Panel: Pieza clickeada: ", pieza)

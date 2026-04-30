@@ -8,7 +8,6 @@ extends Panel
 @onready var acelerar: Button = $acelerar
 
 func _ready() -> void:
-	GlobalSignal.emit_signal("controlMarcaPaso",false)
 	empezar_oleada.text = "Empezar Oleada " + str(globalJuego.oleada_actual)
 	acelerar.text = "x1"
 	globalJuego.oleada_cambiada.connect(_actualizar_oleada)
@@ -33,7 +32,7 @@ func _on_boton_reiniciar_camara_pressed() -> void:
 	if camara and camara is Node3D:
 		camara.reiniciar_posicion()
 
-	mapas.siguiente_mapa()
+	#mapas.siguiente_mapa()
 
 func _on_boton_debilidades_pressed() -> void:
 	if imagen_debilidades.visible:
@@ -46,13 +45,14 @@ func _on_empezar_oleada_pressed() -> void:
 	globalJuego.empezo_oleada = true
 	# falta llamar a la globalSignal de empezar la oleada
 	if globalJuego.empezo_oleada and empezar_oleada.text == "Empezar Oleada " + str(globalJuego.oleada_actual):
+		GlobalSignal.emit_signal("comienzoOleada")
 		empezar_oleada.text = "Pausar Oleada " + str(globalJuego.oleada_actual)
 	elif globalJuego.empezo_oleada and empezar_oleada.text == "Pausar Oleada " + str(globalJuego.oleada_actual):
-		GlobalSignal.emit_signal("controlMarcaPaso",true)
+		GlobalSignal.emit_signal("controlMarcaPaso",false)
 		empezar_oleada.text = "Continuar Oleada " + str(globalJuego.oleada_actual)
 	elif globalJuego.empezo_oleada and empezar_oleada.text == "Continuar Oleada " + str(globalJuego.oleada_actual):
 		empezar_oleada.text = "Pausar Oleada " + str(globalJuego.oleada_actual)
-		GlobalSignal.emit_signal("controlMarcaPaso",false)
+		GlobalSignal.emit_signal("controlMarcaPaso",true)
 
 
 func _on_acelerar_pressed() -> void:

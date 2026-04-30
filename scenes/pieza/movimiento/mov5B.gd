@@ -32,8 +32,10 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed: #revisar esto para que solo ande
-		if event.button_index ==MOUSE_BUTTON_LEFT: #solo ocn el mouse izquierdo
+		if event.button_index == MOUSE_BUTTON_LEFT: #solo ocn el mouse izquierdo
 			fin = obtengo_posicion_baldosa()   #con click izqui	rdo
+			#if(fin == null):
+				#fin = calculoPosActual()
 			tiene_objetivo = true #tiene un punto donde ir, es fin
 			
 
@@ -68,9 +70,11 @@ func analizar_siguientePaso(inicio: Vector3i, fin: Vector3i): #
 			mejor_dist = dist
 			mejor_vecino = vecino #obtengo la que mas me acerca al clickeado
 	if mejor_vecino != null:
-		var dir = mejor_vecino - actual
+		var dir = mejor_vecino
 		girar(dir)
 		moverPaso(mejor_vecino) #avanzo a la mejor posicion
+	else:
+		moverPaso(calculoPosActual())
 
 func moverPaso(destino:Vector3i): #desplazo la pieza a la sieguiente
 	if (en_movimiento):
@@ -97,8 +101,8 @@ func es_valido(pos: Vector3i) -> bool: #me aseguro que se pueda usar la baldosa
 		return false
 	if globalJuego.verifica_obstaculos(pos2d)==false:
 		return false
-	if globalJuego.verifica_piezas(pos2d)==false:
-		return false
+	#if globalJuego.verifica_piezas(pos2d)==false:
+	#	return false
 	return true
 
 func obtengo_posicion_baldosa() -> Vector3:
@@ -116,42 +120,41 @@ func obtengo_posicion_baldosa() -> Vector3:
 	
 	var result = space_state.intersect_ray(query)
 	if result:
-		var nodo_golpeado = result.get("collider")
-		if nodo_golpeado:
-			var nodo = descubroPadre(nodo_golpeado) #funcion del hover
-			return nodo.global_position
+		var baldosaReal = Vector3( #obtengo la posicion real de la baldosa
+		result.position.x / GlobalJuego.espaciado_baldosas,
+		owner.global_position.y,
+		result.position.z / GlobalJuego.espaciado_baldosas)
+		return round(baldosaReal)
 	return self.global_position #mantengo posicion si no selecciono baldosa
 
-func descubroPadre(nodo: Node) -> BaldosaBase: #de la misma manera que el hover
-	var padre = nodo
-	var intentos = 0
-	var max_intentos = 10
-	
-	while padre and intentos < max_intentos:
-		if padre is BaldosaBase:
-			return padre
-		padre = padre.get_parent()
-		intentos += 1
-	
-	return null
 
 func girar(direccion: Vector3i): #giro la reina en base a la direccion del objetivo
 	match direccion:
-		Vector3i(0,0,0):#
+		0: # Quieto
+			direccion = Vector3i(0,0,0)
 			owner.giro(45)
-		Vector3i(1,0,0):
-			owner.giro(90)
-		Vector3i(0,0,1):
-			owner.giro(70)
-		Vector3i(1,0,-1):
-			owner.giro(225)#
-		Vector3i(1,0,1):#
+		1: # arriba 1
+			direccion = Vector3i(0,0,-1)
+			owner.giro(225)
+		2:# arriba 2
+			direccion = Vector3i(0,0,1)
+			owner.giro(225)
+		3: # derecha 1
+			direccion = Vector3i(1,0,0)
 			owner.giro(135)
-		Vector3i(-1,0,1):#
+		4: # derecha 2
+			direccion = Vector3i(-1,0,0)
+			owner.giro(135)
+		5: # abajo 1
+			direccion = Vector3i(1,0,1)
 			owner.giro(45)
-		Vector3i(-1,0,0):
+		6:# adelante 2
+			direccion = Vector3i(-1,0,1)
+			owner.giro(45)
+		7: # izquierda 1
+			direccion = Vector3i(-1,0,-1)
 			owner.giro(-90)
-		Vector3i(0,0,-1):
-			owner.giro(-135)
-		Vector3i(-1,0,-1):
-			owner.giro(-45)
+		8: # izquierda 2
+			direccion = Vector3i(1,0,-1)
+			owner.giro(-90)
+#angulos cada 45 grados -abajo = 45 - derecha 90

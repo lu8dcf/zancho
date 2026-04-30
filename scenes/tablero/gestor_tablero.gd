@@ -18,6 +18,8 @@ var mapa_actual :int = globalJuego.mapa_actual
 func _ready():
 	add_to_group("gestor_tablero")
 	generar_tablero()
+	# crear rey
+	GlobalSignal.emit_signal("crearPieza",Vector2i(1,14),0,true)
 
 func generar_tablero():
 	# Limpiar tablero existente

@@ -80,18 +80,6 @@ func comprar_pieza(pieza:Dictionary) -> bool:
 			return true
 	return false
 
-
-#func puede_comprar(tipo_pieza, costo):
-	#if monedas_actual >= costo and inventario_actual[tipo_pieza] < limite_piezas[tipo_pieza]:
-		#return true
-	#return false
-
-#func comprar_pieza(tipo_pieza, costo):
-	#monedas_actual -= costo
-	#inventario_actual[tipo_pieza] += 1
-	## Emitir señal para actualizar la UI de la tienda
-	#
-
 func vender_pieza(pieza:Dictionary, valor:int):
 	for i in range(inventario_actual.size()):
 		if inventario_actual[i]["nombre"] == pieza["nombre"]:
