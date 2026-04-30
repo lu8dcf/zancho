@@ -1,38 +1,33 @@
 shader_type spatial;
 
-uniform sampler2D albedo_tex : source_color;
-uniform bool force_srgb = false;
-
-uniform float light_yaw : hint_range(0, 360) = 0.0;
-uniform float light_pitch : hint_range(-90, 90) = 45.0;
-uniform float min_brightness : hint_range(0, 1) = 0.3;
-uniform float max_brightness : hint_range(0, 5) = 1.0;
-uniform float light_strength : hint_range(0, 10) = 1.0;
-
-varying vec3 world_normal;
-
-void vertex() {
-    world_normal = normalize((MODEL_MATRIX * vec4(NORMAL, 0.0)).xyz);
-}
+// Mantengo tu sistema de textura para la paleta de colores
+uniform sampler2D albedo_tex : source_color, filter_nearest;
+uniform float shadow_softness : hint_range(0.0, 1.0) = 0.5;
+uniform float ambient_strength : hint_range(0.0, 1.0) = 0.2;
 
 void fragment() {
-    float yaw_rad = radians(light_yaw);
-    float pitch_rad = radians(light_pitch);
-
-    vec3 light_dir = normalize(vec3(
-        cos(pitch_rad) * sin(yaw_rad),
-        sin(pitch_rad),
-        cos(pitch_rad) * cos(yaw_rad)
-    ));
-
-    float base_light = clamp(dot(normalize(world_normal), light_dir), min_brightness, 1.0);
-    float brightness = clamp(base_light * max_brightness * light_strength, 0.0, 5.0);
-
+    // Obtenemos el color base de tu textura de paleta
     vec4 tex_color = texture(albedo_tex, UV);
+    ALBEDO = tex_color.rgb;
+    
+    // Seteamos valores por defecto para que el motor maneje el resto
+    ROUGHNESS = 1.0;
+    SPECULAR = 0.0; // Evita brillos plásticos innecesarios en low-poly
+}
 
-    if (force_srgb) {
-        tex_color.rgb = pow(max(tex_color.rgb, vec3(0.0001)), vec3(2.2));
-    }
-
-    ALBEDO = tex_color.rgb * brightness;
+void light() {
+    // Calculamos la incidencia de la luz (dot product entre normal y luz)
+    // Usamos 'smoothstep' para crear esa transición difuminada que buscas
+    float dot_product = dot(NORMAL, LIGHT);
+    
+    // Mapeamos el valor para que las sombras no sean negras puras ni cortantes
+    float diffuse_stepped = smoothstep(-shadow_softness, 1.0, dot_product);
+    
+    // ATTENUATION incluye las sombras proyectadas y la caída de la luz
+    float light_intensity = diffuse_stepped * ATTENUATION;
+    
+    // Aplicamos el color de la luz y la intensidad al DIFFUSE_LIGHT
+    // Sumamos un pequeño componente ambiental para profundidad de color
+    vec3 light_final = LIGHT_COLOR * light_intensity;
+    DIFFUSE_LIGHT += max(light_final, ALBEDO * ambient_strength * LIGHT_COLOR);
 }

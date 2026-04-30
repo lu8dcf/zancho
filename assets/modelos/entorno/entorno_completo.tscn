@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://yvwwtxa42htj"]
 
 [ext_resource type="PackedScene" uid="uid://b5d4fv4f6o5iw" path="res://assets/modelos/entorno_completo.glb" id="1_ewjn0"]
-[ext_resource type="Material" uid="uid://bg70lqvwct7ri" path="res://assets/modelos/texturas/material_entorno.tres" id="2_kbdlx"]
 [ext_resource type="Texture2D" uid="uid://dmdk311cry085" path="res://assets/modelos/texturas/entorno_completo_ladrillos.png" id="3_w00ve"]
 [ext_resource type="Texture2D" uid="uid://bl52ivb5b5ex4" path="res://assets/modelos/texturas/entorno_completo_tejas.png" id="4_3dm3b"]
 
@@ -12,9 +11,6 @@ albedo_texture = ExtResource("3_w00ve")
 albedo_texture = ExtResource("4_3dm3b")
 
 [node name="entorno_completo" unique_id=1430698962 instance=ExtResource("1_ewjn0")]
-
-[node name="Cubo_009" parent="." index="0" unique_id=1052703386]
-material_override = ExtResource("2_kbdlx")
 
 [node name="ladrillos" parent="." index="3" unique_id=178957385]
 material_override = SubResource("StandardMaterial3D_rfulq")
