@@ -50,10 +50,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3070507, -1.2841301, -24.17
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=582511645]
 transform = Transform3D(1, 0, 0, 0, 0.67583466, 0.7370533, 0, -0.7370533, 0.67583466, 0, 19.440298, 0)
 light_color = Color(0.8504692, 0.8932952, 0.9305096, 1)
-light_energy = 2.33
 light_specular = 0.0
 shadow_enabled = true
 shadow_bias = 0.0
 shadow_normal_bias = 9.273
 shadow_opacity = 0.65
+shadow_blur = 10.0
+
+[node name="OmniLight3D" type="SpotLight3D" parent="." unique_id=1354363738]
+transform = Transform3D(1, 0, 0, 0, 0.23570184, 0.9718255, 0, -0.9718255, 0.23570184, 9.536743e-07, 56.039547, 32.211254)
+visible = false
+light_color = Color(0.7861454, 0.7496575, 0.7434715, 1)
+light_energy = 55.025
+light_specular = 0.0
+shadow_enabled = true
+shadow_opacity = 0.0
+spot_range = 72.41848
+spot_angle = 63.609535
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=487495928]
+transform = Transform3D(0.9976653, 0.049342122, -0.047216658, 0, 0.6913744, 0.72249675, 0.06829391, -0.7208099, 0.6897602, 0, 28.434893, 16.624039)
+light_color = Color(0.6322969, 0.54236585, 0.51961094, 1)
+light_energy = 4.491
+light_specular = 0.0
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 10.0
+shadow_reverse_cull_face = true
+shadow_opacity = 0.0
 shadow_blur = 10.0
