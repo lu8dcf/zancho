@@ -50,7 +50,7 @@ func _ready():
 	conectar_señales()
 	configurar_indicadores()
 	
-	Piezas.modo_colocacion_inicia.connect(_on_modo_colocacion_iniciado)
+	#Piezas.modo_colocacion_inicia.connect(_on_modo_colocacion_iniciado)
 	Piezas.modo_colocacion_cancelado.connect(_on_modo_colocacion_cancelado)
 	Piezas.pieza_colocada.connect(_on_pieza_colocada)
 
@@ -94,10 +94,10 @@ func conectar_señales():
 		area_interaccion.mouse_exited.connect(_al_salir_mouse)
 		#area_interaccion.input_event.connect(_al_evento_input)
 
+
 func _on_modo_colocacion_iniciado(_tipo_pieza: int, _nombre: String):
 	modo_colocacion_activo = true
 	es_valido_colocar = true
-	# esta variable es la que hay que modificar a futuro
 
 func _on_modo_colocacion_cancelado():
 	modo_colocacion_activo = false
@@ -128,7 +128,7 @@ func seleccionar(estado: bool):
 		indicador_invalido.visible = estado
 
 func _al_entrar_mouse():
-	#print("Mouse entrando en baldosa: ", coordenadas_tablero, "modo clocacion activ: ", modo_colocacion_activo)
+	#print("Mouse entrando en baldosa: ", coordenadas_tablero, "modo clocacion activ: ", modo_colocacion_activo, "es valido colocar: ", es_valido_colocar)
 	if modo_colocacion_activo:
 		if es_valido_colocar:
 			_mostrar_indicador_valido()
@@ -147,18 +147,16 @@ func _al_salir_mouse():
 			seleccionar(false)
 
 func _mostrar_indicador_valido():
+	_ocultar_indicadores_colocacion()
 	if indicador_valido:
 		indicador_valido.visible = true
-	if indicador_invalido:
-		indicador_invalido.visible = false
-	seleccionar(false)
+	
 
 func _mostrar_indicador_invalido():
+	_ocultar_indicadores_colocacion()
 	if indicador_invalido:
 		indicador_invalido.visible = true
-	if indicador_valido:
-		indicador_valido.visible = false
-	seleccionar(false)
+
 
 func _ocultar_indicadores_colocacion():
 	if indicador_valido:
@@ -193,10 +191,9 @@ func _on_pieza_colocada(_tipo:int, posicion:Vector2i):
 				#baldosa_click_derecho.emit(self)
 			#
 func _intentar_colocar_pieza():
-	print("Intentando colocar en: ", coordenadas_tablero)
 	if Piezas.colocar_pieza_en_posicion(coordenadas_tablero):
-		print("Pieza colocada exitosamente")
 		esta_ocupada = true
+		
 	else:
 		print("Error al colocar pieza")
 

@@ -7,7 +7,7 @@ extends Node
 var vidas: int = 20              # vidas del castillo/jugador
 var vidaMax: int = 20
 var oleada_actual: int = 1       # numero de oleada actual
-var mapa_actual: int = 1         # numero de mapa activo
+var mapa_actual: int = 1        # numero de mapa activo
 
 # estado de la tienda (si esta desplegada o no)
 var tienda_desplegada: bool = false
@@ -19,7 +19,7 @@ var espaciado_baldosas : float = 2.0
 
 # Oleadas
 var tiempo_pasos = 3.0   # tiempo entre cada movimento
-
+var empezo_oleada = false # si es que empezo la oleada
 # señales para modificar el hud
 
 signal vidas_cambiadas(nuevas_vidas)
@@ -78,15 +78,16 @@ func verifica_obstaculos(sitio: Vector2i):
 	if sitio in mapas.mapas[globalJuego.mapa_actual]:
 		#mensaje("No se puede insertar sobre un obstaculo")
 		return false
-		
+
 func colocar_blanca(sitio: Vector2i):
-	lugar_disponible(sitio)
+	if not lugar_disponible(sitio):
+		return false
 	
 	# sector de spawn negras
 	if (sitio.y<2 and sitio.x>7) or  (sitio.y==2 and sitio.x>8) or (sitio.y==3 and sitio.x>9) or (sitio.y==4 and sitio.x>10) or (sitio.y==5 and sitio.x>11) or (sitio.y==6 and sitio.x>12) or (sitio.y==7 and sitio.x>13):
 		return false
 	return true
-		  
+
 
 func reiniciar_variables():
 	Piezas.piezas_activas = []

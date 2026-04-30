@@ -13,9 +13,9 @@ var ultima_baldosa_clickeada = null
 func _ready():
 	# Buscar referencias automáticamente
 	buscar_referencias()
-	
-	if Piezas.has_signal("modo_colocacion_inicia"):
-		Piezas.modo_colocacion_inicia.connect(_on_modo_colocacion_iniciado)
+	#
+	#if Piezas.has_signal("modo_colocacion_inicia"):
+		#Piezas.modo_colocacion_inicia.connect(_on_modo_colocacion_iniciado)
 	if Piezas.has_signal("modo_colocacion_cancelado"):
 		Piezas.modo_colocacion_cancelado.connect(_on_modo_colocacion_cancelado)
 	
@@ -56,38 +56,40 @@ func _manejar_click_mouse(event: InputEventMouseButton):
 
 # manejo de clicks
 func _manejar_click_izquierdo(baldosa: BaldosaBase):
-	print("Click izquierdo en baldosa: ", baldosa.obtener_coordenadas())
-	
+	var es_valido_colocar = globalJuego.colocar_blanca(baldosa.obtener_coordenadas())
 	if Piezas.modo_colocacion:
-		# Modo colocación activo
-		if baldosa.es_valido_colocar:
-			print("Intentando colocar pieza...")
+		baldosa.modo_colocacion_activo = Piezas.modo_colocacion
+		if es_valido_colocar:
+			baldosa.es_valido_colocar = es_valido_colocar
+			baldosa._al_entrar_mouse()
 			baldosa._intentar_colocar_pieza()
 		else:
-			print("Posición no válida para colocar")
-	else:
-		# Modo normal - seleccionar baldosa
-		ultima_baldosa_clickeada = baldosa
-		baldosa.baldosa_presionada.emit(baldosa)
-		
-		# También notificar al GestorTablero si existe
-		if gestor_tablero and gestor_tablero.has_method("_en_baldosa_presionada"):
-			gestor_tablero._en_baldosa_presionada(baldosa)
+			baldosa._al_entrar_mouse()
+	#else:
+		## Modo normal - seleccionar baldosa
+		#print("modo normal")
+		#ultima_baldosa_clickeada = baldosa
+		#baldosa.baldosa_presionada.emit(baldosa)
+		#baldosa._mostrar_indicador_invalido()
+		## También notificar al GestorTablero si existe
+		#if gestor_tablero and gestor_tablero.has_method("_en_baldosa_presionada"):
+			#gestor_tablero._en_baldosa_presionada(baldosa)
 
 func _manejar_click_derecho(baldosa: BaldosaBase):
-	print("Click derecho en baldosa: ", baldosa.obtener_coordenadas())
+	#print("Click derecho en baldosa: ", baldosa.obtener_coordenadas())
 	
 	if Piezas.modo_colocacion:
-		# Cancelar modo colocación
-		print("Cancelando modo colocación")
 		Piezas.cancelar_modo_colocacion()
 	else:
-		# Comportamiento normal de click derecho
 		baldosa.baldosa_click_derecho.emit(baldosa)
 
 func detectar_baldosa_bajo_mouse():
 	var baldosa_detectada = _obtener_baldosa_bajo_mouse()
-	actualizar_hover(baldosa_detectada)
+	if baldosa_detectada:
+		baldosa_detectada.modo_colocacion_activo = Piezas.modo_colocacion
+		baldosa_detectada.es_valido_colocar = globalJuego.colocar_blanca(baldosa_detectada.obtener_coordenadas())
+		#print("es valido colocar; ", globalJuego.colocar_blanca(baldosa_detectada.obtener_coordenadas()), "la ubicacion es: ", baldosa_detectada.obtener_coordenadas())
+		actualizar_hover(baldosa_detectada)
 
 func _obtener_baldosa_bajo_mouse() -> BaldosaBase:
 	var posicion_mouse = get_viewport().get_mouse_position()
@@ -125,6 +127,7 @@ func encontrar_baldosa_padre(nodo: Node) -> BaldosaBase:
 	return null
 
 func actualizar_hover(nueva_baldosa: BaldosaBase):
+	
 	# Si es la misma baldosa, no hacer nada
 	if nueva_baldosa == baldosa_actual:
 		return
@@ -138,12 +141,13 @@ func actualizar_hover(nueva_baldosa: BaldosaBase):
 	
 	# Poner hover en la nueva
 	if baldosa_actual:
-		baldosa_actual._al_entrar_mouse()			
+		baldosa_actual._al_entrar_mouse()	
+#
 
 
-func _on_modo_colocacion_iniciado(_tipo_pieza: int, _nombre: String):
-	if baldosa_actual:
-		baldosa_actual._al_entrar_mouse()
+#func _on_modo_colocacion_iniciado(_tipo_pieza: int, _nombre: String):
+	#if baldosa_actual:
+		#baldosa_actual._al_entrar_mouse()
 
 func _on_modo_colocacion_cancelado():
 	if baldosa_actual:

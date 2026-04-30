@@ -39,7 +39,6 @@ func cargar_escena_pieza(tipo: int):
 	_limpiar_modelo()
 	var ruta = "res://assets/modelos/piezas/pieza_" + str(tipo) + "B.tscn"
 	
-	print("PiezaFlotante: Intentando cargar: ", ruta)
 	var modelo_objeto = load(ruta)
 	if not modelo_objeto:
 		print ("No se puede cargar la escena del objeto pieza")

@@ -18,6 +18,8 @@ var mapa_actual :int = globalJuego.mapa_actual
 func _ready():
 	add_to_group("gestor_tablero")
 	generar_tablero()
+	# crear rey
+	GlobalSignal.emit_signal("crearPieza",Vector2i(1,14),0,true)
 
 func generar_tablero():
 	# Limpiar tablero existente
@@ -62,6 +64,7 @@ func obtener_baldosa_en_coordenadas(coordenadas: Vector2i) -> BaldosaBase:
 func obtener_baldosa_en_posicion(columna: int, fila: int) -> BaldosaBase:
 	return obtener_baldosa_en_coordenadas(Vector2i(columna, fila))
 
+# revisar esta linea de codigo
 func _en_baldosa_presionada(baldosa: BaldosaBase):
 
 	print("Baldosa presionada en: ", baldosa.obtener_coordenadas())

@@ -1,38 +1,42 @@
 shader_type spatial;
 
-uniform sampler2D albedo_tex : source_color;
-uniform bool force_srgb = false;
+// --- TEXTURA Y PALETA ---
+uniform sampler2D albedo_tex : source_color, filter_nearest;
 
-uniform float light_yaw : hint_range(0, 360) = 0.0;
-uniform float light_pitch : hint_range(-90, 90) = 45.0;
-uniform float min_brightness : hint_range(0, 1) = 0.3;
-uniform float max_brightness : hint_range(0, 5) = 1.0;
-uniform float light_strength : hint_range(0, 10) = 1.0;
+// --- CONTROLES DE LUZ Y SOMBRA ---
+uniform float shadow_softness : hint_range(0.0, 1.0) = 0.5;
+uniform float light_intensity : hint_range(0.0, 5.0) = 0.6;
+uniform float ambient_strength : hint_range(0.0, 1.0) = 0.2;
+uniform vec3 shadow_color_tint : source_color = vec3(0.1, 0.1, 0.2); 
 
-varying vec3 world_normal;
-
-void vertex() {
-    world_normal = normalize((MODEL_MATRIX * vec4(NORMAL, 0.0)).xyz);
-}
+// --- POST-PROCESADO INTERNO (AJUSTES PEDIDOS) ---
+uniform float saturation : hint_range(0.0, 2.0) = 1.1; // 0.1 más que el normal
+uniform float contrast : hint_range(0.5, 2.0) = 1.0;   // Normal por defecto
 
 void fragment() {
-    float yaw_rad = radians(light_yaw);
-    float pitch_rad = radians(light_pitch);
-
-    vec3 light_dir = normalize(vec3(
-        cos(pitch_rad) * sin(yaw_rad),
-        sin(pitch_rad),
-        cos(pitch_rad) * cos(yaw_rad)
-    ));
-
-    float base_light = clamp(dot(normalize(world_normal), light_dir), min_brightness, 1.0);
-    float brightness = clamp(base_light * max_brightness * light_strength, 0.0, 5.0);
-
     vec4 tex_color = texture(albedo_tex, UV);
+    vec3 color = tex_color.rgb;
+    
+    // Ajuste de Contraste (1.0 es neutro)
+    color = ((color - 0.5) * contrast) + 0.5;
+    
+    // Ajuste de Saturación
+    float grayscale = dot(color, vec3(0.299, 0.587, 0.114));
+    ALBEDO = mix(vec3(grayscale), color, saturation);
+    
+    ROUGHNESS = 1.0;
+    SPECULAR = 0.0;
+}
 
-    if (force_srgb) {
-        tex_color.rgb = pow(max(tex_color.rgb, vec3(0.0001)), vec3(2.2));
-    }
-
-    ALBEDO = tex_color.rgb * brightness;
+void light() {
+    float dot_product = dot(NORMAL, LIGHT);
+    float diffuse_stepped = smoothstep(-shadow_softness, 1.0, dot_product);
+    
+    float final_attenuation = diffuse_stepped * ATTENUATION * light_intensity;
+    
+    vec3 direct_light = LIGHT_COLOR * final_attenuation;
+    vec3 custom_ambient = ALBEDO * ambient_strength * shadow_color_tint;
+    
+    // Mezcla final de iluminación
+    DIFFUSE_LIGHT += max(direct_light, custom_ambient);
 }

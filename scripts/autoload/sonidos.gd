@@ -64,3 +64,11 @@ func fade_out(audio: AudioStreamPlayer3D, duration: float):
 	tween.set_ease(Tween.EASE_IN)
 	tween.set_trans(Tween.TRANS_QUAD)
 	await tween.finished
+
+func comienzoOleada():
+	var oleada_Sound = AudioStreamPlayer3D.new()
+	oleada_Sound.stream = preload("res://assets/sound/sfx/CampanaOleada.mp3")
+	add_child(oleada_Sound)
+	oleada_Sound.play()
+	await oleada_Sound.finished
+	oleada_Sound.queue_free()

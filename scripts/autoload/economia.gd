@@ -38,7 +38,13 @@ var piezas_disponibles_tienda: Array = [
 	{"nombre": "Caballo", "precio": 350},
 	{"nombre": "Reina", "precio": 1200}
 ]
-
+var orden_aparicion: Dictionary = {
+	"Peon": 1,
+	"Torre": 3,
+	"Alfil": 2,
+	"Caballo": 4,
+	"Reina": 5
+}
 
 # señales para modificar el hud
 signal monedas_cambiadas(nuevas_monedas) # Emite el cambio de moneda
@@ -74,18 +80,6 @@ func comprar_pieza(pieza:Dictionary) -> bool:
 			return true
 	return false
 
-
-#func puede_comprar(tipo_pieza, costo):
-	#if monedas_actual >= costo and inventario_actual[tipo_pieza] < limite_piezas[tipo_pieza]:
-		#return true
-	#return false
-
-#func comprar_pieza(tipo_pieza, costo):
-	#monedas_actual -= costo
-	#inventario_actual[tipo_pieza] += 1
-	## Emitir señal para actualizar la UI de la tienda
-	#
-
 func vender_pieza(pieza:Dictionary, valor:int):
 	for i in range(inventario_actual.size()):
 		if inventario_actual[i]["nombre"] == pieza["nombre"]:
@@ -103,9 +97,11 @@ func usar_pieza(pieza_nombre:String):
 	for i in inventario_actual:
 		if i["nombre"] == pieza_nombre:
 			i["cantidad"] -= 1
+			inventario_actualizado.emit(inventario_actual)
 	for i in piezas_colocadas:
 		if i["nombre"] == pieza_nombre:
 			i["cantidad"] += 1
+			
 
 func llego_al_limite(pieza_nombre:String ,cantidad_piezas:int)-> bool:
 	if cantidad_piezas == 0:
@@ -116,3 +112,8 @@ func llego_al_limite(pieza_nombre:String ,cantidad_piezas:int)-> bool:
 		return cantidad_piezas >= limite_piezas[pieza_nombre]
 	else:
 		return false
+
+func verificar_orden_aparicion(pieza_nombre:String)->bool:
+	if pieza_nombre in orden_aparicion:
+		return globalJuego.oleada_actual < orden_aparicion[pieza_nombre]
+	return false

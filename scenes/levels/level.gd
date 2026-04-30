@@ -31,7 +31,7 @@ func _ready() -> void:
 	add_child(pieza)
 	pieza.visible = false
 
-	GlobalSignal.emit_signal("controlMarcaPaso",true)	
+	#GlobalSignal.emit_signal("controlMarcaPaso",true)	
 
 	#GlobalSignal.connect("marcaPaso",prueba)
 	

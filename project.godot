@@ -91,5 +91,22 @@ ui_down={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="mobile"
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=0
+camera/depth_of_field/depth_of_field_bokeh_shape=2
+camera/depth_of_field/depth_of_field_bokeh_quality=3
+camera/depth_of_field/depth_of_field_use_jitter=true
+vrs/mode=1
+anti_aliasing/voxel_gi/quality=0
+anti_aliasing/overrides/force_lambert_over_burley.mobile=true
+anti_aliasing/depth_of_field/depth_of_field_bokeh_shape=1
+anti_aliasing/depth_of_field/depth_of_field_use_jitter=false
+anti_aliasing/directional_shadow/soft_shadow_filter_quality=2
+anti_aliasing/positional_shadow/soft_shadow_filter_quality=2
+anti_aliasing/mode=0
+anti_aliasing/texture=""
+anti_aliasing/depth_of_field/depth_of_field_bokeh_quality=1
+anti_aliasing/canvas_textures/default_texture_filter=1

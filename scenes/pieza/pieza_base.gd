@@ -232,7 +232,7 @@ func verificar_proximo_paso(cambio):
 	# convierto la proxima posicion en 2Di para 
 	var nuevo_sitio = Vector2i(sitio3d.x,sitio3d.z)  # en 2d
 	if globalJuego.lugar_disponible(nuevo_sitio)==false:
-		#print (pieza_sitio," ocupado")
+		print (pieza_sitio," ocupado")
 		return false
 	return true
 		

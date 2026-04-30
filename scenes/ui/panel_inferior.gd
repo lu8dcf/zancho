@@ -16,7 +16,7 @@ func _ready():
 	espaciado()
 	_crear_botones_piezas_inventario()
 	economia.pieza_comprada.connect(_actualizar_inventario)
-	
+	economia.inventario_actualizado.connect(_actualizar_inventario)
 	
 	# Actualizar valores iniciales
 	_actualizar_inventario(economia.inventario_actual)
@@ -72,15 +72,6 @@ func _crear_botones_piezas_inventario() -> void:
 		contenedor_boton.add_child(texto_cant)
 		contenedor_piezas.add_child(contenedor_boton)
 
-# ejemplo de inventario
-#
-#var inventario_actual = [
-	#{"nombre": "Peon", "cantidad":8},
-	#{"nombre": "Torre", "cantidad":2},
-	#{"nombre": "Alfil",  "cantidad":2},
-	#{"nombre": "Caballo", "cantidad":2},
-	#{"nombre": "Reina", "cantidad":1}
-#]
 
 func _on_pieza_clicked(pieza: Dictionary) -> void:
 	print("Panel: Pieza clickeada: ", pieza)
@@ -93,23 +84,22 @@ func _on_pieza_clicked(pieza: Dictionary) -> void:
 	if pieza["cantidad"]>0:
 		var tipo_pieza = _obtener_tipo_por_nombre(pieza["nombre"])
 		Piezas.iniciar_modo_colocacion(tipo_pieza,pieza["nombre"])
-		boton_vender_pieza.text = "COLOCANDO " + pieza["nombre"] + "\nClick derecho para cancelar"
 		
-	#if boton_vender_pieza:
+	if boton_vender_pieza:
 		_resaltar_boton(boton_vender_pieza, false)
 		valor = _obtener_valor_reventa(pieza["nombre"])
-		#boton_vender_pieza.text = "VENDER " + pieza["nombre"] + "\n💰 +" + str(valor)
+		boton_vender_pieza.text = "VENDER " + pieza["nombre"] + "\n💰 +" + str(valor)
 	
 	_resaltar_boton(boton_vender_pieza, true)
 	
 func _obtener_tipo_por_nombre(nombre: String) -> int:
 	var tipos = {
-		"Rey": 1,
-		"Peon": 2,
-		"Alfil": 3,
-		"Torre": 4,
-		"Caballo": 5,
-		"Reina": 6
+		"Rey": 0,
+		"Peon": 1,
+		"Alfil": 2,
+		"Torre": 3,
+		"Caballo": 4,
+		"Reina": 5
 	}
 	return tipos.get(nombre, 1)
 
@@ -129,7 +119,7 @@ func _input(event):
 				boton_vender_pieza.visible = false
 				get_viewport().set_input_as_handled()
 			elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-				# La colocación se maneja en GestorTablero
+				boton_vender_pieza.visible = false
 				pass
 
 
