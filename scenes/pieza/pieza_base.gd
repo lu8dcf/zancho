@@ -29,7 +29,8 @@ var ataque_especifico = preload("res://scenes/pieza/ataque/Ataque.tscn") # defin
 @onready var giro_inicial = $GiroInicial
 
 # Contenedor par acargar escena del modelo
-@onready var contenedor_modelo : Node3D = $ContenedorModelo # contenedor modelo imagen y funciones
+@onready var contenedor_movimiento : Node3D = $ContenedorMovimiento # contenedor modelo imagen y funciones
+@onready var contenedor_ataque : Node3D = $ContenedorMovimiento # contenedor modelo imagen y funciones
 
 # Referencia a la instancia de la pieza (con AnimationPlayer)
 var instancia_objeto_pieza: Node3D
@@ -75,7 +76,7 @@ func cargar_objeto():
 		
 	# Instanciar y agregar al contenedor
 	instancia_objeto_pieza = modelo_objeto.instantiate()
-	contenedor_modelo.add_child(instancia_objeto_pieza)
+	contenedor_movimiento.add_child(instancia_objeto_pieza)
 	
 	# Buscar el AnimationPlayer dentro de esta instancia
 	animation_player = _find_animation_player(instancia_objeto_pieza)
@@ -110,7 +111,6 @@ func cargar_ataque(): # agrega el nodo ataque con el script correspondiente a la
 	add_child(ataque)
 	ataque.owner = self  # ← IMPORTANTE: Establece el owner manualmente
 		
-			
 func posicionamiento_giro():
 	#temporizador
 	giro_inicial.wait_time = 3.0   # 1 segundo
@@ -120,7 +120,6 @@ func posicionamiento_giro():
 func llego_al_piso():
 	giro(angulo_frente)
 	
-
 func _on_body_entered(_body):
 	if pieza_colocada : return # solo se ejecuta en el inicio
 	# este if es para que solo tenga un efecto de sonido cuando rebota 

@@ -57,9 +57,11 @@ offset_top = 46.0
 offset_right = 168.0
 offset_bottom = 74.0
 
-[node name="ContenedorModelo" type="Node3D" parent="." unique_id=1845823207]
+[node name="ContenedorMovimiento" type="Node3D" parent="." unique_id=1845823207]
 
 [node name="GiroInicial" type="Timer" parent="." unique_id=994989931]
 one_shot = true
+
+[node name="ContenedorAtaque" type="Node3D" parent="." unique_id=1562388930]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
