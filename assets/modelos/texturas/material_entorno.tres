@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://bg70lqvwct7ri"]
 
 [ext_resource type="Shader" uid="uid://b1qxxcb7tq3l6" path="res://assets/modelos/texturas/Light.gdshader" id="1_mu8et"]
-[ext_resource type="Texture2D" uid="uid://jkc5yhdh1d5j" path="res://assets/modelos/texturas/Paletaentornodegradeprueba.png" id="2_0o644"]
+[ext_resource type="Texture2D" uid="uid://cokrtqwkdtsv7" path="res://assets/modelos/texturas/Paletaentornodegradeprueba.png" id="2_0o644"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0o644"]
 render_priority = 0

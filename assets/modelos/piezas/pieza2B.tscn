@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dsbdyjnr4iiwb"]
 
-[ext_resource type="PackedScene" uid="uid://dtxfft80u2lb5" path="res://assets/modelos/fichas/pieza2B.glb" id="1_b0auw"]
+[ext_resource type="PackedScene" uid="uid://cs1rio81woey7" path="res://assets/modelos/piezas/pieza2B.glb" id="1_b0auw"]
 
 [node name="Node3D" type="Node3D" unique_id=947038279]
 
