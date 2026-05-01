@@ -148,14 +148,7 @@ func check_for_enemies():
 	
 	var nearest_enemy = null
 	
-	
-	for result in results:
-		pass
-		#if body is ChessPiece and body.team != team and body.is_alive:
-		#	var distance = global_position.distance_to(body.global_position)
-		#	if distance < nearest_distance:
-		#		nearest_distance = distance
-		#		nearest_enemy = body
+		
 	
 	target_piece = nearest_enemy
 	
