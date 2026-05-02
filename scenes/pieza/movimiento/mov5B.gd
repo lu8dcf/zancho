@@ -16,8 +16,9 @@ var fin = null
 var tiene_objetivo := false
 var en_movimiento := false
 
-# desplazamiento Torre
-var direccion= Vector3i(0,0,0)
+# desplazamiento Reina
+var direccion_actual : Vector3i = Vector3i(1, 0, -1) # hacia donde mira inicialmente
+var direccion : Vector3i = Vector3i.ZERO
 
 func _ready():
 	# Obtener la referencia a la pieza base (el owner del componente)
@@ -70,8 +71,11 @@ func analizar_siguientePaso(inicio: Vector3i, fin: Vector3i): #
 			mejor_dist = dist
 			mejor_vecino = vecino #obtengo la que mas me acerca al clickeado
 	if mejor_vecino != null:
-		var dir = mejor_vecino
-		girar(dir)
+		var dir = mejor_vecino - actual
+		print ("Dir: ", dir)
+		if dir != direccion_actual:
+			direccion_actual = dir
+			girar(dir)
 		moverPaso(mejor_vecino) #avanzo a la mejor posicion
 	else:
 		moverPaso(calculoPosActual())
@@ -129,32 +133,21 @@ func obtengo_posicion_baldosa() -> Vector3:
 
 
 func girar(direccion: Vector3i): #giro la reina en base a la direccion del objetivo
-	match direccion:
-		0: # Quieto
-			direccion = Vector3i(0,0,0)
-			owner.giro(45)
-		1: # arriba 1
-			direccion = Vector3i(0,0,-1)
-			owner.giro(225)
-		2:# arriba 2
-			direccion = Vector3i(0,0,1)
-			owner.giro(225)
-		3: # derecha 1
-			direccion = Vector3i(1,0,0)
-			owner.giro(135)
-		4: # derecha 2
-			direccion = Vector3i(-1,0,0)
-			owner.giro(135)
-		5: # abajo 1
-			direccion = Vector3i(1,0,1)
-			owner.giro(45)
-		6:# adelante 2
-			direccion = Vector3i(-1,0,1)
-			owner.giro(45)
-		7: # izquierda 1
-			direccion = Vector3i(-1,0,-1)
-			owner.giro(-90)
-		8: # izquierda 2
-			direccion = Vector3i(1,0,-1)
-			owner.giro(-90)
+	match round(direccion):
+		Vector3i(0,0,-1): #awrriba
+			owner.giro(-90) #perfecto
+		Vector3i(1, 0, -1): #arriba derecha
+			owner.giro(225) 
+		Vector3i(1, 0, 0): # derecha
+			owner.giro(180) #reviar para que no de toda la vuelta
+		Vector3i(1, 0, 1): # abajo-derecha
+			owner.giro(135) #reviar para que no de toda la vuelta
+		Vector3i(0, 0, 1): # abajo
+			owner.giro(90) #perfecto
+		Vector3i(-1, 0, 1): # abajo-izquierda
+			owner.giro(45) #perfecto
+		Vector3i(-1, 0, 0): # izquierda
+			owner.giro(0) #perfecto
+		Vector3i(-1, 0, -1): # arriba-izquierda
+			owner.giro(-45) #perfecto
 #angulos cada 45 grados -abajo = 45 - derecha 90
