@@ -1,4 +1,4 @@
-extends Panel
+extends TextureRect
 
 
 # panel de la tienda
@@ -17,6 +17,9 @@ func _ready():
 	_actualizar_monedas(economia.monedas_actual)
 	
 	configurar_tienda()
+
+
+
 
 func _actualizar_monedas(nuevas_monedas: int) -> void:
 	monedas_label.text = "💰 " + str(nuevas_monedas)
