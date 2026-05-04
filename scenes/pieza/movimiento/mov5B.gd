@@ -72,7 +72,6 @@ func analizar_siguientePaso(inicio: Vector3i, fin: Vector3i): #
 			mejor_vecino = vecino #obtengo la que mas me acerca al clickeado
 	if mejor_vecino != null:
 		var dir = mejor_vecino - actual
-		print ("Dir: ", dir)
 		if dir != direccion_actual:
 			direccion_actual = dir
 			girar(dir)
