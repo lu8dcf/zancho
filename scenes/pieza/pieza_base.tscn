@@ -30,6 +30,7 @@ rings = 20
 [sub_resource type="Skin" id="Skin_xmeed"]
 
 [node name="piezaBase" type="RigidBody3D" unique_id=2128333729]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.198883e-06, 0)
 physics_material_override = SubResource("PhysicsMaterial_c11s1")
 contact_monitor = true
 max_contacts_reported = 1
@@ -63,5 +64,7 @@ offset_bottom = 74.0
 one_shot = true
 
 [node name="ContenedorAtaque" type="Node3D" parent="." unique_id=1562388930]
+
+[node name="AreaAtaque" type="Area3D" parent="." unique_id=1650449106]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
