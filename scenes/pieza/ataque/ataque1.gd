@@ -45,7 +45,7 @@ func crear_ataques(direcciones):
 
 # 🎯 Crea un CollisionShape3D y lo posiciona correctamente
 func crear_attack_shape(posicion: Vector3):
-	print ("crea collision ", posicion.x," ",posicion.y," ",posicion.z)
+	#print ("crea collision ", posicion.x," ",posicion.y," ",posicion.z)
 	var shape = CollisionShape3D.new()
 	var cylinder_shape = CylinderShape3D.new()
 	

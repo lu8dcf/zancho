@@ -17,12 +17,12 @@ func _on_area_entered(area: Area3D):
 	if pieza is PiezaBase:
 		manejar_ataque(pieza)
 
-func manejar_ataque(pieza: PiezaBase):
+func manejar_ataque(body):
 	# Verificar que sea del equipo contrario
-	var atacante_blanca = get_meta("pieza_blanca")
-	var atacante_tipo = get_meta("pieza_tipo")
+	var atacante_blanca = body.pieza_blanca
+	var atacante_tipo = body.pieza_tipo
 	
-	if pieza.pieza_blanca != atacante_blanca:
+	if body.pieza_blanca == true:
 		
 		print("⚔️ Ataque detectado!"," blanca ",atacante_blanca," tipo ",atacante_tipo)
-		pieza.recibir_ataque(atacante_tipo, get_meta("origen"))
+		#pieza.recibir_ataque(atacante_tipo, get_meta("origen"))
