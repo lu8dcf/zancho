@@ -3,6 +3,7 @@ extends CanvasLayer
 
 # panel inferior
 @onready var contenedor_piezas = $Control/PanelInferior
+@onready var tienda_animacion: AnimationPlayer = $Control/PanelTienda/tienda_animacion
 
 # panel del rey
 @onready var vidas_label = $Control/PanelRey/vida
@@ -18,7 +19,7 @@ extends CanvasLayer
 
 func _ready():
 	# ocultar la tienda
-	tienda_contenido.visible = false
+	
 	# Conectar las señales globales para actualizar la UI automáticamente
 	economia.monedas_cambiadas.connect(_actualizar_monedas)
 
@@ -39,13 +40,7 @@ func _actualizar_vidas(nuevas_vidas: int) -> void:
 
 
 
-func _on_button_tienda_pressed() -> void:
-	if tienda_boton.text == " + ":
-		tienda_contenido.visible = true
-		tienda_boton.position = Vector2(815, 285)
-		tienda_boton.text = " - "
-		#imagen_debilidades.visible = false
-	else:
-		tienda_contenido.visible = false
-		tienda_boton.position = Vector2(1110,285)
-		tienda_boton.text = " + "
+
+
+func _on_boton_de_despliegue_pressed() -> void:
+	tienda_animacion.play("tienda")

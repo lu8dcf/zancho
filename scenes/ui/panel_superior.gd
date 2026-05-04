@@ -5,11 +5,10 @@ extends Panel
 @onready var boton_reiniciar_camera = $BotonReiniciarCamara
 @onready var imagen_debilidades = $imagenDebilidades
 @onready var empezar_oleada: Button = $empezar_oleada
-@onready var acelerar: Button = $acelerar
+
 
 func _ready() -> void:
 	empezar_oleada.text = "Empezar Oleada " + str(globalJuego.oleada_actual)
-	acelerar.text = "x1"
 	globalJuego.oleada_cambiada.connect(_actualizar_oleada)
 	_actualizar_oleada(globalJuego.oleada_actual)
 	imagen_debilidades.texture = load("res://assets/ui/debilidades.png")
@@ -53,10 +52,3 @@ func _on_empezar_oleada_pressed() -> void:
 	elif globalJuego.empezo_oleada and empezar_oleada.text == "Continuar Oleada " + str(globalJuego.oleada_actual):
 		empezar_oleada.text = "Pausar Oleada " + str(globalJuego.oleada_actual)
 		GlobalSignal.emit_signal("controlMarcaPaso",true)
-
-
-func _on_acelerar_pressed() -> void:
-	if acelerar.text == "x1":
-		acelerar.text = "x2"
-	else:
-		acelerar.text = "x1"
