@@ -22,7 +22,10 @@ func _ready():
 
 
 func _actualizar_monedas(nuevas_monedas: int) -> void:
-	monedas_label.text = "💰 " + str(nuevas_monedas)
+	if !globalJuego.debug:
+		monedas_label.text = "💰 " + str(nuevas_monedas)
+	else: 
+		monedas_label.text = "💰 " + "infinito"
 
 func configurar_tienda():
 	espaciado()
@@ -36,7 +39,6 @@ func espaciado():
 		tienda_botones.add_theme_constant_override("v_separation", 15)
 
 # Funcion de botones
-
 func _crear_botones_piezas_tienda() -> void:
 	for hijo in tienda_botones.get_children():
 		hijo.queue_free()
@@ -66,7 +68,7 @@ func _crear_botones_piezas_tienda() -> void:
 		if economia.llego_al_limite(pieza["nombre"], 0):
 			boton.disabled = true
 			boton.text = pieza["nombre"] + "\n" + str(pieza["precio"])+ "\n" + "MAX"
-		if 	economia.verificar_orden_aparicion(pieza["nombre"]):
+		if 	economia.verificar_orden_aparicion(pieza["nombre"]) and !globalJuego.debug:
 			boton.disabled = true
 			boton.text = pieza["nombre"] + "\n" + "DESHABILITADO"
 

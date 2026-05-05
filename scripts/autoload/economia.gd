@@ -1,6 +1,6 @@
 extends Node
 
-var monedas_actual : int = 1200 # Esencia inicial para la Oleada 1
+var monedas_actual : int = 1200 # monedas inicial para la Oleada 1
 var limite_piezas = {
 	"Peon": 8,
 	"Torre": 2,
@@ -58,7 +58,7 @@ func añadir_monedas(cantidad: int) -> void:
 	emit_signal("monedas_cambiadas", monedas_actual)  # Notificar al HUD que cambió
 
 func comprar_pieza(pieza:Dictionary) -> bool:
-	# Verificar si hay suficiente dinero
+	
 	if monedas_actual < pieza["precio"]:
 		return false
 	
@@ -68,8 +68,8 @@ func comprar_pieza(pieza:Dictionary) -> bool:
 			# Verificar si no se ha alcanzado el límite
 			if llego_al_limite(pieza["nombre"], inventario_actual[i]["cantidad"]):
 				return false
-
-			monedas_actual -= pieza["precio"]
+			if !globalJuego.debug:
+				monedas_actual -= pieza["precio"]
 			inventario_actual[i]["cantidad"] += 1
 			
 			# Emitir señales en orden correcto
@@ -81,13 +81,16 @@ func comprar_pieza(pieza:Dictionary) -> bool:
 	return false
 
 func vender_pieza(pieza:Dictionary, valor:int):
+	
 	for i in range(inventario_actual.size()):
 		if inventario_actual[i]["nombre"] == pieza["nombre"]:
 			# Realizar la venta
 			
 			inventario_actual[i]["cantidad"] -= 1
-			monedas_actual += valor
+			if !globalJuego.debug:
+				monedas_actual += valor
 			
+				
 			# Emitir señales
 			monedas_cambiadas.emit(monedas_actual)
 			pieza_comprada.emit(inventario_actual[i])  # Reutilizamos esta señal para actualizar UI
