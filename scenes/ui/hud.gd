@@ -16,7 +16,13 @@ extends CanvasLayer
 
 @onready var imagen_debilidades= $Control/PanelSuperior/imagenDebilidades
 
+# texto debug
+@onready var label_debug_temporal: Label = $Control/Label_debug_temporal
+
+
+
 func _ready():
+	label_debug_temporal.text = "Debug: " + str(globalJuego.debug) # true y # false
 	# ocultar la tienda
 	tienda_contenido.visible = false
 	# Conectar las señales globales para actualizar la UI automáticamente
@@ -32,7 +38,10 @@ func _ready():
 	
 	
 func _actualizar_monedas(nuevas_monedas: int) -> void:
-	monedas_label.text = "💰 " + str(nuevas_monedas)
+	if !globalJuego.debug:
+		monedas_label.text = "💰 " + str(nuevas_monedas)
+	else: 
+		monedas_label.text = "💰 " + "infinito"
 
 func _actualizar_vidas(nuevas_vidas: int) -> void:
 	vidas_label.text = "❤️ " + str(nuevas_vidas) + "/" + str(globalJuego.vidaMax)
