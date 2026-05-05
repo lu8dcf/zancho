@@ -7,9 +7,9 @@
 render_priority = 0
 shader = ExtResource("1_cui4x")
 shader_parameter/albedo_tex = ExtResource("2_sca83")
-shader_parameter/force_srgb = false
-shader_parameter/light_yaw = 250.000011875
-shader_parameter/light_pitch = 49.28600661608499
-shader_parameter/min_brightness = 0.3
-shader_parameter/max_brightness = 1.150000054625
-shader_parameter/light_strength = 1.0
+shader_parameter/shadow_softness = 0.5
+shader_parameter/light_intensity = 0.6
+shader_parameter/ambient_strength = 0.2
+shader_parameter/shadow_color_tint = Color(0.1, 0.1, 0.2, 1)
+shader_parameter/saturation = 1.1
+shader_parameter/contrast = 1.0
