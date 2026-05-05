@@ -130,7 +130,7 @@ func llego_al_piso():
 func _on_body_entered(_body):
 	if pieza_colocada : return # solo se ejecuta en el inicio
 	# este if es para que solo tenga un efecto de sonido cuando rebota 
-	create_dust_effect()# Efecto de polvo
+	#create_dust_effect()# Efecto de polvo
 	Sonidos.impacto()# Sonido de golpe
 	
 func create_dust_effect(): # Particulas al pegar con el tablero
