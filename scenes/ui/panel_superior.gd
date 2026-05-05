@@ -4,11 +4,11 @@ extends Panel
 @onready var boton_debilidades = $BotonDebilidades
 @onready var boton_reiniciar_camera = $BotonReiniciarCamara
 @onready var imagen_debilidades = $imagenDebilidades
-@onready var empezar_oleada: Button = $empezar_oleada
+@onready var empezar_oleada = $empezar_oleada
 
 
 func _ready() -> void:
-	empezar_oleada.text = "Empezar Oleada " + str(globalJuego.oleada_actual)
+	empezar_oleada.cambiar_texto("Empezar Oleada " + str(globalJuego.oleada_actual))
 	globalJuego.oleada_cambiada.connect(_actualizar_oleada)
 	_actualizar_oleada(globalJuego.oleada_actual)
 	imagen_debilidades.texture = load("res://assets/ui/debilidades.png")
@@ -17,7 +17,7 @@ func _ready() -> void:
 
 
 func _actualizar_oleada(nueva_oleada: int) -> void:
-	empezar_oleada.text = "Empezar Oleada " + str(nueva_oleada)
+	empezar_oleada.cambiar_texto("Empezar Oleada " + str(nueva_oleada))
 	#oleada_label.text = " OLEADA " + str(nueva_oleada)
 	
 
@@ -43,12 +43,13 @@ func _on_boton_debilidades_pressed() -> void:
 func _on_empezar_oleada_pressed() -> void:
 	globalJuego.empezo_oleada = true
 	# falta llamar a la globalSignal de empezar la oleada
-	if globalJuego.empezo_oleada and empezar_oleada.text == "Empezar Oleada " + str(globalJuego.oleada_actual):
+	
+	if globalJuego.empezo_oleada and empezar_oleada.ver_texto() == "Empezar Oleada " + str(globalJuego.oleada_actual):
 		GlobalSignal.emit_signal("comienzoOleada")
-		empezar_oleada.text = "Pausar Oleada " + str(globalJuego.oleada_actual)
-	elif globalJuego.empezo_oleada and empezar_oleada.text == "Pausar Oleada " + str(globalJuego.oleada_actual):
+		empezar_oleada.cambiar_texto("Pausar Oleada " + str(globalJuego.oleada_actual))
+	elif globalJuego.empezo_oleada and empezar_oleada.ver_texto()  == "Pausar Oleada " + str(globalJuego.oleada_actual):
 		GlobalSignal.emit_signal("controlMarcaPaso",false)
-		empezar_oleada.text = "Continuar Oleada " + str(globalJuego.oleada_actual)
-	elif globalJuego.empezo_oleada and empezar_oleada.text == "Continuar Oleada " + str(globalJuego.oleada_actual):
-		empezar_oleada.text = "Pausar Oleada " + str(globalJuego.oleada_actual)
+		empezar_oleada.cambiar_texto("Continuar Oleada " + str(globalJuego.oleada_actual))
+	elif globalJuego.empezo_oleada and empezar_oleada.ver_texto()  == "Continuar Oleada " + str(globalJuego.oleada_actual):
+		empezar_oleada.cambiar_texto("Pausar Oleada " + str(globalJuego.oleada_actual))
 		GlobalSignal.emit_signal("controlMarcaPaso",true)

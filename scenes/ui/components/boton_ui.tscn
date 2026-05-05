@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cr82cvb5b4pj7"]
+
+[ext_resource type="Script" uid="uid://djqk8seumdc60" path="res://scenes/ui/components/boton_ui.gd" id="1_8nd1q"]
+[ext_resource type="LabelSettings" uid="uid://5mxd2sj4000t" path="res://assets/fuentes/textosgrande.tres" id="2_8nd1q"]
+
+[node name="TextureButton" type="TextureButton" unique_id=94794210]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -194.5
+offset_top = -21.0
+offset_right = -56.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("1_8nd1q")
+
+[node name="Label" type="Label" parent="." unique_id=758515416]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 40
+label_settings = ExtResource("2_8nd1q")
