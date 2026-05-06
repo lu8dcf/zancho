@@ -35,6 +35,10 @@ physics_material_override = SubResource("PhysicsMaterial_c11s1")
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_c11s1")
+pieza_tipo = null
+pieza_blanca = null
+id = null
+pieza_sitio = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1624874680]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60533905, 0)
@@ -49,14 +53,6 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_4vkcs")
 draw_pass_1 = SubResource("SphereMesh_krwjw")
 draw_skin = SubResource("Skin_xmeed")
-
-[node name="AttackTimer" type="Timer" parent="." unique_id=52186406]
-
-[node name="HealthBar" type="ProgressBar" parent="." unique_id=2010147779]
-offset_left = 82.0
-offset_top = 46.0
-offset_right = 168.0
-offset_bottom = 74.0
 
 [node name="ContenedorMovimiento" type="Node3D" parent="." unique_id=1845823207]
 

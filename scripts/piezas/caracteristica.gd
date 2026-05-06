@@ -7,7 +7,7 @@ class_name PiezaDato
 @export var danio: int
 
 @export var tipo: int
-@export var blanco: int
+@export var blanco: bool
 
 @export var ataque: Array[Vector3i]
 
