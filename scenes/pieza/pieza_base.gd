@@ -249,10 +249,12 @@ func giro(angulo):
 	var rotacion_destino = angulo
 	#print ("actual ",rotacion_actual,"ang ",angulo)
 	#calcular el giro mas corto
-	
+	Sonidos.giro()
 	tween.tween_property(self, "rotation_degrees:y", rotacion_destino, 0.5)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
+	
+	
 	
 	pieza_colocada = true
 	physics_material_override.bounce = 0
