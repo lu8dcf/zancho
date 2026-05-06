@@ -15,7 +15,7 @@ func _ready():
 	#Señal de control
 	GlobalSignal.connect("controlMarcaPaso",control)
 	# Señal de cambio de velocidad
-	GlobalSignal.connect("velocidadMarcaPaso",multiplicador)
+	GlobalSignal.connect("aceleraMarcaPaso",multiplicador)
 
 func _on_mi_timer_timeout():
 	GlobalSignal.marcaPaso.emit() # Señal que marcara a las piezas ejecucion del paso
