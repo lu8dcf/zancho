@@ -36,14 +36,14 @@ func configurar_ataque():
 		]
 	crear_ataques(direcciones)
 
-# 🔨 Crea un CollisionShape3D para cada dirección (ataque a 1 casilla)
+# Crea un CollisionShape3D para cada dirección (ataque a 1 casilla)
 func crear_ataques(direcciones):
 	for dir in direcciones:
 		var posicion_ataque = owner.global_position + dir * espaciado * 0.707
 		crear_attack_shape(posicion_ataque)
 
 
-# 🎯 Crea un CollisionShape3D y lo posiciona correctamente
+# Crea un CollisionShape3D y lo posiciona correctamente
 func crear_attack_shape(posicion: Vector3):
 	#print ("crea collision ", posicion.x," ",posicion.y," ",posicion.z)
 	var shape = CollisionShape3D.new()

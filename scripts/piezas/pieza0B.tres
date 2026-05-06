@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PiezaDato" format=3 uid="uid://cfmpdxqgscp8d"]
+
+[ext_resource type="Script" uid="uid://ckv37534c60of" path="res://scripts/piezas/caracteristica.gd" id="1_c6roq"]
+
+[resource]
+script = ExtResource("1_c6roq")
+metadata/_custom_type_script = "uid://ckv37534c60of"
