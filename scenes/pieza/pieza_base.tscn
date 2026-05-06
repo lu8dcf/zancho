@@ -6,7 +6,7 @@
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_c11s1"]
 height = 1.2026215
-radius = 0.6303711
+radius = 0.4711914
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4vkcs"]
 emission_shape_scale = Vector3(0.1, 1, 0.1)
@@ -35,10 +35,6 @@ physics_material_override = SubResource("PhysicsMaterial_c11s1")
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_c11s1")
-pieza_tipo = null
-pieza_blanca = null
-id = null
-pieza_sitio = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1624874680]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60533905, 0)

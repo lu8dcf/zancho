@@ -25,21 +25,16 @@ func limpiar_ataques_existentes():
 	for child in owner.area_ataque.get_children():
 		if child is CollisionShape3D:
 			child.queue_free()
-
-func configurar_ataque():
-	var direcciones = [
-		  Vector3( 1, 0,  1), Vector3( 1, 0, -1)
-	]
-	if not owner.pieza_blanca:
-		direcciones = [
-			 Vector3(-1, 0,  1), Vector3(-1, 0, -1)
-		]
-	crear_ataques(direcciones)
-
+			
 # Crea un CollisionShape3D para cada dirección (ataque a 1 casilla)
-func crear_ataques(direcciones):
-	for dir in direcciones:
-		var posicion_ataque = owner.global_position + dir * espaciado * 0.707
+func configurar_ataque():
+	
+	var hipotenuza=1 
+	if owner.pieza_tipo==1:
+		hipotenuza=0.707
+	
+	for dir in owner.pieza.ataque:
+		var posicion_ataque = owner.global_position + dir * espaciado * hipotenuza
 		crear_attack_shape(posicion_ataque)
 
 
@@ -51,7 +46,7 @@ func crear_attack_shape(posicion: Vector3):
 	
 	# Configurar el cilindro
 	# Radio = diámetro / 2 = (0.5 * espaciado) / 2 = 0.25 * espaciado
-	cylinder_shape.radius = 0.25 * espaciado  # Diámetro = 0.5 * espaciado
+	cylinder_shape.radius = 0.10 * espaciado  # Diámetro = 0.5 * espaciado
 	cylinder_shape.height = espaciado          # Altura = espaciado
 		
 	shape.shape = cylinder_shape

@@ -58,6 +58,7 @@ func _ready():
 	if pieza_blanca: color="B" 	
 	
 	pieza = load("res://scripts/piezas/pieza"+ str(pieza_tipo) + color +".tres")
+	
 	# Configurar física
 	linear_velocity = Vector3(0, linear_velocity.y, 0)  # que no se mueva a los costados
 	#rebote
@@ -115,7 +116,7 @@ func cargar_movimiento(): # agrega el nodo movimiento con el script correspondie
 
 func cargar_ataque(): # agrega el nodo ataque con el script correspondiente a la pieza
 	var ataque = ataque_especifico.instantiate()
-	var ataque_script = "res://scenes/pieza/ataque/ataque"+str(pieza_tipo)+".gd"
+	var ataque_script = "res://scenes/pieza/ataque/ataque1.gd"
 	var script = load(ataque_script)
 	ataque.set_script(script)
 	add_child(ataque)
