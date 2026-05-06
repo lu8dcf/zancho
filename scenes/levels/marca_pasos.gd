@@ -2,6 +2,7 @@ extends Timer
 class_name MarcaPaso
 
 
+
 func _ready():
 	# inicializar 
 	wait_time = globalJuego.tiempo_pasos  # duracion
@@ -32,4 +33,8 @@ func control(activa):
 func multiplicador(multi):
 	if multi < 1 or multi >5:
 		return
-	wait_time = globalJuego.tiempo_pasos / multi
+	#wait_time = globalJuego.tiempo_pasos / multi
+
+
+	var escala = float(multi) * 0.5  # 1=1.0 (100%), 2=1.5 (150%), ..., 5=4.0 (400%)
+	Engine.time_scale = escala

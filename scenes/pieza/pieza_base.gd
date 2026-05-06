@@ -1,5 +1,9 @@
 extends RigidBody3D
 class_name PiezaBase
+
+# Parametros de mundo
+var espaciado = GlobalJuego.espaciado_baldosas
+
 # Propiedades de la pieza
 
 #clase de pieza
@@ -8,7 +12,7 @@ class_name PiezaBase
 @export var id:int # id de registro en base de datos
 @export var pieza_sitio:Vector2i
 
-# CArga de parametros 
+# CArga de parametros pieza
 var vida = Piezas.vida[pieza_tipo]
 var danio = Piezas.danio[pieza_tipo]
 var cadencia = Piezas.cadencia[pieza_tipo]
@@ -27,6 +31,8 @@ var ataque_especifico = preload("res://scenes/pieza/ataque/Ataque.tscn") # defin
 @onready var dust_particles = $DustParticles
 @onready var attack_timer = $AttackTimer
 @onready var giro_inicial = $GiroInicial
+#Area de ataque
+@onready var area_ataque: Area3D = $AreaAtaque
 
 # Contenedor par acargar escena del modelo
 @onready var contenedor_movimiento : Node3D = $ContenedorMovimiento # contenedor modelo imagen y funciones
@@ -60,6 +66,7 @@ func _ready():
 	
 	posicionamiento_giro() # gira la pieza a su posicion en grados
 	cargar_movimiento() # Script de movimiento y estados
+	cargar_ataque() # Scrip de zona de ataque
 	#GlobalSignal.connect("marcaPaso",anima_idle)
 	anima_idle()
 
@@ -105,7 +112,7 @@ func cargar_movimiento(): # agrega el nodo movimiento con el script correspondie
 
 func cargar_ataque(): # agrega el nodo ataque con el script correspondiente a la pieza
 	var ataque = ataque_especifico.instantiate()
-	var ataque_script = "res://scenes/pieza/movimiento/mov"+str(pieza_tipo)+ color+".gd"
+	var ataque_script = "res://scenes/pieza/ataque/ataque"+str(pieza_tipo)+".gd"
 	var script = load(ataque_script)
 	ataque.set_script(script)
 	add_child(ataque)
@@ -123,7 +130,7 @@ func llego_al_piso():
 func _on_body_entered(_body):
 	if pieza_colocada : return # solo se ejecuta en el inicio
 	# este if es para que solo tenga un efecto de sonido cuando rebota 
-	create_dust_effect()# Efecto de polvo
+	#create_dust_effect()# Efecto de polvo
 	Sonidos.impacto()# Sonido de golpe
 	
 func create_dust_effect(): # Particulas al pegar con el tablero
@@ -148,14 +155,7 @@ func check_for_enemies():
 	
 	var nearest_enemy = null
 	
-	
-	for result in results:
-		pass
-		#if body is ChessPiece and body.team != team and body.is_alive:
-		#	var distance = global_position.distance_to(body.global_position)
-		#	if distance < nearest_distance:
-		#		nearest_distance = distance
-		#		nearest_enemy = body
+		
 	
 	target_piece = nearest_enemy
 	
@@ -231,7 +231,7 @@ func verificar_proximo_paso(cambio):
 	# convierto la proxima posicion en 2Di para 
 	var nuevo_sitio = Vector2i(sitio3d.x,sitio3d.z)  # en 2d
 	if globalJuego.lugar_disponible(nuevo_sitio)==false:
-		print (pieza_sitio," ocupado")
+		#print (pieza_sitio," ocupado")
 		return false
 	return true
 		

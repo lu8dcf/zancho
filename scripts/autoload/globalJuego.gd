@@ -3,6 +3,11 @@ extends Node
 # ESTE SCRIPT ES GLOBAL - Se puede acceder desde CUALQUIER parte del juego
 # Ejemplo: GameGlobal.monedas, GameGlobal.oleada_actual, etc.
 
+### - DEBUG SI ES TRUE ENTONCES TODO ESTA PERMITIDO
+
+var debug :bool = true 
+
+### - DEBUG SI ES TRUE ENTONCES TODO ESTA PERMITIDO
 
 var vidas: int = 20              # vidas del castillo/jugador
 var vidaMax: int = 20

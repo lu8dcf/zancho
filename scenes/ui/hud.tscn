@@ -250,6 +250,15 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = " + "
 
+[node name="Label_debug_temporal" type="Label" parent="Control" unique_id=1099801254]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 8.0
+offset_right = 286.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 30
+text = "Debug: "
+
 [connection signal="pressed" from="Control/PanelSuperior/empezar_oleada" to="Control/PanelSuperior" method="_on_empezar_oleada_pressed"]
 [connection signal="pressed" from="Control/PanelSuperior/acelerar" to="Control/PanelSuperior" method="_on_acelerar_pressed"]
 [connection signal="pressed" from="Control/PanelSuperior/BotonMenu" to="." method="_on_boton_menu_pressed"]
