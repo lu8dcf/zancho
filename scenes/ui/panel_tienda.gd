@@ -12,10 +12,18 @@ var tienda_visible: bool = false
 # posiciones 
 var posicion_oculta : Vector2
 var posicion_visible : Vector2
+var posicion_boton_visible : Vector2
+var posicion_boton_oculta : Vector2
+
+var altura_boton_visible: float = 100  # altura de tamaño de botón
+
 func _ready():
 	# Guardar la posición actual como visible
 	posicion_visible = imagen_tienda.position
-	posicion_oculta = posicion_visible + Vector2(0, imagen_tienda.size.y)
+	posicion_oculta = posicion_visible + Vector2(0, imagen_tienda.size.y - altura_boton_visible)
+	
+	posicion_boton_visible = boton_de_despliegue.position
+	posicion_boton_oculta = posicion_boton_visible - Vector2(0, imagen_tienda.size.y - altura_boton_visible)
 	
 	boton_de_despliegue.pressed.connect(_alternar_tienda)
 

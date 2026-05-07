@@ -120,3 +120,7 @@ func verificar_orden_aparicion(pieza_nombre:String)->bool:
 	if pieza_nombre in orden_aparicion:
 		return globalJuego.oleada_actual < orden_aparicion[pieza_nombre]
 	return false
+
+func obtener_pieza_dicc(nombre):
+	for i in piezas_disponibles_tienda:
+		return i 

@@ -22,6 +22,12 @@
 [ext_resource type="Texture2D" uid="uid://dwranewqi33yc" path="res://assets/ui/caballo.png" id="16_d5po8"]
 [ext_resource type="Texture2D" uid="uid://meask5j166mr" path="res://assets/ui/torre.png" id="17_7yoph"]
 [ext_resource type="Texture2D" uid="uid://vq8bkiu572s0" path="res://assets/ui/reina.png" id="18_qmm8d"]
+[ext_resource type="Script" uid="uid://byt8a3fhqtffq" path="res://scenes/ui/piezas_tienda.gd" id="23_t0png"]
+[ext_resource type="Texture2D" uid="uid://bj25xdf4tm2lw" path="res://assets/ui/howerpiezas.png" id="24_b6swc"]
+[ext_resource type="Texture2D" uid="uid://ct2qbt3qu4w64" path="res://assets/ui/botonventa.png" id="25_27rlx"]
+[ext_resource type="Texture2D" uid="uid://c18pwmuvmg0fr" path="res://assets/ui/botonventapress.png" id="26_vuvg6"]
+[ext_resource type="Texture2D" uid="uid://bv8twqegsofot" path="res://assets/ui/botoncompra.png" id="27_emer0"]
+[ext_resource type="Texture2D" uid="uid://d3vclh5ease2c" path="res://assets/ui/botoncomprapress.png" id="28_kfdjh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kicr4"]
 
@@ -30,6 +36,10 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_65nxt"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1e6lo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xdlig"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lptj4"]
 
 [node name="Hud" type="CanvasLayer" unique_id=1065574844]
 script = ExtResource("1_hqnrr")
@@ -336,9 +346,9 @@ script = ExtResource("4_136eg")
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.84653825
-anchor_top = 0.43428782
+anchor_top = 0.3622473
 anchor_right = 0.9506872
-anchor_bottom = 1.0053099
+anchor_bottom = 0.93326944
 offset_left = -946.7549
 offset_top = -250.30563
 offset_right = 5.949005
@@ -352,10 +362,10 @@ metadata/_edit_use_anchors_ = true
 [node name="boton_de_despliegue" type="TextureButton" parent="Control/PanelTienda/ImagenTienda" unique_id=1941167755]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 1.0002695
-anchor_top = 0.0031321966
-anchor_right = 1.0164214
-anchor_bottom = 0.006264393
+anchor_left = 0.991127
+anchor_top = 0.019030444
+anchor_right = 1.0082945
+anchor_bottom = 0.022162639
 offset_left = -165.6806
 offset_top = -64.97014
 offset_right = -0.080444336
@@ -365,6 +375,230 @@ texture_normal = ExtResource("8_kicr4")
 ignore_texture_size = true
 stretch_mode = 0
 metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="Control/PanelTienda/ImagenTienda" unique_id=1017335420]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -127.41528
+offset_top = -221.49998
+offset_bottom = 298.50003
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_xdlig")
+
+[node name="Peon" type="Panel" parent="Control/PanelTienda/ImagenTienda/Panel" unique_id=734255993]
+layout_mode = 0
+offset_left = -128.0
+offset_right = 128.0
+offset_bottom = 96.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_lptj4")
+script = ExtResource("23_t0png")
+
+[node name="hover" parent="Control/PanelTienda/ImagenTienda/Panel/Peon" unique_id=1847876714 instance=ExtResource("4_4jqwt")]
+layout_mode = 1
+offset_left = 16.0
+offset_top = -72.0
+offset_right = 120.0
+offset_bottom = 48.0
+texture_normal = ExtResource("24_b6swc")
+
+[node name="pieza" parent="Control/PanelTienda/ImagenTienda/Panel/Peon" unique_id=244187956 instance=ExtResource("4_4jqwt")]
+layout_mode = 1
+offset_left = 8.0
+offset_top = -64.0
+offset_right = 96.0
+offset_bottom = 48.0
+texture_normal = ExtResource("14_4mi7y")
+
+[node name="venta" parent="Control/PanelTienda/ImagenTienda/Panel/Peon" unique_id=516178432 instance=ExtResource("4_4jqwt")]
+layout_mode = 1
+offset_left = -116.0
+offset_top = -25.0
+offset_right = -60.0
+offset_bottom = 31.0
+texture_normal = ExtResource("25_27rlx")
+texture_hover = ExtResource("26_vuvg6")
+
+[node name="compra" parent="Control/PanelTienda/ImagenTienda/Panel/Peon" unique_id=1336696887 instance=ExtResource("4_4jqwt")]
+layout_mode = 1
+offset_left = -67.0
+offset_top = -24.0
+offset_right = -12.0
+offset_bottom = 31.0
+texture_normal = ExtResource("27_emer0")
+texture_hover = ExtResource("28_kfdjh")
+
+[node name="Alfil" type="Panel" parent="Control/PanelTienda/ImagenTienda/Panel" unique_id=378200084]
+layout_mode = 0
+offset_left = -128.0
+offset_top = 103.0
+offset_right = 128.0
+offset_bottom = 199.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_lptj4")
+
+[node name="hover" parent="Control/PanelTienda/ImagenTienda/Panel/Alfil" unique_id=1170838134 instance=ExtResource("4_4jqwt")]
+layout_mode = 1
+offset_left = 19.0
+offset_top = -64.0
+offset_right = 115.0
+offset_bottom = 48.0
+texture_normal = ExtResource("24_b6swc")
+
+[node name="pieza" parent="Control/PanelTienda/ImagenTienda/Panel/Alfil" unique_id=598249990 instance=ExtResource("4_4jqwt")]
+layout_mode = 1
+offset_left = 8.0
+offset_top = -64.0
+offset_right = 88.0
+offset_bottom = 40.0
+texture_normal = ExtResource("15_pkwgd")
+
+[node name="venta" parent="Control/PanelTienda/ImagenTienda/Panel/Alfil" unique_id=1304658711 instance=ExtResource("4_4jqwt")]
+layout_mode = 1
+offset_left = -116.0
+offset_top = -25.0
+offset_right = -60.0
+offset_bottom = 31.0
+texture_normal = ExtResource("25_27rlx")
+texture_hover = ExtResource("26_vuvg6")
+
+[node name="compra" parent="Control/PanelTienda/ImagenTienda/Panel/Alfil" unique_id=452076840 instance=ExtResource("4_4jqwt")]
+layout_mode = 1
+offset_left = -67.0
+offset_top = -24.0
+offset_right = -12.0
+offset_bottom = 31.0
+texture_normal = ExtResource("27_emer0")
+texture_hover = ExtResource("28_kfdjh")
+
+[node name="Caballo" type="Panel" parent="Control/PanelTienda/ImagenTienda/Panel" unique_id=1418576254]
+layout_mode = 0
+offset_left = -128.0
+offset_top = 206.0
+offset_right = 128.0
+offset_bottom = 302.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_lptj4")
+
+[node name="hover" parent="Control/PanelTienda/ImagenTienda/Panel/Caballo" unique_id=2060644772 instance=ExtResource("4_4jqwt")]
+layout_mode = 1
+offset_left = 23.0
+offset_top = -66.0
+offset_right = 119.0
+offset_bottom = 46.0
+texture_normal = ExtResource("24_b6swc")
+
+[node name="pieza" parent="Control/PanelTienda/ImagenTienda/Panel/Caballo" unique_id=1863160420 instance=ExtResource("4_4jqwt")]
+layout_mode = 1
+offset_left = 16.0
+offset_top = -54.0
+offset_right = 88.0
+offset_bottom = 40.0
+texture_normal = ExtResource("16_d5po8")
+
+[node name="venta" parent="Control/PanelTienda/ImagenTienda/Panel/Caballo" unique_id=432214769 instance=ExtResource("4_4jqwt")]
+layout_mode = 1
+offset_left = -116.0
+offset_top = -25.0
+offset_right = -60.0
+offset_bottom = 31.0
+texture_normal = ExtResource("25_27rlx")
+texture_hover = ExtResource("26_vuvg6")
+
+[node name="compra" parent="Control/PanelTienda/ImagenTienda/Panel/Caballo" unique_id=540299542 instance=ExtResource("4_4jqwt")]
+layout_mode = 1
+offset_left = -67.0
+offset_top = -24.0
+offset_right = -12.0
+offset_bottom = 31.0
+texture_normal = ExtResource("27_emer0")
+texture_hover = ExtResource("28_kfdjh")
+
+[node name="Torre" type="Panel" parent="Control/PanelTienda/ImagenTienda/Panel" unique_id=1246697893]
+layout_mode = 0
+offset_left = -128.0
+offset_top = 305.0
+offset_right = 128.0
+offset_bottom = 401.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_lptj4")
+
+[node name="hover" parent="Control/PanelTienda/ImagenTienda/Panel/Torre" unique_id=950757460 instance=ExtResource("4_4jqwt")]
+layout_mode = 1
+offset_left = 20.0
+offset_top = -63.0
+offset_right = 116.0
+offset_bottom = 49.0
+texture_normal = ExtResource("24_b6swc")
+
+[node name="pieza" parent="Control/PanelTienda/ImagenTienda/Panel/Torre" unique_id=1977194678 instance=ExtResource("4_4jqwt")]
+layout_mode = 1
+offset_left = 24.0
+offset_top = -41.0
+offset_right = 88.0
+offset_bottom = 40.0
+texture_normal = ExtResource("17_7yoph")
+
+[node name="venta" parent="Control/PanelTienda/ImagenTienda/Panel/Torre" unique_id=2045281610 instance=ExtResource("4_4jqwt")]
+layout_mode = 1
+offset_left = -116.0
+offset_top = -25.0
+offset_right = -60.0
+offset_bottom = 31.0
+texture_normal = ExtResource("25_27rlx")
+texture_hover = ExtResource("26_vuvg6")
+
+[node name="compra" parent="Control/PanelTienda/ImagenTienda/Panel/Torre" unique_id=753355172 instance=ExtResource("4_4jqwt")]
+layout_mode = 1
+offset_left = -67.0
+offset_top = -24.0
+offset_right = -12.0
+offset_bottom = 31.0
+texture_normal = ExtResource("27_emer0")
+texture_hover = ExtResource("28_kfdjh")
+
+[node name="Reina" type="Panel" parent="Control/PanelTienda/ImagenTienda/Panel" unique_id=620749729]
+layout_mode = 0
+offset_left = -128.0
+offset_top = 407.0
+offset_right = 128.0
+offset_bottom = 503.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_lptj4")
+
+[node name="hover" parent="Control/PanelTienda/ImagenTienda/Panel/Reina" unique_id=351944124 instance=ExtResource("4_4jqwt")]
+layout_mode = 1
+offset_left = 20.0
+offset_top = -62.0
+offset_right = 116.0
+offset_bottom = 50.0
+texture_normal = ExtResource("24_b6swc")
+
+[node name="pieza" parent="Control/PanelTienda/ImagenTienda/Panel/Reina" unique_id=1461484859 instance=ExtResource("4_4jqwt")]
+layout_mode = 1
+offset_left = 15.0
+offset_top = -46.0
+offset_right = 90.0
+offset_bottom = 58.0
+texture_normal = ExtResource("18_qmm8d")
+
+[node name="venta" parent="Control/PanelTienda/ImagenTienda/Panel/Reina" unique_id=278239247 instance=ExtResource("4_4jqwt")]
+layout_mode = 1
+offset_left = -116.0
+offset_top = -25.0
+offset_right = -60.0
+offset_bottom = 31.0
+texture_normal = ExtResource("25_27rlx")
+texture_hover = ExtResource("26_vuvg6")
+
+[node name="compra" parent="Control/PanelTienda/ImagenTienda/Panel/Reina" unique_id=1358269943 instance=ExtResource("4_4jqwt")]
+layout_mode = 1
+offset_left = -67.0
+offset_top = -24.0
+offset_right = -12.0
+offset_bottom = 31.0
+texture_normal = ExtResource("27_emer0")
+texture_hover = ExtResource("28_kfdjh")
 
 [node name="Label_debug_temporal" type="Label" parent="Control" unique_id=1099801254]
 layout_mode = 0
@@ -384,3 +618,7 @@ text = "Debug: "
 [connection signal="pressed" from="Control/PanelSuperior/BotonDebilidades" to="Control/PanelSuperior" method="_on_boton_debilidades_pressed"]
 [connection signal="pressed" from="Control/PanelSuperior/BotonReiniciarCamara" to="Control/PanelSuperior" method="_on_boton_reiniciar_camara_pressed"]
 [connection signal="pressed" from="Control/PanelInferior/BotonVender" to="Control/PanelInferior" method="_on_boton_vender_pressed"]
+[connection signal="mouse_entered" from="Control/PanelTienda/ImagenTienda/Panel/Peon/pieza" to="Control/PanelTienda/ImagenTienda/Panel/Peon" method="_on_pieza_mouse_entered"]
+[connection signal="mouse_exited" from="Control/PanelTienda/ImagenTienda/Panel/Peon/pieza" to="Control/PanelTienda/ImagenTienda/Panel/Peon" method="_on_pieza_mouse_exited"]
+[connection signal="pressed" from="Control/PanelTienda/ImagenTienda/Panel/Peon/venta" to="Control/PanelTienda/ImagenTienda/Panel/Peon" method="_on_venta_pressed"]
+[connection signal="pressed" from="Control/PanelTienda/ImagenTienda/Panel/Peon/compra" to="Control/PanelTienda/ImagenTienda/Panel/Peon" method="_on_compra_pressed"]
