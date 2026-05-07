@@ -1,7 +1,15 @@
 extends CollisionShape3D
 
+var pieza_padre: Ataque
 # Esta función se llama cuando algo entra en esta área
 func _ready():
+	pieza_padre = get_parent() as Ataque
+	# Verificar que se obtuvo correctamente
+	if not pieza_padre:
+		print ("El componente Peon debe ser hijo directo de una PiezaBase")
+		return
+	# Conectar señal después de que la pieza esté lista
+	await pieza_padre.ready
 	# Asegurar que el área padre pueda detectar colisiones
 	var parent_area = get_parent()
 	if parent_area is Area3D:
@@ -20,9 +28,12 @@ func _on_area_entered(area: Area3D):
 func manejar_ataque(body):
 	# Verificar que sea del equipo contrario
 	var atacante_blanca = body.pieza_blanca
-	var atacante_tipo = body.pieza_tipo
 	
-	if body.pieza_blanca == true:
+	if body.pieza_blanca == owner.pieza_blanca:
+		return
 		
-		print("⚔️ Ataque detectado!"," blanca ",atacante_blanca," tipo ",atacante_tipo)
+	var atacante_tipo = body.pieza_tipo
+	var atacante_posicion = body.position
+	
+	print("⚔️ Ataque detectado!"," yo ",owner.pieza_blanca," ",owner.pieza_tipoa," ata ",atacante_tipo," ",atacante_blanca)
 		#pieza.recibir_ataque(atacante_tipo, get_meta("origen"))

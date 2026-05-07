@@ -57,7 +57,7 @@ func _ready():
 	#print (pieza_sitio)
 	if pieza_blanca: color="B" 	
 	
-	pieza = load("res://scripts/piezas/pieza"+ str(pieza_tipo) + color +".tres")
+	pieza = load("res://scripts/resource/pieza"+ str(pieza_tipo) + color +".tres")
 	
 	# Configurar física
 	linear_velocity = Vector3(0, linear_velocity.y, 0)  # que no se mueva a los costados
