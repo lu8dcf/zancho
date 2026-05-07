@@ -5,10 +5,9 @@
 
 [resource]
 script = ExtResource("1_c6roq")
-escena = ExtResource("1_6g21f")
+modelo = ExtResource("1_6g21f")
 nombre = "Rey Blanco"
-vida = 1000
-danio = 5
+vida = 1000.0
 blanco = true
-ataque = Array[Vector3i]([Vector3i(1, 0, 0), Vector3i(-1, 0, 0), Vector3i(0, 0, 1), Vector3i(0, 0, -1), Vector3i(1, 0, 1), Vector3i(1, 0, -1), Vector3i(-1, 0, 1), Vector3i(-1, 0, -1)])
+ataque = Array[Vector3i]([Vector3i(2, 0, 0), Vector3i(-2, 0, 0), Vector3i(0, 0, 2), Vector3i(0, 0, -2), Vector3i(1, 0, 1), Vector3i(1, 0, -1), Vector3i(-1, 0, 1), Vector3i(-1, 0, -1)])
 metadata/_custom_type_script = "uid://ckv37534c60of"

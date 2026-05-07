@@ -79,14 +79,9 @@ func _physics_process(_delta: float) -> void:
 		animation_player.play("ataque_rey")
 	
 func cargar_objeto():
-	var objeto = "res://assets/modelos/piezas/pieza_"+ str(pieza_tipo) + color +".tscn"
-	var modelo_objeto = load(objeto)
-	if not modelo_objeto:
-		print ("No se puede cargar la escena del objeto pieza")
-		return
-		
+			
 	# Instanciar y agregar al contenedor
-	instancia_objeto_pieza = modelo_objeto.instantiate()
+	instancia_objeto_pieza = pieza.modelo.instantiate()
 	contenedor_movimiento.add_child(instancia_objeto_pieza)
 	
 	# Buscar el AnimationPlayer dentro de esta instancia

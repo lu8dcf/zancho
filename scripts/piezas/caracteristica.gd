@@ -1,10 +1,13 @@
 extends Resource
 class_name PiezaDato
 
-@export var escena : PackedScene
+@export var modelo : PackedScene
 @export var nombre: String
-@export var vida: int
-@export var danio: int
+@export var vida: float
+@export var danio: float
+@export var bonus: float
+@export var bonus_a: int
+
 
 @export var tipo: int
 @export var blanco: bool

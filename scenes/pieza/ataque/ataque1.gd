@@ -28,13 +28,9 @@ func limpiar_ataques_existentes():
 			
 # Crea un CollisionShape3D para cada dirección (ataque a 1 casilla)
 func configurar_ataque():
-	
-	var hipotenuza=1 
-	if owner.pieza_tipo==1:
-		hipotenuza=0.707
-	
+		
 	for dir in owner.pieza.ataque:
-		var posicion_ataque = owner.global_position + dir * espaciado * hipotenuza
+		var posicion_ataque = owner.global_position + dir * espaciado * 0.707
 		crear_attack_shape(posicion_ataque)
 
 

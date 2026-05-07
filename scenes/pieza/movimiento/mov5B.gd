@@ -134,18 +134,18 @@ func obtengo_posicion_baldosa() -> Vector3:
 func girar(direccion: Vector3i): #giro la reina en base a la direccion del objetivo
 	match round(direccion):
 		Vector3i(0,0,-1): #awrriba
-			owner.giro(-90)
+			owner.giro(-225)
 		Vector3i(1, 0, -1): #arriba derecha
 			owner.giro(225) 
 		Vector3i(1, 0, 0): # derecha
-			owner.giro(-180)
+			owner.giro(135)
 		Vector3i(1, 0, 1): # abajo-derecha
 			owner.giro(135)
 		Vector3i(0, 0, 1): # abajo
-			owner.giro(90)
+			owner.giro(45)
 		Vector3i(-1, 0, 1): # abajo-izquierda
 			owner.giro(45)
 		Vector3i(-1, 0, 0): # izquierda
-			owner.giro(0)
+			owner.giro(-45)
 		Vector3i(-1, 0, -1): # arriba-izquierda
 			owner.giro(-45)
