@@ -72,8 +72,6 @@ func comprar_pieza(pieza:Dictionary) -> bool:
 				monedas_actual -= pieza["precio"]
 			inventario_actual[i]["cantidad"] += 1
 			
-			# Emitir señales en orden correcto
-			print("se compro pieza: ", pieza)
 			monedas_cambiadas.emit(monedas_actual)
 			pieza_comprada.emit(inventario_actual[i])  # Emitir la pieza actualizada
 			inventario_actualizado.emit(inventario_actual)
