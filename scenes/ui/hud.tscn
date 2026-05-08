@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://jamx7xfkycmi" path="res://scenes/ui/hud.gd" id="1_hqnrr"]
 [ext_resource type="Script" uid="uid://d221g40j7vomt" path="res://scenes/ui/panel_superior.gd" id="2_136eg"]
-[ext_resource type="Texture2D" uid="uid://cdhddcfd78vcc" path="res://assets/ui/Base.png" id="2_h022r"]
+[ext_resource type="Texture2D" uid="uid://bjd7rl8ac0yoj" path="res://assets/ui/base.png" id="2_t0png"]
 [ext_resource type="Script" uid="uid://b07ubchfnu7sg" path="res://scenes/ui/panel_inferior.gd" id="3_8qguk"]
 [ext_resource type="PackedScene" uid="uid://cr82cvb5b4pj7" path="res://scenes/ui/components/boton_ui.tscn" id="4_4jqwt"]
 [ext_resource type="Script" uid="uid://bc18lchq6tbu4" path="res://scenes/ui/panel_tienda.gd" id="4_136eg"]
@@ -11,10 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://cwvpnbwrp4iri" path="res://assets/ui/compra.png" id="6_4jqwt"]
 [ext_resource type="Texture2D" uid="uid://qxw60if2rn4y" path="res://assets/ui/play.png" id="6_cwdlq"]
 [ext_resource type="Texture2D" uid="uid://dvi0oktf1va7f" path="res://assets/ui/camara.png" id="6_mj13f"]
-[ext_resource type="Texture2D" uid="uid://dcalia8ic6evb" path="res://icon.svg" id="7_cwdlq"]
+[ext_resource type="Texture2D" uid="uid://dv1lxna47cig0" path="res://icon.svg" id="7_cwdlq"]
 [ext_resource type="Texture2D" uid="uid://b0fitdy2p358h" path="res://assets/ui/avance2.png" id="7_o6xly"]
-[ext_resource type="Texture2D" uid="uid://dne8ie12kxs1t" path="res://assets/ui/carrito.png" id="8_kicr4"]
 [ext_resource type="Texture2D" uid="uid://x86kqi63xlwv" path="res://assets/ui/avance3.png" id="8_we3sy"]
+[ext_resource type="Texture2D" uid="uid://cfab8ei6ocjti" path="res://assets/ui/boton_menu_hover.png" id="10_27rlx"]
 [ext_resource type="Texture2D" uid="uid://bb30hhx8cxgrt" path="res://assets/ui/plata.png" id="10_o6xly"]
 [ext_resource type="Texture2D" uid="uid://coicbydf3ddih" path="res://assets/ui/peon.png" id="14_4mi7y"]
 [ext_resource type="Texture2D" uid="uid://calwauheh8r2o" path="res://assets/ui/corazon.png" id="14_we3sy"]
@@ -22,12 +22,13 @@
 [ext_resource type="Texture2D" uid="uid://dwranewqi33yc" path="res://assets/ui/caballo.png" id="16_d5po8"]
 [ext_resource type="Texture2D" uid="uid://meask5j166mr" path="res://assets/ui/torre.png" id="17_7yoph"]
 [ext_resource type="Texture2D" uid="uid://vq8bkiu572s0" path="res://assets/ui/reina.png" id="18_qmm8d"]
+[ext_resource type="Texture2D" uid="uid://dcitmjg7mdcgn" path="res://assets/ui/boton_carrito_idle.png" id="22_b6swc"]
+[ext_resource type="Texture2D" uid="uid://cs42h4566e3e4" path="res://assets/ui/boton_carrito_hover.png" id="23_27rlx"]
 [ext_resource type="Script" uid="uid://byt8a3fhqtffq" path="res://scenes/ui/piezas_tienda.gd" id="23_t0png"]
-[ext_resource type="Texture2D" uid="uid://bj25xdf4tm2lw" path="res://assets/ui/howerpiezas.png" id="24_b6swc"]
-[ext_resource type="Texture2D" uid="uid://ct2qbt3qu4w64" path="res://assets/ui/botonventa.png" id="25_27rlx"]
-[ext_resource type="Texture2D" uid="uid://c18pwmuvmg0fr" path="res://assets/ui/botonventapress.png" id="26_vuvg6"]
-[ext_resource type="Texture2D" uid="uid://bv8twqegsofot" path="res://assets/ui/botoncompra.png" id="27_emer0"]
-[ext_resource type="Texture2D" uid="uid://d3vclh5ease2c" path="res://assets/ui/botoncomprapress.png" id="28_kfdjh"]
+[ext_resource type="Texture2D" uid="uid://cgpyd3ttxa0ct" path="res://assets/ui/boton_venta_idle.png" id="26_b6swc"]
+[ext_resource type="Texture2D" uid="uid://c1djdjhurv5hs" path="res://assets/ui/boton_venta_hover.png" id="27_27rlx"]
+[ext_resource type="Texture2D" uid="uid://xvv4jvw3oyei" path="res://assets/ui/boton_compra_idle.png" id="28_vuvg6"]
+[ext_resource type="Texture2D" uid="uid://0n0j3ai37705" path="res://assets/ui/boton_compra_hover.png" id="29_emer0"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kicr4"]
 
@@ -49,7 +50,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -160.0
+offset_top = -121.0
 offset_right = -224.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -59,13 +60,9 @@ color = Color(0.14767182, 0.14767179, 0.14767179, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = 8.0
-offset_right = -2.0
-offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_h022r")
+texture = ExtResource("2_t0png")
 expand_mode = 1
 
 [node name="PanelSuperior" type="Panel" parent="Control" unique_id=66414413]
@@ -132,11 +129,12 @@ layout_mode = 1
 anchors_preset = 4
 anchor_left = 0.0
 anchor_right = 0.0
-offset_left = 30.0
-offset_top = -18.0
-offset_right = 119.0
-offset_bottom = 25.0
+offset_left = 0.0
+offset_top = -32.0
+offset_right = 152.0
+offset_bottom = 49.0
 grow_horizontal = 1
+texture_hover = ExtResource("10_27rlx")
 texto = "Menu"
 
 [node name="imagenDebilidades" type="TextureRect" parent="Control/PanelSuperior" unique_id=2129106426]
@@ -151,9 +149,9 @@ offset_bottom = -392.00006
 expand_mode = 3
 
 [node name="Monedas" parent="Control/PanelSuperior" unique_id=1183922721 instance=ExtResource("4_4jqwt")]
+visible = false
 layout_mode = 1
 offset_left = 228.0
-offset_top = -13.0
 offset_right = 317.9035
 offset_bottom = 24.0
 texture_normal = ExtResource("10_o6xly")
@@ -183,6 +181,7 @@ offset_bottom = 23.0
 texture_normal = ExtResource("6_mj13f")
 
 [node name="PanelInferior" type="Panel" parent="Control" unique_id=1024435106]
+visible = false
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -321,28 +320,30 @@ anchor_left = 0.84653825
 anchor_top = 0.3622473
 anchor_right = 0.9506872
 anchor_bottom = 0.93326944
-offset_left = -233.75488
-offset_top = -250.30563
-offset_right = 5.9489746
-offset_bottom = 14.079895
+offset_left = -323.50714
+offset_top = -245.68082
+offset_right = -0.05102539
+offset_bottom = 18.704773
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_4jqwt")
 expand_mode = 1
+stretch_mode = 4
 
 [node name="boton_de_despliegue" type="TextureButton" parent="Control/PanelTienda/ImagenTienda" unique_id=1941167755]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.991127
-anchor_top = 0.019030444
-anchor_right = 1.0082945
-anchor_bottom = 0.022162639
+anchor_left = 0.9618803
+anchor_top = -0.036301296
+anchor_right = 0.97904766
+anchor_bottom = -0.033169113
 offset_left = -165.6806
 offset_top = -64.97014
 offset_right = -0.080444336
 offset_bottom = 73.02987
 grow_horizontal = 0
-texture_normal = ExtResource("8_kicr4")
+texture_normal = ExtResource("22_b6swc")
+texture_hover = ExtResource("23_27rlx")
 ignore_texture_size = true
 stretch_mode = 0
 metadata/_edit_use_anchors_ = true
@@ -371,37 +372,37 @@ script = ExtResource("23_t0png")
 
 [node name="hover" parent="Control/PanelTienda/ImagenTienda/Panel/Peon" unique_id=1847876714 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = 16.0
-offset_top = -72.0
-offset_right = 120.0
-offset_bottom = 48.0
-texture_normal = ExtResource("24_b6swc")
+offset_left = -23.806274
+offset_top = -91.70442
+offset_right = 80.193726
+offset_bottom = 28.295578
 
 [node name="pieza" parent="Control/PanelTienda/ImagenTienda/Panel/Peon" unique_id=244187956 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = 8.0
-offset_top = -64.0
-offset_right = 96.0
-offset_bottom = 48.0
-texture_normal = ExtResource("14_4mi7y")
+offset_left = -12.806274
+offset_top = -78.079605
+offset_right = 75.193726
+offset_bottom = 33.920395
 
 [node name="venta" parent="Control/PanelTienda/ImagenTienda/Panel/Peon" unique_id=516178432 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = -116.0
-offset_top = -25.0
-offset_right = -60.0
-offset_bottom = 31.0
-texture_normal = ExtResource("25_27rlx")
-texture_hover = ExtResource("26_vuvg6")
+offset_left = -112.806274
+offset_top = -52.704422
+offset_right = -56.806274
+offset_bottom = 3.295578
+scale = Vector2(1.079995, 1.079995)
+texture_normal = ExtResource("26_b6swc")
+texture_hover = ExtResource("27_27rlx")
 
 [node name="compra" parent="Control/PanelTienda/ImagenTienda/Panel/Peon" unique_id=1336696887 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = -67.0
-offset_top = -24.0
-offset_right = -12.0
-offset_bottom = 31.0
-texture_normal = ExtResource("27_emer0")
-texture_hover = ExtResource("28_kfdjh")
+offset_left = -170.80627
+offset_top = -51.704422
+offset_right = -115.806274
+offset_bottom = 3.295578
+scale = Vector2(1.079995, 1.079995)
+texture_normal = ExtResource("28_vuvg6")
+texture_hover = ExtResource("29_emer0")
 
 [node name="Alfil" type="Panel" parent="Control/PanelTienda/ImagenTienda/Panel" unique_id=378200084]
 layout_mode = 0
@@ -418,33 +419,33 @@ offset_left = 19.0
 offset_top = -64.0
 offset_right = 115.0
 offset_bottom = 48.0
-texture_normal = ExtResource("24_b6swc")
 
 [node name="pieza" parent="Control/PanelTienda/ImagenTienda/Panel/Alfil" unique_id=598249990 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = 8.0
-offset_top = -64.0
-offset_right = 88.0
-offset_bottom = 40.0
-texture_normal = ExtResource("15_pkwgd")
+offset_left = -5.8062744
+offset_top = -69.70442
+offset_right = 74.193726
+offset_bottom = 34.295578
 
 [node name="venta" parent="Control/PanelTienda/ImagenTienda/Panel/Alfil" unique_id=1304658711 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = -116.0
-offset_top = -25.0
-offset_right = -60.0
-offset_bottom = 31.0
-texture_normal = ExtResource("25_27rlx")
-texture_hover = ExtResource("26_vuvg6")
+offset_left = -112.806274
+offset_top = -52.704422
+offset_right = -56.806274
+offset_bottom = 3.295578
+scale = Vector2(1.079995, 1.079995)
+texture_normal = ExtResource("26_b6swc")
+texture_hover = ExtResource("27_27rlx")
 
 [node name="compra" parent="Control/PanelTienda/ImagenTienda/Panel/Alfil" unique_id=452076840 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = -67.0
-offset_top = -24.0
-offset_right = -12.0
-offset_bottom = 31.0
-texture_normal = ExtResource("27_emer0")
-texture_hover = ExtResource("28_kfdjh")
+offset_left = -170.80627
+offset_top = -50.704422
+offset_right = -115.806274
+offset_bottom = 4.295578
+scale = Vector2(1.079995, 1.079995)
+texture_normal = ExtResource("28_vuvg6")
+texture_hover = ExtResource("29_emer0")
 
 [node name="Caballo" type="Panel" parent="Control/PanelTienda/ImagenTienda/Panel" unique_id=1418576254]
 layout_mode = 0
@@ -457,37 +458,37 @@ script = ExtResource("23_t0png")
 
 [node name="hover" parent="Control/PanelTienda/ImagenTienda/Panel/Caballo" unique_id=2060644772 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = 23.0
-offset_top = -66.0
-offset_right = 119.0
-offset_bottom = 46.0
-texture_normal = ExtResource("24_b6swc")
+offset_left = -12.806274
+offset_top = -78.70441
+offset_right = 83.193726
+offset_bottom = 33.295593
 
 [node name="pieza" parent="Control/PanelTienda/ImagenTienda/Panel/Caballo" unique_id=1863160420 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = 16.0
-offset_top = -54.0
-offset_right = 88.0
-offset_bottom = 40.0
-texture_normal = ExtResource("16_d5po8")
+offset_left = 0.19372559
+offset_top = -69.70441
+offset_right = 72.193726
+offset_bottom = 24.295593
 
 [node name="venta" parent="Control/PanelTienda/ImagenTienda/Panel/Caballo" unique_id=432214769 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = -116.0
-offset_top = -25.0
-offset_right = -60.0
-offset_bottom = 31.0
-texture_normal = ExtResource("25_27rlx")
-texture_hover = ExtResource("26_vuvg6")
+offset_left = -112.806274
+offset_top = -52.704422
+offset_right = -56.806274
+offset_bottom = 3.295578
+scale = Vector2(1.079995, 1.079995)
+texture_normal = ExtResource("26_b6swc")
+texture_hover = ExtResource("27_27rlx")
 
 [node name="compra" parent="Control/PanelTienda/ImagenTienda/Panel/Caballo" unique_id=540299542 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = -67.0
-offset_top = -24.0
-offset_right = -12.0
-offset_bottom = 31.0
-texture_normal = ExtResource("27_emer0")
-texture_hover = ExtResource("28_kfdjh")
+offset_left = -170.80627
+offset_top = -51.704422
+offset_right = -115.806274
+offset_bottom = 3.295578
+scale = Vector2(1.079995, 1.079995)
+texture_normal = ExtResource("28_vuvg6")
+texture_hover = ExtResource("29_emer0")
 
 [node name="Torre" type="Panel" parent="Control/PanelTienda/ImagenTienda/Panel" unique_id=1246697893]
 layout_mode = 0
@@ -500,37 +501,37 @@ script = ExtResource("23_t0png")
 
 [node name="hover" parent="Control/PanelTienda/ImagenTienda/Panel/Torre" unique_id=950757460 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = 20.0
-offset_top = -63.0
-offset_right = 116.0
-offset_bottom = 49.0
-texture_normal = ExtResource("24_b6swc")
+offset_left = -12.806274
+offset_top = -74.70441
+offset_right = 83.193726
+offset_bottom = 37.295593
 
 [node name="pieza" parent="Control/PanelTienda/ImagenTienda/Panel/Torre" unique_id=1977194678 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = 24.0
-offset_top = -41.0
-offset_right = 88.0
-offset_bottom = 40.0
-texture_normal = ExtResource("17_7yoph")
+offset_left = 0.19372559
+offset_top = -57.704407
+offset_right = 64.193726
+offset_bottom = 23.295593
 
 [node name="venta" parent="Control/PanelTienda/ImagenTienda/Panel/Torre" unique_id=2045281610 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = -116.0
-offset_top = -25.0
-offset_right = -60.0
-offset_bottom = 31.0
-texture_normal = ExtResource("25_27rlx")
-texture_hover = ExtResource("26_vuvg6")
+offset_left = -112.806274
+offset_top = -48.704422
+offset_right = -56.806274
+offset_bottom = 7.295578
+scale = Vector2(1.079995, 1.079995)
+texture_normal = ExtResource("26_b6swc")
+texture_hover = ExtResource("27_27rlx")
 
 [node name="compra" parent="Control/PanelTienda/ImagenTienda/Panel/Torre" unique_id=753355172 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = -67.0
-offset_top = -24.0
-offset_right = -12.0
-offset_bottom = 31.0
-texture_normal = ExtResource("27_emer0")
-texture_hover = ExtResource("28_kfdjh")
+offset_left = -170.80627
+offset_top = -47.704422
+offset_right = -115.806274
+offset_bottom = 7.295578
+scale = Vector2(1.079995, 1.079995)
+texture_normal = ExtResource("28_vuvg6")
+texture_hover = ExtResource("29_emer0")
 
 [node name="Reina" type="Panel" parent="Control/PanelTienda/ImagenTienda/Panel" unique_id=620749729]
 layout_mode = 0
@@ -547,33 +548,33 @@ offset_left = 20.0
 offset_top = -62.0
 offset_right = 116.0
 offset_bottom = 50.0
-texture_normal = ExtResource("24_b6swc")
 
 [node name="pieza" parent="Control/PanelTienda/ImagenTienda/Panel/Reina" unique_id=1461484859 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = 15.0
-offset_top = -46.0
-offset_right = 90.0
-offset_bottom = 58.0
-texture_normal = ExtResource("18_qmm8d")
+offset_left = -5.8062744
+offset_top = -64.70441
+offset_right = 69.193726
+offset_bottom = 39.295593
 
 [node name="venta" parent="Control/PanelTienda/ImagenTienda/Panel/Reina" unique_id=278239247 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = -116.0
-offset_top = -25.0
-offset_right = -60.0
-offset_bottom = 31.0
-texture_normal = ExtResource("25_27rlx")
-texture_hover = ExtResource("26_vuvg6")
+offset_left = -112.806274
+offset_top = -47.704422
+offset_right = -56.806274
+offset_bottom = 8.295578
+scale = Vector2(1.079995, 1.079995)
+texture_normal = ExtResource("26_b6swc")
+texture_hover = ExtResource("27_27rlx")
 
 [node name="compra" parent="Control/PanelTienda/ImagenTienda/Panel/Reina" unique_id=1358269943 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = -67.0
-offset_top = -24.0
-offset_right = -12.0
-offset_bottom = 31.0
-texture_normal = ExtResource("27_emer0")
-texture_hover = ExtResource("28_kfdjh")
+offset_left = -167.80627
+offset_top = -46.704422
+offset_right = -112.806274
+offset_bottom = 8.295578
+scale = Vector2(1.079995, 1.079995)
+texture_normal = ExtResource("28_vuvg6")
+texture_hover = ExtResource("29_emer0")
 
 [node name="Label_debug_temporal" type="Label" parent="Control" unique_id=1099801254]
 layout_mode = 0
