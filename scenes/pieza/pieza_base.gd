@@ -248,3 +248,6 @@ func animacion_caminata(anima):
 		anima = str(pieza_tipo)+anima
 		if animation_player.has_animation(anima):
 			animation_player.play(anima)
+
+func ataque(body):
+	pass
