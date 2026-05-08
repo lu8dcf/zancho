@@ -2,6 +2,7 @@ extends Timer
 class_name MarcaPaso
 
 
+
 func _ready():
 	# inicializar 
 	wait_time = globalJuego.tiempo_pasos  # duracion
@@ -14,7 +15,7 @@ func _ready():
 	#Señal de control
 	GlobalSignal.connect("controlMarcaPaso",control)
 	# Señal de cambio de velocidad
-	GlobalSignal.connect("velocidadMarcaPaso",multiplicador)
+	GlobalSignal.connect("aceleraMarcaPaso",multiplicador)
 
 func _on_mi_timer_timeout():
 	GlobalSignal.marcaPaso.emit() # Señal que marcara a las piezas ejecucion del paso
@@ -32,4 +33,8 @@ func control(activa):
 func multiplicador(multi):
 	if multi < 1 or multi >5:
 		return
-	wait_time = globalJuego.tiempo_pasos / multi
+	#wait_time = globalJuego.tiempo_pasos / multi
+
+
+	var escala = float(multi) * 0.5  # 1=1.0 (100%), 2=1.5 (150%), ..., 5=4.0 (400%)
+	Engine.time_scale = escala

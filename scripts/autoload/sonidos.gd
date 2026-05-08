@@ -29,7 +29,7 @@ func death():
 	
 func impacto():
 	var death_sound = AudioStreamPlayer3D.new()
-	death_sound.stream = preload("res://assets/sound/sfx/pieza_cae.mp3")
+	death_sound.stream = preload("res://assets/sound/sfx/caida.mp3")
 	add_child(death_sound)
 	death_sound.volume_db = -10 + randf_range(-5, 5)
 	death_sound.pitch_scale = 0.8 + randf_range(-0.2, 0.2)
@@ -68,6 +68,17 @@ func fade_out(audio: AudioStreamPlayer3D, duration: float):
 func comienzoOleada():
 	var oleada_Sound = AudioStreamPlayer3D.new()
 	oleada_Sound.stream = preload("res://assets/sound/sfx/CampanaOleada.mp3")
+	add_child(oleada_Sound)
+	oleada_Sound.play()
+	await oleada_Sound.finished
+	oleada_Sound.queue_free()
+	
+func giro():
+	var oleada_Sound = AudioStreamPlayer3D.new()
+	oleada_Sound.stream = preload("res://assets/sound/sfx/arrastre_pesado.mp3")
+	oleada_Sound.attenuation_model = AudioStreamPlayer3D.ATTENUATION_INVERSE_SQUARE_DISTANCE
+	oleada_Sound.unit_size = 10        # Se atenúa rápido
+	oleada_Sound.max_distance = 40.0    # Fuera de 10 m ya no se escucha
 	add_child(oleada_Sound)
 	oleada_Sound.play()
 	await oleada_Sound.finished

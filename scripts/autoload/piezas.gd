@@ -74,3 +74,10 @@ func colocar_pieza_en_posicion(posicion: Vector2i) -> bool:
 	pieza_colocada.emit(tipo, posicion)
 	cancelar_modo_colocacion()
 	return true
+
+
+func contar_piezas_blancas() -> int:
+	return get_tree().get_nodes_in_group("pieza_blanca").size()
+
+func contar_piezas_negras() -> int:
+	return get_tree().get_nodes_in_group("pieza_negra").size()	

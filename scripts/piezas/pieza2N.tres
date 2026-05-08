@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PiezaDato" format=3 uid="uid://bw16dmxyeyqjv"]
+
+[ext_resource type="PackedScene" uid="uid://n4pbdigclwtp" path="res://assets/modelos/piezas/pieza_2N.tscn" id="1_1k0if"]
+[ext_resource type="Script" uid="uid://ckv37534c60of" path="res://scripts/piezas/caracteristica.gd" id="2_sh5n2"]
+
+[resource]
+script = ExtResource("2_sh5n2")
+modelo = ExtResource("1_1k0if")
+nombre = "Alfil Negro"
+vida = 80.0
+bonus = 1.3
+bonus_a = 3
+tipo = 2
+ataque = Array[Vector3i]([Vector3i(2, 0, 0), Vector3i(-2, 0, 0), Vector3i(0, 0, 2), Vector3i(0, 0, -2)])
+metadata/_custom_type_script = "uid://ckv37534c60of"
