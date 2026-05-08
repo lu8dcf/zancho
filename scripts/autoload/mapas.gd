@@ -6,12 +6,12 @@ var mapas: Array[Array] = []
 var obstaculos: Array[Array] = []
 
 var tipo_obstaculo : Dictionary = {
-	1: "res://assets/modelos/objetos/obstaculo1.glb",
-	2: "res://assets/modelos/objetos/obstaculo2.glb",
-	3: "res://assets/modelos/objetos/obstaculo3.glb",
-	4: "res://assets/modelos/objetos/obstaculo4.glb",
-	5: "res://assets/modelos/objetos/obstaculo5.glb",
-	6: "res://assets/modelos/objetos/obstaculo6.glb",
+	1: "res://assets/modelos/objetos/obstaculo_1.tscn",
+	2: "res://assets/modelos/objetos/obstaculo_2.tscn",
+	3: "res://assets/modelos/objetos/obstaculo_3.tscn",
+	4: "res://assets/modelos/objetos/obstaculo_4.tscn",
+	5: "res://assets/modelos/objetos/obstaculo_5.tscn",
+	6: "res://assets/modelos/objetos/obstaculo_6.tscn",
 }
 
 var datos_mapa : Dictionary={
