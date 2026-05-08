@@ -202,7 +202,6 @@ offset_top = -65.0
 offset_right = -331.0
 offset_bottom = 63.0
 texture_normal = ExtResource("14_4mi7y")
-texture_hover = ExtResource("5_gonto")
 
 [node name="CantPeon" parent="Control/PanelInferior" unique_id=1101164896 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
