@@ -16,12 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://x86kqi63xlwv" path="res://assets/ui/avance3.png" id="8_we3sy"]
 [ext_resource type="Texture2D" uid="uid://cfab8ei6ocjti" path="res://assets/ui/boton_menu_hover.png" id="10_27rlx"]
 [ext_resource type="Texture2D" uid="uid://bb30hhx8cxgrt" path="res://assets/ui/plata.png" id="10_o6xly"]
-[ext_resource type="Texture2D" uid="uid://coicbydf3ddih" path="res://assets/ui/peon.png" id="14_4mi7y"]
 [ext_resource type="Texture2D" uid="uid://calwauheh8r2o" path="res://assets/ui/corazon.png" id="14_we3sy"]
-[ext_resource type="Texture2D" uid="uid://bd18kn6ct141o" path="res://assets/ui/alfil.png" id="15_pkwgd"]
-[ext_resource type="Texture2D" uid="uid://dwranewqi33yc" path="res://assets/ui/caballo.png" id="16_d5po8"]
-[ext_resource type="Texture2D" uid="uid://meask5j166mr" path="res://assets/ui/torre.png" id="17_7yoph"]
-[ext_resource type="Texture2D" uid="uid://vq8bkiu572s0" path="res://assets/ui/reina.png" id="18_qmm8d"]
+[ext_resource type="Texture2D" uid="uid://dvl7pmorxn48" path="res://assets/ui/hover_piezas.png" id="16_b6swc"]
 [ext_resource type="Texture2D" uid="uid://dcitmjg7mdcgn" path="res://assets/ui/boton_carrito_idle.png" id="22_b6swc"]
 [ext_resource type="Texture2D" uid="uid://cs42h4566e3e4" path="res://assets/ui/boton_carrito_hover.png" id="23_27rlx"]
 [ext_resource type="Script" uid="uid://byt8a3fhqtffq" path="res://scenes/ui/piezas_tienda.gd" id="23_t0png"]
@@ -46,6 +42,7 @@
 script = ExtResource("1_hqnrr")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1826863757]
+z_index = -4
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -181,7 +178,6 @@ offset_bottom = 23.0
 texture_normal = ExtResource("6_mj13f")
 
 [node name="PanelInferior" type="Panel" parent="Control" unique_id=1024435106]
-visible = false
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -196,11 +192,12 @@ script = ExtResource("3_8qguk")
 
 [node name="BotonPeon" parent="Control/PanelInferior" unique_id=145900941 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = -435.0
-offset_top = -65.0
-offset_right = -331.0
-offset_bottom = 63.0
-texture_normal = ExtResource("14_4mi7y")
+offset_left = -442.0
+offset_top = -71.0
+offset_right = -323.0
+offset_bottom = 80.0
+texture_pressed = ExtResource("16_b6swc")
+texture_hover = ExtResource("16_b6swc")
 
 [node name="CantPeon" parent="Control/PanelInferior" unique_id=1101164896 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
@@ -211,12 +208,14 @@ offset_bottom = 72.0
 texto = "Peon"
 
 [node name="BotonAlfil" parent="Control/PanelInferior" unique_id=1395214267 instance=ExtResource("4_4jqwt")]
+z_index = -2
 layout_mode = 1
 offset_left = -297.0
 offset_top = -71.0
 offset_right = -193.0
 offset_bottom = 57.0
-texture_normal = ExtResource("15_pkwgd")
+texture_pressed = ExtResource("16_b6swc")
+texture_hover = ExtResource("16_b6swc")
 
 [node name="CantAlfil" parent="Control/PanelInferior" unique_id=1442583281 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
@@ -228,11 +227,12 @@ texto = "Alfil"
 
 [node name="BotonCaballo" parent="Control/PanelInferior" unique_id=376318499 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = -155.0
-offset_top = -61.153854
-offset_right = -59.0
-offset_bottom = 57.0
-texture_normal = ExtResource("16_d5po8")
+offset_left = -168.0
+offset_top = -70.999985
+offset_right = -48.0
+offset_bottom = 80.000015
+texture_pressed = ExtResource("16_b6swc")
+texture_hover = ExtResource("16_b6swc")
 
 [node name="CantCaballo" parent="Control/PanelInferior" unique_id=1401861704 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
@@ -244,11 +244,12 @@ texto = "Caballo"
 
 [node name="BotonTorre" parent="Control/PanelInferior" unique_id=405999081 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = -17.0
-offset_top = -54.999977
-offset_right = 72.5
-offset_bottom = 55.15387
-texture_normal = ExtResource("17_7yoph")
+offset_left = -29.0
+offset_top = -65.00001
+offset_right = 88.0
+offset_bottom = 76.0
+texture_pressed = ExtResource("16_b6swc")
+texture_hover = ExtResource("16_b6swc")
 
 [node name="CantTorre" parent="Control/PanelInferior" unique_id=1182038336 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
@@ -260,11 +261,12 @@ texto = "Torre"
 
 [node name="BotonReina" parent="Control/PanelInferior" unique_id=1514182510 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = 114.0
-offset_top = -51.76924
-offset_right = 208.5
-offset_bottom = 64.53845
-texture_normal = ExtResource("18_qmm8d")
+offset_left = 103.0
+offset_top = -65.000015
+offset_right = 232.0
+offset_bottom = 75.999985
+texture_pressed = ExtResource("16_b6swc")
+texture_hover = ExtResource("16_b6swc")
 
 [node name="CantReina" parent="Control/PanelInferior" unique_id=718881395 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
@@ -298,6 +300,7 @@ offset_bottom = 44.0
 texto = "20-20"
 
 [node name="PanelTienda" type="Panel" parent="Control" unique_id=395284349]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.771
@@ -422,10 +425,11 @@ offset_bottom = 48.0
 
 [node name="pieza" parent="Control/PanelTienda/ImagenTienda/Panel/Alfil" unique_id=598249990 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = -5.8062744
-offset_top = -69.70442
-offset_right = 74.193726
-offset_bottom = 34.295578
+offset_left = -12.806274
+offset_top = -74.70442
+offset_right = 67.193726
+offset_bottom = 29.295578
+texture_normal = ExtResource("7_o6xly")
 
 [node name="venta" parent="Control/PanelTienda/ImagenTienda/Panel/Alfil" unique_id=1304658711 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
