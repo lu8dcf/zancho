@@ -1,138 +1,138 @@
 extends Panel
 
 
-# panel inferior
-@onready var contenedor_piezas =$ContenedorInventario
-@onready var boton_vender_pieza = $BotonVender
+# textos delos botones de las piezas
+@onready var cant_peon: TextureButton = $CantPeon
+@onready var cant_alfil: TextureButton = $CantAlfil
+@onready var cant_caballo: TextureButton = $CantCaballo
+@onready var cant_torre: TextureButton = $CantTorre
+@onready var cant_reina: TextureButton = $CantReina
 
+# botones de piezas
+@onready var boton_peon: TextureButton = $BotonPeon
+@onready var boton_alfil: TextureButton = $BotonAlfil
+@onready var boton_caballo: TextureButton = $BotonCaballo
+@onready var boton_torre: TextureButton = $BotonTorre
+@onready var boton_reina: TextureButton = $BotonReina
+
+
+var botones_piezas: Array = []
+var cant_piezas :Array = []
 
 # almacena la pieza qe se selecciono
 var pieza_seleccionada_actual: Dictionary = {}
-var valor = 0
 
 func _ready():
-	boton_vender_pieza.visible =false
+	configurar_botones()
+	conectar_señales_botones()
 	
-	espaciado()
-	_crear_botones_piezas_inventario()
 	economia.pieza_comprada.connect(_actualizar_inventario)
+	economia.pieza_vendida.connect(_actualizar_inventario)
+	
 	economia.inventario_actualizado.connect(_actualizar_inventario)
 	
 	# Actualizar valores iniciales
 	_actualizar_inventario(economia.inventario_actual)
 	
 
-func _actualizar_inventario(_pieza_nueva) -> void:
-	_crear_botones_piezas_inventario()
-# Funcion de botones
-
-func espaciado():
-	# Configurar espaciado para tienda
-	if contenedor_piezas and contenedor_piezas is GridContainer:
-		# Espaciado horizontal y vertical entre botones
-		contenedor_piezas.add_theme_constant_override("h_separation", 40)
-		contenedor_piezas.add_theme_constant_override("v_separation", 15)
-
-
-func _crear_botones_piezas_inventario() -> void:
-	for hijo in contenedor_piezas.get_children():
-		hijo.queue_free()
-		
-	for pieza in economia.inventario_actual:
-		# Crear contenedor vertical para botón + label
-		var contenedor_boton = VBoxContainer.new()
-		contenedor_boton.alignment = BoxContainer.ALIGNMENT_CENTER
-		
-		# Crear botón
-		var boton = Button.new()
-		boton.text = pieza["nombre"]
-		boton.custom_minimum_size = Vector2(100, 50)
-		boton.set_meta("nombre", pieza["nombre"])
-		
-		# Crear label de cantidad
-		var texto_cant = Label.new()
-		texto_cant.text = str(pieza["cantidad"]) + "/" + str( economia.limite_piezas[pieza["nombre"]])
-		texto_cant.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		texto_cant.add_theme_color_override("font_color", Color(1, 1, 0))
-		texto_cant.add_theme_font_size_override("font_size", 14)
-		
-		# Deshabilitar botón si cantidad es 0
-		if pieza["cantidad"] == 0:
-			boton.disabled = true
-			boton.modulate = Color(0.5, 0.5, 0.5, 1)
-		else:
-			boton.disabled = false
-			boton.modulate = Color(1, 1, 1, 1)
-		
-		# Conectar señal
-		boton.pressed.connect(_on_pieza_clicked.bind(pieza))
-		
-		# Añadir al contenedor
-		contenedor_boton.add_child(boton)
-		contenedor_boton.add_child(texto_cant)
-		contenedor_piezas.add_child(contenedor_boton)
-
-
-func _on_pieza_clicked(pieza: Dictionary) -> void:
-	print("Panel: Pieza clickeada: ", pieza)
-	boton_vender_pieza.visible = true
+func configurar_botones():
+	# Agregar todos los botones al array
+	botones_piezas = [boton_peon, boton_alfil, boton_caballo, boton_torre, boton_reina]
+	cant_piezas = [cant_peon, cant_alfil, cant_caballo, cant_torre, cant_reina]
 	
-	pieza_seleccionada_actual = pieza
+	# Asignar metadatos con el nombre de la pieza
+	boton_peon.set_meta("nombre_pieza", "Peon")
+	boton_peon.set_meta("tipo_pieza", 1)
+	
+	boton_alfil.set_meta("nombre_pieza", "Alfil")
+	boton_alfil.set_meta("tipo_pieza", 2)
+	
+	boton_caballo.set_meta("nombre_pieza", "Caballo")
+	boton_caballo.set_meta("tipo_pieza", 4)
+	
+	boton_torre.set_meta("nombre_pieza", "Torre")
+	boton_torre.set_meta("tipo_pieza", 3)
+	
+	boton_reina.set_meta("nombre_pieza", "Reina")
+	boton_reina.set_meta("tipo_pieza", 5)
+	
+		# Asignar metadatos con el nombre de la pieza
+	cant_peon.set_meta("nombre_pieza", "Peon")
+	cant_peon.set_meta("tipo_pieza", 1)
+	
+	cant_alfil.set_meta("nombre_pieza", "Alfil")
+	cant_alfil.set_meta("tipo_pieza", 2)
+	
+	cant_caballo.set_meta("nombre_pieza", "Caballo")
+	cant_caballo.set_meta("tipo_pieza", 4)
+	
+	cant_torre.set_meta("nombre_pieza", "Torre")
+	cant_torre.set_meta("tipo_pieza", 3)
+	
+	cant_reina.set_meta("nombre_pieza", "Reina")
+	cant_reina.set_meta("tipo_pieza", 5)
+
+
+func conectar_señales_botones():
+	for boton in botones_piezas:
+		boton.pressed.connect(_on_boton_pieza_presionado.bind(boton))
+
+func _on_boton_pieza_presionado(boton: TextureButton):
+	var nombre_pieza = boton.get_meta("nombre_pieza", "Desconocido")
+	var tipo_pieza = boton.get_meta("tipo_pieza", 0)
+	
+	
+	var pieza_data = _buscar_pieza_en_inventario(nombre_pieza)
+	if pieza_data.is_empty():
+		print("Pieza no encontrada en inventario")
+		return
+	
+	# Manejar la selección
+	pieza_seleccionada_actual = pieza_data
+	
 	if Piezas.modo_colocacion:
 		Piezas.cancelar_modo_colocacion()
 	
-	if pieza["cantidad"]>0:
-		var tipo_pieza = _obtener_tipo_por_nombre(pieza["nombre"])
-		Piezas.iniciar_modo_colocacion(tipo_pieza,pieza["nombre"])
+	if pieza_data.get("cantidad", 0) > 0:
+		Piezas.iniciar_modo_colocacion(tipo_pieza, nombre_pieza)
 		
-	if boton_vender_pieza:
-		_resaltar_boton(boton_vender_pieza, false)
-		valor = _obtener_valor_reventa(pieza["nombre"])
-		boton_vender_pieza.text = "VENDER " + pieza["nombre"] + "\n💰 +" + str(valor)
-	
-	_resaltar_boton(boton_vender_pieza, true)
-	
-func _obtener_tipo_por_nombre(nombre: String) -> int:
-	var tipos = {
-		"Rey": 0,
-		"Peon": 1,
-		"Alfil": 2,
-		"Torre": 3,
-		"Caballo": 4,
-		"Reina": 5
-	}
-	return tipos.get(nombre, 1)
 
-func _resaltar_boton(boton_vender_pieza: Button, resaltar: bool):
-	if resaltar:
-		boton_vender_pieza.modulate = Color(1.5, 1.5, 1, 1)  # Más brillante
-		boton_vender_pieza.add_theme_color_override("font_color", Color(1, 1, 0))
-	else:
-		boton_vender_pieza.modulate = Color(1, 1, 1, 1)
-		boton_vender_pieza.add_theme_color_override("font_color", Color(1, 1, 1))
+func _buscar_pieza_en_inventario(nombre_pieza: String) -> Dictionary:
+	for pieza in economia.inventario_actual:
+		if pieza.get("nombre", "") == nombre_pieza:
+			return pieza
+	return {}
+
+func _actualizar_inventario(_pieza_nueva) -> void:
+	actualizar_textos_botones()
+
+func actualizar_textos_botones():
+	# Actualizar el texto de cada botón según el inventario
+	for boton in cant_piezas:
+		var nombre_pieza = boton.get_meta("nombre_pieza", "")
+		var pieza_data = _buscar_pieza_en_inventario(nombre_pieza)
+		
+		if not pieza_data.is_empty():
+			var cantidad = pieza_data.get("cantidad", 0)
+			var limite = economia.limite_piezas.get(nombre_pieza, 0)
+			
+			# Actualizar texto del botón
+			boton.cambiar_texto(nombre_pieza +" "+ str(cantidad) + "/" + str(limite))
+			
+			# Deshabilitar si no hay piezas
+			boton.disabled = cantidad <= 0
+			boton.modulate = Color(1, 1, 1, 1) if cantidad > 0 else Color(0.5, 0.5, 0.5, 1)
 
 func _input(event):
+	#print("entra pero: ", Piezas.modo_colocacion)
 	if Piezas.modo_colocacion:
 		if event is InputEventMouseButton:
 			if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 				Piezas.cancelar_modo_colocacion()
-				boton_vender_pieza.visible = false
 				get_viewport().set_input_as_handled()
 			elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-				boton_vender_pieza.visible = false
 				pass
 
 
 func _on_boton_menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/ui/main.tscn")
-
-
-func _on_boton_vender_pressed() -> void:
-	if economia.has_method("vender_pieza"):
-		economia.vender_pieza(pieza_seleccionada_actual,valor)
-		boton_vender_pieza.visible=false
-		
-	
-func _obtener_valor_reventa(nombre_pieza: String) -> int:
-	# Buscar en el diccionario de valores de reventa	
-	return economia.valor_reventa.get(nombre_pieza, 0)

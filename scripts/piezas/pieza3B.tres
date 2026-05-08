@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="PiezaDato" format=3 uid="uid://dyfo8exixfod3"]
+
+[ext_resource type="PackedScene" uid="uid://odtvyh3yke6a" path="res://assets/modelos/piezas/pieza_3B.tscn" id="1_eic4v"]
+[ext_resource type="Script" uid="uid://ckv37534c60of" path="res://scripts/piezas/caracteristica.gd" id="1_ex0be"]
+
+[resource]
+script = ExtResource("1_ex0be")
+modelo = ExtResource("1_eic4v")
+nombre = "Torre Blanca"
+vida = 250.0
+bonus = 1.5
+bonus_a = 1
+tipo = 3
+blanco = true
+ataque = Array[Vector3i]([Vector3i(1, 0, 1), Vector3i(1, 0, -1), Vector3i(-1, 0, 1), Vector3i(-1, 0, -1)])
+metadata/_custom_type_script = "uid://ckv37534c60of"

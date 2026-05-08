@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://bvwoi2ovjcei1"]
-
-[ext_resource type="PackedScene" uid="uid://cs1rio81woey7" path="res://assets/modelos/piezas/pieza2B.glb" id="1_pk8xq"]
-
-[node name="Pieza2bb" type="Node3D" unique_id=1409187607]
-
-[node name="pieza2B" parent="." unique_id=1898427015 instance=ExtResource("1_pk8xq")]

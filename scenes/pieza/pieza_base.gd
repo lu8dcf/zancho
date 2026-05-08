@@ -18,7 +18,7 @@ var danio = Piezas.danio[pieza_tipo]
 var cadencia = Piezas.cadencia[pieza_tipo]
 var bonus_cantidad = Piezas.bonus_cantidad[pieza_tipo]
 var bonus_a = Piezas.bonus_a[pieza_tipo]
-@export var vision_range: float = 5.0
+
 var angulo_frente: int = 225
 
 # Componentes
@@ -27,9 +27,8 @@ var ataque_especifico = preload("res://scenes/pieza/ataque/Ataque.tscn") # defin
 
 # Nodos
 
-@onready var health_bar = $HealthBar
+
 @onready var dust_particles = $DustParticles
-@onready var attack_timer = $AttackTimer
 @onready var giro_inicial = $GiroInicial
 #Area de ataque
 @onready var area_ataque: Area3D = $AreaAtaque
@@ -52,9 +51,14 @@ var color="N"
 var pieza_colocada=false
 var animacion=false
 
+var pieza : Resource
+
 func _ready():
 	#print (pieza_sitio)
 	if pieza_blanca: color="B" 	
+	
+	pieza = load("res://scripts/piezas/pieza"+ str(pieza_tipo) + color +".tres")
+	
 	# Configurar física
 	linear_velocity = Vector3(0, linear_velocity.y, 0)  # que no se mueva a los costados
 	#rebote
@@ -75,14 +79,9 @@ func _physics_process(_delta: float) -> void:
 		animation_player.play("ataque_rey")
 	
 func cargar_objeto():
-	var objeto = "res://assets/modelos/piezas/pieza_"+ str(pieza_tipo) + color +".tscn"
-	var modelo_objeto = load(objeto)
-	if not modelo_objeto:
-		print ("No se puede cargar la escena del objeto pieza")
-		return
-		
+			
 	# Instanciar y agregar al contenedor
-	instancia_objeto_pieza = modelo_objeto.instantiate()
+	instancia_objeto_pieza = pieza.modelo.instantiate()
 	contenedor_movimiento.add_child(instancia_objeto_pieza)
 	
 	# Buscar el AnimationPlayer dentro de esta instancia
@@ -112,7 +111,7 @@ func cargar_movimiento(): # agrega el nodo movimiento con el script correspondie
 
 func cargar_ataque(): # agrega el nodo ataque con el script correspondiente a la pieza
 	var ataque = ataque_especifico.instantiate()
-	var ataque_script = "res://scenes/pieza/ataque/ataque"+str(pieza_tipo)+".gd"
+	var ataque_script = "res://scenes/pieza/ataque/ataque1.gd"
 	var script = load(ataque_script)
 	ataque.set_script(script)
 	add_child(ataque)
@@ -138,29 +137,7 @@ func create_dust_effect(): # Particulas al pegar con el tablero
 	await get_tree().create_timer(0.5).timeout
 	dust_particles.emitting = false
 
-func start_vision_check():
-	while is_alive:
-		await get_tree().create_timer(0.5).timeout
-		check_for_enemies()
 
-func check_for_enemies():
-	var space_state = get_world_3d().direct_space_state
-	var query = PhysicsShapeQueryParameters3D.new()
-	query.shape = SphereShape3D.new()
-	query.shape.radius = vision_range
-	query.transform.origin = global_position
-	query.collision_mask = 2  # Máscara de piezas enemigas
-	
-	var results = space_state.intersect_shape(query)
-	
-	var nearest_enemy = null
-	
-		
-	
-	target_piece = nearest_enemy
-	
-	if target_piece and can_attack:
-		attack_enemy()
 
 func attack_enemy():
 	if target_piece and target_piece.is_alive:
@@ -170,8 +147,8 @@ func attack_enemy():
 		# Efecto visual de ataque
 		create_attack_effect()
 		
-		attack_timer.start(1.0)  # Cooldown de 1 segundo
-		await attack_timer.timeout
+		#attack_timer.start(1.0)  # Cooldown de 1 segundo
+		#await attack_timer.timeout
 		can_attack = true
 
 func take_damage(amount: int):
@@ -189,16 +166,18 @@ func take_damage(amount: int):
 
 func update_health_bar():
 	var health_percentage = float(vida) / float(initial_health)
-	health_bar.value = health_percentage * 100
+	#health_bar.value = health_percentage * 100
 	
 	# Cambiar color según salud
 	if health_percentage > 0.6:
-		health_bar.modulate = Color(0, 1, 0, 1)  # Verde
+	#	health_bar.modulate = Color(0, 1, 0, 1)  # Verde
+		pass
 	elif health_percentage > 0.3:
-		health_bar.modulate = Color(1, 1, 0, 1)  # Amarillo
+	#	health_bar.modulate = Color(1, 1, 0, 1)  # Amarillo
+		pass
 	else:
-		health_bar.modulate = Color(1, 0, 0, 1)  # Rojo
-
+	#	health_bar.modulate = Color(1, 0, 0, 1)  # Rojo
+		pass
 func flash_red():
 	#var original_color = mesh_instance.material_override.albedo_color
 	#mesh_instance.material_override.albedo_color = Color.RED
@@ -249,10 +228,12 @@ func giro(angulo):
 	var rotacion_destino = angulo
 	#print ("actual ",rotacion_actual,"ang ",angulo)
 	#calcular el giro mas corto
-	
+	Sonidos.giro()
 	tween.tween_property(self, "rotation_degrees:y", rotacion_destino, 0.5)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
+	
+	
 	
 	pieza_colocada = true
 	physics_material_override.bounce = 0
