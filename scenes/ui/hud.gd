@@ -3,7 +3,6 @@ extends CanvasLayer
 
 # panel inferior
 @onready var contenedor_piezas = $Control/PanelInferior
-@onready var tienda_animacion: AnimationPlayer = $Control/PanelTienda/tienda_animacion
 
 # panel del rey
 @onready var vida_rey: TextureButton = $Control/PanelRey/VidaRey

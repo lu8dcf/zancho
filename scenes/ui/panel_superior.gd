@@ -1,6 +1,6 @@
 extends Panel
 
-@onready var boton_menu = $BotonMenu
+@onready var boton_menu: TextureButton = $botonMenu
 @onready var boton_debilidades = $BotonDebilidades
 @onready var boton_reiniciar_camera = $BotonReiniciarCamara
 @onready var imagen_debilidades = $imagenDebilidades

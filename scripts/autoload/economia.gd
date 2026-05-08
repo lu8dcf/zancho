@@ -73,6 +73,7 @@ func comprar_pieza(pieza:Dictionary) -> bool:
 			inventario_actual[i]["cantidad"] += 1
 			
 			# Emitir señales en orden correcto
+			print("se compro pieza: ", pieza)
 			monedas_cambiadas.emit(monedas_actual)
 			pieza_comprada.emit(inventario_actual[i])  # Emitir la pieza actualizada
 			inventario_actualizado.emit(inventario_actual)
@@ -84,9 +85,9 @@ func vender_pieza(pieza:Dictionary, valor:int):
 	
 	for i in range(inventario_actual.size()):
 		if inventario_actual[i]["nombre"] == pieza["nombre"]:
-			# Realizar la venta
 			
-			inventario_actual[i]["cantidad"] -= 1
+			if inventario_actual[i]["cantidad"] >0:			
+				inventario_actual[i]["cantidad"] -= 1
 			if !globalJuego.debug:
 				monedas_actual += valor
 			
@@ -123,4 +124,5 @@ func verificar_orden_aparicion(pieza_nombre:String)->bool:
 
 func obtener_pieza_dicc(nombre):
 	for i in piezas_disponibles_tienda:
-		return i 
+		if i["nombre"] == nombre:
+			return i 

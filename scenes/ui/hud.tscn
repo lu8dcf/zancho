@@ -195,34 +195,6 @@ grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_t0png")
 script = ExtResource("3_8qguk")
 
-[node name="ContenedorInventario" type="GridContainer" parent="Control/PanelInferior" unique_id=225476072]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = 2.0
-offset_right = -320.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 5
-
-[node name="BotonVender" type="Button" parent="Control/PanelInferior" unique_id=1026515966]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -192.0
-offset_top = -28.0
-offset_right = -69.0
-offset_bottom = 36.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_font_sizes/font_size = 15
-text = "Vender"
-
 [node name="BotonPeon" parent="Control/PanelInferior" unique_id=145900941 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
 offset_left = -435.0
@@ -230,6 +202,7 @@ offset_top = -65.0
 offset_right = -331.0
 offset_bottom = 63.0
 texture_normal = ExtResource("14_4mi7y")
+texture_hover = ExtResource("5_gonto")
 
 [node name="CantPeon" parent="Control/PanelInferior" unique_id=1101164896 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
@@ -349,15 +322,14 @@ anchor_left = 0.84653825
 anchor_top = 0.3622473
 anchor_right = 0.9506872
 anchor_bottom = 0.93326944
-offset_left = -946.7549
+offset_left = -233.75488
 offset_top = -250.30563
-offset_right = 5.949005
+offset_right = 5.9489746
 offset_bottom = 14.079895
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_4jqwt")
 expand_mode = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="boton_de_despliegue" type="TextureButton" parent="Control/PanelTienda/ImagenTienda" unique_id=1941167755]
 layout_mode = 1
@@ -439,6 +411,7 @@ offset_top = 103.0
 offset_right = 128.0
 offset_bottom = 199.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_lptj4")
+script = ExtResource("23_t0png")
 
 [node name="hover" parent="Control/PanelTienda/ImagenTienda/Panel/Alfil" unique_id=1170838134 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
@@ -481,6 +454,7 @@ offset_top = 206.0
 offset_right = 128.0
 offset_bottom = 302.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_lptj4")
+script = ExtResource("23_t0png")
 
 [node name="hover" parent="Control/PanelTienda/ImagenTienda/Panel/Caballo" unique_id=2060644772 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
@@ -523,6 +497,7 @@ offset_top = 305.0
 offset_right = 128.0
 offset_bottom = 401.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_lptj4")
+script = ExtResource("23_t0png")
 
 [node name="hover" parent="Control/PanelTienda/ImagenTienda/Panel/Torre" unique_id=950757460 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
@@ -565,6 +540,7 @@ offset_top = 407.0
 offset_right = 128.0
 offset_bottom = 503.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_lptj4")
+script = ExtResource("23_t0png")
 
 [node name="hover" parent="Control/PanelTienda/ImagenTienda/Panel/Reina" unique_id=351944124 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
@@ -602,9 +578,9 @@ texture_hover = ExtResource("28_kfdjh")
 
 [node name="Label_debug_temporal" type="Label" parent="Control" unique_id=1099801254]
 layout_mode = 0
-offset_left = 176.0
+offset_left = 159.0
 offset_top = 8.0
-offset_right = 286.0
+offset_right = 269.0
 offset_bottom = 50.0
 theme_override_font_sizes/font_size = 30
 text = "Debug: "
@@ -617,8 +593,3 @@ text = "Debug: "
 [connection signal="pressed" from="Control/PanelSuperior/botonMenu" to="Control/PanelSuperior" method="_on_boton_menu_pressed"]
 [connection signal="pressed" from="Control/PanelSuperior/BotonDebilidades" to="Control/PanelSuperior" method="_on_boton_debilidades_pressed"]
 [connection signal="pressed" from="Control/PanelSuperior/BotonReiniciarCamara" to="Control/PanelSuperior" method="_on_boton_reiniciar_camara_pressed"]
-[connection signal="pressed" from="Control/PanelInferior/BotonVender" to="Control/PanelInferior" method="_on_boton_vender_pressed"]
-[connection signal="mouse_entered" from="Control/PanelTienda/ImagenTienda/Panel/Peon/pieza" to="Control/PanelTienda/ImagenTienda/Panel/Peon" method="_on_pieza_mouse_entered"]
-[connection signal="mouse_exited" from="Control/PanelTienda/ImagenTienda/Panel/Peon/pieza" to="Control/PanelTienda/ImagenTienda/Panel/Peon" method="_on_pieza_mouse_exited"]
-[connection signal="pressed" from="Control/PanelTienda/ImagenTienda/Panel/Peon/venta" to="Control/PanelTienda/ImagenTienda/Panel/Peon" method="_on_venta_pressed"]
-[connection signal="pressed" from="Control/PanelTienda/ImagenTienda/Panel/Peon/compra" to="Control/PanelTienda/ImagenTienda/Panel/Peon" method="_on_compra_pressed"]
