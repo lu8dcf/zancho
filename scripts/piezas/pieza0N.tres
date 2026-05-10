@@ -1,11 +1,9 @@
 [gd_resource type="Resource" script_class="PiezaDato" format=3 uid="uid://dsk2nshxj2o1i"]
 
-[ext_resource type="PackedScene" uid="uid://bbm28kn2275j3" path="res://assets/modelos/piezas/pieza_0B.tscn" id="1_tsu70"]
 [ext_resource type="Script" uid="uid://ckv37534c60of" path="res://scripts/piezas/caracteristica.gd" id="2_6weap"]
 
 [resource]
 script = ExtResource("2_6weap")
-escena = ExtResource("1_tsu70")
 nombre = "Rey Negro"
 vida = 1000.0
 danio = 5.0

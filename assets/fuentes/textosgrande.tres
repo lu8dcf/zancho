@@ -1,6 +1,6 @@
 [gd_resource type="LabelSettings" format=3 uid="uid://5mxd2sj4000t"]
 
-[ext_resource type="FontFile" uid="uid://ljgupmacmpki" path="res://assets/fuentes/Enchanted Land DS D.otf" id="1_bxqo6"]
+[ext_resource type="FontFile" uid="uid://d2x2au6q8fhoc" path="res://assets/fuentes/Enchanted Land DS D.otf" id="1_bxqo6"]
 
 [resource]
 line_spacing = 3.095

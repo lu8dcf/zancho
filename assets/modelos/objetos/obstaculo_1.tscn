@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://bbhekp6ex86w2"]
 
-[ext_resource type="PackedScene" uid="uid://burhp4ddacjya" path="res://assets/modelos/objetos/obstaculo1.glb" id="1_88myk"]
+[ext_resource type="PackedScene" uid="uid://b1sja4h1agbc5" path="res://assets/modelos/objetos/obstaculo1.glb" id="1_88myk"]
 [ext_resource type="Material" uid="uid://bg70lqvwct7ri" path="res://assets/modelos/texturas/material_entorno.tres" id="2_4hk56"]
 
 [node name="obstaculo1" unique_id=1484702038 instance=ExtResource("1_88myk")]
 
-[node name="3" parent="." index="0" unique_id=1119012137]
+[node name="3" parent="." index="0" unique_id=805416038]
 material_override = ExtResource("2_4hk56")
 
-[node name="3_001" parent="." index="1" unique_id=956144287]
+[node name="3_001" parent="." index="1" unique_id=1215137840]
 material_override = ExtResource("2_4hk56")
