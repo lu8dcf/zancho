@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://jamx7xfkycmi" path="res://scenes/ui/hud.gd" id="1_hqnrr"]
 [ext_resource type="Script" uid="uid://d221g40j7vomt" path="res://scenes/ui/panel_superior.gd" id="2_136eg"]
 
-[ext_resource type="Texture2D" uid="uid://cc73cdayrtvgl" path="res://assets/ui/base.png" id="2_t0png"]
+[ext_resource type="Texture2D" uid="uid://cdhddcfd78vcc" path="res://assets/ui/Base.png" id="2_t0png"]
 
 [ext_resource type="Script" uid="uid://b07ubchfnu7sg" path="res://scenes/ui/panel_inferior.gd" id="3_8qguk"]
 [ext_resource type="Texture2D" uid="uid://bolj73wq5l2gv" path="res://assets/ui/Base3.png" id="3_qmm8d"]
@@ -21,8 +21,9 @@
 [ext_resource type="Texture2D" uid="uid://cfab8ei6ocjti" path="res://assets/ui/boton_menu_hover.png" id="10_27rlx"]
 [ext_resource type="Texture2D" uid="uid://bb30hhx8cxgrt" path="res://assets/ui/plata.png" id="10_o6xly"]
 
-[ext_resource type="Texture2D" uid="uid://calwauheh8r2o" path="res://assets/ui/corazon.png" id="14_we3sy"]
 [ext_resource type="Texture2D" uid="uid://cnlel5ai6mxhw" path="res://assets/ui/hover_piezas.png" id="16_b6swc"]
+[ext_resource type="Texture2D" uid="uid://bdys84xjdyres" path="res://assets/ui/idle_piezas.png" id="17_t0png"]
+[ext_resource type="Texture2D" uid="uid://brokn8inr04wm" path="res://assets/ui/vida1.png" id="19_b6swc"]
 
 [ext_resource type="Texture2D" uid="uid://dcitmjg7mdcgn" path="res://assets/ui/boton_carrito_idle.png" id="22_b6swc"]
 [ext_resource type="Texture2D" uid="uid://cs42h4566e3e4" path="res://assets/ui/boton_carrito_hover.png" id="23_27rlx"]
