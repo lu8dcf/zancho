@@ -28,8 +28,9 @@ func manejar_ataque(body):
 		if pieza_base.pieza_blanca:
 			return
 		
-	var atacante_tipo = body.pieza_tipo
+
 	var atacante_posicion = body.position
+	var atacante_id = body.id
 	
-	#print("⚔️ Ataque detectado!"," yo ",owner.pieza_blanca," ",owner.pieza_tipoa," ata ",atacante_tipo," ",atacante_blanca)
+	print("⚔️ Ataque"," yo ",pieza_base.pieza_tipo," ",pieza_base.id," ata ",atacante_id," ", round(atacante_posicion/pieza_base.espaciado))
 		#pieza.recibir_ataque(atacante_tipo, get_meta("origen"))
