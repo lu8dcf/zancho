@@ -228,7 +228,7 @@ func giro(angulo):
 	var rotacion_destino = angulo
 	#print ("actual ",rotacion_actual,"ang ",angulo)
 	#calcular el giro mas corto
-	Sonidos.giro()
+	Sonido()
 	tween.tween_property(self, "rotation_degrees:y", rotacion_destino, 0.5)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
@@ -248,3 +248,14 @@ func animacion_caminata(anima):
 		anima = str(pieza_tipo)+anima
 		if animation_player.has_animation(anima):
 			animation_player.play(anima)
+
+func Sonido():
+	var oleada_Sound = AudioStreamPlayer3D.new()
+	oleada_Sound.stream = preload("res://assets/sound/sfx/giro.mp3")
+	oleada_Sound.attenuation_model = AudioStreamPlayer3D.ATTENUATION_INVERSE_SQUARE_DISTANCE
+	oleada_Sound.unit_size = 10        # Se atenúa rápido
+	oleada_Sound.max_distance = 40.0    # Fuera de 10 m ya no se escucha
+	add_child(oleada_Sound)
+	oleada_Sound.play()
+	await oleada_Sound.finished
+	oleada_Sound.queue_free()
