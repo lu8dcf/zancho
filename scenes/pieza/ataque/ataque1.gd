@@ -49,7 +49,7 @@ func crear_attack_shape(posicion: Vector3):
 	shape.global_position = posicion
 	
 		
-	# Agregar un script de detección al área (opcional)
+	# Agregar un script de detección al área 
 	shape.set_script(preload("res://scenes/pieza/ataque/detector_ataque.gd"))
 	
 	# Asignar metadata para saber quién ataca y desde dónde
