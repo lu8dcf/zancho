@@ -14,33 +14,44 @@ extends CharacterBody3D
 
 @export_group("Velocidades")
 @export var rapidez_movimiento: float = 20.0
-@export var rapidez_vuelo: float = 20.0      # Velocidad al presionar Espacio
+@export var rapidez_vuelo: float = 20.0      # velocidad de vueloo
 @export var sensibilidad_mouse: float = 0.15
 @export var friccion: float = 10.0
 
-# --- Variables de Estado ---
+@onready var posicion_x: float = -2    
+@onready var posicion_y: float = 6
+@onready var posicion_z: float = 31
 var boton_derecho_presionado: bool = false
 
-func _input(event) -> void:
-	# 1. Rotación activada solo con el BOTÓN DERECHO
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_RIGHT:
-			boton_derecho_presionado = event.pressed
-			
-			# Captura el mouse para rotación infinita
-			if event.pressed:
-				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-			else:
-				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+func _ready() -> void:
+	reiniciar_posicion()
 
-	# 2. Lógica de rotación (Horizontal y Vertical)
+func _input(event: InputEvent) -> void:
+	#manejo con mouse
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		boton_derecho_presionado = event.pressed
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if event.pressed else Input.MOUSE_MODE_VISIBLE
+
+	#rotacion si el boton derecho es presionado, tengo que hacerlo con mapa por ahora esta asi
 	if event is InputEventMouseMotion and boton_derecho_presionado:
-		# Rotación Horizontal (Eje Y) - Gira el cuerpo
 		rotate_y(deg_to_rad(-event.relative.x * sensibilidad_mouse))
-		
-		# Rotación Vertical (Eje X) - Gira la cámara
 		var cambio_v = -event.relative.y * sensibilidad_mouse
 		camera_3d.rotation_degrees.x = clamp(camera_3d.rotation_degrees.x + cambio_v, limite_mirar_abajo, limite_mirar_arriba)
+
+	#reset de camara
+	if event.is_action_pressed("resetear_camara"):
+		reiniciar_posicion()
+
+func reiniciar_posicion():
+	velocity = Vector3.ZERO 
+	global_position = Vector3(posicion_x, posicion_y, posicion_z)
+	
+	rotation_degrees.y = -45
+	
+	
+	camera_3d.rotation_degrees.x = -30
+	
+	
 
 func _physics_process(delta: float) -> void:
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -72,7 +83,4 @@ func _physics_process(delta: float) -> void:
 	
 
 	global_position.y = clamp(global_position.y, limite_y_min, limite_y_max)
-	
-func reiniciar_posicion():
-	pass
 	
