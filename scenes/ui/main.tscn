@@ -1,15 +1,16 @@
 [gd_scene format=3 uid="uid://bjbqonwb7pnfh"]
 
 [ext_resource type="Script" uid="uid://by43q6vkxfn8n" path="res://scenes/ui/main.gd" id="1_0ay0p"]
-[ext_resource type="Texture2D" uid="uid://vhos8f4cc3kk" path="res://assets/menu/menu.png" id="2_2p1s2"]
-[ext_resource type="Texture2D" uid="uid://bekhv8mvdp844" path="res://assets/menu/salir.png" id="3_02nsg"]
-[ext_resource type="Texture2D" uid="uid://e0ld2q14lx52" path="res://assets/menu/boton4.png" id="3_7n028"]
+[ext_resource type="Texture2D" uid="uid://bbav04t4gmx14" path="res://assets/menu/menu.png" id="2_2p1s2"]
+[ext_resource type="Texture2D" uid="uid://deam4qk6byf2b" path="res://assets/menu/salir.png" id="3_02nsg"]
+[ext_resource type="Texture2D" uid="uid://d3yi8yemg1njf" path="res://assets/menu/boton4.png" id="3_7n028"]
 [ext_resource type="LabelSettings" uid="uid://c64snqitwil5t" path="res://assets/fuentes/textos.tres" id="4_jvuow"]
-[ext_resource type="Texture2D" uid="uid://cyclvtl3uoh4" path="res://assets/menu/boton5.png" id="6_aain1"]
-[ext_resource type="Texture2D" uid="uid://bdnuhb2lowa5h" path="res://assets/menu/boton2.png" id="7_f8067"]
-[ext_resource type="Texture2D" uid="uid://c5wfquab4f2c2" path="res://assets/menu/boton3.png" id="8_yiij1"]
+[ext_resource type="Texture2D" uid="uid://cae5yijnboeq3" path="res://assets/menu/boton5.png" id="6_aain1"]
+[ext_resource type="Texture2D" uid="uid://b8yo2eqr5vra4" path="res://assets/menu/boton2.png" id="7_f8067"]
+[ext_resource type="Texture2D" uid="uid://d11hm7f8sncqk" path="res://assets/menu/boton3.png" id="8_yiij1"]
 [ext_resource type="Texture2D" uid="uid://couaobhhkqc78" path="res://assets/menu/Boton6.png" id="9_dpyut"]
 [ext_resource type="Script" uid="uid://bjqwvfiaeme7n" path="res://scenes/ui/play.gd" id="9_x68jn"]
+[ext_resource type="Texture2D" uid="uid://bq4yisvcd1lf" path="res://assets/menu/marcos.png" id="10_6ic3k"]
 [ext_resource type="Texture2D" uid="uid://by412hpyptahi" path="res://assets/menu/Boton7.png" id="10_t1dln"]
 [ext_resource type="Texture2D" uid="uid://d08h2xc0xgcas" path="res://assets/menu/placa.png" id="11_t1dln"]
 
@@ -164,6 +165,15 @@ anchor_bottom = 0.4837963
 script = ExtResource("9_x68jn")
 metadata/_edit_use_anchors_ = true
 
+[node name="TextureRect" type="TextureRect" parent="play" unique_id=86005793]
+layout_mode = 0
+offset_left = -28.0
+offset_top = 11.0
+offset_right = 365.0
+offset_bottom = 596.3333
+texture = ExtResource("10_6ic3k")
+expand_mode = 1
+
 [node name="nueva_partida" type="TextureButton" parent="play" unique_id=185137269]
 layout_mode = 0
 offset_left = -19.0
@@ -223,7 +233,91 @@ offset_bottom = 47.0
 text = "Continuar"
 label_settings = ExtResource("4_jvuow")
 
+[node name="opciones" type="MenuBar" parent="." unique_id=1414264697]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2741509
+anchor_top = 0.010329741
+anchor_right = 0.43083492
+anchor_bottom = 0.4748359
+offset_left = 117.35632
+offset_top = 11.612656
+offset_right = 117.35632
+offset_bottom = 11.61261
+script = ExtResource("9_x68jn")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="opciones" unique_id=1860911061]
+layout_mode = 0
+offset_left = -28.0
+offset_top = 11.0
+offset_right = 365.0
+offset_bottom = 596.3333
+texture = ExtResource("10_6ic3k")
+expand_mode = 1
+
+[node name="nueva_partida" type="TextureButton" parent="opciones" unique_id=1159336766]
+layout_mode = 0
+offset_left = -19.0
+offset_top = 96.0
+offset_right = 350.3333
+offset_bottom = 161.0
+texture_normal = ExtResource("9_dpyut")
+texture_hover = ExtResource("10_t1dln")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="opciones/nueva_partida" unique_id=1923896044]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 17.0
+offset_right = 243.0
+offset_bottom = 48.0
+text = "Nueva partida"
+label_settings = ExtResource("4_jvuow")
+
+[node name="Titulo" type="TextureButton" parent="opciones" unique_id=1396898176]
+layout_mode = 0
+offset_left = -19.0
+offset_top = 30.0
+offset_right = 350.3333
+offset_bottom = 95.0
+texture_normal = ExtResource("11_t1dln")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="opciones/Titulo" unique_id=755443889]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 17.0
+offset_right = 297.0
+offset_bottom = 48.0
+text = "Opciones"
+label_settings = ExtResource("4_jvuow")
+
+[node name="continuar" type="TextureButton" parent="opciones" unique_id=568693674]
+layout_mode = 0
+offset_left = -19.0
+offset_top = 160.0
+offset_right = 350.3333
+offset_bottom = 225.0
+texture_normal = ExtResource("9_dpyut")
+texture_hover = ExtResource("10_t1dln")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label2" type="Label" parent="opciones/continuar" unique_id=1001229942]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 16.0
+offset_right = 261.0
+offset_bottom = 47.0
+text = "Continuar"
+label_settings = ExtResource("4_jvuow")
+
 [connection signal="pressed" from="TextureRect/play" to="." method="_on_texture_button_2_pressed"]
-[connection signal="pressed" from="TextureRect/salir" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="TextureRect/salir" to="." method="_on_salir_pressed"]
+[connection signal="pressed" from="TextureRect/salir" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="TextureRect/Opciones" to="." method="_on_opciones_pressed"]
 [connection signal="pressed" from="play/nueva_partida" to="play" method="_on_nueva_partida_pressed"]
+[connection signal="pressed" from="opciones/nueva_partida" to="opciones" method="_on_nueva_partida_pressed"]

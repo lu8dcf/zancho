@@ -23,8 +23,14 @@ extends CharacterBody3D
 @onready var posicion_z: float = 31
 var boton_derecho_presionado: bool = false
 
+
+@export var zoom_distancia: float = 2.0  
+@export var zoom_velocidad: float = 10.0 
+var posicion_original_camara: Vector3
+
 func _ready() -> void:
 	reiniciar_posicion()
+
 
 func _input(event: InputEvent) -> void:
 	#manejo con mouse
@@ -37,6 +43,10 @@ func _input(event: InputEvent) -> void:
 		rotate_y(deg_to_rad(-event.relative.x * sensibilidad_mouse))
 		var cambio_v = -event.relative.y * sensibilidad_mouse
 		camera_3d.rotation_degrees.x = clamp(camera_3d.rotation_degrees.x + cambio_v, limite_mirar_abajo, limite_mirar_arriba)
+		
+		
+	if event.is_action_pressed("zoom_de_camara"):
+		zoom_de_camara()
 
 	#reset de camara
 	if event.is_action_pressed("resetear_camara"):
@@ -51,6 +61,8 @@ func reiniciar_posicion():
 	
 	camera_3d.rotation_degrees.x = -30
 	
+func zoom_de_camara():
+	pass
 	
 
 func _physics_process(delta: float) -> void:
