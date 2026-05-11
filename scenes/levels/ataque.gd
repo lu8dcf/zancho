@@ -13,11 +13,11 @@ func _process(delta: float) -> void:
 	pass
 
 func iniciaAtaque(idA,idD,posicionA,posicionD):
-	print (idA," ",idD," ",posicionA," ",posicionD)
+	
 	if  _crear_clave(idA, idD)==false:
 		return
-	
-	GlobalSignal.controlMarcaPaso.emit(false) #detiene el precose del juego
+	print (idA," ",idD," ",posicionA," ",posicionD)
+	#GlobalSignal.controlMarcaPaso.emit(false) #detiene el precose del juego
 	
 	
 func _crear_clave(a, b): ## Genera una clave única que ignora el orden
