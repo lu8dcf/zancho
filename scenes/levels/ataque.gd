@@ -14,22 +14,37 @@ func _process(delta: float) -> void:
 
 func iniciaAtaque(idA,idD,posicionA,posicionD):
 	print (idA," ",idD," ",posicionA," ",posicionD)
-	var clave = _generar_clave(idA, idD)
+	if  _crear_clave(idA, idD)==false:
+		return
+	
+	GlobalSignal.controlMarcaPaso.emit(false) #detiene el precose del juego
+	
+	
+func _crear_clave(a, b): ## Genera una clave única que ignora el orden
+	var clave = _generar_clave(a, b)
 	
 	if not pares_almacenados.has(clave):
-		pares_almacenados[clave] = {
-			"valor1": a,
-			"valor2": b,
-			"timestamp": Time.get_unix_time_from_system()
-		}
+		pares_almacenados[clave] = {"valor1": a,"valor2": b}
 		return true  # Se almacenó
 	return false  # Ya existía
-	
-	
-	GlobalSignal.controlMarcaPaso.emit(false)
-	pass
-	
 
+
+## Elimina un par específico
+func eliminar_par(a: int, b: int) -> bool:
+	var clave = _generar_clave(a, b)
+	if pares_almacenados.has(clave):
+		pares_almacenados.erase(clave)
+		return true
+	return false
+## Cuenta cuántos pares únicos hay
+func contar_pares() -> int:
+	return pares_almacenados.size()
+
+## Limpia todos los pares
+func limpiar_todo():
+	pares_almacenados.clear()
+
+	
 ## Genera una clave única que ignora el orden
 func _generar_clave(a: int, b: int) -> String:
 	# Ordenamos los números para que (1,2) y (2,1) generen la misma clave
