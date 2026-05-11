@@ -48,7 +48,7 @@ func menu(activar: bool):
 		add_child(death_sound)
 		
 		death_sound.volume_db = 0 + randf_range(-5, 5)
-		death_sound.pitch_scale = 0.8 + randf_range(-0.2, 0.2)
+		#death_sound.pitch_scale = 0.8 + randf_range(-0.2, 0.2)
 		death_sound.play()
 	else:
 		print ("stop")
