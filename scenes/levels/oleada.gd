@@ -30,8 +30,8 @@ func _ready() -> void:
 	#globalJuego.oleada_cambiada.connect(ejecuto_oleada,get_oleada_actual())
 	
 	#TESTEO
-	await get_tree().create_timer(2).timeout
-	GlobalSignal.emit_signal("comienzoOleada")
+	#await get_tree().create_timer(2).timeout
+	#GlobalSignal.emit_signal("comienzoOleada")
 	
 	
 	#if !(pausarOleada):
@@ -44,7 +44,10 @@ func get_oleada_actual():
 #	GlobalJuego.espaciado_baldosas
 	
 func ejecuto_oleada():
-	nivel = get_oleada_actual()
+	if(globalJuego.debug == true):
+		nivel = 0
+	else:
+		nivel = get_oleada_actual()
 	if !DATA_OLEADAS.estructura_por_nivel.has(nivel):
 		print("Este nivel aun no esta desarrollado: ", nivel)
 		return

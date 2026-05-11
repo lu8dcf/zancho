@@ -2,6 +2,13 @@ extends Resource
 class_name OleadasData
 
 static var estructura_por_nivel = {
+	0: [
+		{"pos": Vector2i(11,0), "tipo":1, "blancas":false},
+		{"pos": Vector2i(15,3), "tipo":2, "blancas":false},
+		{"pos": Vector2i(15,0), "tipo":5, "blancas":false},
+		{"pos": Vector2i(12,5), "tipo":4, "blancas":false},
+		{"pos": Vector2i(14,8), "tipo":3, "blancas":false}
+	],
 	1: [
 		{"pos": Vector2i(11,2), "tipo":1, "blancas":false},
 		{"pos": Vector2i(14,5), "tipo":1, "blancas":false}
