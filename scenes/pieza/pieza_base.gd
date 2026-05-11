@@ -57,7 +57,7 @@ func _ready():
 	#print (pieza_sitio)
 	if pieza_blanca: color="B" 	
 	
-	pieza = load("res://scripts/piezas/pieza"+ str(pieza_tipo) + color +".tres")
+	pieza = load("res://scripts/resource/pieza"+ str(pieza_tipo) + color +".tres")
 	
 	# Configurar física
 	linear_velocity = Vector3(0, linear_velocity.y, 0)  # que no se mueva a los costados
@@ -249,6 +249,7 @@ func animacion_caminata(anima):
 		if animation_player.has_animation(anima):
 			animation_player.play(anima)
 
+
 func Sonido():
 	var oleada_Sound = AudioStreamPlayer3D.new()
 	oleada_Sound.stream = preload("res://assets/sound/sfx/giro.mp3")
@@ -259,3 +260,6 @@ func Sonido():
 	oleada_Sound.play()
 	await oleada_Sound.finished
 	oleada_Sound.queue_free()
+
+func ataque(body):
+	pass
