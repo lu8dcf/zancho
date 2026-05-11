@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://df6h7j1frxlw1"]
 
 [ext_resource type="Script" uid="uid://borpciaq4xf08" path="res://scenes/pieza/pieza_base.gd" id="1_c11s1"]
+[ext_resource type="PackedScene" uid="uid://bhf6bbh6v0u5w" path="res://scenes/pieza/vida.tscn" id="2_c11s1"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_c11s1"]
 
@@ -58,5 +59,12 @@ one_shot = true
 [node name="ContenedorAtaque" type="Node3D" parent="." unique_id=1562388930]
 
 [node name="AreaAtaque" type="Area3D" parent="." unique_id=1650449106]
+
+[node name="Marker3D" type="Marker3D" parent="." unique_id=107913833]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6744905, 1.701786)
+
+[node name="Vida" parent="Marker3D" unique_id=217926695 instance=ExtResource("2_c11s1")]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0, -0.971299, 0)
+visible = false
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

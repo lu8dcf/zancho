@@ -18,6 +18,7 @@ func _process(delta: float) -> void:
 func bajarVida():
 	if (!esVisible):
 		esVisible = true
+		visible = true
 		return
 	if(barraVerde.scale.y > 0):
 		barraVerde.scale.y -= danio
