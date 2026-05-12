@@ -69,6 +69,7 @@ func _ready():
 	#cargar_modelo_glb() #asigan el modelo 3d
 	
 	posicionamiento_giro() # gira la pieza a su posicion en grados
+	
 	cargar_movimiento() # Script de movimiento y estados
 	cargar_ataque() # Scrip de zona de ataque
 	#GlobalSignal.connect("marcaPaso",anima_idle)
