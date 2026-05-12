@@ -75,7 +75,7 @@ func _ready():
 	#GlobalSignal.connect("marcaPaso",anima_idle)
 	anima_idle()
 	
-	GlobalSignal.connect("giro_pieza",giro_remoto)
+	GlobalSignal.connect("giro_pieza",look_at_target)
 
 func _physics_process(_delta: float) -> void:
 	if animacion:
@@ -272,7 +272,9 @@ func giro_remoto(pieza_id,angulo):
 		return
 	giro(angulo)
 
-func look_at_target(target: Vector3):
+func look_at_target(pieza_id,target: Vector3):
+	if id!=pieza_id:
+		return
 	# Posición actual del rigidbody
 	var pos = global_transform.origin
 	

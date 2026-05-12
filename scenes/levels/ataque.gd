@@ -55,6 +55,6 @@ func angulo_enfrentamiento(idA,idD,posicionA: Vector3,posicionD: Vector3):
 	var giro=rad_to_deg(atan2(dir.y, dir.x))
 	
 	# Girar las piezas
-	GlobalSignal.giro_pieza.emit(idA,giro-90)
-	GlobalSignal.giro_pieza.emit(idD,giro+90)
-	print (giro)
+	GlobalSignal.giro_pieza.emit(idA,posicionD)
+	GlobalSignal.giro_pieza.emit(idD,posicionA)
+	#print (giro)
