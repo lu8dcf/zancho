@@ -96,7 +96,8 @@ func colocar_blanca(sitio: Vector2i):
 
 func reiniciar_variables():
 	Piezas.reiniciar_variables()
-	
+	mapas.reiniciar_variables()
+	economia.reiniciar_variables()
 	
 	
 func mensaje(texto):

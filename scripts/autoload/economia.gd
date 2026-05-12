@@ -52,6 +52,53 @@ signal pieza_comprada(nueva_pieza)  # Emite la pieza comprada
 signal inventario_actualizado(inventario) # Emite el inventario actualizado
 signal pieza_vendida()
 
+func reiniciar_variables():
+	monedas_actual = 1200 
+	limite_piezas = {
+		"Peon": 8,
+		"Torre": 2,
+		"Alfil": 2,
+		"Caballo": 2,
+		"Reina": 1
+	}
+	valor_reventa = {
+		"Peon": 50,
+		"Torre": 250,
+		"Alfil": 150,
+		"Caballo": 175,
+		"Reina": 600
+	}	
+
+	inventario_actual = [
+		{"nombre": "Peon", "cantidad":0},
+		{"nombre": "Torre", "cantidad":0},
+		{"nombre": "Alfil",  "cantidad":0},
+		{"nombre": "Caballo", "cantidad":0},
+		{"nombre": "Reina", "cantidad":0}
+	]
+	piezas_colocadas = [
+		{"nombre": "Peon", "cantidad":0},
+		{"nombre": "Torre", "cantidad":0},
+		{"nombre": "Alfil",  "cantidad":0},
+		{"nombre": "Caballo", "cantidad":0},
+		{"nombre": "Reina", "cantidad":0}
+	]
+
+	piezas_disponibles_tienda = [
+		{"nombre": "Peon", "precio": 100},
+		{"nombre": "Torre", "precio": 500},
+		{"nombre": "Alfil", "precio": 300},
+		{"nombre": "Caballo", "precio": 350},
+		{"nombre": "Reina", "precio": 1200}
+	]
+	orden_aparicion = {
+		"Peon": 1,
+		"Torre": 3,
+		"Alfil": 2,
+		"Caballo": 4,
+		"Reina": 5
+	}
+
 # funciones para modificar
 func añadir_monedas(cantidad: int) -> void:
 	monedas_actual += cantidad

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dw6tl6131xrlf"]
+
+[ext_resource type="LabelSettings" uid="uid://5mxd2sj4000t" path="res://assets/fuentes/textosgrande.tres" id="1_2fv5a"]
+
+[node name="Label" type="Label" unique_id=4063466]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Peón"
+label_settings = ExtResource("1_2fv5a")
