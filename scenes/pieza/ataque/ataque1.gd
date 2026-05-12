@@ -46,8 +46,7 @@ func crear_attack_shape(posicion: Vector3):
 	cylinder_shape.height = espaciado          # Altura = espaciado
 	shape.shape = cylinder_shape
 	
-	 #  añadir al árbol
-	owner.area_ataque.add_child(shape)
+	
 	
 	#  ajustar la posición relativa
 	shape.position = owner.area_ataque.to_local(posicion)
@@ -59,5 +58,6 @@ func crear_attack_shape(posicion: Vector3):
 	#shape.set_meta("tipo_pieza", tipo_pieza)
 	#shape.set_meta("es_blanca", es_blanca)
 	#shape.set_meta("origen", global_position)
-	
+	 #  añadir al árbol
+	owner.area_ataque.add_child(shape)
 	
