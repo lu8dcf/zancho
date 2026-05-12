@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://c52bhkw0t5x8v" path="res://scenes/pieza/fabricaPiezas.gd" id="4_xb4v1"]
 [ext_resource type="Script" uid="uid://cihsl310tis1d" path="res://scenes/levels/marca_pasos.gd" id="5_urvlt"]
 [ext_resource type="Script" uid="uid://dmfknurvftphe" path="res://scenes/levels/oleada.gd" id="6_d4w6o"]
+[ext_resource type="Script" uid="uid://c0ej3jxwtb3by" path="res://scenes/levels/marca_ataque.gd" id="6_ouxo3"]
 [ext_resource type="Script" uid="uid://cufkm7foia36m" path="res://scenes/levels/ataque.gd" id="7_mbbpy"]
 
 [node name="Level" type="Node3D" unique_id=1370239507]
@@ -21,6 +22,9 @@ script = ExtResource("4_xb4v1")
 
 [node name="MarcaPasos" type="Timer" parent="." unique_id=601792043]
 script = ExtResource("5_urvlt")
+
+[node name="MarcaAtaque" type="Timer" parent="." unique_id=1463488245]
+script = ExtResource("6_ouxo3")
 
 [node name="Oleada" type="Node3D" parent="." unique_id=1385089926]
 script = ExtResource("6_d4w6o")

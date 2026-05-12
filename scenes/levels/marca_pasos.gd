@@ -1,5 +1,5 @@
 extends Timer
-class_name MarcaPaso
+class_name MarcaAtaque
 
 
 

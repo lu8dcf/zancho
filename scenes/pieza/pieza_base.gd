@@ -75,7 +75,7 @@ func _ready():
 	#GlobalSignal.connect("marcaPaso",anima_idle)
 	anima_idle()
 	
-	GlobalSignal.connect("giro_pieza",look_at_target)
+	GlobalSignal.connect("giro_pieza",giro_remoto)
 
 func _physics_process(_delta: float) -> void:
 	if animacion:
@@ -270,20 +270,48 @@ func ataque(body):
 func giro_remoto(pieza_id,angulo):
 	if id!=pieza_id:
 		return
-	giro(angulo)
-
-func look_at_target(pieza_id,target: Vector3):
-	if id!=pieza_id:
+	print (pieza_id," ",angulo)
+	giro_rad(angulo)
+	
+func giro_rad(angulo):
+	var _rotacion_actual = rotation_degrees.y
+	var rotacion_destino = angulo
+	var tween = create_tween()
+	
+	#calcular el giro mas corto
+	Sonido()
+	tween.tween_property(self, "rotation:y", rotacion_destino, 0.5)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_QUAD)
+	
+	
+	
+	pieza_colocada = true
+	physics_material_override.bounce = 0
+	gravity_scale=1
+func look_at_target(pieza_id, target: Vector3):
+	if id != pieza_id:
 		return
-	# Posición actual del rigidbody
+	
+	# Posición actual
 	var pos = global_transform.origin
 	
 	# Ignorar el eje Y (mantener la altura actual)
 	var target_flat = Vector3(target.x, pos.y, target.z)
 	
-	# Calcular dirección hacia el objetivo
+	# Calcular la rotación objetivo
 	var dir = (target_flat - pos).normalized()
+	var target_basis = Basis.looking_at(dir, Vector3.UP)
 	
-	# Usar look_at para orientar el rigidbody
-	global_transform = Transform3D(global_transform.basis, pos)
-	look_at(target_flat, Vector3.UP)
+	# Crear tween para la rotación suave
+	var tween = create_tween()
+	tween.tween_property(self, "global_transform", Transform3D(target_basis, pos), 1.0)
+	
+	# Alternativa: Tween solo la rotación (más eficiente)
+	# var start_basis = global_transform.basis
+	# tween.tween_method(_update_rotation.bind(start_basis, target_basis), 0.0, 1.0, 1.0)
+
+# Método auxiliar para interpolación manual (opcional)
+func _update_rotation(weight: float, start_basis: Basis, end_basis: Basis):
+	var new_basis = start_basis.slerp(end_basis, weight)
+	global_transform = Transform3D(new_basis, global_transform.origin)

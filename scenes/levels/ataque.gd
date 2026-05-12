@@ -15,6 +15,7 @@ func iniciaAtaque(idA,idD,posicionA,posicionD):
 		return
 	print (idA," ",idD," ",posicionA," ",posicionD)
 	GlobalSignal.controlMarcaPaso.emit(false) #detiene el paso del juego
+	GlobalSignal.controlMarcaAtaque.emit(true) #inicia el reloj de ataque
 	angulo_enfrentamiento(idA,idD,posicionA,posicionD)
 	
 func _crear_clave(a, b): ## Genera una clave única que ignora el orden
@@ -52,9 +53,9 @@ func _generar_clave(a: int, b: int) -> String:
 
 func angulo_enfrentamiento(idA,idD,posicionA: Vector3,posicionD: Vector3):
 	var dir = Vector2(posicionD.x - posicionA.x, posicionD.z - posicionA.z)
-	var giro=rad_to_deg(atan2(dir.y, dir.x))
+	var giro=(atan2(dir.y, dir.x))
 	
 	# Girar las piezas
-	GlobalSignal.giro_pieza.emit(idA,posicionD)
-	GlobalSignal.giro_pieza.emit(idD,posicionA)
+	GlobalSignal.giro_pieza.emit(idA,giro-PI)
+	GlobalSignal.giro_pieza.emit(idD,giro)
 	#print (giro)

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dsbbtvwsjkiya"]
+
+[ext_resource type="Script" uid="uid://tmvwumwig3pd" path="res://scenes/levels/ataque/ataque_base.gd" id="1_7auui"]
+
+[node name="AtaqueBase" type="Node3D" unique_id=1096005576]
+script = ExtResource("1_7auui")

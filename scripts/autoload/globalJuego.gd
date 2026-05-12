@@ -27,6 +27,10 @@ var tiempo_pasos = 4.0   # tiempo entre cada movimento
 var empezo_oleada = false # si es que empezo la oleada
 # señales para modificar el hud
 
+# Ataques
+var tiempo_ataque = 0.5 # timepo de cada ataque
+
+
 signal vidas_cambiadas(nuevas_vidas)
 signal oleada_cambiada(nueva_oleada)
 signal tienda_estado_cambiado(desplegada)
