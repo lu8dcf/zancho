@@ -38,6 +38,24 @@ signal pieza_colocada(tipo:int, posicion:Vector2i)
 @warning_ignore("unused_signal")
 signal  pieza_flotante_actualizada(posicion_3d :Vector3, es_valido:bool)
 
+func reiniciar_variables():
+	pieza_b_id = 0
+	pieza_n_id = 0
+	pieza_b_sitio  = [] 
+	pieza_n_sitio  = [] 
+	pieza_b_tipo =[]
+	pieza_n_tipo = []
+	pieza_activa=[]
+	pieza_seleccionada = {
+		"tipo":-1,
+		"nombre":"",
+		"activa":false
+	}
+	pieza_flotante = null
+	modo_colocacion = false
+	
+	
+
 
 func iniciar_modo_colocacion(tipo_pieza: int, nombre_pieza: String) -> void:
 	modo_colocacion = true

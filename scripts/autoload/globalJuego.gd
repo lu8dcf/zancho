@@ -95,7 +95,8 @@ func colocar_blanca(sitio: Vector2i):
 
 
 func reiniciar_variables():
-	Piezas.piezas_activas = []
+	Piezas.reiniciar_variables()
+	
 	
 	
 func mensaje(texto):
