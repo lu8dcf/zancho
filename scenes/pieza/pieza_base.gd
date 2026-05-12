@@ -271,3 +271,17 @@ func giro_remoto(pieza_id,angulo):
 	if id!=pieza_id:
 		return
 	giro(angulo)
+
+func look_at_target(target: Vector3):
+	# Posición actual del rigidbody
+	var pos = global_transform.origin
+	
+	# Ignorar el eje Y (mantener la altura actual)
+	var target_flat = Vector3(target.x, pos.y, target.z)
+	
+	# Calcular dirección hacia el objetivo
+	var dir = (target_flat - pos).normalized()
+	
+	# Usar look_at para orientar el rigidbody
+	global_transform = Transform3D(global_transform.basis, pos)
+	look_at(target_flat, Vector3.UP)
