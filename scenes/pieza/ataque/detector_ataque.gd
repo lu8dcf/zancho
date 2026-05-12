@@ -22,16 +22,15 @@ func _on_area_entered(area: Area3D):
 
 func manejar_ataque(body):
 	# Verificar que sea del equipo contrario
-	var atacante_blanca = body.pieza_blanca
-	
+	print("collision")
 	if body.pieza_blanca: 
 		if pieza_base.pieza_blanca:
 			return
-		
-
-	var atacante_posicion = body.position
-	var atacante_id = body.id
 	
+	if body.pieza_blanca==false: 
+		if pieza_base.pieza_blanca==false:
+			return
+				
 	GlobalSignal.ataque.emit(pieza_base.id,body.id,pieza_base.position,body.position)
 	#print("⚔️ Ataque"," yo ",pieza_base.pieza_tipo," ",pieza_base.id," ata ",atacante_id," ", round(atacante_posicion/pieza_base.espaciado))
 		#pieza.recibir_ataque(atacante_tipo, get_meta("origen"))

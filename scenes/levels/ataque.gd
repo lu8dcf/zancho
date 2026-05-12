@@ -11,13 +11,13 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
+# A= Atacante  , D= defensor
 func iniciaAtaque(idA,idD,posicionA,posicionD):
 	
 	if  _crear_clave(idA, idD)==false:
 		return
 	print (idA," ",idD," ",posicionA," ",posicionD)
-	#GlobalSignal.controlMarcaPaso.emit(false) #detiene el precose del juego
+	GlobalSignal.controlMarcaPaso.emit(false) #detiene el precose del juego
 	
 	
 func _crear_clave(a, b): ## Genera una clave única que ignora el orden
