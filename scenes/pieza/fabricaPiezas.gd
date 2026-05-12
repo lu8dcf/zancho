@@ -5,7 +5,7 @@ var nueva_pieza: RigidBody3D
 var espaciado_baldosas : float = globalJuego.espaciado_baldosas
 var pieza_escena = preload("res://scenes/pieza/pieza_base.tscn")
 var velocidad: float = 1.0
-var id:int  # id de la pieza
+var id:int = 0  # id de la pieza
 var sitio3d: Vector3i
 
 func _ready() -> void:
@@ -41,6 +41,6 @@ func colocar_pieza(sitio: Vector2i, tipo: int , pieza_blanca: bool):
 		
 	Piezas.pieza_activa.append(nueva_pieza)
 	#print ((Piezas.pieza_activa[id].global_position)/globalJuego.espaciado_baldosas)
-	
+	id += 1 # incrementador de nuemro de pieza
 	#print ("Blanca ",Piezas.contar_piezas_blancas())
 	#print ("Negras ",Piezas.contar_piezas_negras())

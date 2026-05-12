@@ -16,3 +16,6 @@ signal aceleraMarcaPaso (multi : int)
 
 @warning_ignore("unused_signal")
 signal comienzoOleada #Senial que debe emitir cuando comienza la oleada
+
+@warning_ignore("unused_signal")
+signal ataque (idA:int,idD:int,posicionA:Vector3i,posicionD:Vector3i)#Senial que debe emitir cuando comienza la oleada

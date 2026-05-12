@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="PiezaDato" format=3 uid="uid://f25a2juaxj2v"]
 
 [ext_resource type="PackedScene" uid="uid://dd3pksohynh1k" path="res://assets/modelos/piezas/pieza_3N.tscn" id="1_2pnpc"]
-[ext_resource type="Script" uid="uid://ckv37534c60of" path="res://scripts/piezas/caracteristica.gd" id="2_kpkix"]
+[ext_resource type="Script" uid="uid://ckv37534c60of" path="res://scripts/resource/caracteristica.gd" id="2_kpkix"]
 
 [resource]
 script = ExtResource("2_kpkix")
