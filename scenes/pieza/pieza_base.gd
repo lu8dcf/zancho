@@ -74,6 +74,8 @@ func _ready():
 	cargar_ataque() # Scrip de zona de ataque
 	#GlobalSignal.connect("marcaPaso",anima_idle)
 	anima_idle()
+	
+	GlobalSignal.connect("giro_pieza",giro_remoto)
 
 func _physics_process(_delta: float) -> void:
 	if animacion:
@@ -227,7 +229,7 @@ func giro(angulo):
 	var tween = create_tween()
 	var _rotacion_actual = rotation_degrees.y
 	var rotacion_destino = angulo
-	#print ("actual ",rotacion_actual,"ang ",angulo)
+	
 	#calcular el giro mas corto
 	Sonido()
 	tween.tween_property(self, "rotation_degrees:y", rotacion_destino, 0.5)
@@ -264,3 +266,8 @@ func Sonido():
 
 func ataque(body):
 	pass
+
+func giro_remoto(pieza_id,angulo):
+	if id!=pieza_id:
+		return
+	giro(angulo)
