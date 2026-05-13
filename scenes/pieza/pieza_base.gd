@@ -12,25 +12,19 @@ var espaciado = GlobalJuego.espaciado_baldosas
 @export var id:int # id de registro en base de datos
 @export var pieza_sitio:Vector2i
 
-# CArga de parametros pieza
-var vida = Piezas.vida[pieza_tipo]
-var danio = Piezas.danio[pieza_tipo]
-var cadencia = Piezas.cadencia[pieza_tipo]
-var bonus_cantidad = Piezas.bonus_cantidad[pieza_tipo]
-var bonus_a = Piezas.bonus_a[pieza_tipo]
 
-var angulo_frente: int = 225
+# CArga de parametros pieza
+var vida_total: int
+var vida_actual: int
+var angulo_frente: int = 225 # por defecto la negra
 
 # Componentes
 var movimiento_especifico = preload("res://scenes/pieza/movimiento/movimiento.tscn") # define le movimiento caracteristico de la pieza
 var ataque_especifico = preload("res://scenes/pieza/ataque/Ataque.tscn") # define le movimiento caracteristico de la pieza
 
 # Nodos
-
-
 @onready var dust_particles = $DustParticles
 @onready var giro_inicial = $GiroInicial
-#Area de ataque
 @onready var area_ataque: Area3D = $AreaAtaque
 
 # Contenedor par acargar escena del modelo
@@ -44,17 +38,16 @@ var animation_player : AnimationPlayer
 
 # Variables de estado
 var is_alive: bool = true
-var can_attack: bool = true
-var target_piece: RigidBody3D = null
-var initial_health: int
 var color="N"
 var pieza_colocada=false
-var animacion=false
-
 var pieza : Resource
+var secuencia_sfx = 0 # secuencia de sonido
+
 
 func _ready():
-	#print (pieza_sitio)
+	vida_total = Piezas.vida[pieza_tipo]
+	vida_actual = vida_total
+	
 	if pieza_blanca: color="B" 	
 	
 	pieza = load("res://scripts/resource/pieza"+ str(pieza_tipo) + color +".tres")
@@ -66,28 +59,24 @@ func _ready():
 	gravity_scale = 2.0
 	
 	cargar_objeto() # Asigna el modelo y objero con sus animaciones			
-	#cargar_modelo_glb() #asigan el modelo 3d
-	
 	posicionamiento_giro() # gira la pieza a su posicion en grados
+	
 	cargar_movimiento() # Script de movimiento y estados
 	cargar_ataque() # Scrip de zona de ataque
 	#GlobalSignal.connect("marcaPaso",anima_idle)
-	anima_idle()
-
-func _physics_process(_delta: float) -> void:
-	if animacion:
-		animation_player.play("ataque_rey")
+	animacion("Bidle")
 	
-func cargar_objeto():
-			
-	# Instanciar y agregar al contenedor
+	GlobalSignal.connect("giro_pieza",giro_remoto)
+	GlobalSignal.connect("piezaAtaca",ataque)
+	GlobalSignal.connect("piezaRecibeDanio",recibeDanio)
+
+func cargar_objeto():# Instanciar y agregar al contenedor
 	instancia_objeto_pieza = pieza.modelo.instantiate()
 	contenedor_movimiento.add_child(instancia_objeto_pieza)
-	
 	# Buscar el AnimationPlayer dentro de esta instancia
 	animation_player = _find_animation_player(instancia_objeto_pieza)
 
-func _find_animation_player(node: Node) -> AnimationPlayer:
+func _find_animation_player(node: Node) -> AnimationPlayer: # agrega las animaciones del mnodelo a la pieza
 	for child in node.get_children():
 		if child is AnimationPlayer:
 			return child
@@ -99,7 +88,6 @@ func _find_animation_player(node: Node) -> AnimationPlayer:
 # Método público para acceder a la animación desde los scripts de movimiento
 func get_animation_player() -> AnimationPlayer:
 	return animation_player
-			
 	
 func cargar_movimiento(): # agrega el nodo movimiento con el script correspondiente a la pieza
 	var movimiento = movimiento_especifico.instantiate()
@@ -117,7 +105,9 @@ func cargar_ataque(): # agrega el nodo ataque con el script correspondiente a la
 	add_child(ataque)
 	ataque.owner = self  # ← IMPORTANTE: Establece el owner manualmente
 		
-func posicionamiento_giro():
+		
+# colocacion inicial --------------------------------------------------------------------------------		
+func posicionamiento_giro(): # Giro inicial de la pieza an colocarse en el tablero hay que cambiar a radianes
 	#temporizador
 	giro_inicial.wait_time = 3.0   # 1 segundo
 	giro_inicial.connect("timeout",llego_al_piso)
@@ -126,83 +116,19 @@ func posicionamiento_giro():
 func llego_al_piso():
 	giro(angulo_frente)
 	
-func _on_body_entered(_body):
+func _on_body_entered(_body): #cuando la pieza se instancia y cae 
 	if pieza_colocada : return # solo se ejecuta en el inicio
 	# este if es para que solo tenga un efecto de sonido cuando rebota 
-	#create_dust_effect()# Efecto de polvo
+	create_dust_effect()# Efecto de polvo
 	Sonidos.impacto()# Sonido de golpe
+	pieza_colocada=true # que no vuelva a generar el sonido de caida
 	
 func create_dust_effect(): # Particulas al pegar con el tablero
 	dust_particles.emitting = true
 	await get_tree().create_timer(0.5).timeout
 	dust_particles.emitting = false
+# fin de colocacion inicial --------------------------------------------------------------------------------	
 
-
-
-func attack_enemy():
-	if target_piece and target_piece.is_alive:
-		can_attack = false
-		target_piece.take_damage(danio)
-		
-		# Efecto visual de ataque
-		create_attack_effect()
-		
-		#attack_timer.start(1.0)  # Cooldown de 1 segundo
-		#await attack_timer.timeout
-		can_attack = true
-
-func take_damage(amount: int):
-	vida -= amount
-	update_health_bar()
-	
-	# Efecto visual de daño
-	flash_red()
-	
-	# Sonido de daño
-	Sonidos.hurt()
-	
-	if vida <= 0:
-		die()
-
-func update_health_bar():
-	var health_percentage = float(vida) / float(initial_health)
-	#health_bar.value = health_percentage * 100
-	
-	# Cambiar color según salud
-	if health_percentage > 0.6:
-	#	health_bar.modulate = Color(0, 1, 0, 1)  # Verde
-		pass
-	elif health_percentage > 0.3:
-	#	health_bar.modulate = Color(1, 1, 0, 1)  # Amarillo
-		pass
-	else:
-	#	health_bar.modulate = Color(1, 0, 0, 1)  # Rojo
-		pass
-func flash_red():
-	#var original_color = mesh_instance.material_override.albedo_color
-	#mesh_instance.material_override.albedo_color = Color.RED
-	await get_tree().create_timer(0.1).timeout
-	#mesh_instance.material_override.albedo_color = original_color
-
-func create_attack_effect():
-	# Crear línea de ataque visual
-	var line = ImmediateMesh.new()
-	var line_mesh = MeshInstance3D.new()
-	line_mesh.mesh = line
-	
-	# Animación de daño en el enemigo
-	if target_piece:
-		target_piece.flash_red()
-
-func die():
-	is_alive = false
-	create_dust_effect()
-	Sonidos.death()
-	
-	# Animación de muerte
-	var tween = create_tween()
-	tween.tween_property(self, "scale", Vector3.ZERO, 0.5)
-	tween.tween_callback(queue_free)
 
 func verificar_proximo_paso(cambio):
 	# proximo sitio a ocupar
@@ -214,52 +140,163 @@ func verificar_proximo_paso(cambio):
 		return false
 	return true
 		
-func giro(angulo):
-	
-	"""
-    Gira la pieza en el eje horizontal (Y) usando Tween
-    
-    Parámetros:
-    - angulo_grados: Ángulo a rotar en grados (positivo = derecha, negativo = izquierda)
-    - duracion: Duración de la animación en segundos
-	"""
+func giro(angulo): #Gira la pieza en el eje horizontal (Y) usando Tween
 	var tween = create_tween()
 	var _rotacion_actual = rotation_degrees.y
 	var rotacion_destino = angulo
-	#print ("actual ",rotacion_actual,"ang ",angulo)
+	
 	#calcular el giro mas corto
-	Sonido()
+	if pieza_tipo !=4 and pieza_blanca==false: # evita que el caballo negro suene mucho al andar
+		Sonido("giro")
 	tween.tween_property(self, "rotation_degrees:y", rotacion_destino, 0.5)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
-	
-	
 	
 	pieza_colocada = true
 	physics_material_override.bounce = 0
 	gravity_scale=1
 
-func anima_idle(): # animacion de idle
-	var anima="Bidle"
-	animacion_caminata(anima)
 			
-func animacion_caminata(anima):
+func animacion(anima):
 	if animation_player:
 		anima = str(pieza_tipo)+anima
 		if animation_player.has_animation(anima):
 			animation_player.play(anima)
 
 
-func Sonido():
+func Sonido(tipo):
 	var oleada_Sound = AudioStreamPlayer3D.new()
-	oleada_Sound.stream = preload("res://assets/sound/sfx/giro.mp3")
+	var archivo_sonido = "res://assets/sound/sfx/"+tipo+".mp3"
+	oleada_Sound.stream = load(archivo_sonido)
 	oleada_Sound.attenuation_model = AudioStreamPlayer3D.ATTENUATION_INVERSE_SQUARE_DISTANCE
 	oleada_Sound.unit_size = 10        # Se atenúa rápido
-	oleada_Sound.max_distance = 40.0    # Fuera de 10 m ya no se escucha
+	oleada_Sound.max_distance = 30.0    # Fuera de 10 m ya no se escucha
 	add_child(oleada_Sound)
 	oleada_Sound.play()
 	await oleada_Sound.finished
 	oleada_Sound.queue_free()
 
-func ataque(body):
-	pass
+func ataque(idA):
+	if idA!=id:
+		return
+	animacion("Bataque")
+
+# -------------------------------   esto hay que pasarlo a la barra d evida ------------------------
+func recibeDanio(idD: int,danio: int):
+	if idD!=id:
+		return
+	vida_actual -= danio
+	
+	if secuencia_sfx==3:
+		secuencia_sfx=0
+		
+	if secuencia_sfx==0:  # para que os sonidos sean diversos y no suenen tan seguidos
+		Sonido("hurt")
+		secuencia_sfx +=1
+		
+	print (vida_actual)	
+	# actualizar barra de vida -------------------------------------------------
+		
+	
+	
+		
+	if vida_actual <= 0:
+		die()
+
+func die():
+	GlobalSignal.piezaMuere.emit(id)
+	is_alive = false
+	#create_dust_effect()
+	Sonidos.death()
+	if Piezas.pieza_activa.has(self):
+		Piezas.pieza_activa.erase(self)
+		
+	if pieza_blanca:
+		remove_from_group("pieza_blanca")
+	else:
+		remove_from_group("pieza_negra")
+	# Destruir la pieza
+	animacion_muerte()
+	
+
+func animacion_muerte():
+	freeze = true
+	gravity_scale = 0
+	
+	var tween = create_tween()
+	tween.set_parallel(true)
+	
+	# Subir y rotar lentamente
+	tween.tween_property(self, "global_position:y", global_position.y + 1 , 4)
+	tween.tween_property(self, "rotation:y", rotation.y + 360, 4)  # Girar mientras sube
+	#tween.tween_property(self, "scale", Vector3.ZERO, 4)
+	
+	# Color celestial con brillo
+	tween.tween_callback(func():
+		var material = StandardMaterial3D.new()
+		material.albedo_color = Color(0.7, 0.9, 1.0)
+		material.emission_enabled = true
+		material.emission = Color(0.5, 0.7, 1.0)
+		material.emission_energy = 2.0
+		
+		if has_node("MeshInstance3D"):
+			$MeshInstance3D.material_override = material
+	)
+	
+	tween.tween_callback(queue_free)
+	await tween.finished
+	#queue_free()
+
+func giro_remoto(pieza_id,angulo):
+	if id!=pieza_id:
+		return
+	#print (pieza_id," ",angulo)
+	giro_rad(angulo)
+	
+func giro_rad(angulo):
+	var _rotacion_actual = rotation_degrees.y
+	var rotacion_destino = angulo
+	var tween = create_tween()
+	
+	#calcular el giro mas corto
+	Sonido("giro")
+	tween.tween_property(self, "rotation:y", rotacion_destino, 0.5)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_QUAD)
+	
+	
+	pieza_colocada = true
+	physics_material_override.bounce = 0
+	gravity_scale=1
+	
+# ---------------------  auxilia borrar si no es necesario	
+
+
+	
+func look_at_target(pieza_id, target: Vector3):
+	if id != pieza_id:
+		return
+	
+	# Posición actual
+	var pos = global_transform.origin
+	
+	# Ignorar el eje Y (mantener la altura actual)
+	var target_flat = Vector3(target.x, pos.y, target.z)
+	
+	# Calcular la rotación objetivo
+	var dir = (target_flat - pos).normalized()
+	var target_basis = Basis.looking_at(dir, Vector3.UP)
+	
+	# Crear tween para la rotación suave
+	var tween = create_tween()
+	tween.tween_property(self, "global_transform", Transform3D(target_basis, pos), 1.0)
+	
+	
+	# Alternativa: Tween solo la rotación (más eficiente)
+	# var start_basis = global_transform.basis
+	# tween.tween_method(_update_rotation.bind(start_basis, target_basis), 0.0, 1.0, 1.0)
+
+# Método auxiliar para interpolación manual (opcional)
+func _update_rotation(weight: float, start_basis: Basis, end_basis: Basis):
+	var new_basis = start_basis.slerp(end_basis, weight)
+	global_transform = Transform3D(new_basis, global_transform.origin)

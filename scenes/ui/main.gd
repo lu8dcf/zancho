@@ -7,7 +7,7 @@ extends Control
 func _ready():
 	play.visible=false
 	opciones.visible=false
-	Sonidos.menu(true)
+	#Sonidos.menu(true)
 
 
 func _on_texture_button_pressed() -> void:

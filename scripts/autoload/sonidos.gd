@@ -11,13 +11,6 @@ func _process(_delta: float) -> void:
 	pass
 
 
-func hurt():
-	var hurt_sound = AudioStreamPlayer3D.new()
-	hurt_sound.stream = preload("res://assets/sound/sfx/hurt.mp3")
-	add_child(hurt_sound)
-	hurt_sound.play()
-	await hurt_sound.finished
-	hurt_sound.queue_free()
 
 func death():
 	var death_sound = AudioStreamPlayer3D.new()
@@ -73,13 +66,3 @@ func comienzoOleada():
 	await oleada_Sound.finished
 	oleada_Sound.queue_free()
 	
-func giro():
-	var oleada_Sound = AudioStreamPlayer3D.new()
-	oleada_Sound.stream = preload("res://assets/sound/sfx/arrastre_pesado.mp3")
-	oleada_Sound.attenuation_model = AudioStreamPlayer3D.ATTENUATION_INVERSE_SQUARE_DISTANCE
-	oleada_Sound.unit_size = 10        # Se atenúa rápido
-	oleada_Sound.max_distance = 40.0    # Fuera de 10 m ya no se escucha
-	add_child(oleada_Sound)
-	oleada_Sound.play()
-	await oleada_Sound.finished
-	oleada_Sound.queue_free()

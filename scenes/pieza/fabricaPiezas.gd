@@ -4,7 +4,7 @@ class_name FabricaPiezas
 var nueva_pieza: RigidBody3D
 var espaciado_baldosas : float = globalJuego.espaciado_baldosas
 var pieza_escena = preload("res://scenes/pieza/pieza_base.tscn")
-var velocidad: float = 1.0
+
 var id:int = 0  # id de la pieza
 var sitio3d: Vector3i
 
