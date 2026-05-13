@@ -78,10 +78,8 @@ func _physics_process(_delta: float):
 	#	animation_player.play("ataque_rey")
 	
 func cargar_objeto():# Instanciar y agregar al contenedor
-	
 	instancia_objeto_pieza = pieza.modelo.instantiate()
 	contenedor_movimiento.add_child(instancia_objeto_pieza)
-	
 	# Buscar el AnimationPlayer dentro de esta instancia
 	animation_player = _find_animation_player(instancia_objeto_pieza)
 
@@ -131,6 +129,7 @@ func _on_body_entered(_body): #cuando la pieza se instancia y cae
 	# este if es para que solo tenga un efecto de sonido cuando rebota 
 	#create_dust_effect()# Efecto de polvo
 	Sonidos.impacto()# Sonido de golpe
+	pieza_colocada=true # que no vuelva a generar el sonido de caida
 	
 func create_dust_effect(): # Particulas al pegar con el tablero
 	dust_particles.emitting = true
