@@ -3,6 +3,7 @@ extends Panel
 
 # textos delos botones de las piezas
 @onready var cant_peon: TextureButton = $CantPeon
+
 @onready var cant_alfil: TextureButton = $CantAlfil
 @onready var cant_caballo: TextureButton = $CantCaballo
 @onready var cant_torre: TextureButton = $CantTorre

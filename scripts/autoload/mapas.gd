@@ -49,6 +49,7 @@ func _ready():
 func reiniciar_variables():
 	mapas = []
 	obstaculos = []
+	cargar_todos_mapas()
 
 func cargar_todos_mapas():
 	mapas.clear()
