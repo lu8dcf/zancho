@@ -12,9 +12,10 @@ var danioA=Piezas
 # Called when the node enters the scene tree for the first time.
 
 var atacanteId: int
+var defensorId: int
 var danio: int
 var turno = true # true turno inicial atacante A
-var tiempo_ataque = Timer
+var mi_timer = Timer
 
 func _ready() -> void:
 	crear_timer()
@@ -24,18 +25,24 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func atacaPieza():
+func _on_timer_timeout():
+	# poner el potenciador de daño
+	
 	if turno:
 		turno = false
 		danio = Piezas.danio[piezaA_tipo]
-		GlobalSignal.piezaAtaca.emit(idA)
-		GlobalSignal.piezaRecibeDanio.emit(idD,danio)
+		atacanteId = idA
+		defensorId = idD
+	
 	else:
 		turno = true
-		danio = Piezas.danio[piezaA_tipo]
-		GlobalSignal.piezaAtaca.emit(idA)
-		GlobalSignal.piezaRecibeDanio.emit(idD,danio)
-
+		danio = Piezas.danio[piezaD_tipo]
+		atacanteId = idD
+		defensorId = idA
+		
+	GlobalSignal.piezaAtaca.emit(atacanteId)
+	GlobalSignal.piezaRecibeDanio.emit(defensorId,danio)
+	
 func atacaA():
 	pass
 

@@ -28,9 +28,3 @@ signal piezaAtaca(id: int)
 signal piezaRecibeDanio(id: int,danio: int)
 @warning_ignore("unused_signal")
 signal piezaMuere(id: int)
-
-# Pasos del ataque
-@warning_ignore("unused_signal")
-signal marcaAtaque
-@warning_ignore("unused_signal")
-signal controlMarcaAtaque (activa : bool)

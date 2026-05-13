@@ -2,6 +2,10 @@ extends Node3D
 
 var pares_almacenados = {}
 
+const ATAQUE_BASE = preload("res://scenes/levels/ataque/ataque_base.tscn")
+
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GlobalSignal.connect("ataque",iniciaAtaque)
@@ -17,7 +21,7 @@ func iniciaAtaque(idA,idD,posicionA,posicionD):
 	GlobalSignal.controlMarcaPaso.emit(false) #detiene el paso del juego
 	
 	angulo_enfrentamiento(idA,idD,posicionA,posicionD)
-	GlobalSignal.controlMarcaAtaque.emit(true) #inicia el reloj de ataque
+	
 	
 	
 	
