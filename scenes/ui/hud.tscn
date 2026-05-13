@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://x86kqi63xlwv" path="res://assets/ui/avance3.png" id="8_we3sy"]
 [ext_resource type="Texture2D" uid="uid://cfab8ei6ocjti" path="res://assets/ui/boton_menu_hover.png" id="10_27rlx"]
 [ext_resource type="Texture2D" uid="uid://bb30hhx8cxgrt" path="res://assets/ui/plata.png" id="10_o6xly"]
+[ext_resource type="Script" uid="uid://byh4vgo0mtohy" path="res://scenes/ui/imagen_back_inferior.gd" id="16_27rlx"]
 [ext_resource type="Texture2D" uid="uid://cnlel5ai6mxhw" path="res://assets/ui/hover_piezas.png" id="16_b6swc"]
 [ext_resource type="Texture2D" uid="uid://bdys84xjdyres" path="res://assets/ui/idle_piezas.png" id="17_t0png"]
 [ext_resource type="Texture2D" uid="uid://brokn8inr04wm" path="res://assets/ui/vida1.png" id="19_b6swc"]
@@ -32,9 +33,9 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kicr4"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t0png"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_65nxt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t0png"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1e6lo"]
 
@@ -63,6 +64,20 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_qmm8d")
 expand_mode = 1
+
+[node name="botonEsconderSuperior" parent="PanelSuperior" unique_id=94794210 instance=ExtResource("4_4jqwt")]
+z_index = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0
+anchor_right = 0.094000004
+anchor_bottom = 2.0270002
+offset_left = 12.0
+offset_top = 39.0
+offset_right = -0.288002
+offset_bottom = -25.728012
+texture_hover = ExtResource("7_cwdlq")
+texto = "ESCONDER"
 
 [node name="empezar_oleada" parent="PanelSuperior" unique_id=998142765 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
@@ -179,14 +194,20 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_t0png")
 expand_mode = 1
+script = ExtResource("16_27rlx")
 
-[node name="botonEsconderInferior" parent="imagenBackInferior" unique_id=94794210 instance=ExtResource("4_4jqwt")]
+[node name="botonEsconderInferior" parent="imagenBackInferior" unique_id=853448499 instance=ExtResource("4_4jqwt")]
 z_index = 2
 layout_mode = 1
-offset_left = -576.0
-offset_top = -112.0
-offset_right = -480.0
-offset_bottom = -79.0
+anchors_preset = -1
+anchor_left = 0.0
+anchor_top = -1.8260001
+anchor_right = 0.106000006
+anchor_bottom = -1.442
+offset_left = 6.0
+offset_top = 405.02402
+offset_right = -20.112007
+offset_bottom = 352.008
 texture_hover = ExtResource("7_cwdlq")
 texto = "ESCONDER"
 
@@ -204,6 +225,29 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_t0png")
 expand_mode = 1
+
+[node name="PanelRey" type="Panel" parent="imagenBackInferior" unique_id=1017658866]
+layout_mode = 0
+offset_top = 88.0
+offset_right = 128.0
+offset_bottom = 224.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_65nxt")
+
+[node name="VidaRey" parent="imagenBackInferior/PanelRey" unique_id=2032502324 instance=ExtResource("4_4jqwt")]
+layout_mode = 1
+offset_left = -58.0
+offset_top = -104.0
+offset_right = 7.0
+offset_bottom = 68.0
+texture_normal = ExtResource("19_b6swc")
+
+[node name="ValorVida" parent="imagenBackInferior/PanelRey" unique_id=1770344340 instance=ExtResource("4_4jqwt")]
+layout_mode = 1
+offset_left = -51.0
+offset_top = -20.0
+offset_right = -6.0
+offset_bottom = 12.0
+texto = "20-20"
 
 [node name="PanelInferior" type="Panel" parent="." unique_id=1024435106]
 anchors_preset = 12
@@ -228,11 +272,12 @@ texture_pressed = ExtResource("16_b6swc")
 texture_hover = ExtResource("16_b6swc")
 
 [node name="CantPeon" parent="PanelInferior" unique_id=1101164896 instance=ExtResource("4_4jqwt")]
+z_index = 2
 layout_mode = 1
-offset_left = -416.0
-offset_top = 48.0
-offset_right = -344.0
-offset_bottom = 72.0
+offset_left = -410.0
+offset_top = 43.0
+offset_right = -335.0
+offset_bottom = 66.0
 texto = "Peon"
 
 [node name="BotonAlfil" parent="PanelInferior" unique_id=1395214267 instance=ExtResource("4_4jqwt")]
@@ -246,11 +291,12 @@ texture_pressed = ExtResource("16_b6swc")
 texture_hover = ExtResource("16_b6swc")
 
 [node name="CantAlfil" parent="PanelInferior" unique_id=1442583281 instance=ExtResource("4_4jqwt")]
+z_index = 2
 layout_mode = 1
-offset_left = -277.0
-offset_top = 48.0
-offset_right = -205.0
-offset_bottom = 72.0
+offset_left = -275.0
+offset_top = 44.0
+offset_right = -203.0
+offset_bottom = 64.0
 texto = "Alfil"
 
 [node name="BotonCaballo" parent="PanelInferior" unique_id=376318499 instance=ExtResource("4_4jqwt")]
@@ -264,11 +310,12 @@ texture_pressed = ExtResource("16_b6swc")
 texture_hover = ExtResource("16_b6swc")
 
 [node name="CantCaballo" parent="PanelInferior" unique_id=1401861704 instance=ExtResource("4_4jqwt")]
+z_index = 2
 layout_mode = 1
-offset_left = -141.0
-offset_top = 48.0
-offset_right = -69.0
-offset_bottom = 72.0
+offset_left = -145.0
+offset_top = 44.0
+offset_right = -73.0
+offset_bottom = 64.0
 texto = "Caballo"
 
 [node name="BotonTorre" parent="PanelInferior" unique_id=405999081 instance=ExtResource("4_4jqwt")]
@@ -282,11 +329,12 @@ texture_pressed = ExtResource("16_b6swc")
 texture_hover = ExtResource("16_b6swc")
 
 [node name="CantTorre" parent="PanelInferior" unique_id=1182038336 instance=ExtResource("4_4jqwt")]
+z_index = 2
 layout_mode = 1
-offset_left = -5.0
-offset_top = 48.0
-offset_right = 67.0
-offset_bottom = 72.0
+offset_left = -12.0
+offset_top = 43.0
+offset_right = 60.0
+offset_bottom = 64.0
 texto = "Torre"
 
 [node name="BotonReina" parent="PanelInferior" unique_id=1514182510 instance=ExtResource("4_4jqwt")]
@@ -300,34 +348,13 @@ texture_pressed = ExtResource("16_b6swc")
 texture_hover = ExtResource("16_b6swc")
 
 [node name="CantReina" parent="PanelInferior" unique_id=718881395 instance=ExtResource("4_4jqwt")]
+z_index = 2
 layout_mode = 1
-offset_left = 133.0
-offset_top = 48.0
-offset_right = 205.0
-offset_bottom = 72.0
+offset_left = 123.0
+offset_top = 44.0
+offset_right = 192.0
+offset_bottom = 63.0
 texto = "Reina"
-
-[node name="PanelRey" type="Panel" parent="." unique_id=1017658866]
-offset_top = 512.0
-offset_right = 128.0
-offset_bottom = 648.0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_65nxt")
-
-[node name="VidaRey" parent="PanelRey" unique_id=2032502324 instance=ExtResource("4_4jqwt")]
-layout_mode = 1
-offset_left = -58.0
-offset_top = -104.0
-offset_right = 7.0
-offset_bottom = 68.0
-texture_normal = ExtResource("19_b6swc")
-
-[node name="ValorVida" parent="PanelRey" unique_id=1770344340 instance=ExtResource("4_4jqwt")]
-layout_mode = 1
-offset_left = -1.0
-offset_top = 12.0
-offset_right = 55.0
-offset_bottom = 44.0
-texto = "20-20"
 
 [node name="PanelTienda" type="Panel" parent="." unique_id=395284349]
 anchors_preset = -1
@@ -617,6 +644,7 @@ offset_bottom = 50.0
 theme_override_font_sizes/font_size = 30
 text = "Debug: "
 
+[connection signal="pressed" from="PanelSuperior/botonEsconderSuperior" to="PanelSuperior" method="_on_boton_esconder_superior_pressed"]
 [connection signal="pressed" from="PanelSuperior/empezar_oleada" to="PanelSuperior" method="_on_empezar_oleada_pressed"]
 [connection signal="pressed" from="PanelSuperior/BotonPausar" to="PanelSuperior" method="_on_boton_pausar_pressed"]
 [connection signal="pressed" from="PanelSuperior/BotonPlay" to="PanelSuperior" method="_on_boton_play_pressed"]
@@ -625,4 +653,4 @@ text = "Debug: "
 [connection signal="pressed" from="PanelSuperior/botonMenu" to="PanelSuperior" method="_on_boton_menu_pressed"]
 [connection signal="pressed" from="PanelSuperior/BotonDebilidades" to="PanelSuperior" method="_on_boton_debilidades_pressed"]
 [connection signal="pressed" from="PanelSuperior/BotonReiniciarCamara" to="PanelSuperior" method="_on_boton_reiniciar_camara_pressed"]
-[connection signal="pressed" from="imagenBackInferior/botonEsconderInferior" to="." method="_on_boton_esconder_inferior_pressed"]
+[connection signal="pressed" from="imagenBackInferior/botonEsconderInferior" to="imagenBackInferior" method="_on_boton_esconder_inferior_pressed"]

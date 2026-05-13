@@ -2,13 +2,14 @@ extends CanvasLayer
 
 #panel inferior
 @onready var panel_inferior: Panel = $PanelInferior
-@onready var panel_rey: Panel = $PanelRey
 @onready var imagen_back_inferior: TextureRect = $imagenBackInferior
+@onready var panel_rey: Panel = $imagenBackInferior/PanelRey
 
 
 # panel del rey
-@onready var valor_vida: TextureButton = $PanelRey/ValorVida
-@onready var vida_rey: TextureButton = $PanelRey/VidaRey
+
+@onready var vida_rey: TextureButton = $imagenBackInferior/PanelRey/VidaRey
+@onready var valor_vida: TextureButton = $imagenBackInferior/PanelRey/ValorVida
 
 #panel superior
 @onready var panel_superior: Panel = $PanelSuperior
@@ -36,9 +37,3 @@ func mostrar_todos_paneles():
 	
 func _actualizar_vidas(nuevas_vidas: int) -> void:
 	valor_vida.cambiar_texto(str(nuevas_vidas) + "/" + str(globalJuego.vidaMax))
-
-
-func _on_boton_esconder_inferior_pressed() -> void:
-	panel_inferior.visible=false
-	panel_rey.visible =false
-	imagen_back_inferior.visible = false

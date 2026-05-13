@@ -17,6 +17,8 @@ extends Panel
 @onready var boton_reina: TextureButton = $BotonReina
 
 
+
+
 var botones_piezas: Array = []
 var cant_piezas :Array = []
 
