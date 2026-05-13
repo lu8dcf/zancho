@@ -19,6 +19,7 @@ var mi_timer = Timer
 
 func _ready() -> void:
 	crear_timer()
+	GlobalSignal.connect("piezaMuere",piezaMuere) # una pieza murio
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,6 +28,7 @@ func _process(_delta: float) -> void:
 
 func _on_timer_timeout():
 	# poner el potenciador de daño
+	
 	
 	if turno:
 		turno = false
@@ -46,8 +48,7 @@ func _on_timer_timeout():
 func atacaA():
 	pass
 
-func crear_timer():
-	# Crear el Timer
+func crear_timer(): # Tiempo entre ataques
 	mi_timer = Timer.new()
 	
 	# Configurar como cíclico (0.5 segundos)
@@ -60,3 +61,8 @@ func crear_timer():
 	
 	# Agregar a la escena
 	add_child(mi_timer)
+
+func piezaMuere(id):
+	if id==idA or id==idD:
+		mi_timer.stop()  # detengo el timer de ataque
+		

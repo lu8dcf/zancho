@@ -39,6 +39,10 @@ physics_material_override = SubResource("PhysicsMaterial_c11s1")
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_c11s1")
+pieza_tipo = null
+pieza_blanca = null
+id = null
+pieza_sitio = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1624874680]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60533905, 0)
@@ -73,5 +77,7 @@ transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, -0.019870281, -0.728
 stream = SubResource("AudioStreamMP3_c11s1")
 max_distance = 5.0
 bus = &"Efectos"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1440981203]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

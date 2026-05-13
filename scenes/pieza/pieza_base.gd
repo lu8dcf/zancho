@@ -204,16 +204,48 @@ func recibeDanio(idD: int,danio: int):
 		die()
 
 func die():
+	GlobalSignal.piezaMuere.emit(id)
 	is_alive = false
-	create_dust_effect()
+	#create_dust_effect()
 	Sonidos.death()
+	if Piezas.pieza_activa.has(self):
+		Piezas.pieza_activa.erase(self)
+		
+	if pieza_blanca:
+		remove_from_group("pieza_blanca")
+	else:
+		remove_from_group("pieza_negra")
+	# Destruir la pieza
+	animacion_muerte()
 	
-	# Animación de muerte
+
+func animacion_muerte():
+	freeze = true
+	gravity_scale = 0
+	
 	var tween = create_tween()
-	tween.tween_property(self, "scale", Vector3.ZERO, 0.5)
+	tween.set_parallel(true)
+	
+	# Subir y rotar lentamente
+	tween.tween_property(self, "global_position:y", global_position.y + 1 , 4)
+	tween.tween_property(self, "rotation:y", rotation.y + 360, 4)  # Girar mientras sube
+	#tween.tween_property(self, "scale", Vector3.ZERO, 4)
+	
+	# Color celestial con brillo
+	tween.tween_callback(func():
+		var material = StandardMaterial3D.new()
+		material.albedo_color = Color(0.7, 0.9, 1.0)
+		material.emission_enabled = true
+		material.emission = Color(0.5, 0.7, 1.0)
+		material.emission_energy = 2.0
+		
+		if has_node("MeshInstance3D"):
+			$MeshInstance3D.material_override = material
+	)
+	
 	tween.tween_callback(queue_free)
-
-
+	await tween.finished
+	#queue_free()
 
 func giro_remoto(pieza_id,angulo):
 	if id!=pieza_id:
@@ -258,6 +290,7 @@ func look_at_target(pieza_id, target: Vector3):
 	# Crear tween para la rotación suave
 	var tween = create_tween()
 	tween.tween_property(self, "global_transform", Transform3D(target_basis, pos), 1.0)
+	
 	
 	# Alternativa: Tween solo la rotación (más eficiente)
 	# var start_basis = global_transform.basis
