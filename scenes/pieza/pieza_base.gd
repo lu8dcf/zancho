@@ -24,8 +24,6 @@ var movimiento_especifico = preload("res://scenes/pieza/movimiento/movimiento.ts
 var ataque_especifico = preload("res://scenes/pieza/ataque/Ataque.tscn") # define le movimiento caracteristico de la pieza
 
 # Nodos
-
-
 @onready var dust_particles = $DustParticles
 @onready var giro_inicial = $GiroInicial
 #Area de ataque
@@ -42,14 +40,11 @@ var animation_player : AnimationPlayer
 
 # Variables de estado
 var is_alive: bool = true
-var can_attack: bool = true
-var target_piece: RigidBody3D = null
-var initial_health: int
 var color="N"
 var pieza_colocada=false
-var animacion=false
-
 var pieza : Resource
+var secuencia_sfx = 0
+
 
 func _ready():
 	#print (pieza_sitio)
@@ -71,7 +66,7 @@ func _ready():
 	cargar_movimiento() # Script de movimiento y estados
 	cargar_ataque() # Scrip de zona de ataque
 	#GlobalSignal.connect("marcaPaso",anima_idle)
-	anima_idle()
+	animacion("Bidle")
 	
 	GlobalSignal.connect("giro_pieza",giro_remoto)
 	GlobalSignal.connect("piezaAtaca",ataque)
@@ -144,8 +139,6 @@ func create_dust_effect(): # Particulas al pegar con el tablero
 # fin de colocacion inicial --------------------------------------------------------------------------------	
 
 
-
-
 func verificar_proximo_paso(cambio):
 	# proximo sitio a ocupar
 	var sitio3d = round(global_position+cambio)/globalJuego.espaciado_baldosas # en 3d
@@ -156,9 +149,7 @@ func verificar_proximo_paso(cambio):
 		return false
 	return true
 		
-func giro(angulo):
-		 #Gira la pieza en el eje horizontal (Y) usando Tween
-	  
+func giro(angulo): #Gira la pieza en el eje horizontal (Y) usando Tween
 	var tween = create_tween()
 	var _rotacion_actual = rotation_degrees.y
 	var rotacion_destino = angulo
@@ -173,11 +164,10 @@ func giro(angulo):
 	physics_material_override.bounce = 0
 	gravity_scale=1
 
-func anima_idle(): # animacion de idle
-	var anima="Bidle"
-	animacion_caminata(anima)
+
+	
 			
-func animacion_caminata(anima):
+func animacion(anima):
 	if animation_player:
 		anima = str(pieza_tipo)+anima
 		if animation_player.has_animation(anima):
@@ -190,7 +180,7 @@ func Sonido(tipo):
 	oleada_Sound.stream = load(archivo_sonido)
 	oleada_Sound.attenuation_model = AudioStreamPlayer3D.ATTENUATION_INVERSE_SQUARE_DISTANCE
 	oleada_Sound.unit_size = 10        # Se atenúa rápido
-	oleada_Sound.max_distance = 40.0    # Fuera de 10 m ya no se escucha
+	oleada_Sound.max_distance = 30.0    # Fuera de 10 m ya no se escucha
 	add_child(oleada_Sound)
 	oleada_Sound.play()
 	await oleada_Sound.finished
@@ -200,17 +190,20 @@ func ataque(idA):
 	if idA!=id:
 		return
 	var anima="Bataque"
-	animacion_caminata(anima)
+	animacion(anima)
 
 func recibeDanio(idD: int,danio: int):
 	if idD!=id:
 		return
 	vida_actual -= danio
-	Sonido("hurt")
+	
+	if secuencia_sfx==0:  # para que os sonidos sean diversos y no suenen tan seguidos
+		Sonido("hurt")
+		secuencia_sfx +=1
+		
+		
 	# actualizar barra de vida -------------------------------------------------
 		
-	# Efecto visual de daño
-	flash_red()
 	
 	# Sonido de daño - cargar los diferentes tipod de sonido
 	#recibeDanio.play()
@@ -253,21 +246,7 @@ func giro_rad(angulo):
 	gravity_scale=1
 	
 # ---------------------  auxilia borrar si no es necesario	
-func flash_red():
-	#var original_color = mesh_instance.material_override.albedo_color
-	#mesh_instance.material_override.albedo_color = Color.RED
-	await get_tree().create_timer(0.1).timeout
-	#mesh_instance.material_override.albedo_color = original_color
 
-func create_attack_effect():
-	# Crear línea de ataque visual
-	var line = ImmediateMesh.new()
-	var line_mesh = MeshInstance3D.new()
-	line_mesh.mesh = line
-	
-	# Animación de daño en el enemigo
-	if target_piece:
-		target_piece.flash_red()
 
 	
 func look_at_target(pieza_id, target: Vector3):
