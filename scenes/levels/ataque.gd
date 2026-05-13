@@ -13,7 +13,7 @@ func iniciaAtaque(idA,idD,posicionA,posicionD,tipoA,tipoD):
 	
 	if _crear_clave(idA, idD)==false:
 		return
-	print (idA," ",idD," ",posicionA," ",posicionD)
+	#print (idA," ",idD," ",posicionA," ",posicionD)
 	GlobalSignal.controlMarcaPaso.emit(false) #detiene el paso del juego
 	
 	angulo_enfrentamiento(idA,idD,posicionA,posicionD)

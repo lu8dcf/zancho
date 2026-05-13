@@ -20,7 +20,6 @@ func _on_area_entered(area: Area3D):
 
 func manejar_ataque(body):
 	# Verificar que sea del equipo contrario
-	
 	if body.pieza_blanca: 
 		if pieza_base.pieza_blanca:
 			return

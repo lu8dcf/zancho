@@ -218,7 +218,7 @@ func die():
 func giro_remoto(pieza_id,angulo):
 	if id!=pieza_id:
 		return
-	print (pieza_id," ",angulo)
+	#print (pieza_id," ",angulo)
 	giro_rad(angulo)
 	
 func giro_rad(angulo):
