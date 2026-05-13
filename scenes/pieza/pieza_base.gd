@@ -77,20 +77,20 @@ func _ready():
 	GlobalSignal.connect("piezaAtaca",ataque)
 	GlobalSignal.connect("piezaRecibeDanio",recibeDanio)
 
-func _physics_process(_delta: float) -> void:
-	if animacion:
-		animation_player.play("ataque_rey")
+func _physics_process(_delta: float):
+	pass
+	#if animacion:
+	#	animation_player.play("ataque_rey")
 	
-func cargar_objeto():
-			
-	# Instanciar y agregar al contenedor
+func cargar_objeto():# Instanciar y agregar al contenedor
+	
 	instancia_objeto_pieza = pieza.modelo.instantiate()
 	contenedor_movimiento.add_child(instancia_objeto_pieza)
 	
 	# Buscar el AnimationPlayer dentro de esta instancia
 	animation_player = _find_animation_player(instancia_objeto_pieza)
 
-func _find_animation_player(node: Node) -> AnimationPlayer:
+func _find_animation_player(node: Node) -> AnimationPlayer: # agrega las animaciones del mnodelo a la pieza
 	for child in node.get_children():
 		if child is AnimationPlayer:
 			return child
@@ -120,7 +120,9 @@ func cargar_ataque(): # agrega el nodo ataque con el script correspondiente a la
 	add_child(ataque)
 	ataque.owner = self  # ← IMPORTANTE: Establece el owner manualmente
 		
-func posicionamiento_giro():
+		
+# colocacion inicial --------------------------------------------------------------------------------		
+func posicionamiento_giro(): # Giro inicial de la pieza an colocarse en el tablero hay que cambiar a radianes
 	#temporizador
 	giro_inicial.wait_time = 3.0   # 1 segundo
 	giro_inicial.connect("timeout",llego_al_piso)
@@ -129,7 +131,7 @@ func posicionamiento_giro():
 func llego_al_piso():
 	giro(angulo_frente)
 	
-func _on_body_entered(_body):
+func _on_body_entered(_body): #cuando la pieza se instancia y cae 
 	if pieza_colocada : return # solo se ejecuta en el inicio
 	# este if es para que solo tenga un efecto de sonido cuando rebota 
 	#create_dust_effect()# Efecto de polvo
@@ -139,28 +141,8 @@ func create_dust_effect(): # Particulas al pegar con el tablero
 	dust_particles.emitting = true
 	await get_tree().create_timer(0.5).timeout
 	dust_particles.emitting = false
+# fin de colocacion inicial --------------------------------------------------------------------------------	
 
-
-
-
-
-
-
-func flash_red():
-	#var original_color = mesh_instance.material_override.albedo_color
-	#mesh_instance.material_override.albedo_color = Color.RED
-	await get_tree().create_timer(0.1).timeout
-	#mesh_instance.material_override.albedo_color = original_color
-
-func create_attack_effect():
-	# Crear línea de ataque visual
-	var line = ImmediateMesh.new()
-	var line_mesh = MeshInstance3D.new()
-	line_mesh.mesh = line
-	
-	# Animación de daño en el enemigo
-	if target_piece:
-		target_piece.flash_red()
 
 func die():
 	is_alive = false
@@ -190,7 +172,7 @@ func giro(angulo):
 	var rotacion_destino = angulo
 	
 	#calcular el giro mas corto
-	Sonido()
+	Sonido("giro")
 	tween.tween_property(self, "rotation_degrees:y", rotacion_destino, 0.5)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
@@ -210,9 +192,10 @@ func animacion_caminata(anima):
 			animation_player.play(anima)
 
 
-func Sonido():
+func Sonido(tipo):
 	var oleada_Sound = AudioStreamPlayer3D.new()
-	oleada_Sound.stream = preload("res://assets/sound/sfx/giro.mp3")
+	var archivo_sonido = "res://assets/sound/sfx/"+tipo+".mp3"
+	oleada_Sound.stream = load(archivo_sonido)
 	oleada_Sound.attenuation_model = AudioStreamPlayer3D.ATTENUATION_INVERSE_SQUARE_DISTANCE
 	oleada_Sound.unit_size = 10        # Se atenúa rápido
 	oleada_Sound.max_distance = 40.0    # Fuera de 10 m ya no se escucha
@@ -257,7 +240,7 @@ func giro_rad(angulo):
 	var tween = create_tween()
 	
 	#calcular el giro mas corto
-	Sonido()
+	Sonido("giro")
 	tween.tween_property(self, "rotation:y", rotacion_destino, 0.5)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
@@ -266,6 +249,24 @@ func giro_rad(angulo):
 	pieza_colocada = true
 	physics_material_override.bounce = 0
 	gravity_scale=1
+	
+# ---------------------  auxilia borrar si no es necesario	
+func flash_red():
+	#var original_color = mesh_instance.material_override.albedo_color
+	#mesh_instance.material_override.albedo_color = Color.RED
+	await get_tree().create_timer(0.1).timeout
+	#mesh_instance.material_override.albedo_color = original_color
+
+func create_attack_effect():
+	# Crear línea de ataque visual
+	var line = ImmediateMesh.new()
+	var line_mesh = MeshInstance3D.new()
+	line_mesh.mesh = line
+	
+	# Animación de daño en el enemigo
+	if target_piece:
+		target_piece.flash_red()
+
 	
 func look_at_target(pieza_id, target: Vector3):
 	if id != pieza_id:

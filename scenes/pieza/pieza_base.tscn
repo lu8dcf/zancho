@@ -37,10 +37,6 @@ physics_material_override = SubResource("PhysicsMaterial_c11s1")
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_c11s1")
-pieza_tipo = null
-pieza_blanca = null
-id = null
-pieza_sitio = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1624874680]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60533905, 0)
@@ -66,10 +62,10 @@ one_shot = true
 [node name="AreaAtaque" type="Area3D" parent="." unique_id=1650449106]
 
 [node name="Marker3D" type="Marker3D" parent="." unique_id=107913833]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6744905, 1.701786)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6744905, 1.6040001)
 
 [node name="Vida" parent="Marker3D" unique_id=217926695 instance=ExtResource("2_c11s1")]
-transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0, -0.971299, 0)
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, -0.019870281, -0.72823024, -1.6248655)
 
 [node name="recibeDanio" type="AudioStreamPlayer3D" parent="." unique_id=1296894691]
 stream = ExtResource("3_4vkcs")

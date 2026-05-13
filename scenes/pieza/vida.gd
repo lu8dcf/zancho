@@ -4,16 +4,11 @@ extends Node3D
 var danio = 10
 @onready var barraVerde = $vidaverde
 var esVisible: bool = false
-signal VidaEsCero
+var pieza: PiezaBase
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _ready():
+	# Obtener la referencia a la pieza base (el owner del componente)
+	pieza = get_parent() as PiezaBase
 
 func bajarVida():
 	if (!esVisible):
