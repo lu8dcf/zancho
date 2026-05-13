@@ -13,7 +13,7 @@ func _ready() -> void:
 
 
 # A= Atacante  , D= defensor
-func iniciaAtaque(idA,idD,posicionA,posicionD):
+func iniciaAtaque(idA,idD,posicionA,posicionD,tipoA,tipoD):
 	
 	if  _crear_clave(idA, idD)==false:
 		return
@@ -21,6 +21,24 @@ func iniciaAtaque(idA,idD,posicionA,posicionD):
 	GlobalSignal.controlMarcaPaso.emit(false) #detiene el paso del juego
 	
 	angulo_enfrentamiento(idA,idD,posicionA,posicionD)
+	
+	var nuevo_ataque = ATAQUE_BASE.instantiate()
+			
+	nuevo_ataque.idA = idA
+	nuevo_ataque.idD = idD
+	nuevo_ataque.danioA = calcular_danio(tipoA,tipoD)
+	nuevo_ataque.danioD = calcular_danio(tipoD,tipoA)
+			
+	add_child(nuevo_ataque)
+	
+	
+	
+func calcular_danio(tipoA,tipoD):
+	var danio= Piezas.danio[tipoA]
+	if Piezas.bonus_a[tipoA]==tipoD:
+		Piezas.bonus_cantidad[tipoA] * danio
+		
+		
 	
 	
 	
