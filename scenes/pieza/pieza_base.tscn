@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://borpciaq4xf08" path="res://scenes/pieza/pieza_base.gd" id="1_c11s1"]
 [ext_resource type="PackedScene" uid="uid://bhf6bbh6v0u5w" path="res://scenes/pieza/vida.tscn" id="2_c11s1"]
+[ext_resource type="AudioStream" uid="uid://cx3ebfwnjwhrl" path="res://assets/sound/sfx/hurt.mp3" id="3_4vkcs"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_c11s1"]
 
@@ -69,6 +70,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6744905, 1.701786)
 
 [node name="Vida" parent="Marker3D" unique_id=217926695 instance=ExtResource("2_c11s1")]
 transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0, -0.971299, 0)
-visible = false
+
+[node name="recibeDanio" type="AudioStreamPlayer3D" parent="." unique_id=1296894691]
+stream = ExtResource("3_4vkcs")
+max_distance = 5.0
+bus = &"Efectos"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

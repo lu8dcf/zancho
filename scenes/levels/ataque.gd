@@ -5,17 +5,13 @@ var pares_almacenados = {}
 const ATAQUE_BASE = preload("res://scenes/levels/ataque/ataque_base.tscn")
 
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GlobalSignal.connect("ataque",iniciaAtaque)
 	
-
-
 # A= Atacante  , D= defensor
 func iniciaAtaque(idA,idD,posicionA,posicionD,tipoA,tipoD):
 	
-	if  _crear_clave(idA, idD)==false:
+	if _crear_clave(idA, idD)==false:
 		return
 	print (idA," ",idD," ",posicionA," ",posicionD)
 	GlobalSignal.controlMarcaPaso.emit(false) #detiene el paso del juego

@@ -13,11 +13,9 @@ var espaciado = GlobalJuego.espaciado_baldosas
 @export var pieza_sitio:Vector2i
 
 # CArga de parametros pieza
-var vida = Piezas.vida[pieza_tipo]
-var danio = Piezas.danio[pieza_tipo]
-var cadencia = Piezas.cadencia[pieza_tipo]
-var bonus_cantidad = Piezas.bonus_cantidad[pieza_tipo]
-var bonus_a = Piezas.bonus_a[pieza_tipo]
+var vida_total = Piezas.vida[pieza_tipo]
+var vida_actual = vida_total
+
 
 var angulo_frente: int = 225
 
@@ -144,45 +142,10 @@ func create_dust_effect(): # Particulas al pegar con el tablero
 
 
 
-func attack_enemy():
-	if target_piece and target_piece.is_alive:
-		can_attack = false
-		target_piece.take_damage(danio)
-		
-		# Efecto visual de ataque
-		create_attack_effect()
-		
-		#attack_timer.start(1.0)  # Cooldown de 1 segundo
-		#await attack_timer.timeout
-		can_attack = true
 
-func take_damage(amount: int):
-	vida -= amount
-	update_health_bar()
-	
-	# Efecto visual de daño
-	flash_red()
-	
-	# Sonido de daño
-	Sonidos.hurt()
-	
-	if vida <= 0:
-		die()
 
-func update_health_bar():
-	var health_percentage = float(vida) / float(initial_health)
-	#health_bar.value = health_percentage * 100
-	
-	# Cambiar color según salud
-	if health_percentage > 0.6:
-	#	health_bar.modulate = Color(0, 1, 0, 1)  # Verde
-		pass
-	elif health_percentage > 0.3:
-	#	health_bar.modulate = Color(1, 1, 0, 1)  # Amarillo
-		pass
-	else:
-	#	health_bar.modulate = Color(1, 0, 0, 1)  # Rojo
-		pass
+
+
 func flash_red():
 	#var original_color = mesh_instance.material_override.albedo_color
 	#mesh_instance.material_override.albedo_color = Color.RED
@@ -220,14 +183,8 @@ func verificar_proximo_paso(cambio):
 	return true
 		
 func giro(angulo):
-	
-	"""
-    Gira la pieza en el eje horizontal (Y) usando Tween
-    
-    Parámetros:
-    - angulo_grados: Ángulo a rotar en grados (positivo = derecha, negativo = izquierda)
-    - duracion: Duración de la animación en segundos
-	"""
+		 #Gira la pieza en el eje horizontal (Y) usando Tween
+	  
 	var tween = create_tween()
 	var _rotacion_actual = rotation_degrees.y
 	var rotacion_destino = angulo
@@ -237,8 +194,6 @@ func giro(angulo):
 	tween.tween_property(self, "rotation_degrees:y", rotacion_destino, 0.5)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
-	
-	
 	
 	pieza_colocada = true
 	physics_material_override.bounce = 0
@@ -266,12 +221,29 @@ func Sonido():
 	await oleada_Sound.finished
 	oleada_Sound.queue_free()
 
-func ataque(body):
+func ataque(idA):
+	if idA!=id:
+		return
 	var anima="Bataque"
 	animacion_caminata(anima)
 
-func recibeDanio():
-	pass
+func recibeDanio(idD: int,danio: int):
+	if idD!=id:
+		return
+	vida_actual -= danio
+	# actualizar barra de vida -------------------------------------------------
+		
+	# Efecto visual de daño
+	flash_red()
+	
+	# Sonido de daño - cargar los diferentes tipod de sonido
+	#recibeDanio.play()
+		
+	if vida_actual <= 0:
+		die()
+
+
+
 
 func giro_remoto(pieza_id,angulo):
 	if id!=pieza_id:
