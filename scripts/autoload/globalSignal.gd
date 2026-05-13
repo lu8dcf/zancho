@@ -22,6 +22,12 @@ signal comienzoOleada #Senial que debe emitir cuando comienza la oleada
 signal ataque (idA:int,idD:int,posicionA:Vector3i,posicionD:Vector3i)#Senial que debe emitir cuando comienza la oleada
 @warning_ignore("unused_signal")
 signal giro_pieza(id: int,angulo:float)
+@warning_ignore("unused_signal")
+signal piezaAtaca(id: int)
+@warning_ignore("unused_signal")
+signal piezaRecibeDanio(id: int,danio: int)
+@warning_ignore("unused_signal")
+signal piezaMuere(id: int)
 
 # Pasos del ataque
 @warning_ignore("unused_signal")

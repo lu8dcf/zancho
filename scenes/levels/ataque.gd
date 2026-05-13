@@ -15,8 +15,11 @@ func iniciaAtaque(idA,idD,posicionA,posicionD):
 		return
 	print (idA," ",idD," ",posicionA," ",posicionD)
 	GlobalSignal.controlMarcaPaso.emit(false) #detiene el paso del juego
-	GlobalSignal.controlMarcaAtaque.emit(true) #inicia el reloj de ataque
+	
 	angulo_enfrentamiento(idA,idD,posicionA,posicionD)
+	GlobalSignal.controlMarcaAtaque.emit(true) #inicia el reloj de ataque
+	
+	
 	
 func _crear_clave(a, b): ## Genera una clave única que ignora el orden
 	var clave = _generar_clave(a, b)
