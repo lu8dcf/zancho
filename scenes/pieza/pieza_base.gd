@@ -76,6 +76,8 @@ func _ready():
 	anima_idle()
 	
 	GlobalSignal.connect("giro_pieza",giro_remoto)
+	GlobalSignal.connect("piezaAtaca",ataque)
+	GlobalSignal.connect("piezaRecibeDanio",recibeDanio)
 
 func _physics_process(_delta: float) -> void:
 	if animacion:
@@ -265,6 +267,10 @@ func Sonido():
 	oleada_Sound.queue_free()
 
 func ataque(body):
+	var anima="Bataque"
+	animacion_caminata(anima)
+
+func recibeDanio():
 	pass
 
 func giro_remoto(pieza_id,angulo):
@@ -285,10 +291,10 @@ func giro_rad(angulo):
 	tween.set_trans(Tween.TRANS_QUAD)
 	
 	
-	
 	pieza_colocada = true
 	physics_material_override.bounce = 0
 	gravity_scale=1
+	
 func look_at_target(pieza_id, target: Vector3):
 	if id != pieza_id:
 		return

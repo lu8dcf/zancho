@@ -1,12 +1,12 @@
 extends Node3D
 
 #clase de pieza
-@export var piezaA_tipo: int
-@export var piezaD_tipo: int
+@export var danioA: int
+@export var danioD: int
 @export var idA: int
 @export var idD: int
 
-var danioA=Piezas
+
 @export var piezaA_sitio:Vector3
 @export var piezaD_sitio:Vector3
 # Called when the node enters the scene tree for the first time.
@@ -22,7 +22,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func _on_timer_timeout():
@@ -30,13 +30,13 @@ func _on_timer_timeout():
 	
 	if turno:
 		turno = false
-		danio = Piezas.danio[piezaA_tipo]
+		danio = danioA
 		atacanteId = idA
 		defensorId = idD
 	
 	else:
 		turno = true
-		danio = Piezas.danio[piezaD_tipo]
+		danio = danioD
 		atacanteId = idD
 		defensorId = idA
 		

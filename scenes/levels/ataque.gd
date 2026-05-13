@@ -38,7 +38,7 @@ func calcular_danio(tipoA,tipoD):
 	if Piezas.bonus_a[tipoA]==tipoD:
 		Piezas.bonus_cantidad[tipoA] * danio
 		
-		
+	return danio	
 	
 	
 	
