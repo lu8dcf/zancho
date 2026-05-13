@@ -12,12 +12,11 @@ var espaciado = GlobalJuego.espaciado_baldosas
 @export var id:int # id de registro en base de datos
 @export var pieza_sitio:Vector2i
 
+
 # CArga de parametros pieza
-var vida_total = Piezas.vida[pieza_tipo]
-var vida_actual = vida_total
-
-
-var angulo_frente: int = 225
+var vida_total: int
+var vida_actual: int
+var angulo_frente: int = 225 # por defecto la negra
 
 # Componentes
 var movimiento_especifico = preload("res://scenes/pieza/movimiento/movimiento.tscn") # define le movimiento caracteristico de la pieza
@@ -26,7 +25,6 @@ var ataque_especifico = preload("res://scenes/pieza/ataque/Ataque.tscn") # defin
 # Nodos
 @onready var dust_particles = $DustParticles
 @onready var giro_inicial = $GiroInicial
-#Area de ataque
 @onready var area_ataque: Area3D = $AreaAtaque
 
 # Contenedor par acargar escena del modelo
@@ -43,11 +41,13 @@ var is_alive: bool = true
 var color="N"
 var pieza_colocada=false
 var pieza : Resource
-var secuencia_sfx = 0
+var secuencia_sfx = 0 # secuencia de sonido
 
 
 func _ready():
-	#print (pieza_sitio)
+	vida_total = Piezas.vida[pieza_tipo]
+	vida_actual = vida_total
+	
 	if pieza_blanca: color="B" 	
 	
 	pieza = load("res://scripts/resource/pieza"+ str(pieza_tipo) + color +".tres")
@@ -59,8 +59,6 @@ func _ready():
 	gravity_scale = 2.0
 	
 	cargar_objeto() # Asigna el modelo y objero con sus animaciones			
-	#cargar_modelo_glb() #asigan el modelo 3d
-	
 	posicionamiento_giro() # gira la pieza a su posicion en grados
 	
 	cargar_movimiento() # Script de movimiento y estados
@@ -72,11 +70,6 @@ func _ready():
 	GlobalSignal.connect("piezaAtaca",ataque)
 	GlobalSignal.connect("piezaRecibeDanio",recibeDanio)
 
-func _physics_process(_delta: float):
-	pass
-	#if animacion:
-	#	animation_player.play("ataque_rey")
-	
 func cargar_objeto():# Instanciar y agregar al contenedor
 	instancia_objeto_pieza = pieza.modelo.instantiate()
 	contenedor_movimiento.add_child(instancia_objeto_pieza)
@@ -95,7 +88,6 @@ func _find_animation_player(node: Node) -> AnimationPlayer: # agrega las animaci
 # Método público para acceder a la animación desde los scripts de movimiento
 func get_animation_player() -> AnimationPlayer:
 	return animation_player
-			
 	
 func cargar_movimiento(): # agrega el nodo movimiento con el script correspondiente a la pieza
 	var movimiento = movimiento_especifico.instantiate()
@@ -127,7 +119,7 @@ func llego_al_piso():
 func _on_body_entered(_body): #cuando la pieza se instancia y cae 
 	if pieza_colocada : return # solo se ejecuta en el inicio
 	# este if es para que solo tenga un efecto de sonido cuando rebota 
-	#create_dust_effect()# Efecto de polvo
+	create_dust_effect()# Efecto de polvo
 	Sonidos.impacto()# Sonido de golpe
 	pieza_colocada=true # que no vuelva a generar el sonido de caida
 	
@@ -154,7 +146,8 @@ func giro(angulo): #Gira la pieza en el eje horizontal (Y) usando Tween
 	var rotacion_destino = angulo
 	
 	#calcular el giro mas corto
-	Sonido("giro")
+	if pieza_tipo !=4 and pieza_blanca==false: # evita que el caballo negro suene mucho al andar
+		Sonido("giro")
 	tween.tween_property(self, "rotation_degrees:y", rotacion_destino, 0.5)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
@@ -163,8 +156,6 @@ func giro(angulo): #Gira la pieza en el eje horizontal (Y) usando Tween
 	physics_material_override.bounce = 0
 	gravity_scale=1
 
-
-	
 			
 func animacion(anima):
 	if animation_player:
@@ -188,24 +179,26 @@ func Sonido(tipo):
 func ataque(idA):
 	if idA!=id:
 		return
-	var anima="Bataque"
-	animacion(anima)
+	animacion("Bataque")
 
+# -------------------------------   esto hay que pasarlo a la barra d evida ------------------------
 func recibeDanio(idD: int,danio: int):
 	if idD!=id:
 		return
 	vida_actual -= danio
 	
+	if secuencia_sfx==3:
+		secuencia_sfx=0
+		
 	if secuencia_sfx==0:  # para que os sonidos sean diversos y no suenen tan seguidos
 		Sonido("hurt")
 		secuencia_sfx +=1
 		
-		
+	print (vida_actual)	
 	# actualizar barra de vida -------------------------------------------------
 		
 	
-	# Sonido de daño - cargar los diferentes tipod de sonido
-	#recibeDanio.play()
+	
 		
 	if vida_actual <= 0:
 		die()
