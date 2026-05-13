@@ -144,15 +144,7 @@ func create_dust_effect(): # Particulas al pegar con el tablero
 # fin de colocacion inicial --------------------------------------------------------------------------------	
 
 
-func die():
-	is_alive = false
-	create_dust_effect()
-	Sonidos.death()
-	
-	# Animación de muerte
-	var tween = create_tween()
-	tween.tween_property(self, "scale", Vector3.ZERO, 0.5)
-	tween.tween_callback(queue_free)
+
 
 func verificar_proximo_paso(cambio):
 	# proximo sitio a ocupar
@@ -214,6 +206,7 @@ func recibeDanio(idD: int,danio: int):
 	if idD!=id:
 		return
 	vida_actual -= danio
+	Sonido("hurt")
 	# actualizar barra de vida -------------------------------------------------
 		
 	# Efecto visual de daño
@@ -225,6 +218,15 @@ func recibeDanio(idD: int,danio: int):
 	if vida_actual <= 0:
 		die()
 
+func die():
+	is_alive = false
+	create_dust_effect()
+	Sonidos.death()
+	
+	# Animación de muerte
+	var tween = create_tween()
+	tween.tween_property(self, "scale", Vector3.ZERO, 0.5)
+	tween.tween_callback(queue_free)
 
 
 

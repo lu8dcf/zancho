@@ -11,13 +11,6 @@ func _process(_delta: float) -> void:
 	pass
 
 
-func hurt():
-	var hurt_sound = AudioStreamPlayer3D.new()
-	hurt_sound.stream = preload("res://assets/sound/sfx/hurt.mp3")
-	add_child(hurt_sound)
-	hurt_sound.play()
-	await hurt_sound.finished
-	hurt_sound.queue_free()
 
 func death():
 	var death_sound = AudioStreamPlayer3D.new()
