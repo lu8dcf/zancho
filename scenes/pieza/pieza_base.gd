@@ -194,7 +194,7 @@ func recibeDanio(idD: int,danio: int):
 		Sonido("hurt")
 		secuencia_sfx +=1
 		
-	print (vida_actual)	
+	#print (vida_actual)	
 	# actualizar barra de vida -------------------------------------------------
 		
 	
@@ -227,25 +227,12 @@ func animacion_muerte():
 	tween.set_parallel(true)
 	
 	# Subir y rotar lentamente
-	tween.tween_property(self, "global_position:y", global_position.y + 1 , 4)
-	tween.tween_property(self, "rotation:y", rotation.y + 360, 4)  # Girar mientras sube
-	#tween.tween_property(self, "scale", Vector3.ZERO, 4)
-	
-	# Color celestial con brillo
-	tween.tween_callback(func():
-		var material = StandardMaterial3D.new()
-		material.albedo_color = Color(0.7, 0.9, 1.0)
-		material.emission_enabled = true
-		material.emission = Color(0.5, 0.7, 1.0)
-		material.emission_energy = 2.0
+	tween.tween_property(self, "global_position:y", global_position.y + 10 ,2)
+	tween.tween_property(self, "rotation:y", rotation.y + 10, 2)  # Girar mientras sube
+	tween.tween_property(self, "scale", Vector3.ZERO, 2)
 		
-		if has_node("MeshInstance3D"):
-			$MeshInstance3D.material_override = material
-	)
-	
-	tween.tween_callback(queue_free)
 	await tween.finished
-	#queue_free()
+	queue_free()
 
 func giro_remoto(pieza_id,angulo):
 	if id!=pieza_id:
