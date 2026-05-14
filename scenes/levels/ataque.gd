@@ -49,15 +49,22 @@ func _crear_clave(a, b): ## Genera una clave única que ignora el orden
 
 
 ## Elimina un par específico
-func eliminar_par(a: int, b: int) -> bool:
+func eliminar_par(a: int, b: int):
 	var clave = _generar_clave(a, b)
 	if pares_almacenados.has(clave):
 		pares_almacenados.erase(clave)
-		return true
+		
+		contar_pares()
+		print ("contar pares",a," ",b)
+		
 	return false
+	
+	
 ## Cuenta cuántos pares únicos hay
-func contar_pares() -> int:
-	return pares_almacenados.size()
+func contar_pares():
+	if pares_almacenados.size() == 0:
+		print (pares_almacenados.size())
+		GlobalSignal.controlMarcaPaso.emit(true)
 
 ## Limpia todos los pares
 func limpiar_todo():
