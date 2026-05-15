@@ -8,6 +8,7 @@ const ATAQUE_BASE = preload("res://scenes/levels/ataque/ataque_base.tscn")
 func _ready() -> void:
 	limpiar_todo()
 	GlobalSignal.connect("ataque",iniciaAtaque)
+	GlobalSignal.connect("finalizaOleada",finalizaOleada)
 	
 # A= Atacante  , D= defensor
 func iniciaAtaque(idA,idD,posicionA,posicionD,tipoA,tipoD):
@@ -88,3 +89,9 @@ func angulo_enfrentamiento(idA,idD,posicionA: Vector3,posicionD: Vector3):
 	GlobalSignal.giro_pieza.emit(idA,giro-PI)
 	GlobalSignal.giro_pieza.emit(idD,giro)
 	#print (giro)
+
+func finalizaOleada(estado):
+	limpiar_todo()  # limpia todas las batallas
+	GlobalSignal.controlMarcaPaso.emit(false) # parar el marca paso
+	Piezas.pieza_activa=[]  # eliminar la lista de instancia
+	

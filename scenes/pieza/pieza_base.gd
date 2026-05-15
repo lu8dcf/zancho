@@ -69,6 +69,7 @@ func _ready():
 	GlobalSignal.connect("giro_pieza",giro_remoto)
 	GlobalSignal.connect("piezaAtaca",ataque)
 	GlobalSignal.connect("piezaRecibeDanio",recibeDanio)
+	GlobalSignal.connect("finalizaOleada",finalizaOleada)
 
 func cargar_objeto():# Instanciar y agregar al contenedor
 	instancia_objeto_pieza = pieza.modelo.instantiate()
@@ -235,7 +236,12 @@ func animacion_muerte():
 	tween.tween_property(self, "scale", Vector3.ZERO, 3)
 		
 	await tween.finished
-	GlobalSignal.finalizaOleada.emit(false)
+	if pieza_tipo==0:
+		GlobalSignal.finalizaOleada.emit(false)
+	else:
+		queue_free()
+
+func finalizaOleada(estado):
 	queue_free()
 	
 
