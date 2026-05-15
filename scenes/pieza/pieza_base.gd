@@ -43,6 +43,9 @@ var pieza_colocada=false
 var pieza : Resource
 var secuencia_sfx = randi() % 3# secuencia de sonido
 
+# barra de vida
+signal barraVida(porcentual)
+@onready var barra = $Marker3D/barra
 
 func _ready():
 	vida_total = Piezas.vida[pieza_tipo]
@@ -66,6 +69,7 @@ func _ready():
 	#GlobalSignal.connect("marcaPaso",anima_idle)
 	animacion("Bidle")
 	
+	barraVida.connect(barra._on_pieza_base_barra_vida)
 	GlobalSignal.connect("giro_pieza",giro_remoto)
 	GlobalSignal.connect("piezaAtaca",ataque)
 	GlobalSignal.connect("piezaRecibeDanio",recibeDanio)
@@ -198,9 +202,9 @@ func recibeDanio(idD: int,danio: int):
 		Sonido("hurt")
 	secuencia_sfx +=1	
 		
-	#print (vida_actual)	
-	# actualizar barra de vida -------------------------------------------------
-		
+	# calculo del porcentaje de vida 
+	var porcentaje = float(vida_actual) / vida_total
+	barraVida.emit(porcentaje)
 	
 	
 		
@@ -297,10 +301,6 @@ func look_at_target(pieza_id, target: Vector3):
 	tween.tween_property(self, "global_transform", Transform3D(target_basis, pos), 1.0)
 	
 	
-	# Alternativa: Tween solo la rotación (más eficiente)
-	# var start_basis = global_transform.basis
-	# tween.tween_method(_update_rotation.bind(start_basis, target_basis), 0.0, 1.0, 1.0)
-
 # Método auxiliar para interpolación manual (opcional)
 func _update_rotation(weight: float, start_basis: Basis, end_basis: Basis):
 	var new_basis = start_basis.slerp(end_basis, weight)
