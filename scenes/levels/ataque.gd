@@ -34,7 +34,7 @@ func iniciaAtaque(idA,idD,posicionA,posicionD,tipoA,tipoD):
 func calcular_danio(tipoA,tipoD):
 	var danio= Piezas.danio[tipoA]
 	if Piezas.bonus_a[tipoA]==tipoD:
-		Piezas.bonus_cantidad[tipoA] * danio
+		danio = Piezas.bonus_cantidad[tipoA] * danio
 		
 	return danio	
 	
@@ -90,7 +90,7 @@ func angulo_enfrentamiento(idA,idD,posicionA: Vector3,posicionD: Vector3):
 	GlobalSignal.giro_pieza.emit(idD,giro)
 	#print (giro)
 
-func finalizaOleada(estado):
+func finalizaOleada(_estado):
 	limpiar_todo()  # limpia todas las batallas
 	GlobalSignal.controlMarcaPaso.emit(false) # parar el marca paso
 	Piezas.pieza_blanca=[]  # eliminar la lista de instancia

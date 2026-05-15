@@ -69,7 +69,7 @@ func _ready():
 	#GlobalSignal.connect("marcaPaso",anima_idle)
 	animacion("Bidle")
 	
-	barraVida.connect(barra._on_pieza_base_barra_vida)
+	
 	GlobalSignal.connect("giro_pieza",giro_remoto)
 	GlobalSignal.connect("piezaAtaca",ataque)
 	GlobalSignal.connect("piezaRecibeDanio",recibeDanio)
@@ -248,7 +248,7 @@ func animacion_muerte():
 	else:
 		queue_free()
 
-func finalizaOleada(estado):
+func finalizaOleada(_estado):
 	queue_free()
 	
 

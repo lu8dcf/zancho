@@ -28,8 +28,6 @@ func _process(_delta: float) -> void:
 
 func _on_timer_timeout():
 	# poner el potenciador de daño
-	
-	
 	if turno:
 		turno = false
 		danio = danioA
@@ -45,8 +43,6 @@ func _on_timer_timeout():
 	GlobalSignal.piezaAtaca.emit(atacanteId)
 	GlobalSignal.piezaRecibeDanio.emit(defensorId,danio)
 	
-func atacaA():
-	pass
 
 func crear_timer(): # Tiempo entre ataques
 	mi_timer = Timer.new()
@@ -73,5 +69,5 @@ func piezaMuere(id):
 	get_parent().eliminar_par(idA,idD)
 	queue_free()
 
-func finalizaOleada(estado):
+func finalizaOleada(_estado):
 	queue_free()

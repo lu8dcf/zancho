@@ -18,7 +18,7 @@ func colocar_pieza(sitio: Vector2i, tipo: int , pieza_blanca: bool):
 		return
 		
 	# instanciar		
-	var nueva_pieza = pieza_escena.instantiate()
+	nueva_pieza = pieza_escena.instantiate()
 			
 	nueva_pieza.pieza_tipo = tipo
 	nueva_pieza.pieza_blanca = pieza_blanca 
