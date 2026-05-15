@@ -212,13 +212,8 @@ func die():
 	
 	#create_dust_effect()
 	Sonidos.death()
-	
-			
-	
-	# Destruir la pieza
 	animacion_muerte()
 	
-
 func animacion_muerte():
 	freeze = true
 	gravity_scale = 0
