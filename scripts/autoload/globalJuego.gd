@@ -28,7 +28,7 @@ var empezo_oleada = false # si es que empezo la oleada
 # señales para modificar el hud
 
 # Ataques
-var tiempo_ataque = 0.5 # timepo de cada ataque
+var tiempo_ataque = 2 # timepo de cada ataque
 
 
 signal vidas_cambiadas(nuevas_vidas)
