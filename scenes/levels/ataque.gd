@@ -6,6 +6,7 @@ const ATAQUE_BASE = preload("res://scenes/levels/ataque/ataque_base.tscn")
 
 
 func _ready() -> void:
+	limpiar_todo()
 	GlobalSignal.connect("ataque",iniciaAtaque)
 	
 # A= Atacante  , D= defensor
@@ -55,7 +56,7 @@ func eliminar_par(a: int, b: int):
 		pares_almacenados.erase(clave)
 		
 		contar_pares()
-		print ("contar pares",a," ",b)
+		#print ("contar pares",a," ",b)
 		
 	return false
 	
@@ -63,7 +64,7 @@ func eliminar_par(a: int, b: int):
 ## Cuenta cuántos pares únicos hay
 func contar_pares():
 	if pares_almacenados.size() == 0:
-		print (pares_almacenados.size())
+		#print (pares_almacenados.size())
 		GlobalSignal.controlMarcaPaso.emit(true)
 
 ## Limpia todos los pares
