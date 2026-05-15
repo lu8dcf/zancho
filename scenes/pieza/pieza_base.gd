@@ -37,11 +37,11 @@ var animation_player : AnimationPlayer
 
 
 # Variables de estado
-var is_alive: bool = true
+
 var color="N"
 var pieza_colocada=false
 var pieza : Resource
-var secuencia_sfx = 0 # secuencia de sonido
+var secuencia_sfx = randi() % 3# secuencia de sonido
 
 
 func _ready():
@@ -179,20 +179,22 @@ func Sonido(tipo):
 func ataque(idA):
 	if idA!=id:
 		return
+	if secuencia_sfx==1:  # para que os sonidos sean diversos y no suenen tan seguidos
+		Sonido("espada")
 	animacion("Bataque")
-
+	
 # -------------------------------   esto hay que pasarlo a la barra d evida ------------------------
 func recibeDanio(idD: int,danio: int):
 	if idD!=id:
 		return
 	vida_actual -= danio
 	
-	if secuencia_sfx==3:
+	if secuencia_sfx>3:
 		secuencia_sfx=0
 		
 	if secuencia_sfx==0:  # para que os sonidos sean diversos y no suenen tan seguidos
 		Sonido("hurt")
-		secuencia_sfx +=1
+	secuencia_sfx +=1	
 		
 	#print (vida_actual)	
 	# actualizar barra de vida -------------------------------------------------
@@ -205,7 +207,7 @@ func recibeDanio(idD: int,danio: int):
 
 func die():
 	GlobalSignal.piezaMuere.emit(id)
-	is_alive = false
+	
 	#create_dust_effect()
 	Sonidos.death()
 	if Piezas.pieza_activa.has(self):
