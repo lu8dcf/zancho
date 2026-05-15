@@ -141,6 +141,7 @@ func verificar_proximo_paso(cambio):
 	return true
 		
 func giro(angulo): #Gira la pieza en el eje horizontal (Y) usando Tween
+	angulo_frente=angulo
 	var tween = create_tween()
 	var _rotacion_actual = rotation_degrees.y
 	var rotacion_destino = angulo
@@ -235,11 +236,16 @@ func animacion_muerte():
 		
 	await tween.finished
 	queue_free()
+	
 
 func giro_remoto(pieza_id,angulo):
 	if id!=pieza_id:
 		return
-	#print (pieza_id," ",angulo)
+	
+	# señal que la batalla finalizo y esta pieza es la ganadora debe volver a la posicion inicial
+	if angulo==1000:  
+		giro(angulo_frente)
+		return
 	giro_rad(angulo)
 	
 func giro_rad(angulo):
