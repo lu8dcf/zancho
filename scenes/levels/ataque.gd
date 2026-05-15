@@ -6,7 +6,9 @@ const ATAQUE_BASE = preload("res://scenes/levels/ataque/ataque_base.tscn")
 
 
 func _ready() -> void:
+	limpiar_todo()
 	GlobalSignal.connect("ataque",iniciaAtaque)
+	GlobalSignal.connect("finalizaOleada",finalizaOleada)
 	
 # A= Atacante  , D= defensor
 func iniciaAtaque(idA,idD,posicionA,posicionD,tipoA,tipoD):
@@ -55,7 +57,7 @@ func eliminar_par(a: int, b: int):
 		pares_almacenados.erase(clave)
 		
 		contar_pares()
-		print ("contar pares",a," ",b)
+		#print ("contar pares",a," ",b)
 		
 	return false
 	
@@ -63,7 +65,7 @@ func eliminar_par(a: int, b: int):
 ## Cuenta cuántos pares únicos hay
 func contar_pares():
 	if pares_almacenados.size() == 0:
-		print (pares_almacenados.size())
+		#print (pares_almacenados.size())
 		GlobalSignal.controlMarcaPaso.emit(true)
 
 ## Limpia todos los pares
@@ -87,3 +89,10 @@ func angulo_enfrentamiento(idA,idD,posicionA: Vector3,posicionD: Vector3):
 	GlobalSignal.giro_pieza.emit(idA,giro-PI)
 	GlobalSignal.giro_pieza.emit(idD,giro)
 	#print (giro)
+
+func finalizaOleada(estado):
+	limpiar_todo()  # limpia todas las batallas
+	GlobalSignal.controlMarcaPaso.emit(false) # parar el marca paso
+	Piezas.pieza_blanca=[]  # eliminar la lista de instancia
+	Piezas.pieza_negra=[]  # eliminar la lista de instancia
+	

@@ -17,5 +17,4 @@ func bajarVida():
 		return
 	if(barraVerde.scale.y > 0):
 		barraVerde.scale.y -= danio
-	else:
-		emit_signal("VidaEsCero")
+	

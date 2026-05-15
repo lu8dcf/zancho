@@ -20,7 +20,7 @@ var mi_timer = Timer
 func _ready() -> void:
 	crear_timer()
 	GlobalSignal.connect("piezaMuere",piezaMuere) # una pieza murio
-
+	GlobalSignal.connect("finalizaOleada",finalizaOleada)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -63,8 +63,15 @@ func crear_timer(): # Tiempo entre ataques
 	add_child(mi_timer)
 
 func piezaMuere(id):
-	if id==idA or id==idD:
+	if id==idA:
 		mi_timer.stop()  # detengo el timer de ataque
-		
-		get_parent().eliminar_par(idA,idD)
-		queue_free()
+		GlobalSignal.giro_pieza.emit(idD,1000)	
+	
+	if id==idD:
+		mi_timer.stop()  # detengo el timer de ataque
+		GlobalSignal.giro_pieza.emit(idA,1000)
+	get_parent().eliminar_par(idA,idD)
+	queue_free()
+
+func finalizaOleada(estado):
+	queue_free()

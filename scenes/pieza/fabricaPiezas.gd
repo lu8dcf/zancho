@@ -28,9 +28,10 @@ func colocar_pieza(sitio: Vector2i, tipo: int , pieza_blanca: bool):
 	
 	# Asignar al grupo correspondiente
 	if pieza_blanca:
-		nueva_pieza.add_to_group("pieza_blanca")
+		Piezas.pieza_blanca.append(nueva_pieza)
+		
 	else:
-		nueva_pieza.add_to_group("pieza_negra")
+		Piezas.pieza_negra.append(nueva_pieza)
 	
 	nueva_pieza.id=id	
 		
@@ -39,7 +40,7 @@ func colocar_pieza(sitio: Vector2i, tipo: int , pieza_blanca: bool):
 	nueva_pieza.global_position = sitio3d
 		
 		
-	Piezas.pieza_activa.append(nueva_pieza)
+	
 	#print ((Piezas.pieza_activa[id].global_position)/globalJuego.espaciado_baldosas)
 	id += 1 # incrementador de nuemro de pieza
 	#print ("Blanca ",Piezas.contar_piezas_blancas())

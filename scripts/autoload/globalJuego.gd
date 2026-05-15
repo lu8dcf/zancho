@@ -66,28 +66,42 @@ func cambiar_mapa(nuevo_indice: int) -> bool:
 func lugar_disponible(sitio: Vector2i):
 	if verifica_obstaculos(sitio)==false: return false
 	if verifica_extremos(sitio)==false: return false
-	if verifica_piezas(sitio)==false: return false	
+	if verifica_piezas_blanca(sitio)==false: return false	
+	if verifica_piezas_negra(sitio)==false: return false	
 	return true
 
-
-func verifica_piezas(sitio: Vector2i):	
-	for pieza in Piezas.pieza_activa:
+func verifica_piezas(sitio: Vector2i):
+	if verifica_piezas_blanca(sitio)==false: return false	
+	if verifica_piezas_negra(sitio)==false: return false	
+			
+	return true
+	
+func verifica_piezas_blanca(sitio: Vector2i):	
+	for pieza in Piezas.pieza_blanca:
 		if pieza.pieza_sitio == sitio:
 			#print ("lugar ocupado")
 			return false
+
+func verifica_piezas_negra(sitio: Vector2i):	
+	for pieza in Piezas.pieza_blanca:
+		if pieza.pieza_sitio == sitio:
+			#print ("lugar ocupado")
+			return false
+	return true
 			
 func verifica_extremos(sitio: Vector2i):	
 	if sitio.x > 15 or sitio.x < 0 or sitio.y >15 or sitio.y <0:
 		#mensaje(" La posición esta fuera del tablero ")	
 		return false
-	
+	return true
 	
 func verifica_obstaculos(sitio: Vector2i):
 	# Verificacion de obstaculos en el mapa
 	if sitio in mapas.mapas[globalJuego.mapa_actual]:
 		#mensaje("No se puede insertar sobre un obstaculo")
 		return false
-
+	return true
+	
 func colocar_blanca(sitio: Vector2i):
 	if not lugar_disponible(sitio):
 		return false

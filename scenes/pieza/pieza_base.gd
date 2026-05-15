@@ -37,11 +37,11 @@ var animation_player : AnimationPlayer
 
 
 # Variables de estado
-var is_alive: bool = true
+
 var color="N"
 var pieza_colocada=false
 var pieza : Resource
-var secuencia_sfx = 0 # secuencia de sonido
+var secuencia_sfx = randi() % 3# secuencia de sonido
 
 
 func _ready():
@@ -69,6 +69,7 @@ func _ready():
 	GlobalSignal.connect("giro_pieza",giro_remoto)
 	GlobalSignal.connect("piezaAtaca",ataque)
 	GlobalSignal.connect("piezaRecibeDanio",recibeDanio)
+	GlobalSignal.connect("finalizaOleada",finalizaOleada)
 
 func cargar_objeto():# Instanciar y agregar al contenedor
 	instancia_objeto_pieza = pieza.modelo.instantiate()
@@ -141,6 +142,7 @@ func verificar_proximo_paso(cambio):
 	return true
 		
 func giro(angulo): #Gira la pieza en el eje horizontal (Y) usando Tween
+	angulo_frente=angulo
 	var tween = create_tween()
 	var _rotacion_actual = rotation_degrees.y
 	var rotacion_destino = angulo
@@ -179,20 +181,22 @@ func Sonido(tipo):
 func ataque(idA):
 	if idA!=id:
 		return
+	if secuencia_sfx==1:  # para que os sonidos sean diversos y no suenen tan seguidos
+		Sonido("espada")
 	animacion("Bataque")
-
+	
 # -------------------------------   esto hay que pasarlo a la barra d evida ------------------------
 func recibeDanio(idD: int,danio: int):
 	if idD!=id:
 		return
 	vida_actual -= danio
 	
-	if secuencia_sfx==3:
+	if secuencia_sfx>3:
 		secuencia_sfx=0
 		
 	if secuencia_sfx==0:  # para que os sonidos sean diversos y no suenen tan seguidos
 		Sonido("hurt")
-		secuencia_sfx +=1
+	secuencia_sfx +=1	
 		
 	#print (vida_actual)	
 	# actualizar barra de vida -------------------------------------------------
@@ -205,16 +209,12 @@ func recibeDanio(idD: int,danio: int):
 
 func die():
 	GlobalSignal.piezaMuere.emit(id)
-	is_alive = false
+	
 	#create_dust_effect()
 	Sonidos.death()
-	if Piezas.pieza_activa.has(self):
-		Piezas.pieza_activa.erase(self)
-		
-	if pieza_blanca:
-		remove_from_group("pieza_blanca")
-	else:
-		remove_from_group("pieza_negra")
+	
+			
+	
 	# Destruir la pieza
 	animacion_muerte()
 	
@@ -229,15 +229,38 @@ func animacion_muerte():
 	# Subir y rotar lentamente
 	tween.tween_property(self, "global_position:y", global_position.y + 10 ,2)
 	tween.tween_property(self, "rotation:y", rotation.y + 10, 2)  # Girar mientras sube
-	tween.tween_property(self, "scale", Vector3.ZERO, 2)
+	tween.tween_property(self, "scale", Vector3.ZERO, 3)
 		
 	await tween.finished
+	
+	# elimina la instancia d ela lista
+	if Piezas.pieza_blanca.has(self):
+		Piezas.pieza_blanca.erase(self)
+	
+	if Piezas.pieza_negra.has(self):
+		Piezas.pieza_negra.erase(self)	
+		if Piezas.pieza_negra.size()==0:
+			GlobalSignal.finalizaOleada.emit(true)
+		
+		print (Piezas.pieza_negra.size())
+		
+	if pieza_tipo==0:
+		GlobalSignal.finalizaOleada.emit(false)
+	else:
+		queue_free()
+
+func finalizaOleada(estado):
 	queue_free()
+	
 
 func giro_remoto(pieza_id,angulo):
 	if id!=pieza_id:
 		return
-	#print (pieza_id," ",angulo)
+	
+	# señal que la batalla finalizo y esta pieza es la ganadora debe volver a la posicion inicial
+	if angulo==1000:  
+		giro(angulo_frente)
+		return
 	giro_rad(angulo)
 	
 func giro_rad(angulo):

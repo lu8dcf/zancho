@@ -3,25 +3,16 @@ extends Node
 # Variables de las piezas
 # 0 Rey , 1 Peon , 2 Alfil , 3 Torre , 4 Caballo , 5 Reina
 
-var vida = [1000,50,80,250,120,400]
+var vida = [1000,80,100,250,120,400]
 var danio = [5,10,35,15,25,50]
-var cadencia = [1,0.7,1,0.5,1.2,1.5]
+
 var bonus_cantidad = [1,1.3,1.3,1.5,1.5,1.5]
 var bonus_a=[0,4,3,1,5,2]
 
 
-# Variables de la partida
-var pieza_b_id = 0
-var pieza_n_id = 0
-var pieza_b_sitio : Array[Vector2i] = [] 
-var pieza_n_sitio : Array[Vector2i] = [] 
-var pieza_b_tipo =[]
-var pieza_n_tipo = []
-
-
 # las piezas que estan activas en la partida
-var pieza_activa: Array[RigidBody3D] = []
-
+var pieza_blanca: Array[RigidBody3D] = []
+var pieza_negra: Array[RigidBody3D] = []
 # manejo de colocacion de piezas
 
 var pieza_seleccionada: Dictionary = {
@@ -39,13 +30,8 @@ signal pieza_colocada(tipo:int, posicion:Vector2i)
 signal  pieza_flotante_actualizada(posicion_3d :Vector3, es_valido:bool)
 
 func reiniciar_variables():
-	pieza_b_id = 0
-	pieza_n_id = 0
-	pieza_b_sitio  = [] 
-	pieza_n_sitio  = [] 
-	pieza_b_tipo =[]
-	pieza_n_tipo = []
-	pieza_activa=[]
+	pieza_negra=[]
+	pieza_blanca=[]
 	pieza_seleccionada = {
 		"tipo":-1,
 		"nombre":"",

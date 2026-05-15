@@ -67,7 +67,7 @@ one_shot = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6744905, 1.6040001)
 
 [node name="Vida" parent="Marker3D" unique_id=217926695 instance=ExtResource("2_c11s1")]
-transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, -0.019870281, -0.72823024, -1.6248655)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.0025413036, -0.72823024, -1.6192627)
 
 [node name="recibeDanio" type="AudioStreamPlayer3D" parent="." unique_id=1296894691]
 stream = SubResource("AudioStreamMP3_c11s1")
