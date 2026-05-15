@@ -212,13 +212,9 @@ func die():
 	
 	#create_dust_effect()
 	Sonidos.death()
-	if Piezas.pieza_activa.has(self):
-		Piezas.pieza_activa.erase(self)
-		
-	if pieza_blanca:
-		remove_from_group("pieza_blanca")
-	else:
-		remove_from_group("pieza_negra")
+	
+			
+	
 	# Destruir la pieza
 	animacion_muerte()
 	
@@ -236,6 +232,18 @@ func animacion_muerte():
 	tween.tween_property(self, "scale", Vector3.ZERO, 3)
 		
 	await tween.finished
+	
+	# elimina la instancia d ela lista
+	if Piezas.pieza_blanca.has(self):
+		Piezas.pieza_blanca.erase(self)
+	
+	if Piezas.pieza_negra.has(self):
+		Piezas.pieza_negra.erase(self)	
+		if Piezas.pieza_negra.size()==0:
+			GlobalSignal.finalizaOleada.emit(true)
+		
+		print (Piezas.pieza_negra.size())
+		
 	if pieza_tipo==0:
 		GlobalSignal.finalizaOleada.emit(false)
 	else:

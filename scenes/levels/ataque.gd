@@ -93,5 +93,6 @@ func angulo_enfrentamiento(idA,idD,posicionA: Vector3,posicionD: Vector3):
 func finalizaOleada(estado):
 	limpiar_todo()  # limpia todas las batallas
 	GlobalSignal.controlMarcaPaso.emit(false) # parar el marca paso
-	Piezas.pieza_activa=[]  # eliminar la lista de instancia
+	Piezas.pieza_blanca=[]  # eliminar la lista de instancia
+	Piezas.pieza_negra=[]  # eliminar la lista de instancia
 	
