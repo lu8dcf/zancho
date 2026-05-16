@@ -171,3 +171,6 @@ func obtener_pieza_dicc(nombre):
 	for i in piezas_disponibles_tienda:
 		if i["nombre"] == nombre:
 			return i 
+
+
+var piezas_vivas = []
