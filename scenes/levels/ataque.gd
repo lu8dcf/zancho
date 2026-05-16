@@ -90,9 +90,16 @@ func angulo_enfrentamiento(idA,idD,posicionA: Vector3,posicionD: Vector3):
 	GlobalSignal.giro_pieza.emit(idD,giro)
 	#print (giro)
 
-func finalizaOleada(_estado):
+func finalizaOleada(estado):
+	
 	limpiar_todo()  # limpia todas las batallas
 	GlobalSignal.controlMarcaPaso.emit(false) # parar el marca paso
-	Piezas.pieza_blanca=[]  # eliminar la lista de instancia
 	Piezas.pieza_negra=[]  # eliminar la lista de instancia
+	
+	if !estado:
+		for pieza in Piezas.pieza_blanca:
+			economia.piezas_vivas.append(pieza.pieza_tipo)
+	#print (economia.piezas_vivas)
+	Piezas.pieza_blanca=[]  # eliminar la lista de instancia
+	
 	
