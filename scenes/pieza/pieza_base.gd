@@ -46,6 +46,7 @@ var secuencia_sfx = randi() % 3# secuencia de sonido
 # barra de vida
 signal barraVida(porcentual)
 @onready var barra = $Marker3D/barra
+@onready var sangre = $sangre/AnimationPlayer
 
 func _ready():
 	vida_total = Piezas.vida[pieza_tipo]
@@ -195,6 +196,8 @@ func recibeDanio(idD: int,danio: int):
 		return
 	vida_actual -= danio
 	
+	sangre.play("Sangre")
+	
 	if secuencia_sfx>3:
 		secuencia_sfx=0
 		
@@ -205,9 +208,7 @@ func recibeDanio(idD: int,danio: int):
 	# calculo del porcentaje de vida 
 	var porcentaje = float(vida_actual) / vida_total
 	barraVida.emit(porcentaje)
-	
-	
-		
+			
 	if vida_actual <= 0:
 		die()
 

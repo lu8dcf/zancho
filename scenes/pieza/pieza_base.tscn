@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://borpciaq4xf08" path="res://scenes/pieza/pieza_base.gd" id="1_c11s1"]
 [ext_resource type="PackedScene" uid="uid://bhf6bbh6v0u5w" path="res://scenes/pieza/vida.tscn" id="2_c11s1"]
+[ext_resource type="PackedScene" uid="uid://chof4nbcho4wr" path="res://scenes/particulas/sangre.tscn" id="3_4vkcs"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_c11s1"]
 
@@ -74,6 +75,8 @@ visible = false
 stream = SubResource("AudioStreamMP3_c11s1")
 max_distance = 5.0
 bus = &"Efectos"
+
+[node name="sangre" parent="." unique_id=1014549941 instance=ExtResource("3_4vkcs")]
 
 [connection signal="barraVida" from="." to="Marker3D/barra" method="_on_pieza_base_barra_vida"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

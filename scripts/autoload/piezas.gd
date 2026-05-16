@@ -4,7 +4,7 @@ extends Node
 # 0 Rey , 1 Peon , 2 Alfil , 3 Torre , 4 Caballo , 5 Reina
 
 var vida = [1000,80,100,250,120,400]
-var danio = [5,10,35,15,25,50]
+var danio = [5,10,20,15,20,30]
 
 var bonus_cantidad = [1,1.3,1.3,1.5,1.5,1.5]
 var bonus_a=[0,4,3,1,5,2]
