@@ -17,8 +17,6 @@ extends Panel
 @onready var boton_reina: TextureButton = $BotonReina
 
 
-
-
 var botones_piezas: Array = []
 var cant_piezas :Array = []
 
@@ -38,6 +36,14 @@ func _ready():
 	_actualizar_inventario(economia.inventario_actual)
 	
 
+func _process(_delta):
+	if globalJuego.empezo_oleada:
+		for boton in botones_piezas:
+			boton.disabled = true
+	else: 
+		for boton in botones_piezas:
+			boton.disabled = false
+			
 func configurar_botones():
 	# Agregar todos los botones al array
 	botones_piezas = [boton_peon, boton_alfil, boton_caballo, boton_torre, boton_reina]

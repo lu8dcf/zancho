@@ -6,34 +6,57 @@ extends CanvasLayer
 @onready var panel_rey: Panel = $imagenBackInferior/PanelRey
 
 
-# panel del rey
-
-@onready var vida_rey: TextureButton = $imagenBackInferior/PanelRey/VidaRey
-@onready var valor_vida: TextureButton = $imagenBackInferior/PanelRey/ValorVida
-
 #panel superior
 @onready var panel_superior: Panel = $PanelSuperior
 
 # texto debug
 @onready var label_debug_temporal: Label = $Label_debug_temporal
 
+# pantalla temporal de ganar
+@onready var gano_oleada: TextureRect = $GanoOleada
 
+var tween : Tween
 
 func _ready():
 	mostrar_todos_paneles()
+	gano_oleada.modulate.a = 0  
+	gano_oleada.visible = false
 	label_debug_temporal.text = "Debug: " + str(globalJuego.debug) # true y # false
 	# ocultar la tienda
+	GlobalSignal.finalizaOleada.connect(mostrar_gano)
 	
-	globalJuego.vidas_cambiadas.connect(_actualizar_vidas)
-	
-	#globalJuego.tienda_estado_cambiado.connect(_actualizar_tienda)
-	
-	_actualizar_vidas(globalJuego.vidas)
 
 func mostrar_todos_paneles():
 	panel_inferior.visible = true
 	panel_superior.visible = true
-	panel_rey.visible=true
+	panel_rey.visible = true
 	
-func _actualizar_vidas(nuevas_vidas: int) -> void:
-	valor_vida.cambiar_texto(str(nuevas_vidas) + "/" + str(globalJuego.vidaMax))
+func mostrar_gano(ganar: int) -> void:
+	globalJuego.empezo_oleada=false
+	if ganar:
+		# Matar tween anterior si existe
+		if tween and tween.is_valid():
+			tween.kill()
+		
+		tween = create_tween()
+		gano_oleada.visible = true
+		gano_oleada.modulate.a = 0
+		
+		# Fade in: aparece en 0.5 segundos
+		tween.tween_property(gano_oleada, "modulate:a", 1.0, 0.5)
+		# Espera 2 segundos visible
+		tween.tween_interval(4.0)
+		# Fade out: desaparece en 0.5 segundos
+		tween.tween_property(gano_oleada, "modulate:a", 0.0, 0.5)
+		# Al terminar, ocultar completamente
+		tween.tween_callback(_ocultar_gano)
+		globalJuego.siguiente_oleada() # cambia la oleada a la siguiete
+	else:
+		print("perdiste, reiniicando la oleada...")
+		globalJuego.perder_fe(5)
+		
+
+
+
+func _ocultar_gano() -> void:
+	gano_oleada.visible = false

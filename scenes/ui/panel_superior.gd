@@ -47,6 +47,8 @@ func _ready() -> void:
 	
 	posicion_boton_visible = boton_esconder_superior.position
 	posicion_boton_oculta = posicion_boton_visible + Vector2(0, panel_superior.size.y + altura_boton_visible)
+	
+	GlobalSignal.finalizaOleada.connect(finaliza_oleada)
 
 
 func _actualizar_monedas(nuevas_monedas: int) -> void:
@@ -59,6 +61,8 @@ func _actualizar_oleada(nueva_oleada: int) -> void:
 	empezar_oleada.cambiar_texto("Empezar Oleada " + str(nueva_oleada))
 	#oleada_label.text = " OLEADA " + str(nueva_oleada)
 	
+func finaliza_oleada(valor):
+	desaparecer_botones_velocidades()
 
 func _on_boton_menu_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/ui/main.tscn")
@@ -99,7 +103,7 @@ func _on_empezar_oleada_pressed() -> void:
 		globalJuego.empezo_oleada = true
 		GlobalSignal.emit_signal("comienzoOleada")
 		aparecer_botones_velocidades()
-	print("empezo la oleada")
+	
 
 
 # botones de velocidad y pausa

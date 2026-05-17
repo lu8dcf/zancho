@@ -5,12 +5,15 @@ extends Node
 
 ### - DEBUG SI ES TRUE ENTONCES TODO ESTA PERMITIDO
 
-var debug :bool = true 
+var debug :bool = false 
 
 ### - DEBUG SI ES TRUE ENTONCES TODO ESTA PERMITIDO
 
 var vidas: int = 20              # vidas del castillo/jugador
 var vidaMax: int = 20
+
+var fe : int = 20
+var feMax : int = 20
 var oleada_actual: int = 1       # numero de oleada actual
 var mapa_actual: int = 1        # numero de mapa activo
 
@@ -25,6 +28,8 @@ var espaciado_baldosas : float = 2.0
 # Oleadas
 var tiempo_pasos = 4.0   # tiempo entre cada movimento
 var empezo_oleada = false # si es que empezo la oleada
+var valores_antes_empezar_oleada = []
+
 # señales para modificar el hud
 
 # Ataques
@@ -35,15 +40,23 @@ signal vidas_cambiadas(nuevas_vidas)
 signal oleada_cambiada(nueva_oleada)
 signal tienda_estado_cambiado(desplegada)
 signal mapa_cambiado(nuevo_mapa: int)
-
+signal fe_cambiada(nueva_fe)
 
 func perder_vida(cantidad: int = 1) -> void:
 	vidas -= cantidad
 	emit_signal("vidas_cambiadas", vidas)
 	
 	if vidas <= 0:
-		juego_terminado()
+		print("se termino la vida")
 
+
+func perder_fe(cantidad: int = 1) -> void:
+	fe -= cantidad
+	emit_signal("fe_cambiada", fe)
+	
+	if fe <= 0:
+		print("se perdio toda la fe")
+		
 func siguiente_oleada() -> void:
 	oleada_actual += 1
 	emit_signal("oleada_cambiada", oleada_actual)
