@@ -1,7 +1,6 @@
 extends Node3D
 class_name GestorHover
 
-@onready var camara3d : Camera3D = $"../Camera3D"
 
 # Variables privadas
 var baldosa_actual : BaldosaBase = null

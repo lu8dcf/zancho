@@ -52,6 +52,7 @@ func _alternar_tienda():
 	tienda_visible = !tienda_visible
 
 func _mostrar_tienda():
+	
 	# Efecto de rebote al mostrar
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_BACK)  # BACK crea el efecto rebote

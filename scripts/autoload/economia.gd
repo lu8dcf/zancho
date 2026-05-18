@@ -1,6 +1,6 @@
 extends Node
 
-var monedas_actual : int = 1200 # monedas inicial para la Oleada 1
+var monedas_actual : int = 0 # monedas inicial para la Oleada 1
 var limite_piezas = {
 	"Peon": 8,
 	"Torre": 2,
@@ -45,6 +45,8 @@ var orden_aparicion: Dictionary = {
 	"Caballo": 4,
 	"Reina": 5
 }
+
+var piezas_vivas = []
 
 # señales para modificar el hud
 signal monedas_cambiadas(nuevas_monedas) # Emite el cambio de moneda
@@ -98,6 +100,9 @@ func reiniciar_variables():
 		"Caballo": 4,
 		"Reina": 5
 	}
+	
+	piezas_vivas = []
+
 
 # funciones para modificar
 func añadir_monedas(cantidad: int) -> void:
@@ -150,6 +155,7 @@ func usar_pieza(pieza_nombre:String):
 	for i in piezas_colocadas:
 		if i["nombre"] == pieza_nombre:
 			i["cantidad"] += 1
+	
 			
 
 func llego_al_limite(pieza_nombre:String ,cantidad_piezas:int)-> bool:
@@ -171,6 +177,3 @@ func obtener_pieza_dicc(nombre):
 	for i in piezas_disponibles_tienda:
 		if i["nombre"] == nombre:
 			return i 
-
-
-var piezas_vivas = []
