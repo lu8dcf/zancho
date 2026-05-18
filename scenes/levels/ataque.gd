@@ -18,7 +18,7 @@ func iniciaAtaque(idA,idD,posicionA,posicionD,tipoA,tipoD):
 		return
 	#print (idA," ",idD," ",posicionA," ",posicionD)
 	GlobalSignal.controlMarcaPaso.emit(false) #detiene el paso del juego
-	
+	Sonidos.ataque()
 	angulo_enfrentamiento(idA,posicionA,posicionD)
 	angulo_enfrentamiento(idD,posicionD,posicionA)
 	

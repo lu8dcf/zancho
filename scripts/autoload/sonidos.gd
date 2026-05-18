@@ -73,3 +73,11 @@ func compra():
 	oleada_Sound.play()
 	await oleada_Sound.finished
 	oleada_Sound.queue_free()
+
+func ataque():
+	var oleada_Sound = AudioStreamPlayer3D.new()
+	oleada_Sound.stream = preload("res://assets/sound/sfx/horn.mp3")
+	add_child(oleada_Sound)
+	oleada_Sound.play()
+	await oleada_Sound.finished
+	oleada_Sound.queue_free()

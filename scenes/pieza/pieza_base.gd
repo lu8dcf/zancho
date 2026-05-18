@@ -182,24 +182,30 @@ func Sonido(tipo): # funcion generica pra los sonidos de la pieza
 func ataque(idA):
 	if idA!=id:
 		return
-	if secuencia_sfx==1:  # para que os sonidos sean diversos y no suenen tan seguidos
-		Sonido("espada")
 	animacion("Bataque")
+	print (idA," ",vida_actual)
 	
 # -------------------------------   esto hay que pasarlo a la barra d evida ------------------------
 func recibeDanio(idD: int,danio: int):
 	if idD!=id:
 		return
 	vida_actual -= danio
-	
-	sangre.play("Sangre")
-	
+			
+	match secuencia_sfx:
+		0:
+			Sonido("hurt")
+			sangre.play("Sangre")
+		1:
+			Sonido("esada2")
+		2:
+			Sonido("danio")
+			sangre.play("Sangre")
+		3:	
+			Sonido("espada")	
+	secuencia_sfx +=1		
 	if secuencia_sfx>3:
 		secuencia_sfx=0
 		
-	if secuencia_sfx==0:  # para que os sonidos sean diversos y no suenen tan seguidos
-		Sonido("hurt")
-	secuencia_sfx +=1	
 		
 	# calculo del porcentaje de vida 
 	var porcentaje = float(vida_actual) / vida_total
@@ -207,6 +213,7 @@ func recibeDanio(idD: int,danio: int):
 			
 	if vida_actual <= 0:
 		die()
+
 
 func die():
 	GlobalSignal.piezaMuere.emit(id)
