@@ -261,16 +261,17 @@ func giro_remoto(pieza_id,angulo):
 	if angulo==1000:  
 		giro(angulo_frente)
 		return
+	print (pieza_id," ",angulo)
 	giro_rad(angulo)
 	
 func giro_rad(angulo):
-	var _rotacion_actual = rotation_degrees.y
-	var rotacion_destino = angulo
+	#var _rotacion_actual = rotation_degrees.y
+	
 	var tween = create_tween()
 	
 	#calcular el giro mas corto
 	Sonido("giro")
-	tween.tween_property(self, "rotation:y", rotacion_destino, 0.5)
+	tween.tween_property(self, "rotation:y", angulo, 0.5)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
 	

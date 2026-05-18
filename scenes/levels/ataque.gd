@@ -3,22 +3,24 @@ extends Node3D
 var pares_almacenados = {}
 
 const ATAQUE_BASE = preload("res://scenes/levels/ataque/ataque_base.tscn")
-
+@export var giro2 :float = 0
 
 func _ready() -> void:
 	limpiar_todo()
 	GlobalSignal.connect("ataque",iniciaAtaque)
 	GlobalSignal.connect("finalizaOleada",finalizaOleada)
 	
+	
 # A= Atacante  , D= defensor
 func iniciaAtaque(idA,idD,posicionA,posicionD,tipoA,tipoD):
 	
-	if _crear_clave(idA, idD)==false:
+	if _crear_clave(idA, idD)==false:  # codigo del ataque y verifica que no eista anterirormente
 		return
 	#print (idA," ",idD," ",posicionA," ",posicionD)
 	GlobalSignal.controlMarcaPaso.emit(false) #detiene el paso del juego
 	
-	angulo_enfrentamiento(idA,idD,posicionA,posicionD)
+	angulo_enfrentamiento(idA,posicionA,posicionD)
+	angulo_enfrentamiento(idD,posicionD,posicionA)
 	
 	var nuevo_ataque = ATAQUE_BASE.instantiate()
 			
@@ -81,15 +83,20 @@ func _generar_clave(a: int, b: int) -> String:
 	return str(menor) + "|" + str(mayor)
 
 
-func angulo_enfrentamiento(idA,idD,posicionA: Vector3,posicionD: Vector3):
-	var dir = Vector2(posicionD.x - posicionA.x, posicionD.z - posicionA.z)
-	var giro=(atan2(dir.y, dir.x))
+func angulo_enfrentamiento(id,posicionA: Vector3,posicionD: Vector3):
+	var posA = posicionA/ GlobalJuego.espaciado_baldosas
+	var posD = posicionD/ GlobalJuego.espaciado_baldosas 
 	
+	var giro=(atan2(posD.z - posA.z, posA.x - posD.x))
+	
+	print (id," ",giro)
+	
+	
+	#i
 	# Girar las piezas
-	GlobalSignal.giro_pieza.emit(idA,giro-PI)
-	GlobalSignal.giro_pieza.emit(idD,giro)
-	#print (giro)
-
+	GlobalSignal.giro_pieza.emit(id,giro)
+	
+	
 func finalizaOleada(estado):
 	
 	limpiar_todo()  # limpia todas las batallas
