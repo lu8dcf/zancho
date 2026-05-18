@@ -66,3 +66,10 @@ func comienzoOleada():
 	await oleada_Sound.finished
 	oleada_Sound.queue_free()
 	
+func compra():
+	var oleada_Sound = AudioStreamPlayer3D.new()
+	oleada_Sound.stream = preload("res://assets/sound/sfx/compra.mp3")
+	add_child(oleada_Sound)
+	oleada_Sound.play()
+	await oleada_Sound.finished
+	oleada_Sound.queue_free()
