@@ -19,7 +19,8 @@ func _ready() -> void:
 	compra.pressed.connect(_on_compra_pressed)
 	pieza.mouse_entered.connect(_on_pieza_mouse_entered)
 	pieza.mouse_exited.connect(_on_pieza_mouse_exited)
-	
+	GlobalSignal.finalizaOleada.connect(actualizar_pieza)
+
 	bloqueos.visible = false
 	actualizar_pieza()
 	

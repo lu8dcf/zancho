@@ -126,6 +126,10 @@ func colocar_blanca(sitio: Vector2i):
 
 
 func reiniciar_variables():
+	vidas = 20
+	fe = 20
+	oleada_actual = 1
+	mapa_actual=1
 	Piezas.reiniciar_variables()
 	mapas.reiniciar_variables()
 	economia.reiniciar_variables()
