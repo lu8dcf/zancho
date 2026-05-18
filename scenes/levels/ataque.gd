@@ -86,14 +86,8 @@ func _generar_clave(a: int, b: int) -> String:
 func angulo_enfrentamiento(id,posicionA: Vector3,posicionD: Vector3):
 	var posA = posicionA/ GlobalJuego.espaciado_baldosas
 	var posD = posicionD/ GlobalJuego.espaciado_baldosas 
-	
 	var giro=(atan2(posD.z - posA.z, posA.x - posD.x))
 	
-	print (id," ",giro)
-	
-	
-	#i
-	# Girar las piezas
 	GlobalSignal.giro_pieza.emit(id,giro)
 	
 	
