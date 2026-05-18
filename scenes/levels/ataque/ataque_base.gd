@@ -24,7 +24,9 @@ func _ready() -> void:
 	GlobalSignal.connect("finalizaOleada",finalizaOleada)
 
 func _on_timer_timeout():
+	print ("ataque")
 	if murio: # evita que siga atacando la pieza muerta
+		print ("murio")
 		return
 	# poner el potenciador de daño
 	if turno:
@@ -32,7 +34,7 @@ func _on_timer_timeout():
 		danio = danioA
 		atacanteId = idA
 		defensorId = idD
-	
+		
 	else:
 		turno = true
 		danio = danioD

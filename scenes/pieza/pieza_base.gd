@@ -225,6 +225,7 @@ func die():
 func animacion_muerte():
 	freeze = true
 	gravity_scale = 0
+	GlobalSignal.piezaMuere.emit(id)
 	
 	var tween = create_tween()
 	tween.set_parallel(true)
@@ -245,7 +246,7 @@ func animacion_muerte():
 		if Piezas.pieza_negra.size()==0:
 			GlobalSignal.finalizaOleada.emit(true)
 		
-		print (Piezas.pieza_negra.size())
+		#print (Piezas.pieza_negra.size())
 		
 	if pieza_tipo==0:
 		GlobalSignal.finalizaOleada.emit(false)
@@ -278,4 +279,3 @@ func giro_rad(angulo):
 	physics_material_override.bounce = 0
 	gravity_scale=1
 	
-# ---------------------  auxilia borrar si no es necesario	
