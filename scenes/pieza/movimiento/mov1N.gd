@@ -12,6 +12,9 @@ var direccion= Vector3i(0,0,0)
 var secuencia = [0,1,2,3,4]
 var paso = 3
 
+# variables para detectar cuando el peon queda trabado y no puede avanzar
+var pasos_detenido = 0
+var ultima_posicion: Vector3
 
 
 func _ready():
@@ -29,6 +32,17 @@ func _ready():
 	
 		
 func movimiento():
+	
+	# deteccion qu esta quieto o trabado con otra pieza
+	ultima_posicion = pieza.position
+	if ultima_posicion==pieza.position:
+		if pasos_detenido==3:
+			pieza.die()
+			return
+		pasos_detenido+=1
+		print (pasos_detenido)
+	else:
+		pasos_detenido=0	
 	
 	cambio_estado(paso)
 	# actualizacion de posicion

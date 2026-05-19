@@ -216,9 +216,8 @@ func recibeDanio(idD: int,danio: int):
 
 
 func die():
-	GlobalSignal.piezaMuere.emit(id)
-	
-	#create_dust_effect()
+	GlobalSignal.piezaMuere.emit(id) # aviso que muere
+	# Efectos de muerte
 	Sonidos.death()
 	animacion_muerte()
 	
@@ -237,7 +236,7 @@ func animacion_muerte():
 		
 	await tween.finished
 	
-	# elimina la instancia d ela lista
+	# elimina la instancia de la lista
 	if Piezas.pieza_blanca.has(self):
 		Piezas.pieza_blanca.erase(self)
 	
@@ -245,9 +244,7 @@ func animacion_muerte():
 		Piezas.pieza_negra.erase(self)	
 		if Piezas.pieza_negra.size()==0:
 			GlobalSignal.finalizaOleada.emit(true)
-		
-		#print (Piezas.pieza_negra.size())
-		
+	
 	if pieza_tipo==0:
 		GlobalSignal.finalizaOleada.emit(false)
 	else:

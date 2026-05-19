@@ -29,8 +29,6 @@ func iniciaAtaque(idA,idD,posicionA,posicionD,tipoA,tipoD):
 			
 	add_child(nuevo_ataque)
 	
-	
-	
 func calcular_danio(tipoA,tipoD):
 	var danio= Piezas.danio[tipoA]
 	if Piezas.bonus_a[tipoA]==tipoD:
@@ -41,7 +39,7 @@ func calcular_danio(tipoA,tipoD):
 func _crear_clave(a, d): ## Genera una clave única que ignora el orden
 	var clave = _generar_clave(a, d)
 	if not pares_almacenados.has(clave):
-		print (clave)
+		#print (clave)
 		pares_almacenados[clave] = {"valor1": a,"valor2": d}
 		return true  # Se almacenó
 	return false  # Ya existía
@@ -73,9 +71,6 @@ func contar_pares():
 ## Limpia todos los pares
 func limpiar_todo():
 	pares_almacenados.clear()
-
-	
-
 
 
 func angulo_enfrentamiento(id,posicionA: Vector3,posicionD: Vector3):
