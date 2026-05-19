@@ -58,7 +58,6 @@ func crear_timer(): # Tiempo entre ataques
 	add_child(mi_timer)
 
 func piezaMuere(id):
-	
 	if id==idA:
 		mi_timer.stop()  # detengo el timer de ataque
 		GlobalSignal.giro_pieza.emit(idD,1000)	
