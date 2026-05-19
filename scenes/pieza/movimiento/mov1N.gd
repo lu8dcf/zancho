@@ -15,8 +15,6 @@ var paso = 3
 # variables para detectar cuando el peon queda trabado y no puede avanzar
 var pasos_detenido = 0
 
-
-
 func _ready():
 	# Obtener la referencia a la pieza base (el owner del componente)
 	pieza = get_parent() as PiezaBase
@@ -41,6 +39,7 @@ func movimiento():
 	# convierto la proxima posicion en 2Di para 
 	var nuevo_sitio = Vector2i(sitio3d.x,sitio3d.z)  # en 2d
 	
+				
 	if globalJuego.verifica_extremos(nuevo_sitio)==false:
 		saltar_paso()
 		return
@@ -51,9 +50,12 @@ func movimiento():
 		
 	if globalJuego.verifica_piezas(nuevo_sitio)==false:
 		paso=0
-		
+		pasos_detenido +=1
 		return
-	pasos_detenido=0 # se esta moviendo
+	print (pieza.id," ",pasos_detenido)
+	if pasos_detenido==3:
+			pieza.die()
+			return
 	
 	
 	var tween = create_tween()
@@ -70,13 +72,7 @@ func saltar_paso(): # volver a iniciar en otra posicion d esalto
 	
 # Estadod de la pieza
 func cambio_estado(cambio):
-	
-	# deteccion qu esta quieto o trabado con otra pieza
-	if pasos_detenido==3:
-		pieza.die()
-		return
-	
-	print (pasos_detenido)
+		
 	match secuencia[cambio]:
 		0: # Quieto
 			direccion = Vector3i(0,0,0)
