@@ -53,7 +53,7 @@ func movimiento():
 		pasos_detenido +=1
 		return
 	print (pieza.id," ",pasos_detenido)
-	if pasos_detenido==3:
+	if pasos_detenido==2:
 			pieza.die()
 			return
 	
