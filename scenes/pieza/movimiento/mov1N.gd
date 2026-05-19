@@ -12,7 +12,8 @@ var direccion= Vector3i(0,0,0)
 var secuencia = [0,1,2,3,4]
 var paso = 3
 
-
+# variables para detectar cuando el peon queda trabado y no puede avanzar
+var pasos_detenido = 0
 
 func _ready():
 	# Obtener la referencia a la pieza base (el owner del componente)
@@ -22,14 +23,13 @@ func _ready():
 	if not pieza:
 		print ("El componente Peon debe ser hijo directo de una PiezaBase")
 		return
-
+	
 	# Conectar señal después de que la pieza esté lista
 	await pieza.ready
 	GlobalSignal.connect("marcaPaso",movimiento	)
 	
 		
 func movimiento():
-	
 	cambio_estado(paso)
 	# actualizacion de posicion
 	var cambio = direccion*GlobalJuego.espaciado_baldosas # # vector de cambio de la pieza
@@ -39,6 +39,7 @@ func movimiento():
 	# convierto la proxima posicion en 2Di para 
 	var nuevo_sitio = Vector2i(sitio3d.x,sitio3d.z)  # en 2d
 	
+				
 	if globalJuego.verifica_extremos(nuevo_sitio)==false:
 		saltar_paso()
 		return
@@ -49,8 +50,12 @@ func movimiento():
 		
 	if globalJuego.verifica_piezas(nuevo_sitio)==false:
 		paso=0
+		pasos_detenido +=1
 		return
-	
+	print (pieza.id," ",pasos_detenido)
+	if pasos_detenido==2:
+			pieza.die()
+			return
 	
 	
 	var tween = create_tween()
@@ -58,7 +63,7 @@ func movimiento():
 	.set_trans(Tween.TRANS_SINE) \
 	.set_ease(Tween.EASE_IN_OUT)
 	paso = 3
-
+	
 	
 func saltar_paso(): # volver a iniciar en otra posicion d esalto
 	paso +=1
@@ -67,7 +72,7 @@ func saltar_paso(): # volver a iniciar en otra posicion d esalto
 	
 # Estadod de la pieza
 func cambio_estado(cambio):
-	
+		
 	match secuencia[cambio]:
 		0: # Quieto
 			direccion = Vector3i(0,0,0)

@@ -3,7 +3,7 @@ extends Node3D
 var pares_almacenados = {}
 
 const ATAQUE_BASE = preload("res://scenes/levels/ataque/ataque_base.tscn")
-
+@export var giro2 :float = 0
 
 func _ready() -> void:
 	limpiar_todo()
@@ -13,12 +13,13 @@ func _ready() -> void:
 # A= Atacante  , D= defensor
 func iniciaAtaque(idA,idD,posicionA,posicionD,tipoA,tipoD):
 	
-	if _crear_clave(idA, idD)==false:
+	if _crear_clave(idA, idD)==false:  # codigo del ataque y verifica que no eista anterirormente
 		return
 	#print (idA," ",idD," ",posicionA," ",posicionD)
 	GlobalSignal.controlMarcaPaso.emit(false) #detiene el paso del juego
-	
-	angulo_enfrentamiento(idA,idD,posicionA,posicionD)
+	Sonidos.ataque()
+	angulo_enfrentamiento(idA,posicionA,posicionD)
+	angulo_enfrentamiento(idD,posicionD,posicionA)
 	
 	var nuevo_ataque = ATAQUE_BASE.instantiate()
 			
@@ -29,77 +30,63 @@ func iniciaAtaque(idA,idD,posicionA,posicionD,tipoA,tipoD):
 			
 	add_child(nuevo_ataque)
 	
-	
-	
 func calcular_danio(tipoA,tipoD):
 	var danio= Piezas.danio[tipoA]
 	if Piezas.bonus_a[tipoA]==tipoD:
 		danio = Piezas.bonus_cantidad[tipoA] * danio
-		
 	return danio	
 	
-	
-	
-	
-func _crear_clave(a, b): ## Genera una clave única que ignora el orden
-	var clave = _generar_clave(a, b)
-	
+func _crear_clave(a, d): ## Genera una clave única que ignora el orden
+	var clave = _generar_clave(a, d)
 	if not pares_almacenados.has(clave):
-		pares_almacenados[clave] = {"valor1": a,"valor2": b}
+		#print (clave)
+		pares_almacenados[clave] = {"valor1": a,"valor2": d}
 		return true  # Se almacenó
 	return false  # Ya existía
-
+	
+## Genera una clave única que ignora el orden
+func _generar_clave(a: int, d: int) -> String:
+	# Ordenamos los números para que (1,2) y (2,1) generen la misma clave
+	var menor = min(a, d)
+	var mayor = max(a, d)
+	return str(menor) + "|" + str(mayor)
 
 ## Elimina un par específico
 func eliminar_par(a: int, b: int):
 	var clave = _generar_clave(a, b)
 	if pares_almacenados.has(clave):
 		pares_almacenados.erase(clave)
-		
 		contar_pares()
 		#print ("contar pares",a," ",b)
-		
 	return false
 	
 	
 ## Cuenta cuántos pares únicos hay
 func contar_pares():
 	if pares_almacenados.size() == 0:
-		#print (pares_almacenados.size())
 		GlobalSignal.controlMarcaPaso.emit(true)
 
 ## Limpia todos los pares
 func limpiar_todo():
 	pares_almacenados.clear()
 
+func angulo_enfrentamiento(id,posicionA: Vector3,posicionD: Vector3):
+	var posA = posicionA/ GlobalJuego.espaciado_baldosas
+	var posD = posicionD/ GlobalJuego.espaciado_baldosas 
+	var giro=(atan2(posD.z - posA.z, posA.x - posD.x))
+	GlobalSignal.giro_pieza.emit(id,giro)
 	
-## Genera una clave única que ignora el orden
-func _generar_clave(a: int, b: int) -> String:
-	# Ordenamos los números para que (1,2) y (2,1) generen la misma clave
-	var menor = min(a, b)
-	var mayor = max(a, b)
-	return str(menor) + "|" + str(mayor)
-
-
-func angulo_enfrentamiento(idA,idD,posicionA: Vector3,posicionD: Vector3):
-	var dir = Vector2(posicionD.x - posicionA.x, posicionD.z - posicionA.z)
-	var giro=(atan2(dir.y, dir.x))
 	
-	# Girar las piezas
-	GlobalSignal.giro_pieza.emit(idA,giro-PI)
-	GlobalSignal.giro_pieza.emit(idD,giro)
-	#print (giro)
-
 func finalizaOleada(estado):
-	
 	limpiar_todo()  # limpia todas las batallas
 	GlobalSignal.controlMarcaPaso.emit(false) # parar el marca paso
 	Piezas.pieza_negra=[]  # eliminar la lista de instancia
 	
 	if !estado:
+		print ("gano")
 		for pieza in Piezas.pieza_blanca:
 			economia.piezas_vivas.append(pieza.pieza_tipo)
-	#print (economia.piezas_vivas)
+			print (pieza.pieza_tipo)
 	Piezas.pieza_blanca=[]  # eliminar la lista de instancia
 	
 	

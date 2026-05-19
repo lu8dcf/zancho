@@ -46,18 +46,12 @@ func crear_attack_shape(posicion: Vector3):
 	cylinder_shape.height = espaciado          # Altura = espaciado
 	shape.shape = cylinder_shape
 	
-	
-	
 	#  ajustar la posición relativa
 	shape.position = owner.area_ataque.to_local(posicion)
 		
 	# Agregar un script de detección al área 
 	shape.set_script(preload("res://scenes/pieza/ataque/detector_ataque.gd"))
 	
-	# Asignar metadata para saber quién ataca y desde dónde
-	#shape.set_meta("tipo_pieza", tipo_pieza)
-	#shape.set_meta("es_blanca", es_blanca)
-	#shape.set_meta("origen", global_position)
 	 #  añadir al árbol
 	owner.area_ataque.add_child(shape)
 	
