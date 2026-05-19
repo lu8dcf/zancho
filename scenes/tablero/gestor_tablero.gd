@@ -91,15 +91,10 @@ func mostrar_oleada_actual(gano):
 		await get_tree().create_timer(2.0).timeout
 		print("se crea un nuevo rey")
 		GlobalSignal.emit_signal("crearPieza",Vector2i(1,14),0,true)
-		#if economia.inventario_actual ==[]:
-			#economia.inventario_actual = economia.piezas_vivas
-			#economia.inventario_actualizado.emit()
-		#else:
-			#for i in 
+		economia.obtener_inventario_dinero_despues_oleada(true)
+
 	else:
 		# se crea otro rey aunque haya perdido
 		GlobalSignal.emit_signal("crearPieza",Vector2i(1,14),0,true)
-		#economia.inventario_actual = 
-		#economia.inventario_actualizado.emit()
-		
+		economia.obtener_inventario_despues_oleada(false)
 		

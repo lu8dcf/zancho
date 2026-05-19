@@ -1,6 +1,7 @@
 extends Node
 
 var monedas_actual : int = 0 # monedas inicial para la Oleada 1
+var monedas_antes_oleada : int = 0
 var limite_piezas = {
 	"Peon": 8,
 	"Torre": 2,
@@ -56,6 +57,7 @@ signal pieza_vendida()
 
 func reiniciar_variables():
 	monedas_actual = 1200 
+	monedas_antes_oleada  = 0
 	limite_piezas = {
 		"Peon": 8,
 		"Torre": 2,
@@ -109,8 +111,37 @@ func añadir_monedas(cantidad: int) -> void:
 	monedas_actual += cantidad
 	emit_signal("monedas_cambiadas", monedas_actual)  # Notificar al HUD que cambió
 
-func comprar_pieza(pieza:Dictionary) -> bool:
+func obtener_inventario_dinero_despues_oleada(gano:bool):
 	
+	if gano:
+		añadir_monedas(200) # al pasar la oleada y ganar entonces gana dinero
+	else: # si perdio se le debe dejar el dinero que tenia antes de empezar la oleada y el inventario que tenia antes de empezar a colocar
+		monedas_actual = monedas_antes_oleada 
+	unificar_piezas(gano)
+
+func unificar_piezas(gano):
+	var inventario_completo = []
+	if gano:
+		for i in inventario_actual:
+			inventario_completo.append(i)
+		#for i in piezas_vivas:
+			#inventario_completo.append(i)
+	else:
+		for i in piezas_colocadas:
+			inventario_completo.append(i)
+	piezas_colocadas = [
+		{"nombre": "Peon", "cantidad":0},
+		{"nombre": "Torre", "cantidad":0},
+		{"nombre": "Alfil",  "cantidad":0},
+		{"nombre": "Caballo", "cantidad":0},
+		{"nombre": "Reina", "cantidad":0}
+	]
+		
+
+func comprar_pieza(pieza:Dictionary) -> bool:
+	print("comprando")
+	for i in piezas_vivas:
+		print("piezas vivas: ", i)
 	if monedas_actual < pieza["precio"]:
 		return false
 	
@@ -156,17 +187,28 @@ func usar_pieza(pieza_nombre:String):
 		if i["nombre"] == pieza_nombre:
 			i["cantidad"] += 1
 	
+	
 			
 
 func llego_al_limite(pieza_nombre:String ,cantidad_piezas:int)-> bool:
-	if cantidad_piezas == 0:
-		for i in inventario_actual:
-			if i["nombre"] == pieza_nombre:
-				cantidad_piezas = i["cantidad"]
+	var total :int =0
+	for i in inventario_actual:
+		if i["nombre"] == pieza_nombre:
+			total += i["cantidad"]
+	for i in piezas_colocadas:
+		if i["nombre"] == pieza_nombre:
+			total += i["cantidad"]
 	if pieza_nombre in limite_piezas:
-		return cantidad_piezas >= limite_piezas[pieza_nombre]
+		return total >= limite_piezas[pieza_nombre]
 	else:
 		return false
+	
+	
+	#if cantidad_piezas == 0:
+		#for i in inventario_actual:
+			#if i["nombre"] == pieza_nombre:
+				#cantidad_piezas = i["cantidad"]
+
 
 func verificar_orden_aparicion(pieza_nombre:String)->bool:
 	if pieza_nombre in orden_aparicion:

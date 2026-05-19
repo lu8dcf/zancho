@@ -102,6 +102,7 @@ func _on_empezar_oleada_pressed() -> void:
 	if !globalJuego.empezo_oleada and empezar_oleada.ver_texto() == "Empezar Oleada " + str(globalJuego.oleada_actual):
 		globalJuego.empezo_oleada = true
 		GlobalSignal.emit_signal("comienzoOleada")
+		economia.monedas_antes_oleada = economia.monedas_actual
 		aparecer_botones_velocidades()
 	
 

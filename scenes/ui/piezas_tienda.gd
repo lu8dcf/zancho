@@ -43,7 +43,7 @@ func _on_compra_pressed() -> void:
 		economia.comprar_pieza(pieza_compra)
 
 
-func actualizar_pieza():
+func actualizar_pieza(_nada=0):
 	var nombre_del_panel = name  # esto devolverá "Peon"
 	var pieza_actualizar = economia.obtener_pieza_dicc(nombre_del_panel)
 	if globalJuego.empezo_oleada:
