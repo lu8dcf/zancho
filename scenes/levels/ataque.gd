@@ -12,6 +12,8 @@ func _ready() -> void:
 	
 # A= Atacante  , D= defensor
 func iniciaAtaque(idA,idD,posicionA,posicionD,tipoA,tipoD):
+	if vive(idA)==false:return # aseguramos que estan las piezas vivas
+	if vive(idD)==false:return
 	
 	if _crear_clave(idA, idD)==false:  # codigo del ataque y verifica que no eista anterirormente
 		return
@@ -89,4 +91,11 @@ func finalizaOleada(estado):
 		economia.piezas_vivas.remove_at(0)  # elimino la primer ubicación que es el rey
 	Piezas.pieza_blanca=[]  # eliminar la lista de instancia
 	
-	
+func vive(id):
+	for pieza in Piezas.pieza_blanca:
+		if pieza.id == id:
+			return true
+	for pieza in Piezas.pieza_negra:
+		if pieza.id == id:
+			return true
+	return false

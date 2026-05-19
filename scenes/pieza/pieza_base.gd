@@ -183,7 +183,7 @@ func ataque(idA):
 	if idA!=id:
 		return
 	animacion("Bataque")
-	print (idA," ",vida_actual)
+	
 	
 # -------------------------------   esto hay que pasarlo a la barra d evida ------------------------
 func recibeDanio(idD: int,danio: int):
@@ -225,7 +225,12 @@ func animacion_muerte():
 	freeze = true
 	gravity_scale = 0
 	GlobalSignal.piezaMuere.emit(id)
-	
+	# elimina la instancia de la lista
+	if Piezas.pieza_blanca.has(self):  # elimina su instancia si es blanca
+		Piezas.pieza_blanca.erase(self)
+	if Piezas.pieza_negra.has(self):   # elimina su instancia si es negra
+		Piezas.pieza_negra.erase(self)	
+		
 	var tween = create_tween()
 	tween.set_parallel(true)
 	
@@ -236,19 +241,13 @@ func animacion_muerte():
 		
 	await tween.finished
 	
-	# elimina la instancia de la lista
-	if Piezas.pieza_blanca.has(self):
-		Piezas.pieza_blanca.erase(self)
 	
-	if Piezas.pieza_negra.has(self):
-		Piezas.pieza_negra.erase(self)	
-		if Piezas.pieza_negra.size()==0:
-			GlobalSignal.finalizaOleada.emit(true)
+	if Piezas.pieza_negra.size()==0:
+		GlobalSignal.finalizaOleada.emit(true)
 	
 	if pieza_tipo==0:
 		GlobalSignal.finalizaOleada.emit(false)
-	else:
-		queue_free()
+	queue_free()
 
 func finalizaOleada(_estado):
 	queue_free()
