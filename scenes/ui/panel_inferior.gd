@@ -3,6 +3,7 @@ extends Panel
 
 # textos delos botones de las piezas
 @onready var cant_peon: TextureButton = $CantPeon
+
 @onready var cant_alfil: TextureButton = $CantAlfil
 @onready var cant_caballo: TextureButton = $CantCaballo
 @onready var cant_torre: TextureButton = $CantTorre
@@ -35,6 +36,14 @@ func _ready():
 	_actualizar_inventario(economia.inventario_actual)
 	
 
+func _process(_delta):
+	if globalJuego.empezo_oleada:
+		for boton in botones_piezas:
+			boton.disabled = true
+	else: 
+		for boton in botones_piezas:
+			boton.disabled = false
+			
 func configurar_botones():
 	# Agregar todos los botones al array
 	botones_piezas = [boton_peon, boton_alfil, boton_caballo, boton_torre, boton_reina]

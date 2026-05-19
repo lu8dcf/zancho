@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://3rr01i83xrlh"]
 
-[ext_resource type="Texture2D" uid="uid://b8oju5ddteuuf" path="res://assets/modelos/texturas/cielo.png" id="1_65f8h"]
+[ext_resource type="Texture2D" uid="uid://c52wa62yix2kg" path="res://assets/modelos/texturas/cielo.png" id="1_65f8h"]
 [ext_resource type="PackedScene" uid="uid://yvwwtxa42htj" path="res://assets/modelos/entorno/entorno_completo.tscn" id="3_65f8h"]
 [ext_resource type="PackedScene" uid="uid://b0uqs330pls56" path="res://scenes/particulas/nubes.tscn" id="3_rawsq"]
 [ext_resource type="PackedScene" uid="uid://b7gb2ttvbq0ot" path="res://scenes/particulas/humo_particula.tscn" id="4_6mpwl"]

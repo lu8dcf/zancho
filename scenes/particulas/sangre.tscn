@@ -63,10 +63,6 @@ size = Vector3(0.2, 0.2, 0.2)
 _data = [Vector2(0, 0.9157775), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="GDScript" id="GDScript_fe5f8"]
-script/source = "extends CPUParticles3D
-"
-
 [sub_resource type="Animation" id="Animation_mrbbd"]
 length = 0.001
 tracks/0/type = "value"
@@ -108,8 +104,6 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_r78l6"]
 resource_name = "Sangre"
-length = 2.0
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -213,7 +207,6 @@ spread = 26.5
 gravity = Vector3(0, -22.47, 0)
 initial_velocity_max = 3.97
 scale_amount_curve = SubResource("Curve_r78l6")
-script = SubResource("GDScript_fe5f8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=649544887]
 libraries/ = SubResource("AnimationLibrary_6kyup")

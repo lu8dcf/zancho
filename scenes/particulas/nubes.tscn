@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b0uqs330pls56"]
 
-[ext_resource type="ArrayMesh" uid="uid://ctjl7o5s1m88e" path="res://assets/modelos/particulas/nubes.obj" id="1_51jd2"]
+[ext_resource type="ArrayMesh" uid="uid://csgejkjhki820" path="res://assets/modelos/particulas/nubes.obj" id="1_51jd2"]
 
 [sub_resource type="Curve" id="Curve_51jd2"]
 _data = [Vector2(0, 0.5077453), 0.0, 0.0, 0, 0, Vector2(0.5714286, 0.4486608), -0.1376739, -0.1376739, 0, 0, Vector2(1, 0), -3.4763994, 0.0, 0, 0]

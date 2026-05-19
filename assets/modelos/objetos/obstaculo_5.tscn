@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bxq4oelxokvgr"]
 
-[ext_resource type="PackedScene" uid="uid://u8e5d6q5t8p7" path="res://assets/modelos/objetos/obstaculo5.glb" id="1_fbixm"]
+[ext_resource type="PackedScene" uid="uid://0eakqf3klja6" path="res://assets/modelos/objetos/obstaculo5.glb" id="1_fbixm"]
 [ext_resource type="Material" uid="uid://bg70lqvwct7ri" path="res://assets/modelos/texturas/material_entorno.tres" id="2_mjc4e"]
 
 [node name="obstaculo5" unique_id=721840771 instance=ExtResource("1_fbixm")]
 
-[node name="Cubo_017" parent="." index="0" unique_id=1877800232]
+[node name="Cubo_017" parent="." index="0" unique_id=150770952]
 material_override = ExtResource("2_mjc4e")

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://xv5vf17hra84"]
+
+[ext_resource type="LabelSettings" uid="uid://c64snqitwil5t" path="res://assets/fuentes/textos.tres" id="1_n5xvk"]
+
+[node name="Label" type="Label" unique_id=4063466]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Peón"
+label_settings = ExtResource("1_n5xvk")
+horizontal_alignment = 1
+vertical_alignment = 1

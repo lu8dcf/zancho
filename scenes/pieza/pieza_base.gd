@@ -37,12 +37,16 @@ var animation_player : AnimationPlayer
 
 
 # Variables de estado
-var is_alive: bool = true
+
 var color="N"
 var pieza_colocada=false
 var pieza : Resource
-var secuencia_sfx = 0 # secuencia de sonido
+var secuencia_sfx = randi() % 3# secuencia de sonido
 
+# barra de vida
+signal barraVida(porcentual)
+@onready var barra = $Marker3D/barra
+@onready var sangre = $sangre/AnimationPlayer
 
 func _ready():
 	vida_total = Piezas.vida[pieza_tipo]
@@ -66,9 +70,11 @@ func _ready():
 	#GlobalSignal.connect("marcaPaso",anima_idle)
 	animacion("Bidle")
 	
+	# señales de control	
 	GlobalSignal.connect("giro_pieza",giro_remoto)
 	GlobalSignal.connect("piezaAtaca",ataque)
 	GlobalSignal.connect("piezaRecibeDanio",recibeDanio)
+	GlobalSignal.connect("finalizaOleada",finalizaOleada)
 
 func cargar_objeto():# Instanciar y agregar al contenedor
 	instancia_objeto_pieza = pieza.modelo.instantiate()
@@ -95,7 +101,7 @@ func cargar_movimiento(): # agrega el nodo movimiento con el script correspondie
 	var script = load(movimiento_script)
 	movimiento.set_script(script)
 	add_child(movimiento)
-	movimiento.owner = self  # ← IMPORTANTE: Establece el owner manualmente
+	movimiento.owner = self  #  Establece el owner manualmente
 
 func cargar_ataque(): # agrega el nodo ataque con el script correspondiente a la pieza
 	var ataque = ataque_especifico.instantiate()
@@ -103,8 +109,7 @@ func cargar_ataque(): # agrega el nodo ataque con el script correspondiente a la
 	var script = load(ataque_script)
 	ataque.set_script(script)
 	add_child(ataque)
-	ataque.owner = self  # ← IMPORTANTE: Establece el owner manualmente
-		
+	ataque.owner = self  #  Establece el owner manualmente
 		
 # colocacion inicial --------------------------------------------------------------------------------		
 func posicionamiento_giro(): # Giro inicial de la pieza an colocarse en el tablero hay que cambiar a radianes
@@ -129,7 +134,6 @@ func create_dust_effect(): # Particulas al pegar con el tablero
 	dust_particles.emitting = false
 # fin de colocacion inicial --------------------------------------------------------------------------------	
 
-
 func verificar_proximo_paso(cambio):
 	# proximo sitio a ocupar
 	var sitio3d = round(global_position+cambio)/globalJuego.espaciado_baldosas # en 3d
@@ -141,6 +145,7 @@ func verificar_proximo_paso(cambio):
 	return true
 		
 func giro(angulo): #Gira la pieza en el eje horizontal (Y) usando Tween
+	angulo_frente=angulo
 	var tween = create_tween()
 	var _rotacion_actual = rotation_degrees.y
 	var rotacion_destino = angulo
@@ -155,7 +160,6 @@ func giro(angulo): #Gira la pieza en el eje horizontal (Y) usando Tween
 	pieza_colocada = true
 	physics_material_override.bounce = 0
 	gravity_scale=1
-
 			
 func animacion(anima):
 	if animation_player:
@@ -163,8 +167,7 @@ func animacion(anima):
 		if animation_player.has_animation(anima):
 			animation_player.play(anima)
 
-
-func Sonido(tipo):
+func Sonido(tipo): # funcion generica pra los sonidos de la pieza
 	var oleada_Sound = AudioStreamPlayer3D.new()
 	var archivo_sonido = "res://assets/sound/sfx/"+tipo+".mp3"
 	oleada_Sound.stream = load(archivo_sonido)
@@ -180,123 +183,96 @@ func ataque(idA):
 	if idA!=id:
 		return
 	animacion("Bataque")
-
+	print (idA," ",vida_actual)
+	
 # -------------------------------   esto hay que pasarlo a la barra d evida ------------------------
 func recibeDanio(idD: int,danio: int):
 	if idD!=id:
 		return
 	vida_actual -= danio
-	
-	if secuencia_sfx==3:
+			
+	match secuencia_sfx:
+		0:
+			Sonido("hurt")
+			sangre.play("Sangre")
+		1:
+			Sonido("esada2")
+		2:
+			Sonido("danio")
+			sangre.play("Sangre")
+		3:	
+			Sonido("espada")	
+	secuencia_sfx +=1		
+	if secuencia_sfx>3:
 		secuencia_sfx=0
 		
-	if secuencia_sfx==0:  # para que os sonidos sean diversos y no suenen tan seguidos
-		Sonido("hurt")
-		secuencia_sfx +=1
 		
-	print (vida_actual)	
-	# actualizar barra de vida -------------------------------------------------
-		
-	
-	
-		
+	# calculo del porcentaje de vida 
+	var porcentaje = float(vida_actual) / vida_total
+	barraVida.emit(porcentaje)
+			
 	if vida_actual <= 0:
 		die()
 
+
 func die():
-	GlobalSignal.piezaMuere.emit(id)
-	is_alive = false
-	#create_dust_effect()
+	GlobalSignal.piezaMuere.emit(id) # aviso que muere
+	# Efectos de muerte
 	Sonidos.death()
-	if Piezas.pieza_activa.has(self):
-		Piezas.pieza_activa.erase(self)
-		
-	if pieza_blanca:
-		remove_from_group("pieza_blanca")
-	else:
-		remove_from_group("pieza_negra")
-	# Destruir la pieza
 	animacion_muerte()
 	
-
 func animacion_muerte():
 	freeze = true
 	gravity_scale = 0
+	GlobalSignal.piezaMuere.emit(id)
 	
 	var tween = create_tween()
 	tween.set_parallel(true)
 	
 	# Subir y rotar lentamente
-	tween.tween_property(self, "global_position:y", global_position.y + 1 , 4)
-	tween.tween_property(self, "rotation:y", rotation.y + 360, 4)  # Girar mientras sube
-	#tween.tween_property(self, "scale", Vector3.ZERO, 4)
-	
-	# Color celestial con brillo
-	tween.tween_callback(func():
-		var material = StandardMaterial3D.new()
-		material.albedo_color = Color(0.7, 0.9, 1.0)
-		material.emission_enabled = true
-		material.emission = Color(0.5, 0.7, 1.0)
-		material.emission_energy = 2.0
+	tween.tween_property(self, "global_position:y", global_position.y + 10 ,2)
+	tween.tween_property(self, "rotation:y", rotation.y + 10, 2)  # Girar mientras sube
+	tween.tween_property(self, "scale", Vector3.ZERO, 3)
 		
-		if has_node("MeshInstance3D"):
-			$MeshInstance3D.material_override = material
-	)
-	
-	tween.tween_callback(queue_free)
 	await tween.finished
-	#queue_free()
+	
+	# elimina la instancia de la lista
+	if Piezas.pieza_blanca.has(self):
+		Piezas.pieza_blanca.erase(self)
+	
+	if Piezas.pieza_negra.has(self):
+		Piezas.pieza_negra.erase(self)	
+		if Piezas.pieza_negra.size()==0:
+			GlobalSignal.finalizaOleada.emit(true)
+	
+	if pieza_tipo==0:
+		GlobalSignal.finalizaOleada.emit(false)
+	else:
+		queue_free()
+
+func finalizaOleada(_estado):
+	queue_free()
 
 func giro_remoto(pieza_id,angulo):
 	if id!=pieza_id:
 		return
-	#print (pieza_id," ",angulo)
+	
+	# señal que la batalla finalizo y esta pieza es la ganadora debe volver a la posicion inicial
+	if angulo==1000:  
+		giro(angulo_frente)
+		return
+	
 	giro_rad(angulo)
 	
 func giro_rad(angulo):
-	var _rotacion_actual = rotation_degrees.y
-	var rotacion_destino = angulo
 	var tween = create_tween()
-	
-	#calcular el giro mas corto
+		
 	Sonido("giro")
-	tween.tween_property(self, "rotation:y", rotacion_destino, 0.5)
+	tween.tween_property(self, "rotation:y", angulo, 0.5)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
-	
-	
+		
 	pieza_colocada = true
 	physics_material_override.bounce = 0
 	gravity_scale=1
 	
-# ---------------------  auxilia borrar si no es necesario	
-
-
-	
-func look_at_target(pieza_id, target: Vector3):
-	if id != pieza_id:
-		return
-	
-	# Posición actual
-	var pos = global_transform.origin
-	
-	# Ignorar el eje Y (mantener la altura actual)
-	var target_flat = Vector3(target.x, pos.y, target.z)
-	
-	# Calcular la rotación objetivo
-	var dir = (target_flat - pos).normalized()
-	var target_basis = Basis.looking_at(dir, Vector3.UP)
-	
-	# Crear tween para la rotación suave
-	var tween = create_tween()
-	tween.tween_property(self, "global_transform", Transform3D(target_basis, pos), 1.0)
-	
-	
-	# Alternativa: Tween solo la rotación (más eficiente)
-	# var start_basis = global_transform.basis
-	# tween.tween_method(_update_rotation.bind(start_basis, target_basis), 0.0, 1.0, 1.0)
-
-# Método auxiliar para interpolación manual (opcional)
-func _update_rotation(weight: float, start_basis: Basis, end_basis: Basis):
-	var new_basis = start_basis.slerp(end_basis, weight)
-	global_transform = Transform3D(new_basis, global_transform.origin)

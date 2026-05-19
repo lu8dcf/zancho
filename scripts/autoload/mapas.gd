@@ -45,7 +45,12 @@ func _ready():
 #14 │ .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . │
 #15 │ .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . │
    #└───────────────────────────────────────────────┘
-	
+
+func reiniciar_variables():
+	mapas = []
+	obstaculos = []
+	cargar_todos_mapas()
+
 func cargar_todos_mapas():
 	mapas.clear()
 	obstaculos.clear()

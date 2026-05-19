@@ -364,30 +364,27 @@ _data = {
 [node name="pieza5B" unique_id=659826326 instance=ExtResource("1_mv6n7")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 
-[node name="Skeleton3D" parent="Esqueleto_007" parent_id_path=PackedInt32Array(1031401997) index="0" unique_id=1354135015]
-bones/2/rotation = Quaternion(0, 0.02461363, 0, 0.9996971)
+[node name="Skeleton3D" parent="Esqueleto_007" parent_id_path=PackedInt32Array(219707914) index="0" unique_id=2122705295]
 bones/5/rotation = Quaternion(-2.4584276e-07, 2.252332e-08, 0.88017213, -0.47465464)
-bones/8/rotation = Quaternion(0.07246416, -0.031805955, -0.08468495, 0.99326026)
-bones/9/position = Vector3(-0.061724886, 0, 0.0021576344)
-bones/10/position = Vector3(-0.056263633, 0.23867081, -0.0093283625)
-bones/12/rotation = Quaternion(0.5500166, -0.14915141, -0.06758637, 0.8189431)
-bones/13/rotation = Quaternion(0.17582138, -0.085208416, 0.61637586, 0.7628284)
-bones/14/rotation = Quaternion(0.20661928, 0.054933093, 0.053496204, 0.97541225)
-bones/15/rotation = Quaternion(-0.21430415, 0.1550111, 0.6573927, 0.7056062)
-bones/16/position = Vector3(-0.0023215786, 0.87304664, 0.0113670165)
-bones/16/rotation = Quaternion(1.6540215e-08, -0.95535433, 4.22052e-09, 0.2954626)
-bones/18/rotation = Quaternion(-0.6223032, -0.08413657, -0.0833854, 0.7737614)
-bones/19/rotation = Quaternion(-0.089935765, -0.016671104, 0.73414457, 0.6728042)
-bones/20/rotation = Quaternion(0.18864103, 0.0029202853, 0.23018774, 0.95468307)
-bones/21/position = Vector3(-0.017951362, 0.20054974, -0.024279214)
-bones/21/rotation = Quaternion(0.016899034, -0.05359122, 0.11572712, 0.9916903)
-bones/22/position = Vector3(-0.50138515, 1.3401732, 0.46990827)
+bones/8/rotation = Quaternion(9.72772e-09, 9.9366844e-08, -0.070417985, 0.9975176)
+bones/12/rotation = Quaternion(0.45190424, -0.4840048, 0.5092386, 0.54972535)
+bones/13/rotation = Quaternion(0.00017431546, -0.076936916, 0.0029727719, 0.9970315)
+bones/14/rotation = Quaternion(-0.0001644832, 0.077301234, -0.0036895047, 0.99700093)
+bones/15/rotation = Quaternion(-0.26418728, 0.06584731, 0.65721947, 0.7028029)
+bones/16/position = Vector3(-0.002321667, 0.873047, 0.011366985)
+bones/16/rotation = Quaternion(-1.862641e-09, -2.5634654e-07, 1.6148178e-08, 1)
+bones/18/rotation = Quaternion(-0.5914911, 0.045432992, 0.00012378463, 0.80503047)
+bones/19/rotation = Quaternion(-0.058930397, 0.030553259, 0.5930557, 0.80242056)
+bones/20/rotation = Quaternion(0.034975402, 0.022789352, 0.16157761, 0.98597676)
+bones/21/position = Vector3(-0.01134389, 0.20377734, -0.0028854734)
+bones/21/rotation = Quaternion(-0.034923468, 4.932743e-08, 0.13730614, 0.98991287)
+bones/22/position = Vector3(-0.996371, 1.6449684, 0.34396315)
 bones/22/rotation = Quaternion(0.6456136, -0.6443031, 0.28841594, 0.29132965)
-bones/23/position = Vector3(-0.42612702, 1.4216138, -0.32700452)
+bones/23/position = Vector3(-0.5116834, 1.3749057, -0.44029218)
 bones/23/rotation = Quaternion(0.6449604, -0.6449596, 0.28987366, 0.28987333)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Esqueleto_007/Skeleton3D" index="0" unique_id=1004915074]
-transform = Transform3D(-0.93834704, -0.014293401, -0.34539822, 0.0130927935, 0.99695843, -0.07682599, 0.34544575, -0.076611556, -0.9353062, -0.5014613, 1.4307672, 0.4699204)
+transform = Transform3D(-0.85323745, 0.010173051, -0.5214229, -0.039629124, 0.99565446, 0.08427307, 0.5200143, 0.09256847, -0.84912664, -0.8409643, 1.7350157, 0.33265725)
 bone_name = "Hueso.013"
 bone_idx = 15
 
@@ -419,8 +416,8 @@ emission_sphere_radius = 0.05
 gravity = Vector3(0, 6.21, 0)
 scale_amount_curve = SubResource("Curve_30d8y")
 
-[node name="Círculo_039" parent="Esqueleto_007/Skeleton3D" index="1" unique_id=1349317283]
+[node name="Círculo_039" parent="Esqueleto_007/Skeleton3D" index="1" unique_id=1210490222]
 material_override = ExtResource("2_4oolc")
 
-[node name="AnimationPlayer" parent="." index="1" unique_id=810034535]
+[node name="AnimationPlayer" parent="." index="1" unique_id=670471537]
 libraries/ = SubResource("AnimationLibrary_ya1pv")

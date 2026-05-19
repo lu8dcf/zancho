@@ -13,13 +13,12 @@ class_name GestorTablero
 var baldosas : Dictionary = {}  # Diccionario con clave Vector2i -> BaldosaBase
 var baldosa_seleccionada : BaldosaBase = null
 
-var mapa_actual :int = globalJuego.mapa_actual
 
 func _ready():
 	add_to_group("gestor_tablero")
-	generar_tablero()
-	# crear rey
-	GlobalSignal.emit_signal("crearPieza",Vector2i(1,14),0,true)
+	generar_tablero()	
+	mostrar_oleada_actual(true) # se genera la oleada con el rey
+	GlobalSignal.finalizaOleada.connect(mostrar_oleada_actual) # si es true quiere decir que gano, si es false se reiniciaa
 
 func generar_tablero():
 	# Limpiar tablero existente
@@ -75,15 +74,27 @@ func _en_baldosa_presionada(baldosa: BaldosaBase):
 	
 	baldosa_seleccionada = baldosa
 
-		
-
 func limpiar_seleccion():
 	if baldosa_seleccionada:
 		baldosa_seleccionada.seleccionar(false)
 		baldosa_seleccionada = null
 									# vector(3,2) posicion de la baldosa
+
 func obtener_punto_colocacion_pieza(coordenadas: Vector2i) -> Vector3:
 	var baldosa = obtener_baldosa_en_coordenadas(coordenadas)
 	if baldosa:
 		return baldosa.obtener_punto_colocacion()
 	return Vector3.ZERO
+
+func mostrar_oleada_actual(gano):
+	if gano:
+		await get_tree().create_timer(2.0).timeout
+		print("se crea un nuevo rey")
+		GlobalSignal.emit_signal("crearPieza",Vector2i(1,14),0,true)
+		economia.obtener_inventario_dinero_despues_oleada(true)
+
+	else:
+		# se crea otro rey aunque haya perdido
+		GlobalSignal.emit_signal("crearPieza",Vector2i(1,14),0,true)
+		economia.obtener_inventario_despues_oleada(false)
+		

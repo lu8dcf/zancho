@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cr82cvb5b4pj7"]
 
-[ext_resource type="Script" uid="uid://djqk8seumdc60" path="res://scenes/ui/components/boton_ui.gd" id="1_8nd1q"]
-[ext_resource type="LabelSettings" uid="uid://c64snqitwil5t" path="res://assets/fuentes/textos.tres" id="2_8nd1q"]
+[ext_resource type="Script" path="res://scenes/ui/components/boton_ui.gd" id="1_8nd1q"]
+[ext_resource type="LabelSettings" uid="uid://5mxd2sj4000t" path="res://assets/fuentes/textosgrande.tres" id="2_8nd1q"]
 
 [node name="TextureButton" type="TextureButton" unique_id=94794210]
 anchors_preset = 8
