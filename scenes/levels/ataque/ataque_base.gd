@@ -24,7 +24,6 @@ func _ready() -> void:
 	GlobalSignal.connect("finalizaOleada",finalizaOleada)
 
 func _on_timer_timeout():
-	print ("ataque")
 	if murio: # evita que siga atacando la pieza muerta
 		print ("murio")
 		return

@@ -82,11 +82,11 @@ func finalizaOleada(estado):
 	GlobalSignal.controlMarcaPaso.emit(false) # parar el marca paso
 	Piezas.pieza_negra=[]  # eliminar la lista de instancia
 	
-	if !estado:
-		print ("gano")
-		for pieza in Piezas.pieza_blanca:
-			economia.piezas_vivas.append(pieza.pieza_tipo)
-			print (pieza.pieza_tipo)
+	if estado:
+		economia.piezas_vivas=[] # limpio la lista anterior
+		for pieza in Piezas.pieza_blanca: # recorro las piezas que quedaron vivas
+			economia.piezas_vivas.append(pieza.pieza_tipo) # agrego el numero de pieza
+		economia.piezas_vivas.remove_at(0)  # elimino la primer ubicación que es el rey
 	Piezas.pieza_blanca=[]  # eliminar la lista de instancia
 	
 	
