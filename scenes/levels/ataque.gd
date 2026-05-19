@@ -10,10 +10,8 @@ func _ready() -> void:
 	GlobalSignal.connect("ataque",iniciaAtaque)
 	GlobalSignal.connect("finalizaOleada",finalizaOleada)
 	
-	
 # A= Atacante  , D= defensor
 func iniciaAtaque(idA,idD,posicionA,posicionD,tipoA,tipoD):
-	
 	if _crear_clave(idA, idD)==false:  # codigo del ataque y verifica que no eista anterirormente
 		return
 	#print (idA," ",idD," ",posicionA," ",posicionD)
@@ -40,17 +38,20 @@ func calcular_danio(tipoA,tipoD):
 		
 	return danio	
 	
-	
-	
-	
-func _crear_clave(a, b): ## Genera una clave única que ignora el orden
-	var clave = _generar_clave(a, b)
-	
+func _crear_clave(a, d): ## Genera una clave única que ignora el orden
+	var clave = _generar_clave(a, d)
 	if not pares_almacenados.has(clave):
-		pares_almacenados[clave] = {"valor1": a,"valor2": b}
+		print (clave)
+		pares_almacenados[clave] = {"valor1": a,"valor2": d}
 		return true  # Se almacenó
 	return false  # Ya existía
-
+	
+## Genera una clave única que ignora el orden
+func _generar_clave(a: int, d: int) -> String:
+	# Ordenamos los números para que (1,2) y (2,1) generen la misma clave
+	var menor = min(a, d)
+	var mayor = max(a, d)
+	return str(menor) + "|" + str(mayor)
 
 ## Elimina un par específico
 func eliminar_par(a: int, b: int):
@@ -60,7 +61,6 @@ func eliminar_par(a: int, b: int):
 		
 		contar_pares()
 		#print ("contar pares",a," ",b)
-		
 	return false
 	
 	
@@ -75,12 +75,7 @@ func limpiar_todo():
 	pares_almacenados.clear()
 
 	
-## Genera una clave única que ignora el orden
-func _generar_clave(a: int, b: int) -> String:
-	# Ordenamos los números para que (1,2) y (2,1) generen la misma clave
-	var menor = min(a, b)
-	var mayor = max(a, b)
-	return str(menor) + "|" + str(mayor)
+
 
 
 func angulo_enfrentamiento(id,posicionA: Vector3,posicionD: Vector3):
