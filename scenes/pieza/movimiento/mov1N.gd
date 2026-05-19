@@ -51,7 +51,7 @@ func movimiento():
 		
 	if globalJuego.verifica_piezas(nuevo_sitio)==false:
 		paso=0
-		pasos_detenido+=1
+		
 		return
 	pasos_detenido=0 # se esta moviendo
 	
