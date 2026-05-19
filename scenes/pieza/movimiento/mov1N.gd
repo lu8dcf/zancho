@@ -14,7 +14,7 @@ var paso = 3
 
 # variables para detectar cuando el peon queda trabado y no puede avanzar
 var pasos_detenido = 0
-var ultima_posicion: Vector3
+
 
 
 func _ready():
@@ -25,25 +25,13 @@ func _ready():
 	if not pieza:
 		print ("El componente Peon debe ser hijo directo de una PiezaBase")
 		return
-
+	
 	# Conectar señal después de que la pieza esté lista
 	await pieza.ready
 	GlobalSignal.connect("marcaPaso",movimiento	)
 	
 		
 func movimiento():
-	
-	# deteccion qu esta quieto o trabado con otra pieza
-	ultima_posicion = pieza.position
-	if ultima_posicion==pieza.position:
-		if pasos_detenido==3:
-			pieza.die()
-			return
-		pasos_detenido+=1
-		print (pasos_detenido)
-	else:
-		pasos_detenido=0	
-	
 	cambio_estado(paso)
 	# actualizacion de posicion
 	var cambio = direccion*GlobalJuego.espaciado_baldosas # # vector de cambio de la pieza
@@ -63,8 +51,9 @@ func movimiento():
 		
 	if globalJuego.verifica_piezas(nuevo_sitio)==false:
 		paso=0
+		pasos_detenido+=1
 		return
-	
+	pasos_detenido=0 # se esta moviendo
 	
 	
 	var tween = create_tween()
@@ -72,7 +61,7 @@ func movimiento():
 	.set_trans(Tween.TRANS_SINE) \
 	.set_ease(Tween.EASE_IN_OUT)
 	paso = 3
-
+	
 	
 func saltar_paso(): # volver a iniciar en otra posicion d esalto
 	paso +=1
@@ -82,6 +71,12 @@ func saltar_paso(): # volver a iniciar en otra posicion d esalto
 # Estadod de la pieza
 func cambio_estado(cambio):
 	
+	# deteccion qu esta quieto o trabado con otra pieza
+	if pasos_detenido==3:
+		pieza.die()
+		return
+	
+	print (pasos_detenido)
 	match secuencia[cambio]:
 		0: # Quieto
 			direccion = Vector3i(0,0,0)

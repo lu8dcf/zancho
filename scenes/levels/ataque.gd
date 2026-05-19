@@ -12,6 +12,7 @@ func _ready() -> void:
 	
 # A= Atacante  , D= defensor
 func iniciaAtaque(idA,idD,posicionA,posicionD,tipoA,tipoD):
+	
 	if _crear_clave(idA, idD)==false:  # codigo del ataque y verifica que no eista anterirormente
 		return
 	#print (idA," ",idD," ",posicionA," ",posicionD)
@@ -33,7 +34,6 @@ func calcular_danio(tipoA,tipoD):
 	var danio= Piezas.danio[tipoA]
 	if Piezas.bonus_a[tipoA]==tipoD:
 		danio = Piezas.bonus_cantidad[tipoA] * danio
-		
 	return danio	
 	
 func _crear_clave(a, d): ## Genera una clave única que ignora el orden
@@ -56,7 +56,6 @@ func eliminar_par(a: int, b: int):
 	var clave = _generar_clave(a, b)
 	if pares_almacenados.has(clave):
 		pares_almacenados.erase(clave)
-		
 		contar_pares()
 		#print ("contar pares",a," ",b)
 	return false
@@ -65,32 +64,29 @@ func eliminar_par(a: int, b: int):
 ## Cuenta cuántos pares únicos hay
 func contar_pares():
 	if pares_almacenados.size() == 0:
-		#print (pares_almacenados.size())
 		GlobalSignal.controlMarcaPaso.emit(true)
 
 ## Limpia todos los pares
 func limpiar_todo():
 	pares_almacenados.clear()
 
-
 func angulo_enfrentamiento(id,posicionA: Vector3,posicionD: Vector3):
 	var posA = posicionA/ GlobalJuego.espaciado_baldosas
 	var posD = posicionD/ GlobalJuego.espaciado_baldosas 
 	var giro=(atan2(posD.z - posA.z, posA.x - posD.x))
-	
 	GlobalSignal.giro_pieza.emit(id,giro)
 	
 	
 func finalizaOleada(estado):
-	
 	limpiar_todo()  # limpia todas las batallas
 	GlobalSignal.controlMarcaPaso.emit(false) # parar el marca paso
 	Piezas.pieza_negra=[]  # eliminar la lista de instancia
 	
 	if !estado:
+		print ("gano")
 		for pieza in Piezas.pieza_blanca:
 			economia.piezas_vivas.append(pieza.pieza_tipo)
-	#print (economia.piezas_vivas)
+			print (pieza.pieza_tipo)
 	Piezas.pieza_blanca=[]  # eliminar la lista de instancia
 	
 	
