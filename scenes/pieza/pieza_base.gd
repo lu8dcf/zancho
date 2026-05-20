@@ -196,7 +196,7 @@ func recibeDanio(idD: int,danio: int):
 			Sonido("hurt")
 			sangre.play("Sangre")
 		1:
-			Sonido("esada2")
+			Sonido("espada2")
 		2:
 			Sonido("danio")
 			sangre.play("Sangre")
@@ -213,7 +213,6 @@ func recibeDanio(idD: int,danio: int):
 			
 	if vida_actual <= 0:
 		die()
-
 
 func die():
 	GlobalSignal.piezaMuere.emit(id) # aviso que muere
