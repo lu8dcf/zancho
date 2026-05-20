@@ -52,10 +52,10 @@ func movimiento():
 		paso=0
 		pasos_detenido +=1
 		return
-	print (pieza.id," ",pasos_detenido)
-	if pasos_detenido==2:
-			pieza.die()
-			return
+	
+	if pasos_detenido==3:
+		pieza.die()
+		return
 	
 	
 	var tween = create_tween()
