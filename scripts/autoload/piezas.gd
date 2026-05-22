@@ -26,6 +26,7 @@ var modo_colocacion : bool = false # activar o desactivar el modo colcoacion
 signal modo_colocacion_inicia(tipo_pieza:int,nombre:String)
 signal modo_colocacion_cancelado
 signal pieza_colocada(tipo:int, posicion:Vector2i)
+signal pieza_colocada_inventario(nombre_pieza: String) 
 @warning_ignore("unused_signal")
 signal  pieza_flotante_actualizada(posicion_3d :Vector3, es_valido:bool)
 
@@ -40,10 +41,9 @@ func reiniciar_variables():
 	pieza_flotante = null
 	modo_colocacion = false
 	
-	
-
 
 func iniciar_modo_colocacion(tipo_pieza: int, nombre_pieza: String) -> void:
+	print("Iniciando modo colocación: ", nombre_pieza, " tipo: ", tipo_pieza)
 	modo_colocacion = true
 	pieza_seleccionada = {
 		"tipo": tipo_pieza,
@@ -67,17 +67,33 @@ func colocar_pieza_en_posicion(posicion: Vector2i) -> bool:
 	
 	var tipo = pieza_seleccionada["tipo"]
 	var nombre = pieza_seleccionada["nombre"]
+	print("Colocando pieza: ", nombre, " tipo: ", tipo, " en posición: ", posicion)
 	
+	if nombre.is_empty():
+		print("Error: nombre de pieza vacío")
+		cancelar_modo_colocacion()
+		return false
+		
+	if not economia.usar_pieza(nombre):
+		print("No se pudo usar la pieza: ", nombre)
+		return false
 	# se crea la pieza
 	GlobalSignal.crearPieza.emit(posicion, tipo, true)  # true = pieza blanca (jugador)
 	
-	# si lo colocamos, el inventario se resta uno pero en la colocacion se suma uno
-	if economia.has_method("usar_pieza"):
-		economia.usar_pieza(nombre)
-	
 	pieza_colocada.emit(tipo, posicion)
-	cancelar_modo_colocacion()
-	return true
+	pieza_colocada_inventario.emit(nombre)
+	#verificar si quedan mas en el inventario apra seguir colocando
+	var cantidad_restante = economia.inventario_actual.get(nombre, 0)
+	print("Cantidad restante de ", nombre, ": ", cantidad_restante)
+	
+	if cantidad_restante > 0:
+		pieza_seleccionada["cantidad"] = cantidad_restante
+		return true
+	else:
+		# cancelar modo colocación
+		print("No quedan más ", nombre, ", cancelando modo colocación")
+		cancelar_modo_colocacion()
+		return true
 
 
 func contar_piezas_blancas() -> int:

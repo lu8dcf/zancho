@@ -98,25 +98,25 @@ func _on_boton_debilidades_pressed() -> void:
 
 # boton empezar oleada
 func _on_empezar_oleada_pressed() -> void:
-	
 	if !globalJuego.empezo_oleada and empezar_oleada.ver_texto() == "Empezar Oleada " + str(globalJuego.oleada_actual):
 		globalJuego.empezo_oleada = true
 		GlobalSignal.emit_signal("comienzoOleada")
 		economia.monedas_antes_oleada = economia.monedas_actual
 		aparecer_botones_velocidades()
+		Piezas.cancelar_modo_colocacion()
+		Piezas.emit_signal("modo_colocacion_cancelado")
 	
 
 
 # botones de velocidad y pausa
 func _on_boton_pausar_pressed() -> void:
-	
 	GlobalSignal.emit_signal("aceleraMarcaPaso",1)
 	GlobalSignal.emit_signal("controlMarcaPaso",false)
 	print("se toco la pausa")
 
 func _on_boton_play_pressed() -> void:
-	GlobalSignal.emit_signal("controlMarcaPaso",true)
 	GlobalSignal.emit_signal("aceleraMarcaPaso",1)
+	GlobalSignal.emit_signal("controlMarcaPaso",true)
 	print("se toco play")
 
 func _on_boton_acelerar_1_pressed() -> void:
