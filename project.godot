@@ -39,7 +39,6 @@ GlobalJuego="*uid://ddgt0astfx6o4"
 [display]
 
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 
 [file_customization]
 

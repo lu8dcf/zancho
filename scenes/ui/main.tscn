@@ -1,26 +1,29 @@
 [gd_scene format=3 uid="uid://bjbqonwb7pnfh"]
 
 [ext_resource type="Script" uid="uid://by43q6vkxfn8n" path="res://scenes/ui/main.gd" id="1_0ay0p"]
-[ext_resource type="Texture2D" uid="uid://vhos8f4cc3kk" path="res://assets/menu/menu.png" id="2_2p1s2"]
-[ext_resource type="Texture2D" uid="uid://bekhv8mvdp844" path="res://assets/menu/salir.png" id="3_02nsg"]
-[ext_resource type="Texture2D" uid="uid://e0ld2q14lx52" path="res://assets/menu/boton4.png" id="3_7n028"]
+[ext_resource type="Texture2D" uid="uid://bbav04t4gmx14" path="res://assets/menu/menu.png" id="2_2p1s2"]
+[ext_resource type="Texture2D" uid="uid://deam4qk6byf2b" path="res://assets/menu/salir.png" id="3_02nsg"]
+[ext_resource type="Texture2D" uid="uid://d3yi8yemg1njf" path="res://assets/menu/boton4.png" id="3_7n028"]
 [ext_resource type="LabelSettings" uid="uid://c64snqitwil5t" path="res://assets/fuentes/textos.tres" id="4_jvuow"]
 [ext_resource type="PackedScene" uid="uid://dw6tl6131xrlf" path="res://scenes/ui/components/label_grande.tscn" id="4_xbw52"]
-[ext_resource type="Texture2D" uid="uid://cyclvtl3uoh4" path="res://assets/menu/boton5.png" id="6_aain1"]
-[ext_resource type="Texture2D" uid="uid://bdnuhb2lowa5h" path="res://assets/menu/boton2.png" id="7_f8067"]
-[ext_resource type="Texture2D" uid="uid://c5wfquab4f2c2" path="res://assets/menu/boton3.png" id="8_yiij1"]
+[ext_resource type="Texture2D" uid="uid://cae5yijnboeq3" path="res://assets/menu/boton5.png" id="6_aain1"]
+[ext_resource type="Texture2D" uid="uid://b8yo2eqr5vra4" path="res://assets/menu/boton2.png" id="7_f8067"]
+[ext_resource type="Texture2D" uid="uid://d11hm7f8sncqk" path="res://assets/menu/boton3.png" id="8_yiij1"]
 [ext_resource type="Texture2D" uid="uid://couaobhhkqc78" path="res://assets/menu/Boton6.png" id="9_dpyut"]
 [ext_resource type="Script" uid="uid://bjqwvfiaeme7n" path="res://scenes/ui/play.gd" id="9_x68jn"]
-[ext_resource type="Texture2D" uid="uid://1xn3gjlvlk63" path="res://assets/menu/marcos.png" id="10_6ic3k"]
+[ext_resource type="Texture2D" uid="uid://bq4yisvcd1lf" path="res://assets/menu/marcos.png" id="10_6ic3k"]
 [ext_resource type="Texture2D" uid="uid://by412hpyptahi" path="res://assets/menu/Boton7.png" id="10_t1dln"]
 [ext_resource type="Texture2D" uid="uid://d08h2xc0xgcas" path="res://assets/menu/placa.png" id="11_t1dln"]
 [ext_resource type="PackedScene" uid="uid://xv5vf17hra84" path="res://scenes/ui/components/label_peque.tscn" id="13_qmqn8"]
+[ext_resource type="Script" uid="uid://bg8oqunosc1by" path="res://scenes/ui/opciones.gd" id="16_26ekd"]
+[ext_resource type="Script" uid="uid://l85kexbiwntl" path="res://scenes/ui/video.gd" id="17_hfsfw"]
+[ext_resource type="Texture2D" uid="uid://bajf757x4htjn" path="res://assets/menu/separador.png" id="18_hfsfw"]
+[ext_resource type="Script" uid="uid://diwb1fg2k6x1u" path="res://scenes/ui/sonido.gd" id="18_wweun"]
 
 [node name="main" type="Control" unique_id=1651978815]
 layout_mode = 3
-anchor_right = 1.9110001
+anchor_right = 2.0
 anchor_bottom = 2.0
-offset_right = 102.52783
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0ay0p")
@@ -36,18 +39,19 @@ grow_vertical = 2
 size_flags_horizontal = 8
 texture = ExtResource("2_2p1s2")
 expand_mode = 1
-stretch_mode = 6
+stretch_mode = 5
 metadata/_edit_use_anchors_ = true
 
 [node name="TextureButton" type="TextureButton" parent="TextureRect" unique_id=1620588259]
 layout_mode = 0
-offset_left = 91.0
-offset_top = 86.0
-offset_right = 276.0
-offset_bottom = 310.3247
+anchor_left = 0.07899305
+anchor_top = 0.13271604
+anchor_right = 0.23958333
+anchor_bottom = 0.47889614
 texture_hover = ExtResource("8_yiij1")
 ignore_texture_size = true
 stretch_mode = 0
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" parent="TextureRect/TextureButton" unique_id=4063466 instance=ExtResource("4_xbw52")]
 layout_mode = 1
@@ -68,12 +72,13 @@ anchor_left = 0.4184028
 anchor_top = 0.020061728
 anchor_right = 0.6154514
 anchor_bottom = 0.48961467
+offset_left = -1.0
+offset_right = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture_hover = ExtResource("3_7n028")
 ignore_texture_size = true
 stretch_mode = 0
-metadata/_edit_use_anchors_ = true
 
 [node name="Label" parent="TextureRect/play" unique_id=1992725283 instance=ExtResource("4_xbw52")]
 layout_mode = 1
@@ -146,10 +151,11 @@ anchor_left = 0.1545139
 anchor_top = 0.5740741
 anchor_right = 0.30208334
 anchor_bottom = 0.8648951
+grow_horizontal = 2
+grow_vertical = 2
 texture_hover = ExtResource("7_f8067")
 ignore_texture_size = true
 stretch_mode = 0
-metadata/_edit_use_anchors_ = true
 
 [node name="Label" parent="TextureRect/Opciones" unique_id=783391677 instance=ExtResource("4_xbw52")]
 layout_mode = 1
@@ -167,6 +173,7 @@ grow_vertical = 2
 text = "Opciones"
 
 [node name="play" type="MenuBar" parent="." unique_id=1867162247]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3250868
@@ -202,9 +209,10 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -12.0
-offset_right = 0.0
-offset_bottom = 12.0
+offset_left = -1.0
+offset_top = -33.5
+offset_right = -1.0
+offset_bottom = 18.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Nueva Partida"
@@ -225,8 +233,10 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -12.0
-offset_bottom = 12.0
+offset_left = -1.0
+offset_top = -30.5
+offset_right = -1.0
+offset_bottom = 21.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Partida por oleadas"
@@ -251,8 +261,10 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -12.0
-offset_bottom = 12.0
+offset_left = -1.0
+offset_top = -32.5
+offset_right = -1.0
+offset_bottom = 19.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Continuar"
@@ -263,15 +275,11 @@ vertical_alignment = 1
 [node name="opciones" type="MenuBar" parent="." unique_id=1414264697]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.2741509
-anchor_top = 0.010329741
-anchor_right = 0.43083492
-anchor_bottom = 0.4748359
-offset_left = 117.35632
-offset_top = 11.612656
-offset_right = 117.35632
-offset_bottom = 11.61261
-script = ExtResource("9_x68jn")
+anchor_left = 0.3250868
+anchor_top = 0.019290123
+anchor_right = 0.48177084
+anchor_bottom = 0.48379624
+script = ExtResource("16_26ekd")
 metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="opciones" unique_id=1860911061]
@@ -282,9 +290,78 @@ offset_right = 365.0
 offset_bottom = 596.3333
 texture = ExtResource("10_6ic3k")
 expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="nueva_partida" type="TextureButton" parent="opciones" unique_id=1159336766]
-layout_mode = 0
+[node name="boton_sonido" type="TextureButton" parent="opciones" unique_id=107333561]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05263158
+anchor_top = -0.15780732
+anchor_right = 0.05263158
+anchor_bottom = -0.15780732
+offset_left = -38.0
+offset_top = 320.0
+offset_right = 331.3333
+offset_bottom = 385.0
+texture_normal = ExtResource("9_dpyut")
+texture_hover = ExtResource("10_t1dln")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="opciones/boton_sonido" unique_id=975064198]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.029783396
+anchor_top = -0.015384615
+anchor_right = 0.029783396
+anchor_bottom = 0.8153846
+offset_left = 142.0
+offset_top = 1.0
+offset_right = 259.0
+offset_bottom = 53.0
+text = "Sonido
+"
+label_settings = ExtResource("4_jvuow")
+metadata/_edit_use_anchors_ = true
+
+[node name="boton_accecibilidad" type="TextureButton" parent="opciones" unique_id=1538658732]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.034823548
+anchor_top = -1.3618706
+anchor_right = 0.034823515
+anchor_bottom = -1.3618706
+offset_left = -31.5713
+offset_top = 1111.8461
+offset_right = 337.76202
+offset_bottom = 1176.8461
+texture_normal = ExtResource("9_dpyut")
+texture_hover = ExtResource("10_t1dln")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="opciones/boton_accecibilidad" unique_id=144691988]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.03790614
+anchor_top = -0.015384615
+anchor_right = -0.01895307
+anchor_bottom = -0.015384615
+offset_left = 142.0
+offset_top = 1.0
+offset_right = 259.0
+offset_bottom = 53.0
+text = "Accecibilidad"
+label_settings = ExtResource("4_jvuow")
+metadata/_edit_use_anchors_ = true
+
+[node name="boton_video" type="TextureButton" parent="opciones" unique_id=1159336766]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.0016611298
+anchor_bottom = -0.0016611298
 offset_left = -19.0
 offset_top = 96.0
 offset_right = 350.3333
@@ -293,15 +370,55 @@ texture_normal = ExtResource("9_dpyut")
 texture_hover = ExtResource("10_t1dln")
 ignore_texture_size = true
 stretch_mode = 0
+metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="opciones/nueva_partida" unique_id=1923896044]
-layout_mode = 0
-offset_left = 126.0
-offset_top = 17.0
-offset_right = 243.0
-offset_bottom = 48.0
-text = "Nueva partida"
+[node name="Label" type="Label" parent="opciones/boton_video" unique_id=1923896044]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.09476535
+anchor_top = 0.03076923
+anchor_right = 0.09476535
+anchor_bottom = 0.03076923
+offset_left = 122.0
+offset_top = -1.0
+offset_right = 261.0
+offset_bottom = 51.0
+text = "Video"
 label_settings = ExtResource("4_jvuow")
+metadata/_edit_use_anchors_ = true
+
+[node name="volver" type="TextureButton" parent="opciones" unique_id=1610744552]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05263158
+anchor_top = 0.3172758
+anchor_right = 0.05263158
+anchor_bottom = 0.3172758
+offset_left = -38.0
+offset_top = 320.0
+offset_right = 331.3333
+offset_bottom = 385.0
+texture_normal = ExtResource("9_dpyut")
+texture_hover = ExtResource("10_t1dln")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="opciones/volver" unique_id=1146890355]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.029783396
+anchor_top = -0.015384615
+anchor_right = 0.029783396
+anchor_bottom = 0.8153846
+offset_left = 142.0
+offset_top = 1.0
+offset_right = 259.0
+offset_bottom = 53.0
+text = "Volver
+"
+label_settings = ExtResource("4_jvuow")
+metadata/_edit_use_anchors_ = true
 
 [node name="Titulo" type="TextureButton" parent="opciones" unique_id=1396898176]
 layout_mode = 0
@@ -312,18 +429,20 @@ offset_bottom = 95.0
 texture_normal = ExtResource("11_t1dln")
 ignore_texture_size = true
 stretch_mode = 0
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="opciones/Titulo" unique_id=755443889]
 layout_mode = 0
-offset_left = 139.0
-offset_top = 17.0
-offset_right = 297.0
-offset_bottom = 48.0
+offset_left = 144.0
+offset_right = 302.0
+offset_bottom = 52.0
 text = "Opciones"
 label_settings = ExtResource("4_jvuow")
+metadata/_edit_use_anchors_ = true
 
-[node name="continuar" type="TextureButton" parent="opciones" unique_id=568693674]
-layout_mode = 0
+[node name="boton_controles" type="TextureButton" parent="opciones" unique_id=568693674]
+layout_mode = 1
+anchors_preset = -1
 offset_left = -19.0
 offset_top = 160.0
 offset_right = 350.3333
@@ -332,19 +451,216 @@ texture_normal = ExtResource("9_dpyut")
 texture_hover = ExtResource("10_t1dln")
 ignore_texture_size = true
 stretch_mode = 0
+metadata/_edit_use_anchors_ = true
 
-[node name="Label2" type="Label" parent="opciones/continuar" unique_id=1001229942]
-layout_mode = 0
-offset_left = 144.0
-offset_top = 16.0
-offset_right = 261.0
-offset_bottom = 47.0
-text = "Continuar"
+[node name="Label2" type="Label" parent="opciones/boton_controles" unique_id=1001229942]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.008122744
+anchor_right = -0.008122744
+offset_left = 142.0
+offset_top = 1.0
+offset_right = 259.0
+offset_bottom = 53.0
+text = "Controles"
 label_settings = ExtResource("4_jvuow")
+metadata/_edit_use_anchors_ = true
+
+[node name="video_menu" type="MenuBar" parent="opciones" unique_id=689834738]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3250868
+anchor_top = 0.019290123
+anchor_right = 0.48177087
+anchor_bottom = 0.48379624
+script = ExtResource("17_hfsfw")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="opciones/video_menu" unique_id=1160496099]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -11.038258
+anchor_top = 0.0013852037
+anchor_right = -2.781968
+anchor_bottom = 2.0946074
+offset_right = -1.5258789e-05
+texture = ExtResource("10_6ic3k")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="espaciador" type="TextureRect" parent="opciones/video_menu/TextureRect" unique_id=252263945]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04710921
+anchor_top = 0.21013668
+anchor_right = 8.303399
+anchor_bottom = 2.303359
+offset_right = -1.5258789e-05
+scale = Vector2(0.110328235, 0.007244024)
+texture = ExtResource("18_hfsfw")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="espaciador2" type="TextureRect" parent="opciones/video_menu/TextureRect" unique_id=1011155994]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04710921
+anchor_top = 0.29214126
+anchor_right = 8.303399
+anchor_bottom = 2.3853636
+offset_right = -1.5258789e-05
+scale = Vector2(0.110328235, 0.007244024)
+texture = ExtResource("18_hfsfw")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="espaciador3" type="TextureRect" parent="opciones/video_menu/TextureRect" unique_id=1070304057]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04710921
+anchor_top = 0.3741458
+anchor_right = 8.303399
+anchor_bottom = 2.4673681
+offset_right = -1.5258789e-05
+scale = Vector2(0.110328235, 0.007244024)
+texture = ExtResource("18_hfsfw")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="espaciador4" type="TextureRect" parent="opciones/video_menu/TextureRect" unique_id=1136447362]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04710921
+anchor_top = 0.45615035
+anchor_right = 8.303399
+anchor_bottom = 2.5493727
+offset_right = -1.5258789e-05
+scale = Vector2(0.110328235, 0.007244024)
+texture = ExtResource("18_hfsfw")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Titulo" type="TextureButton" parent="opciones/video_menu" unique_id=735699275]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -9.606226
+anchor_top = -0.06656108
+anchor_right = -9.606224
+anchor_bottom = -0.066561066
+offset_left = -19.0
+offset_top = 30.0
+offset_right = 350.3333
+offset_bottom = 95.0
+scale = Vector2(0.94450027, 0.94450027)
+texture_normal = ExtResource("11_t1dln")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="opciones/video_menu/Titulo" unique_id=1658794604]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.029783396
+anchor_right = 0.029783396
+offset_left = 144.0
+offset_right = 302.0
+offset_bottom = 52.0
+text = "Video"
+label_settings = ExtResource("4_jvuow")
+metadata/_edit_use_anchors_ = true
+
+[node name="pantalla" type="Label" parent="opciones/video_menu" unique_id=222722238]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -12.982994
+anchor_top = 0.25886583
+anchor_right = -12.982994
+anchor_bottom = 0.25886583
+offset_left = 144.0
+offset_right = 302.0
+offset_bottom = 52.0
+text = "Pantalla"
+label_settings = ExtResource("4_jvuow")
+metadata/_edit_use_anchors_ = true
+
+[node name="sonido_menu" type="MenuBar" parent="opciones" unique_id=1538344803]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3250868
+anchor_top = 0.019290123
+anchor_right = 0.48177087
+anchor_bottom = 0.48379624
+script = ExtResource("18_wweun")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="opciones/sonido_menu" unique_id=1725610387]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -11.038258
+anchor_top = 0.0013852037
+anchor_right = -2.781968
+anchor_bottom = 2.0946074
+offset_right = -1.5258789e-05
+texture = ExtResource("10_6ic3k")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="controles_menu" type="MenuBar" parent="opciones" unique_id=1123123891]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3250868
+anchor_top = 0.019290123
+anchor_right = 0.48177087
+anchor_bottom = 0.48379624
+script = ExtResource("17_hfsfw")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="opciones/controles_menu" unique_id=2101043724]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -11.038258
+anchor_top = 0.0013852037
+anchor_right = -2.781968
+anchor_bottom = 2.0946074
+offset_right = -1.5258789e-05
+texture = ExtResource("10_6ic3k")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="accecibilidad_menu" type="MenuBar" parent="opciones" unique_id=254047681]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3250868
+anchor_top = 0.019290123
+anchor_right = 0.48177087
+anchor_bottom = 0.48379624
+script = ExtResource("17_hfsfw")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="opciones/accecibilidad_menu" unique_id=1513242181]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -11.038258
+anchor_top = 0.0013852037
+anchor_right = -2.781968
+anchor_bottom = 2.0946074
+offset_right = -1.5258789e-05
+texture = ExtResource("10_6ic3k")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="TextureRect/play" to="." method="_on_texture_button_2_pressed"]
-[connection signal="pressed" from="TextureRect/salir" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="TextureRect/salir" to="." method="_on_salir_pressed"]
+[connection signal="pressed" from="TextureRect/salir" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="TextureRect/Opciones" to="." method="_on_opciones_pressed"]
 [connection signal="pressed" from="play/nueva_partida" to="play" method="_on_nueva_partida_pressed"]
-[connection signal="pressed" from="opciones/nueva_partida" to="opciones" method="_on_nueva_partida_pressed"]
+[connection signal="pressed" from="opciones/boton_sonido" to="." method="_on_sonido_pressed"]
+[connection signal="pressed" from="opciones/boton_accecibilidad" to="opciones" method="_on_boton_accecibilidad_pressed"]
+[connection signal="pressed" from="opciones/boton_video" to="opciones" method="_on_nueva_partida_pressed"]
+[connection signal="pressed" from="opciones/boton_video" to="opciones" method="_on_boton_video_pressed"]
+[connection signal="pressed" from="opciones/volver" to="opciones" method="_on_volver_pressed"]
+[connection signal="pressed" from="opciones/boton_controles" to="opciones" method="_on_boton_controles_pressed"]
