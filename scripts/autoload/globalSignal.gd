@@ -18,6 +18,8 @@ signal aceleraMarcaPaso (multi : int)
 signal comienzoOleada #Senial que debe emitir cuando comienza la oleada
 @warning_ignore("unused_signal")
 signal finalizaOleada(estado: bool) #true gano rey   false muere rey
+@warning_ignore("unused_signal")
+signal nuevaOleada(estado: bool) #true gano rey   false muere rey con diferencia de tiempo 
 
 
 # Secuencia de ataques
