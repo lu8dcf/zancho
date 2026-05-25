@@ -16,7 +16,6 @@ extends Panel
 @onready var boton_torre: TextureButton = $BotonTorre
 @onready var boton_reina: TextureButton = $BotonReina
 
-
 var botones_piezas: Array = []
 var cant_piezas :Array = []
 
@@ -27,113 +26,181 @@ func _ready():
 	configurar_botones()
 	conectar_señales_botones()
 	
+	#conectar señaes de economia
 	economia.pieza_comprada.connect(_actualizar_inventario)
 	economia.pieza_vendida.connect(_actualizar_inventario)
-	
 	economia.inventario_actualizado.connect(_actualizar_inventario)
 	
-	# Actualizar valores iniciales
-	_actualizar_inventario(economia.inventario_actual)
+	if not Piezas.pieza_colocada_inventario.is_connected(_on_pieza_colocada_desde_inventario):
+		Piezas.pieza_colocada_inventario.connect(_on_pieza_colocada_desde_inventario)
+		
+	_actualizar_inventario(null)
+	GlobalSignal.finalizaOleada.connect(esconder_botones)
+	GlobalSignal.comienzoOleada.connect(esconder_botones)
 	
 
-func _process(_delta):
+func esconder_botones():
 	if globalJuego.empezo_oleada:
 		for boton in botones_piezas:
 			boton.disabled = true
 	else: 
 		for boton in botones_piezas:
 			boton.disabled = false
-			
+
 func configurar_botones():
-	# Agregar todos los botones al array
+	# agregar todos los botones al array
 	botones_piezas = [boton_peon, boton_alfil, boton_caballo, boton_torre, boton_reina]
 	cant_piezas = [cant_peon, cant_alfil, cant_caballo, cant_torre, cant_reina]
 	
-	# Asignar metadatos con el nombre de la pieza
-	boton_peon.set_meta("nombre_pieza", "Peon")
-	boton_peon.set_meta("tipo_pieza", 1)
+	var mapeo_piezas = {
+		"Peon": 1,
+		"Alfil": 2,
+		"Torre": 3,
+		"Caballo": 4,
+		"Reina": 5
+	}
+	#asignar metadatos
+	for boton in botones_piezas:
+		var nombre_pieza = _obtener_nombre_desde_boton(boton)
+		if nombre_pieza in mapeo_piezas:
+			boton.set_meta("nombre_pieza", nombre_pieza)
+			boton.set_meta("tipo_pieza", mapeo_piezas[nombre_pieza])
 	
-	boton_alfil.set_meta("nombre_pieza", "Alfil")
-	boton_alfil.set_meta("tipo_pieza", 2)
-	
-	boton_caballo.set_meta("nombre_pieza", "Caballo")
-	boton_caballo.set_meta("tipo_pieza", 4)
-	
-	boton_torre.set_meta("nombre_pieza", "Torre")
-	boton_torre.set_meta("tipo_pieza", 3)
-	
-	boton_reina.set_meta("nombre_pieza", "Reina")
-	boton_reina.set_meta("tipo_pieza", 5)
-	
-		# Asignar metadatos con el nombre de la pieza
-	cant_peon.set_meta("nombre_pieza", "Peon")
-	cant_peon.set_meta("tipo_pieza", 1)
-	
-	cant_alfil.set_meta("nombre_pieza", "Alfil")
-	cant_alfil.set_meta("tipo_pieza", 2)
-	
-	cant_caballo.set_meta("nombre_pieza", "Caballo")
-	cant_caballo.set_meta("tipo_pieza", 4)
-	
-	cant_torre.set_meta("nombre_pieza", "Torre")
-	cant_torre.set_meta("tipo_pieza", 3)
-	
-	cant_reina.set_meta("nombre_pieza", "Reina")
-	cant_reina.set_meta("tipo_pieza", 5)
+	for boton in cant_piezas:
+		var nombre_pieza = _obtener_nombre_desde_boton(boton)
+		if nombre_pieza in mapeo_piezas:
+			boton.set_meta("nombre_pieza", nombre_pieza)
+			boton.set_meta("tipo_pieza", mapeo_piezas[nombre_pieza])
 
+func _obtener_nombre_desde_boton(boton: TextureButton) -> String:
+	var nombre_nodo = boton.name	
+	# mapeo de nombres de nodos a nombres de piezas
+	var mapeo_nodos = {
+		"boton_peon": "Peon",
+		"BotonPeon": "Peon",
+		"cant_peon": "Peon",
+		"CantPeon": "Peon",
+		"boton_alfil": "Alfil",
+		"BotonAlfil": "Alfil",
+		"cant_alfil": "Alfil",
+		"CantAlfil": "Alfil",
+		"boton_torre": "Torre",
+		"BotonTorre": "Torre",
+		"cant_torre": "Torre",
+		"CantTorre": "Torre",
+		"boton_caballo": "Caballo",
+		"BotonCaballo": "Caballo",
+		"cant_caballo": "Caballo",
+		"CantCaballo": "Caballo",
+		"boton_reina": "Reina",
+		"BotonReina": "Reina",
+		"cant_reina": "Reina",
+		"CantReina": "Reina"
+	}
+	#obtener el nombre de la pieza de ese nodo
+	return mapeo_nodos.get(nombre_nodo, "")
 
 func conectar_señales_botones():
 	for boton in botones_piezas:
 		boton.pressed.connect(_on_boton_pieza_presionado.bind(boton))
 
 func _on_boton_pieza_presionado(boton: TextureButton):
-	var nombre_pieza = boton.get_meta("nombre_pieza", "Desconocido")
+	var nombre_pieza = boton.get_meta("nombre_pieza", "")
 	var tipo_pieza = boton.get_meta("tipo_pieza", 0)
 	
-	
-	var pieza_data = _buscar_pieza_en_inventario(nombre_pieza)
-	if pieza_data.is_empty():
-		print("Pieza no encontrada en inventario")
+	# verificar si hay piezas en el inventario
+	var cantidad = economia.inventario_actual.get(nombre_pieza, 0)
+	if cantidad <= 0:
+		print("No hay ", nombre_pieza, " disponibles")
 		return
 	
-	# Manejar la selección
-	pieza_seleccionada_actual = pieza_data
-	
+	pieza_seleccionada_actual = {
+		"nombre": nombre_pieza,
+		"tipo": tipo_pieza,
+		"cantidad": cantidad,
+		"precio": economia.datos_piezas.get(nombre_pieza, {}).get("precio", 0)
+	}
+	# el modo colocacion es cuando se hace click en la pieza del inventario y se intenta colocar,
 	if Piezas.modo_colocacion:
 		Piezas.cancelar_modo_colocacion()
 	
-	if pieza_data.get("cantidad", 0) > 0:
-		Piezas.iniciar_modo_colocacion(tipo_pieza, nombre_pieza)
+	Piezas.iniciar_modo_colocacion(tipo_pieza, nombre_pieza)
+
+#func _on_pieza_colocada(nombre_pieza: String):
+	#print("Pieza colocada: ", nombre_pieza)
+	#
+	## aca se verificar si todavía quedan piezas del mismo tipo
+	#var cantidad_restante = economia.inventario_actual.get(nombre_pieza, 0)
+	##si aun queda se mantiene el modo colocación
+	#if cantidad_restante > 0:
+		#print("Quedan ", cantidad_restante, " piezas. Manteniendo modo colocación.")
+		#
+		#var tipo_pieza = _obtener_tipo_pieza(nombre_pieza)
+		#pieza_seleccionada_actual = {
+			#"nombre": nombre_pieza,
+			#"tipo": tipo_pieza,
+			#"cantidad": cantidad_restante,
+			#"precio": economia.datos_piezas.get(nombre_pieza, {}).get("precio", 0)
+		#}
+		#
+	#else:
+		## si ya no quedan más piezas, se cancela modo colocación
+		#print("No quedan más ", nombre_pieza, ". Cancelando modo colocación.")
+		#Piezas.cancelar_modo_colocacion()
+	#actualizar_textos_botones()
+
+func _on_pieza_colocada_desde_inventario(nombre_pieza: String):	
+	actualizar_textos_botones()
+	#verifica si tiene mas piezas y hace un print( esto ya es innecesario)
+	var cantidad_restante = economia.inventario_actual.get(nombre_pieza, 0)
+	
+	#if cantidad_restante > 0:
+		## Todavía hay piezas, el modo colocación se mantiene automáticamente
+		#print("Quedan ", cantidad_restante, " piezas de ", nombre_pieza)
+	#else:
+		## No quedan piezas, el modo colocación ya se canceló en Piezas
+		#print("No quedan más piezas de ", nombre_pieza)
 		
+func _obtener_tipo_pieza(nombre_pieza: String) -> int:
+	var tipos = {
+		"Peon": 1,
+		"Alfil": 2,
+		"Torre": 3,
+		"Caballo": 4,
+		"Reina": 5
+	}
+	return tipos.get(nombre_pieza, 0)
 
-func _buscar_pieza_en_inventario(nombre_pieza: String) -> Dictionary:
-	for pieza in economia.inventario_actual:
-		if pieza.get("nombre", "") == nombre_pieza:
-			return pieza
-	return {}
 
-func _actualizar_inventario(_pieza_nueva) -> void:
+func _actualizar_inventario(_pieza_nueva = null) -> void:
 	actualizar_textos_botones()
 
-func actualizar_textos_botones():
-	# Actualizar el texto de cada botón según el inventario
+func actualizar_textos_botones(): # se actualizan todos los botones, cada vez que se compra, se vende, se coloca
 	for boton in cant_piezas:
 		var nombre_pieza = boton.get_meta("nombre_pieza", "")
-		var pieza_data = _buscar_pieza_en_inventario(nombre_pieza)
+		if nombre_pieza.is_empty():
+			continue
 		
-		if not pieza_data.is_empty():
-			var cantidad = pieza_data.get("cantidad", 0)
-			var limite = economia.limite_piezas.get(nombre_pieza, 0)
-			
-			# Actualizar texto del botón
-			boton.cambiar_texto(nombre_pieza +" "+ str(cantidad) + "/" + str(limite))
-			
-			# Deshabilitar si no hay piezas
-			boton.disabled = cantidad <= 0
-			boton.modulate = Color(1, 1, 1, 1) if cantidad > 0 else Color(0.5, 0.5, 0.5, 1)
+		# necesitamos los datos directamente del diccionario de economía
+		var cantidad = economia.inventario_actual.get(nombre_pieza, 0)
+		var limite = economia.datos_piezas.get(nombre_pieza, {}).get("limite", 0)
+		
+		boton.cambiar_texto(nombre_pieza + " " + str(cantidad) + "/" + str(limite))
+		
+		# deshabilitar si no hay piezas
+		boton.disabled = cantidad <= 0
+		boton.modulate = Color(1, 1, 1, 1) if cantidad > 0 else Color(0.5, 0.5, 0.5, 1)
+	
+	for boton in botones_piezas:
+		var nombre_pieza = boton.get_meta("nombre_pieza", "")
+		if nombre_pieza.is_empty():
+			continue
+		
+		var cantidad = economia.inventario_actual.get(nombre_pieza, 0)
+		boton.disabled = cantidad <= 0
+		boton.modulate = Color(1, 1, 1, 1) if cantidad > 0 else Color(0.5, 0.5, 0.5, 1)
 
 func _input(event):
-	#print("entra pero: ", Piezas.modo_colocacion)
 	if Piezas.modo_colocacion:
 		if event is InputEventMouseButton:
 			if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:

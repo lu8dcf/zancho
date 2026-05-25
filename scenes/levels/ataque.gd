@@ -99,6 +99,11 @@ func finalizaOleada(estado):
 			economia.piezas_vivas.append(pieza.pieza_tipo) # agrego el numero de pieza
 		economia.piezas_vivas.remove_at(0)  # elimino la primer ubicación que es el rey
 	Piezas.pieza_blanca=[]  # eliminar la lista de instancia
+	# tiempo de espera para que se limpie el ataque
+	
+	await get_tree().create_timer(2.0).timeout
+	
+	GlobalSignal.nuevaOleada.emit(estado)
 	
 func vive(id): # detector de que la pieza sigue en instancia, evitar que ataue al morir
 	for pieza in Piezas.pieza_blanca:

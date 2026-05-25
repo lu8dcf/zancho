@@ -42,7 +42,7 @@ func mostrar_imagen(ganar: int) -> void:
 		
 		globalJuego.siguiente_oleada() # cambia la oleada a la siguiete
 	else:
-		imagen_oleada = perdio
+		imagen_oleada.texture = perdio
 		mostras_desaparecer_imagen()
 		print("perdiste, reiniicando la oleada...")
 		globalJuego.perder_fe(5)

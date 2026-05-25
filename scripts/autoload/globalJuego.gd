@@ -53,6 +53,7 @@ func perder_vida(cantidad: int = 1) -> void:
 func perder_fe(cantidad: int = 1) -> void:
 	fe -= cantidad
 	emit_signal("fe_cambiada", fe)
+	print("cuanta fe queda: ", fe, feMax)
 	
 	if fe <= 0:
 		print("se perdio toda la fe")

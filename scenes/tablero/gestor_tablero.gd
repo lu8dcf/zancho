@@ -87,14 +87,15 @@ func obtener_punto_colocacion_pieza(coordenadas: Vector2i) -> Vector3:
 	return Vector3.ZERO
 
 func mostrar_oleada_actual(gano):
+	GlobalSignal.emit_signal("aceleraMarcaPaso",2)
+	GlobalSignal.emit_signal("controlMarcaPaso",true)
 	if gano:
 		await get_tree().create_timer(2.0).timeout
-		print("se crea un nuevo rey")
 		GlobalSignal.emit_signal("crearPieza",Vector2i(1,14),0,true)
 		economia.obtener_inventario_dinero_despues_oleada(true)
 
 	else:
 		# se crea otro rey aunque haya perdido
 		GlobalSignal.emit_signal("crearPieza",Vector2i(1,14),0,true)
-		economia.obtener_inventario_despues_oleada(false)
+		economia.obtener_inventario_dinero_despues_oleada(false)
 		

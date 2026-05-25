@@ -12,14 +12,16 @@ var candado_cerrado = load("res://assets/ui/candado_cerrado.png")
 var sin_plata  = load("res://assets/ui/moneda.png")
 
 func _ready() -> void:
-	
+	# señales onectadas
 	economia.pieza_vendida.connect(actualizar_pieza)
 	economia.pieza_comprada.connect(actualizar_pieza)
+	GlobalSignal.finalizaOleada.connect(actualizar_pieza)
+	
+	#conectar botones
 	venta.pressed.connect(_on_venta_pressed)
 	compra.pressed.connect(_on_compra_pressed)
 	pieza.mouse_entered.connect(_on_pieza_mouse_entered)
 	pieza.mouse_exited.connect(_on_pieza_mouse_exited)
-	GlobalSignal.finalizaOleada.connect(actualizar_pieza)
 
 	bloqueos.visible = false
 	actualizar_pieza()
@@ -29,66 +31,85 @@ func _ready() -> void:
 
 func _on_venta_pressed() -> void:
 	actualizar_pieza()
-	var nombre_del_panel = name  # Esto devolverá "Peon"
-	var valor = _obtener_valor_reventa(nombre_del_panel)
-	var pieza_venta = economia.obtener_pieza_dicc(nombre_del_panel)
-	economia.vender_pieza(pieza_venta,valor)
+	var nombre_pieza = name  # esto devolverá "Peon"
+	if economia.inventario_actual.get(nombre_pieza, 0) > 0:
+		economia.vender_pieza(nombre_pieza)
+		actualizar_pieza()
 
 
 func _on_compra_pressed() -> void:
 	actualizar_pieza()
-	var nombre_del_panel = name  # Esto devolverá "Peon"
-	var pieza_compra = economia.obtener_pieza_dicc(nombre_del_panel)
-	if economia.monedas_actual >= pieza_compra["precio"]:
-		economia.comprar_pieza(pieza_compra)
+	var nombre_pieza = name  # Esto devolverá "Peon"
+	# intentar comprar esto ahora verifica: monedas y límites
+	if economia.comprar_pieza(nombre_pieza):
+		actualizar_pieza()
+	else:
+		print("No se pudo comprar ", nombre_pieza)
 
 
 func actualizar_pieza(_nada=0):
-	var nombre_del_panel = name  # esto devolverá "Peon"
-	var pieza_actualizar = economia.obtener_pieza_dicc(nombre_del_panel)
-	if globalJuego.empezo_oleada:
-		pieza.disabled = true
-		venta.disabled = true
-		compra.disabled = true
-		bloqueos.visible = true
-		bloqueos.texture_normal = candado_cerrado
+	var nombre_pieza  = name  # esto devolverá "Peon"
+	var datos = economia.obtener_datos_pieza(nombre_pieza)
+	
+	# Si no hay datos, deshabilitar todo
+	if datos.is_empty():
+		deshabilitar_todo("Error")
 		return
-		
-	bloqueos.visible = true
-	bloqueos.texture_normal = candado_abierto
-	if pieza_actualizar["precio"] > economia.monedas_actual:
-		pieza.disabled = true
-		venta.disabled = false
-		compra.disabled = true
+	
+	# Si la oleada empezó, bloquear todo
+	if globalJuego.empezo_oleada:
+		deshabilitar_todo_cerrado()
+		return
+	
+	# Verificar si no hay suficientes monedas
+	if economia.monedas_actual < datos["precio"]:
 		bloqueos.visible = true
 		bloqueos.texture_normal = sin_plata
-		#print("no te alcanza")
+		pieza.disabled = true
+		venta.disabled = inventario_vacio(nombre_pieza)
+		compra.disabled = true
 		return
-	if economia.llego_al_limite(pieza_actualizar["nombre"], 0):
+	
+	# Verificar si llegó al límite
+	if economia.llego_al_limite(nombre_pieza):
 		bloqueos.visible = true
 		bloqueos.texture_normal = null
 		bloqueos.cambiar_texto("MAX")
 		pieza.disabled = true
-		venta.disabled = false
+		venta.disabled = inventario_vacio(nombre_pieza)
 		compra.disabled = true
-		#print(pieza_actualizar["nombre"] + "\n" + str(pieza_actualizar["precio"])+ "\n" + "MAX")
 		return
-	if 	economia.verificar_orden_aparicion(pieza_actualizar["nombre"]) and !globalJuego.debug:
-		pieza.disabled = true
-		venta.disabled = true
-		compra.disabled = true
-		bloqueos.visible = true
-		bloqueos.texture_normal = candado_cerrado
-		#print(pieza_actualizar["nombre"] + "\n" + "DESHABILITADO")
+	
+	# Verificar orden de aparición
+	if economia.verificar_orden_aparicion(nombre_pieza) and !globalJuego.debug:
+		deshabilitar_todo_cerrado()
 		return
+	
+	# Todo bien, habilitar
+	bloqueos.visible = true
+	bloqueos.texture_normal = candado_abierto
 	pieza.disabled = false
-	venta.disabled = false
+	venta.disabled = inventario_vacio(nombre_pieza)
 	compra.disabled = false
 
+func deshabilitar_todo(mensaje: String = ""):
+	pieza.disabled = true
+	venta.disabled = true
+	compra.disabled = true
+	bloqueos.visible = true
+	if mensaje:
+		bloqueos.texture_normal = null
+		bloqueos.cambiar_texto(mensaje)
 
-func _obtener_valor_reventa(nombre_pieza: String) -> int:
-	return economia.valor_reventa.get(nombre_pieza, 0)
+func deshabilitar_todo_cerrado():
+	pieza.disabled = true
+	venta.disabled = true
+	compra.disabled = true
+	bloqueos.visible = true
+	bloqueos.texture_normal = candado_cerrado
 
+func inventario_vacio(nombre_pieza: String) -> bool:
+	return economia.inventario_actual.get(nombre_pieza, 0) <= 0
 
 func _on_pieza_mouse_entered() -> void:
 	actualizar_pieza()

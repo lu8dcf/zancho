@@ -1,112 +1,71 @@
 extends Node
 
-var monedas_actual : int = 0 # monedas inicial para la Oleada 1
+var monedas_actual : int = 1200 # monedas inicial para la Oleada 1
 var monedas_antes_oleada : int = 0
-var limite_piezas = {
-	"Peon": 8,
-	"Torre": 2,
-	"Alfil": 2,
-	"Caballo": 2,
-	"Reina": 1
-}
-var valor_reventa = {
-	"Peon": 50,
-	"Torre": 250,
-	"Alfil": 150,
-	"Caballo": 175,
-	"Reina": 600
-}
+const NOMBRES_PIEZAS = ["Peon", "Torre", "Alfil", "Caballo", "Reina"]
 
-var inventario_actual = [
-	{"nombre": "Peon", "cantidad":0},
-	{"nombre": "Torre", "cantidad":0},
-	{"nombre": "Alfil",  "cantidad":0},
-	{"nombre": "Caballo", "cantidad":0},
-	{"nombre": "Reina", "cantidad":0}
-]
-var piezas_colocadas = [
-	{"nombre": "Peon", "cantidad":0},
-	{"nombre": "Torre", "cantidad":0},
-	{"nombre": "Alfil",  "cantidad":0},
-	{"nombre": "Caballo", "cantidad":0},
-	{"nombre": "Reina", "cantidad":0}
-]
+var inventario_actual: Dictionary = {}
+var piezas_colocadas: Dictionary = {}
+var piezas_vivas: Array = []
 
-var piezas_disponibles_tienda: Array = [
-	{"nombre": "Peon", "precio": 100},
-	{"nombre": "Torre", "precio": 500},
-	{"nombre": "Alfil", "precio": 300},
-	{"nombre": "Caballo", "precio": 350},
-	{"nombre": "Reina", "precio": 1200}
-]
-var orden_aparicion: Dictionary = {
-	"Peon": 1,
-	"Torre": 3,
-	"Alfil": 2,
-	"Caballo": 4,
-	"Reina": 5
+var datos_piezas = {
+	"Peon": {
+		"precio": 100,
+		"valor_reventa": 50,
+		"limite": 8,
+		"orden_aparicion": 1
+	},
+	"Torre": {
+		"precio": 500,
+		"valor_reventa": 250,
+		"limite": 2,
+		"orden_aparicion": 3
+	},
+	"Alfil": {
+		"precio": 300,
+		"valor_reventa": 150,
+		"limite": 2,
+		"orden_aparicion": 2
+	},
+	"Caballo": {
+		"precio": 350,
+		"valor_reventa": 175,
+		"limite": 2,
+		"orden_aparicion": 4
+	},
+	"Reina": {
+		"precio": 1200,
+		"valor_reventa": 600,
+		"limite": 1,
+		"orden_aparicion": 5
+	}
 }
-
-var piezas_vivas = []
 
 # señales para modificar el hud
-signal monedas_cambiadas(nuevas_monedas) # Emite el cambio de moneda
-signal pieza_comprada(nueva_pieza)  # Emite la pieza comprada
-signal inventario_actualizado(inventario) # Emite el inventario actualizado
+signal monedas_cambiadas(nuevas_monedas: int) # Emite el cambio de moneda
+signal pieza_comprada(pieza:Dictionary)  # Emite la pieza comprada
+signal inventario_actualizado(inventario:Dictionary) # Emite el inventario actualizado
 signal pieza_vendida()
+
+func _ready() -> void:
+	reiniciar_variables()
 
 func reiniciar_variables():
 	monedas_actual = 1200 
 	monedas_antes_oleada  = 0
-	limite_piezas = {
-		"Peon": 8,
-		"Torre": 2,
-		"Alfil": 2,
-		"Caballo": 2,
-		"Reina": 1
-	}
-	valor_reventa = {
-		"Peon": 50,
-		"Torre": 250,
-		"Alfil": 150,
-		"Caballo": 175,
-		"Reina": 600
-	}	
-
-	inventario_actual = [
-		{"nombre": "Peon", "cantidad":0},
-		{"nombre": "Torre", "cantidad":0},
-		{"nombre": "Alfil",  "cantidad":0},
-		{"nombre": "Caballo", "cantidad":0},
-		{"nombre": "Reina", "cantidad":0}
-	]
-	piezas_colocadas = [
-		{"nombre": "Peon", "cantidad":0},
-		{"nombre": "Torre", "cantidad":0},
-		{"nombre": "Alfil",  "cantidad":0},
-		{"nombre": "Caballo", "cantidad":0},
-		{"nombre": "Reina", "cantidad":0}
-	]
-
-	piezas_disponibles_tienda = [
-		{"nombre": "Peon", "precio": 100},
-		{"nombre": "Torre", "precio": 500},
-		{"nombre": "Alfil", "precio": 300},
-		{"nombre": "Caballo", "precio": 350},
-		{"nombre": "Reina", "precio": 1200}
-	]
-	orden_aparicion = {
-		"Peon": 1,
-		"Torre": 3,
-		"Alfil": 2,
-		"Caballo": 4,
-		"Reina": 5
-	}
 	
-	piezas_vivas = []
+	# inicializar los diccionarios
+	inicializar_diccionarios()
+	economia.emit_signal("inventario_actualizado")
 
-
-# funciones para modificar
+func inicializar_diccionarios():
+	inventario_actual.clear()
+	piezas_colocadas.clear()
+	
+	for nombre in NOMBRES_PIEZAS:
+		inventario_actual[nombre] = 0
+		piezas_colocadas[nombre] = 0
+		
 func añadir_monedas(cantidad: int) -> void:
 	monedas_actual += cantidad
 	emit_signal("monedas_cambiadas", monedas_actual)  # Notificar al HUD que cambió
@@ -119,89 +78,133 @@ func obtener_inventario_dinero_despues_oleada(gano:bool):
 		monedas_actual = monedas_antes_oleada 
 	unificar_piezas(gano)
 
-func unificar_piezas(gano):
-	var inventario_completo = []
+func unificar_piezas(gano:bool):
+	#se corrigen los nombres a como lo tengo en dicc
+	var piezas_convertidas = corregir_nombres(piezas_vivas) if not piezas_vivas.is_empty() else {}
+	
+	# se crear nuevo inventario completo (las piezas colocadas / o vivas y las que se tenian en el inventario
+	var nuevo_inventario = {}
+	for nombre in NOMBRES_PIEZAS:
+		nuevo_inventario[nombre] = 0
+	# sumar inventario actual
+	for nombre in inventario_actual:
+		nuevo_inventario[nombre] += inventario_actual[nombre]
+	
+	# si gano es igual a TRUE entonces se suman las piezas vivas, sino solo las que se colocó y se vuelve a jugar
 	if gano:
-		for i in inventario_actual:
-			inventario_completo.append(i)
-		#for i in piezas_vivas:
-			#inventario_completo.append(i)
+		for nombre in piezas_convertidas:
+			nuevo_inventario[nombre] += piezas_convertidas[nombre]
 	else:
-		for i in piezas_colocadas:
-			inventario_completo.append(i)
-	piezas_colocadas = [
-		{"nombre": "Peon", "cantidad":0},
-		{"nombre": "Torre", "cantidad":0},
-		{"nombre": "Alfil",  "cantidad":0},
-		{"nombre": "Caballo", "cantidad":0},
-		{"nombre": "Reina", "cantidad":0}
-	]
-		
+		for nombre in piezas_colocadas:
+			nuevo_inventario[nombre] += piezas_colocadas[nombre]
+	
+	# actualizar inventario
+	inventario_actual = nuevo_inventario
+	
+	# reiniciar las variables de piezas colocadas
+	#inicializar_diccionarios()
+	for nombre in NOMBRES_PIEZAS:
+		piezas_colocadas[nombre] = 0
+	economia.emit_signal("inventario_actualizado")
 
-func comprar_pieza(pieza:Dictionary) -> bool:
-	print("comprando")
-	for i in piezas_vivas:
-		print("piezas vivas: ", i)
-	if monedas_actual < pieza["precio"]:
+func corregir_nombres(piezas_vivas:Array) -> Dictionary: # piezas_vivas = [1,2,1]
+	const VALOR_A_NOMBRE = {
+		1: "Peon",
+		2: "Alfil",
+		3: "Torre",
+		4: "Caballo",
+		5: "Reina"
+	}
+	
+	var conteo = {}
+	for nombre in NOMBRES_PIEZAS:
+		conteo[nombre] = 0
+	
+	for valor in piezas_vivas:
+		if valor in VALOR_A_NOMBRE:
+			var nombre = VALOR_A_NOMBRE[valor]
+			conteo[nombre] += 1
+	
+	return conteo
+
+func comprar_pieza(nombre_pieza:String) -> bool:
+	if not nombre_pieza in datos_piezas:
 		return false
 	
-	# Buscar la pieza en el inventario
-	for i in range(inventario_actual.size()):
-		if inventario_actual[i]["nombre"] == pieza["nombre"]:
-			# Verificar si no se ha alcanzado el límite
-			if llego_al_limite(pieza["nombre"], inventario_actual[i]["cantidad"]):
-				return false
-			if !globalJuego.debug:
-				monedas_actual -= pieza["precio"]
-			inventario_actual[i]["cantidad"] += 1
-			
-			monedas_cambiadas.emit(monedas_actual)
-			pieza_comprada.emit(inventario_actual[i])  # Emitir la pieza actualizada
-			inventario_actualizado.emit(inventario_actual)
-			
-			return true
-	return false
-
-func vender_pieza(pieza:Dictionary, valor:int):
+	var datos = datos_piezas[nombre_pieza]
 	
-	for i in range(inventario_actual.size()):
-		if inventario_actual[i]["nombre"] == pieza["nombre"]:
-			
-			if inventario_actual[i]["cantidad"] >0:			
-				inventario_actual[i]["cantidad"] -= 1
-			if !globalJuego.debug:
-				monedas_actual += valor
-			
-				
-			# Emitir señales
-			monedas_cambiadas.emit(monedas_actual)
-			pieza_comprada.emit(inventario_actual[i])  # Reutilizamos esta señal para actualizar UI
-			pieza_vendida.emit()
-
-func usar_pieza(pieza_nombre:String):
-	for i in inventario_actual:
-		if i["nombre"] == pieza_nombre:
-			i["cantidad"] -= 1
-			inventario_actualizado.emit(inventario_actual)
-	for i in piezas_colocadas:
-		if i["nombre"] == pieza_nombre:
-			i["cantidad"] += 1
-	
-	
-			
-
-func llego_al_limite(pieza_nombre:String ,cantidad_piezas:int)-> bool:
-	var total :int =0
-	for i in inventario_actual:
-		if i["nombre"] == pieza_nombre:
-			total += i["cantidad"]
-	for i in piezas_colocadas:
-		if i["nombre"] == pieza_nombre:
-			total += i["cantidad"]
-	if pieza_nombre in limite_piezas:
-		return total >= limite_piezas[pieza_nombre]
-	else:
+	# verificar monedas, si no alcanza vuelve (igualemnte es imposible comprar)
+	if monedas_actual < datos["precio"]:
 		return false
+	
+	# verificar límite, si llega al maximo
+	if llego_al_limite(nombre_pieza):
+		return false
+	
+	# si todo fue bien. se hace la compra
+	if not globalJuego.debug:
+		monedas_actual -= datos["precio"]
+	
+	inventario_actual[nombre_pieza] += 1
+	
+	# se mandan las señales para actualizar el hud
+	monedas_cambiadas.emit(monedas_actual)
+	pieza_comprada.emit({"nombre": nombre_pieza, "cantidad": inventario_actual[nombre_pieza]})
+	inventario_actualizado.emit(inventario_actual)
+	
+	return true
+
+func vender_pieza(nombre_pieza:String) -> bool:
+	if not nombre_pieza in inventario_actual:
+		return false
+	
+	if inventario_actual[nombre_pieza] <= 0:
+		return false
+	
+	var valor_venta = datos_piezas[nombre_pieza]["valor_reventa"]
+	
+	# si todo sale bien se vente la pieza y se suma el valor de la reventa
+	inventario_actual[nombre_pieza] -= 1
+	
+	if not globalJuego.debug:
+		monedas_actual += valor_venta
+	
+	# se mandan las señales para actualizar el hud
+	monedas_cambiadas.emit(monedas_actual)
+	pieza_comprada.emit({"nombre": nombre_pieza, "cantidad": inventario_actual[nombre_pieza]})
+	pieza_vendida.emit()
+	
+	return true
+
+func usar_pieza(nombre_pieza:String):
+	if not nombre_pieza in inventario_actual:
+		return false
+	
+	if inventario_actual[nombre_pieza] <= 0:
+		return false
+	
+	# pasar esa pieza desde el inventario a colocadas
+	inventario_actual[nombre_pieza] -= 1
+	piezas_colocadas[nombre_pieza] += 1
+	
+	inventario_actualizado.emit(inventario_actual)
+	return true
+	
+	
+			
+
+#func llego_al_limite(pieza_nombre:String ,cantidad_piezas:int)-> bool:
+	#var total :int =0
+	#for i in inventario_actual:
+		#if i["nombre"] == pieza_nombre:
+			#total += i["cantidad"]
+	#for i in piezas_colocadas:
+		#if i["nombre"] == pieza_nombre:
+			#total += i["cantidad"]
+	#if pieza_nombre in limite_piezas:
+		#return total >= limite_piezas[pieza_nombre]
+	#else:
+		#return false
 	
 	
 	#if cantidad_piezas == 0:
@@ -209,13 +212,21 @@ func llego_al_limite(pieza_nombre:String ,cantidad_piezas:int)-> bool:
 			#if i["nombre"] == pieza_nombre:
 				#cantidad_piezas = i["cantidad"]
 
+func llego_al_limite(nombre_pieza: String) -> bool:
+	if not nombre_pieza in datos_piezas:
+		return false
+	
+	var total = inventario_actual.get(nombre_pieza, 0) + piezas_colocadas.get(nombre_pieza, 0)
+	# si al sumar todas las piezas, las colocadas y las del inventario y llegan al limite impuesto, entocnes no es posible comprar mas
+	return total >= datos_piezas[nombre_pieza]["limite"]
 
-func verificar_orden_aparicion(pieza_nombre:String)->bool:
-	if pieza_nombre in orden_aparicion:
-		return globalJuego.oleada_actual < orden_aparicion[pieza_nombre]
-	return false
-
-func obtener_pieza_dicc(nombre):
-	for i in piezas_disponibles_tienda:
-		if i["nombre"] == nombre:
-			return i 
+func verificar_orden_aparicion(nombre_pieza: String) -> bool:
+	if not nombre_pieza in datos_piezas:
+		return false
+	# verificar la oleada actual, dependendiendo del numero se van mostrando las piezas
+	return globalJuego.oleada_actual < datos_piezas[nombre_pieza]["orden_aparicion"]
+	
+# funcion para obtener los datos de las piezas
+func obtener_datos_pieza(nombre: String) -> Dictionary:
+	return datos_piezas.get(nombre, {})
+	
