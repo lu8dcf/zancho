@@ -1,20 +1,19 @@
 extends CharacterBody3D
 
-# --- Referencias de Nodos ---
 @onready var camera_3d: Camera3D = $Camera3D
 
-# --- Variables Editables ---
+
 @export_group("Límites de Movimiento")
 @export var limite_y_min: float = 3
 @export var limite_y_max: float = 13
 
 @export_group("Límites de Ángulo")
-@export var limite_mirar_arriba: float = 85.0 # Casi vertical
+@export var limite_mirar_arriba: float = 85.0 
 @export var limite_mirar_abajo: float = -85.0
 
 @export_group("Velocidades")
 @export var rapidez_movimiento: float = 20.0
-@export var rapidez_vuelo: float = 20.0      # velocidad de vueloo
+@export var rapidez_vuelo: float = 20.0     
 @export var sensibilidad_mouse: float = 0.15
 @export var friccion: float = 10.0
 

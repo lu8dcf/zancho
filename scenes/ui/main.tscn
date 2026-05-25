@@ -20,6 +20,8 @@
 [ext_resource type="Texture2D" uid="uid://bajf757x4htjn" path="res://assets/menu/separador.png" id="18_hfsfw"]
 [ext_resource type="Script" uid="uid://diwb1fg2k6x1u" path="res://scenes/ui/sonido.gd" id="18_wweun"]
 
+[sub_resource type="Theme" id="Theme_hfsfw"]
+
 [node name="main" type="Control" unique_id=1651978815]
 layout_mode = 3
 anchor_right = 2.0
@@ -303,6 +305,7 @@ offset_left = -38.0
 offset_top = 320.0
 offset_right = 331.3333
 offset_bottom = 385.0
+theme = SubResource("Theme_hfsfw")
 texture_normal = ExtResource("9_dpyut")
 texture_hover = ExtResource("10_t1dln")
 ignore_texture_size = true
@@ -328,7 +331,7 @@ metadata/_edit_use_anchors_ = true
 [node name="boton_accecibilidad" type="TextureButton" parent="opciones" unique_id=1538658732]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.034823548
+anchor_left = 0.034823515
 anchor_top = -1.3618706
 anchor_right = 0.034823515
 anchor_bottom = -1.3618706
@@ -583,6 +586,51 @@ text = "Pantalla"
 label_settings = ExtResource("4_jvuow")
 metadata/_edit_use_anchors_ = true
 
+[node name="pantalla_lista" type="OptionButton" parent="opciones/video_menu/pantalla" unique_id=1208725293]
+layout_mode = 0
+offset_left = 228.0
+offset_top = 19.0
+offset_right = 408.0
+offset_bottom = 50.0
+selected = 0
+item_count = 3
+popup/item_0/text = "pantalla completa"
+popup/item_0/id = 0
+popup/item_1/text = "ventana"
+popup/item_1/id = 1
+popup/item_2/text = "ventana sin bordes"
+popup/item_2/id = 2
+
+[node name="resolucion" type="Label" parent="opciones/video_menu" unique_id=643609057]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -12.982994
+anchor_top = 0.4448241
+anchor_right = -12.982994
+anchor_bottom = 0.4448241
+offset_left = 144.0
+offset_right = 302.0
+offset_bottom = 52.0
+text = "Resolución
+"
+label_settings = ExtResource("4_jvuow")
+metadata/_edit_use_anchors_ = true
+
+[node name="resolucion_lista" type="OptionButton" parent="opciones/video_menu/resolucion" unique_id=1213238140]
+layout_mode = 0
+offset_left = 228.0
+offset_top = 15.0
+offset_right = 408.0
+offset_bottom = 46.0
+selected = 0
+item_count = 3
+popup/item_0/text = "1280 x 720"
+popup/item_0/id = 0
+popup/item_1/text = "1920 x 1080"
+popup/item_1/id = 1
+popup/item_2/text = "2560 x 1440"
+popup/item_2/id = 2
+
 [node name="sonido_menu" type="MenuBar" parent="opciones" unique_id=1538344803]
 visible = false
 layout_mode = 1
@@ -660,7 +708,7 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="play/nueva_partida" to="play" method="_on_nueva_partida_pressed"]
 [connection signal="pressed" from="opciones/boton_sonido" to="." method="_on_sonido_pressed"]
 [connection signal="pressed" from="opciones/boton_accecibilidad" to="opciones" method="_on_boton_accecibilidad_pressed"]
-[connection signal="pressed" from="opciones/boton_video" to="opciones" method="_on_nueva_partida_pressed"]
 [connection signal="pressed" from="opciones/boton_video" to="opciones" method="_on_boton_video_pressed"]
+[connection signal="pressed" from="opciones/boton_video" to="opciones" method="_on_nueva_partida_pressed"]
 [connection signal="pressed" from="opciones/volver" to="opciones" method="_on_volver_pressed"]
 [connection signal="pressed" from="opciones/boton_controles" to="opciones" method="_on_boton_controles_pressed"]
