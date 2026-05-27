@@ -6,6 +6,9 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0o644"]
 render_priority = 0
 shader = ExtResource("1_mu8et")
+shader_parameter/gradient_low = -1.0
+shader_parameter/gradient_high = 1.0
+shader_parameter/gradient_intensity = 0.5
 shader_parameter/shadow_softness = 0.5
 shader_parameter/light_intensity = 0.6
 shader_parameter/ambient_strength = 0.2
@@ -18,6 +21,9 @@ render_priority = 0
 next_pass = SubResource("ShaderMaterial_0o644")
 shader = ExtResource("1_mu8et")
 shader_parameter/albedo_tex = ExtResource("2_0o644")
+shader_parameter/gradient_low = -1.0
+shader_parameter/gradient_high = 1.0
+shader_parameter/gradient_intensity = 0.5
 shader_parameter/shadow_softness = 0.5
 shader_parameter/light_intensity = 0.6
 shader_parameter/ambient_strength = 0.2
