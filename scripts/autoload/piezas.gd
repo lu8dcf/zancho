@@ -24,12 +24,12 @@ var pieza_flotante : Node3D = null # la pieza que sostiene el mouse
 var modo_colocacion : bool = false # activar o desactivar el modo colcoacion
 
 var piezas_ataques = [
-	{0:[Vector3i(2,0,0),Vector3i(-2,0,0),Vector3i(0,0,2),Vector3i(0,0,-2),Vector3i(1,0,1),Vector3i(1,0,-1),Vector3i(-1,0,-1)]},
+	{0:[Vector3i(-1,0,-1),Vector3i(0,0,-1),Vector3i(1,0,-1),Vector3i(-1,0,0),Vector3i(1,0,0),Vector3i(-1,0,1),Vector3i(0,0,1),Vector3i(1,0,1)]},
 	{1:[Vector3i(0,0,-1),Vector3i(1,0,0)]},
-	{2:[Vector3i(2,0,0),Vector3i(-2,0,0),Vector3i(0,0,2),Vector3i(0,0,-2)]},
-	{3:[Vector3i(1,0,1),Vector3i(1,0,-1),Vector3i(-1,0,1),Vector3i(-1,0,-1)]},
-	{4:[Vector3i(3,0,1),Vector3i(3,0,-1),Vector3i(-3,0,1),Vector3i(-3,0,-1),Vector3i(1,0,3),Vector3i(1,0,-3),Vector3i(-1,0,3),Vector3i(-1,0,-3)]},
-	{5:[Vector3i(-2,0,0),Vector3i(0,0,-2),Vector3i(2,0,0),Vector3i(0,0,2),Vector3i(-1,0,-1),Vector3i(1,0,-1),Vector3i(1,0,1),Vector3i(-1,0,1)]},
+	{2:[Vector3i(-1,0,-1),Vector3i(1,0,-1),Vector3i(-1,0,1),Vector3i(1,0,1)]},
+	{3:[Vector3i(0,0,-1),Vector3i(1,0,0),Vector3i(0,0,1),Vector3i(-1,0,0)]},
+	{4:[Vector3i(-2,0,-1),Vector3i(-1,0,-2),Vector3i(1,0,-2),Vector3i(2,0,-1),Vector3i(2,0,1),Vector3i(1,0,2),Vector3i(-1,0,2),Vector3i(-2,0,1)]},
+	{5:[Vector3i(-1,0,-1),Vector3i(0,0,-1),Vector3i(1,0,-1),Vector3i(-1,0,0),Vector3i(1,0,0),Vector3i(-1,0,1),Vector3i(0,0,1),Vector3i(1,0,1)]},
 ]
 
 
