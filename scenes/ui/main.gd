@@ -5,15 +5,15 @@ extends Control
 @onready var opciones: MenuBar = $opciones
 @onready var video: MenuBar = $opciones/sub_menu_video
 
+
 func _ready():
 	play.visible=false
 	opciones.visible=false
-	
-	#Sonidos.menu(true)
-
-
+	Sonidos.menu(true)
 func _on_texture_button_pressed() -> void:
+	
 	get_tree().quit()
+	
 
 func esconder_todo():
 	play.visible=false

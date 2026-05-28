@@ -1,16 +1,13 @@
 extends Node
 
+# Única línea nueva: variable persistente para que el 'else' no falle nunca
+var musica_menu_global: AudioStreamPlayer = null
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
 	pass
 
-
+func _process(_delta: float) -> void:
+	pass
 
 func death():
 	var death_sound = AudioStreamPlayer3D.new()
@@ -31,31 +28,45 @@ func impacto():
 	death_sound.queue_free()
 	
 func menu(activar: bool):
-	var death_sound: AudioStreamPlayer3D = null
+	var death_sound: AudioStreamPlayer = null 
 	
 	if activar:
 		print ("play")
-		# Crear solo si no existe (pero siempre se reinicia aquí)
-		death_sound = AudioStreamPlayer3D.new()
-		death_sound.stream = preload("res://assets/audio/music/TheTrueStoryofBeelzebub.ogg")
-		add_child(death_sound)
-		
-		death_sound.volume_db = 0 + randf_range(-5, 5)
-		#death_sound.pitch_scale = 0.8 + randf_range(-0.2, 0.2)
-		death_sound.play()
+		if musica_menu_global == null:
+			death_sound = AudioStreamPlayer.new()
+			death_sound.stream = preload("res://assets/audio/music/TheTrueStoryofBeelzebub.ogg")
+			add_child(death_sound)
+			
+	
+			var volumen_objetivo = 0 + randf_range(-5, 5)
+			death_sound.volume_db = -80.0
+			death_sound.play()
+			
+
+			var tween_in = create_tween()
+			tween_in.set_trans(Tween.TRANS_SINE)
+			tween_in.set_ease(Tween.EASE_OUT)
+			tween_in.tween_property(death_sound, "volume_db", volumen_objetivo, 2.0)
+			
+			musica_menu_global = death_sound
 	else:
 		print ("stop")
-		if death_sound != null:
-			await fade_out(death_sound, 1.0)
-			death_sound.stop()
-			death_sound.queue_free()
-			death_sound = null
+		if musica_menu_global != null:
+			var musica_a_borrar = musica_menu_global
+			musica_menu_global = null 
+			
+			await fade_out(musica_a_borrar, 6.0)
+			
+			musica_a_borrar.stop()
+			musica_a_borrar.queue_free()
 
-func fade_out(audio: AudioStreamPlayer3D, duration: float):
+func fade_out(audio: AudioStreamPlayer, duration: float):
 	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_OUT)
+	
 	tween.tween_property(audio, "volume_db", -80.0, duration)
-	tween.set_ease(Tween.EASE_IN)
-	tween.set_trans(Tween.TRANS_QUAD)
+	
 	await tween.finished
 
 func comienzoOleada():

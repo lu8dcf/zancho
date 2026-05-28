@@ -20,6 +20,30 @@
 [ext_resource type="Texture2D" uid="uid://bajf757x4htjn" path="res://assets/menu/separador.png" id="18_hfsfw"]
 [ext_resource type="Script" uid="uid://diwb1fg2k6x1u" path="res://scenes/ui/sonido.gd" id="18_wweun"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hfsfw"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_wweun"]
+colors = PackedColorArray(0.21950102, 0.21950102, 0.21950102, 1, 0.634689, 0.44469106, 0.11951815, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rvf5f"]
+gradient = SubResource("Gradient_wweun")
+fill = 1
+fill_from = Vector2(0.4871795, 0.51282054)
+fill_to = Vector2(0.2905983, 0.73504275)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uk7en"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1000, 250, 1)
+gravity = Vector3(0, 98, 0)
+scale_min = 0.0
+scale_max = 4.0
+scale_over_velocity_max = 5.0
+turbulence_enabled = true
+turbulence_noise_speed_random = 1.37
+
 [sub_resource type="Theme" id="Theme_hfsfw"]
 
 [node name="main" type="Control" unique_id=1651978815]
@@ -43,6 +67,18 @@ texture = ExtResource("2_2p1s2")
 expand_mode = 1
 stretch_mode = 5
 metadata/_edit_use_anchors_ = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="TextureRect" unique_id=1149264635]
+z_index = 12
+material = SubResource("CanvasItemMaterial_hfsfw")
+position = Vector2(640, 4.5474735e-12)
+rotation = -3.1415927
+scale = Vector2(0.70316136, -0.08716147)
+amount = 129
+texture = SubResource("GradientTexture2D_rvf5f")
+lifetime = 122.60000000000001
+preprocess = 1.16
+process_material = SubResource("ParticleProcessMaterial_uk7en")
 
 [node name="TextureButton" type="TextureButton" parent="TextureRect" unique_id=1620588259]
 layout_mode = 0
@@ -706,7 +742,6 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="TextureRect/salir" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="TextureRect/Opciones" to="." method="_on_opciones_pressed"]
 [connection signal="pressed" from="play/nueva_partida" to="play" method="_on_nueva_partida_pressed"]
-[connection signal="pressed" from="opciones/boton_sonido" to="." method="_on_sonido_pressed"]
 [connection signal="pressed" from="opciones/boton_accecibilidad" to="opciones" method="_on_boton_accecibilidad_pressed"]
 [connection signal="pressed" from="opciones/boton_video" to="opciones" method="_on_boton_video_pressed"]
 [connection signal="pressed" from="opciones/boton_video" to="opciones" method="_on_nueva_partida_pressed"]

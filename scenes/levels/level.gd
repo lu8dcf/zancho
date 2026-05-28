@@ -14,7 +14,7 @@ var tipo_pieza=0
 @onready var MarcaPasos = $MarcaPasos
 
 func _ready() -> void:
-	
+	Sonidos.menu(false)
 	var hud = hud_escena.instantiate()
 	add_child(hud)
 
