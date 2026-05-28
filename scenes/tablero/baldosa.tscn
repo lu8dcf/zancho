@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cv1vvwtvmlv0n" path="res://assets/modelos/baldosa1.glb" id="2_ugxcp"]
 [ext_resource type="PackedScene" uid="uid://cxvwh4mp4bg43" path="res://assets/modelos/baldosa2.glb" id="3_e5ivh"]
 [ext_resource type="PackedScene" uid="uid://bnd1ypt7081oc" path="res://assets/modelos/seleccionroja.glb" id="4_e5ivh"]
+[ext_resource type="PackedScene" uid="uid://du48q73arda3h" path="res://assets/modelos/seleccionnaranja.glb" id="4_lwq43"]
 [ext_resource type="PackedScene" uid="uid://dj24eg4u2u2wa" path="res://assets/modelos/seleccion.glb" id="4_ugxcp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lwq43"]
@@ -43,11 +44,13 @@ shape = SubResource("BoxShape3D_n346q")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="IndicadorSeleccion" unique_id=1152541481]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25096738, 0)
+visible = false
 mesh = SubResource("PlaneMesh_ebrun")
 
-[node name="seleccionroja" parent="IndicadorSeleccion" unique_id=490922839 instance=ExtResource("4_e5ivh")]
+[node name="seleccionnaranja" parent="IndicadorSeleccion" unique_id=883970150 instance=ExtResource("4_lwq43")]
+
+[node name="seleccionroja" parent="IndicadorSeleccion" unique_id=1531857071 instance=ExtResource("4_e5ivh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.861033, 0)
-visible = false
 
 [node name="IndicadorInvalido" type="Node3D" parent="." unique_id=1716336308]
 

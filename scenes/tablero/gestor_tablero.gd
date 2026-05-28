@@ -18,6 +18,13 @@ func _ready():
 	add_to_group("gestor_tablero")
 	generar_tablero()	
 	mostrar_oleada_actual(true) # se genera la oleada con el rey
+	conectar_señales_baldosas()
+	
+	var baldosa_rey = obtener_baldosa_en_coordenadas(Vector2i(1, 14))
+	if baldosa_rey:
+		print("Baldosa del rey encontrada en (1,14)")
+		print("Señal conectada: ", baldosa_rey.mostrar_ataques.get_connections().size() > 0)
+		
 	GlobalSignal.finalizaOleada.connect(mostrar_oleada_actual) # si es true quiere decir que gano, si es false se reiniciaa
 
 func generar_tablero():
@@ -54,9 +61,41 @@ func crear_baldosa(columna: int, fila: int) -> BaldosaBase:
 	baldosa.establecer_coordenadas(columna, fila)
 	baldosa.position = Vector3(columna * espaciado_baldosas, 0, fila * espaciado_baldosas)
 	
+	if not baldosa.mostrar_ataques.is_connected(_on_mostrar_ataques):
+		baldosa.mostrar_ataques.connect(_on_mostrar_ataques)
 	add_child(baldosa)
 	return baldosa
 
+func conectar_señales_baldosas():
+	for baldosa in baldosas.values():
+		if not baldosa.mostrar_ataques.is_connected(_on_mostrar_ataques):
+			baldosa.mostrar_ataques.connect(_on_mostrar_ataques)
+
+func _on_mostrar_ataques(coordenadas_base: Vector2i, ataques: Array, mostrar: bool):
+	if mostrar:
+		_resaltar_casillas_ataque(coordenadas_base, ataques)
+	else:
+		_limpiar_resaltado_ataque()
+
+func _resaltar_casillas_ataque(posicion_base: Vector2i, ataques: Array):
+	_limpiar_resaltado_ataque()  # Limpiar anteriores
+	
+	for ataque in ataques:
+		var pos_x = posicion_base.x + ataque.x
+		var pos_y = posicion_base.y + ataque.z
+		
+		# Verificar que la posición está dentro del tablero
+		if pos_x >= 0 and pos_x < tamano_tablero.x and pos_y >= 0 and pos_y < tamano_tablero.y:
+			var baldosa_objetivo = obtener_baldosa_en_coordenadas(Vector2i(pos_x, pos_y))
+			if baldosa_objetivo:
+				baldosa_objetivo.seleccionar(true)  # Usar el indicador existente o crear uno nuevo
+
+# NUEVA FUNCIÓN: Limpiar el resaltado de ataques
+func _limpiar_resaltado_ataque():
+	for baldosa in baldosas.values():
+		if not baldosa.esta_ocupada:  # Solo limpiar baldosas no ocupadas
+			baldosa.seleccionar(false)
+			
 func obtener_baldosa_en_coordenadas(coordenadas: Vector2i) -> BaldosaBase:
 	return baldosas.get(coordenadas, null)
 
@@ -64,10 +103,7 @@ func obtener_baldosa_en_posicion(columna: int, fila: int) -> BaldosaBase:
 	return obtener_baldosa_en_coordenadas(Vector2i(columna, fila))
 
 # revisar esta linea de codigo
-func _en_baldosa_presionada(baldosa: BaldosaBase):
-
-	print("Baldosa presionada en: ", baldosa.obtener_coordenadas())
-	
+func _en_baldosa_presionada(baldosa: BaldosaBase):	
 	if baldosa_seleccionada:
 		baldosa_seleccionada.seleccionar(false)
 		return
@@ -98,4 +134,11 @@ func mostrar_oleada_actual(gano):
 		# se crea otro rey aunque haya perdido
 		GlobalSignal.emit_signal("crearPieza",Vector2i(1,14),0,true)
 		economia.obtener_inventario_dinero_despues_oleada(false)
+		
+	await get_tree().process_frame
+	
+	var baldosa_rey = obtener_baldosa_en_coordenadas(Vector2i(1, 14))
+	if baldosa_rey:
+		baldosa_rey.esta_ocupada = true
+		baldosa_rey.tipo_pieza_actual = 0  # 0 = Rey según tu array
 		

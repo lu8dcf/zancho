@@ -22,7 +22,6 @@ func _ready():
 
 # funciones de señales
 func _on_modo_colocacion_iniciado(tipo: int, nombre: String):
-	print("PiezaFlotante: Modo colocación iniciado - Tipo: ", tipo, " Nombre: ", nombre)
 	tipo_pieza = tipo
 	cargar_escena_pieza(tipo)
 	visible = true

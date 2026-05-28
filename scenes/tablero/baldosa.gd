@@ -8,6 +8,8 @@ signal baldosa_presionada(baldosa)
 signal baldosa_resaltada(baldosa, estado)
 @warning_ignore("unused_signal")
 signal baldosa_click_derecho(baldosa)
+@warning_ignore("unused_signal")
+signal mostrar_ataques(coordenadas_base, ataques, mostrar)
 
 # Enumeración para el tipo de baldosa
 enum TipoBaldosa {
@@ -42,6 +44,9 @@ var mouse_sobre_baltosa : bool = false
 # variables para el sistema de colcocion
 var es_valido_colocar:bool = false
 var modo_colocacion_activo:bool = false
+
+# para saber que tipo de pieza está sobre  la baldosa
+var tipo_pieza_actual: int = -1
 
 func _ready():
 	
@@ -138,6 +143,9 @@ func _al_entrar_mouse():
 	else:
 		if not esta_ocupada:
 			seleccionar(true)
+		else:
+			# si la baldosa esta ocupada, vemos el ataque de esa pieza
+			_mostrar_ataques_pieza()
 
 func _al_salir_mouse():
 	if modo_colocacion_activo:
@@ -145,7 +153,39 @@ func _al_salir_mouse():
 	else:
 		if not esta_ocupada:
 			seleccionar(false)
+		else:
+			#ocultar los ataques de la pieza
+			_ocultar_ataques_piezas()
+			
 
+func _mostrar_ataques_pieza():
+	if not esta_ocupada  or tipo_pieza_actual < 0 :
+		
+		return
+	var ataques_pieza = Piezas.obtener_ataques_pieza(tipo_pieza_actual)
+	
+	if ataques_pieza != null:
+		# Emitir señal para que el gestor del tablero muestre las casillas de ataque
+		mostrar_ataques.emit(coordenadas_tablero, ataques_pieza, true)
+
+func _ocultar_ataques_piezas():
+	if not esta_ocupada or tipo_pieza_actual < 0:
+		return
+	
+	var ataques_pieza = Piezas.obtener_ataques_pieza(tipo_pieza_actual)
+	
+	if ataques_pieza != null:
+		mostrar_ataques.emit(coordenadas_tablero, ataques_pieza, false)
+
+func _obtener_ataques_por_tipo(tipo: int) -> Array:
+	# Buscar en el array global piezas_ataques
+	if not Piezas.has_method("obtener_ataques_pieza"):
+		# Si no existe el método, buscar directamente en la variable
+		for entrada in Piezas.piezas_ataques:
+			if entrada.has(tipo):
+				return entrada[tipo]
+	return []
+	
 func _mostrar_indicador_valido():
 	_ocultar_indicadores_colocacion()
 	if indicador_valido:
@@ -169,6 +209,7 @@ func _on_pieza_colocada(_tipo:int, posicion:Vector2i):
 	if posicion == coordenadas_tablero:
 		esta_ocupada = true
 		modo_colocacion_activo = false
+		tipo_pieza_actual = _tipo
 		es_valido_colocar = false
 		_ocultar_indicadores_colocacion()
 		

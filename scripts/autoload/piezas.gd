@@ -23,6 +23,16 @@ var pieza_seleccionada: Dictionary = {
 var pieza_flotante : Node3D = null # la pieza que sostiene el mouse
 var modo_colocacion : bool = false # activar o desactivar el modo colcoacion
 
+var piezas_ataques = [
+	{0:[Vector3i(2,0,0),Vector3i(-2,0,0),Vector3i(0,0,2),Vector3i(0,0,-2),Vector3i(1,0,1),Vector3i(1,0,-1),Vector3i(-1,0,-1)]},
+	{1:[Vector3i(0,0,-1),Vector3i(1,0,0)]},
+	{2:[Vector3i(2,0,0),Vector3i(-2,0,0),Vector3i(0,0,2),Vector3i(0,0,-2)]},
+	{3:[Vector3i(1,0,1),Vector3i(1,0,-1),Vector3i(-1,0,1),Vector3i(-1,0,-1)]},
+	{4:[Vector3i(3,0,1),Vector3i(3,0,-1),Vector3i(-3,0,1),Vector3i(-3,0,-1),Vector3i(1,0,3),Vector3i(1,0,-3),Vector3i(-1,0,3),Vector3i(-1,0,-3)]},
+	{5:[Vector3i(-2,0,0),Vector3i(0,0,-2),Vector3i(2,0,0),Vector3i(0,0,2),Vector3i(-1,0,-1),Vector3i(1,0,-1),Vector3i(1,0,1),Vector3i(-1,0,1)]},
+]
+
+
 signal modo_colocacion_inicia(tipo_pieza:int,nombre:String)
 signal modo_colocacion_cancelado
 signal pieza_colocada(tipo:int, posicion:Vector2i)
@@ -42,8 +52,13 @@ func reiniciar_variables():
 	modo_colocacion = false
 	
 
+func obtener_ataques_pieza(tipo: int) -> Array:
+	for i in piezas_ataques:
+		if i.has(tipo):
+			return i[tipo]
+	return []
+	
 func iniciar_modo_colocacion(tipo_pieza: int, nombre_pieza: String) -> void:
-	print("Iniciando modo colocación: ", nombre_pieza, " tipo: ", tipo_pieza)
 	modo_colocacion = true
 	pieza_seleccionada = {
 		"tipo": tipo_pieza,
@@ -67,7 +82,6 @@ func colocar_pieza_en_posicion(posicion: Vector2i) -> bool:
 	
 	var tipo = pieza_seleccionada["tipo"]
 	var nombre = pieza_seleccionada["nombre"]
-	print("Colocando pieza: ", nombre, " tipo: ", tipo, " en posición: ", posicion)
 	
 	if nombre.is_empty():
 		print("Error: nombre de pieza vacío")
@@ -84,14 +98,12 @@ func colocar_pieza_en_posicion(posicion: Vector2i) -> bool:
 	pieza_colocada_inventario.emit(nombre)
 	#verificar si quedan mas en el inventario apra seguir colocando
 	var cantidad_restante = economia.inventario_actual.get(nombre, 0)
-	print("Cantidad restante de ", nombre, ": ", cantidad_restante)
 	
 	if cantidad_restante > 0:
 		pieza_seleccionada["cantidad"] = cantidad_restante
 		return true
 	else:
 		# cancelar modo colocación
-		print("No quedan más ", nombre, ", cancelando modo colocación")
 		cancelar_modo_colocacion()
 		return true
 
