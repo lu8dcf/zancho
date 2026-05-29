@@ -24,6 +24,8 @@ func _ready() -> void:
 	GlobalSignal.connect("finalizaOleada",finalizaOleada)
 
 func _on_timer_timeout():
+	if GlobalJuego.juego_pausa:
+		return
 	if murio: # evita que siga atacando la pieza muerta
 		print ("murio")
 		return

@@ -31,6 +31,7 @@ var empezo_oleada = false # si es que empezo la oleada
 var valores_antes_empezar_oleada = []
 
 # señales para modificar el hud
+var juego_pausa = false
 
 # Ataques
 var tiempo_ataque = 2 # timepo de cada ataque
@@ -134,6 +135,7 @@ func reiniciar_variables():
 	Piezas.reiniciar_variables()
 	mapas.reiniciar_variables()
 	economia.reiniciar_variables()
+	juego_pausa = false
 	
 	
 func mensaje(texto):

@@ -112,20 +112,21 @@ func _on_empezar_oleada_pressed() -> void:
 func _on_boton_pausar_pressed() -> void:
 	GlobalSignal.emit_signal("aceleraMarcaPaso",1)
 	GlobalSignal.emit_signal("controlMarcaPaso",false)
-	print("se toco la pausa")
+	GlobalJuego.juego_pausa = true
+	
 
 func _on_boton_play_pressed() -> void:
 	GlobalSignal.emit_signal("aceleraMarcaPaso",1)
 	GlobalSignal.emit_signal("controlMarcaPaso",true)
-	print("se toco play")
+	GlobalJuego.juego_pausa = false
 
 func _on_boton_acelerar_1_pressed() -> void:
 	GlobalSignal.emit_signal("aceleraMarcaPaso",3)
-	print("se acelera un nivel")
+	GlobalJuego.juego_pausa = false
 
 func _on_boton_acelerar_2_pressed() -> void:
 	GlobalSignal.emit_signal("aceleraMarcaPaso",5)
-	print("se acelera dos niveles")
+	GlobalJuego.juego_pausa = false
 	
 
 
