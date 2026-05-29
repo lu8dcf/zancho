@@ -20,6 +20,7 @@ func _ready() -> void:
 	texture_hover = mostrar_hover
 
 func _on_pressed() -> void:
+	Sonidos.boton1()
 
 	mostrando = !mostrando
 	

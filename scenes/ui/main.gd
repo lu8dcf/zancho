@@ -10,9 +10,7 @@ func _ready():
 	play.visible=false
 	opciones.visible=false
 	Sonidos.menu(true)
-func _on_texture_button_pressed() -> void:
-	
-	get_tree().quit()
+
 	
 
 func esconder_todo():
@@ -20,6 +18,7 @@ func esconder_todo():
 	opciones.visible=false
 
 func _on_texture_button_2_pressed() -> void:
+	Sonidos.boton1()
 	esconder_todo()
 	if play.visible == true:
 		play.visible = false
@@ -27,10 +26,12 @@ func _on_texture_button_2_pressed() -> void:
 		play.visible = true
 
 func _on_salir_pressed() -> void:
+	Sonidos.boton1()
 	get_tree().quit()
 
 
 func _on_opciones_pressed() -> void:
+	Sonidos.boton1()
 	esconder_todo()
 	if opciones.visible == true:
 		opciones.visible = false

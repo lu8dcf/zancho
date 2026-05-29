@@ -18,24 +18,28 @@ func esconder_todo() -> void:
 	pass
 	
 func _on_sonido_pressed() -> void:
+	Sonidos.boton1()
 	esconder_todo()
 	sonido_menu.visible=true
 	
 	pass
 
 func _on_boton_video_pressed() -> void:
+	Sonidos.boton1()
 	esconder_todo()
 	video_menu.visible=true
 	pass
 
 
 func _on_boton_accecibilidad_pressed() -> void:
+	Sonidos.boton1()
 	esconder_todo()
 	accecibilidad_menu.visible=true
 	pass # Replace with function body.
 
 
 func _on_volver_pressed() -> void:
+	Sonidos.boton1()
 	esconder_todo()
 	opciones.visible=false
 	
@@ -43,6 +47,7 @@ func _on_volver_pressed() -> void:
 
 
 func _on_boton_controles_pressed() -> void:
+	Sonidos.boton1()
 	esconder_todo()
 	controles_menu.visible=true
 	pass # Replace with function body.

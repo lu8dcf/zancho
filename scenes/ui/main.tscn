@@ -76,7 +76,7 @@ rotation = -3.1415927
 scale = Vector2(0.70316136, -0.08716147)
 amount = 129
 texture = SubResource("GradientTexture2D_rvf5f")
-lifetime = 122.60000000000001
+lifetime = 122.6
 preprocess = 1.16
 process_material = SubResource("ParticleProcessMaterial_uk7en")
 

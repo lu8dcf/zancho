@@ -28,21 +28,19 @@ func impacto():
 	death_sound.queue_free()
 	
 func menu(activar: bool):
-	var death_sound: AudioStreamPlayer = null 
-	
 	if activar:
-		print ("play")
+		print("play")
 		if musica_menu_global == null:
-			death_sound = AudioStreamPlayer.new()
+			var death_sound = AudioStreamPlayer.new()
 			death_sound.stream = preload("res://assets/audio/music/TheTrueStoryofBeelzebub.ogg")
 			add_child(death_sound)
 			
-	
-			var volumen_objetivo = 0 + randf_range(-5, 5)
+		
+			var volumen_objetivo = -20.0 
+			
 			death_sound.volume_db = -80.0
 			death_sound.play()
 			
-
 			var tween_in = create_tween()
 			tween_in.set_trans(Tween.TRANS_SINE)
 			tween_in.set_ease(Tween.EASE_OUT)
@@ -50,7 +48,7 @@ func menu(activar: bool):
 			
 			musica_menu_global = death_sound
 	else:
-		print ("stop")
+		print("stop")
 		if musica_menu_global != null:
 			var musica_a_borrar = musica_menu_global
 			musica_menu_global = null 
@@ -92,3 +90,24 @@ func ataque():
 	oleada_Sound.play()
 	await oleada_Sound.finished
 	oleada_Sound.queue_free()
+
+
+func boton1():
+	var boton_sound = AudioStreamPlayer2D.new()
+	
+	
+	var sonidos = [
+		preload("res://assets/sound/sfx/botones_interfaz/boton1.mp3"),
+		preload("res://assets/sound/sfx/botones_interfaz/boton2.mp3"),
+		preload("res://assets/sound/sfx/botones_interfaz/boton3.mp3"),
+		preload("res://assets/sound/sfx/botones_interfaz/boton4.mp3")
+	]
+	
+	
+	boton_sound.stream = sonidos.pick_random()
+	
+	add_child(boton_sound)
+	boton_sound.play()
+	
+	await boton_sound.finished
+	boton_sound.queue_free()

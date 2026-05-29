@@ -21,3 +21,7 @@ func cambiar_texto(texto_nuevo:String) :
 func ver_texto():
 
 	return label.text
+
+
+func _on_pressed() -> void:
+	Sonidos.boton1()
