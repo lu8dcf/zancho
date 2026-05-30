@@ -77,6 +77,7 @@ max_distance = 5.0
 bus = &"Efectos"
 
 [node name="sangre" parent="." unique_id=1014549941 instance=ExtResource("3_4vkcs")]
+visible = false
 
 [connection signal="barraVida" from="." to="Marker3D/barra" method="_on_pieza_base_barra_vida"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

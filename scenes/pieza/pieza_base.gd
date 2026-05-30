@@ -47,6 +47,7 @@ var secuencia_sfx = randi() % 3# secuencia de sonido
 signal barraVida(porcentual)
 @onready var barra = $Marker3D/barra
 @onready var sangre = $sangre/AnimationPlayer
+@onready var nodo_sangre = $sangre
 
 func _ready():
 	vida_total = Piezas.vida[pieza_tipo]
@@ -189,6 +190,7 @@ func ataque(idA):
 func recibeDanio(idD: int,danio: int):
 	if idD!=id:
 		return
+	nodo_sangre.visible=true
 	vida_actual -= danio
 			
 	match secuencia_sfx:
