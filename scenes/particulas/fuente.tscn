@@ -1,33 +1,38 @@
 [gd_scene format=3 uid="uid://bcxjbd4xw2c7r"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5v5ge"]
-transparency = 1
-albedo_color = Color(0.22473961, 0.45452654, 0.7407201, 1)
+transparency = 2
+alpha_scissor_threshold = 1.0
+alpha_antialiasing_mode = 0
+albedo_color = Color(0.2706665, 0.61592877, 0.83790386, 1)
 
-[sub_resource type="SphereMesh" id="SphereMesh_5v5ge"]
-material = SubResource("StandardMaterial3D_5v5ge")
-radius = 0.25
-height = 0.5
-radial_segments = 6
-rings = 3
+[sub_resource type="Curve" id="Curve_qd60r"]
+_data = [Vector2(0, 0.1211735), 0.0, 0.0, 0, 0, Vector2(0.114285715, 0.41135204), 3.4540603, 3.4540603, 0, 0, Vector2(0.40952381, 1), 0.0, 0.0, 0, 0, Vector2(0.60634923, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.06313777), 0.0, 0.0, 0, 0]
+point_count = 5
 
-[sub_resource type="Curve" id="Curve_5v5ge"]
-_data = [Vector2(0, 0.29776794), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
+[sub_resource type="CurveTexture" id="CurveTexture_7w8b5"]
+curve = SubResource("Curve_qd60r")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2hm1k"]
+direction = Vector3(17, 44.96, 0)
+spread = 0.0
+initial_velocity_min = 6.0
+initial_velocity_max = 6.5
+scale_curve = SubResource("CurveTexture_7w8b5")
+
+[sub_resource type="SphereMesh" id="SphereMesh_64t5i"]
+radius = 0.1
+height = 0.2
+radial_segments = 12
+rings = 8
 
 [node name="Node3D" type="Node3D" unique_id=483354626]
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=351296144]
-amount = 157
-lifetime = 2.9299999999999997
-lifetime_randomness = 0.58
-mesh = SubResource("SphereMesh_5v5ge")
-emission_shape = 1
-emission_sphere_radius = 0.1
-direction = Vector3(17.205, 44.96, 0)
-spread = 1.2
-initial_velocity_min = 5.8
-initial_velocity_max = 6.0
-scale_amount_min = 0.3
-scale_amount_max = 0.6
-scale_amount_curve = SubResource("Curve_5v5ge")
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=439535241]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018994689, 0.016502857, 0.0110116005)
+material_override = SubResource("StandardMaterial3D_5v5ge")
+amount = 61
+lifetime = 1.82
+trail_lifetime = 4.26
+process_material = SubResource("ParticleProcessMaterial_2hm1k")
+draw_pass_1 = SubResource("SphereMesh_64t5i")
