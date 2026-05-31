@@ -506,6 +506,7 @@ label_settings = ExtResource("4_jvuow")
 metadata/_edit_use_anchors_ = true
 
 [node name="video_menu" type="MenuBar" parent="opciones" unique_id=689834738]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3250868
@@ -691,7 +692,6 @@ expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="controles_menu" type="MenuBar" parent="opciones" unique_id=1123123891]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3250868
@@ -712,6 +712,160 @@ offset_right = -1.5258789e-05
 texture = ExtResource("10_6ic3k")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="opciones/controles_menu" unique_id=2066934914]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -11.038258
+anchor_top = 0.0013852037
+anchor_right = -2.781968
+anchor_bottom = 2.0946074
+offset_right = -1.5258789e-05
+texture = ExtResource("10_6ic3k")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="espaciador" type="TextureRect" parent="opciones/controles_menu/TextureRect" unique_id=497689456]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04710921
+anchor_top = 0.21013668
+anchor_right = 8.303399
+anchor_bottom = 2.303359
+offset_right = -1.5258789e-05
+scale = Vector2(0.110328235, 0.007244024)
+texture = ExtResource("18_hfsfw")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="espaciador2" type="TextureRect" parent="opciones/controles_menu/TextureRect" unique_id=1583087280]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04710921
+anchor_top = 0.29214126
+anchor_right = 8.303399
+anchor_bottom = 2.3853636
+offset_right = -1.5258789e-05
+scale = Vector2(0.110328235, 0.007244024)
+texture = ExtResource("18_hfsfw")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="espaciador3" type="TextureRect" parent="opciones/controles_menu/TextureRect" unique_id=996373926]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04710921
+anchor_top = 0.3741458
+anchor_right = 8.303399
+anchor_bottom = 2.4673681
+offset_right = -1.5258789e-05
+scale = Vector2(0.110328235, 0.007244024)
+texture = ExtResource("18_hfsfw")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="espaciador4" type="TextureRect" parent="opciones/controles_menu/TextureRect" unique_id=226666886]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04710921
+anchor_top = 0.45615035
+anchor_right = 8.303399
+anchor_bottom = 2.5493727
+offset_right = -1.5258789e-05
+scale = Vector2(0.110328235, 0.007244024)
+texture = ExtResource("18_hfsfw")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Titulo" type="TextureButton" parent="opciones/controles_menu" unique_id=33110715]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -9.606226
+anchor_top = -0.06656108
+anchor_right = -9.606224
+anchor_bottom = -0.066561066
+offset_left = -19.0
+offset_top = 30.0
+offset_right = 350.3333
+offset_bottom = 95.0
+scale = Vector2(0.94450027, 0.94450027)
+texture_normal = ExtResource("11_t1dln")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="opciones/controles_menu/Titulo" unique_id=408702065]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.005710477
+anchor_top = 0.04886589
+anchor_right = 0.005710477
+anchor_bottom = 0.048865862
+offset_left = 144.0
+offset_right = 302.0
+offset_bottom = 52.0
+text = "Controles"
+label_settings = ExtResource("4_jvuow")
+metadata/_edit_use_anchors_ = true
+
+[node name="pantalla" type="Label" parent="opciones/controles_menu" unique_id=1201730767]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -12.982994
+anchor_top = 0.25886583
+anchor_right = -12.982994
+anchor_bottom = 0.25886583
+offset_left = 144.0
+offset_right = 302.0
+offset_bottom = 52.0
+text = "Pantalla"
+label_settings = ExtResource("4_jvuow")
+metadata/_edit_use_anchors_ = true
+
+[node name="pantalla_lista" type="OptionButton" parent="opciones/controles_menu/pantalla" unique_id=1982143906]
+layout_mode = 0
+offset_left = 228.0
+offset_top = 19.0
+offset_right = 408.0
+offset_bottom = 50.0
+selected = 0
+item_count = 3
+popup/item_0/text = "pantalla completa"
+popup/item_0/id = 0
+popup/item_1/text = "ventana"
+popup/item_1/id = 1
+popup/item_2/text = "ventana sin bordes"
+popup/item_2/id = 2
+
+[node name="resolucion" type="Label" parent="opciones/controles_menu" unique_id=1321237389]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -12.982994
+anchor_top = 0.4448241
+anchor_right = -12.982994
+anchor_bottom = 0.4448241
+offset_left = 144.0
+offset_right = 302.0
+offset_bottom = 52.0
+text = "Resolución
+"
+label_settings = ExtResource("4_jvuow")
+metadata/_edit_use_anchors_ = true
+
+[node name="resolucion_lista" type="OptionButton" parent="opciones/controles_menu/resolucion" unique_id=1105434128]
+layout_mode = 0
+offset_left = 228.0
+offset_top = 15.0
+offset_right = 408.0
+offset_bottom = 46.0
+selected = 0
+item_count = 3
+popup/item_0/text = "1280 x 720"
+popup/item_0/id = 0
+popup/item_1/text = "1920 x 1080"
+popup/item_1/id = 1
+popup/item_2/text = "2560 x 1440"
+popup/item_2/id = 2
 
 [node name="accecibilidad_menu" type="MenuBar" parent="opciones" unique_id=254047681]
 visible = false
@@ -738,12 +892,12 @@ expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="TextureRect/play" to="." method="_on_texture_button_2_pressed"]
-[connection signal="pressed" from="TextureRect/salir" to="." method="_on_salir_pressed"]
 [connection signal="pressed" from="TextureRect/salir" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="TextureRect/salir" to="." method="_on_salir_pressed"]
 [connection signal="pressed" from="TextureRect/Opciones" to="." method="_on_opciones_pressed"]
 [connection signal="pressed" from="play/nueva_partida" to="play" method="_on_nueva_partida_pressed"]
 [connection signal="pressed" from="opciones/boton_accecibilidad" to="opciones" method="_on_boton_accecibilidad_pressed"]
-[connection signal="pressed" from="opciones/boton_video" to="opciones" method="_on_boton_video_pressed"]
 [connection signal="pressed" from="opciones/boton_video" to="opciones" method="_on_nueva_partida_pressed"]
+[connection signal="pressed" from="opciones/boton_video" to="opciones" method="_on_boton_video_pressed"]
 [connection signal="pressed" from="opciones/volver" to="opciones" method="_on_volver_pressed"]
 [connection signal="pressed" from="opciones/boton_controles" to="opciones" method="_on_boton_controles_pressed"]

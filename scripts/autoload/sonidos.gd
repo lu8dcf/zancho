@@ -29,7 +29,7 @@ func impacto():
 	
 func menu(activar: bool):
 	if activar:
-		print("play")
+		
 		if musica_menu_global == null:
 			var death_sound = AudioStreamPlayer.new()
 			death_sound.stream = preload("res://assets/audio/music/TheTrueStoryofBeelzebub.ogg")
@@ -48,7 +48,7 @@ func menu(activar: bool):
 			
 			musica_menu_global = death_sound
 	else:
-		print("stop")
+		
 		if musica_menu_global != null:
 			var musica_a_borrar = musica_menu_global
 			musica_menu_global = null 
