@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://3rr01i83xrlh"]
 
-[ext_resource type="Texture2D" uid="uid://c52wa62yix2kg" path="res://assets/modelos/texturas/cielo.png" id="1_65f8h"]
+[ext_resource type="Texture2D" uid="uid://b8oju5ddteuuf" path="res://assets/modelos/texturas/cielo.png" id="1_65f8h"]
 [ext_resource type="PackedScene" uid="uid://yvwwtxa42htj" path="res://assets/modelos/entorno/entorno_completo.tscn" id="3_65f8h"]
 [ext_resource type="PackedScene" uid="uid://b0uqs330pls56" path="res://scenes/particulas/nubes.tscn" id="3_rawsq"]
 [ext_resource type="PackedScene" uid="uid://b7gb2ttvbq0ot" path="res://scenes/particulas/humo_particula.tscn" id="4_6mpwl"]
@@ -100,4 +100,19 @@ shadow_opacity = 0.65
 shadow_blur = 10.0
 
 [node name="Node3D" parent="." unique_id=483354626 instance=ExtResource("4_rawsq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.666817, 5.161826, -15.875572)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.801588, 5.161826, -15.875572)
+
+[node name="Node3D" parent="Node3D" unique_id=1496354591 instance=ExtResource("4_rawsq")]
+transform = Transform3D(0.42114663, 0, -0.90699255, 0, 1, 0, 0.90699255, 0, 0.42114663, -0.7409897, 0.14180326, 1.5153112)
+
+[node name="Node3D" parent="Node3D/Node3D" unique_id=172915497 instance=ExtResource("4_rawsq")]
+transform = Transform3D(0.6493819, 0, -0.76046276, 0, 1, 0, 0.76046276, 0, 0.6493819, -0.7409897, 0.14180326, 1.5153093)
+
+[node name="Node3D" parent="Node3D/Node3D/Node3D" unique_id=387525698 instance=ExtResource("4_rawsq")]
+transform = Transform3D(0.23578677, 0, -0.9718051, 0, 1, 0, 0.9718051, 0, 0.23578677, -1.0360003, 0.15632963, 1.4648094)
+
+[node name="Node3D" parent="Node3D/Node3D/Node3D/Node3D" unique_id=96317796 instance=ExtResource("4_rawsq")]
+transform = Transform3D(0.6493819, 0, -0.76046276, 0, 1, 0, 0.76046276, 0, 0.6493819, -0.7409897, 0.14180326, 1.5153093)
+
+[node name="Node3D" parent="Node3D/Node3D/Node3D/Node3D/Node3D" unique_id=1663974552 instance=ExtResource("4_rawsq")]
+transform = Transform3D(0.6493819, 0, -0.76046276, 0, 1, 0, 0.76046276, 0, 0.6493819, -0.7409897, 0.14180326, 1.5153093)
