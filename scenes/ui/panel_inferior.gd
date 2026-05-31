@@ -152,7 +152,7 @@ func _on_boton_pieza_presionado(boton: TextureButton):
 func _on_pieza_colocada_desde_inventario(nombre_pieza: String):	
 	actualizar_textos_botones()
 	#verifica si tiene mas piezas y hace un print( esto ya es innecesario)
-	var cantidad_restante = economia.inventario_actual.get(nombre_pieza, 0)
+	#var cantidad_restante = economia.inventario_actual.get(nombre_pieza, 0)
 	
 	#if cantidad_restante > 0:
 		## Todavía hay piezas, el modo colocación se mantiene automáticamente

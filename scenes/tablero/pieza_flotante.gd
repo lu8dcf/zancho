@@ -21,7 +21,7 @@ func _ready():
 	visible = false
 
 # funciones de señales
-func _on_modo_colocacion_iniciado(tipo: int, nombre: String):
+func _on_modo_colocacion_iniciado(tipo: int, _nombre: String):
 	tipo_pieza = tipo
 	cargar_escena_pieza(tipo)
 	visible = true

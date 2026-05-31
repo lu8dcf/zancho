@@ -177,13 +177,13 @@ func _ocultar_ataques_piezas():
 	if ataques_pieza != null:
 		mostrar_ataques.emit(coordenadas_tablero, ataques_pieza, false)
 
-func _obtener_ataques_por_tipo(tipo: int) -> Array:
+func _obtener_ataques_por_tipo(tipo_B: int) -> Array:
 	# Buscar en el array global piezas_ataques
 	if not Piezas.has_method("obtener_ataques_pieza"):
 		# Si no existe el método, buscar directamente en la variable
 		for entrada in Piezas.piezas_ataques:
-			if entrada.has(tipo):
-				return entrada[tipo]
+			if entrada.has(tipo_B):
+				return entrada[tipo_B]
 	return []
 	
 func _mostrar_indicador_valido():

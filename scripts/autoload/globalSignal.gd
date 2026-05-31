@@ -33,3 +33,9 @@ signal piezaAtaca(id: int)
 signal piezaRecibeDanio(id: int,danio: int)
 @warning_ignore("unused_signal")
 signal piezaMuere(id: int)
+
+# Acciones del jugador
+@warning_ignore("unused_signal")
+signal overPieza(activo:bool, tipo: int,posicion: Vector3i)
+@warning_ignore("unused_signal")
+signal clickReina()

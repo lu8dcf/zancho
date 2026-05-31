@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bhf6bbh6v0u5w"]
 
-[ext_resource type="Script" uid="uid://d0jxjja6eu1d6" path="res://scenes/pieza/vida.gd" id="1_h1kns"]
+[ext_resource type="Script" path="res://scenes/pieza/vida.gd" id="1_h1kns"]
 [ext_resource type="ArrayMesh" uid="uid://b3rcc8t46o614" path="res://assets/modelos/objetos/vidaverde.obj" id="1_qq6xa"]
 [ext_resource type="ArrayMesh" uid="uid://ouldkcxqapn3" path="res://assets/modelos/objetos/vidaroja.obj" id="2_h1kns"]
 

@@ -15,5 +15,5 @@ func _on_body_entered(body: Node3D) -> void:
 		taberna.play()
 
 
-func _on_body_exited(body: Node3D) -> void:
+func _on_body_exited(_body: Node3D) -> void:
 	taberna.stop()
