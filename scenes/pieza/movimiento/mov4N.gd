@@ -70,7 +70,7 @@ func realizar_salto_parabolico(cambio: Vector3):
 	tween_actual.tween_method(actualizar_altura_parabolica, 0.0, 1.0, duracion_salto)
 	
 	# 3. Efecto de rotación durante el salto
-	tween_actual.tween_method(actualizar_rotacion_salto, 0.0, 360.0, duracion_salto)
+	#tween_actual.tween_method(actualizar_rotacion_salto, 45.0, 45.0, duracion_salto)
 	
 	# 4. Escala durante el salto (opcional)
 	tween_actual.tween_method(actualizar_escala_salto, 1.0, 1.2, duracion_salto * 0.5)
@@ -149,8 +149,8 @@ func cambio_estado(cambio):
 		7: # izquierda 1
 			direccion = Vector3i(-2, 0, -1)
 			if pieza and pieza.has_method("giro"):
-				pieza.giro(-90)
+				pieza.giro(-45)
 		8: # izquierda 2
 			direccion = Vector3i(-1, 0, -2)
 			if pieza and pieza.has_method("giro"):
-				pieza.giro(-90)
+				pieza.giro(-45)
