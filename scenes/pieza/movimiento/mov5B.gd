@@ -12,6 +12,15 @@ const DIRECCIONES = [ #Son las 8 direccions qque tiene a su alrededor
 	Vector3i(-1,0,-1), Vector3i(1,0,-1)
 ]
 
+enum Estado {
+	INACTIVA,
+	ESPERANDO_DESTINO,
+	MOVIENDO
+	}
+
+var estado = Estado.INACTIVA
+
+
 var fin = null
 var tiene_objetivo := false
 var en_movimiento := false
@@ -30,16 +39,21 @@ func _ready():
 	# Conectar señal después de que la pieza esté lista
 	await pieza.ready
 	GlobalSignal.connect("marcaPaso", puedoAvanzar)
+	GlobalSignal.connect("clickReina",ReinaSeleccionada)
 
 func _input(event):
+	if (estado != Estado.ESPERANDO_DESTINO):
+		return
 	if event is InputEventMouseButton and event.pressed: #revisar esto para que solo ande
 		if event.button_index == MOUSE_BUTTON_LEFT: #solo ocn el mouse izquierdo
 			fin = obtengo_posicion_baldosa()   #con click izqui	rdo
-			#if(fin == null):
-				#fin = calculoPosActual()
 			tiene_objetivo = true #tiene un punto donde ir, es fin
-			
+			estado = Estado.MOVIENDO
 
+func ReinaSeleccionada():
+	estado = Estado.ESPERANDO_DESTINO
+	
+	
 func puedoAvanzar(): #funcion que se sincroniza con el marcapaso, veo si tengo objetivo
 	if (tiene_objetivo and fin != null):
 		avanzoEnTiempo(fin)
@@ -50,6 +64,8 @@ func avanzoEnTiempo(fin : Vector3i):
 	var posActual = calculoPosActual()
 	if(posActual != fin): #si aun no llegue al objetivo, repito
 		analizar_siguientePaso(posActual, fin)
+	else:
+		estado = Estado.INACTIVA
 
 func calculoPosActual() -> Vector3i:
 	var actual = Vector3i(
@@ -78,6 +94,7 @@ func analizar_siguientePaso(inicio: Vector3i, fin: Vector3i): #
 		moverPaso(mejor_vecino) #avanzo a la mejor posicion
 	else:
 		moverPaso(calculoPosActual())
+		estado = Estado.INACTIVA
 
 func moverPaso(destino:Vector3i): #desplazo la pieza a la sieguiente
 	if (en_movimiento):
@@ -104,8 +121,8 @@ func es_valido(pos: Vector3i) -> bool: #me aseguro que se pueda usar la baldosa
 		return false
 	if globalJuego.verifica_obstaculos(pos2d)==false:
 		return false
-	#if globalJuego.verifica_piezas(pos2d)==false:
-	#	return false
+	if globalJuego.verifica_piezas(pos2d)==false:
+		return false
 	return true
 
 func obtengo_posicion_baldosa() -> Vector3:
