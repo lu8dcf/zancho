@@ -8,7 +8,9 @@ func _ready():
 	if parent_area is Area3D:
 		parent_area.body_entered.connect(_on_body_entered)
 		#parent_area.area_entered.connect(_on_area_entered)
-
+	# Conectar con la señal marcapaso para inhabilitar la interaccion de ataque cuando estan en movimiento
+	GlobalSignal.connect("marcaPaso",marcaPaso)
+	
 func _on_body_entered(body: Node):
 	if body is PiezaBase:
 		manejar_ataque(body)
@@ -31,3 +33,8 @@ func manejar_ataque(body):
 	GlobalSignal.ataque.emit(pieza_base.id,body.id,pieza_base.position,body.position,pieza_base.pieza_tipo,body.pieza_tipo)
 	#print("⚔️ Ataque"," yo ",pieza_base.pieza_tipo," ",pieza_base.id," ata ",body.id," ", round(body.position/pieza_base.espaciado))
 		#pieza.recibir_ataque(atacante_tipo, get_meta("origen"))
+
+func marcaPaso():
+	self.disabled = true
+	await get_tree().create_timer(0.5).timeout
+	self.disabled = false

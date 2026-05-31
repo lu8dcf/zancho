@@ -255,7 +255,7 @@ func animacion_muerte():
 func finalizaOleada(_estado):
 	queue_free()
 
-func giro_remoto(pieza_id,angulo):
+func giro_remoto(pieza_id,angulo): # angulo en radianes
 	if id!=pieza_id:
 		return
 	
@@ -295,7 +295,7 @@ func _al_salir_mouse():
 	GlobalSignal.overPieza.emit(false,pieza_tipo,round(global_position/espaciado))
 	
 #click sobre la pieza emn esrte caso busca la reina blanca	
-func _al_evento_input(viewport, event, shape_idx,a,b):
+func _al_evento_input(_viewport, event, _shape_idx,_a,_b):
 	# Detectar CLIC IZQUIERDO
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:  # Cuando se presiona el botón

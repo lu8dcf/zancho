@@ -21,6 +21,7 @@ func _ready():
 	call_deferred("configurar_ataque")
 	
 	
+	
 func limpiar_ataques_existentes():
 	for child in owner.area_ataque.get_children():
 		if child is CollisionShape3D:
@@ -51,7 +52,11 @@ func crear_attack_shape(posicion: Vector3):
 		
 	# Agregar un script de detección al área 
 	shape.set_script(preload("res://scenes/pieza/ataque/detector_ataque.gd"))
-	
+	shape.disabled = true
 	 #  añadir al árbol
 	owner.area_ataque.add_child(shape)
+	# Habilitar después de 0.5 segundos
 	
+	
+
+			
