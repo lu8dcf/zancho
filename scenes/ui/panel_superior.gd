@@ -61,7 +61,7 @@ func _actualizar_oleada(nueva_oleada: int) -> void:
 	empezar_oleada.cambiar_texto("Empezar Oleada " + str(nueva_oleada))
 	#oleada_label.text = " OLEADA " + str(nueva_oleada)
 	
-func finaliza_oleada(valor):
+func finaliza_oleada(_valor):
 	desaparecer_botones_velocidades()
 
 func _on_boton_menu_pressed() -> void:

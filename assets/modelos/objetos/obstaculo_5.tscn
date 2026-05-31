@@ -5,5 +5,5 @@
 
 [node name="obstaculo5" unique_id=721840771 instance=ExtResource("1_fbixm")]
 
-[node name="Cubo_017" parent="." index="0" unique_id=150770952]
+[node name="Cubo_017" parent="." index="0" unique_id=785456104]
 material_override = ExtResource("2_mjc4e")

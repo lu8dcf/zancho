@@ -107,7 +107,7 @@ func unificar_piezas(gano:bool):
 		piezas_colocadas[nombre] = 0
 	economia.emit_signal("inventario_actualizado")
 
-func corregir_nombres(piezas_vivas:Array) -> Dictionary: # piezas_vivas = [1,2,1]
+func corregir_nombres(piezasVivas:Array) -> Dictionary: # piezas_vivas = [1,2,1]
 	const VALOR_A_NOMBRE = {
 		1: "Peon",
 		2: "Alfil",
@@ -120,7 +120,7 @@ func corregir_nombres(piezas_vivas:Array) -> Dictionary: # piezas_vivas = [1,2,1
 	for nombre in NOMBRES_PIEZAS:
 		conteo[nombre] = 0
 	
-	for valor in piezas_vivas:
+	for valor in piezasVivas:
 		if valor in VALOR_A_NOMBRE:
 			var nombre = VALOR_A_NOMBRE[valor]
 			conteo[nombre] += 1

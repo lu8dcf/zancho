@@ -34,6 +34,7 @@ var ataque_especifico = preload("res://scenes/pieza/ataque/Ataque.tscn") # defin
 # Referencia a la instancia de la pieza (con AnimationPlayer)
 var instancia_objeto_pieza: Node3D
 var animation_player : AnimationPlayer
+@onready var area_interaccion : Area3D = $AreaInteraccion
 
 
 # Variables de estado
@@ -70,6 +71,7 @@ func _ready():
 	cargar_ataque() # Scrip de zona de ataque
 	#GlobalSignal.connect("marcaPaso",anima_idle)
 	animacion("Bidle")
+	conectar_señales()
 	
 	# señales de control	
 	GlobalSignal.connect("giro_pieza",giro_remoto)
@@ -105,12 +107,12 @@ func cargar_movimiento(): # agrega el nodo movimiento con el script correspondie
 	movimiento.owner = self  #  Establece el owner manualmente
 
 func cargar_ataque(): # agrega el nodo ataque con el script correspondiente a la pieza
-	var ataque = ataque_especifico.instantiate()
+	var ataque_pieza = ataque_especifico.instantiate()
 	var ataque_script = "res://scenes/pieza/ataque/ataque1.gd"
 	var script = load(ataque_script)
-	ataque.set_script(script)
-	add_child(ataque)
-	ataque.owner = self  #  Establece el owner manualmente
+	ataque_pieza.set_script(script)
+	add_child(ataque_pieza)
+	ataque_pieza.owner = self  #  Establece el owner manualmente
 		
 # colocacion inicial --------------------------------------------------------------------------------		
 func posicionamiento_giro(): # Giro inicial de la pieza an colocarse en el tablero hay que cambiar a radianes
@@ -275,4 +277,31 @@ func giro_rad(angulo):
 	pieza_colocada = true
 	physics_material_override.bounce = 0
 	gravity_scale=1
+	
+#Acciones del jugador	
+func conectar_señales():
+	if area_interaccion:
+		area_interaccion.mouse_entered.connect(_al_entrar_mouse)
+		area_interaccion.mouse_exited.connect(_al_salir_mouse)
+		# CLIC DEL MOUSE (input_event)
+		area_interaccion.input_event.connect(_al_evento_input)
+		
+# Over sobre la pieza
+func _al_entrar_mouse():
+	GlobalSignal.overPieza.emit(true,pieza_tipo,round(global_position/espaciado))
+	
+#salir del over
+func _al_salir_mouse():
+	GlobalSignal.overPieza.emit(false,pieza_tipo,round(global_position/espaciado))
+	
+#click sobre la pieza emn esrte caso busca la reina blanca	
+func _al_evento_input(viewport, event, shape_idx,a,b):
+	# Detectar CLIC IZQUIERDO
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:  # Cuando se presiona el botón
+			if pieza_tipo==5 and pieza_blanca==true:
+				GlobalSignal.clickReina.emit()
+				
+				#print("CLIC IZQUIERDO detectado en el Area2D ",pieza_tipo )
+			
 	
