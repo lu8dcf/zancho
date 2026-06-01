@@ -29,16 +29,21 @@ var ataque_especifico = preload("res://scenes/pieza/ataque/Ataque.tscn") # defin
 
 # Contenedor par acargar escena del modelo
 @onready var contenedor_movimiento : Node3D = $ContenedorMovimiento # contenedor modelo imagen y funciones
-@onready var contenedor_ataque : Node3D = $ContenedorMovimiento # contenedor modelo imagen y funciones
+@onready var contenedor_ataque : Node3D = $ContenedorAtaque # contenedor modelo imagen y funciones
+@onready var contenedor_modelo : Node3D = $ContenedorModelo # contenedor modelo imagen y funciones
 
 # Referencia a la instancia de la pieza (con AnimationPlayer)
 var instancia_objeto_pieza: Node3D
 var animation_player : AnimationPlayer
 @onready var area_interaccion : Area3D = $AreaInteraccion
 
-
+# modelo
+var modelo_glb  = "res://assets/modelos/pieza_generica/pieza"
+var modelo_escena : PackedScene
+var material_muerte = load("res://assets/modelos/texturas/material_muerte.tres")
+var material_pieza : ShaderMaterial
+var circulo_mesh : MeshInstance3D
 # Variables de estado
-
 var color="N"
 var pieza_colocada=false
 var pieza : Resource
@@ -54,6 +59,9 @@ func _ready():
 	vida_total = Piezas.vida[pieza_tipo]
 	vida_actual = vida_total
 	
+	
+	cargar_modelo() # el modelo con la textura de la pieza
+	
 	if pieza_blanca: color="B" 	
 	
 	pieza = load("res://scripts/resource/pieza"+ str(pieza_tipo) + color +".tres")
@@ -64,7 +72,7 @@ func _ready():
 	physics_material_override.bounce =.3
 	gravity_scale = 2.0
 	
-	cargar_objeto() # Asigna el modelo y objero con sus animaciones			
+	#cargar_objeto() # Asigna el modelo y objero con sus animaciones			
 	posicionamiento_giro() # gira la pieza a su posicion en grados
 	
 	cargar_movimiento() # Script de movimiento y estados
@@ -78,6 +86,41 @@ func _ready():
 	GlobalSignal.connect("piezaAtaca",ataque)
 	GlobalSignal.connect("piezaRecibeDanio",recibeDanio)
 	GlobalSignal.connect("finalizaOleada",finalizaOleada)
+	
+func cargar_modelo():
+	# modelo de la escena
+	modelo_glb = modelo_glb + str(pieza_tipo) + ".glb"
+	modelo_escena = load(modelo_glb)
+	instancia_objeto_pieza = modelo_escena.instantiate()
+	contenedor_movimiento.add_child(instancia_objeto_pieza)
+	# Buscar el AnimationPlayer dentro de esta instancia
+	animation_player = _find_animation_player(instancia_objeto_pieza)
+	if pieza_blanca:
+		material_pieza = load ("res://assets/modelos/texturas/material_buenos.tres")
+	else:
+		material_pieza = load ("res://assets/modelos/texturas/material_malos.tres")
+	var mat_unico = material_pieza.duplicate(true) 
+	
+	
+	match pieza_tipo: 
+		0: 
+			circulo_mesh = $"ContenedorMovimiento/pieza0/Esqueleto_008/Skeleton3D/Círculo_037"
+		1:
+			circulo_mesh = $"ContenedorMovimiento/pieza1/Esqueleto/Skeleton3D/Círculo_001"
+		2:
+			circulo_mesh = $"ContenedorMovimiento/pieza2/Esqueleto_001/Skeleton3D/alfil"
+		3:
+			circulo_mesh = $"ContenedorMovimiento/pieza3/Esqueleto_004/Skeleton3D/Círculo_003"
+		4:
+			circulo_mesh = $"ContenedorMovimiento/pieza4/Esqueleto_002/Skeleton3D/Círculo_007"
+		5:
+			circulo_mesh = $"ContenedorMovimiento/pieza5/Esqueleto_007/Skeleton3D/Círculo_039"
+			
+	circulo_mesh.material_override = mat_unico
+
+# AÑADE ESTAS FUNCIONES DESPUÉS DE cargar_modelo()
+
+
 
 func cargar_objeto():# Instanciar y agregar al contenedor
 	instancia_objeto_pieza = pieza.modelo.instantiate()

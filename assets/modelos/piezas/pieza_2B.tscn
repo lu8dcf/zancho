@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c6ccyopwvkocl"]
 
-[ext_resource type="PackedScene" uid="uid://dvbcy7jk2vuo3" path="res://assets/modelos/piezas/pieza2B.glb" id="1_yp0r7"]
+[ext_resource type="PackedScene" uid="uid://cs1rio81woey7" path="res://assets/modelos/piezas/pieza2B.glb" id="1_yp0r7"]
 [ext_resource type="Material" uid="uid://bo3dgaal0nxtp" path="res://assets/modelos/texturas/material_buenos.tres" id="2_65it0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_65it0"]
@@ -340,7 +340,7 @@ _data = {
 [node name="pieza2B" unique_id=1107394134 instance=ExtResource("1_yp0r7")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 
-[node name="Skeleton3D" parent="Esqueleto_001" parent_id_path=PackedInt32Array(2120645963) index="0" unique_id=1499403415]
+[node name="Skeleton3D" parent="Esqueleto_001" parent_id_path=PackedInt32Array(1902608490) index="0" unique_id=594878214]
 bones/1/rotation = Quaternion(-3.5527105e-15, 1.7763568e-14, -4.038968e-28, 1)
 bones/2/rotation = Quaternion(-0.76347697, -0.07604944, 0.03411561, 0.6404339)
 bones/3/rotation = Quaternion(-0.17683436, -0.33287883, 0.40633422, 0.8323545)
@@ -360,7 +360,7 @@ bones/10/rotation = Quaternion(-3.5527105e-15, 0, -4.038968e-28, 1)
 bones/11/position = Vector3(-0.53248465, 0.84166, 0.026814159)
 bones/11/rotation = Quaternion(0.002201561, 0.9578233, -0.12223369, 0.26005515)
 
-[node name="alfil" parent="Esqueleto_001/Skeleton3D" index="0" unique_id=1759799199]
+[node name="alfil" parent="Esqueleto_001/Skeleton3D" index="0" unique_id=1847047149]
 material_override = ExtResource("2_65it0")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Esqueleto_001/Skeleton3D" index="1" unique_id=1141427468]
@@ -385,5 +385,5 @@ scale_amount_min = 0.0
 scale_amount_max = 0.5
 scale_amount_curve = SubResource("Curve_dorn6")
 
-[node name="AnimationPlayer" parent="." index="1" unique_id=2128741947]
+[node name="AnimationPlayer" parent="." index="1" unique_id=1185174904]
 libraries/ = SubResource("AnimationLibrary_130qa")
