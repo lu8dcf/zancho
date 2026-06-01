@@ -40,7 +40,7 @@ var animation_player : AnimationPlayer
 # modelo
 var modelo_glb  = "res://assets/modelos/pieza_generica/pieza"
 var modelo_escena : PackedScene
-var material_muerte = load("res://assets/modelos/texturas/material_muerte.tres")
+var material_muerte : Resource
 var material_pieza : ShaderMaterial
 var circulo_mesh : MeshInstance3D
 # Variables de estado
@@ -65,7 +65,7 @@ func _ready():
 	if pieza_blanca: color="B" 	
 	
 	pieza = load("res://scripts/resource/pieza"+ str(pieza_tipo) + color +".tres")
-	
+	material_muerte = load("res://assets/modelos/texturas/material_muerte.tres")
 	# Configurar física
 	linear_velocity = Vector3(0, linear_velocity.y, 0)  # que no se mueva a los costados
 	#rebote
@@ -99,7 +99,7 @@ func cargar_modelo():
 		material_pieza = load ("res://assets/modelos/texturas/material_buenos.tres")
 	else:
 		material_pieza = load ("res://assets/modelos/texturas/material_malos.tres")
-	var mat_unico = material_pieza.duplicate(true) 
+	var mat_unico = material_muerte.duplicate(true) 
 	
 	
 	match pieza_tipo: 
@@ -117,9 +117,6 @@ func cargar_modelo():
 			circulo_mesh = $"ContenedorMovimiento/pieza5/Esqueleto_007/Skeleton3D/Círculo_039"
 			
 	circulo_mesh.material_override = mat_unico
-
-# AÑADE ESTAS FUNCIONES DESPUÉS DE cargar_modelo()
-
 
 
 func cargar_objeto():# Instanciar y agregar al contenedor
@@ -263,6 +260,11 @@ func recibeDanio(idD: int,danio: int):
 		die()
 
 func die():
+	# Cambio de la paleta a azul traslucido al morir
+	
+	var mat_unico_muerte = material_muerte.duplicate(true) 
+	circulo_mesh.material_override = mat_unico_muerte
+	
 	GlobalSignal.piezaMuere.emit(id) # aviso que muere
 	# Efectos de muerte
 	Sonidos.death()
