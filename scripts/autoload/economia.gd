@@ -151,7 +151,7 @@ func comprar_pieza(nombre_pieza:String) -> bool:
 	monedas_cambiadas.emit(monedas_actual)
 	pieza_comprada.emit({"nombre": nombre_pieza, "cantidad": inventario_actual[nombre_pieza]})
 	inventario_actualizado.emit(inventario_actual)
-	
+	GlobalSignal.emit.mensaje_tienda(true,nombre_pieza)
 	return true
 
 func vender_pieza(nombre_pieza:String) -> bool:
@@ -173,7 +173,7 @@ func vender_pieza(nombre_pieza:String) -> bool:
 	monedas_cambiadas.emit(monedas_actual)
 	pieza_comprada.emit({"nombre": nombre_pieza, "cantidad": inventario_actual[nombre_pieza]})
 	pieza_vendida.emit()
-	
+	GlobalSignal.emit.mensaje_tienda(false,nombre_pieza)
 	return true
 
 func usar_pieza(nombre_pieza:String):

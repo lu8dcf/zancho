@@ -6,7 +6,6 @@ extends CanvasLayer
 @onready var panel_rey: Panel = $imagenBackInferior/PanelRey
 
 # contenedor de log
-@onready var contenedor_log: PanelContainer = $ContenedorLog
 @onready var log: RichTextLabel = $ContenedorLog/Log
 
 var max_mensajes :int = 50
@@ -31,6 +30,7 @@ func _ready():
 	# ocultar la tienda
 	GlobalSignal.finalizaOleada.connect(mostrar_imagen)
 	GlobalSignal.mensaje_oleada.connect(mensaje_oleada_log)
+	GlobalSignal.mensaje_tienda.connect(mensaje_tienda_log)
 
 func mostrar_todos_paneles():
 	panel_inferior.visible = true
@@ -74,12 +74,28 @@ func _ocultar_imagen() -> void:
 
 # signal mensaje_oleada(empieza:bool,gano:bool) 
 func mensaje_oleada_log(empieza:bool, gano = null):
-	print("llega")
 	var texto_completo = ""
 	var tipo = null
 	if empieza:
 		texto_completo += "Empieza la Oleada "+ str(GlobalJuego.oleada_actual)
-		tipo = 1
+		tipo = 2
+	else:
+		texto_completo += "Terminó la Oleada "+ str(GlobalJuego.oleada_actual)
+		if gano:
+			tipo = 1
+			texto_completo += "¡Ganaste!"
+		else:
+			tipo = 0
+			texto_completo += "¡Perdiste! Tus piezas pierden Fé "
+	actualizar_log(texto_completo, 1)
+			
+			
+func mensaje_tienda_log(compra:bool,nombre_pieza:String):
+	var texto_completo = ""
+	var tipo = null
+	if compra:
+		texto_completo += "Compraste "+ nombre_pieza
+		tipo = 3
 	else:
 		texto_completo += "Terminó la Oleada "+ str(GlobalJuego.oleada_actual)
 		if gano:
@@ -87,9 +103,6 @@ func mensaje_oleada_log(empieza:bool, gano = null):
 		else:
 			texto_completo += "¡Perdiste! Tus piezas pierden Fé "
 	actualizar_log(texto_completo, 1)
-			
-			
-		
 
 func mensaje_ataques():
 	pass

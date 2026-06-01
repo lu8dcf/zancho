@@ -43,3 +43,5 @@ signal clickReina()
 # mensajes para el log
 @warning_ignore("unused_signal")
 signal mensaje_oleada(empieza:bool,gano:bool) 
+@warning_ignore("unused_signal")
+signal mensaje_tienda(compra:bool,pieza:String) # si es true la compra quiere decir que compró una pieza
