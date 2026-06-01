@@ -20,11 +20,6 @@ func _ready():
 	mostrar_oleada_actual(true) # se genera la oleada con el rey
 	conectar_señales_baldosas()
 	
-	var baldosa_rey = obtener_baldosa_en_coordenadas(Vector2i(1, 14))
-	if baldosa_rey:
-		print("Baldosa del rey encontrada en (1,14)")
-		print("Señal conectada: ", baldosa_rey.mostrar_ataques.get_connections().size() > 0)
-		
 	GlobalSignal.finalizaOleada.connect(mostrar_oleada_actual) # si es true quiere decir que gano, si es false se reiniciaa
 
 func generar_tablero():
@@ -79,7 +74,7 @@ func _on_mostrar_ataques(coordenadas_base: Vector2i, ataques: Array, mostrar: bo
 
 func _resaltar_casillas_ataque(posicion_base: Vector2i, ataques: Array):
 	_limpiar_resaltado_ataque()  # Limpiar anteriores
-	
+	print("resaltando")
 	for ataque in ataques:
 		var pos_x = posicion_base.x + ataque.x
 		var pos_y = posicion_base.y + ataque.z

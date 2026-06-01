@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://jamx7xfkycmi" path="res://scenes/ui/hud.gd" id="1_hqnrr"]
 [ext_resource type="Script" uid="uid://d221g40j7vomt" path="res://scenes/ui/panel_superior.gd" id="2_136eg"]
-[ext_resource type="Texture2D" uid="uid://dyypkhbpay64y" path="res://assets/ui/Base.png" id="2_t0png"]
+[ext_resource type="Texture2D" uid="uid://cdhddcfd78vcc" path="res://assets/ui/Base.png" id="2_t0png"]
 [ext_resource type="Script" uid="uid://b07ubchfnu7sg" path="res://scenes/ui/panel_inferior.gd" id="3_8qguk"]
 [ext_resource type="Texture2D" uid="uid://bolj73wq5l2gv" path="res://assets/ui/Base3.png" id="3_qmm8d"]
 [ext_resource type="PackedScene" uid="uid://cr82cvb5b4pj7" path="res://scenes/ui/components/boton_ui.tscn" id="4_4jqwt"]
@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://blwkj1ovpc3jt" path="res://assets/ui/esconder_idle.png" id="5_33vp1"]
 [ext_resource type="Texture2D" uid="uid://3n4g5qn4kguq" path="res://assets/ui/pausa.png" id="5_gonto"]
 [ext_resource type="Texture2D" uid="uid://dfrb6rklnripw" path="res://assets/ui/debil.png" id="5_kicr4"]
-[ext_resource type="Texture2D" uid="uid://b32fuxum0r4oy" path="res://assets/ui/compra.png" id="6_4jqwt"]
+[ext_resource type="Texture2D" uid="uid://cwvpnbwrp4iri" path="res://assets/ui/compra.png" id="6_4jqwt"]
 [ext_resource type="Texture2D" uid="uid://qxw60if2rn4y" path="res://assets/ui/play.png" id="6_cwdlq"]
 [ext_resource type="Texture2D" uid="uid://dvi0oktf1va7f" path="res://assets/ui/camara.png" id="6_mj13f"]
 [ext_resource type="Script" uid="uid://biieex05lqus" path="res://scenes/ui/components/boton_esconder_ui.gd" id="7_4h7mh"]
@@ -23,12 +23,12 @@
 [ext_resource type="Texture2D" uid="uid://cfab8ei6ocjti" path="res://assets/ui/boton_menu_hover.png" id="10_27rlx"]
 [ext_resource type="Texture2D" uid="uid://cm40t88fypt7f" path="res://assets/ui/pausa_pressed.png" id="13_t4m8u"]
 [ext_resource type="Texture2D" uid="uid://bqm8mpiu4cfl" path="res://assets/ui/play_pressed.png" id="15_04enw"]
-[ext_resource type="Script" path="res://scenes/ui/imagen_back_inferior.gd" id="16_27rlx"]
+[ext_resource type="Script" uid="uid://byh4vgo0mtohy" path="res://scenes/ui/imagen_back_inferior.gd" id="16_27rlx"]
 [ext_resource type="Texture2D" uid="uid://cnlel5ai6mxhw" path="res://assets/ui/hover_piezas.png" id="16_b6swc"]
 [ext_resource type="Texture2D" uid="uid://bfpe1q878220w" path="res://assets/ui/avance1.png" id="16_rvhgw"]
 [ext_resource type="Texture2D" uid="uid://bykxrkutkuu6c" path="res://assets/ui/avance1_pressed.png" id="17_sj4ew"]
 [ext_resource type="Texture2D" uid="uid://bdys84xjdyres" path="res://assets/ui/idle_piezas.png" id="17_t0png"]
-[ext_resource type="Script" path="res://scenes/ui/panel_rey.gd" id="18_emer0"]
+[ext_resource type="Script" uid="uid://betryrljwp6w7" path="res://scenes/ui/panel_rey.gd" id="18_emer0"]
 [ext_resource type="Texture2D" uid="uid://b8u6c5gbb0wy" path="res://assets/ui/vida2.png" id="18_vuvg6"]
 [ext_resource type="Texture2D" uid="uid://bn52rgat260xi" path="res://assets/ui/avance2_pressed.png" id="19_83uk5"]
 [ext_resource type="Texture2D" uid="uid://brokn8inr04wm" path="res://assets/ui/vida1.png" id="19_b6swc"]
@@ -781,6 +781,20 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("33_kfdjh")
 expand_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=2072026705]
+anchors_preset = -1
+anchor_top = 0.123
+anchor_right = 0.17400001
+anchor_bottom = 0.296
+offset_left = 8.0
+offset_top = 0.29599762
+offset_right = -8.448013
+offset_bottom = 0.19200134
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer" unique_id=1362907016]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 12
 
 [connection signal="pressed" from="PanelSuperior/botonEsconderSuperior" to="PanelSuperior" method="_on_boton_esconder_superior_pressed"]
 [connection signal="pressed" from="PanelSuperior/empezar_oleada" to="PanelSuperior" method="_on_empezar_oleada_pressed"]
