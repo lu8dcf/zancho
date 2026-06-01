@@ -58,6 +58,7 @@ func _ready():
 	#Piezas.modo_colocacion_inicia.connect(_on_modo_colocacion_iniciado)
 	Piezas.modo_colocacion_cancelado.connect(_on_modo_colocacion_cancelado)
 	Piezas.pieza_colocada.connect(_on_pieza_colocada)
+	GlobalSignal.overPieza.connect(_mostrar_ataques_pieza) # se muestran los rangos de ataque de las piezas
 
 func configurar_colision():
 	if cuerpo_estatico:
@@ -133,19 +134,15 @@ func seleccionar(estado: bool):
 		indicador_invalido.visible = estado
 
 func _al_entrar_mouse():
-	#print("Mouse entrando en baldosa: ", coordenadas_tablero, "modo clocacion activ: ", modo_colocacion_activo, "es valido colocar: ", es_valido_colocar)
 	if modo_colocacion_activo:
 		if es_valido_colocar:
-			_mostrar_indicador_valido()
+			_mostrar_indicador_valido() # verde
 		else:
-			_mostrar_indicador_invalido()
+			_mostrar_indicador_invalido() # rojo invalido
 			
 	else:
 		if not esta_ocupada:
-			seleccionar(true)
-		else:
-			# si la baldosa esta ocupada, vemos el ataque de esa pieza
-			_mostrar_ataques_pieza()
+			seleccionar(true) # seleccion 
 
 func _al_salir_mouse():
 	if modo_colocacion_activo:
@@ -153,38 +150,23 @@ func _al_salir_mouse():
 	else:
 		if not esta_ocupada:
 			seleccionar(false)
-		else:
-			#ocultar los ataques de la pieza
-			_ocultar_ataques_piezas()
-			
-
-func _mostrar_ataques_pieza():
-	if not esta_ocupada  or tipo_pieza_actual < 0 :
 		
-		return
-	var ataques_pieza = Piezas.obtener_ataques_pieza(tipo_pieza_actual)
-	
-	if ataques_pieza != null:
-		# Emitir señal para que el gestor del tablero muestre las casillas de ataque
-		mostrar_ataques.emit(coordenadas_tablero, ataques_pieza, true)
+#signal overPieza(activo:bool, tipo: int,posicion: Vector3i)
+ # si es activo: true tiene el mouse encima y si es false entocnes sale el mouse
+# el tipo es el tipo de pieza
+# y la posicion es donde esta la pieza
 
-func _ocultar_ataques_piezas():
-	if not esta_ocupada or tipo_pieza_actual < 0:
-		return
-	
+func _mostrar_ataques_pieza(mostrar:bool, tipo_pieza_actual:int, posicion:Vector3i ):
 	var ataques_pieza = Piezas.obtener_ataques_pieza(tipo_pieza_actual)
-	
-	if ataques_pieza != null:
-		mostrar_ataques.emit(coordenadas_tablero, ataques_pieza, false)
+	var posicion_transformada: Vector2i = Vector2i(posicion.x, posicion.z)
+	if mostrar:
+		if ataques_pieza != null:
+			# Emitir señal para que el gestor del tablero muestre las casillas de ataque
+			mostrar_ataques.emit(posicion_transformada, ataques_pieza, true)
+	else:
+		if ataques_pieza != null:
+			mostrar_ataques.emit(posicion_transformada, ataques_pieza, false)
 
-func _obtener_ataques_por_tipo(tipo_B: int) -> Array:
-	# Buscar en el array global piezas_ataques
-	if not Piezas.has_method("obtener_ataques_pieza"):
-		# Si no existe el método, buscar directamente en la variable
-		for entrada in Piezas.piezas_ataques:
-			if entrada.has(tipo_B):
-				return entrada[tipo_B]
-	return []
 	
 func _mostrar_indicador_valido():
 	_ocultar_indicadores_colocacion()
@@ -209,7 +191,7 @@ func _on_pieza_colocada(_tipo:int, posicion:Vector2i):
 	if posicion == coordenadas_tablero:
 		esta_ocupada = true
 		modo_colocacion_activo = false
-		tipo_pieza_actual = _tipo
+		#tipo_pieza_actual = _tipo
 		es_valido_colocar = false
 		_ocultar_indicadores_colocacion()
 		

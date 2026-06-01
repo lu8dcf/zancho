@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://dfyyiy6ccyjmr"]
 
 [ext_resource type="Script" uid="uid://3epx16lu8m3k" path="res://scenes/tablero/baldosa.gd" id="1_ug7nx"]
-[ext_resource type="PackedScene" uid="uid://55dtb0wex3wp" path="res://assets/modelos/baldosa1.glb" id="2_ugxcp"]
-[ext_resource type="PackedScene" uid="uid://b63sf2cf0t88p" path="res://assets/modelos/baldosa2.glb" id="3_e5ivh"]
-[ext_resource type="PackedScene" uid="uid://dvx8ptk421x4t" path="res://assets/modelos/seleccionroja.glb" id="4_e5ivh"]
+[ext_resource type="PackedScene" uid="uid://cv1vvwtvmlv0n" path="res://assets/modelos/baldosa1.glb" id="2_ugxcp"]
+[ext_resource type="PackedScene" uid="uid://cxvwh4mp4bg43" path="res://assets/modelos/baldosa2.glb" id="3_e5ivh"]
+[ext_resource type="PackedScene" uid="uid://bnd1ypt7081oc" path="res://assets/modelos/seleccionroja.glb" id="4_e5ivh"]
 [ext_resource type="PackedScene" uid="uid://du48q73arda3h" path="res://assets/modelos/seleccionnaranja.glb" id="4_lwq43"]
-[ext_resource type="PackedScene" uid="uid://6n0kgrdfcdpc" path="res://assets/modelos/seleccion.glb" id="4_ugxcp"]
+[ext_resource type="PackedScene" uid="uid://dj24eg4u2u2wa" path="res://assets/modelos/seleccion.glb" id="4_ugxcp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lwq43"]
 size = Vector3(2.0007324, 0.4626007, 2.0076904)

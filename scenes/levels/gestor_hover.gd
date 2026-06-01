@@ -58,7 +58,7 @@ func _manejar_click_izquierdo(baldosa: BaldosaBase):
 	var es_valido_colocar = globalJuego.colocar_blanca(baldosa.obtener_coordenadas())
 	if Piezas.modo_colocacion:
 		baldosa.modo_colocacion_activo = Piezas.modo_colocacion
-		if es_valido_colocar:
+		if es_valido_colocar: # true es valido, false no lo es
 			baldosa.es_valido_colocar = es_valido_colocar
 			baldosa._al_entrar_mouse()
 			baldosa._intentar_colocar_pieza()
