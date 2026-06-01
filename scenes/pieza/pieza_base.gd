@@ -117,7 +117,7 @@ func cargar_ataque(): # agrega el nodo ataque con el script correspondiente a la
 # colocacion inicial --------------------------------------------------------------------------------		
 func posicionamiento_giro(): # Giro inicial de la pieza an colocarse en el tablero hay que cambiar a radianes
 	#temporizador
-	giro_inicial.wait_time = 3.0   # 1 segundo
+	giro_inicial.wait_time = 2.0   # 1 segundo
 	giro_inicial.connect("timeout",llego_al_piso)
 	giro_inicial.start()
 
