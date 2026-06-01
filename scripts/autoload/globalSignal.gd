@@ -39,3 +39,7 @@ signal piezaMuere(id: int)
 signal overPieza(activo:bool, tipo: int,posicion: Vector3i) # si es activo: true tiene el mouse encima y si es false entocnes sale
 @warning_ignore("unused_signal")
 signal clickReina()
+
+# mensajes para el log
+@warning_ignore("unused_signal")
+signal mensaje_oleada(empieza:bool,gano:bool) 

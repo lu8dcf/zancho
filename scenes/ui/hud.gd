@@ -5,7 +5,11 @@ extends CanvasLayer
 @onready var imagen_back_inferior: TextureRect = $imagenBackInferior
 @onready var panel_rey: Panel = $imagenBackInferior/PanelRey
 
+# contenedor de log
+@onready var contenedor_log: PanelContainer = $ContenedorLog
+@onready var log: RichTextLabel = $ContenedorLog/Log
 
+var max_mensajes :int = 50
 #panel superior
 @onready var panel_superior: Panel = $PanelSuperior
 
@@ -26,7 +30,7 @@ func _ready():
 	label_debug_temporal.text = "Debug: " + str(globalJuego.debug) # true y # false
 	# ocultar la tienda
 	GlobalSignal.finalizaOleada.connect(mostrar_imagen)
-	
+	GlobalSignal.mensaje_oleada.connect(mensaje_oleada_log)
 
 func mostrar_todos_paneles():
 	panel_inferior.visible = true
@@ -44,7 +48,6 @@ func mostrar_imagen(ganar: int) -> void:
 	else:
 		imagen_oleada.texture = perdio
 		mostras_desaparecer_imagen()
-		print("perdiste, reiniicando la oleada...")
 		globalJuego.perder_fe(5)
 		
 func mostras_desaparecer_imagen():
@@ -68,3 +71,79 @@ func mostras_desaparecer_imagen():
 
 func _ocultar_imagen() -> void:
 	imagen_oleada.visible = false
+
+# signal mensaje_oleada(empieza:bool,gano:bool) 
+func mensaje_oleada_log(empieza:bool, gano = null):
+	print("llega")
+	var texto_completo = ""
+	var tipo = null
+	if empieza:
+		texto_completo += "Empieza la Oleada "+ str(GlobalJuego.oleada_actual)
+		tipo = 1
+	else:
+		texto_completo += "Terminó la Oleada "+ str(GlobalJuego.oleada_actual)
+		if gano:
+			texto_completo += "¡Ganaste!"
+		else:
+			texto_completo += "¡Perdiste! Tus piezas pierden Fé "
+	actualizar_log(texto_completo, 1)
+			
+			
+		
+
+func mensaje_ataques():
+	pass
+
+func actualizar_log(mensaje: String, tipo: int = 5):
+	# Añadir timestamp
+	var timestamp = Time.get_time_string_from_system()
+	
+	# Formatear según tipo
+	var color = _obtener_color_por_tipo(tipo)
+	var icono = _obtener_icono_por_tipo(tipo)
+	
+	# Crear línea de log
+	var linea_log = "[color=%s]%s[/color] %s %s\n" % [color, timestamp, icono, mensaje]
+	
+	log.text = linea_log + log.text  # Los mensajes nuevos arriba
+	
+	_limitar_lineas_log()
+
+func _obtener_color_por_tipo(tipo: int) -> String:
+	match tipo:
+		0:
+			return "#ffaa55"  # Naranja / advertencia
+		1:
+			return "#55ff55"  # Verde / exito
+		2:
+			return "#ff5555"  # Rojo / perder Combate
+		3:
+			return "#ffff55"  # Amarillo / economia
+		4:
+			return "#55aaff"  # Azul / sistma
+		_:
+			return "#ffffff"  # Blanco (info normal)
+
+func _obtener_icono_por_tipo(tipo: int) -> String:
+	match tipo:
+		0:
+			return "⚠️"
+		1:
+			return "✅"
+		2:
+			return "⚔️"
+		3:
+			return "💰"
+		4:
+			return "🖥️"
+		_:
+			return "📝"
+
+func _limitar_lineas_log():
+	var lineas = log.text.split("\n", false)
+	if lineas.size() > max_mensajes:
+		log.text = "\n".join(lineas.slice(0, max_mensajes))
+
+# Función para limpiar el log
+func limpiar_log():
+	log.text = ""

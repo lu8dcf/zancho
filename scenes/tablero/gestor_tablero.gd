@@ -74,7 +74,6 @@ func _on_mostrar_ataques(coordenadas_base: Vector2i, ataques: Array, mostrar: bo
 
 func _resaltar_casillas_ataque(posicion_base: Vector2i, ataques: Array):
 	_limpiar_resaltado_ataque()  # Limpiar anteriores
-	print("resaltando")
 	for ataque in ataques:
 		var pos_x = posicion_base.x + ataque.x
 		var pos_y = posicion_base.y + ataque.z
