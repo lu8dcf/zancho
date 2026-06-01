@@ -165,6 +165,7 @@ func giro(angulo): #Gira la pieza en el eje horizontal (Y) usando Tween
 	gravity_scale=1
 			
 func animacion(anima):
+	
 	if animation_player:
 		anima = str(pieza_tipo)+anima
 		if animation_player.has_animation(anima):
