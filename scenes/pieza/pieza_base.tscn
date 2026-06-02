@@ -87,7 +87,7 @@ shape = SubResource("CylinderShape3D_4vkcs")
 
 [node name="Contenedor" type="Node3D" parent="." unique_id=1845823207]
 
-[node name="Ataque" type="Node3D" parent="." unique_id=1667183187]
+[node name="ContenedorAtaque" type="Node3D" parent="." unique_id=1667183187]
 
 [connection signal="barraVida" from="." to="Marker3D/barra" method="_on_pieza_base_barra_vida"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

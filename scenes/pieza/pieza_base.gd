@@ -29,7 +29,7 @@ var ataque_especifico = preload("res://scenes/pieza/ataque/Ataque.tscn") # defin
 
 # Contenedor par acargar escena del modelo
 @onready var contenedor : Node3D = $Contenedor # contenedor modelo imagen y funciones
-@onready var contenedor_ataque : Node3D = $Ataque
+@onready var contenedor_ataque : Node3D = $ContenedorAtaque # contenedor modelo imagen y funciones
 
 # Referencia a la instancia de la pieza (con AnimationPlayer)
 var instancia_objeto_pieza: Node3D
@@ -57,7 +57,7 @@ func _ready():
 	
 	if pieza_blanca: color="B" 	
 	
-	#pieza = load("res://scripts/resource/pieza"+ str(pieza_tipo) + color +".tres")
+	pieza = load("res://scripts/resource/pieza"+ str(pieza_tipo) + color +".tres")
 	
 	# Configurar física
 	linear_velocity = Vector3(0, linear_velocity.y, 0)  # que no se mueva a los costados
