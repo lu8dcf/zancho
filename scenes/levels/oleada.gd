@@ -57,7 +57,7 @@ func ejecuto_oleada():
 	for pieza in DATA_OLEADAS.estructura_por_nivel[nivel]:
 		await get_tree().create_timer(.1).timeout
 		GlobalSignal.emit_signal("crearPieza",pieza["pos"],pieza["tipo"], pieza["blancas"])
-	await get_tree().create_timer(5).timeout #tiempo en que se acomodan las piezas
+	await get_tree().create_timer(3).timeout #tiempo en que se acomodan las piezas
 	Sonidos.comienzoOleada()
 	GlobalSignal.emit_signal("controlMarcaPaso",true) #inicio tiempo oleada
 

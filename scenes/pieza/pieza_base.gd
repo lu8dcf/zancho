@@ -29,7 +29,7 @@ var ataque_especifico = preload("res://scenes/pieza/ataque/Ataque.tscn") # defin
 
 # Contenedor par acargar escena del modelo
 @onready var contenedor_movimiento : Node3D = $ContenedorMovimiento # contenedor modelo imagen y funciones
-@onready var contenedor_ataque : Node3D = $ContenedorMovimiento # contenedor modelo imagen y funciones
+@onready var contenedor_ataque : Node3D = $ContenedorAtaque # contenedor modelo imagen y funciones
 
 # Referencia a la instancia de la pieza (con AnimationPlayer)
 var instancia_objeto_pieza: Node3D

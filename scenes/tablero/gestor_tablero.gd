@@ -118,7 +118,7 @@ func obtener_punto_colocacion_pieza(coordenadas: Vector2i) -> Vector3:
 
 func mostrar_oleada_actual(gano):
 	GlobalSignal.emit_signal("aceleraMarcaPaso",2)
-	GlobalSignal.emit_signal("controlMarcaPaso",true)
+	#GlobalSignal.emit_signal("controlMarcaPaso",true)
 	if gano:
 		await get_tree().create_timer(2.0).timeout
 		GlobalSignal.emit_signal("crearPieza",Vector2i(1,14),0,true)

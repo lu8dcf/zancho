@@ -79,7 +79,6 @@ visible = false
 [node name="recibeDanio" type="AudioStreamPlayer3D" parent="." unique_id=1296894691]
 stream = SubResource("AudioStreamMP3_c11s1")
 max_distance = 5.0
-bus = &"Efectos"
 
 [node name="sangre" parent="." unique_id=1014549941 instance=ExtResource("3_4vkcs")]
 visible = false
