@@ -47,8 +47,38 @@ func _ready() -> void:
 	
 	posicion_boton_visible = boton_esconder_superior.position
 	posicion_boton_oculta = posicion_boton_visible + Vector2(0, panel_superior.size.y + altura_boton_visible)
-	
+	empezar_oleada.mouse_entered.connect(_on_empezar_oleada_hover_entered)
+	empezar_oleada.mouse_exited.connect(_on_empezar_oleada_hover_exited)
 	GlobalSignal.finalizaOleada.connect(finaliza_oleada)
+
+
+func _on_empezar_oleada_hover_entered():
+	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
+	# Escalar el botón
+	var tween_hover = create_tween()
+	tween_hover.set_ease(Tween.EASE_OUT)
+	tween_hover.set_trans(Tween.TRANS_BACK)
+	tween_hover.tween_property(empezar_oleada, "scale", Vector2(1.005, 1.005), 0.2)
+	
+	# Cambiar opacidad o color de la label dentro
+	var label = empezar_oleada.get_node_or_null("Label")  # Ajusta el nombre del nodo Label
+	if label:
+		var tween_label = create_tween()
+		tween_label.tween_property(label, "modulate", Color(1, 1, 0.5), 0.2)  # Color amarillento
+
+func _on_empezar_oleada_hover_exited():
+	# Restaurar escala
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+	var tween_hover = create_tween()
+	tween_hover.set_ease(Tween.EASE_OUT)
+	tween_hover.set_trans(Tween.TRANS_BACK)
+	tween_hover.tween_property(empezar_oleada, "scale", Vector2(1, 1), 0.2)
+	
+	# Restaurar color de la label
+	var label = empezar_oleada.get_node_or_null("Label")
+	if label:
+		var tween_label = create_tween()
+		tween_label.tween_property(label, "modulate", Color(1, 1, 1), 0.2)
 
 
 func _actualizar_monedas(nuevas_monedas: int) -> void:

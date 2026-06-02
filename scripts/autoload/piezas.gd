@@ -32,10 +32,13 @@ var piezas_ataques = [
 	{5:[Vector3i(-1,0,-1),Vector3i(0,0,-1),Vector3i(1,0,-1),Vector3i(-1,0,0),Vector3i(1,0,0),Vector3i(-1,0,1),Vector3i(0,0,1),Vector3i(1,0,1)]},
 ]
 
-
+@warning_ignore("unused_signal")
 signal modo_colocacion_inicia(tipo_pieza:int,nombre:String)
+@warning_ignore("unused_signal")
 signal modo_colocacion_cancelado
+@warning_ignore("unused_signal")
 signal pieza_colocada(tipo:int, posicion:Vector2i)
+@warning_ignore("unused_signal")
 signal pieza_colocada_inventario(nombre_pieza: String) 
 @warning_ignore("unused_signal")
 signal  pieza_flotante_actualizada(posicion_3d :Vector3, es_valido:bool)

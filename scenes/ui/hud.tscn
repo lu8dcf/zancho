@@ -101,10 +101,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="empezar_oleada" parent="PanelSuperior" unique_id=998142765 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-offset_left = -219.0
-offset_top = -26.0
+offset_left = -200.0
+offset_top = -24.0
 offset_right = -36.0
-offset_bottom = 31.0
+offset_bottom = 8.0
 
 [node name="BotonPausar" parent="PanelSuperior" unique_id=874488580 instance=ExtResource("4_4jqwt")]
 layout_mode = 1

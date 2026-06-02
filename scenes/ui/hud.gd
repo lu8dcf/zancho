@@ -31,6 +31,7 @@ func _ready():
 	GlobalSignal.finalizaOleada.connect(mostrar_imagen)
 	GlobalSignal.mensaje_oleada.connect(mensaje_oleada_log)
 	GlobalSignal.mensaje_tienda.connect(mensaje_tienda_log)
+	Piezas.pieza_colocada.connect(mensaje_colocacion_log)
 
 func mostrar_todos_paneles():
 	panel_inferior.visible = true
@@ -87,36 +88,37 @@ func mensaje_oleada_log(empieza:bool, gano = null):
 		else:
 			tipo = 0
 			texto_completo += "¡Perdiste! Tus piezas pierden Fé "
-	actualizar_log(texto_completo, 1)
+	actualizar_log(texto_completo, tipo)
 			
 			
 func mensaje_tienda_log(compra:bool,nombre_pieza:String):
 	var texto_completo = ""
-	var tipo = null
+	var tipo = 3
 	if compra:
 		texto_completo += "Compraste "+ nombre_pieza
-		tipo = 3
+		
 	else:
-		texto_completo += "Terminó la Oleada "+ str(GlobalJuego.oleada_actual)
-		if gano:
-			texto_completo += "¡Ganaste!"
-		else:
-			texto_completo += "¡Perdiste! Tus piezas pierden Fé "
-	actualizar_log(texto_completo, 1)
+		texto_completo += "Vendiste "+ nombre_pieza
+	actualizar_log(texto_completo,tipo)
+
+#pieza_colocada(tipo:int, posicion:Vector2i)
+func mensaje_colocacion_log(tipo_pieza:int,posicion:Vector2i):
+	var texto_completo = ""
+	var tipo = 4
+	var nombre_pieza = economia.obtener_nombre_pieza(tipo_pieza)
+	texto_completo += "Colocaste la pieza "+ nombre_pieza + " en la ubicación: "+ str(posicion)
+	actualizar_log(texto_completo,tipo)
 
 func mensaje_ataques():
 	pass
 
-func actualizar_log(mensaje: String, tipo: int = 5):
-	# Añadir timestamp
-	var timestamp = Time.get_time_string_from_system()
-	
+func actualizar_log(mensaje: String, tipo: int = 5):	
 	# Formatear según tipo
 	var color = _obtener_color_por_tipo(tipo)
 	var icono = _obtener_icono_por_tipo(tipo)
 	
 	# Crear línea de log
-	var linea_log = "[color=%s]%s[/color] %s %s\n" % [color, timestamp, icono, mensaje]
+	var linea_log = "[color=%s]%s %s[/color]\n" % [color, icono, mensaje]
 	
 	log.text = linea_log + log.text  # Los mensajes nuevos arriba
 	

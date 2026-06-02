@@ -2,7 +2,7 @@ extends Node
 
 var monedas_actual : int = 1200 # monedas inicial para la Oleada 1
 var monedas_antes_oleada : int = 0
-const NOMBRES_PIEZAS = ["Peon", "Torre", "Alfil", "Caballo", "Reina"]
+const NOMBRES_PIEZAS = ["Peon", "Alfil","Torre",  "Caballo", "Reina"]
 
 var inventario_actual: Dictionary = {}
 var piezas_colocadas: Dictionary = {}
@@ -151,7 +151,7 @@ func comprar_pieza(nombre_pieza:String) -> bool:
 	monedas_cambiadas.emit(monedas_actual)
 	pieza_comprada.emit({"nombre": nombre_pieza, "cantidad": inventario_actual[nombre_pieza]})
 	inventario_actualizado.emit(inventario_actual)
-	GlobalSignal.emit.mensaje_tienda(true,nombre_pieza)
+	GlobalSignal.mensaje_tienda.emit(true,nombre_pieza)
 	return true
 
 func vender_pieza(nombre_pieza:String) -> bool:
@@ -173,7 +173,7 @@ func vender_pieza(nombre_pieza:String) -> bool:
 	monedas_cambiadas.emit(monedas_actual)
 	pieza_comprada.emit({"nombre": nombre_pieza, "cantidad": inventario_actual[nombre_pieza]})
 	pieza_vendida.emit()
-	GlobalSignal.emit.mensaje_tienda(false,nombre_pieza)
+	GlobalSignal.mensaje_tienda.emit(false,nombre_pieza)
 	return true
 
 func usar_pieza(nombre_pieza:String):
@@ -225,7 +225,11 @@ func verificar_orden_aparicion(nombre_pieza: String) -> bool:
 		return false
 	# verificar la oleada actual, dependendiendo del numero se van mostrando las piezas
 	return globalJuego.oleada_actual < datos_piezas[nombre_pieza]["orden_aparicion"]
-	
+
+func obtener_nombre_pieza(tipo:int):
+	return NOMBRES_PIEZAS[tipo-1]
+
+
 # funcion para obtener los datos de las piezas
 func obtener_datos_pieza(nombre: String) -> Dictionary:
 	return datos_piezas.get(nombre, {})
