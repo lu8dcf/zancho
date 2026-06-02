@@ -34,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://brokn8inr04wm" path="res://assets/ui/vida1.png" id="19_b6swc"]
 [ext_resource type="Script" uid="uid://b84j1w32cqx6n" path="res://scenes/ui/components/boton_tiempo_ui.gd" id="20_04enw"]
 [ext_resource type="Texture2D" uid="uid://dotmq4er7qliu" path="res://assets/ui/oro.png" id="21_d778v"]
+[ext_resource type="PackedScene" uid="uid://dw6tl6131xrlf" path="res://scenes/ui/components/label_grande.tscn" id="21_rvhgw"]
 [ext_resource type="Texture2D" uid="uid://dcitmjg7mdcgn" path="res://assets/ui/boton_carrito_idle.png" id="22_b6swc"]
 [ext_resource type="Texture2D" uid="uid://cs42h4566e3e4" path="res://assets/ui/boton_carrito_hover.png" id="23_27rlx"]
 [ext_resource type="Script" uid="uid://byt8a3fhqtffq" path="res://scenes/ui/piezas_tienda.gd" id="23_t0png"]
@@ -60,9 +61,10 @@
 script = ExtResource("1_hqnrr")
 
 [node name="PanelSuperior" type="Panel" parent="." unique_id=66414413]
-anchors_preset = 10
+anchors_preset = -1
 anchor_right = 1.0
-offset_bottom = 64.0
+anchor_bottom = 0.09900001
+offset_bottom = -0.15200806
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_kicr4")
 script = ExtResource("2_136eg")
@@ -171,16 +173,25 @@ script = ExtResource("20_04enw")
 
 [node name="botonMenu" parent="PanelSuperior" unique_id=1230073659 instance=ExtResource("4_4jqwt")]
 layout_mode = 1
-anchors_preset = 4
-anchor_left = 0.0
-anchor_right = 0.0
-offset_left = 0.0
-offset_top = -32.0
-offset_right = 152.0
-offset_bottom = 49.0
+anchors_preset = -1
+anchor_left = 0.014
+anchor_top = 0.125
+anchor_right = 0.11100001
+anchor_bottom = 1.0
+offset_left = -16.128
+offset_top = -8.0
+offset_right = 24.12799
+offset_bottom = 17.0
 grow_horizontal = 1
 texture_hover = ExtResource("10_27rlx")
-texto = "Menu"
+
+[node name="Label2" parent="PanelSuperior/botonMenu" unique_id=4063466 instance=ExtResource("21_rvhgw")]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 8.0
+offset_right = 80.0
+offset_bottom = 44.0
+text = "Menú"
 
 [node name="imagenDebilidades" type="TextureRect" parent="PanelSuperior" unique_id=2129106426]
 layout_mode = 1
@@ -795,6 +806,8 @@ offset_bottom = 0.19200134
 [node name="Log" type="RichTextLabel" parent="ContenedorLog" unique_id=1362907016]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+scroll_active = false
 
 [connection signal="pressed" from="PanelSuperior/botonEsconderSuperior" to="PanelSuperior" method="_on_boton_esconder_superior_pressed"]
 [connection signal="pressed" from="PanelSuperior/empezar_oleada" to="PanelSuperior" method="_on_empezar_oleada_pressed"]

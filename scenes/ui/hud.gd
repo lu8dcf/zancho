@@ -27,6 +27,8 @@ func _ready():
 	imagen_oleada.modulate.a = 0  
 	imagen_oleada.visible = false
 	label_debug_temporal.text = "Debug: " + str(globalJuego.debug) # true y # false
+	log.bbcode_enabled = true
+	log.scroll_active = false
 	# ocultar la tienda
 	GlobalSignal.finalizaOleada.connect(mostrar_imagen)
 	GlobalSignal.mensaje_oleada.connect(mensaje_oleada_log)

@@ -5,7 +5,7 @@
 [resource]
 line_spacing = 3.095
 font = ExtResource("1_bxqo6")
-font_size = 31
+font_size = 32
 shadow_size = 10
 shadow_color = Color(0, 0, 0, 0.92156863)
 shadow_offset = Vector2(4.33, 2.475)
