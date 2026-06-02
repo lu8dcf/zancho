@@ -28,8 +28,8 @@ var ataque_especifico = preload("res://scenes/pieza/ataque/Ataque.tscn") # defin
 @onready var area_ataque: Area3D = $AreaAtaque
 
 # Contenedor par acargar escena del modelo
-@onready var contenedor_movimiento : Node3D = $ContenedorMovimiento # contenedor modelo imagen y funciones
-@onready var contenedor_ataque : Node3D = $ContenedorAtaque # contenedor modelo imagen y funciones
+@onready var contenedor : Node3D = $Contenedor # contenedor modelo imagen y funciones
+@onready var contenedor_ataque : Node3D = $Ataque
 
 # Referencia a la instancia de la pieza (con AnimationPlayer)
 var instancia_objeto_pieza: Node3D
@@ -57,7 +57,7 @@ func _ready():
 	
 	if pieza_blanca: color="B" 	
 	
-	pieza = load("res://scripts/resource/pieza"+ str(pieza_tipo) + color +".tres")
+	#pieza = load("res://scripts/resource/pieza"+ str(pieza_tipo) + color +".tres")
 	
 	# Configurar física
 	linear_velocity = Vector3(0, linear_velocity.y, 0)  # que no se mueva a los costados
@@ -80,15 +80,25 @@ func _ready():
 	GlobalSignal.connect("finalizaOleada",finalizaOleada)
 
 func cargar_modelo():
-	modelo = preload("res://assets/modelos/pieza_generica/pieza_1.tscn")
+	modelo = load("res://assets/modelos/pieza_generica/pieza_"+ str(pieza_tipo)+".tscn")
 	instancia_objeto_pieza = modelo.instantiate()
-	contenedor_movimiento.add_child(instancia_objeto_pieza)
+	
+	# agrega el material correspondiente al color
+	if pieza_blanca: 
+		instancia_objeto_pieza.material = Piezas.material_bueno
+	else:
+		instancia_objeto_pieza.material = Piezas.material_malo
+	# le paso el id a la textura para que sepa cuando cambiar a nmuerte
+	instancia_objeto_pieza.id=id
+		
+	
+	contenedor.add_child(instancia_objeto_pieza)
 	# Buscar el AnimationPlayer dentro de esta instancia
 	animation_player = _find_animation_player(instancia_objeto_pieza)
 
 func cargar_objeto():# Instanciar y agregar al contenedor
 	instancia_objeto_pieza = pieza.modelo.instantiate()
-	contenedor_movimiento.add_child(instancia_objeto_pieza)
+	contenedor.add_child(instancia_objeto_pieza)
 	# Buscar el AnimationPlayer dentro de esta instancia
 	animation_player = _find_animation_player(instancia_objeto_pieza)
 

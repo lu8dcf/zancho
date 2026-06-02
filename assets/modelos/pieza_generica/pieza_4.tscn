@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://4k5pgptar6s3"]
+
+[ext_resource type="PackedScene" uid="uid://p3vk4j73wmcq" path="res://assets/modelos/piezas/pieza4B.glb" id="1_u01u4"]
+[ext_resource type="Material" uid="uid://bo3dgaal0nxtp" path="res://assets/modelos/texturas/material_buenos.tres" id="2_1it5v"]
+[ext_resource type="Script" uid="uid://cd7g3a2c2xve0" path="res://assets/modelos/pieza_generica/pieza_4.gd" id="2_4nm2l"]
+
+[node name="pieza4B" unique_id=619342659 instance=ExtResource("1_u01u4")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+script = ExtResource("2_4nm2l")
+
+[node name="Skeleton3D" parent="Esqueleto_002" parent_id_path=PackedInt32Array(532292281) index="0" unique_id=1310727414]
+bones/1/rotation = Quaternion(3.725289e-09, -7.391692e-08, -6.7055225e-08, 1)
+bones/2/rotation = Quaternion(-3.657433e-08, 2.7738738e-08, -0.65941197, 0.7517819)
+bones/3/rotation = Quaternion(-1.1664922e-07, 9.784953e-08, 0.79368657, 0.60832685)
+bones/4/rotation = Quaternion(-0.5916623, 0.38721532, 0.5916624, 0.3872153)
+bones/5/rotation = Quaternion(-0.0891834, -1.7317178e-07, 2.42925e-08, 0.99601525)
+bones/6/rotation = Quaternion(-0.5916623, 0.38721532, 0.5916624, 0.3872153)
+bones/7/rotation = Quaternion(-0.0891834, -1.7317178e-07, 2.42925e-08, 0.99601525)
+bones/8/rotation = Quaternion(-4.0290558e-09, -4.9508493e-08, -0.72748756, 0.68612087)
+bones/9/rotation = Quaternion(4.5571906e-09, 3.5488693e-08, 0.09202937, 0.9957563)
+bones/10/rotation = Quaternion(-2.2204458e-15, 3.5527133e-15, 1.6617748e-15, 1)
+bones/12/rotation = Quaternion(-0.027903708, 0.013536594, -0.43626142, 0.89928544)
+bones/13/rotation = Quaternion(0.00073514564, -0.0003323835, -0.41196945, 0.91119736)
+bones/14/rotation = Quaternion(-0.1644859, 0.042567782, -0.24689735, 0.9540304)
+bones/15/rotation = Quaternion(-0.19948404, 0.3077286, -0.2880993, 0.88459486)
+bones/16/rotation = Quaternion(-0.14654228, 0.0036167095, -0.024402173, 0.98889685)
+bones/18/scale = Vector3(0.9999999, 0.9999999, 0.9999999)
+bones/19/rotation = Quaternion(0.9638778, 4.6995353e-08, 2.1330013e-07, 0.2663449)
+bones/22/rotation = Quaternion(0.9638778, -3.1750773e-08, 1.14903166e-07, -0.2663449)
+bones/23/rotation = Quaternion(-0.16379873, 0.15459904, 0.41663402, 0.8807299)
+bones/24/rotation = Quaternion(-0.097867586, 0.0091377795, 0.09480557, 0.9906313)
+bones/25/rotation = Quaternion(0.98156434, -0.031781062, -0.03494936, -0.18520273)
+bones/26/rotation = Quaternion(-0.01393295, 0.012906901, 0.011402611, 0.9997546)
+bones/27/rotation = Quaternion(0.9798837, -0.05731699, -0.060441643, 0.18135536)
+bones/28/rotation = Quaternion(0.015663818, 0.00664044, 0.008876401, 0.9998159)
+
+[node name="Círculo_007" parent="Esqueleto_002/Skeleton3D" index="0" unique_id=1312416398]
+material_override = ExtResource("2_1it5v")

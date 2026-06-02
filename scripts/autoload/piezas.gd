@@ -9,6 +9,10 @@ var danio = [5,10,20,15,20,30]
 var bonus_cantidad = [1,1.3,1.3,1.5,1.5,1.5]
 var bonus_a=[0,4,3,1,5,2]
 
+#texturas de los modelos
+var material_bueno = "res://assets/modelos/texturas/material_buenos.tres"
+var material_malo = "res://assets/modelos/texturas/material_malos.tres"
+var material_muerte ="res://assets/modelos/texturas/material_muerte.tres"
 
 # las piezas que estan activas en la partida
 var pieza_blanca: Array[RigidBody3D] = []

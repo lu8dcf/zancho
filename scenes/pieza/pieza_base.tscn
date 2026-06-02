@@ -59,12 +59,8 @@ process_material = SubResource("ParticleProcessMaterial_4vkcs")
 draw_pass_1 = SubResource("SphereMesh_krwjw")
 draw_skin = SubResource("Skin_xmeed")
 
-[node name="ContenedorMovimiento" type="Node3D" parent="." unique_id=1845823207]
-
 [node name="GiroInicial" type="Timer" parent="." unique_id=994989931]
 one_shot = true
-
-[node name="ContenedorAtaque" type="Node3D" parent="." unique_id=1562388930]
 
 [node name="AreaAtaque" type="Area3D" parent="." unique_id=1650449106]
 visible = false
@@ -88,6 +84,10 @@ visible = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AreaInteraccion" unique_id=1483198257]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8619308, 0)
 shape = SubResource("CylinderShape3D_4vkcs")
+
+[node name="Contenedor" type="Node3D" parent="." unique_id=1845823207]
+
+[node name="Ataque" type="Node3D" parent="." unique_id=1667183187]
 
 [connection signal="barraVida" from="." to="Marker3D/barra" method="_on_pieza_base_barra_vida"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
