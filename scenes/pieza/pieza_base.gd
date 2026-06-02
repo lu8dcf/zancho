@@ -35,6 +35,7 @@ var ataque_especifico = preload("res://scenes/pieza/ataque/Ataque.tscn") # defin
 var instancia_objeto_pieza: Node3D
 var animation_player : AnimationPlayer
 @onready var area_interaccion : Area3D = $AreaInteraccion
+var modelo : PackedScene
 
 
 # Variables de estado
@@ -63,13 +64,12 @@ func _ready():
 	#rebote
 	physics_material_override.bounce =.3
 	gravity_scale = 2.0
-	
-	cargar_objeto() # Asigna el modelo y objero con sus animaciones			
+	cargar_modelo()
+	#cargar_objeto() # Asigna el modelo y objero con sus animaciones			
 	posicionamiento_giro() # gira la pieza a su posicion en grados
 	
 	cargar_movimiento() # Script de movimiento y estados
 	cargar_ataque() # Scrip de zona de ataque
-	#GlobalSignal.connect("marcaPaso",anima_idle)
 	animacion("Bidle")
 	conectar_señales()
 	
@@ -78,6 +78,13 @@ func _ready():
 	GlobalSignal.connect("piezaAtaca",ataque)
 	GlobalSignal.connect("piezaRecibeDanio",recibeDanio)
 	GlobalSignal.connect("finalizaOleada",finalizaOleada)
+
+func cargar_modelo():
+	modelo = preload("res://assets/modelos/pieza_generica/pieza_1.tscn")
+	instancia_objeto_pieza = modelo.instantiate()
+	contenedor_movimiento.add_child(instancia_objeto_pieza)
+	# Buscar el AnimationPlayer dentro de esta instancia
+	animation_player = _find_animation_player(instancia_objeto_pieza)
 
 func cargar_objeto():# Instanciar y agregar al contenedor
 	instancia_objeto_pieza = pieza.modelo.instantiate()
@@ -165,7 +172,6 @@ func giro(angulo): #Gira la pieza en el eje horizontal (Y) usando Tween
 	gravity_scale=1
 			
 func animacion(anima):
-	
 	if animation_player:
 		anima = str(pieza_tipo)+anima
 		if animation_player.has_animation(anima):
