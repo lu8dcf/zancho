@@ -228,7 +228,6 @@ func die():
 func animacion_muerte():
 	freeze = true
 	gravity_scale = 0
-	GlobalSignal.piezaMuere.emit(id)
 	# elimina la instancia de la lista
 	if Piezas.pieza_blanca.has(self):  # elimina su instancia si es blanca
 		Piezas.pieza_blanca.erase(self)
@@ -239,8 +238,8 @@ func animacion_muerte():
 	tween.set_parallel(true)
 	
 	# Subir y rotar lentamente
-	tween.tween_property(self, "global_position:y", global_position.y + 10 ,2)
-	tween.tween_property(self, "rotation:y", rotation.y + 10, 2)  # Girar mientras sube
+	tween.tween_property(self, "global_position:y", global_position.y + 5 ,3)
+	#tween.tween_property(self, "rotation:y", rotation.y + 10, 2)  # Girar mientras sube
 	tween.tween_property(self, "scale", Vector3.ZERO, 3)
 		
 	await tween.finished

@@ -5,6 +5,8 @@ extends Node3D
 @export var danioD: int
 @export var idA: int
 @export var idD: int
+@export var tipoA: int
+@export var tipoD: int
 
 
 @export var piezaA_sitio:Vector3
@@ -61,16 +63,20 @@ func crear_timer(): # Tiempo entre ataques
 
 func piezaMuere(id):
 	if id==idA:
+		Piezas.informar_fin_ataque(idD,idA) # Señal de fin de ataque para mensaje
 		mi_timer.stop()  # detengo el timer de ataque
 		GlobalSignal.giro_pieza.emit(idD,1000)	
 		murio = true # evita que siga atacando la pieza muerta
+		
 		get_parent().eliminar_par(idA,idD)
 		queue_free()
 		
 	if id==idD:
+		Piezas.informar_fin_ataque(idA,idD)# Señal de fin de ataque para mensaje
 		mi_timer.stop()  # detengo el timer de ataque
 		GlobalSignal.giro_pieza.emit(idA,1000)
 		murio = true # evita que siga atacando la pieza muerta
+		
 		get_parent().eliminar_par(idA,idD)
 		queue_free()
 	

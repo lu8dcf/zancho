@@ -34,6 +34,9 @@ signal piezaRecibeDanio(id: int,danio: int)
 @warning_ignore("unused_signal")
 signal piezaMuere(id: int)
 
+@warning_ignore("unused_signal")
+signal finAtaque(gano: int,color: bool,perdio: int)
+
 # Acciones del jugador
 @warning_ignore("unused_signal")
 signal overPieza(activo:bool, tipo: int,posicion: Vector3i) # si es activo: true tiene el mouse encima y si es false entocnes sale

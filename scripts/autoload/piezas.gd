@@ -13,6 +13,29 @@ var bonus_a=[0,4,3,1,5,2]
 # las piezas que estan activas en la partida
 var pieza_blanca: Array[RigidBody3D] = []
 var pieza_negra: Array[RigidBody3D] = []
+
+func buscar_color(id_buscar : int) -> bool:
+	for pieza_b in pieza_blanca:
+		if id_buscar == pieza_b.id:
+			return true
+	return false
+
+func buscar_tipo(id_buscar : int):
+	for pieza_b in pieza_blanca:
+		if id_buscar == pieza_b.id:
+			return pieza_b.pieza_tipo
+	
+	for pieza_b in pieza_negra:
+		if id_buscar == pieza_b.id:
+			return pieza_b.pieza_tipo
+	
+func informar_fin_ataque(ganador,perdedor): # Tipo ganador
+	GlobalSignal.finAtaque.emit(buscar_tipo(ganador),buscar_color(ganador),buscar_tipo(perdedor))
+	#print (buscar_tipo(ganador)," ",buscar_color(ganador)," ",buscar_tipo(perdedor))
+			
+			
+
+
 # manejo de colocacion de piezas
 
 var pieza_seleccionada: Dictionary = {

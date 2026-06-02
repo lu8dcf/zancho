@@ -29,6 +29,8 @@ func iniciaAtaque(idA,idD,posicionA,posicionD,tipoA,tipoD):
 	nuevo_ataque.idD = idD
 	nuevo_ataque.danioA = calcular_danio(tipoA,tipoD)
 	nuevo_ataque.danioD = calcular_danio(tipoD,tipoA)
+	nuevo_ataque.tipoA = tipoA
+	nuevo_ataque.tipoD = tipoD
 			
 	add_child(nuevo_ataque)
 	
@@ -47,7 +49,6 @@ func _crear_clave(a, d): # Genera una clave única que ignora el orden
 		pares_almacenados[clave] = {"a": a,"d": d}
 		return true  # Se almacenó
 	return false  # Ya existía
-	
 
 func _generar_clave(a: int, d: int) -> String: # Genera una clave única que ignora el orden
 	# Ordenamos los números para que (1,2) y (2,1) generen la misma clave
