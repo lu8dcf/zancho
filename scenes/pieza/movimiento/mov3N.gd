@@ -9,7 +9,7 @@ var proxima_posicion : Vector3
 
 # desplazamiento Torre
 var direccion= Vector3i(0,0,0)
-var secuencia = [0,3,3,2,2,3,3,4,4,3,3,4,4]
+var secuencia = [0,3,3,3,3,4,4,3,3,4,4]
 var paso = 0
 
 
@@ -20,14 +20,39 @@ func _ready():
 	
 	# Verificar que se obtuvo correctamente
 	if not pieza:
-		print ("El componente Peon debe ser hijo directo de una PiezaBase")
+		print ("El componente Torre debe ser hijo directo de una PiezaBase")
 		return
 
 	# Conectar señal después de que la pieza esté lista
 	await pieza.ready
-	GlobalSignal.connect("marcaPaso",movimiento	)
 	
+	await get_tree().create_timer(1).timeout
+	
+	var posicionActual = calculoPosActual()
+	#depende del lado que este del tablero, cambia la secuencia
+	if( posicionActual.x+ posicionActual.z<15):
+		print("lado izquierdo")
+		secuencia=[0,4,4,3,3,3]
+	elif(posicionActual.x + posicionActual.z>15):
+		print("lado derecho")
+		secuencia = [0,3,3,3,3,4,4]
+	else:
+		print("diagonal")
+		secuencia = [0,3,4,3,4]
 		
+
+	GlobalSignal.connect("marcaPaso",movimiento	)
+
+
+	
+
+func calculoPosActual() -> Vector3i:
+	var actual = Vector3i(
+	round(pieza.global_position.x / GlobalJuego.espaciado_baldosas),
+	0,
+	round(pieza.global_position.z / GlobalJuego.espaciado_baldosas))
+	return actual
+
 func movimiento():
 	dar_paso()
 	# actualizacion de posicion
