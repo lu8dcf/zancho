@@ -16,13 +16,13 @@ uniform float contrast : hint_range(0.5, 2.0) = 1.0;
 
 // --- CONFIGURACIÓN DE LA DESAPARICIÓN ---
 // CONTROLADO POR SCRIPT: 0.0 = Completo y visible, 1.0 = Completamente disuelto (invisible)
-uniform float progreso_disolver : hint_range(0.0, 1.0) = 0.0; 
+uniform float progreso_disolver : hint_range(0.7, 1) = 0.7; 
 uniform float object_height = 4.0;       // Tus 4 metros de pieza
 uniform float suavidad_borde = 0.6;      // Un degradado más ancho para que sea más suave todavía
 
 // --- EFECTO AZULADO Y TRANSPARENTE ---
 uniform vec4 color_holograma : source_color = vec4(0.0, 0.4, 1.0, 0.3); // Azul con un 60% de opacidad base
-uniform float fuerza_brillo : hint_range(0.0, 5.0) = 1.5;             // Intensidad del brillo azul
+uniform float fuerza_brillo : hint_range(0, 5.0) = 1.5;             // Intensidad del brillo azul
 
 varying float local_y;
 

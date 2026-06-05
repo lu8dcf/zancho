@@ -2,8 +2,12 @@
 
 [ext_resource type="Script" uid="uid://ckv37534c60of" path="res://scripts/resource/caracteristica.gd" id="1_vow7k"]
 
+[sub_resource type="Resource" id="Resource_l01k3"]
+metadata/__load_path__ = "res://assets/modelos/piezas/pieza_5B.tscn"
+
 [resource]
 script = ExtResource("1_vow7k")
+modelo = SubResource("Resource_l01k3")
 nombre = "Reina Blanca"
 vida = 400.0
 bonus = 1.5
