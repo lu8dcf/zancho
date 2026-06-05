@@ -1,12 +1,12 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://81xafefy1suc"]
 
-[ext_resource type="Shader" uid="uid://bs1hc40vhxw18" path="res://assets/modelos/texturas/muerte.gdshader" id="1_kh12j"]
+[ext_resource type="Shader" uid="uid://dxmn2xq16km7f" path="res://assets/modelos/texturas/muerte.gdshader" id="1_kh12j"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_kh12j")
 shader_parameter/shadow_softness = 0.5
-shader_parameter/light_intensity = 0.6
+shader_parameter/light_intensity = 0.1050000049875
 shader_parameter/ambient_strength = 0.2
 shader_parameter/shadow_color_tint = Color(0.1, 0.1, 0.2, 1)
 shader_parameter/saturation = 1.1

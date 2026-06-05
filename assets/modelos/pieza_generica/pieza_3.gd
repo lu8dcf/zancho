@@ -21,9 +21,5 @@ func cambiar_a_material_muerte(idA):
 	if id!=idA:  # si no es el mismo evita cambiar
 		return
 	
-	var material_muerte: Material = load(Piezas.material_muerte)
-	
-	if material_muerte:
-		var mat_nuevo_unico = material_muerte as ShaderMaterial
-		circulo_mesh.material_override = mat_nuevo_unico
+	circulo_mesh.material_override = load(Piezas.material_muerte)
 		
