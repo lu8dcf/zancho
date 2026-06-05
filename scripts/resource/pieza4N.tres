@@ -1,11 +1,9 @@
 [gd_resource type="Resource" script_class="PiezaDato" format=3 uid="uid://b3d2hcuvmtdxx"]
 
-[ext_resource type="PackedScene" uid="uid://cf3o6hmpnvx8w" path="res://assets/modelos/piezas/pieza_4N.tscn" id="1_kc8mo"]
 [ext_resource type="Script" uid="uid://ckv37534c60of" path="res://scripts/resource/caracteristica.gd" id="2_tf6se"]
 
 [resource]
 script = ExtResource("2_tf6se")
-modelo = ExtResource("1_kc8mo")
 nombre = "Caballo Negro"
 vida = 120.0
 bonus = 1.5

@@ -1,11 +1,9 @@
 [gd_resource type="Resource" script_class="PiezaDato" format=3 uid="uid://dq1tbwd1fha4i"]
 
-[ext_resource type="PackedScene" uid="uid://6yvobem00xvg" path="res://assets/modelos/piezas/pieza_5N.tscn" id="1_6vikq"]
 [ext_resource type="Script" uid="uid://ckv37534c60of" path="res://scripts/resource/caracteristica.gd" id="2_4ju5r"]
 
 [resource]
 script = ExtResource("2_4ju5r")
-modelo = ExtResource("1_6vikq")
 nombre = "Reina Negra"
 vida = 400.0
 danio = 50.0

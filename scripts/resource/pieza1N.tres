@@ -1,11 +1,9 @@
 [gd_resource type="Resource" script_class="PiezaDato" format=3 uid="uid://dd2o51ax20owp"]
 
 [ext_resource type="Script" uid="uid://ckv37534c60of" path="res://scripts/resource/caracteristica.gd" id="1_hw1oh"]
-[ext_resource type="PackedScene" uid="uid://c5mos5uwxr4yr" path="res://assets/modelos/piezas/pieza_1N.tscn" id="1_tmoix"]
 
 [resource]
 script = ExtResource("1_hw1oh")
-modelo = ExtResource("1_tmoix")
 nombre = "Peon Negro"
 vida = 50.0
 bonus = 1.3

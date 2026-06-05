@@ -1,11 +1,9 @@
 [gd_resource type="Resource" script_class="PiezaDato" format=3 uid="uid://cfmpdxqgscp8d"]
 
-[ext_resource type="PackedScene" uid="uid://bbm28kn2275j3" path="res://assets/modelos/piezas/pieza_0B.tscn" id="1_6g21f"]
 [ext_resource type="Script" uid="uid://ckv37534c60of" path="res://scripts/resource/caracteristica.gd" id="1_c6roq"]
 
 [resource]
 script = ExtResource("1_c6roq")
-modelo = ExtResource("1_6g21f")
 nombre = "Rey Blanco"
 vida = 1000.0
 blanco = true

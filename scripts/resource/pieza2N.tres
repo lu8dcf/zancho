@@ -1,11 +1,9 @@
 [gd_resource type="Resource" script_class="PiezaDato" format=3 uid="uid://bw16dmxyeyqjv"]
 
-[ext_resource type="PackedScene" uid="uid://dmvscihy3up3v" path="res://assets/modelos/piezas/pieza_2N.tscn" id="1_1k0if"]
 [ext_resource type="Script" uid="uid://ckv37534c60of" path="res://scripts/resource/caracteristica.gd" id="2_sh5n2"]
 
 [resource]
 script = ExtResource("2_sh5n2")
-modelo = ExtResource("1_1k0if")
 nombre = "Alfil Negro"
 vida = 80.0
 bonus = 1.3
