@@ -43,7 +43,7 @@ var modelo : PackedScene
 var color="N"
 var pieza_colocada=false
 var pieza : Resource
-var secuencia_sfx = randi() % 3# secuencia de sonido
+#var secuencia_sfx = randi() % 3# secuencia de sonido
 
 # barra de vida
 signal barraVida(porcentual)
@@ -202,8 +202,10 @@ func Sonido(tipo): # funcion generica pra los sonidos de la pieza
 func ataque(idA):
 	if idA!=id:
 		return
-	animacion("Bataque")
 	
+	animacion("Bataque")
+	await get_tree().create_timer(0.5).timeout
+	Sonido("espada2")
 	
 # -------------------------------   esto hay que pasarlo a la barra d evida ------------------------
 func recibeDanio(idD: int,danio: int):
@@ -211,21 +213,12 @@ func recibeDanio(idD: int,danio: int):
 		return
 	nodo_sangre.visible=true
 	vida_actual -= danio
-			
-	match secuencia_sfx:
-		0:
-			Sonido("hurt")
-			sangre.play("Sangre")
-		1:
-			Sonido("espada2")
-		2:
-			Sonido("danio")
-			sangre.play("Sangre")
-		3:	
-			Sonido("espada")	
-	secuencia_sfx +=1		
-	if secuencia_sfx>3:
-		secuencia_sfx=0
+	await get_tree().create_timer(0.7).timeout
+	Sonido("danio")
+	sangre.play("Sangre")
+	
+		
+	
 		
 		
 	# calculo del porcentaje de vida 
@@ -317,6 +310,7 @@ func _al_evento_input(_viewport, event, _shape_idx,_a,_b):
 		if event.pressed:  # Cuando se presiona el botón
 			if pieza_tipo==5 and pieza_blanca==true:
 				GlobalSignal.clickReina.emit()
+			
 				
 				#print("CLIC IZQUIERDO detectado en el Area2D ",pieza_tipo )
 			

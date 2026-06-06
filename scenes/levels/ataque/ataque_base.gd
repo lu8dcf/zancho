@@ -51,7 +51,7 @@ func _on_timer_timeout():
 func crear_timer(): # Tiempo entre ataques
 	mi_timer = Timer.new()
 	# Configurar como cíclico (0.5 segundos)
-	mi_timer.wait_time = 0.5
+	mi_timer.wait_time = GlobalJuego.tiempo_ataque
 	mi_timer.one_shot = false  # false = cíclico / true = una sola vez
 	mi_timer.autostart = true   # Inicia automáticamente
 	

@@ -34,7 +34,7 @@ var valores_antes_empezar_oleada = []
 var juego_pausa = false
 
 # Ataques
-var tiempo_ataque = 2 # timepo de cada ataque
+var tiempo_ataque = 1 # timepo de cada ataque
 
 
 signal vidas_cambiadas(nuevas_vidas)
