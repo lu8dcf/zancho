@@ -20,5 +20,17 @@ func _ready() -> void:
 func cambiar_a_material_muerte(idA):
 	if id!=idA:  # si no es el mismo evita cambiar
 		return
-	circulo_mesh.material_override = load(Piezas.material_muerte)
-		
+	material=Piezas.material_muerte
+	var material_muerte = load(material)
+	circulo_mesh.material_override = material_muerte
+	matar_con_animacion(material_muerte)
+
+func matar_con_animacion(mat: ShaderMaterial):
+	var parametro_nombre = "progreso_disolver"  # Nombre de tu variable en el shader
+	
+	# Establecer valor inicial
+	mat.set_shader_parameter(parametro_nombre, 0.3)
+	
+	# Crear tween que interpola automáticamente
+	var tween = create_tween()
+	tween.tween_property(mat, "shader_parameter/" + parametro_nombre, 1.0, 3.0)		
