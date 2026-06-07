@@ -59,7 +59,14 @@ func guardar_tecla_en_config(config: ConfigFile, accion: String, tecla: String):
 		
 func _on_line_edit_input(event: InputEvent, edit: LineEdit, accion: String):
 	if event is InputEventKey and event.pressed:
-		edit.text = OS.get_keycode_string(event.keycode)
+		# Capturar la tecla, incluyendo espacio
+		var key_text = OS.get_keycode_string(event.keycode)
+		
+		# Si es espacio, OS.get_keycode_string devuelve ""
+		if event.keycode == KEY_SPACE:
+			key_text = "Espacio"
+		
+		edit.text = key_text
 		edit.release_focus()
 
 func _on_guardar_pressed():
