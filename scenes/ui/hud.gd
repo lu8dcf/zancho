@@ -6,7 +6,7 @@ extends CanvasLayer
 @onready var panel_rey: Panel = $imagenBackInferior/PanelRey
 
 # contenedor de log
-@onready var log: RichTextLabel = $ContenedorLog/Log
+@onready var log_texto: RichTextLabel = $ContenedorLog/Log
 
 var max_mensajes :int = 50
 #panel superior
@@ -27,8 +27,8 @@ func _ready():
 	imagen_oleada.modulate.a = 0  
 	imagen_oleada.visible = false
 	label_debug_temporal.text = "Debug: " + str(globalJuego.debug) # true y # false
-	log.bbcode_enabled = true
-	log.scroll_active = false
+	log_texto.bbcode_enabled = true
+	log_texto.scroll_active = false
 	# ocultar la tienda
 	GlobalSignal.finalizaOleada.connect(mostrar_imagen)
 	GlobalSignal.mensaje_oleada.connect(mensaje_oleada_log)
@@ -78,7 +78,7 @@ func _ocultar_imagen() -> void:
 	imagen_oleada.visible = false
 
 # signal mensaje_oleada(empieza:bool,gano:bool) 
-func mensaje_oleada_log(empieza:bool, gano = null):
+func mensaje_oleada_log(empieza:bool, gano_oleada = null):
 	var texto_completo = ""
 	var tipo = null
 	if empieza:
@@ -86,7 +86,7 @@ func mensaje_oleada_log(empieza:bool, gano = null):
 		tipo = 2
 	else:
 		texto_completo += "Terminó la Oleada "+ str(GlobalJuego.oleada_actual)
-		if gano:
+		if gano_oleada:
 			tipo = 1
 			texto_completo += "¡Ganaste!"
 		else:
@@ -114,11 +114,11 @@ func mensaje_colocacion_log(tipo_pieza:int,posicion:Vector2i):
 	actualizar_log(texto_completo,tipo)
 
 # signal finAtaque(gano: int,color: bool,perdio: int)  # tipo: int, blanca:bool si es true es blanca y si es false es negra
-func mensaje_muerte_log(gano: int,color: bool,perdio: int):
+func mensaje_muerte_log(gano_pelea: int,color: bool,perdio_pelea: int):
 	var texto_completo = ""
 	var tipo = 2
-	var pieza_ganadora = economia.obtener_nombre_pieza(gano)
-	var pieza_perdedora = economia.obtener_nombre_pieza(perdio)
+	var pieza_ganadora = economia.obtener_nombre_pieza(gano_pelea)
+	var pieza_perdedora = economia.obtener_nombre_pieza(perdio_pelea)
 	if color:
 		texto_completo += pieza_ganadora + " blanco mató a "+ pieza_perdedora
 	else:
@@ -133,7 +133,7 @@ func actualizar_log(mensaje: String, tipo: int = 5):
 	# crear línea de log
 	var linea_log = "[color=%s]%s %s[/color]\n" % [color, icono, mensaje]
 	
-	log.text = linea_log + log.text  # Los mensajes nuevos arriba
+	log_texto.text = linea_log + log_texto.text  # Los mensajes nuevos arriba
 	
 	_limitar_lineas_log()
 
@@ -168,10 +168,10 @@ func _obtener_icono_por_tipo(tipo: int) -> String:
 			return "📝"
 
 func _limitar_lineas_log():
-	var lineas = log.text.split("\n", false)
+	var lineas = log_texto.text.split("\n", false)
 	if lineas.size() > max_mensajes:
-		log.text = "\n".join(lineas.slice(0, max_mensajes))
+		log_texto.text = "\n".join(lineas.slice(0, max_mensajes))
 
 # Función para limpiar el log
 func limpiar_log():
-	log.text = ""
+	log_texto.text = ""

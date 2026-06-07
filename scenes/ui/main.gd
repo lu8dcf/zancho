@@ -3,7 +3,6 @@ extends Control
 @onready var play: MenuBar = $play
 
 @onready var opciones: MenuBar = $opciones
-@onready var video: MenuBar = $opciones/sub_menu_video
 @onready var recompensa: Control = $recompensa
 
 

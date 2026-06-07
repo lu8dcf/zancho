@@ -96,9 +96,12 @@ func reiniciar_variables():
 	modo_colocacion = false
 	
 
-func obtener_ataques_pieza(tipo: int) -> Array:
+func obtener_ataques_pieza(tipo: int,es_pieza_blanca:bool) -> Array:
+	
 	for i in piezas_ataques:
 		if i.has(tipo):
+			if tipo == 1 and !es_pieza_blanca:
+				return [Vector3i(-1,0,0),Vector3i(0,0,1)]
 			return i[tipo]
 	return []
 	

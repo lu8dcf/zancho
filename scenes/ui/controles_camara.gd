@@ -57,7 +57,7 @@ func guardar_tecla_en_config(config: ConfigFile, accion: String, tecla: String):
 	if tecla != "":
 		config.set_value(accion, "tecla", tecla)
 		
-func _on_line_edit_input(event: InputEvent, edit: LineEdit, accion: String):
+func _on_line_edit_input(event: InputEvent, edit: LineEdit, _accion: String):
 	if event is InputEventKey and event.pressed:
 		# Capturar la tecla, incluyendo espacio
 		var key_text = OS.get_keycode_string(event.keycode)

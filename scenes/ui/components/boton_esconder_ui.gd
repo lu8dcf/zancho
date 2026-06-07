@@ -12,8 +12,6 @@ var mostrando : bool = true
 
 func _ready() -> void:
 	label.text = texto
-
-	pressed.connect(_on_pressed)
 	
 
 	texture_normal = mostrar_idle
