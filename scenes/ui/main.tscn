@@ -20,6 +20,12 @@
 [ext_resource type="Texture2D" uid="uid://bajf757x4htjn" path="res://assets/menu/separador.png" id="18_hfsfw"]
 [ext_resource type="Script" uid="uid://diwb1fg2k6x1u" path="res://scenes/ui/sonido.gd" id="18_wweun"]
 [ext_resource type="Script" uid="uid://d184ng4dyotc3" path="res://scenes/ui/controles_camara.gd" id="20_wweun"]
+[ext_resource type="Script" uid="uid://by5rg4ddmdnti" path="res://scenes/ui/accesibilidad_menu.gd" id="21_aca1m"]
+[ext_resource type="Script" uid="uid://bomc1kavji17" path="res://scenes/ui/recompensa.gd" id="21_me51f"]
+[ext_resource type="Texture2D" uid="uid://cjjiu5j24ga7a" path="res://assets/ui/recompensa1.png" id="22_8fca0"]
+[ext_resource type="Texture2D" uid="uid://cfug7r4elnpbi" path="res://assets/ui/brillo.png" id="22_aca1m"]
+[ext_resource type="Texture2D" uid="uid://b2014xvxqqsne" path="res://assets/ui/recompensa2.png" id="23_aca1m"]
+[ext_resource type="LabelSettings" uid="uid://5mxd2sj4000t" path="res://assets/fuentes/textosgrande.tres" id="24_uoc8b"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hfsfw"]
 blend_mode = 1
@@ -515,7 +521,6 @@ label_settings = ExtResource("4_jvuow")
 metadata/_edit_use_anchors_ = true
 
 [node name="video_menu" type="MenuBar" parent="opciones" unique_id=689834738]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3250868
@@ -678,7 +683,6 @@ popup/item_2/text = "2560 x 1440"
 popup/item_2/id = 2
 
 [node name="sonido_menu" type="MenuBar" parent="opciones" unique_id=1538344803]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3250868
@@ -1058,7 +1062,8 @@ offset_bottom = 40.0
 alignment = 1
 
 [node name="zoom" type="Label" parent="opciones/controles_menu/boton_camara/controles_camara/Container_camera" unique_id=213838067]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
 anchor_left = -0.02007592
 anchor_top = 7.4426928
 anchor_right = 1.1263546
@@ -1249,14 +1254,15 @@ alignment = 1
 [node name="guardar" type="TextureButton" parent="opciones/controles_menu" unique_id=435665128]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -9.553186
-anchor_top = 0.6701197
-anchor_right = -9.553186
-anchor_bottom = 0.6701196
-offset_left = -38.0
-offset_top = 320.0
-offset_right = 331.3333
-offset_bottom = 385.0
+anchor_left = -10.193001
+anchor_top = 1.8220001
+anchor_right = -7.5860004
+anchor_bottom = 2.061
+offset_left = -0.8101196
+offset_top = 1.8965454
+offset_right = 0.029937744
+offset_bottom = 0.06439209
+rotation = -0.012241621
 texture_normal = ExtResource("9_dpyut")
 texture_hover = ExtResource("10_t1dln")
 ignore_texture_size = true
@@ -1266,10 +1272,10 @@ metadata/_edit_use_anchors_ = true
 [node name="Label2" type="Label" parent="opciones/controles_menu/guardar" unique_id=2096305168]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.01895307
-anchor_top = -0.035897125
-anchor_right = 0.01895307
-anchor_bottom = -0.03589714
+anchor_left = -0.72395575
+anchor_top = -0.021163696
+anchor_right = -0.72395587
+anchor_bottom = -0.021163696
 offset_left = 142.0
 offset_top = 1.0
 offset_right = 259.0
@@ -1278,7 +1284,40 @@ text = "Guardar"
 label_settings = ExtResource("4_jvuow")
 metadata/_edit_use_anchors_ = true
 
-[node name="accecibilidad_menu" type="MenuBar" parent="opciones" unique_id=254047681]
+[node name="restablecer" type="TextureButton" parent="opciones/controles_menu" unique_id=208369825]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -6.2710004
+anchor_top = 1.83
+anchor_right = -3.6350002
+anchor_bottom = 2.058
+offset_left = 0.026977539
+offset_top = 0.03894043
+offset_right = 0.0320282
+offset_bottom = 1.2827148
+rotation = -0.012241621
+texture_normal = ExtResource("9_dpyut")
+texture_hover = ExtResource("10_t1dln")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="opciones/controles_menu/restablecer" unique_id=1345418938]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.8160285
+anchor_top = -0.017392613
+anchor_right = -0.869682
+anchor_bottom = -0.017392596
+offset_left = 142.0
+offset_top = 1.0
+offset_right = 259.0
+offset_bottom = 53.0
+text = "Restablecer"
+label_settings = ExtResource("4_jvuow")
+metadata/_edit_use_anchors_ = true
+
+[node name="accesibilidad_menu" type="MenuBar" parent="opciones" unique_id=183060484]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -1286,11 +1325,10 @@ anchor_left = 0.3250868
 anchor_top = 0.019290123
 anchor_right = 0.48177087
 anchor_bottom = 0.48379624
-script = ExtResource("17_hfsfw")
+script = ExtResource("21_aca1m")
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect2" type="TextureRect" parent="opciones/accecibilidad_menu" unique_id=1513242181]
-visible = false
+[node name="TextureRect" type="TextureRect" parent="opciones/accesibilidad_menu" unique_id=467613219]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -11.038258
@@ -1302,15 +1340,278 @@ texture = ExtResource("10_6ic3k")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="espaciador" type="TextureRect" parent="opciones/accesibilidad_menu/TextureRect" unique_id=1728226061]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04710921
+anchor_top = 0.21013668
+anchor_right = 8.303399
+anchor_bottom = 2.303359
+offset_right = -1.5258789e-05
+scale = Vector2(0.110328235, 0.007244024)
+texture = ExtResource("18_hfsfw")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="espaciador2" type="TextureRect" parent="opciones/accesibilidad_menu/TextureRect" unique_id=455326922]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04710921
+anchor_top = 0.29214126
+anchor_right = 8.303399
+anchor_bottom = 2.3853636
+offset_right = -1.5258789e-05
+scale = Vector2(0.110328235, 0.007244024)
+texture = ExtResource("18_hfsfw")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="espaciador3" type="TextureRect" parent="opciones/accesibilidad_menu/TextureRect" unique_id=1868437190]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04710921
+anchor_top = 0.3741458
+anchor_right = 8.303399
+anchor_bottom = 2.4673681
+offset_right = -1.5258789e-05
+scale = Vector2(0.110328235, 0.007244024)
+texture = ExtResource("18_hfsfw")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="espaciador4" type="TextureRect" parent="opciones/accesibilidad_menu/TextureRect" unique_id=841899636]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04710921
+anchor_top = 0.45615035
+anchor_right = 8.303399
+anchor_bottom = 2.5493727
+offset_right = -1.5258789e-05
+scale = Vector2(0.110328235, 0.007244024)
+texture = ExtResource("18_hfsfw")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Titulo" type="TextureButton" parent="opciones/accesibilidad_menu" unique_id=913321669]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -9.606226
+anchor_top = -0.06656108
+anchor_right = -9.606224
+anchor_bottom = -0.066561066
+offset_left = -19.0
+offset_top = 30.0
+offset_right = 350.3333
+offset_bottom = 95.0
+scale = Vector2(0.94450027, 0.94450027)
+texture_normal = ExtResource("11_t1dln")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="opciones/accesibilidad_menu/Titulo" unique_id=922616855]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.045889728
+anchor_right = -0.045889728
+offset_left = 144.0
+offset_right = 302.0
+offset_bottom = 52.0
+text = "Accesibilidad"
+label_settings = ExtResource("4_jvuow")
+metadata/_edit_use_anchors_ = true
+
+[node name="multi" type="Label" parent="opciones/accesibilidad_menu" unique_id=1052228799]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -12.982994
+anchor_top = 0.25886583
+anchor_right = -12.982994
+anchor_bottom = 0.25886583
+offset_left = 144.0
+offset_right = 302.0
+offset_bottom = 52.0
+text = "Multijugador"
+label_settings = ExtResource("4_jvuow")
+metadata/_edit_use_anchors_ = true
+
+[node name="CheckButton" type="CheckButton" parent="opciones/accesibilidad_menu/multi" unique_id=2084168923]
+layout_mode = 0
+offset_left = 231.0
+offset_top = 14.0
+offset_right = 343.0
+offset_bottom = 45.0
+disabled = true
+text = "Permitir"
+alignment = 1
+
+[node name="recompensa" type="Control" parent="." unique_id=455167008]
+visible = false
+layout_mode = 1
+anchor_left = 0.014
+anchor_top = 0.019000001
+anchor_right = 0.045
+anchor_bottom = 0.068
+offset_left = -0.25600052
+offset_top = -0.62400246
+offset_right = 0.31999207
+offset_bottom = -0.12800598
+script = ExtResource("21_me51f")
+
+[node name="brillo" type="TextureRect" parent="recompensa" unique_id=1076795937]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.333
+anchor_top = -0.25
+anchor_right = 1.4440001
+anchor_bottom = 1.3440001
+offset_left = 7.976
+offset_top = 8.0
+offset_right = 0.03199005
+offset_bottom = 1.9839935
+pivot_offset = Vector2(64, 48)
+texture = ExtResource("22_aca1m")
+expand_mode = 1
+
+[node name="imagen_recompensa" type="TextureButton" parent="recompensa" unique_id=1095198958]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.222
+anchor_bottom = 1.125
+offset_left = -2.0
+offset_top = -1.0
+offset_right = 14.015999
+offset_bottom = 7.0
+texture_normal = ExtResource("22_8fca0")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="panel" type="TextureRect" parent="recompensa" unique_id=1312268837]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 3.0555556
+anchor_top = 1.203125
+anchor_right = 11.222
+anchor_bottom = 7.7500005
+offset_left = -28.0
+offset_top = 11.0
+offset_right = 0.015991211
+offset_bottom = -3.0517578e-05
+texture = ExtResource("10_6ic3k")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="recompensa/panel" unique_id=1383276195]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 80.0
+offset_right = 368.0
+offset_bottom = 344.0
+texture = ExtResource("23_aca1m")
+expand_mode = 1
+
+[node name="titulo" type="Label" parent="recompensa/panel" unique_id=1253018707]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 336.0
+offset_top = 112.0
+offset_right = -25.5
+offset_bottom = 305.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 19
+text = "Mi Rey, recaudamos 500 monedas de oro de los impuestos del reino. Esta guerra nos costará más de lo previsto..."
+label_settings = ExtResource("24_uoc8b")
+autowrap_mode = 3
+
+[node name="Label3" type="Label" parent="recompensa/panel" unique_id=1548432075]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 52.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 10
+text = "¡Recibiste 500 monedas de oro!"
+label_settings = ExtResource("4_jvuow")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="continuar" type="TextureButton" parent="recompensa/panel" unique_id=1335209984]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -237.0
+offset_top = -83.0
+offset_right = -37.0
+offset_bottom = -18.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("9_dpyut")
+texture_hover = ExtResource("10_t1dln")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" parent="recompensa/panel/continuar" unique_id=474577763 instance=ExtResource("13_qmqn8")]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -33.5
+offset_right = -1.0
+offset_bottom = 18.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Continuar"
+
+[node name="rechazar" type="TextureButton" parent="recompensa/panel" unique_id=102650894]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -83.0
+offset_right = -376.0
+offset_bottom = -18.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("9_dpyut")
+texture_hover = ExtResource("10_t1dln")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" parent="recompensa/panel/rechazar" unique_id=114097863 instance=ExtResource("13_qmqn8")]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -33.5
+offset_right = -1.0
+offset_bottom = 18.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Rechazar"
+
 [connection signal="pressed" from="TextureRect/play" to="." method="_on_texture_button_2_pressed"]
 [connection signal="pressed" from="TextureRect/salir" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="TextureRect/salir" to="." method="_on_salir_pressed"]
 [connection signal="pressed" from="TextureRect/Opciones" to="." method="_on_opciones_pressed"]
 [connection signal="pressed" from="play/nueva_partida" to="play" method="_on_nueva_partida_pressed"]
 [connection signal="pressed" from="opciones/boton_accecibilidad" to="opciones" method="_on_boton_accecibilidad_pressed"]
-[connection signal="pressed" from="opciones/boton_video" to="opciones" method="_on_boton_video_pressed"]
 [connection signal="pressed" from="opciones/boton_video" to="opciones" method="_on_nueva_partida_pressed"]
+[connection signal="pressed" from="opciones/boton_video" to="opciones" method="_on_boton_video_pressed"]
 [connection signal="pressed" from="opciones/volver" to="opciones" method="_on_volver_pressed"]
 [connection signal="pressed" from="opciones/boton_controles" to="opciones" method="_on_boton_controles_pressed"]
 [connection signal="pressed" from="opciones/controles_menu/boton_camara" to="opciones/controles_menu" method="_on_boton_camara_pressed"]
 [connection signal="pressed" from="opciones/controles_menu/boton_jugabilidad" to="opciones/controles_menu" method="_on_boton_jugabilidad_pressed"]
+[connection signal="pressed" from="recompensa/imagen_recompensa" to="recompensa" method="_on_imagen_recompensa_pressed"]
+[connection signal="pressed" from="recompensa/panel/continuar" to="recompensa" method="_on_continuar_pressed"]
+[connection signal="pressed" from="recompensa/panel/rechazar" to="recompensa" method="_on_rechazar_pressed"]

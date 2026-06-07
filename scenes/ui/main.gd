@@ -4,11 +4,13 @@ extends Control
 
 @onready var opciones: MenuBar = $opciones
 @onready var video: MenuBar = $opciones/sub_menu_video
+@onready var recompensa: Control = $recompensa
 
 
 func _ready():
 	play.visible=false
 	opciones.visible=false
+	recompensa.visible = true
 	Sonidos.menu(true)
 
 	
