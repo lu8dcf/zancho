@@ -39,9 +39,11 @@ signal finAtaque(gano: int,color: bool,perdio: int)  # tipo: int, blanca:bool si
 
 # Acciones del jugador
 @warning_ignore("unused_signal")
-signal overPieza(activo:bool, tipo: int,posicion: Vector3i) # si es activo: true tiene el mouse encima y si es false entocnes sale
+signal overPieza(activo:bool, tipo: int, blanca: bool, posicion: Vector3i) # si es activo: true tiene el mouse encima y si es false entocnes sale
 @warning_ignore("unused_signal")
 signal clickReina()
+@warning_ignore("unused_signal")
+signal cambioLugar(tipo:int)
 
 # mensajes para el log
 @warning_ignore("unused_signal")

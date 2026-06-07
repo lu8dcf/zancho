@@ -10,8 +10,11 @@ var bonus_cantidad = [1,1.3,1.3,1.5,1.5,1.5]
 var bonus_a=[0,4,3,1,5,2]
 
 #texturas de los modelos
-var material_bueno = "res://assets/modelos/texturas/material_buenos.tres"
-var material_malo = "res://assets/modelos/texturas/material_malos.tres"
+#var material_bueno = "res://assets/modelos/texturas/material_buenos.tres"
+#var material_malo = "res://assets/modelos/texturas/material_malos.tres"
+
+var material_bueno = "res://assets/modelos/texturas/material_malos.tres"
+var material_malo = "res://assets/modelos/texturas/material_buenos.tres"
 var material_muerte ="res://assets/modelos/texturas/material_muerte.tres"
 
 # las piezas que estan activas en la partida
@@ -32,9 +35,20 @@ func buscar_tipo(id_buscar : int):
 	for pieza_b in pieza_negra:
 		if id_buscar == pieza_b.id:
 			return pieza_b.pieza_tipo
-	
+
+# Elimina una pieza blanca de la lista segun su id
+func eliminar_pieza(id_buscar):
+	for pieza_b in pieza_blanca:
+		if id_buscar == pieza_b.id:
+			pieza_blanca.erase(pieza_b) # elimina la pieza
+			return true
+	return false
+		
+		
 func informar_fin_ataque(ganador,perdedor): # Tipo ganador
-	GlobalSignal.finAtaque.emit(buscar_tipo(ganador),buscar_color(ganador),buscar_tipo(perdedor))
+	if GlobalJuego.empezo_oleada:
+		GlobalSignal.finAtaque.emit(buscar_tipo(ganador),buscar_color(ganador),buscar_tipo(perdedor))
+	
 	#print (buscar_tipo(ganador)," ",buscar_color(ganador)," ",buscar_tipo(perdedor))
 			
 			

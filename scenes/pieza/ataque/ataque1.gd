@@ -21,7 +21,6 @@ func _ready():
 	call_deferred("configurar_ataque")
 	
 	
-	
 func limpiar_ataques_existentes():
 	for child in owner.area_ataque.get_children():
 		if child is CollisionShape3D:

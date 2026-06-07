@@ -128,8 +128,8 @@ func _on_boton_debilidades_pressed() -> void:
 
 # boton empezar oleada
 func _on_empezar_oleada_pressed() -> void:
-	if !globalJuego.empezo_oleada and empezar_oleada.ver_texto() == "Empezar Oleada " + str(globalJuego.oleada_actual):
-		globalJuego.empezo_oleada = true
+	if !GlobalJuego.empezo_oleada and empezar_oleada.ver_texto() == "Empezar Oleada " + str(GlobalJuego.oleada_actual):
+		GlobalJuego.empezo_oleada = true
 		GlobalSignal.emit_signal("comienzoOleada")
 		GlobalSignal.emit_signal("mensaje_oleada",true)
 		await get_tree().create_timer(3).timeout
@@ -137,7 +137,7 @@ func _on_empezar_oleada_pressed() -> void:
 		aparecer_botones_velocidades()
 		Piezas.cancelar_modo_colocacion()
 		Piezas.emit_signal("modo_colocacion_cancelado")
-	
+		
 
 
 # botones de velocidad y pausa

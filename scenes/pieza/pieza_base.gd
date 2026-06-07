@@ -229,9 +229,11 @@ func recibeDanio(idD: int,danio: int):
 		die()
 
 func die():
-	GlobalSignal.piezaMuere.emit(id) # aviso que muere
+	
 	# Efectos de muerte
-	Sonidos.death()
+	if GlobalJuego.empezo_oleada:
+		GlobalSignal.piezaMuere.emit(id) # aviso que muere
+		Sonidos.death()
 	animacion_muerte()
 	
 func animacion_muerte():
@@ -249,16 +251,17 @@ func animacion_muerte():
 	# Subir y rotar lentamente
 	tween.tween_property(self, "global_position:y", global_position.y + 5 ,3)
 	#tween.tween_property(self, "rotation:y", rotation.y + 10, 2)  # Girar mientras sube
-	#tween.tween_property(self, "scale", Vector3.ZERO, 3)
+	if !GlobalJuego.empezo_oleada:
+		tween.tween_property(self, "scale", Vector3.ZERO, 1.5)
 		
 	await tween.finished
 	
+	if GlobalJuego.empezo_oleada:
+		if Piezas.pieza_negra.size()==0:
+			GlobalSignal.finalizaOleada.emit(true)
 	
-	if Piezas.pieza_negra.size()==0:
-		GlobalSignal.finalizaOleada.emit(true)
-	
-	if pieza_tipo==0:
-		GlobalSignal.finalizaOleada.emit(false)
+		if pieza_tipo==0:
+			GlobalSignal.finalizaOleada.emit(false)
 	queue_free()
 
 func finalizaOleada(_estado):
@@ -297,21 +300,23 @@ func conectar_señales():
 		
 # Over sobre la pieza
 func _al_entrar_mouse():
-	GlobalSignal.overPieza.emit(true,pieza_tipo,round(global_position/espaciado))
+	GlobalSignal.overPieza.emit(true,pieza_tipo,pieza_blanca,round(global_position/espaciado))
 	
 #salir del over
 func _al_salir_mouse():
-	GlobalSignal.overPieza.emit(false,pieza_tipo,round(global_position/espaciado))
+	GlobalSignal.overPieza.emit(false,pieza_tipo,pieza_blanca,round(global_position/espaciado))
 	
-#click sobre la pieza emn esrte caso busca la reina blanca	
+#click sobre la pieza emn esrte caso busca la reina blanca	o cambio de pieza
 func _al_evento_input(_viewport, event, _shape_idx,_a,_b):
 	# Detectar CLIC IZQUIERDO
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:  # Cuando se presiona el botón
-			if pieza_tipo==5 and pieza_blanca==true:
+			if pieza_tipo==5 and pieza_blanca==true and GlobalJuego.empezo_oleada:
 				GlobalSignal.clickReina.emit()
-			
-				
+			if pieza_blanca==true and GlobalJuego.empezo_oleada == false and pieza_tipo!=0:
+				if Piezas.eliminar_pieza(id):
+					GlobalSignal.cambioLugar.emit(pieza_tipo)
+					die()
 				#print("CLIC IZQUIERDO detectado en el Area2D ",pieza_tipo )
 			
 	
