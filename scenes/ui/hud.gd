@@ -33,7 +33,9 @@ func _ready():
 	GlobalSignal.finalizaOleada.connect(mostrar_imagen)
 	GlobalSignal.mensaje_oleada.connect(mensaje_oleada_log)
 	GlobalSignal.mensaje_tienda.connect(mensaje_tienda_log)
+	GlobalSignal.finAtaque.connect(mensaje_muerte_log)
 	Piezas.pieza_colocada.connect(mensaje_colocacion_log)
+	
 
 func mostrar_todos_paneles():
 	panel_inferior.visible = true
@@ -108,18 +110,27 @@ func mensaje_colocacion_log(tipo_pieza:int,posicion:Vector2i):
 	var texto_completo = ""
 	var tipo = 4
 	var nombre_pieza = economia.obtener_nombre_pieza(tipo_pieza)
-	texto_completo += "Colocaste la pieza "+ nombre_pieza + " en la ubicación: "+ str(posicion)
+	texto_completo += "Colocaste la pieza "+ nombre_pieza + " en n: "+ str(posicion)
 	actualizar_log(texto_completo,tipo)
 
-func mensaje_ataques():
-	pass
+# signal finAtaque(gano: int,color: bool,perdio: int)  # tipo: int, blanca:bool si es true es blanca y si es false es negra
+func mensaje_muerte_log(gano: int,color: bool,perdio: int):
+	var texto_completo = ""
+	var tipo = 2
+	var pieza_ganadora = economia.obtener_nombre_pieza(gano)
+	var pieza_perdedora = economia.obtener_nombre_pieza(perdio)
+	if color:
+		texto_completo += pieza_ganadora + " blanco mató a "+ pieza_perdedora
+	else:
+		texto_completo += pieza_ganadora + " negro mató a "+ pieza_perdedora
+
+	actualizar_log(texto_completo,tipo)
 
 func actualizar_log(mensaje: String, tipo: int = 5):	
-	# Formatear según tipo
 	var color = _obtener_color_por_tipo(tipo)
 	var icono = _obtener_icono_por_tipo(tipo)
 	
-	# Crear línea de log
+	# crear línea de log
 	var linea_log = "[color=%s]%s %s[/color]\n" % [color, icono, mensaje]
 	
 	log.text = linea_log + log.text  # Los mensajes nuevos arriba

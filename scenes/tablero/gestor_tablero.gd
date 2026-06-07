@@ -84,9 +84,10 @@ func _resaltar_casillas_ataque(posicion_base: Vector2i, ataques: Array):
 			if baldosa_objetivo:
 				baldosa_objetivo.seleccionar(true)  # Usar el indicador existente o crear uno nuevo
 
-# NUEVA FUNCIÓN: Limpiar el resaltado de ataques
+# limpiar el resaltado de ataques
 func _limpiar_resaltado_ataque():
 	for baldosa in baldosas.values():
+		baldosa.seleccionar(false)
 		if not baldosa.esta_ocupada:  # Solo limpiar baldosas no ocupadas
 			baldosa.seleccionar(false)
 			
