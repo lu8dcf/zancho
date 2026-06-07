@@ -36,7 +36,7 @@ func _on_modo_colocacion_cancelado():
 
 func cargar_escena_pieza(tipo: int):
 	_limpiar_modelo()
-	var ruta = "res://assets/modelos/piezas/pieza_" + str(tipo) + "B.tscn"
+	var ruta = "res://assets/modelos/pieza_generica/pieza_" + str(tipo) + ".tscn"
 	
 	var modelo_objeto = load(ruta)
 	if not modelo_objeto:

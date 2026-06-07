@@ -35,7 +35,7 @@ signal piezaRecibeDanio(id: int,danio: int)
 signal piezaMuere(id: int)
 
 @warning_ignore("unused_signal")
-signal finAtaque(gano: int,color: bool,perdio: int)
+signal finAtaque(gano: int,color: bool,perdio: int)  # tipo: int, blanca:bool si es true es blanca y si es false es negra
 
 # Acciones del jugador
 @warning_ignore("unused_signal")
