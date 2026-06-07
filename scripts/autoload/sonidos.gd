@@ -36,7 +36,7 @@ func menu(activar: bool):
 			add_child(death_sound)
 			
 		
-			var volumen_objetivo = -20.0 
+			var volumen_objetivo = -50.0 
 			
 			death_sound.volume_db = -80.0
 			death_sound.play()
@@ -111,3 +111,28 @@ func boton1():
 	
 	await boton_sound.finished
 	boton_sound.queue_free()
+
+
+func claim():
+	var oleada_Sound = AudioStreamPlayer2D.new()
+	oleada_Sound.stream = preload("res://assets/sound/sfx/botones_interfaz/claim.mp3")
+	add_child(oleada_Sound)
+	oleada_Sound.play()
+	await oleada_Sound.finished
+	oleada_Sound.queue_free()
+
+func error():
+	var oleada_Sound = AudioStreamPlayer2D.new()
+	oleada_Sound.stream = preload("res://assets/sound/sfx/botones_interfaz/error.mp3")
+	add_child(oleada_Sound)
+	oleada_Sound.play()
+	await oleada_Sound.finished
+	oleada_Sound.queue_free()
+	
+func hover():
+	var oleada_Sound = AudioStreamPlayer2D.new()
+	oleada_Sound.stream = preload("res://assets/sound/sfx/botones_interfaz/hover.mp3")
+	add_child(oleada_Sound)
+	oleada_Sound.play()
+	await oleada_Sound.finished
+	oleada_Sound.queue_free()
