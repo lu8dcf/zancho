@@ -1089,6 +1089,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_wweun")
 theme_override_styles/hover = SubResource("StyleBoxFlat_rvf5f")
 
 [node name="controles_jugabilidad" type="Label" parent="opciones/controles_menu/boton_jugabilidad" unique_id=526877973]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -10.631631
@@ -1250,7 +1251,7 @@ alignment = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -9.553186
-anchor_top = 0.6701197
+anchor_top = 0.6701196
 anchor_right = -9.553186
 anchor_bottom = 0.6701196
 offset_left = -38.0
@@ -1267,7 +1268,7 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.01895307
-anchor_top = -0.035897125
+anchor_top = -0.03589714
 anchor_right = 0.01895307
 anchor_bottom = -0.03589714
 offset_left = 142.0
@@ -1308,8 +1309,8 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="TextureRect/Opciones" to="." method="_on_opciones_pressed"]
 [connection signal="pressed" from="play/nueva_partida" to="play" method="_on_nueva_partida_pressed"]
 [connection signal="pressed" from="opciones/boton_accecibilidad" to="opciones" method="_on_boton_accecibilidad_pressed"]
-[connection signal="pressed" from="opciones/boton_video" to="opciones" method="_on_boton_video_pressed"]
 [connection signal="pressed" from="opciones/boton_video" to="opciones" method="_on_nueva_partida_pressed"]
+[connection signal="pressed" from="opciones/boton_video" to="opciones" method="_on_boton_video_pressed"]
 [connection signal="pressed" from="opciones/volver" to="opciones" method="_on_volver_pressed"]
 [connection signal="pressed" from="opciones/boton_controles" to="opciones" method="_on_boton_controles_pressed"]
 [connection signal="pressed" from="opciones/controles_menu/boton_camara" to="opciones/controles_menu" method="_on_boton_camara_pressed"]
