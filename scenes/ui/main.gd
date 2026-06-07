@@ -38,3 +38,19 @@ func _on_opciones_pressed() -> void:
 		opciones.visible = false
 	else:
 		opciones.visible = true
+
+
+func _on_play_mouse_entered() -> void:
+	Sonidos.hover()
+
+
+func _on_salir_focus_entered() -> void:
+	Sonidos.hover()
+
+
+func _on_creditos_mouse_entered() -> void:
+	Sonidos.hover()
+
+
+func _on_opciones_mouse_entered() -> void:
+	Sonidos.hover()

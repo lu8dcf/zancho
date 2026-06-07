@@ -81,7 +81,7 @@ func _on_imagen_recompensa_pressed() -> void:
 
 	imagen_recompensa.rotation_degrees = 0
 	imagen_recompensa.scale = Vector2.ONE
-
+	Sonidos.boton1()
 	panel.visible = true
 	opciones.visible = false
 	play.visible = false
@@ -89,8 +89,10 @@ func _on_imagen_recompensa_pressed() -> void:
 
 
 func _on_continuar_pressed() -> void:
+	
+	Sonidos.claim()
 	economia.añadir_monedas(500)
-	await get_tree().create_timer(1.0).timeout
+	
 	recompensa.visible = false	
 
 func _on_rechazar_pressed() -> void:
