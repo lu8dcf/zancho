@@ -16,7 +16,8 @@ var espaciado = GlobalJuego.espaciado_baldosas
 # CArga de parametros pieza
 var vida_total: int
 var vida_actual: int
-var angulo_frente: int = 225 # por defecto la negra
+var angulo_frente: int = 225 # por defecto la blanca
+var angulo_frente_negra: int = 45 # por defecto la negra
 
 # Componentes
 var movimiento_especifico = preload("res://scenes/pieza/movimiento/movimiento.tscn") # define le movimiento caracteristico de la pieza
@@ -139,7 +140,10 @@ func posicionamiento_giro(): # Giro inicial de la pieza an colocarse en el table
 	giro_inicial.start()
 
 func llego_al_piso():
-	giro(angulo_frente)
+	if pieza_blanca:
+		giro(angulo_frente)
+	else:
+		giro(angulo_frente_negra)
 	
 func _on_body_entered(_body): #cuando la pieza se instancia y cae 
 	if pieza_colocada : return # solo se ejecuta en el inicio
