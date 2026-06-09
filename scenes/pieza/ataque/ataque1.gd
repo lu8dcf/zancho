@@ -32,7 +32,7 @@ func configurar_ataque():
 	for dir in owner.pieza.ataque:
 		var posicion_ataque = owner.global_position + dir * espaciado * 0.707
 		crear_attack_shape(posicion_ataque)
-
+		
 
 # Crea un CollisionShape3D y lo posiciona correctamente
 func crear_attack_shape(posicion: Vector3):
@@ -51,7 +51,7 @@ func crear_attack_shape(posicion: Vector3):
 		
 	# Agregar un script de detección al área 
 	shape.set_script(preload("res://scenes/pieza/ataque/detector_ataque.gd"))
-	shape.disabled = true
+	shape.disabled = false
 	 #  añadir al árbol
 	owner.area_ataque.add_child(shape)
 	# Habilitar después de 0.5 segundos
