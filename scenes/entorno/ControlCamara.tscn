@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dkxck3q07ef2a"]
 
 [ext_resource type="Script" path="res://scenes/entorno/control_camara.gd" id="1_xmuj0"]
-[ext_resource type="Script" path="res://scenes/entorno/camera_3d.gd" id="2_nttae"]
+[ext_resource type="Script" uid="uid://d2pra362yk8lr" path="res://scenes/entorno/camera_3d.gd" id="2_nttae"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xmuj0"]
 radius = 0.40509033

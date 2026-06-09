@@ -156,8 +156,8 @@ func _al_salir_mouse():
 # el tipo es el tipo de pieza
 # y la posicion es donde esta la pieza
 
-func _mostrar_ataques_pieza(mostrar:bool, tipo_pieza_actual:int,pieza_blanca:bool,  posicion:Vector3i ):
-	var ataques_pieza = Piezas.obtener_ataques_pieza(tipo_pieza_actual,pieza_blanca)
+func _mostrar_ataques_pieza(mostrar:bool, tipo_pieza_actual2:int,pieza_blanca:bool,  posicion:Vector3i ):
+	var ataques_pieza = Piezas.obtener_ataques_pieza(tipo_pieza_actual2,pieza_blanca)
 	var posicion_transformada: Vector2i = Vector2i(posicion.x, posicion.z)
 	if mostrar:
 		if ataques_pieza != null:
