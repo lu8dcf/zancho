@@ -221,17 +221,33 @@ func recibeDanio(idD: int,danio: int):
 	Sonido("danio")
 	sangre.play("Sangre")
 	
-		
+	actualizar_shader_danio()
 	
-		
-		
-	# calculo del porcentaje de vida 
 	var porcentaje = float(vida_actual) / vida_total
 	barraVida.emit(porcentaje)
 			
 	if vida_actual <= 0:
 		die()
 
+func actualizar_shader_danio():
+	if instancia_objeto_pieza:
+		var mesh_node = instancia_objeto_pieza if instancia_objeto_pieza is MeshInstance3D else _buscar_mesh(instancia_objeto_pieza)
+		if mesh_node and mesh_node.material_override:
+			var material_pieza = mesh_node.material_override as ShaderMaterial
+			if material_pieza:
+				var porcentaje_danio = 1.0 - (float(vida_actual) / vida_total)
+				material_pieza.set_shader_parameter("damage_percentage", porcentaje_danio)
+
+
+#el for esta en vano pero 
+func _buscar_mesh(nodo: Node) -> MeshInstance3D:
+	if nodo is MeshInstance3D:
+		return nodo
+	for hijo in nodo.get_children():
+		var encontrado = _buscar_mesh(hijo)
+		if encontrado:
+			return encontrado
+	return null
 func die():
 	
 	# Efectos de muerte
