@@ -3,7 +3,8 @@
 [ext_resource type="FontFile" uid="uid://c6ngyfvifeml" path="res://assets/fuentes/startedbyamouse.ttf" id="1_bxqo6"]
 
 [resource]
-line_spacing = 3.095
+line_spacing = 10.925
+paragraph_spacing = 2.03
 font = ExtResource("1_bxqo6")
 font_size = 32
 shadow_size = 10

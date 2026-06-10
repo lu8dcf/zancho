@@ -1,0 +1,173 @@
+[gd_scene format=3 uid="uid://jo3svada24fj"]
+
+[ext_resource type="Script" uid="uid://c2dai0gxnijq7" path="res://scenes/ui/components/ganaste_oleada.gd" id="1_e6gjl"]
+[ext_resource type="Texture2D" uid="uid://duuilqgtqt51l" path="res://assets/ui/cartel.png" id="1_mrs6e"]
+[ext_resource type="FontFile" uid="uid://c6ngyfvifeml" path="res://assets/fuentes/startedbyamouse.ttf" id="2_q46lh"]
+[ext_resource type="Texture2D" uid="uid://couaobhhkqc78" path="res://assets/menu/Boton6.png" id="3_q46lh"]
+[ext_resource type="Texture2D" uid="uid://by412hpyptahi" path="res://assets/menu/Boton7.png" id="4_e6gjl"]
+
+[sub_resource type="Animation" id="Animation_aynca"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-146, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_3lj2e"]
+resource_name = "ganaste la oldeada"
+length = 5.4
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -1.6666667, 0, 0, 0),
+"times": PackedFloat32Array(0, 2.2000003)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(2, 0, 2),
+"points": PackedFloat32Array(-673, -0.048659537, -68.69105, 0.3, 423.5, -163.5, -0.7645335, 103, 0, 0, -173.5, -0.202667, -25, 0, 0),
+"times": PackedFloat32Array(0, 1.5312002, 1.9360003)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w68fg"]
+_data = {
+&"RESET": SubResource("Animation_aynca"),
+&"ganaste la oldeada": SubResource("Animation_3lj2e")
+}
+
+[sub_resource type="Curve" id="Curve_e6gjl"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.979351, 0.03563094), 1.5572218, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_aynca"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.2140575, 0.3514377, 0.52396166, 0.686901, 1)
+colors = PackedColorArray(0.99999994, 0.8112437, 0.38780284, 1, 1, 0.22252941, 0.46458316, 1, 0.9684666, 0.0004978645, 0.9164701, 1, 7.70092e-07, 0.89758074, 0.8308528, 1, 0.5097611, 0.73748267, 0.9998073, 1, 0.98848814, 0.55177003, 0.3881044, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_n6w5e"]
+line_spacing = 9.84
+font = ExtResource("2_q46lh")
+font_size = 174
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 31
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(8.075, 5.74)
+
+[node name="GanasteOleada" type="Control" unique_id=1830827380]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e6gjl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=892150953]
+libraries/ = SubResource("AnimationLibrary_w68fg")
+autoplay = &"ganaste la oldeada"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1595600934]
+layout_mode = 0
+offset_top = -146.0
+offset_right = 2560.0
+offset_bottom = 1294.0
+scale = Vector2(0.46203217, 0.46203217)
+texture = ExtResource("1_mrs6e")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="TextureRect" unique_id=1684619697]
+z_index = -1
+z_as_relative = false
+position = Vector2(1917.6155, 818.12494)
+rotation = 0.2617994
+amount = 176
+lifetime = 2.15
+lifetime_randomness = 0.45
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2(1, -20.995)
+spread = 52.5
+initial_velocity_min = 805.49
+initial_velocity_max = 2500.0
+angular_velocity_max = 340.0
+scale_amount_max = 28.78
+scale_amount_curve = SubResource("Curve_e6gjl")
+color_initial_ramp = SubResource("Gradient_aynca")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="TextureRect/CPUParticles2D2" unique_id=1916529720]
+z_index = -1
+z_as_relative = false
+position = Vector2(-1204.638, 295.89322)
+rotation = -1.0471976
+amount = 176
+lifetime = 2.15
+lifetime_randomness = 0.45
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2(1, -20.995)
+spread = 52.5
+initial_velocity_min = 805.49
+initial_velocity_max = 2500.0
+angular_velocity_max = 340.0
+scale_amount_max = 28.78
+scale_amount_curve = SubResource("Curve_e6gjl")
+color_initial_ramp = SubResource("Gradient_aynca")
+
+[node name="Label" type="Label" parent="TextureRect" unique_id=1246924648]
+layout_mode = 0
+offset_left = 770.5091
+offset_top = 633.0728
+offset_right = 1196.509
+offset_bottom = 828.0728
+scale = Vector2(2.29978, 2.29978)
+text = "VICTORIA"
+label_settings = SubResource("LabelSettings_n6w5e")
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect" unique_id=1857949204]
+layout_mode = 0
+offset_left = 930.6711
+offset_top = 1168.7498
+offset_right = 2038.6711
+offset_bottom = 1410.7498
+scale = Vector2(0.62373257, 0.75364804)
+texture_normal = ExtResource("3_q46lh")
+texture_hover = ExtResource("4_e6gjl")
+
+[node name="Label" type="Label" parent="TextureRect/TextureButton" unique_id=100638714]
+layout_mode = 0
+offset_left = 270.6601
+offset_top = 25.846504
+offset_right = 1000.0046
+offset_bottom = 359.70148
+scale = Vector2(1.4115095, 0.82643807)
+text = "Continuar"
+label_settings = SubResource("LabelSettings_n6w5e")
