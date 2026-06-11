@@ -9,7 +9,8 @@ var proxima_posicion : Vector3
 
 # desplazamiento Torre
 var direccion= Vector3i(0,0,0)
-var secuencia = [0,1,2,3,4]
+#var secuencia = [0,1,2,3,4]
+var secuencia = [3,4,2,1,0]
 var paso = 3
 
 # variables para detectar cuando el peon queda trabado y no puede avanzar
@@ -30,50 +31,64 @@ func _ready():
 	
 		
 func movimiento():
-	cambio_estado(paso)
-	# actualizacion de posicion
-	var cambio = direccion*GlobalJuego.espaciado_baldosas # # vector de cambio de la pieza
+	#cambio_estado(paso)
+	## actualizacion de posicion
+	#var cambio = direccion*GlobalJuego.espaciado_baldosas # # vector de cambio de la pieza
+	#
+	## proximo sitio a ocupar
+	#var sitio3d = round(owner.global_position+cambio)/globalJuego.espaciado_baldosas # en 3d
+	## convierto la proxima posicion en 2Di para 
+	#var nuevo_sitio = Vector2i(sitio3d.x,sitio3d.z)  # en 2d
+	#
+				#
+	#if globalJuego.verifica_extremos(nuevo_sitio)==false:
+		#saltar_paso()
+		#return
+	#
+	#if globalJuego.verifica_obstaculos(nuevo_sitio)==false:
+		#saltar_paso()
+		#return
+		#
+	#if globalJuego.verifica_piezas(nuevo_sitio)==false:
+		#paso=0
+		#pasos_detenido +=1
+		#return
+	#
+	#if pasos_detenido==3:
+		#pieza.die()
+		#return
+	#
+	for i in range(secuencia.size()): #es un sistema de prioridad
+		cambio_estado(secuencia[i]) #siempre muevea delante, si no, una casilla, si no a la derecha y asi
+		var cambio = direccion * GlobalJuego.espaciado_baldosas # vector de cambio de la pieza
+		if (owner.verificar_proximo_paso(cambio)):
+			mover(cambio)
+			return
 	
-	# proximo sitio a ocupar
-	var sitio3d = round(owner.global_position+cambio)/globalJuego.espaciado_baldosas # en 3d
-	# convierto la proxima posicion en 2Di para 
-	var nuevo_sitio = Vector2i(sitio3d.x,sitio3d.z)  # en 2d
-	
-				
-	if globalJuego.verifica_extremos(nuevo_sitio)==false:
-		saltar_paso()
-		return
-	
-	if globalJuego.verifica_obstaculos(nuevo_sitio)==false:
-		saltar_paso()
-		return
-		
-	if globalJuego.verifica_piezas(nuevo_sitio)==false:
-		paso=0
-		pasos_detenido +=1
-		return
-	
-	if pasos_detenido==3:
-		pieza.die()
-		return
+	#var tween = create_tween()
+	#tween.tween_property(owner, "global_position", owner.global_position + cambio , 1) \
+	#.set_trans(Tween.TRANS_SINE) \
+	#.set_ease(Tween.EASE_IN_OUT)
+	#paso = 3
 	
 	
+func mover(cambio):
 	var tween = create_tween()
 	tween.tween_property(owner, "global_position", owner.global_position + cambio , 1) \
 	.set_trans(Tween.TRANS_SINE) \
 	.set_ease(Tween.EASE_IN_OUT)
-	paso = 3
-	
-	
-func saltar_paso(): # volver a iniciar en otra posicion d esalto
-	paso +=1
-	if paso==5: paso=2
-	movimiento()  	
+
+
+#func saltar_paso(): # volver a iniciar en otra posicion d esalto
+	#paso +=1
+	#if paso==5: paso=2
+	#movimiento()  	
 	
 # Estadod de la pieza
 func cambio_estado(cambio):
 		
-	match secuencia[cambio]:
+	#match secuencia[cambio]:
+	match cambio:
 		0: # Quieto
 			direccion = Vector3i(0,0,0)
 			owner.giro(45)
@@ -83,7 +98,7 @@ func cambio_estado(cambio):
 		2:# derecha
 			direccion = Vector3i(1,0,1)
 			owner.giro(135)
-		3: # abajo
+		3: # abajo [3,4,2,1,0]
 			direccion = Vector3i(-1,0,1)
 			owner.giro(45)
 		4: # izquierda

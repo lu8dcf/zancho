@@ -161,12 +161,18 @@ func create_dust_effect(): # Particulas al pegar con el tablero
 func verificar_proximo_paso(cambio):
 	# proximo sitio a ocupar
 	var sitio3d = round(global_position+cambio)/globalJuego.espaciado_baldosas # en 3d
+	var antiguoSitio3d  = round(global_position)/globalJuego.espaciado_baldosas #tambien la posicion actual
 	# convierto la proxima posicion en 2Di para 
 	var nuevo_sitio = Vector2i(sitio3d.x,sitio3d.z)  # en 2d
-	if globalJuego.lugar_disponible(nuevo_sitio)==false:
+	var sitioActual = Vector2i(antiguoSitio3d.x,antiguoSitio3d.z) #2d
+	if(globalJuego.verifico_casillas_reservadas(nuevo_sitio,sitioActual)) and globalJuego.lugar_disponible(nuevo_sitio):
+		return true
+	return false
+	
+	
 		#print (pieza_sitio," ocupado")
-		return false
-	return true
+		#return false
+	#return true
 		
 func giro(angulo): #Gira la pieza en el eje horizontal (Y) usando Tween
 	angulo_frente=angulo

@@ -32,14 +32,13 @@ func _ready() -> void:
 	#TESTEO
 	#await get_tree().create_timer(2).timeout
 	#GlobalSignal.emit_signal("comienzoOleada")
-	GlobalSignal.connect("marcaPaso", actualizoPosEnemigos)
+	#GlobalSignal.connect("marcaPaso", actualizoPosEnemigos)
 	
 	#if !(pausarOleada):
 		#ejecuto_oleada(globalJuego.oleada_actual)
 
-func actualizoPosEnemigos():
-	print("casilllas: ", globalJuego.casillas_reservadas)
-	GlobalJuego.actualizar_todas_las_piezas()
+#func actualizoPosEnemigos():
+	#GlobalJuego.actualizar_todas_las_piezas()
 
 
 func get_oleada_actual():

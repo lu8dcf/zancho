@@ -81,18 +81,30 @@ func cambiar_mapa(nuevo_indice: int) -> bool:
 	return false
 
 func lugar_disponible(sitio: Vector2i):
-	if sitio in casillas_reservadas:
-		return false
 	if verifica_obstaculos(sitio)==false:
 		return false
 	if verifica_extremos(sitio)==false:
 		return false
 	if verifica_piezas_blanca(sitio)==false: 
 		return false
-	if verifica_piezas_negra(sitio)==false: 
-		return false
-	casillas_reservadas.append(sitio)
+	#if verifica_piezas_negra(sitio)==false: 
+		#return false
 	return true
+	
+	
+func verifico_casillas_reservadas(sitio: Vector2i, antiguoSitio: Vector2i): #le paso la nueva pos y al actual
+	if sitio in casillas_reservadas: #si esta reservada, no se puede ocupar
+		return false
+	else:
+		borroPiezaSitio(sitio,antiguoSitio)
+		casillas_reservadas.append(sitio) #si no, se agrega a las reservadas
+		casillas_reservadas.erase(antiguoSitio) #y se borra la actual
+		return true
+		
+func borroPiezaSitio(sitio: Vector2i, antiguoSitio: Vector2i):
+	for pieza in Piezas.pieza_negra:
+		if pieza.pieza_sitio == antiguoSitio:
+			pieza.pieza_sitio = sitio
 
 func verifica_piezas(sitio: Vector2i):
 	if verifica_piezas_blanca(sitio)==false: return false
@@ -113,12 +125,16 @@ func verifica_piezas_negra(sitio: Vector2i)-> bool:
 			return false
 	return true
 
+
 func actualizar_todas_las_piezas():
 	for pieza in Piezas.pieza_negra:
 		var sitio3d = round(pieza.global_position) / globalJuego.espaciado_baldosas
 		pieza.pieza_sitio = Vector2i(sitio3d.x, sitio3d.z)
-		casillas_reservadas.resize(0)
 
+func limpio_reservadas():
+	print(casillas_reservadas)
+	casillas_reservadas.clear()
+		
 func verifica_extremos(sitio: Vector2i):	
 	if sitio.x > 15 or sitio.x < 0 or sitio.y >15 or sitio.y <0:
 		#mensaje(" La posición esta fuera del tablero ")	
