@@ -81,6 +81,8 @@ func cambiar_mapa(nuevo_indice: int) -> bool:
 	return false
 
 func lugar_disponible(sitio: Vector2i):
+	if sitio in casillas_reservadas:
+		return false
 	if verifica_obstaculos(sitio)==false:
 		return false
 	if verifica_extremos(sitio)==false:
@@ -89,6 +91,7 @@ func lugar_disponible(sitio: Vector2i):
 		return false
 	if verifica_piezas_negra(sitio)==false: 
 		return false
+	casillas_reservadas.append(sitio)
 	return true
 
 func verifica_piezas(sitio: Vector2i):
@@ -114,6 +117,7 @@ func actualizar_todas_las_piezas():
 	for pieza in Piezas.pieza_negra:
 		var sitio3d = round(pieza.global_position) / globalJuego.espaciado_baldosas
 		pieza.pieza_sitio = Vector2i(sitio3d.x, sitio3d.z)
+		casillas_reservadas.resize(0)
 
 func verifica_extremos(sitio: Vector2i):	
 	if sitio.x > 15 or sitio.x < 0 or sitio.y >15 or sitio.y <0:

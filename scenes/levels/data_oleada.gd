@@ -118,6 +118,12 @@ static var estructura_por_nivel = {
 		{"pos": Vector2i(13,2), "tipo":2, "blancas":false}
 	],
 	16:[
+		{"pos": Vector2i(9,5), "tipo":2, "blancas":false},
+		{"pos": Vector2i(10,6), "tipo":2, "blancas":false},
+		{"pos": Vector2i(13,1), "tipo":4, "blancas":false},
+		{"pos": Vector2i(14,2), "tipo":4, "blancas":false}
+	],
+	17:[
 		{"pos": Vector2i(9,3), "tipo":1, "blancas":false},
 		{"pos": Vector2i(9,5), "tipo":2, "blancas":false},
 		{"pos": Vector2i(10,6), "tipo":2, "blancas":false},

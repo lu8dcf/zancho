@@ -33,7 +33,7 @@ func _ready():
 	if(posicionActual.x+ posicionActual.z<15):
 		secuencia= [5,6,3,4,1,2,7,8]
 	elif(posicionActual.x + posicionActual.z>15):
-		secuencia = [6,5,4,3,2,1,8,7]
+		secuencia = [6,5,7,3,2,1,8,4]
 	else:
 		#diagonal
 		secuencia = [0,6,5]
