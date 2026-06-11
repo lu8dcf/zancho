@@ -12,7 +12,7 @@ var proxima_posicion : Vector3
 # desplazamiento alfil
 var direccion= Vector3i(0,0,0)
 #var secuencia = [0,3,3,2,2,3,3,4,4,3,3,4,4]
-var secuencia = [#3, # diagonal x2
+var secuencia = [#3 # diagonal x2
 	5, # diagonal x1
 	2, # derecha
 	4, # izquierda
@@ -50,25 +50,33 @@ func movimiento():
 		#saltar_paso()
 		#return
 	#owner.animacion_caminata("Bidle")
-	
-	
 	for i in range(secuencia.size()): #es un sistema de prioridad
 		cambio_estado(secuencia[i]) #siempre muevea delante, si no, una casilla, si no a la derecha y asi
 		var cambio = direccion * GlobalJuego.espaciado_baldosas # vector de cambio de la pieza
-		if secuencia[i] == 3: #solo para el que avanza dos, debo chequear el intermpedio para no atravesarlo
-			var PasoIntermedio = Vector3(-1,0,1) * GlobalJuego.espaciado_baldosas
-			PasoEsValido = (
-				owner.verificar_proximo_paso(PasoIntermedio)
-				and
-				owner.verificar_proximo_paso(cambio))
-		else:
-			PasoEsValido = owner.verificar_proximo_paso(cambio)
-		if (PasoEsValido):
+		#if secuencia[i] == 3: #solo para el que avanza dos, debo chequear el intermpedio para no atravesarlo
+			#var PasoIntermedio = Vector3(-1,0,1) * GlobalJuego.espaciado_baldosas
+			#PasoEsValido = (
+				#validarPaso(PasoIntermedio)
+				#and
+				#validarPaso(cambio))
+		#else:
+			#PasoEsValido = validarPaso(cambio)
+		if (owner.verificar_proximo_paso(cambio)):
 			mover(cambio)
 			return
-	cambio_estado(0)
+	#cambio_estado(0)
 
+func validarPaso(nuevo_sitio):
+	var sitio = Vector2i(nuevo_sitio.x,nuevo_sitio.z)
+	if globalJuego.verifica_extremos(sitio)==false:
+		return false
+	if globalJuego.verifica_obstaculos(sitio)==false:
+		return false
+	if globalJuego.verifica_piezas(sitio)==false:
+		return false
+	return true
 
+	
 func mover(cambio):
 	var tween = create_tween()
 	tween.tween_property(owner, "global_position", owner.global_position + cambio , 1) \

@@ -32,10 +32,14 @@ func _ready() -> void:
 	#TESTEO
 	#await get_tree().create_timer(2).timeout
 	#GlobalSignal.emit_signal("comienzoOleada")
-	
+	connect("marcapaso", actualizoPosEnemigos)
 	
 	#if !(pausarOleada):
 		#ejecuto_oleada(globalJuego.oleada_actual)
+
+func actualizoPosEnemigos():
+	GlobalJuego.actualizar_todas_las_piezas()
+
 
 func get_oleada_actual():
 	return globalJuego.oleada_actual
@@ -45,7 +49,7 @@ func get_oleada_actual():
 	
 func ejecuto_oleada():
 	if(globalJuego.debug == true):
-		nivel = 0
+		nivel = 16
 	else:
 		nivel = get_oleada_actual()
 	if !DATA_OLEADAS.estructura_por_nivel.has(nivel):

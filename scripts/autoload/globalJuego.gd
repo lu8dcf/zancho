@@ -36,6 +36,8 @@ var juego_pausa = false
 # Ataques
 var tiempo_ataque = 1 # timepo de cada ataque
 
+#lista piezas
+var casillas_reservadas = []
 
 signal vidas_cambiadas(nuevas_vidas)
 signal oleada_cambiada(nueva_oleada)
@@ -79,31 +81,40 @@ func cambiar_mapa(nuevo_indice: int) -> bool:
 	return false
 
 func lugar_disponible(sitio: Vector2i):
-	if verifica_obstaculos(sitio)==false: return false
-	if verifica_extremos(sitio)==false: return false
-	if verifica_piezas_blanca(sitio)==false: return false	
-	if verifica_piezas_negra(sitio)==false: return false	
+	if verifica_obstaculos(sitio)==false:
+		return false
+	if verifica_extremos(sitio)==false:
+		return false
+	if verifica_piezas_blanca(sitio)==false: 
+		return false
+	if verifica_piezas_negra(sitio)==false: 
+		return false
 	return true
 
 func verifica_piezas(sitio: Vector2i):
-	if verifica_piezas_blanca(sitio)==false: return false	
-	if verifica_piezas_negra(sitio)==false: return false	
-			
+	if verifica_piezas_blanca(sitio)==false: return false
+	if verifica_piezas_negra(sitio)==false: return false
 	return true
 	
-func verifica_piezas_blanca(sitio: Vector2i):	
-	for pieza in Piezas.pieza_blanca:
-		if pieza.pieza_sitio == sitio:
-			#print ("lugar ocupado")
-			return false
-
-func verifica_piezas_negra(sitio: Vector2i):	
+func verifica_piezas_blanca(sitio: Vector2i)-> bool:	
 	for pieza in Piezas.pieza_blanca:
 		if pieza.pieza_sitio == sitio:
 			#print ("lugar ocupado")
 			return false
 	return true
-			
+
+func verifica_piezas_negra(sitio: Vector2i)-> bool:	
+	for pieza in Piezas.pieza_negra:
+		if pieza.pieza_sitio == sitio:
+			#print ("lugar ocupado")
+			return false
+	return true
+
+func actualizar_todas_las_piezas():
+	for pieza in Piezas.pieza_negra:
+		var sitio3d = round(pieza.global_position) / globalJuego.espaciado_baldosas
+		pieza.pieza_sitio = Vector2i(sitio3d.x, sitio3d.z)
+
 func verifica_extremos(sitio: Vector2i):	
 	if sitio.x > 15 or sitio.x < 0 or sitio.y >15 or sitio.y <0:
 		#mensaje(" La posición esta fuera del tablero ")	

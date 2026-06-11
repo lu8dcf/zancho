@@ -4,10 +4,11 @@ class_name CaballoN
 var pasos = 0
 var pieza: PiezaBase
 var proxima_posicion: Vector3
+var esValida = false
 
 # Movimiento en L
 var direccion = Vector3i(0, 0, 0)
-var secuencia = [0, 3, 4, 5, 6, 7, 8]
+var secuencia = []
 var paso = 0
 
 # Variables para el salto
@@ -22,34 +23,104 @@ func _ready():
 	pieza = get_parent() as PiezaBase
 	
 	if not pieza:
-		print("❌ Error: El componente CaballoN debe ser hijo directo de una PiezaBase")
+		print("Error: El componente CaballoN debe ser hijo directo de una PiezaBase")
 		return
-	
 	await pieza.ready
-	GlobalSignal.connect("marcaPaso", movimiento)
+	await get_tree().create_timer(1).timeout
+	var posicionActual = calculoPosActual()
+	#var limite = globalJuego.tamano_tablero.x - 1 #seria una general
+	#depende del lado que este del tablero, cambia la secuencia
+	if(posicionActual.x+ posicionActual.z<15):
+		secuencia= [5,6,3,4,1,2,7,8]
+	elif(posicionActual.x + posicionActual.z>15):
+		secuencia = [6,5,4,3,2,1,8,7]
+	else:
+		#diagonal
+		secuencia = [0,6,5]
+		
+	GlobalSignal.connect("marcaPaso",movimiento	)
+
+func calculoPosActual() -> Vector3i:
+	var actual = Vector3i(
+	round(pieza.global_position.x / GlobalJuego.espaciado_baldosas),
+	0,
+	round(pieza.global_position.z / GlobalJuego.espaciado_baldosas))
+	return actual
+
+
 
 func movimiento():
-	if esta_saltando:
-		print("⚠️ El caballo ya está saltando, esperando...")
-		return
+	for i in range(secuencia.size()): #es un sistema de prioridad
+		cambio_estado(secuencia[i]) #siempre muevea delante, si no, una casilla, si no a la derecha y asi
+		var cambio = direccion * GlobalJuego.espaciado_baldosas # vector de cambio de la pieza
+		if (owner.verificar_proximo_paso(cambio)):
+			realizar_salto_parabolico(cambio)
+			return
+	cambio_estado(0)
 	
-	# Calcular paso actual
-	paso += 1
-	if paso == len(secuencia):
-		paso = 1
-	
+	#
+	#
+	#
+	#cambio_estado(paso)
+	#var cambio = direccion * GlobalJuego.espaciado_baldosas
+	#if owner.verificar_proximo_paso(cambio):
+		#realizar_salto_parabolico(cambio)
+		#dar_paso()
+	#else:
+		#buscar_siguiente_valido()
+
+func dar_paso():
+	paso+=1
+	if paso==len(secuencia): paso=1
 	cambio_estado(paso)
 	
-	# Verificar si el movimiento en L es válido
-	var cambio = direccion * GlobalJuego.espaciado_baldosas
+func saltar_paso(): # volver a iniciar en otra posicion d esalto
+	buscar_siguiente_valido()  	
 	
-	if not owner.verificar_proximo_paso(cambio):
-		saltar_paso()
-		return
-	
-	# Ejecutar salto parabólico
-	realizar_salto_parabolico(cambio)
+func buscar_siguiente_valido():
+	for offset in range(1, len(secuencia) + 1):
 
+		var indice = (paso + offset) % len(secuencia)
+
+		cambio_estado(indice)
+
+		var cambio = direccion * GlobalJuego.espaciado_baldosas
+		var valido = owner.verificar_proximo_paso(cambio)
+		if owner.verificar_proximo_paso(cambio):
+
+			paso = indice
+
+			realizar_salto_parabolico(cambio)
+
+			dar_paso()
+
+			return
+
+	print("No hay movimientos válidos")
+	
+
+	
+#func movimiento():
+	#if esta_saltando:
+		#print("El caballo ya está saltando, esperando...")
+		#return
+	#esValida = false
+	## Calcular paso actual
+	#paso += 1
+	#if paso == len(secuencia):
+		#paso = 1
+	#cambio_estado(paso)
+	#
+	## Verificar si el movimiento en L es válido
+	#var cambio = direccion * GlobalJuego.espaciado_baldosas
+	#
+	#if owner.verificar_proximo_paso(cambio):
+		#esValida = true
+		#realizar_salto_parabolico(cambio)
+	#else:
+		#saltar_pasos()
+
+	
 func realizar_salto_parabolico(cambio: Vector3):
 	posicion_inicial = owner.global_position
 	posicion_final = owner.global_position + cambio
@@ -104,20 +175,24 @@ func actualizar_escala_salto(escala: float):
 	owner.scale = Vector3(escala, escala, escala)
 
 # Función para saltar por encima de obstáculos
-func saltar_paso():
-	#print("🔄 Saltando paso (obstáculo detectado)")
-	# Buscar una dirección alternativa
-	for i in range(1, len(secuencia)):
-		cambio_estado(i)
-		var cambio = direccion * GlobalJuego.espaciado_baldosas
-		if owner.verificar_proximo_paso(cambio):
-			realizar_salto_parabolico(cambio)
-			return
-	
-	print("❌ No hay movimientos válidos para el caballo")
+#func saltar_paso():
+	##var i = 0
+	#print("paso: ", paso)
+	## Buscar una dirección alternativa
+	#while (paso<len(secuencia) and !esValida):
+	##for i in range(1, len(secuencia)):
+		#cambio_estado(paso)
+		#var cambio = direccion * GlobalJuego.espaciado_baldosas
+		#if owner.verificar_proximo_paso(cambio):
+			#esValida = true
+			#realizar_salto_parabolico(cambio)
+			#return
+		#else:
+			#paso+=1
+	#print(" No hay movimientos válidos para el caballo")
 
 func cambio_estado(cambio):
-	match secuencia[cambio]:
+	match cambio:
 		0: # Quieto
 			direccion = Vector3i(0, 0, 0)
 			if pieza and pieza.has_method("giro"):

@@ -32,13 +32,13 @@ func _ready():
 	#var limite = globalJuego.tamano_tablero.x - 1 #seria una general
 	#depende del lado que este del tablero, cambia la secuencia
 	if( posicionActual.x+ posicionActual.z<15):
-		print("lado izquierdo")
+		#lado izquierdo
 		secuencia=[0,4,4,3,3]
 	elif(posicionActual.x + posicionActual.z>15):
-		print("lado derecho")
+		#lado derecho
 		secuencia = [0,3,3,4,4]
 	else:
-		print("diagonal")
+		#diagonal
 		secuencia = [0,3,4,3,4]
 		
 
