@@ -131,4 +131,25 @@ static var estructura_por_nivel = {
 		{"pos": Vector2i(13,1), "tipo":4, "blancas":false},
 		{"pos": Vector2i(14,2), "tipo":4, "blancas":false}
 	],
+	18:[
+		{"pos": Vector2i(9,5), "tipo":1, "blancas":false},
+		{"pos": Vector2i(10,6), "tipo":1, "blancas":false},
+		{"pos": Vector2i(14,1), "tipo":2, "blancas":false},
+		{"pos": Vector2i(11,1), "tipo":4, "blancas":false},
+		{"pos": Vector2i(8,3), "tipo":4, "blancas":false},
+		{"pos": Vector2i(12,7), "tipo":4, "blancas":false},
+		{"pos": Vector2i(14,4), "tipo":4, "blancas":false}
+	],
+	19:[
+		{"pos": Vector2i(8,1), "tipo":3, "blancas":false},
+		{"pos": Vector2i(8,3), "tipo":3, "blancas":false},
+		{"pos": Vector2i(12,7), "tipo":3, "blancas":false},
+		{"pos": Vector2i(14,7), "tipo":3, "blancas":false},
+		{"pos": Vector2i(9,5), "tipo":2, "blancas":false},
+		{"pos": Vector2i(10,6), "tipo":2, "blancas":false},
+		{"pos": Vector2i(11,0), "tipo":4, "blancas":false},
+		{"pos": Vector2i(12,1), "tipo":4, "blancas":false},
+		{"pos": Vector2i(14,3), "tipo":4, "blancas":false},
+		{"pos": Vector2i(15,4), "tipo":4, "blancas":false}
+	],
 }
