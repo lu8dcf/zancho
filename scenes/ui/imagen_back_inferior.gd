@@ -23,8 +23,10 @@ func _ready() -> void:
 	
 	posicion_boton_visible = boton_esconder_inferior.position
 	posicion_boton_oculta = posicion_boton_visible - Vector2(0, imagen_back_inferior.size.y - altura_boton_visible)
-	
-	
+	if Piezas.color_piezas:
+		imagen_inferior.texture = preload("res://assets/ui/Base2.png")
+	else:
+		imagen_inferior.texture = preload("res://assets/ui/Base2_negro.png")
 	#imagen_back_inferior.position = posicion_oculta
 	
 

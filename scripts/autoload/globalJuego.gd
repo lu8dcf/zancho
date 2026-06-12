@@ -128,6 +128,7 @@ func colocar_blanca(sitio: Vector2i):
 
 
 func reiniciar_variables():
+	empezo_oleada=false
 	vidas = 20
 	fe = 20
 	oleada_actual = 1

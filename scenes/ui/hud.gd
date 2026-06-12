@@ -116,10 +116,27 @@ func mensaje_muerte_log(gano_pelea: int, color: bool, perdio_pelea: int):
 	var pieza_ganadora = economia.obtener_nombre_pieza(gano_pelea)
 	var pieza_perdedora = economia.obtener_nombre_pieza(perdio_pelea)
 	var texto_completo = ""
-	if color:
-		texto_completo = pieza_ganadora + " blanco mató a " + pieza_perdedora
+	if Piezas.color_piezas: #true = blancas
+		if color:
+			texto_completo = pieza_ganadora + " blanco mató a " + pieza_perdedora
+			if pieza_ganadora == "Torre" or pieza_ganadora == "Reina":
+				texto_completo = pieza_ganadora + " blanca mató a " + pieza_perdedora
+				
+		else:
+			texto_completo = pieza_ganadora + " negro mató a " + pieza_perdedora
+			if pieza_ganadora == "Torre" or pieza_ganadora == "Reina":
+				texto_completo = pieza_ganadora + " negra mató a " + pieza_perdedora
 	else:
-		texto_completo = pieza_ganadora + " negro mató a " + pieza_perdedora
+		if color:
+			texto_completo = pieza_ganadora + " negro mató a " + pieza_perdedora
+			if pieza_ganadora == "Torre" or pieza_ganadora == "Reina":
+				texto_completo = pieza_ganadora + " negra mató a " + pieza_perdedora
+				
+		else:
+			texto_completo = pieza_ganadora + " blanco mató a " + pieza_perdedora
+			if pieza_ganadora == "Torre" or pieza_ganadora == "Reina":
+				texto_completo = pieza_ganadora + " blanca mató a " + pieza_perdedora
+		
 	actualizar_log(texto_completo, 2)
 
 func actualizar_log(mensaje: String, tipo: int = 5):    
