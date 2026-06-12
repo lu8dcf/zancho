@@ -56,7 +56,7 @@ func movimiento():
 		if (owner.verificar_proximo_paso(cambio)):
 			realizar_salto_parabolico(cambio)
 			return
-	cambio_estado(0)
+	#cambio_estado(0)
 	
 	#
 	#

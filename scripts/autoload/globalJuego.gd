@@ -96,12 +96,16 @@ func verifico_casillas_reservadas(sitio: Vector2i, antiguoSitio: Vector2i): #le 
 	if sitio in casillas_reservadas: #si esta reservada, no se puede ocupar
 		return false
 	else:
-		borroPiezaSitio(sitio,antiguoSitio)
 		casillas_reservadas.append(sitio) #si no, se agrega a las reservadas
-		casillas_reservadas.erase(antiguoSitio) #y se borra la actual
+		borroPiezaSitio(sitio,antiguoSitio)
+		if(antiguoSitio in casillas_reservadas): #si la posicion actual esta en casilla_reservadas
+			casillas_reservadas.erase(antiguoSitio) #borra la actual
+		else: 
+			if(len(casillas_reservadas) > len(Piezas.pieza_negra)): #pero si las casillas reservadas son mas que las piezas
+				casillas_reservadas.pop_front() #elimino la priemra de la lista
 		return true
 		
-func borroPiezaSitio(sitio: Vector2i, antiguoSitio: Vector2i):
+func borroPiezaSitio(sitio: Vector2i, antiguoSitio: Vector2i): #acualizo pos de pieza
 	for pieza in Piezas.pieza_negra:
 		if pieza.pieza_sitio == antiguoSitio:
 			pieza.pieza_sitio = sitio

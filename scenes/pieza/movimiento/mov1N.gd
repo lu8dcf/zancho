@@ -10,7 +10,7 @@ var proxima_posicion : Vector3
 # desplazamiento Torre
 var direccion= Vector3i(0,0,0)
 #var secuencia = [0,1,2,3,4]
-var secuencia = [3,4,2,1,0]
+var secuencia = [3,2,4,1,0]
 var paso = 3
 
 # variables para detectar cuando el peon queda trabado y no puede avanzar
