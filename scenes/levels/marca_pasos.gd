@@ -18,6 +18,8 @@ func _ready():
 	GlobalSignal.connect("aceleraMarcaPaso",multiplicador)
 
 func _on_mi_timer_timeout():
+	if GlobalJuego.ataque_en_proceso:
+		return
 	GlobalSignal.marcaPaso.emit() # Señal que marcara a las piezas ejecucion del paso
 	
 

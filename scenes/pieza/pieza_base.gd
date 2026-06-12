@@ -248,6 +248,7 @@ func _buscar_mesh(nodo: Node) -> MeshInstance3D:
 		if encontrado:
 			return encontrado
 	return null
+
 func die():
 	
 	# Efectos de muerte

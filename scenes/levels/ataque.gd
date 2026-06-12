@@ -17,6 +17,7 @@ func iniciaAtaque(idA,idD,posicionA,posicionD,tipoA,tipoD):
 	
 	if _crear_clave(idA, idD)==false:  # codigo del ataque y verifica que no eista anterirormente
 		return
+	GlobalJuego.ataque_en_proceso=true
 	#print (idA," ",idD," ",posicionA," ",posicionD)
 	GlobalSignal.controlMarcaPaso.emit(false) #detiene el paso del juego
 	Sonidos.ataque()
@@ -76,9 +77,10 @@ func eliminar_par(a: int, b: int):
 	
 ## Cuenta cuántos pares únicos hay
 func contar_pares():
-	if pares_almacenados.size() == 0:
+	if pares_almacenados.size() == 0: # no hay mas pares no hay mas batallas
 		GlobalSignal.controlMarcaPaso.emit(true)
-
+		GlobalJuego.ataque_en_proceso=false
+	
 ## Limpia todos los pares
 func limpiar_todo():
 	pares_almacenados.clear()
