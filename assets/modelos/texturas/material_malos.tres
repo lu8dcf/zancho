@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://e2oyjpkuf1qo"]
 
-[ext_resource type="Texture2D" uid="uid://cxa0v3stdnrsn" path="res://assets/modelos/texturas/paletamala.png" id="1_m3s8a"]
+[ext_resource type="Texture2D" uid="uid://do5f3caqqisf2" path="res://assets/modelos/texturas/paletamala.png" id="1_m3s8a"]
 [ext_resource type="Shader" uid="uid://b1qxxcb7tq3l6" path="res://assets/modelos/texturas/Light.gdshader" id="1_p3wxj"]
 
 [resource]

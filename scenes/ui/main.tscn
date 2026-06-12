@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://xv5vf17hra84" path="res://scenes/ui/components/label_peque.tscn" id="13_qmqn8"]
 [ext_resource type="Script" uid="uid://bg8oqunosc1by" path="res://scenes/ui/opciones.gd" id="16_26ekd"]
 [ext_resource type="Script" uid="uid://l85kexbiwntl" path="res://scenes/ui/video.gd" id="17_hfsfw"]
-[ext_resource type="Texture2D" uid="uid://bajf757x4htjn" path="res://assets/menu/separador.png" id="18_hfsfw"]
+[ext_resource type="Texture2D" uid="uid://b31jomv6yryp6" path="res://assets/menu/separador.png" id="18_hfsfw"]
 [ext_resource type="Script" uid="uid://diwb1fg2k6x1u" path="res://scenes/ui/sonido.gd" id="18_wweun"]
 [ext_resource type="Script" uid="uid://d184ng4dyotc3" path="res://scenes/ui/controles_camara.gd" id="20_wweun"]
 [ext_resource type="Script" uid="uid://by5rg4ddmdnti" path="res://scenes/ui/accesibilidad_menu.gd" id="21_aca1m"]

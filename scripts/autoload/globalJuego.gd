@@ -35,6 +35,7 @@ var juego_pausa = false
 
 # Ataques
 var tiempo_ataque = 1 # timepo de cada ataque
+var ataque_en_proceso = false
 
 
 signal vidas_cambiadas(nuevas_vidas)
@@ -137,6 +138,7 @@ func reiniciar_variables():
 	mapas.reiniciar_variables()
 	economia.reiniciar_variables()
 	juego_pausa = false
+	ataque_en_proceso=false
 	
 	
 func mensaje(texto):
