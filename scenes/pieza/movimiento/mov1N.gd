@@ -53,7 +53,8 @@ func movimiento():
 		pasos_detenido +=1
 		return
 	
-	if pasos_detenido==3:
+	if pasos_detenido==3: # esto cuenta cuantos pasos el peon queda detenido asi muere
+		GlobalSignal.finAtaque.emit(6,true,1)
 		pieza.die()
 		return
 	
