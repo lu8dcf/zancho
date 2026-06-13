@@ -2,7 +2,7 @@ extends Node3D
 class_name Material_Peon
 
 @onready var circulo_mesh: MeshInstance3D = $"Esqueleto/Skeleton3D/Círculo_001"
-@onready var material: String
+@export var material: String  
 @onready var id: int
 
 func _ready() -> void:

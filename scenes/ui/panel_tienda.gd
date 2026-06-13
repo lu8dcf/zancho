@@ -25,6 +25,10 @@ func _ready():
 	posicion_boton_visible = boton_de_despliegue.position
 	posicion_boton_oculta = posicion_boton_visible - Vector2(0, imagen_tienda.size.y - altura_boton_visible)
 	
+	if Piezas.color_piezas:
+		imagen_tienda.texture=preload("res://assets/ui/compra.png")
+	else:
+		imagen_tienda.texture=preload("res://assets/ui/compra_negro.png")
 	boton_de_despliegue.pressed.connect(_alternar_tienda)
 
 	

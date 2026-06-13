@@ -65,11 +65,7 @@ func movimiento():
 			mover(cambio)
 			return
 	
-	#var tween = create_tween()
-	#tween.tween_property(owner, "global_position", owner.global_position + cambio , 1) \
-	#.set_trans(Tween.TRANS_SINE) \
-	#.set_ease(Tween.EASE_IN_OUT)
-	#paso = 3
+
 	
 	
 func mover(cambio):

@@ -10,11 +10,12 @@ var bonus_cantidad = [1,1.3,1.3,1.5,1.5,1.5]
 var bonus_a=[0,4,3,1,5,2]
 
 #texturas de los modelos
-#var material_bueno = "res://assets/modelos/texturas/material_buenos.tres"
-#var material_malo = "res://assets/modelos/texturas/material_malos.tres"
+var material_bueno = "res://assets/modelos/texturas/material_buenos.tres"
+var material_malo = "res://assets/modelos/texturas/material_malos.tres"
 
-var material_bueno = "res://assets/modelos/texturas/material_malos.tres"
-var material_malo = "res://assets/modelos/texturas/material_buenos.tres"
+var color_piezas = true # por defecto es true
+
+
 var material_muerte ="res://assets/modelos/texturas/material_muerte.tres"
 
 # las piezas que estan activas en la partida
@@ -94,6 +95,14 @@ func reiniciar_variables():
 	}
 	pieza_flotante = null
 	modo_colocacion = false
+	
+	if color_piezas:
+		material_bueno = "res://assets/modelos/texturas/material_buenos.tres"
+		material_malo = "res://assets/modelos/texturas/material_malos.tres"
+	else:
+		material_bueno = "res://assets/modelos/texturas/material_malos.tres"
+		material_malo = "res://assets/modelos/texturas/material_buenos.tres"
+		
 	
 
 func obtener_ataques_pieza(tipo: int,es_pieza_blanca:bool) -> Array:

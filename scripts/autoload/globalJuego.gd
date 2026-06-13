@@ -35,6 +35,7 @@ var juego_pausa = false
 
 # Ataques
 var tiempo_ataque = 1 # timepo de cada ataque
+var ataque_en_proceso = false
 
 #lista piezas
 var casillas_reservadas = []
@@ -163,6 +164,7 @@ func colocar_blanca(sitio: Vector2i):
 
 
 func reiniciar_variables():
+	empezo_oleada=false
 	vidas = 20
 	fe = 20
 	oleada_actual = 1
@@ -171,6 +173,7 @@ func reiniciar_variables():
 	mapas.reiniciar_variables()
 	economia.reiniciar_variables()
 	juego_pausa = false
+	ataque_en_proceso=false
 	
 	
 func mensaje(texto):

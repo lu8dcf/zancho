@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://chof4nbcho4wr"]
 
-[ext_resource type="Shader" path="res://assets/modelos/particulas/sangre.gdshader" id="1_mrbbd"]
-[ext_resource type="Texture2D" uid="uid://swnj3m61ur3l" path="res://assets/modelos/particulas/T_Decal_Blood651aas.png" id="2_r78l6"]
-[ext_resource type="Texture2D" uid="uid://d3rovhv1usslg" path="res://assets/modelos/particulas/T_Decal_Blood651aas_N.png" id="3_6kyup"]
+[ext_resource type="Shader" uid="uid://mqrjfb1ykinh" path="res://assets/modelos/particulas/sangre.gdshader" id="1_mrbbd"]
+[ext_resource type="Texture2D" uid="uid://d1e0ot27pjt7r" path="res://assets/modelos/particulas/T_Decal_Blood651aas.png" id="2_r78l6"]
+[ext_resource type="Texture2D" uid="uid://bt5xdr1bgegs" path="res://assets/modelos/particulas/T_Decal_Blood651aas_N.png" id="3_6kyup"]
 
 [sub_resource type="Gradient" id="Gradient_fe5f8"]
 colors = PackedColorArray(0.7670248, 1.4920532e-06, 3.85046e-07, 1, 0.5901515, 0.09768335, 0.22067273, 1)
@@ -28,7 +28,7 @@ shader_parameter/normal_intensity = 1.0
 [sub_resource type="PlaneMesh" id="PlaneMesh_1dyh1"]
 
 [sub_resource type="Curve" id="Curve_mrbbd"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.4077103), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_taobe"]
@@ -49,7 +49,7 @@ particles_anim_loop = false
 [sub_resource type="QuadMesh" id="QuadMesh_b1dri"]
 
 [sub_resource type="Curve" id="Curve_xyxw2"]
-_data = [Vector2(0, 0.08346045), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(0.5213849, 0.6432928), -6.2528887, -6.2528887, 0, 0, Vector2(0.9551934, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.08346045), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.5443926), 0.0, 0.0, 0, 0, Vector2(0.50737464, 0.4380842), -0.88482165, -0.88482165, 0, 0, Vector2(0.9551934, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mrbbd"]
@@ -60,7 +60,7 @@ emission = Color(1, 0, 0, 1)
 size = Vector3(0.2, 0.2, 0.2)
 
 [sub_resource type="Curve" id="Curve_r78l6"]
-_data = [Vector2(0, 0.9157775), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.4077103), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Animation" id="Animation_mrbbd"]
@@ -152,16 +152,15 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.0014019012, 0.25885206, 0.0
 
 [node name="plano" type="CPUParticles3D" parent="." unique_id=1339521529]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0005316436, -0.008441985)
-visible = false
 material_override = SubResource("ShaderMaterial_reoqx")
 amount = 13
-lifetime = 5.3
+lifetime = 1.26
 one_shot = true
 explosiveness = 0.9
 randomness = 1.0
 mesh = SubResource("PlaneMesh_1dyh1")
 emission_shape = 3
-emission_box_extents = Vector3(0.64, 0, 0.58)
+emission_box_extents = Vector3(0.39, 0, 0.36)
 direction = Vector3(0, 18, 0)
 spread = 20.71
 gravity = Vector3(0, 0, 0)
@@ -192,7 +191,6 @@ scale_amount_curve = SubResource("Curve_xyxw2")
 
 [node name="cachos" type="CPUParticles3D" parent="." unique_id=726937862]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.045624346, 0.53647244, -0.01759082)
-visible = false
 material_override = SubResource("StandardMaterial3D_mrbbd")
 emitting = false
 amount = 10

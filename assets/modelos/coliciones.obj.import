@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://2wd3p7qbs4cn"
+path="res://.godot/imported/coliciones.obj-e782d973730df4416f5f438048acc40d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/coliciones.obj-e782d973730df4416f5f438048acc40d.mesh"]
+
+source_file="res://assets/modelos/coliciones.obj"
+dest_files=["res://.godot/imported/coliciones.obj-e782d973730df4416f5f438048acc40d.mesh", "res://.godot/imported/coliciones.obj-e782d973730df4416f5f438048acc40d.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
