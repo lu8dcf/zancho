@@ -46,9 +46,12 @@ func _input(event):
 		return
 	if event is InputEventMouseButton and event.pressed: #revisar esto para que solo ande
 		if event.button_index == MOUSE_BUTTON_LEFT: #solo ocn el mouse izquierdo
+			if(event.button_index == MOUSE_BUTTON_RIGHT):
+				estado = Estado.INACTIVA
 			fin = obtengo_posicion_baldosa()   #con click izqui	rdo
 			tiene_objetivo = true #tiene un punto donde ir, es fin
 			estado = Estado.MOVIENDO
+			
 
 func ReinaSeleccionada():
 	estado = Estado.ESPERANDO_DESTINO
