@@ -1,7 +1,7 @@
 extends Node
 class_name ReinaN
 
-const DISTANCIA_CAZA := 10
+const DISTANCIA_CAZA := 11
 const DISTANCIA_ATAQUE := 3
 
 # Referencia a la pieza base (el RigidBody3D que contiene este componente)
@@ -13,6 +13,7 @@ var ultimoMovimiento : Vector3i = Vector3i.ZERO
 # aumenta cuando caen defensores
 var agresividad := 0
 var impaciencia := 0
+var piezasTotal := 0
 # cantidad de defensores cuando comenzó el acecho
 var defensoresIniciales := -1
 # evita reinicializar
@@ -21,7 +22,7 @@ var acechoIniciado := false
 # desplazamiento reinaBlanca
 var direccion= Vector3i(0,0,0)
 
-var movimientosDisponibles = [
+var movimientosDisponibles = [ #casillas alrededor
 		#0: # Quieto
 			#Vector3i(0,0,0),
 		#1: # arriba 1
@@ -53,11 +54,12 @@ func _ready():
 
 	# Conectar señal después de que la pieza esté lista
 	await pieza.ready
+	piezasTotal = batallasCerca()
 	GlobalSignal.connect("marcaPaso",movimientoConPeso)
 	
 
 func movimientoConPeso():
-	
+
 	var candidatos = obtenerMovimientosValidos()
 	if candidatos.is_empty():
 		return
@@ -107,7 +109,7 @@ func obtenerMovimientosValidos():
 	
 func calcularPesoMovimiento(mov):
 	var distancia = distanciaAlRey(calculoPosActual())
-	if(distancia > DISTANCIA_CAZA): #si la distancia es mayo a 8, su objetivo es acercarse
+	if(distancia > DISTANCIA_CAZA): #si la distancia es mayo a 11, su objetivo es acercarse
 		return pesoCaza(mov)
 	elif distancia > DISTANCIA_ATAQUE: #si la distancia ya es de ataque
 		return pesoAcecho(mov) #primero rodea y espera a que bajen las desfensas
@@ -115,19 +117,22 @@ func calcularPesoMovimiento(mov):
 	
 func pesoCaza(mov): #se enfoca en acercarse
 	var peso := 0
-	peso += pesoDistanciaRey(mov) * 4
+	peso += pesoDistanciaRey(mov) * 4#prioridad 
 	peso += pesoPorMemoria(mov)
+	agresividadPorBatalla()
+	peso += agresividad
 	return peso
 
 func pesoAcecho(mov): 
 	inicializarAcecho()
-	actualizarAgresividad() #la agresividad se da cuando bajan los enemigos
+	#actualizarAgresividad() #la agresividad se da cuando bajan los enemigos
 	var peso := 0
 	peso += pesoOrbital(mov) #pero por seguir orbitando
-	peso += agresividad #pero por agresividad/ataque
+	agresividadPorBatalla()
+	peso += agresividad * 2#pero por agresividad/ataque
 	peso += impaciencia * 2 #peso por impaciencia
 	peso += pesoPorMemoria(mov) #peso para no reptir pasos
-	if impaciencia > 500:
+	if impaciencia > 270:
 		print("bastaPaciencia")
 		return pesoAtaque(mov) #no hay mas paciencia, ataco
 	return peso
@@ -135,7 +140,6 @@ func pesoAcecho(mov):
 func inicializarAcecho(): #acecho = contar defensores
 	if acechoIniciado:
 		return
-	defensoresIniciales = contarDefensoresCercanos()
 	acechoIniciado = true
 
 func pesoAtaque(mov): #busco acercarme y atacar
@@ -145,12 +149,14 @@ func pesoAtaque(mov): #busco acercarme y atacar
 	peso += agresividad * 2
 	return peso
 	
-func actualizarAgresividad(): 
-	var actuales = contarDefensoresCercanos()
-	if actuales == 0: #si no hay defensores, que ataque
-		impaciencia += 15
-	var eliminados = defensoresIniciales - actuales
-	agresividad = eliminados * 25 #va a atacar cuando se queden pocos enemigos
+#func actualizarAgresividad(): 
+	#var actuales = contarDefensoresCercanos()
+	#print("defAct: ", actuales)
+	#if actuales == 0: #si no hay defensores, que ataque
+		#impaciencia += 15
+	#var eliminados = defensoresIniciales - actuales
+	#print("elimn: ", eliminados)
+	#agresividad = eliminados * 25 #va a atacar cuando se queden pocos enemigos
 	
 func pesoOrbital(mov): #mantenerse a 5 de distancia del rey
 	var nueva = posicionFutura(mov) #
@@ -166,10 +172,20 @@ func contarDefensoresCercanos(): #referencia
 			total += 1
 	return total
 
+func agresividadPorBatalla():
+	var piezasActuales = batallasCerca()
+	if(piezasTotal> piezasActuales):
+		agresividad+=(piezasTotal-piezasActuales)*25
+
+
+func batallasCerca():
+	return (Piezas.pieza_blanca.size()+Piezas.pieza_negra.size())
+
+
 func posicionFutura(mov: Vector3i): #posicion mas posible siguiente posicion
 	return calculoPosActual() + Vector3i(mov.x,0,mov.z)
 
-func pesoDistanciaRey(mov: Vector3i):
+func pesoDistanciaRey(mov: Vector3i): 
 	var actual = calculoPosActual()
 	var nueva = actual + mov
 	var distanciaActual = distanciaAlRey(actual)

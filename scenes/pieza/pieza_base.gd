@@ -165,7 +165,9 @@ func verificar_proximo_paso(cambio):
 	# convierto la proxima posicion en 2Di para 
 	var nuevo_sitio = Vector2i(sitio3d.x,sitio3d.z)  # en 2d
 	var sitioActual = Vector2i(antiguoSitio3d.x,antiguoSitio3d.z) #2d
-	if(globalJuego.verifico_casillas_reservadas(nuevo_sitio,sitioActual)) and globalJuego.lugar_disponible(nuevo_sitio):
+	if(globalJuego.verifico_casillas_reservadas(nuevo_sitio,sitioActual)
+	and globalJuego.verifica_obstaculos(nuevo_sitio) 
+	and globalJuego.verifica_extremos(nuevo_sitio)):
 		return true
 	return false
 	
