@@ -45,6 +45,7 @@ func cargar_escena_pieza(tipo: int):
 		
 	# Instanciar y agregar al contenedor
 	var instancia_objeto_pieza = modelo_objeto.instantiate()
+	instancia_objeto_pieza.material = Piezas.material_bueno
 	modelo_3d.add_child(instancia_objeto_pieza)
 	
 	instancia_objeto_pieza.scale = Vector3.ONE * 1.0
