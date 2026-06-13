@@ -1,8 +1,8 @@
 extends Node
 class_name ReinaN
 
-const DISTANCIA_CAZA := 11
-const DISTANCIA_ATAQUE := 3
+const DISTANCIA_CAZA := 11 #distancia al rey en que busca acercarse
+const DISTANCIA_ATAQUE := 3 #distancia al rey comienza acechp
 
 # Referencia a la pieza base (el RigidBody3D que contiene este componente)
 var pieza: PiezaBase
@@ -65,9 +65,9 @@ func movimientoConPeso():
 		return
 	var movimientoElegido = elegirMovimiento(candidatos)
 	ultimoMovimiento = movimientoElegido
-	print("MovEle:", movimientoElegido)
-	print("imp:", impaciencia)
-	print("agr:", agresividad)
+	#print("MovEle:", movimientoElegido)
+	#print("imp:", impaciencia)
+	#print("agr:", agresividad)
 	moverPaso(movimientoElegido)
 
 	#var actual = calculoPosActual()
@@ -107,6 +107,13 @@ func obtenerMovimientosValidos():
 	return candidatos
 
 	
+func elegirMovimiento(candidatos):
+	var mejor = candidatos[0]
+	for candidato in candidatos:
+		if candidato["peso"] > mejor["peso"]: #selecciona la opcion de mas peso
+			mejor = candidato
+	return mejor["direccion"]
+	
 func calcularPesoMovimiento(mov):
 	var distancia = distanciaAlRey(calculoPosActual())
 	if(distancia > DISTANCIA_CAZA): #si la distancia es mayo a 11, su objetivo es acercarse
@@ -129,11 +136,10 @@ func pesoAcecho(mov):
 	var peso := 0
 	peso += pesoOrbital(mov) #pero por seguir orbitando
 	agresividadPorBatalla()
-	peso += agresividad * 2#pero por agresividad/ataque
+	peso += agresividad#pero por agresividad/ataque
 	peso += impaciencia * 2 #peso por impaciencia
 	peso += pesoPorMemoria(mov) #peso para no reptir pasos
-	if impaciencia > 270:
-		print("bastaPaciencia")
+	if impaciencia > 270 or agresividad > 1000:
 		return pesoAtaque(mov) #no hay mas paciencia, ataco
 	return peso
 
@@ -148,15 +154,7 @@ func pesoAtaque(mov): #busco acercarme y atacar
 	peso += pesoAlineacionRey(mov)
 	peso += agresividad * 2
 	return peso
-	
-#func actualizarAgresividad(): 
-	#var actuales = contarDefensoresCercanos()
-	#print("defAct: ", actuales)
-	#if actuales == 0: #si no hay defensores, que ataque
-		#impaciencia += 15
-	#var eliminados = defensoresIniciales - actuales
-	#print("elimn: ", eliminados)
-	#agresividad = eliminados * 25 #va a atacar cuando se queden pocos enemigos
+
 	
 func pesoOrbital(mov): #mantenerse a 5 de distancia del rey
 	var nueva = posicionFutura(mov) #
@@ -175,7 +173,7 @@ func contarDefensoresCercanos(): #referencia
 func agresividadPorBatalla():
 	var piezasActuales = batallasCerca()
 	if(piezasTotal> piezasActuales):
-		agresividad+=(piezasTotal-piezasActuales)*25
+		agresividad+=(piezasTotal-piezasActuales)*2
 
 
 func batallasCerca():
@@ -234,11 +232,5 @@ func pesoPorMemoria(mov: Vector3i):
 		return +15
 	return 0
 
-	
-func elegirMovimiento(candidatos):
-	var mejor = candidatos[0]
-	for candidato in candidatos:
-		if candidato["peso"] > mejor["peso"]: #selecciona la opcion de mas peso
-			mejor = candidato
-	return mejor["direccion"]
+
 	

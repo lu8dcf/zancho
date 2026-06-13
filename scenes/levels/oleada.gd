@@ -49,7 +49,7 @@ func get_oleada_actual():
 	
 func ejecuto_oleada():
 	if(globalJuego.debug == true):
-		nivel = 17
+		nivel = 0
 	else:
 		nivel = get_oleada_actual()
 	if !DATA_OLEADAS.estructura_por_nivel.has(nivel):
