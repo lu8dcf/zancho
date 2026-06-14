@@ -23,6 +23,8 @@ var max_mensajes: int = 50
 @export var escena_victoria: PackedScene = preload("res://scenes/ui/components/ganaste_oleada.tscn")
 @export var escena_derrota: PackedScene = preload("res://scenes/ui/components/ganaste_oleada.tscn")
 
+#tutorial
+@onready var pantallaNegra = $blackOut
 # -------------------------------------------------------------
 
 var tween: Tween
@@ -50,19 +52,28 @@ func mostrar_todos_paneles():
 func mostrar_imagen(ganar: int) -> void:
 	globalJuego.empezo_oleada = false
 	$PanelTienda._ocultar_tienda()
-	if ganar:
-		if escena_victoria:
-			var instancia_victoria = escena_victoria.instantiate()
-			add_child(instancia_victoria)
-		mostras_desaparecer_imagen()
-		globalJuego.siguiente_oleada()
+	#si es el tutorial:
+	if (GlobalJuego.tutorial):
+		print("FinOleada")
+		pantallaNegra.visible = true
+		var tween = create_tween()
+		tween.tween_property(pantallaNegra, "modulate", Color(0.0, 0.0, 0.0, 1), 1.5)
+		await get_tree().create_timer(3).timeout
+		GlobalSignal.emit_signal("PantallaNegra")
 	else:
-		if escena_derrota:
-			var instancia_derrota = escena_derrota.instantiate()
-			add_child(instancia_derrota)
-		mostras_desaparecer_imagen()
-		globalJuego.perder_fe(5)
-		
+		if ganar:
+			if escena_victoria:
+				var instancia_victoria = escena_victoria.instantiate()
+				add_child(instancia_victoria)
+			mostras_desaparecer_imagen()
+			globalJuego.siguiente_oleada()
+		else:
+			if escena_derrota:
+				var instancia_derrota = escena_derrota.instantiate()
+				add_child(instancia_derrota)
+			mostras_desaparecer_imagen()
+			globalJuego.perder_fe(5)
+			
 func mostras_desaparecer_imagen():
 	if tween and tween.is_valid():
 		tween.kill()

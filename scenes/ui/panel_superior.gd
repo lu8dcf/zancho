@@ -5,6 +5,7 @@ extends Panel
 @onready var boton_reiniciar_camera = $BotonReiniciarCamara
 @onready var imagen_debilidades = $imagenDebilidades
 @onready var empezar_oleada = $empezar_oleada
+#Para Tutorial
 
 # botones de velocidades, pausar y continuar
 @onready var boton_pausar: TextureButton = $BotonPausar
@@ -50,8 +51,26 @@ func _ready() -> void:
 	empezar_oleada.mouse_entered.connect(_on_empezar_oleada_hover_entered)
 	empezar_oleada.mouse_exited.connect(_on_empezar_oleada_hover_exited)
 	GlobalSignal.finalizaOleada.connect(finaliza_oleada)
+	if(GlobalJuego.tutorial):
+		GlobalSignal.connect("parpadearTabla",parpadearDebilidades)
+		GlobalSignal.connect("parpadeaOleadar",parpadearOleada)
+		
 
+func parpadearDebilidades(): #tutorial
+	var tween = create_tween()
+	for i in 2:
+		tween.tween_property(boton_debilidades, "modulate", Color(1.5, 1.5, 0.0, 0.973), 0.3)
+		tween.tween_property(boton_debilidades, "modulate", Color.WHITE, 0.2)
 
+func parpadearOleada(): #tutorial
+	# Cambiar opacidad o color de la label dentro
+	var label = empezar_oleada.get_node_or_null("Label")  # Ajusta el nombre del nodo Label
+	if label:
+		var tween_label = create_tween()
+		for i in 2:
+			tween_label.tween_property(label, "modulate", Color(1.5, 1.5, 0.0, 0.973), 0.3)
+			tween_label.tween_property(label, "modulate", Color.WHITE, 0.2)
+			
 func _on_empezar_oleada_hover_entered():
 	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 	# Escalar el botón

@@ -153,7 +153,7 @@ func _on_modo_colocacion_cancelado():
 		baldosa_actual._al_salir_mouse()
 
 # Método público para obtener la baldosa actual
-func obtener_baltosa_actual() -> BaldosaBase:
+func obtener_baltosa_actuall() -> BaldosaBase:
 	return baldosa_actual
 
 # Método para limpiar el hover

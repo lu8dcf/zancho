@@ -5,7 +5,9 @@ extends Node
 
 ### - DEBUG SI ES TRUE ENTONCES TODO ESTA PERMITIDO
 
-var debug :bool = true
+var debug :bool = false
+
+var tutorial : bool = true
 
 ### - DEBUG SI ES TRUE ENTONCES TODO ESTA PERMITIDO
 
@@ -171,7 +173,7 @@ func reiniciar_variables():
 	mapa_actual=1
 	Piezas.reiniciar_variables()
 	mapas.reiniciar_variables()
-	economia.reiniciar_variables()
+	economia.vacioVariables()
 	juego_pausa = false
 	ataque_en_proceso=false
 	

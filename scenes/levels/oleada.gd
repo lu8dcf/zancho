@@ -50,6 +50,8 @@ func get_oleada_actual():
 func ejecuto_oleada():
 	if(globalJuego.debug == true):
 		nivel = 0
+	elif(globalJuego.tutorial == true):
+		nivel = -1
 	else:
 		nivel = get_oleada_actual()
 	if !DATA_OLEADAS.estructura_por_nivel.has(nivel):

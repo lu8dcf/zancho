@@ -7,9 +7,9 @@ var tablero_escena = preload("res://scenes/tablero/gestorTablero.tscn")
 var entorno = preload("res://scenes/entorno/escenario.tscn")
 var fabrica_obstaculos_escena = preload("res://scenes/objetos/fabrica_objetos.tscn")
 var pieza_flotante = preload("res://scenes/tablero/pieza_flotante.tscn")
+var tutorialEscena = preload ("res://scenes/tutorial/tutorial.tscn")
 
 var tipo_pieza=0
-
 
 @onready var MarcaPasos = $MarcaPasos
 
@@ -30,6 +30,9 @@ func _ready() -> void:
 	var pieza = pieza_flotante.instantiate()
 	add_child(pieza)
 	pieza.visible = false
+	
+	if(globalJuego.tutorial):
+		add_child(tutorialEscena.instantiate())
 
 	#GlobalSignal.emit_signal("controlMarcaPaso",true)	
 

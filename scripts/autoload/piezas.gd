@@ -84,6 +84,8 @@ signal pieza_colocada(tipo:int, posicion:Vector2i)
 signal pieza_colocada_inventario(nombre_pieza: String) 
 @warning_ignore("unused_signal")
 signal  pieza_flotante_actualizada(posicion_3d :Vector3, es_valido:bool)
+@warning_ignore("unused_signal")
+signal modo_colocacion_true()
 
 func reiniciar_variables():
 	pieza_negra=[]
@@ -122,6 +124,7 @@ func iniciar_modo_colocacion(tipo_pieza: int, nombre_pieza: String) -> void:
 		"activa": true
 	}
 	modo_colocacion_inicia.emit(tipo_pieza, nombre_pieza)
+	
 
 func cancelar_modo_colocacion() -> void:
 	modo_colocacion = false
@@ -152,6 +155,7 @@ func colocar_pieza_en_posicion(posicion: Vector2i) -> bool:
 	
 	pieza_colocada.emit(tipo, posicion)
 	pieza_colocada_inventario.emit(nombre)
+	modo_colocacion_true.emit() #tutorial
 	#verificar si quedan mas en el inventario apra seguir colocando
 	var cantidad_restante = economia.inventario_actual.get(nombre, 0)
 	

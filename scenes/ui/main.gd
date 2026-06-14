@@ -54,3 +54,10 @@ func _on_creditos_mouse_entered() -> void:
 
 func _on_opciones_mouse_entered() -> void:
 	Sonidos.hover()
+
+
+func _on_como_jugar_pressed() -> void:
+	Sonidos.boton1()
+	globalJuego.tutorial = true
+	GlobalJuego.reiniciar_variables()
+	get_tree().change_scene_to_file("res://scenes/levels/level.tscn")

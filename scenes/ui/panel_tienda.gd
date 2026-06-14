@@ -34,13 +34,18 @@ func _ready():
 	
 	imagen_tienda.position = posicion_oculta
 	
-	
+	GlobalSignal.connect("tiendaHoverParpadea", parpadeaTutorial)
 	# Conectar las señales globales para actualizar la UI automáticamente
 	#economia.pieza_vendida.connect(_crear_botones_piezas_tienda)
 	
 	
 	#configurar_tienda()
 
+func parpadeaTutorial():
+	var tween = create_tween()
+	for i in 2:
+		tween.tween_property(boton_de_despliegue, "scale", Vector2(.9, 1), 0.1)
+		tween.tween_property(boton_de_despliegue, "scale", Vector2.ONE, 0.1)
 
 func _alternar_tienda():
 	if tween and tween.is_running():
@@ -57,6 +62,8 @@ func _alternar_tienda():
 
 func _mostrar_tienda():
 	Sonidos.boton1()
+	
+	GlobalSignal.emit_signal("tiendaClick")
 	
 	# Efecto de rebote al mostrar
 	tween.set_ease(Tween.EASE_OUT)
