@@ -1,26 +1,36 @@
 extends Node
 
-#instruccionesCumplidas
-var tiendaClickeada : bool = false #se abre el menu
-var piezaComprada : bool = false #se compra pieza
-var piezaSeleccionada : bool = false #selecciono pieza para poner
+enum TutorialState { #maquina de estados!
+	TIENDA,
+	COMPRA_PIEZA,
+	SELECCION_PIEZA,
+	COMIENZO_OLEADA,
+	FIN_OLEADA,
+	COMPLETO
+}
 
-#var obtuveBaldosa :bool = false
+var estado : TutorialState = TutorialState.TIENDA
 
-var piezaPosicionada : bool = false #se posiciona pieza
-var comienzoOleada : bool = false
-var mostroTabla : bool = false
-var ganoOleada : bool = false
-var tutorialCompleto : bool = false
+##instruccionesCumplidas
+#var tiendaClickeada : bool = false #se abre el menu
+#var piezaComprada : bool = false #se compra pieza
+#var piezaSeleccionada : bool = false #selecciono pieza para poner
+#
+##var obtuveBaldosa :bool = false
+#
+#var piezaPosicionada : bool = false #se posiciona pieza
+#var comienzoOleada : bool = false
+#var mostroTabla : bool = false
+#var ganoOleada : bool = false
+#var tutorialCompleto : bool = false
 
-var baldosa : BaldosaBase
+#var baldosa : BaldosaBase
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-
-	await get_tree().create_timer(5).timeout
-	#senialesEmitidas
+	await esperar(5)
 	GlobalSignal.emit_signal("tutorialVisible")
+	estado = TutorialState.TIENDA
 	presentacionTienda()
 	
 	#señalesConectadas
@@ -34,25 +44,33 @@ func _ready() -> void:
 	GlobalSignal.connect("PantallaNegra", finDeOleada)
 	pass # Replace with function body.
 
+func esperar(segundos: float) -> void:
+	await get_tree().create_timer(segundos).timeout
+
+
 func presentacionTienda():
-	while(!tiendaClickeada):
+	while estado == TutorialState.TIENDA:
 		GlobalSignal.emit_signal("tiendaHoverParpadea")
-		await get_tree().create_timer(2).timeout
+		await esperar(2)
 	
 
 func tiendaClick():
-	tiendaClickeada = true
-	GlobalSignal.emit_signal("cambioTexto",2)
+	if estado != TutorialState.TIENDA:
+		return
+	estado = TutorialState.COMPRA_PIEZA
+	GlobalSignal.emit_signal("cambioTexto",2) #compraEn tienda
 	
 func piezaEnInventario():
-	piezaComprada =true
-	GlobalSignal.emit_signal("cambioTexto",4)
+	if estado != TutorialState.COMPRA_PIEZA:
+		return
+	estado = TutorialState.SELECCION_PIEZA
+	GlobalSignal.emit_signal("cambioTexto",4) #instruccion, poner pieza
 	seDebeSeleccionarPieza()
 
 func seDebeSeleccionarPieza():
-	while(!piezaSeleccionada):
+	while estado == TutorialState.SELECCION_PIEZA:
 		GlobalSignal.emit_signal("parpadeoPiezas")
-		await get_tree().create_timer(3).timeout
+		await esperar(3)
 	#hacerParpadearBaldosa()
 #func hacerParpadearBaldosa(): #(3,12)
 	#piezaSeleccionada = true
@@ -74,34 +92,41 @@ func seDebeSeleccionarPieza():
 
 	
 func ComienzoOleadaTut():
-	piezaSeleccionada = true
-	GlobalSignal.emit_signal("cambioTexto",5)
-	while(!comienzoOleada):
+	if estado != TutorialState.SELECCION_PIEZA:
+		return
+	estado = TutorialState.COMIENZO_OLEADA
+	GlobalSignal.emit_signal("cambioTexto",5) #apretar la oleada para comenzar el ataque
+	while estado == TutorialState.COMIENZO_OLEADA:
 		GlobalSignal.emit_signal("parpadeaOleadar")
-		await get_tree().create_timer(2).timeout
+		await esperar(2)
 	
 func comenzoOleada():
-	comienzoOleada = true
-	GlobalSignal.emit_signal("cambioTexto",6)
-	for i in 3:
+	if estado != TutorialState.COMIENZO_OLEADA:
+		return
+	estado = TutorialState.FIN_OLEADA
+	GlobalSignal.emit_signal("cambioTexto",6) #tabla de defensa
+	for i in range(3):
 		GlobalSignal.emit_signal("parpadearTabla")
-		await get_tree().create_timer(5).timeout
-	GlobalSignal.emit_signal("cambioTexto",10)
-	await get_tree().create_timer(5).timeout	
-	GlobalSignal.emit_signal("cambioTexto",11)
-	await get_tree().create_timer(7).timeout
-	GlobalSignal.emit_signal("cambioTexto",7)
-	await get_tree().create_timer(3).timeout
+		await esperar(5)
+	GlobalSignal.emit_signal("cambioTexto",10) #ataque de piezas
+	await esperar(5)
+	GlobalSignal.emit_signal("cambioTexto",11) #camara
+	await esperar(7)
+	GlobalSignal.emit_signal("cambioTexto",7) #suerte
+	await esperar(4)
 	GlobalSignal.emit_signal("tutorialVisible")
 	
 func finDeOleada():
+	if estado != TutorialState.FIN_OLEADA:
+		return
+	estado = TutorialState.COMPLETO
 	GlobalSignal.emit_signal("tutorialVisible")
-	GlobalSignal.emit_signal("cambioTexto",8)
-	await get_tree().create_timer(5).timeout
-	GlobalSignal.emit_signal("cambioTexto",9)
-	await get_tree().create_timer(3).timeout
+	GlobalSignal.emit_signal("cambioTexto",8) #explicacion de fe
+	await esperar(5)
+	GlobalSignal.emit_signal("cambioTexto",9) #final
+	await esperar(3)
 	GlobalSignal.emit_signal("ultimoTexto")
-	await get_tree().create_timer(3).timeout
+	await esperar(3)
 	GlobalJuego.reiniciar_variables()
 	GlobalJuego.tutorial = false
 	get_tree().change_scene_to_file("res://scenes/ui/main.tscn")

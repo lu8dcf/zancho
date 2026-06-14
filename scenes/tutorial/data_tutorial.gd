@@ -20,11 +20,11 @@ Solo hay que dar la señal.",
 	7:"¡Mucha suerte!",
 	
 	8:"Una cosa más, cuando pierdas las batallas y el rey caiga.
-La fe restablecerá de nuevo al rey.",
+La fe restablecerá al rey.",
 
 	9:"Solo… no dejes que la fe se acabe.",
 	
-	10: "Podes ver donde atacan las piezas, pasando por encima el mouse",
+	10: "Podes ver donde atacan las piezas, pasando por encima el cursor.",
 	
 	11: "A veces es necesario ver mejor para armar la estrategia,
 	 usa W,A,S,D y click derecho",

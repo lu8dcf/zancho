@@ -54,7 +54,6 @@ func mostrar_imagen(ganar: int) -> void:
 	$PanelTienda._ocultar_tienda()
 	#si es el tutorial:
 	if (GlobalJuego.tutorial):
-		print("FinOleada")
 		pantallaNegra.visible = true
 		var tween = create_tween()
 		tween.tween_property(pantallaNegra, "modulate", Color(0.0, 0.0, 0.0, 1), 1.5)
