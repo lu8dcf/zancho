@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dh1sod33mcrpq"]
+
+[ext_resource type="Script" uid="uid://c08emipop50lc" path="res://scenes/ui/monedas/moneda.gd" id="1_1sbyp"]
+[ext_resource type="Texture2D" uid="uid://btd0wrpidr1hf" path="res://assets/ui/moneda.png" id="2_7fajn"]
+
+[node name="Moneda" type="Node2D" unique_id=409082135]
+script = ExtResource("1_1sbyp")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1273488569]
+position = Vector2(9.536743e-07, 9.536743e-07)
+scale = Vector2(0.0421025, 0.041406233)
+texture = ExtResource("2_7fajn")
+
+[node name="Espera" type="Timer" parent="." unique_id=2140258639]
+wait_time = 0.606
+one_shot = true
+autostart = true

@@ -31,6 +31,3 @@ func transicionTextoFinal():
 	tween.tween_property(self, "modulate", Color(1.5, 1.5, 1.5, 0.0), 1.5)
 	
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

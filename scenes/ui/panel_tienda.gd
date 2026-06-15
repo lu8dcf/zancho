@@ -42,10 +42,10 @@ func _ready():
 	#configurar_tienda()
 
 func parpadeaTutorial():
-	var tween = create_tween()
+	var tween_tuto = create_tween()
 	for i in 2:
-		tween.tween_property(boton_de_despliegue, "scale", Vector2(.9, 1), 0.1)
-		tween.tween_property(boton_de_despliegue, "scale", Vector2.ONE, 0.1)
+		tween_tuto.tween_property(boton_de_despliegue, "scale", Vector2(.9, 1), 0.1)
+		tween_tuto.tween_property(boton_de_despliegue, "scale", Vector2.ONE, 0.1)
 
 func _alternar_tienda():
 	if tween and tween.is_running():
