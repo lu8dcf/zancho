@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://bjbqonwb7pnfh"]
 
 [ext_resource type="Script" uid="uid://by43q6vkxfn8n" path="res://scenes/ui/main.gd" id="1_0ay0p"]
-[ext_resource type="Texture2D" uid="uid://rf316ffkjwtt" path="res://assets/menu/menu.png" id="2_2p1s2"]
-[ext_resource type="Texture2D" uid="uid://deam4qk6byf2b" path="res://assets/menu/salir.png" id="3_02nsg"]
-[ext_resource type="Texture2D" uid="uid://cqf4aqigwwqd8" path="res://assets/menu/boton4.png" id="3_7n028"]
+[ext_resource type="Texture2D" uid="uid://vhos8f4cc3kk" path="res://assets/menu/menu.png" id="2_2p1s2"]
+[ext_resource type="Texture2D" uid="uid://bekhv8mvdp844" path="res://assets/menu/salir.png" id="3_02nsg"]
+[ext_resource type="Texture2D" uid="uid://e0ld2q14lx52" path="res://assets/menu/boton4.png" id="3_7n028"]
 [ext_resource type="LabelSettings" uid="uid://c64snqitwil5t" path="res://assets/fuentes/textos.tres" id="4_jvuow"]
 [ext_resource type="PackedScene" uid="uid://dw6tl6131xrlf" path="res://scenes/ui/components/label_grande.tscn" id="4_xbw52"]
-[ext_resource type="Texture2D" uid="uid://ct704grnjc3v4" path="res://assets/menu/boton5.png" id="6_aain1"]
-[ext_resource type="Texture2D" uid="uid://dp4342bo0wi3" path="res://assets/menu/boton2.png" id="7_f8067"]
-[ext_resource type="Texture2D" uid="uid://d3nkpo21nvyl6" path="res://assets/menu/boton3.png" id="8_yiij1"]
+[ext_resource type="Texture2D" uid="uid://cyclvtl3uoh4" path="res://assets/menu/boton5.png" id="6_aain1"]
+[ext_resource type="Texture2D" uid="uid://bdnuhb2lowa5h" path="res://assets/menu/boton2.png" id="7_f8067"]
+[ext_resource type="Texture2D" uid="uid://c5wfquab4f2c2" path="res://assets/menu/boton3.png" id="8_yiij1"]
 [ext_resource type="Texture2D" uid="uid://couaobhhkqc78" path="res://assets/menu/Boton6.png" id="9_dpyut"]
 [ext_resource type="Script" uid="uid://bjqwvfiaeme7n" path="res://scenes/ui/play.gd" id="9_x68jn"]
-[ext_resource type="Texture2D" uid="uid://1xn3gjlvlk63" path="res://assets/menu/marcos.png" id="10_6ic3k"]
+[ext_resource type="Texture2D" uid="uid://bgtnsshunar3y" path="res://assets/menu/marcos.png" id="10_6ic3k"]
 [ext_resource type="Texture2D" uid="uid://by412hpyptahi" path="res://assets/menu/Boton7.png" id="10_t1dln"]
 [ext_resource type="Texture2D" uid="uid://d08h2xc0xgcas" path="res://assets/menu/placa.png" id="11_t1dln"]
 [ext_resource type="PackedScene" uid="uid://dx2ufxs2ydj1b" path="res://scenes/ui/components/boton_main_largo.tscn" id="11_txqnm"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" uid="uid://d184ng4dyotc3" path="res://scenes/ui/controles_camara.gd" id="20_wweun"]
 [ext_resource type="Script" uid="uid://by5rg4ddmdnti" path="res://scenes/ui/accesibilidad_menu.gd" id="21_aca1m"]
 [ext_resource type="Script" uid="uid://bomc1kavji17" path="res://scenes/ui/recompensa.gd" id="21_me51f"]
+[ext_resource type="FontFile" uid="uid://d2x2au6q8fhoc" path="res://assets/fuentes/Enchanted Land DS D.otf" id="21_txqnm"]
 [ext_resource type="Texture2D" uid="uid://cjjiu5j24ga7a" path="res://assets/ui/recompensa1.png" id="22_8fca0"]
 [ext_resource type="Texture2D" uid="uid://cfug7r4elnpbi" path="res://assets/ui/brillo.png" id="22_aca1m"]
 [ext_resource type="Texture2D" uid="uid://b2014xvxqqsne" path="res://assets/ui/recompensa2.png" id="23_aca1m"]
@@ -59,6 +60,14 @@ bg_color = Color(0.6, 0.6, 0.13333334, 0.67058825)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rvf5f"]
 bg_color = Color(0.6, 0.6, 0.13333334, 0.67058825)
+
+[sub_resource type="Theme" id="Theme_7qwja"]
+default_font = ExtResource("21_txqnm")
+default_font_size = 20
+
+[sub_resource type="Theme" id="Theme_o14an"]
+default_font = ExtResource("21_txqnm")
+default_font_size = 20
 
 [node name="main" type="Control" unique_id=1651978815]
 layout_mode = 3
@@ -318,7 +327,6 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="opciones" type="MenuBar" parent="." unique_id=1414264697]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3250868
@@ -1400,6 +1408,7 @@ offset_left = 231.0
 offset_top = 14.0
 offset_right = 343.0
 offset_bottom = 45.0
+theme = SubResource("Theme_7qwja")
 disabled = true
 text = "Permitir"
 alignment = 1
@@ -1414,19 +1423,26 @@ anchor_bottom = 0.43767184
 offset_left = 144.0
 offset_right = 302.0
 offset_bottom = 52.0
-text = "Color de Piezas"
+text = "Elijo Piezas"
 label_settings = ExtResource("4_jvuow")
 metadata/_edit_use_anchors_ = true
 
-[node name="checkColor" type="CheckButton" parent="opciones/accesibilidad_menu/color_piezas" unique_id=156713839]
-layout_mode = 0
+[node name="option_color" type="OptionButton" parent="opciones/accesibilidad_menu/color_piezas" unique_id=1302938135]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.633
+anchor_bottom = 0.38500002
 offset_left = 231.0
-offset_top = 14.0
-offset_right = 343.0
-offset_bottom = 45.0
-button_pressed = true
-text = "Blancas"
-alignment = 1
+offset_top = 11.0
+offset_right = 230.986
+offset_bottom = 29.98
+theme = SubResource("Theme_o14an")
+selected = 0
+item_count = 2
+popup/item_0/text = "Blancas"
+popup/item_0/id = 0
+popup/item_1/text = "Negras"
+popup/item_1/id = 1
 
 [node name="guardar" parent="opciones/accesibilidad_menu" unique_id=1934532811 instance=ExtResource("11_txqnm")]
 layout_mode = 0
@@ -1634,7 +1650,7 @@ text = "Rechazar"
 [connection signal="pressed" from="opciones/controles_menu/boton_jugabilidad" to="opciones/controles_menu" method="_on_boton_jugabilidad_pressed"]
 [connection signal="mouse_entered" from="opciones/accesibilidad_menu/multi/CheckButton" to="opciones/accesibilidad_menu" method="_on_check_button_mouse_entered"]
 [connection signal="pressed" from="opciones/accesibilidad_menu/multi/CheckButton" to="opciones/accesibilidad_menu" method="_on_check_button_pressed"]
-[connection signal="toggled" from="opciones/accesibilidad_menu/color_piezas/checkColor" to="opciones/accesibilidad_menu" method="_on_check_color_toggled"]
+[connection signal="item_selected" from="opciones/accesibilidad_menu/color_piezas/option_color" to="opciones/accesibilidad_menu" method="_on_option_color_item_selected"]
 [connection signal="pressed" from="opciones/accesibilidad_menu/guardar" to="opciones/accesibilidad_menu" method="_on_guardar_pressed"]
 [connection signal="pressed" from="opciones/accesibilidad_menu/restablecer" to="opciones/accesibilidad_menu" method="_on_restablecer_pressed"]
 [connection signal="pressed" from="recompensa/imagen_recompensa" to="recompensa" method="_on_imagen_recompensa_pressed"]
