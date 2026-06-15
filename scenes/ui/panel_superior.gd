@@ -57,10 +57,10 @@ func _ready() -> void:
 		
 
 func parpadearDebilidades(): #tutorial
-	var tween = create_tween()
+	var tween_debil = create_tween()
 	for i in 2:
-		tween.tween_property(boton_debilidades, "modulate", Color(1.5, 1.5, 0.0, 0.973), 0.3)
-		tween.tween_property(boton_debilidades, "modulate", Color.WHITE, 0.2)
+		tween_debil.tween_property(boton_debilidades, "modulate", Color(1.5, 1.5, 0.0, 0.973), 0.3)
+		tween_debil.tween_property(boton_debilidades, "modulate", Color.WHITE, 0.2)
 
 func parpadearOleada(): #tutorial
 	# Cambiar opacidad o color de la label dentro

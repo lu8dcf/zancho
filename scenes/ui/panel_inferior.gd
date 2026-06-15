@@ -49,6 +49,7 @@ func parpadeaPiezaComprada(): #tutorial
 
 func esconder_botones():
 	if GlobalJuego.empezo_oleada:
+
 		for boton in botones_piezas:
 			boton.disabled = true
 	else: 

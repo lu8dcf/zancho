@@ -53,6 +53,7 @@ signal barraVida(porcentual)
 @onready var nodo_sangre = $sangre
 
 func _ready():
+	GlobalSignal.monedas.emit()
 	vida_total = Piezas.vida[pieza_tipo]
 	vida_actual = vida_total
 	
