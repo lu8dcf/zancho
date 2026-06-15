@@ -52,7 +52,7 @@ func _ready() -> void:
 
 
 func reiniciar_variables():
-	if(globalJuego.tutorial):
+	if(GlobalJuego.tutorial):
 		monedas_actual = 200
 	else:
 		monedas_actual = 1200 
@@ -145,7 +145,7 @@ func comprar_pieza(nombre_pieza:String) -> bool:
 	
 	# verificar monedas, si no alcanza vuelve (igualemnte es imposible comprar)
 	if monedas_actual < datos["precio"]:
-		if(globalJuego.tutorial):
+		if(GlobalJuego.tutorial):
 			GlobalSignal.emit_signal("cambioTexto",3)
 		return false
 	
@@ -154,7 +154,7 @@ func comprar_pieza(nombre_pieza:String) -> bool:
 		return false
 	
 	# si todo fue bien. se hace la compra
-	if not globalJuego.debug:
+	if not GlobalJuego.debug:
 		monedas_actual -= datos["precio"]
 	
 	inventario_actual[nombre_pieza] += 1
@@ -183,7 +183,7 @@ func vender_pieza(nombre_pieza:String) -> bool:
 	# si todo sale bien se vente la pieza y se suma el valor de la reventa
 	inventario_actual[nombre_pieza] -= 1
 	
-	if not globalJuego.debug:
+	if not GlobalJuego.debug:
 		monedas_actual += valor_venta
 	
 	# se mandan las señales para actualizar el hud
@@ -241,7 +241,7 @@ func verificar_orden_aparicion(nombre_pieza: String) -> bool:
 	if not nombre_pieza in datos_piezas:
 		return false
 	# verificar la oleada actual, dependendiendo del numero se van mostrando las piezas
-	return globalJuego.oleada_actual < datos_piezas[nombre_pieza]["orden_aparicion"]
+	return GlobalJuego.oleada_actual < datos_piezas[nombre_pieza]["orden_aparicion"]
 
 func obtener_nombre_pieza(tipo:int):
 	return NOMBRES_PIEZAS[tipo-1]

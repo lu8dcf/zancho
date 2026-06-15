@@ -33,7 +33,7 @@ func _ready():
 	mostrar_todos_paneles()
 	imagen_oleada.modulate.a = 0  
 	imagen_oleada.visible = false
-	label_debug_temporal.text = "Debug: " + str(globalJuego.debug)
+	label_debug_temporal.text = "Debug: " + str(GlobalJuego.debug)
 	log_texto.bbcode_enabled = true
 	log_texto.scroll_active = false
 	
@@ -50,13 +50,13 @@ func mostrar_todos_paneles():
 	panel_rey.visible = true
 	
 func mostrar_imagen(ganar: int) -> void:
-	globalJuego.empezo_oleada = false
+	GlobalJuego.empezo_oleada = false
 	$PanelTienda._ocultar_tienda()
 	#si es el tutorial:
 	if (GlobalJuego.tutorial):
 		pantallaNegra.visible = true
-		var tween = create_tween()
-		tween.tween_property(pantallaNegra, "modulate", Color(0.0, 0.0, 0.0, 1), 1.5)
+		var tweenTutorial = create_tween()
+		tweenTutorial.tween_property(pantallaNegra, "modulate", Color(0.0, 0.0, 0.0, 1), 1.5)
 		await get_tree().create_timer(3).timeout
 		GlobalSignal.emit_signal("PantallaNegra")
 	else:
@@ -65,13 +65,13 @@ func mostrar_imagen(ganar: int) -> void:
 				var instancia_victoria = escena_victoria.instantiate()
 				add_child(instancia_victoria)
 			mostras_desaparecer_imagen()
-			globalJuego.siguiente_oleada()
+			GlobalJuego.siguiente_oleada()
 		else:
 			if escena_derrota:
 				var instancia_derrota = escena_derrota.instantiate()
 				add_child(instancia_derrota)
 			mostras_desaparecer_imagen()
-			globalJuego.perder_fe(5)
+			GlobalJuego.perder_fe(5)
 			
 func mostras_desaparecer_imagen():
 	if tween and tween.is_valid():

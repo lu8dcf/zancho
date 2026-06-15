@@ -28,7 +28,7 @@ func _ready():
 	await pieza.ready
 	await get_tree().create_timer(1).timeout
 	var posicionActual = calculoPosActual()
-	#var limite = globalJuego.tamano_tablero.x - 1 #seria una general
+	#var limite = GlobalJuego.tamano_tablero.x - 1 #seria una general
 	#depende del lado que este del tablero, cambia la secuencia
 	if(posicionActual.x+ posicionActual.z<15):
 		secuencia= [5,6,3,4,1,2,7,8]

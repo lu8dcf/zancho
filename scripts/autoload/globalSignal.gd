@@ -53,24 +53,24 @@ signal mensaje_tienda(compra:bool,pieza:String) # si es true la compra quiere de
 
 #Seniales para el tutorial
 @warning_ignore("unused_signal")
-signal tiendaHoverParpadea()
+signal tiendaHoverParpadea
 @warning_ignore("unused_signal")
-signal tutorialVisible()
+signal tutorialVisible
 @warning_ignore("unused_signal")
 signal cambioTexto(nroTexto: int)
 @warning_ignore("unused_signal")
-signal tiendaClick()
+signal tiendaClick
 @warning_ignore("unused_signal")
-signal parpadeoPiezas()
+signal parpadeoPiezas
 @warning_ignore("unused_signal")
-signal seComproPieza()
+signal seComproPieza
 @warning_ignore("unused_signal")
-signal parpadearTabla()
+signal parpadearTabla
 @warning_ignore("unused_signal")
-signal parpadeaOleadar()
+signal parpadeaOleadar
 @warning_ignore("unused_signal")
-signal PantallaNegra()
+signal PantallaNegra
 @warning_ignore("unused_signal")
-signal ultimoTexto()
+signal ultimoTexto
 #signal obtenerBaldosa(posicion : Vector2i)
 #signal retornoBaldosa(baldosa : BaldosaBase)

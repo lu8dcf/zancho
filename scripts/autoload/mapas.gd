@@ -61,9 +61,9 @@ func cargar_todos_mapas():
 func siguiente_mapa():
 	for mapa in datos_mapa:
 		var oleadas = datos_mapa[mapa]
-		if globalJuego.oleada_actual in oleadas:
-			globalJuego.mapa_actual = mapa
-			print("mapa acual e: ", globalJuego.mapa_actual)
+		if GlobalJuego.oleada_actual in oleadas:
+			GlobalJuego.mapa_actual = mapa
+			print("mapa acual e: ", GlobalJuego.mapa_actual)
 
 func cargar_cada_mapa(mapa_numero:int):
 	var posiciones = []
@@ -135,8 +135,8 @@ func obtener_mapa_actual(indice_mapa: int = 0) -> Dictionary:
 	#return posicion in mapas[indice_mapa]
 
 #func siguiente_mapa() -> void:
-	#var nuevo_mapa = (globalJuego.mapa_actual + 1)
+	#var nuevo_mapa = (GlobalJuego.mapa_actual + 1)
 	#if nuevo_mapa == 6:
 		#nuevo_mapa = 1
-	#globalJuego.cambiar_mapa(nuevo_mapa)
+	#GlobalJuego.cambiar_mapa(nuevo_mapa)
 	#esiguiente_mapa()

@@ -7,7 +7,8 @@ extends Node
 
 var debug :bool = false
 
-var tutorial : bool = true
+var tutorial : bool = false
+
 
 ### - DEBUG SI ES TRUE ENTONCES TODO ESTA PERMITIDO
 
@@ -135,7 +136,7 @@ func verifica_piezas_negra(sitio: Vector2i)-> bool:
 
 func actualizar_todas_las_piezas():
 	for pieza in Piezas.pieza_negra:
-		var sitio3d = round(pieza.global_position) / globalJuego.espaciado_baldosas
+		var sitio3d = round(pieza.global_position) / GlobalJuego.espaciado_baldosas
 		pieza.pieza_sitio = Vector2i(sitio3d.x, sitio3d.z)
 
 func limpio_reservadas():
@@ -150,7 +151,7 @@ func verifica_extremos(sitio: Vector2i):
 	
 func verifica_obstaculos(sitio: Vector2i):
 	# Verificacion de obstaculos en el mapa
-	if sitio in mapas.mapas[globalJuego.mapa_actual]:
+	if sitio in mapas.mapas[GlobalJuego.mapa_actual]:
 		#mensaje("No se puede insertar sobre un obstaculo")
 		return false
 	return true

@@ -120,11 +120,11 @@ func moverPaso(destino:Vector3i): #desplazo la pieza a la sieguiente
 
 func es_valido(pos: Vector3i) -> bool: #me aseguro que se pueda usar la baldosa
 	var pos2d = Vector2i(pos.x, pos.z)
-	if globalJuego.verifica_extremos(pos2d)==false:
+	if GlobalJuego.verifica_extremos(pos2d)==false:
 		return false
-	if globalJuego.verifica_obstaculos(pos2d)==false:
+	if GlobalJuego.verifica_obstaculos(pos2d)==false:
 		return false
-	if globalJuego.verifica_piezas(pos2d)==false:
+	if GlobalJuego.verifica_piezas(pos2d)==false:
 		return false
 	return true
 

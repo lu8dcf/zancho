@@ -2,14 +2,14 @@ extends Panel
 @onready var barra_fe: TextureProgressBar = $BarraFe
 
 func _ready() -> void:
-	barra_fe.max_value = globalJuego.feMax
-	barra_fe.value = globalJuego.fe
+	barra_fe.max_value = GlobalJuego.feMax
+	barra_fe.value = GlobalJuego.fe
 	
-	globalJuego.fe_cambiada.connect(_actualizar_fe)
+	GlobalJuego.fe_cambiada.connect(_actualizar_fe)
 	
-	#globalJuego.tienda_estado_cambiado.connect(_actualizar_tienda)
+	#GlobalJuego.tienda_estado_cambiado.connect(_actualizar_tienda)
 	
-	_actualizar_fe(globalJuego.fe)
+	_actualizar_fe(GlobalJuego.fe)
 	
 	
 func _actualizar_fe(fe_nueva):

@@ -28,7 +28,7 @@ buses/default_bus_layout="uid://bvc55uhqxn66k"
 
 [autoload]
 
-globalJuego="*uid://ddgt0astfx6o4"
+globalJuego="uid://ddgt0astfx6o4"
 economia="*uid://bx3m3e00xreoa"
 mapas="*uid://cx3yodnfc5g1l"
 Sonidos="*uid://13ju4at2w07"

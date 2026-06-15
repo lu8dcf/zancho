@@ -28,6 +28,7 @@ var estado : TutorialState = TutorialState.TIENDA
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	print("TUTORIAL READY")
 	await esperar(5)
 	GlobalSignal.emit_signal("tutorialVisible")
 	estado = TutorialState.TIENDA

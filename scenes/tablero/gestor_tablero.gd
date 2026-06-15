@@ -5,8 +5,8 @@ class_name GestorTablero
 @export var escena_baldosa : PackedScene
 @export var modelo_glb_claro : PackedScene
 @export var modelo_glb_oscuro : PackedScene
-@export var tamano_tablero : Vector2i = globalJuego.tamano_tablero #(30:16)
-@export var espaciado_baldosas : float = globalJuego.espaciado_baldosas
+@export var tamano_tablero : Vector2i = GlobalJuego.tamano_tablero #(30:16)
+@export var espaciado_baldosas : float = GlobalJuego.espaciado_baldosas
 @export var altura_piezas : float = 0.2
 
 # Variables privadas

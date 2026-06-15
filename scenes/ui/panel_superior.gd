@@ -34,10 +34,10 @@ var altura_boton_visible: float = 5
 
 
 func _ready() -> void:
-	empezar_oleada.cambiar_texto("Empezar Oleada " + str(globalJuego.oleada_actual))
+	empezar_oleada.cambiar_texto("Empezar Oleada " + str(GlobalJuego.oleada_actual))
 	desaparecer_botones_velocidades()
-	globalJuego.oleada_cambiada.connect(_actualizar_oleada)
-	_actualizar_oleada(globalJuego.oleada_actual)
+	GlobalJuego.oleada_cambiada.connect(_actualizar_oleada)
+	_actualizar_oleada(GlobalJuego.oleada_actual)
 	imagen_debilidades.texture = load("res://assets/ui/debilidades.png")
 	imagen_debilidades.visible=false
 	economia.monedas_cambiadas.connect(_actualizar_monedas)
@@ -101,7 +101,7 @@ func _on_empezar_oleada_hover_exited():
 
 
 func _actualizar_monedas(nuevas_monedas: int) -> void:
-	if !globalJuego.debug:
+	if !GlobalJuego.debug:
 		monedas_valor.cambiar_texto(str(nuevas_monedas))
 	else: 
 		monedas_valor.cambiar_texto(" ?")

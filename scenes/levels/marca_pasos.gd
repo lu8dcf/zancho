@@ -5,7 +5,7 @@ class_name MarcaAtaque
 
 func _ready():
 	# inicializar 
-	wait_time = globalJuego.tiempo_pasos  # duracion
+	wait_time = GlobalJuego.tiempo_pasos  # duracion
 	one_shot = false  # Repetitivo (ciclos infinitos)
 	autostart = false  # No inicia solo, control manual
 	
@@ -35,7 +35,7 @@ func control(activa):
 func multiplicador(multi):
 	if multi < 1 or multi >5:
 		return
-	#wait_time = globalJuego.tiempo_pasos / multi
+	#wait_time = GlobalJuego.tiempo_pasos / multi
 
 
 	var escala = float(multi) * 0.5  # 1=1.0 (100%), 2=1.5 (150%), ..., 5=4.0 (400%)

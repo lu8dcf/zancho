@@ -48,7 +48,7 @@ func parpadeaPiezaComprada(): #tutorial
 		tween.tween_property(self, "modulate", Color.WHITE, 0.2)
 
 func esconder_botones():
-	if globalJuego.empezo_oleada:
+	if GlobalJuego.empezo_oleada:
 		for boton in botones_piezas:
 			boton.disabled = true
 	else: 

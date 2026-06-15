@@ -57,7 +57,7 @@ func actualizar_pieza(_nada=0):
 		return
 	
 	# Si la oleada empezó, bloquear todo
-	if globalJuego.empezo_oleada:
+	if GlobalJuego.empezo_oleada:
 		deshabilitar_todo_cerrado()
 		return
 	
@@ -81,7 +81,7 @@ func actualizar_pieza(_nada=0):
 		return
 	
 	# Verificar orden de aparición
-	if economia.verificar_orden_aparicion(nombre_pieza) and !globalJuego.debug:
+	if economia.verificar_orden_aparicion(nombre_pieza) and !GlobalJuego.debug:
 		deshabilitar_todo_cerrado()
 		return
 	

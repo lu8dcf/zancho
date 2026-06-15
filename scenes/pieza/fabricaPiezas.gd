@@ -2,7 +2,7 @@ extends Node
 class_name FabricaPiezas
 
 var nueva_pieza: RigidBody3D
-var espaciado_baldosas : float = globalJuego.espaciado_baldosas
+var espaciado_baldosas : float = GlobalJuego.espaciado_baldosas
 var pieza_escena = preload("res://scenes/pieza/pieza_base.tscn")
 
 
@@ -15,7 +15,7 @@ func _ready() -> void:
 	
 func colocar_pieza(sitio: Vector2i, tipo: int , pieza_blanca: bool):
 	
-	if globalJuego.lugar_disponible(sitio)==false: # verifica que el lugar a instanciar este libre
+	if GlobalJuego.lugar_disponible(sitio)==false: # verifica que el lugar a instanciar este libre
 		return
 		
 	# instanciar		
@@ -44,7 +44,7 @@ func colocar_pieza(sitio: Vector2i, tipo: int , pieza_blanca: bool):
 		
 		
 	
-	#print ((Piezas.pieza_activa[id].global_position)/globalJuego.espaciado_baldosas)
+	#print ((Piezas.pieza_activa[id].global_position)/GlobalJuego.espaciado_baldosas)
 	id += 1 # incrementador de nuemro de pieza
 	#print ("Blanca ",Piezas.contar_piezas_blancas())
 	#print ("Negras ",Piezas.contar_piezas_negras())

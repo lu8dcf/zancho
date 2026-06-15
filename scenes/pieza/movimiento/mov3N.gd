@@ -29,7 +29,7 @@ func _ready():
 	await get_tree().create_timer(1).timeout
 	
 	var posicionActual = calculoPosActual()
-	#var limite = globalJuego.tamano_tablero.x - 1 #seria una general
+	#var limite = GlobalJuego.tamano_tablero.x - 1 #seria una general
 	#depende del lado que este del tablero, cambia la secuencia
 	if( posicionActual.x+ posicionActual.z<15):
 		#lado izquierdo

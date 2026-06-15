@@ -7,6 +7,7 @@ extends Control
 
 
 func _ready():
+
 	play.visible=false
 	opciones.visible=false
 	recompensa.visible = true
@@ -58,6 +59,6 @@ func _on_opciones_mouse_entered() -> void:
 
 func _on_como_jugar_pressed() -> void:
 	Sonidos.boton1()
-	globalJuego.tutorial = true
+	GlobalJuego.tutorial = true
 	GlobalJuego.reiniciar_variables()
 	get_tree().change_scene_to_file("res://scenes/levels/level.tscn")
