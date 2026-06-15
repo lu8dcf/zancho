@@ -13,8 +13,8 @@ func posicionar_en_centro_aleatorio() -> void:
 	var centro_pantalla: Vector2 = get_viewport_rect().size / 2
 	
 	# 2. Generar un desvío aleatorio entre -100 y +100 para cada eje
-	var desvio_x: float = randf_range(-25.0, 25.0)
-	var desvio_y: float = randf_range(-25.0, 25.0)
+	var desvio_x: float = randf_range(-15.0, 15.0)
+	var desvio_y: float = randf_range(-15.0, 15.0)
 	var vector_desvio := Vector2(desvio_x, desvio_y)
 	
 	# 3. Asignar la posición final al Area2D
@@ -27,7 +27,7 @@ func animar_vuelo_moneda() -> void:
 	
 	# 2. Creamos una posición intermedia aleatoria para crear el efecto "arco" o explosión inicial
 	# Esto hace que cada moneda tome un camino ligeramente diferente
-	var desvio_inicial = Vector2(randf_range(-150, 150), randf_range(-150, 150))
+	var desvio_inicial = Vector2(randf_range(-100, 100), randf_range(-100, 100))
 	var posicion_intermedia = centro_pantalla + desvio_inicial
 	
 	# Variable para calcular un tiempo de viaje ligeramente único por moneda (entre 0.6 y 0.9 segundos)

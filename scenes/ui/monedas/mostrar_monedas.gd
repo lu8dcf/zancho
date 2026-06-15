@@ -6,17 +6,14 @@ const ESCENA_MONEDA = preload("res://scenes/ui/monedas/moneda.tscn")
 
 
 func _ready() -> void:
-	GlobalSignal.connect("monedas",generar_lluvia_de_monedas)
-	
+	generar_lluvia_de_monedas()
 # Función que podés llamar desde cualquier parte del juego para activar el efecto
 func generar_lluvia_de_monedas() -> void:
-	var cantidad_monedas: int = 10
+	var cantidad_monedas: int = 20
 	
 	for i in range(cantidad_monedas):
 		# A. Instanciar la moneda en memoria
 		var nueva_moneda = ESCENA_MONEDA.instantiate()
-		
-		# B. Añadirla como hija de este nodo para que aparezca en el árbol del juego
 		add_child(nueva_moneda)
 		
 		# C. Calcular un tiempo de espera aleatorio entre 0.2 y 0.5 segundos para la próxima moneda
