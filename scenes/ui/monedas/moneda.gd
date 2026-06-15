@@ -33,10 +33,8 @@ func animar_vuelo_moneda() -> void:
 	# Variable para calcular un tiempo de viaje ligeramente único por moneda (entre 0.6 y 0.9 segundos)
 	var duracion_viaje: float = randf_range(0.6, 0.9)
 	
-	# 3. Inicializamos el Tween
-	var tween = create_tween()
 	
-	# Hacemos que los efectos de movimiento y escala ocurran en paralelo (al mismo tiempo)
+	var tween = create_tween()
 	tween.set_parallel(true)
 	
 	# --- ANIMACIÓN DE MOVIMIENTO (Trayectoria en curva) ---
@@ -63,4 +61,4 @@ func animar_vuelo_moneda() -> void:
 	# 4. Auto-destrucción: Cuando todo el Tween termina, borramos la instancia de la memoria
 	tween.set_parallel(false)
 	tween.tween_callback(queue_free)
-	# (Opcional): Justo antes del queue_free podrías disparar una señal al HUD para que sume el número en el contador
+	#  Justo antes del queue_free ---- disparar una señal al HUD para que sume el número en el contador

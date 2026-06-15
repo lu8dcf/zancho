@@ -7,8 +7,8 @@
 script = ExtResource("1_1sbyp")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1273488569]
-position = Vector2(9.536743e-07, 9.536743e-07)
-scale = Vector2(0.0421025, 0.041406233)
+position = Vector2(9.536743e-07, 0)
+scale = Vector2(0.06289225, 0.062369782)
 texture = ExtResource("2_7fajn")
 
 [node name="Espera" type="Timer" parent="." unique_id=2140258639]
