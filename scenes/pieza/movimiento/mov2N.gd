@@ -68,11 +68,11 @@ func movimiento():
 
 func validarPaso(nuevo_sitio):
 	var sitio = Vector2i(nuevo_sitio.x,nuevo_sitio.z)
-	if globalJuego.verifica_extremos(sitio)==false:
+	if GlobalJuego.verifica_extremos(sitio)==false:
 		return false
-	if globalJuego.verifica_obstaculos(sitio)==false:
+	if GlobalJuego.verifica_obstaculos(sitio)==false:
 		return false
-	if globalJuego.verifica_piezas(sitio)==false:
+	if GlobalJuego.verifica_piezas(sitio)==false:
 		return false
 	return true
 

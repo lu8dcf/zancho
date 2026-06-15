@@ -35,19 +35,19 @@ func movimiento():
 	var cambio = direccion*GlobalJuego.espaciado_baldosas # # vector de cambio de la pieza
 	
 	# proximo sitio a ocupar
-	var sitio3d = round(owner.global_position+cambio)/globalJuego.espaciado_baldosas # en 3d
+	var sitio3d = round(owner.global_position+cambio)/GlobalJuego.espaciado_baldosas # en 3d
 	# convierto la proxima posicion en 2Di para 
 	var nuevo_sitio = Vector2i(sitio3d.x,sitio3d.z)  # en 2d
 	
-	if globalJuego.verifica_extremos(nuevo_sitio)==false:
+	if GlobalJuego.verifica_extremos(nuevo_sitio)==false:
 		saltar_paso()
 		return
 	
-	if globalJuego.verifica_obstaculos(nuevo_sitio)==false:
+	if GlobalJuego.verifica_obstaculos(nuevo_sitio)==false:
 		saltar_paso()
 		return
 		
-	if globalJuego.verifica_piezas(nuevo_sitio)==false:
+	if GlobalJuego.verifica_piezas(nuevo_sitio)==false:
 		paso=0
 		return
 	

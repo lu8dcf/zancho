@@ -38,9 +38,18 @@ func _ready():
 	GlobalSignal.finalizaOleada.connect(esconder_botones)
 	GlobalSignal.comienzoOleada.connect(esconder_botones)
 	
+	if(GlobalJuego.tutorial):
+		GlobalSignal.connect("parpadeoPiezas",parpadeaPiezaComprada)
+
+func parpadeaPiezaComprada(): #tutorial
+	var tween = create_tween()
+	for i in 2:
+		tween.tween_property(self, "modulate", Color(1.5, 1.5, 0.0, 0.973), 0.3)
+		tween.tween_property(self, "modulate", Color.WHITE, 0.2)
 
 func esconder_botones():
-	if globalJuego.empezo_oleada:
+	if GlobalJuego.empezo_oleada:
+
 		for boton in botones_piezas:
 			boton.disabled = true
 	else: 
@@ -123,6 +132,8 @@ func _on_boton_pieza_presionado(boton: TextureButton):
 	# el modo colocacion es cuando se hace click en la pieza del inventario y se intenta colocar,
 	if Piezas.modo_colocacion:
 		Piezas.cancelar_modo_colocacion()
+
+	
 	
 	Piezas.iniciar_modo_colocacion(tipo_pieza, nombre_pieza)
 
@@ -175,6 +186,7 @@ func _obtener_tipo_pieza(nombre_pieza: String) -> int:
 func _actualizar_inventario(_pieza_nueva = null) -> void:
 	actualizar_textos_botones()
 
+
 func actualizar_textos_botones(): # se actualizan todos los botones, cada vez que se compra, se vende, se coloca
 	for boton in cant_piezas:
 		var nombre_pieza = boton.get_meta("nombre_pieza", "")
@@ -199,6 +211,7 @@ func actualizar_textos_botones(): # se actualizan todos los botones, cada vez qu
 		var cantidad = economia.inventario_actual.get(nombre_pieza, 0)
 		boton.disabled = cantidad <= 0
 		boton.modulate = Color(1, 1, 1, 1) if cantidad > 0 else Color(0.5, 0.5, 0.5, 1)
+		
 
 func _input(event):
 	if Piezas.modo_colocacion:

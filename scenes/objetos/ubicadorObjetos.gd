@@ -3,7 +3,7 @@ class_name UbicadorObjetos
 
 @export var  escena_obstaculo : PackedScene # escena base
 var altura_objetos :float = 0.2
-var espaciado_baldosas :float = globalJuego.espaciado_baldosas
+var espaciado_baldosas :float = GlobalJuego.espaciado_baldosas
 
 var gestor_tablero 
 var obstaculos_instanciados : Array = [] 
@@ -20,7 +20,7 @@ func cargar_obstaculos():
 		push_error("no hay tablero")
 		return
 		
-	var indice_mapa = globalJuego.mapa_actual 
+	var indice_mapa = GlobalJuego.mapa_actual 
 	var datos_mapa = mapas.obtener_mapa_actual(indice_mapa)
 	var posiciones = datos_mapa["posiciones"]
 	var tipos = datos_mapa["tipos"]
@@ -79,7 +79,7 @@ func recargar_mapa():
 	cargar_obstaculos()
 
 func es_posicion_ocupada_por_obstaculo(posicion: Vector2i) -> bool:
-	var indice_mapa = globalJuego.mapa_actual 
+	var indice_mapa = GlobalJuego.mapa_actual 
 	return mapas.es_posicion_bloqueada(posicion, indice_mapa)
 
 func limpiar_obstaculos():

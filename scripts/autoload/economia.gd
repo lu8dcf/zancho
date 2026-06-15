@@ -50,13 +50,23 @@ signal pieza_vendida()
 func _ready() -> void:
 	reiniciar_variables()
 
+
 func reiniciar_variables():
-	monedas_actual = 1200 
+	if(GlobalJuego.tutorial):
+		monedas_actual = 200
+	else:
+		monedas_actual = 1200 
 	monedas_antes_oleada  = 0
 	
 	# inicializar los diccionarios
 	inicializar_diccionarios()
 	economia.emit_signal("inventario_actualizado")
+
+func vacioVariables():
+	inventario_actual = {}
+	piezas_colocadas = {}
+	piezas_vivas = []
+	reiniciar_variables()
 
 func inicializar_diccionarios():
 	inventario_actual.clear()
@@ -135,6 +145,8 @@ func comprar_pieza(nombre_pieza:String) -> bool:
 	
 	# verificar monedas, si no alcanza vuelve (igualemnte es imposible comprar)
 	if monedas_actual < datos["precio"]:
+		if(GlobalJuego.tutorial):
+			GlobalSignal.emit_signal("cambioTexto",3)
 		return false
 	
 	# verificar límite, si llega al maximo
@@ -142,7 +154,7 @@ func comprar_pieza(nombre_pieza:String) -> bool:
 		return false
 	
 	# si todo fue bien. se hace la compra
-	if not globalJuego.debug:
+	if not GlobalJuego.debug:
 		monedas_actual -= datos["precio"]
 	
 	inventario_actual[nombre_pieza] += 1
@@ -152,7 +164,12 @@ func comprar_pieza(nombre_pieza:String) -> bool:
 	pieza_comprada.emit({"nombre": nombre_pieza, "cantidad": inventario_actual[nombre_pieza]})
 	inventario_actualizado.emit(inventario_actual)
 	GlobalSignal.mensaje_tienda.emit(true,nombre_pieza)
+	
+	if (GlobalJuego.tutorial):
+		GlobalSignal.emit_signal("seComproPieza")
+	
 	return true
+
 
 func vender_pieza(nombre_pieza:String) -> bool:
 	if not nombre_pieza in inventario_actual:
@@ -166,7 +183,7 @@ func vender_pieza(nombre_pieza:String) -> bool:
 	# si todo sale bien se vente la pieza y se suma el valor de la reventa
 	inventario_actual[nombre_pieza] -= 1
 	
-	if not globalJuego.debug:
+	if not GlobalJuego.debug:
 		monedas_actual += valor_venta
 	
 	# se mandan las señales para actualizar el hud
@@ -224,7 +241,7 @@ func verificar_orden_aparicion(nombre_pieza: String) -> bool:
 	if not nombre_pieza in datos_piezas:
 		return false
 	# verificar la oleada actual, dependendiendo del numero se van mostrando las piezas
-	return globalJuego.oleada_actual < datos_piezas[nombre_pieza]["orden_aparicion"]
+	return GlobalJuego.oleada_actual < datos_piezas[nombre_pieza]["orden_aparicion"]
 
 func obtener_nombre_pieza(tipo:int):
 	return NOMBRES_PIEZAS[tipo-1]

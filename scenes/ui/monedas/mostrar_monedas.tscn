@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://buy1tuy053jm4"]
+
+[ext_resource type="Script" uid="uid://bfskyep7n4c1o" path="res://scenes/ui/monedas/mostrar_monedas.gd" id="1_xjmpt"]
+
+[node name="MostrarMonedas" type="Node2D" unique_id=220346310]
+script = ExtResource("1_xjmpt")

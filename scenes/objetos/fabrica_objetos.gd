@@ -4,7 +4,7 @@ class_name FabricaObjetos
 
 
 var gestor_tablero: GestorTablero
-var espaciado_baldosas: float = globalJuego.espaciado_baldosas
+var espaciado_baldosas: float = GlobalJuego.espaciado_baldosas
 var altura_objetos: float = 0.2
 
 var objetos_instanciados: Array[ObjetoBase] = [] # objetos ( obstaculos intanciados)
@@ -13,8 +13,8 @@ func _ready():
 	await get_tree().process_frame # espera a que cargue el tablero
 	gestor_tablero = get_tree().root.find_child("GestorTablero", true, false)
 	
-	if not globalJuego.mapa_cambiado.is_connected(_on_mapa_cambiado):
-		globalJuego.mapa_cambiado.connect(_on_mapa_cambiado)
+	if not GlobalJuego.mapa_cambiado.is_connected(_on_mapa_cambiado):
+		GlobalJuego.mapa_cambiado.connect(_on_mapa_cambiado)
 		
 		
 	cargar_objetos_del_mapa()
@@ -51,7 +51,7 @@ func _obtener_datos_objeto(tipo: int) -> Dictionary:
 # MÉTODOS DE PRODUCCIÓN EN MASA
 func producir_objetos_desde_mapa(indice_mapa: int = -1) -> void:
 	if indice_mapa == -1:
-		indice_mapa = globalJuego.mapa_actual 
+		indice_mapa = GlobalJuego.mapa_actual 
 	
 	var datos_mapa = mapas.obtener_mapa_actual(indice_mapa)
 	var posiciones = datos_mapa["posiciones"]
@@ -108,7 +108,7 @@ func obtener_objeto_en_posicion(posicion: Vector2i) -> ObjetoBase:
 	return null
 
 func es_posicion_ocupada(posicion: Vector2i) -> bool:
-	var indice_mapa = globalJuego.mapa_actual if globalJuego.has("mapa_actual") else 0
+	var indice_mapa = GlobalJuego.mapa_actual if GlobalJuego.has("mapa_actual") else 0
 	return mapas.es_posicion_bloqueada(posicion, indice_mapa)
 
 # MÉTODOS DE LIMPIEZA Y RECARGA

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://jo3svada24fj"]
 
 [ext_resource type="Script" uid="uid://c2dai0gxnijq7" path="res://scenes/ui/components/ganaste_oleada.gd" id="1_e6gjl"]
-[ext_resource type="Texture2D" uid="uid://duuilqgtqt51l" path="res://assets/ui/cartel.png" id="1_mrs6e"]
+[ext_resource type="Texture2D" uid="uid://bjc5e7437lcjg" path="res://assets/ui/cartel.png" id="1_mrs6e"]
 [ext_resource type="FontFile" uid="uid://c6ngyfvifeml" path="res://assets/fuentes/startedbyamouse.ttf" id="2_q46lh"]
 [ext_resource type="Texture2D" uid="uid://couaobhhkqc78" path="res://assets/menu/Boton6.png" id="3_q46lh"]
 [ext_resource type="Texture2D" uid="uid://by412hpyptahi" path="res://assets/menu/Boton7.png" id="4_e6gjl"]

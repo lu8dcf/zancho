@@ -6,43 +6,45 @@
 [ext_resource type="Texture2D" uid="uid://b76yjxksbnl2f" path="res://assets/ui/Base3.png" id="3_qmm8d"]
 [ext_resource type="PackedScene" uid="uid://cr82cvb5b4pj7" path="res://scenes/ui/components/boton_ui.tscn" id="4_4jqwt"]
 [ext_resource type="Script" uid="uid://bc18lchq6tbu4" path="res://scenes/ui/panel_tienda.gd" id="4_136eg"]
-[ext_resource type="Texture2D" uid="uid://b4rer8jq81jtt" path="res://assets/ui/Base2.png" id="4_t0png"]
+[ext_resource type="Texture2D" uid="uid://cnxchr7q6ys8j" path="res://assets/ui/Base2.png" id="4_t0png"]
 [ext_resource type="Texture2D" uid="uid://blwkj1ovpc3jt" path="res://assets/ui/esconder_idle.png" id="5_33vp1"]
-[ext_resource type="Texture2D" uid="uid://3n4g5qn4kguq" path="res://assets/ui/pausa.png" id="5_gonto"]
-[ext_resource type="Texture2D" uid="uid://dfrb6rklnripw" path="res://assets/ui/debil.png" id="5_kicr4"]
-[ext_resource type="Texture2D" uid="uid://cwvpnbwrp4iri" path="res://assets/ui/compra.png" id="6_4jqwt"]
-[ext_resource type="Texture2D" uid="uid://qxw60if2rn4y" path="res://assets/ui/play.png" id="6_cwdlq"]
-[ext_resource type="Texture2D" uid="uid://dvi0oktf1va7f" path="res://assets/ui/camara.png" id="6_mj13f"]
+[ext_resource type="Texture2D" uid="uid://clqxrrys6e4xq" path="res://assets/ui/pausa.png" id="5_gonto"]
+[ext_resource type="Texture2D" uid="uid://cl5jgfc05s3fo" path="res://assets/ui/debil.png" id="5_kicr4"]
+[ext_resource type="Texture2D" uid="uid://cg6sd1gt6sa41" path="res://assets/ui/compra.png" id="6_4jqwt"]
+[ext_resource type="Texture2D" uid="uid://bclnc3pkm1cjy" path="res://assets/ui/play.png" id="6_cwdlq"]
+[ext_resource type="Texture2D" uid="uid://7ovlswcllpfc" path="res://assets/ui/camara.png" id="6_mj13f"]
 [ext_resource type="Script" uid="uid://biieex05lqus" path="res://scenes/ui/components/boton_esconder_ui.gd" id="7_4h7mh"]
 [ext_resource type="Texture2D" uid="uid://dcalia8ic6evb" path="res://icon.svg" id="7_cwdlq"]
 [ext_resource type="Texture2D" uid="uid://dw3g3upffwvtc" path="res://assets/ui/esconder_hover.png" id="7_jpd3y"]
-[ext_resource type="Texture2D" uid="uid://b0fitdy2p358h" path="res://assets/ui/avance2.png" id="7_o6xly"]
+[ext_resource type="Texture2D" uid="uid://30oyt60w2hps" path="res://assets/ui/avance2.png" id="7_o6xly"]
 [ext_resource type="Texture2D" uid="uid://csaekraw1m1vr" path="res://assets/ui/mostrar_hover.png" id="8_4h7mh"]
 [ext_resource type="Texture2D" uid="uid://bcheoaad2lkbl" path="res://assets/ui/mostrar_idle.png" id="9_4vegw"]
-[ext_resource type="Texture2D" uid="uid://cfab8ei6ocjti" path="res://assets/ui/boton_menu_hover.png" id="10_27rlx"]
+[ext_resource type="Texture2D" uid="uid://b5p43md6j8t6u" path="res://assets/ui/boton_menu_hover.png" id="10_27rlx"]
 [ext_resource type="Texture2D" uid="uid://cm40t88fypt7f" path="res://assets/ui/pausa_pressed.png" id="13_t4m8u"]
 [ext_resource type="Texture2D" uid="uid://bqm8mpiu4cfl" path="res://assets/ui/play_pressed.png" id="15_04enw"]
 [ext_resource type="Script" uid="uid://byh4vgo0mtohy" path="res://scenes/ui/imagen_back_inferior.gd" id="16_27rlx"]
-[ext_resource type="Texture2D" uid="uid://cnlel5ai6mxhw" path="res://assets/ui/hover_piezas.png" id="16_b6swc"]
+[ext_resource type="Texture2D" uid="uid://ctri7i1smm7q8" path="res://assets/ui/hover_piezas.png" id="16_b6swc"]
 [ext_resource type="Texture2D" uid="uid://bfpe1q878220w" path="res://assets/ui/avance1.png" id="16_rvhgw"]
 [ext_resource type="Texture2D" uid="uid://bykxrkutkuu6c" path="res://assets/ui/avance1_pressed.png" id="17_sj4ew"]
-[ext_resource type="Texture2D" uid="uid://bdys84xjdyres" path="res://assets/ui/idle_piezas.png" id="17_t0png"]
+[ext_resource type="Texture2D" uid="uid://bstm0b4pcxt02" path="res://assets/ui/idle_piezas.png" id="17_t0png"]
 [ext_resource type="Script" uid="uid://betryrljwp6w7" path="res://scenes/ui/panel_rey.gd" id="18_emer0"]
-[ext_resource type="Texture2D" uid="uid://b8u6c5gbb0wy" path="res://assets/ui/vida2.png" id="18_vuvg6"]
+[ext_resource type="Texture2D" uid="uid://c0n3huhvgy1ef" path="res://assets/ui/vida2.png" id="18_vuvg6"]
 [ext_resource type="Texture2D" uid="uid://bn52rgat260xi" path="res://assets/ui/avance2_pressed.png" id="19_83uk5"]
-[ext_resource type="Texture2D" uid="uid://brokn8inr04wm" path="res://assets/ui/vida1.png" id="19_b6swc"]
+[ext_resource type="Texture2D" uid="uid://dm4kdhgy7vn00" path="res://assets/ui/vida1.png" id="19_b6swc"]
 [ext_resource type="Script" uid="uid://b84j1w32cqx6n" path="res://scenes/ui/components/boton_tiempo_ui.gd" id="20_04enw"]
 [ext_resource type="PackedScene" uid="uid://dw6tl6131xrlf" path="res://scenes/ui/components/label_grande.tscn" id="21_rvhgw"]
 [ext_resource type="Texture2D" uid="uid://4nx0iqswboev" path="res://assets/ui/boton_carrito_idle.png" id="22_b6swc"]
 [ext_resource type="Texture2D" uid="uid://b2ha5rnk3mmjb" path="res://assets/ui/boton_carrito_hover.png" id="23_27rlx"]
 [ext_resource type="Script" uid="uid://byt8a3fhqtffq" path="res://scenes/ui/piezas_tienda.gd" id="23_t0png"]
-[ext_resource type="Texture2D" uid="uid://cdhddcfd78vcc" path="res://assets/ui/Base.png" id="25_04enw"]
+[ext_resource type="Texture2D" uid="uid://dcd16pq08w308" path="res://assets/ui/Base.png" id="25_04enw"]
 [ext_resource type="Texture2D" uid="uid://1a22h8n64b84" path="res://assets/ui/seleccion_de_velocidad.png" id="25_rvhgw"]
-[ext_resource type="Texture2D" uid="uid://dtlt6wa5c2hbp" path="res://assets/ui/boton_venta_idle.png" id="26_b6swc"]
-[ext_resource type="Texture2D" uid="uid://cvpqvy4xl6cxs" path="res://assets/ui/boton_venta_hover.png" id="27_27rlx"]
-[ext_resource type="Texture2D" uid="uid://clbddaemvfrtv" path="res://assets/ui/boton_compra_idle.png" id="28_vuvg6"]
-[ext_resource type="Texture2D" uid="uid://7023i4vtlgv3" path="res://assets/ui/boton_compra_hover.png" id="29_emer0"]
+[ext_resource type="Texture2D" uid="uid://cwheubucs7v6s" path="res://assets/ui/boton_venta_idle.png" id="26_b6swc"]
+[ext_resource type="Texture2D" uid="uid://dla4h1n557y0c" path="res://assets/ui/boton_venta_hover.png" id="27_27rlx"]
+[ext_resource type="Texture2D" uid="uid://b4i6518ssjc0n" path="res://assets/ui/boton_compra_idle.png" id="28_vuvg6"]
+[ext_resource type="Texture2D" uid="uid://bmh06rynd4e0j" path="res://assets/ui/boton_compra_hover.png" id="29_emer0"]
 [ext_resource type="Texture2D" uid="uid://cl7bvx2nl4w8x" path="res://assets/ui/gano_oleada.png" id="33_kfdjh"]
+[ext_resource type="FontFile" uid="uid://dk0s5u1t3qgc8" path="res://assets/fuentes/DOMINICA.TTF" id="44_sj4ew"]
+[ext_resource type="Script" uid="uid://dt8gc504rybi4" path="res://scenes/tutorial/texto_tutorial.gd" id="45_83uk5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kicr4"]
 
@@ -479,12 +481,12 @@ offset_left = -165.6806
 offset_top = -64.97014
 offset_right = -0.080444336
 offset_bottom = 73.02987
-grow_horizontal = 0
+grow_horizontal = 2
+grow_vertical = 2
 texture_normal = ExtResource("22_b6swc")
 texture_hover = ExtResource("23_27rlx")
 ignore_texture_size = true
 stretch_mode = 0
-metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="PanelTienda/ImagenTienda" unique_id=1017335420]
 layout_mode = 1
@@ -807,6 +809,38 @@ layout_mode = 2
 theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 scroll_active = false
+
+[node name="TextoTutorial" type="Label" parent="." unique_id=2091064343]
+visible = false
+z_index = 6
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -138.5
+offset_top = 100.0
+offset_right = 138.5
+offset_bottom = 123.000015
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8862745)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("44_sj4ew")
+theme_override_font_sizes/font_size = 25
+text = "Debes armarte para defender al rey.
+Para eso, ve al mercado."
+horizontal_alignment = 1
+script = ExtResource("45_83uk5")
+
+[node name="blackOut" type="ColorRect" parent="." unique_id=662131010]
+visible = false
+modulate = Color(0, 0, 0, 0)
+z_index = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="pressed" from="PanelSuperior/botonEsconderSuperior" to="PanelSuperior" method="_on_boton_esconder_superior_pressed"]
 [connection signal="pressed" from="PanelSuperior/empezar_oleada" to="PanelSuperior" method="_on_empezar_oleada_pressed"]

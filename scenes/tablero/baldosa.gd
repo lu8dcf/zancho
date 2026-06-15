@@ -222,3 +222,10 @@ func _intentar_colocar_pieza():
 
 func obtener_punto_colocacion() -> Vector3:
 	return position + Vector3(0, 0.2, 0)  # Altura ajustable según el modelo
+#
+#
+#func parpadearBaldosa(): #tutorial
+	#var tween = create_tween()
+	#for i in 2:
+		#tween.tween_property(self, "modulate", Color(1.5, 1.5, 0.0, 0.973), 0.3)
+		#tween.tween_property(self, "modulate", Color.WHITE, 0.2)

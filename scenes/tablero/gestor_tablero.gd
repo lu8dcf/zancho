@@ -5,8 +5,8 @@ class_name GestorTablero
 @export var escena_baldosa : PackedScene
 @export var modelo_glb_claro : PackedScene
 @export var modelo_glb_oscuro : PackedScene
-@export var tamano_tablero : Vector2i = globalJuego.tamano_tablero #(30:16)
-@export var espaciado_baldosas : float = globalJuego.espaciado_baldosas
+@export var tamano_tablero : Vector2i = GlobalJuego.tamano_tablero #(30:16)
+@export var espaciado_baldosas : float = GlobalJuego.espaciado_baldosas
 @export var altura_piezas : float = 0.2
 
 # Variables privadas
@@ -19,6 +19,10 @@ func _ready():
 	generar_tablero()	
 	mostrar_oleada_actual(true) # se genera la oleada con el rey
 	conectar_señales_baldosas()
+	
+	#si es tutorial, conecto esta senial que retorna la baldosa
+	#if(GlobalJuego.tutorial):
+		#GlobalSignal.connect("obtenerBaldosa",obtener_baldosa_en_coordenadasSenial)
 	
 	GlobalSignal.finalizaOleada.connect(mostrar_oleada_actual) # si es true quiere decir que gano, si es false se reiniciaa
 
@@ -93,6 +97,9 @@ func _limpiar_resaltado_ataque():
 			
 func obtener_baldosa_en_coordenadas(coordenadas: Vector2i) -> BaldosaBase:
 	return baldosas.get(coordenadas, null)
+#
+#func obtener_baldosa_en_coordenadasSenial(coordenadas: Vector2i):
+	#GlobalSignal.emit_signal("retornoBaldosa",baldosas.get(coordenadas, null))
 
 func obtener_baldosa_en_posicion(columna: int, fila: int) -> BaldosaBase:
 	return obtener_baldosa_en_coordenadas(Vector2i(columna, fila))
@@ -123,7 +130,7 @@ func mostrar_oleada_actual(gano):
 	if gano:
 		await get_tree().create_timer(2.0).timeout
 		GlobalSignal.emit_signal("crearPieza",Vector2i(1,14),0,true)
-		economia.obtener_inventario_dinero_despues_oleada(true)
+		economia.obtener_inventario_dinero_despues_oleada(true) #ojo con esto, se agregan 200 monedas en la primer partida
 
 	else:
 		# se crea otro rey aunque haya perdido

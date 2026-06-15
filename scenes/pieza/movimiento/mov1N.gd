@@ -31,54 +31,36 @@ func _ready():
 	
 		
 func movimiento():
-	#cambio_estado(paso)
-	## actualizacion de posicion
-	#var cambio = direccion*GlobalJuego.espaciado_baldosas # # vector de cambio de la pieza
-	#
-	## proximo sitio a ocupar
-	#var sitio3d = round(owner.global_position+cambio)/globalJuego.espaciado_baldosas # en 3d
-	## convierto la proxima posicion en 2Di para 
-	#var nuevo_sitio = Vector2i(sitio3d.x,sitio3d.z)  # en 2d
-	#
-				#
-	#if globalJuego.verifica_extremos(nuevo_sitio)==false:
-		#saltar_paso()
-		#return
-	#
-	#if globalJuego.verifica_obstaculos(nuevo_sitio)==false:
-		#saltar_paso()
-		#return
-		#
-	#if globalJuego.verifica_piezas(nuevo_sitio)==false:
-		#paso=0
-		#pasos_detenido +=1
-		#return
-	#
-	#if pasos_detenido==3:
-		#pieza.die()
-		#return
-	#
-	for i in range(secuencia.size()): #es un sistema de prioridad
-		cambio_estado(secuencia[i]) #siempre muevea delante, si no, una casilla, si no a la derecha y asi
-		var cambio = direccion * GlobalJuego.espaciado_baldosas # vector de cambio de la pieza
-		if (owner.verificar_proximo_paso(cambio)):
+	# observo casilla frontal
+	cambio_estado(3) # adelante
+	var cambio = direccion * GlobalJuego.espaciado_baldosas
+	var sitio3d = round(owner.global_position + cambio) / GlobalJuego.espaciado_baldosas #
+	var nuevo_sitio = Vector2i(sitio3d.x, sitio3d.z)#vector 2i con las coordenadas
+
+	if !GlobalJuego.verifica_piezas(nuevo_sitio): # Si adelante hay una pieza, se queda quieto
+		pasos_detenido += 1
+		if pasos_detenido >= 3:
+			pieza.die()
+		return
+
+	pasos_detenido = 0 	# Si no esta bloqueado por pieza reiniciamos contador
+
+
+	for estado in secuencia: 	# Buscar movimiento segun prioridad
+		cambio_estado(estado)
+		cambio = direccion * GlobalJuego.espaciado_baldosas
+		if owner.verificar_proximo_paso(cambio):
 			mover(cambio)
 			return
 	
 
-	
-	
 func mover(cambio):
+
 	var tween = create_tween()
 	tween.tween_property(owner, "global_position", owner.global_position + cambio , 1) \
 	.set_trans(Tween.TRANS_SINE) \
 	.set_ease(Tween.EASE_IN_OUT)
 
-
-#func saltar_paso(): # volver a iniciar en otra posicion d esalto
-	#paso +=1
-	#if paso==5: paso=2
-	#movimiento()  	
 	
 # Estadod de la pieza
 func cambio_estado(cambio):

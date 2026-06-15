@@ -7,13 +7,14 @@ var tablero_escena = preload("res://scenes/tablero/gestorTablero.tscn")
 var entorno = preload("res://scenes/entorno/escenario.tscn")
 var fabrica_obstaculos_escena = preload("res://scenes/objetos/fabrica_objetos.tscn")
 var pieza_flotante = preload("res://scenes/tablero/pieza_flotante.tscn")
+var tutorialEscena = preload ("res://scenes/tutorial/tutorial.tscn")
 
 var tipo_pieza=0
-
 
 @onready var MarcaPasos = $MarcaPasos
 
 func _ready() -> void:
+	
 	Sonidos.menu(false)
 	var hud = hud_escena.instantiate()
 	add_child(hud)
@@ -30,10 +31,14 @@ func _ready() -> void:
 	var pieza = pieza_flotante.instantiate()
 	add_child(pieza)
 	pieza.visible = false
+	
+	if(GlobalJuego.tutorial):
+		var tuto = tutorialEscena.instantiate()
+		add_child(tuto)
 
 	#GlobalSignal.emit_signal("controlMarcaPaso",true)	
 
 	#GlobalSignal.connect("marcaPaso",prueba)
 	
-	if not globalJuego.mapa_cambiado.is_connected(obstaculos._on_mapa_cambiado):
-		globalJuego.mapa_cambiado.connect(obstaculos._on_mapa_cambiado)
+	if not GlobalJuego.mapa_cambiado.is_connected(obstaculos._on_mapa_cambiado):
+		GlobalJuego.mapa_cambiado.connect(obstaculos._on_mapa_cambiado)

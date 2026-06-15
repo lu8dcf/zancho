@@ -5,6 +5,7 @@ extends Panel
 @onready var boton_reiniciar_camera = $BotonReiniciarCamara
 @onready var imagen_debilidades = $imagenDebilidades
 @onready var empezar_oleada = $empezar_oleada
+#Para Tutorial
 
 # botones de velocidades, pausar y continuar
 @onready var boton_pausar: TextureButton = $BotonPausar
@@ -33,10 +34,10 @@ var altura_boton_visible: float = 5
 
 
 func _ready() -> void:
-	empezar_oleada.cambiar_texto("Empezar Oleada " + str(globalJuego.oleada_actual))
+	empezar_oleada.cambiar_texto("Empezar Oleada " + str(GlobalJuego.oleada_actual))
 	desaparecer_botones_velocidades()
-	globalJuego.oleada_cambiada.connect(_actualizar_oleada)
-	_actualizar_oleada(globalJuego.oleada_actual)
+	GlobalJuego.oleada_cambiada.connect(_actualizar_oleada)
+	_actualizar_oleada(GlobalJuego.oleada_actual)
 	imagen_debilidades.texture = load("res://assets/ui/debilidades.png")
 	imagen_debilidades.visible=false
 	economia.monedas_cambiadas.connect(_actualizar_monedas)
@@ -50,8 +51,26 @@ func _ready() -> void:
 	empezar_oleada.mouse_entered.connect(_on_empezar_oleada_hover_entered)
 	empezar_oleada.mouse_exited.connect(_on_empezar_oleada_hover_exited)
 	GlobalSignal.finalizaOleada.connect(finaliza_oleada)
+	if(GlobalJuego.tutorial):
+		GlobalSignal.connect("parpadearTabla",parpadearDebilidades)
+		GlobalSignal.connect("parpadeaOleadar",parpadearOleada)
+		
 
+func parpadearDebilidades(): #tutorial
+	var tween_debil = create_tween()
+	for i in 2:
+		tween_debil.tween_property(boton_debilidades, "modulate", Color(1.5, 1.5, 0.0, 0.973), 0.3)
+		tween_debil.tween_property(boton_debilidades, "modulate", Color.WHITE, 0.2)
 
+func parpadearOleada(): #tutorial
+	# Cambiar opacidad o color de la label dentro
+	var label = empezar_oleada.get_node_or_null("Label")  # Ajusta el nombre del nodo Label
+	if label:
+		var tween_label = create_tween()
+		for i in 2:
+			tween_label.tween_property(label, "modulate", Color(1.5, 1.5, 0.0, 0.973), 0.3)
+			tween_label.tween_property(label, "modulate", Color.WHITE, 0.2)
+			
 func _on_empezar_oleada_hover_entered():
 	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 	# Escalar el botón
@@ -82,7 +101,7 @@ func _on_empezar_oleada_hover_exited():
 
 
 func _actualizar_monedas(nuevas_monedas: int) -> void:
-	if !globalJuego.debug:
+	if !GlobalJuego.debug:
 		monedas_valor.cambiar_texto(str(nuevas_monedas))
 	else: 
 		monedas_valor.cambiar_texto(" ?")

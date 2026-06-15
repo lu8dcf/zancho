@@ -53,6 +53,7 @@ signal barraVida(porcentual)
 @onready var nodo_sangre = $sangre
 
 func _ready():
+	
 	vida_total = Piezas.vida[pieza_tipo]
 	vida_actual = vida_total
 	
@@ -160,15 +161,16 @@ func create_dust_effect(): # Particulas al pegar con el tablero
 
 func verificar_proximo_paso(cambio):
 	# proximo sitio a ocupar
-	var sitio3d = round(global_position+cambio)/globalJuego.espaciado_baldosas # en 3d
-	var antiguoSitio3d  = round(global_position)/globalJuego.espaciado_baldosas #tambien la posicion actual
+	var sitio3d = round(global_position+cambio)/GlobalJuego.espaciado_baldosas # en 3d
+	var antiguoSitio3d  = round(global_position)/GlobalJuego.espaciado_baldosas #tambien la posicion actual
 	# convierto la proxima posicion en 2Di para 
 	var nuevo_sitio = Vector2i(sitio3d.x,sitio3d.z)  # en 2d
 	var sitioActual = Vector2i(antiguoSitio3d.x,antiguoSitio3d.z) #2d
-	if(globalJuego.verifico_casillas_reservadas(nuevo_sitio,sitioActual)
-	and globalJuego.verifica_obstaculos(nuevo_sitio) 
-	and globalJuego.verifica_extremos(nuevo_sitio)
-	and globalJuego.verifica_piezas_blanca(nuevo_sitio)):
+	if(GlobalJuego.verifico_casillas_reservadas(nuevo_sitio,sitioActual)
+	and GlobalJuego.verifica_obstaculos(nuevo_sitio) 
+	and GlobalJuego.verifica_extremos(nuevo_sitio)
+	and GlobalJuego.verifica_piezas_blanca(nuevo_sitio)
+	):
 		return true
 	return false
 	

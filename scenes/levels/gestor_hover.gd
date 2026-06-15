@@ -55,7 +55,7 @@ func _manejar_click_mouse(event: InputEventMouseButton):
 
 # manejo de clicks
 func _manejar_click_izquierdo(baldosa: BaldosaBase):
-	var es_valido_colocar = globalJuego.colocar_blanca(baldosa.obtener_coordenadas())
+	var es_valido_colocar = GlobalJuego.colocar_blanca(baldosa.obtener_coordenadas())
 	if Piezas.modo_colocacion:
 		baldosa.modo_colocacion_activo = Piezas.modo_colocacion
 		if es_valido_colocar: # true es valido, false no lo es
@@ -86,8 +86,8 @@ func detectar_baldosa_bajo_mouse():
 	var baldosa_detectada = _obtener_baldosa_bajo_mouse()
 	if baldosa_detectada:
 		baldosa_detectada.modo_colocacion_activo = Piezas.modo_colocacion
-		baldosa_detectada.es_valido_colocar = globalJuego.colocar_blanca(baldosa_detectada.obtener_coordenadas())
-		#print("es valido colocar; ", globalJuego.colocar_blanca(baldosa_detectada.obtener_coordenadas()), "la ubicacion es: ", baldosa_detectada.obtener_coordenadas())
+		baldosa_detectada.es_valido_colocar = GlobalJuego.colocar_blanca(baldosa_detectada.obtener_coordenadas())
+		#print("es valido colocar; ", GlobalJuego.colocar_blanca(baldosa_detectada.obtener_coordenadas()), "la ubicacion es: ", baldosa_detectada.obtener_coordenadas())
 		actualizar_hover(baldosa_detectada)
 
 func _obtener_baldosa_bajo_mouse() -> BaldosaBase:
@@ -153,7 +153,7 @@ func _on_modo_colocacion_cancelado():
 		baldosa_actual._al_salir_mouse()
 
 # Método público para obtener la baldosa actual
-func obtener_baltosa_actual() -> BaldosaBase:
+func obtener_baltosa_actuall() -> BaldosaBase:
 	return baldosa_actual
 
 # Método para limpiar el hover

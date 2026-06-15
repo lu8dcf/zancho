@@ -27,7 +27,7 @@ func _ready() -> void:
 	#GlobalSignal.emit_signal("crearPieza",Vector2i(9,13),5,true) #reina blanco en posicion
 	#GlobalSignal.emit_signal("crearPieza",Vector2i(1,14),0,true) #rey blanco en posicion
 	#GlobalSignal.emit_signal("crearPieza",Vector2i(2,9),1,true) #rey blanco en posicion
-	#globalJuego.oleada_cambiada.connect(ejecuto_oleada,get_oleada_actual())
+	#GlobalJuego.oleada_cambiada.connect(ejecuto_oleada,get_oleada_actual())
 	
 	#TESTEO
 	#await get_tree().create_timer(2).timeout
@@ -35,21 +35,23 @@ func _ready() -> void:
 	#GlobalSignal.connect("marcaPaso", actualizoPosEnemigos)
 	
 	#if !(pausarOleada):
-		#ejecuto_oleada(globalJuego.oleada_actual)
+		#ejecuto_oleada(GlobalJuego.oleada_actual)
 
 #func actualizoPosEnemigos():
 	#GlobalJuego.actualizar_todas_las_piezas()
 
 
 func get_oleada_actual():
-	return globalJuego.oleada_actual
+	return GlobalJuego.oleada_actual
 	
 	
 #	GlobalJuego.espaciado_baldosas
 	
 func ejecuto_oleada():
-	if(globalJuego.debug == true):
+	if(GlobalJuego.debug == true):
 		nivel = 0
+	elif(GlobalJuego.tutorial == true):
+		nivel = -1
 	else:
 		nivel = get_oleada_actual()
 	if !DATA_OLEADAS.estructura_por_nivel.has(nivel):

@@ -3,11 +3,14 @@ extends Node
 # Única línea nueva: variable persistente para que el 'else' no falle nunca
 var musica_menu_global: AudioStreamPlayer = null
 
-func _ready() -> void:
-	pass
-
-func _process(_delta: float) -> void:
-	pass
+func sonar_sfx(archivo):
+	var sound = AudioStreamPlayer3D.new()
+	var direccion="res://assets/sound/sfx/" + archivo + ".mp3"
+	sound.stream = load(direccion)
+	add_child(sound)
+	sound.play()
+	await sound.finished
+	sound.queue_free()
 
 func death():
 	var death_sound = AudioStreamPlayer3D.new()
