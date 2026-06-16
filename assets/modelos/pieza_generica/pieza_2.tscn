@@ -342,7 +342,7 @@ _data = {
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 script = ExtResource("2_pe3c8")
 
-[node name="Skeleton3D" parent="Esqueleto_001" parent_id_path=PackedInt32Array(956655234) index="0" unique_id=1964312194]
+[node name="Skeleton3D" parent="Esqueleto_001" parent_id_path=PackedInt32Array(1785585912) index="0" unique_id=1030910136]
 bones/1/rotation = Quaternion(-3.5527105e-15, 1.7763568e-14, -4.038968e-28, 1)
 bones/2/rotation = Quaternion(-0.76347697, -0.07604944, 0.03411561, 0.6404339)
 bones/3/rotation = Quaternion(-0.17683436, -0.33287883, 0.40633422, 0.8323545)
@@ -362,7 +362,7 @@ bones/10/rotation = Quaternion(-3.5527105e-15, 0, -4.038968e-28, 1)
 bones/11/position = Vector3(-0.53248465, 0.84166, 0.026814159)
 bones/11/rotation = Quaternion(0.002201561, 0.9578233, -0.12223369, 0.26005515)
 
-[node name="alfil" parent="Esqueleto_001/Skeleton3D" index="0" unique_id=1798895497]
+[node name="alfil" parent="Esqueleto_001/Skeleton3D" index="0" unique_id=2031949643]
 material_override = ExtResource("2_65it0")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Esqueleto_001/Skeleton3D" index="1" unique_id=1141427468]
@@ -387,5 +387,5 @@ scale_amount_min = 0.0
 scale_amount_max = 0.5
 scale_amount_curve = SubResource("Curve_dorn6")
 
-[node name="AnimationPlayer" parent="." index="1" unique_id=1645717015]
+[node name="AnimationPlayer" parent="." index="1" unique_id=911161064]
 libraries/ = SubResource("AnimationLibrary_130qa")
