@@ -60,5 +60,9 @@ func animar_vuelo_moneda() -> void:
 		
 	# 4. Auto-destrucción: Cuando todo el Tween termina, borramos la instancia de la memoria
 	tween.set_parallel(false)
-	tween.tween_callback(queue_free)
+	tween.tween_callback(final)
+	
+func final():
+	GlobalSignal.conteoMonedas.emit()
+	queue_free()
 	#  Justo antes del queue_free ---- disparar una señal al HUD para que sume el número en el contador

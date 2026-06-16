@@ -74,3 +74,7 @@ signal PantallaNegra
 signal ultimoTexto
 #signal obtenerBaldosa(posicion : Vector2i)
 #signal retornoBaldosa(baldosa : BaldosaBase)
+
+# efectos
+@warning_ignore("unused_signal")
+signal conteoMonedas
