@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5a0ot6dqegoj"
-path="res://.godot/imported/Pantalla.jpg-e94a1bfc94478d410004776dc043ed00.ctex"
+uid="uid://b1qtya6cbnfcl"
+path="res://.godot/imported/vida3.png-81dab8fae2a5ce2560294d0d6375cfdc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icon/Pantalla.jpg"
-dest_files=["res://.godot/imported/Pantalla.jpg-e94a1bfc94478d410004776dc043ed00.ctex"]
+source_file="res://assets/ui/vida3.png"
+dest_files=["res://.godot/imported/vida3.png-81dab8fae2a5ce2560294d0d6375cfdc.ctex"]
 
 [params]
 
