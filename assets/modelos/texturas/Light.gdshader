@@ -12,6 +12,10 @@ uniform vec3 damage_color : source_color = vec3(0.6, 0.0, 0.0);
 uniform float noise_scale : hint_range(1.0, 30.0) = 8.0;
 uniform float damage_smoothness : hint_range(0.01, 0.3) = 0.05;
 uniform bool debug_mode = false;
+uniform float intensidad_emision : hint_range(0.0, 100.0) = 50.0;
+uniform vec3 color_emision : source_color = vec3(1.0, 1.0, 1.0);
+
+
 
 
 
@@ -43,6 +47,8 @@ void vertex() {
 }
 
 void fragment() {
+	ALBEDO = vec3(0.1, 0.1, 0.1); 
+    EMISSION = color_emision * intensidad_emision;
 	vec4 tex_color = texture(albedo_tex, UV);
 	vec3 color = tex_color.rgb;
 	color = ((color - 0.5) * contrast) + 0.5;
