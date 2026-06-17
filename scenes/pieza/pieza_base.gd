@@ -19,9 +19,15 @@ var vida_actual: int
 var angulo_frente: int = 225 # por defecto la blanca
 var angulo_frente_negra: int = 45 # por defecto la negra
 
+
 # Componentes
-var movimiento_especifico = preload("res://scenes/pieza/movimiento/movimiento.tscn") # define le movimiento caracteristico de la pieza
-var ataque_especifico = preload("res://scenes/pieza/ataque/Ataque.tscn") # define le movimiento caracteristico de la pieza
+var movimiento_especifico = preload("res://scenes/pieza/movimiento/movimiento.tscn")
+var ataque_especifico = preload("res://scenes/pieza/ataque/Ataque.tscn")
+# Escena del cilindro de selección (Ajustá la ruta a la de tu proyecto)
+var escena_cilindro_seleccion = preload("res://scenes/pieza/seleccion.tscn") 
+
+# Variable para guardar la referencia de la instancia activa
+var cilindro_instanciado: Node3D = null
 
 # Nodos
 @onready var dust_particles = $DustParticles
@@ -251,6 +257,7 @@ func actualizar_shader_danio():
 
 
 #el for esta en vano pero 
+
 func _buscar_mesh(nodo: Node) -> MeshInstance3D:
 	if nodo is MeshInstance3D:
 		return nodo
@@ -352,3 +359,17 @@ func _al_evento_input(_viewport, event, _shape_idx,_a,_b):
 				#print("CLIC IZQUIERDO detectado en el Area2D ",pieza_tipo )
 			
 	
+func brillar(estado: bool):
+	if estado:
+		
+		if cilindro_instanciado == null:
+			cilindro_instanciado = escena_cilindro_seleccion.instantiate()
+			add_child(cilindro_instanciado)
+			
+			cilindro_instanciado.transform.origin = Vector3.ZERO 
+	else:
+		
+		if cilindro_instanciado != null:
+			cilindro_instanciado.queue_free()
+			cilindro_instanciado = null
+			
