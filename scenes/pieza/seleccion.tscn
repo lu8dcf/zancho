@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dyhakb1hkvqx3"]
 
 [ext_resource type="Material" uid="uid://ddtjpte13xa2x" path="res://assets/modelos/texturas/material_seleccion.tres" id="1_6hhvi"]
-[ext_resource type="ArrayMesh" uid="uid://bofv86ps8fnli" path="res://assets/modelos/objetos/seleccion.obj" id="2_gcpic"]
+[ext_resource type="ArrayMesh" uid="uid://duapoqcltpylf" path="res://assets/modelos/objetos/seleccion.obj" id="2_gcpic"]
 
 [node name="Node3D" type="Node3D" unique_id=343973907]
 
