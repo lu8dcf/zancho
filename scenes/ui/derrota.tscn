@@ -2,8 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dqvok4wc6s7fy" path="res://assets/ui/perder.png" id="1_b55oh"]
 [ext_resource type="Script" uid="uid://d3u5nymkgiq03" path="res://scenes/ui/derrota.gd" id="1_ry7db"]
-[ext_resource type="Texture2D" uid="uid://couaobhhkqc78" path="res://assets/menu/Boton6.png" id="2_b55oh"]
-[ext_resource type="Texture2D" uid="uid://by412hpyptahi" path="res://assets/menu/Boton7.png" id="3_ry7db"]
+[ext_resource type="PackedScene" uid="uid://dx2ufxs2ydj1b" path="res://scenes/ui/components/boton_main_largo.tscn" id="3_b55oh"]
 [ext_resource type="LabelSettings" uid="uid://5mxd2sj4000t" path="res://assets/fuentes/textosgrande.tres" id="4_ry7db"]
 [ext_resource type="FontFile" uid="uid://d2x2au6q8fhoc" path="res://assets/fuentes/Enchanted Land DS D.otf" id="6_jwdiw"]
 
@@ -36,7 +35,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("TextureRect/TextureButton2:modulate")
+tracks/2/path = NodePath("TextureRect/volver/Label2:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -48,19 +47,19 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("TextureRect/TextureButton:self_modulate")
+tracks/3/path = NodePath("Label:lines_skipped")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("TextureRect/TextureButton/Label:modulate")
+tracks/4/path = NodePath("Label:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -72,26 +71,14 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Label:lines_skipped")
+tracks/5/path = NodePath("TextureRect/reintentar/Label:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Label:modulate")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_o6nby"]
@@ -124,35 +111,35 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("TextureRect/TextureButton2:modulate")
+tracks/2/path = NodePath("TextureRect/volver/Label2:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(1, 2.7333333, 6.005),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0.5333333, 1.8666667),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("TextureRect/TextureButton:self_modulate")
+tracks/3/path = NodePath("Label:lines_skipped")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(1.7333333, 3.3, 5.9666667),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+"times": PackedFloat32Array(1.33),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("TextureRect/TextureButton/Label:modulate")
+tracks/4/path = NodePath("Label:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(1.7, 3.3),
+"times": PackedFloat32Array(0.53333336, 1.8666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -160,23 +147,11 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Label:lines_skipped")
+tracks/5/path = NodePath("TextureRect/reintentar/Label:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(1.33),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Label:modulate")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0.53333336, 1.8666667),
+"times": PackedFloat32Array(0.56, 1.85),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -197,6 +172,7 @@ shadow_color = Color(0.27555662, 0.02274021, 0.032831885, 0.67058825)
 shadow_offset = Vector2(4.605, 3.66)
 
 [node name="Control" type="Control" unique_id=1476875576]
+z_index = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -216,64 +192,50 @@ grow_vertical = 2
 texture = ExtResource("1_b55oh")
 expand_mode = 1
 
-[node name="TextureButton2" type="TextureButton" parent="TextureRect" unique_id=75973102]
+[node name="reintentar" parent="TextureRect" unique_id=1560458901 instance=ExtResource("3_b55oh")]
+z_index = 3
+layout_mode = 0
+offset_left = 688.0
+offset_top = 451.0
+offset_right = 1064.0
+offset_bottom = 531.0
+
+[node name="Label" type="Label" parent="TextureRect/reintentar" unique_id=1691389464]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5989583
-anchor_top = 0.6944444
-anchor_right = 0.92485934
-anchor_bottom = 0.82098764
-offset_bottom = 3.0517578e-05
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -22.0
+offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("2_b55oh")
-texture_hover = ExtResource("3_ry7db")
-ignore_texture_size = true
-stretch_mode = 0
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="TextureRect/TextureButton2" unique_id=1691389464]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.047944
-anchor_top = -0.0487801
-anchor_right = 0.029299112
-anchor_bottom = -0.0487801
-offset_left = 149.0
-offset_top = 22.0
-offset_right = 239.0
-offset_bottom = 63.0
 text = "Reintentar"
 label_settings = ExtResource("4_ry7db")
-metadata/_edit_use_anchors_ = true
+horizontal_alignment = 1
 
-[node name="TextureButton" type="TextureButton" parent="TextureRect" unique_id=1734945723]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5989583
-anchor_top = 0.82098764
-anchor_right = 0.92485934
-anchor_bottom = 0.94753087
-texture_normal = ExtResource("2_b55oh")
-texture_hover = ExtResource("3_ry7db")
-ignore_texture_size = true
-stretch_mode = 0
-metadata/_edit_use_anchors_ = true
+[node name="volver" parent="TextureRect" unique_id=1679724498 instance=ExtResource("3_b55oh")]
+z_index = 3
+layout_mode = 0
+offset_left = 688.0
+offset_top = 534.0
+offset_right = 1064.0
+offset_bottom = 614.0
 
-[node name="Label" type="Label" parent="TextureRect/TextureButton" unique_id=519093524]
+[node name="Label2" type="Label" parent="TextureRect/volver" unique_id=519093524]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.07724312
-anchor_top = -0.0121951215
-anchor_right = 0.082570225
-anchor_bottom = -0.0121951215
-offset_left = 149.0
-offset_top = 22.0
-offset_right = 239.0
-offset_bottom = 63.0
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -23.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Volver a menu"
 label_settings = ExtResource("4_ry7db")
-metadata/_edit_use_anchors_ = true
+horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TextureRect" unique_id=634188511]
 root_node = NodePath("../..")
@@ -290,5 +252,5 @@ text = "Derrota"
 label_settings = SubResource("LabelSettings_vo5nr")
 visible_characters_behavior = 3
 
-[connection signal="pressed" from="TextureRect/TextureButton2" to="." method="_on_texture_button_2_pressed"]
-[connection signal="pressed" from="TextureRect/TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="TextureRect/reintentar" to="." method="_on_reintentar_pressed"]
+[connection signal="pressed" from="TextureRect/volver" to="." method="_on_volver_pressed"]

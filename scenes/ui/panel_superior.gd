@@ -12,6 +12,8 @@ extends Panel
 @onready var boton_play: TextureButton = $BotonPlay
 @onready var boton_acelerar_1: TextureButton = $BotonAcelerar1
 @onready var boton_acelerar_2: TextureButton = $BotonAcelerar2
+@onready var selectordevelocidad: TextureButton = $selectordevelocidad
+
 
 # dinero
 @onready var monedas_valor: TextureButton = $Monedas_valor
@@ -122,6 +124,7 @@ func desaparecer_botones_velocidades():
 	boton_acelerar_2.visible = false
 	boton_play.visible = false
 	boton_pausar.visible = false
+	selectordevelocidad.visible = false
 
 func aparecer_botones_velocidades():
 	boton_acelerar_1.visible = true

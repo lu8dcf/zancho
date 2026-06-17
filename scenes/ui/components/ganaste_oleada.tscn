@@ -3,8 +3,7 @@
 [ext_resource type="Script" uid="uid://c2dai0gxnijq7" path="res://scenes/ui/components/ganaste_oleada.gd" id="1_e6gjl"]
 [ext_resource type="Texture2D" uid="uid://bjc5e7437lcjg" path="res://assets/ui/cartel.png" id="1_mrs6e"]
 [ext_resource type="FontFile" uid="uid://c6ngyfvifeml" path="res://assets/fuentes/startedbyamouse.ttf" id="2_q46lh"]
-[ext_resource type="Texture2D" uid="uid://couaobhhkqc78" path="res://assets/menu/Boton6.png" id="3_q46lh"]
-[ext_resource type="Texture2D" uid="uid://by412hpyptahi" path="res://assets/menu/Boton7.png" id="4_e6gjl"]
+[ext_resource type="PackedScene" uid="uid://dx2ufxs2ydj1b" path="res://scenes/ui/components/boton_main_largo.tscn" id="4_q46lh"]
 
 [sub_resource type="Animation" id="Animation_aynca"]
 length = 0.001
@@ -75,18 +74,20 @@ colors = PackedColorArray(0.99999994, 0.8112437, 0.38780284, 1, 1, 0.22252941, 0
 [sub_resource type="LabelSettings" id="LabelSettings_n6w5e"]
 line_spacing = 9.84
 font = ExtResource("2_q46lh")
-font_size = 174
+font_size = 130
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 31
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(8.075, 5.74)
 
 [node name="GanasteOleada" type="Control" unique_id=1830827380]
+z_index = -1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1152.0
+offset_left = 71.0
+offset_right = -1081.0
 offset_bottom = -648.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -99,15 +100,16 @@ autoplay = &"ganaste la oldeada"
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1595600934]
 layout_mode = 0
 offset_top = -146.0
-offset_right = 2560.0
-offset_bottom = 1294.0
+offset_right = 2162.4275
+offset_bottom = 1070.3655
 scale = Vector2(0.46203217, 0.46203217)
 texture = ExtResource("1_mrs6e")
+expand_mode = 1
 
 [node name="CPUParticles2D2" type="CPUParticles2D" parent="TextureRect" unique_id=1684619697]
 z_index = -1
 z_as_relative = false
-position = Vector2(1917.6155, 818.12494)
+position = Vector2(1681.701, 644.9768)
 rotation = 0.2617994
 amount = 176
 lifetime = 2.15
@@ -126,7 +128,7 @@ color_initial_ramp = SubResource("Gradient_aynca")
 [node name="CPUParticles2D2" type="CPUParticles2D" parent="TextureRect/CPUParticles2D2" unique_id=1916529720]
 z_index = -1
 z_as_relative = false
-position = Vector2(-1204.638, 295.89322)
+position = Vector2(-1166.2562, 330.42285)
 rotation = -1.0471976
 amount = 176
 lifetime = 2.15
@@ -143,31 +145,55 @@ scale_amount_curve = SubResource("Curve_e6gjl")
 color_initial_ramp = SubResource("Gradient_aynca")
 
 [node name="Label" type="Label" parent="TextureRect" unique_id=1246924648]
-layout_mode = 0
-offset_left = 770.5091
-offset_top = 633.0728
-offset_right = 1196.509
-offset_bottom = 828.0728
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -386.45703
+offset_top = -32.46527
+offset_right = -17.540894
+offset_bottom = 162.53473
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(2.29978, 2.29978)
+theme_override_font_sizes/font_size = 15
 text = "VICTORIA"
 label_settings = SubResource("LabelSettings_n6w5e")
 
-[node name="TextureButton" type="TextureButton" parent="TextureRect" unique_id=1857949204]
-layout_mode = 0
-offset_left = 930.6711
-offset_top = 1168.7498
-offset_right = 2038.6711
-offset_bottom = 1410.7498
-scale = Vector2(0.62373257, 0.75364804)
-texture_normal = ExtResource("3_q46lh")
-texture_hover = ExtResource("4_e6gjl")
+[node name="continuar" parent="TextureRect" unique_id=1560458901 instance=ExtResource("4_q46lh")]
+z_index = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33100003
+anchor_top = 0.809
+anchor_right = 0.67
+anchor_bottom = 1.001
+offset_left = 53.01007
+offset_top = -0.5389404
+offset_right = -34.098267
+offset_bottom = -53.38452
+grow_horizontal = 2
+grow_vertical = 0
 
-[node name="Label" type="Label" parent="TextureRect/TextureButton" unique_id=100638714]
-layout_mode = 0
-offset_left = 270.6601
-offset_top = 25.846504
-offset_right = 1000.0046
-offset_bottom = 359.70148
+[node name="Label" type="Label" parent="TextureRect/continuar" unique_id=100638714]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.045
+anchor_top = 0.24400002
+anchor_right = 0.97800004
+anchor_bottom = 0.75100005
+offset_left = 50.584175
+offset_top = -36.317722
+offset_right = -210.48108
+offset_bottom = 40.06906
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(1.4115095, 0.82643807)
 text = "Continuar"
 label_settings = SubResource("LabelSettings_n6w5e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="TextureRect/continuar" to="." method="_on_continuar_pressed"]

@@ -16,12 +16,10 @@ var max_mensajes: int = 50
 # texto debug
 @onready var label_debug_temporal: Label = $Label_debug_temporal
 
-# pantalla temporal de ganar
-@onready var imagen_oleada: TextureRect = $GanoOleada
 
 # escenas de victoria/derrota
 @export var escena_victoria: PackedScene = preload("res://scenes/ui/components/ganaste_oleada.tscn")
-@export var escena_derrota: PackedScene = preload("res://scenes/ui/components/ganaste_oleada.tscn")
+@export var escena_derrota: PackedScene = preload("res://scenes/ui/derrota.tscn")
 
 #tutorial
 @onready var pantallaNegra = $blackOut
@@ -31,9 +29,10 @@ var tween: Tween
 
 func _ready():
 	mostrar_todos_paneles()
-	imagen_oleada.modulate.a = 0  
-	imagen_oleada.visible = false
-	label_debug_temporal.text = "Debug: " + str(GlobalJuego.debug)
+	if GlobalJuego.debug:
+		label_debug_temporal.text = "Debug: " + str(GlobalJuego.debug)
+	else:
+		label_debug_temporal.visible = false
 	log_texto.bbcode_enabled = true
 	log_texto.scroll_active = false
 	
@@ -64,32 +63,14 @@ func mostrar_imagen(ganar: int) -> void:
 			if escena_victoria:
 				var instancia_victoria = escena_victoria.instantiate()
 				add_child(instancia_victoria)
-			mostras_desaparecer_imagen()
-			GlobalJuego.siguiente_oleada()
+			#mostras_desaparecer_imagen()
+			#GlobalJuego.siguiente_oleada()
 		else:
 			if escena_derrota:
 				var instancia_derrota = escena_derrota.instantiate()
 				add_child(instancia_derrota)
-			mostras_desaparecer_imagen()
-			GlobalJuego.perder_fe(5)
-			
-func mostras_desaparecer_imagen():
-	if tween and tween.is_valid():
-		tween.kill()
-		
-	tween = create_tween()
-	imagen_oleada.visible = true
-	imagen_oleada.modulate.a = 0
-	
-	tween.tween_property(imagen_oleada, "modulate:a", 1.0, 0.5)
-	tween.tween_interval(4.0)
-	tween.tween_property(imagen_oleada, "modulate:a", 0.0, 0.5)
-	tween.tween_callback(_ocultar_imagen)
-
-
-
-func _ocultar_imagen() -> void:
-	imagen_oleada.visible = false
+			#mostras_desaparecer_imagen()
+			#GlobalJuego.perder_fe(5)
 
 # signal mensaje_oleada(empieza:bool,gano:bool) 
 func mensaje_oleada_log(empieza: bool, gano_oleada = null):

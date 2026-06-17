@@ -42,7 +42,6 @@
 [ext_resource type="Texture2D" uid="uid://dla4h1n557y0c" path="res://assets/ui/boton_venta_hover.png" id="27_27rlx"]
 [ext_resource type="Texture2D" uid="uid://b4i6518ssjc0n" path="res://assets/ui/boton_compra_idle.png" id="28_vuvg6"]
 [ext_resource type="Texture2D" uid="uid://bmh06rynd4e0j" path="res://assets/ui/boton_compra_hover.png" id="29_emer0"]
-[ext_resource type="Texture2D" uid="uid://cl7bvx2nl4w8x" path="res://assets/ui/gano_oleada.png" id="33_kfdjh"]
 [ext_resource type="FontFile" uid="uid://dk0s5u1t3qgc8" path="res://assets/fuentes/DOMINICA.TTF" id="44_sj4ew"]
 [ext_resource type="Script" uid="uid://dt8gc504rybi4" path="res://scenes/tutorial/texto_tutorial.gd" id="45_83uk5"]
 
@@ -778,21 +777,6 @@ offset_right = 269.0
 offset_bottom = 50.0
 theme_override_font_sizes/font_size = 30
 text = "Debug: "
-
-[node name="GanoOleada" type="TextureRect" parent="." unique_id=33296107]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -213.5
-offset_top = -128.5
-offset_right = 213.5
-offset_bottom = 128.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("33_kfdjh")
-expand_mode = 1
 
 [node name="ContenedorLog" type="PanelContainer" parent="." unique_id=2072026705]
 anchors_preset = -1

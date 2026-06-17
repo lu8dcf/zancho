@@ -35,8 +35,8 @@ func _ready():
 		Piezas.pieza_colocada_inventario.connect(_on_pieza_colocada_desde_inventario)
 		
 	_actualizar_inventario(null)
-	GlobalSignal.finalizaOleada.connect(esconder_botones)
-	GlobalSignal.comienzoOleada.connect(esconder_botones)
+	#GlobalSignal.finalizaOleada.connect(esconder_botones)
+	#GlobalSignal.comienzoOleada.connect(esconder_botones)
 	
 	if(GlobalJuego.tutorial):
 		GlobalSignal.connect("parpadeoPiezas",parpadeaPiezaComprada)
@@ -47,14 +47,14 @@ func parpadeaPiezaComprada(): #tutorial
 		tween.tween_property(self, "modulate", Color(1.5, 1.5, 0.0, 0.973), 0.3)
 		tween.tween_property(self, "modulate", Color.WHITE, 0.2)
 
-func esconder_botones():
-	if GlobalJuego.empezo_oleada:
-
-		for boton in botones_piezas:
-			boton.disabled = true
-	else: 
-		for boton in botones_piezas:
-			boton.disabled = false
+#func esconder_botones():
+	#if GlobalJuego.empezo_oleada:
+#
+		#for boton in botones_piezas:
+			#boton.disabled = true
+	#else: 
+		#for boton in botones_piezas:
+			#boton.disabled = false
 
 func configurar_botones():
 	# agregar todos los botones al array

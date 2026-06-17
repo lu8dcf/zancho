@@ -1,9 +1,14 @@
 extends Control
 
+@onready var control: Control = $"."
 
-func _on_texture_button_pressed() -> void:
+
+func _on_reintentar_pressed() -> void:
+	GlobalJuego.perder_fe(5)
+	control.visible = false
+
+
+func _on_volver_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/ui/main.tscn")
-
-
-func _on_texture_button_2_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/levels/level.tscn")
+	control.visible = false
+	
