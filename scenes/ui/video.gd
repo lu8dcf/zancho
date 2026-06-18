@@ -30,3 +30,7 @@ func actualizar_estilo_botones(camara_activo: bool, jugabilidad_activo: bool):
 	#  oscurecer/clarificar botones
 	boton_camara.modulate = Color(1, 1, 1, 1) if camara_activo else Color(0.7, 0.7, 0.7, 1)
 	boton_jugabilidad.modulate = Color(1, 1, 1, 1) if jugabilidad_activo else Color(0.7, 0.7, 0.7, 1)
+
+
+func _on_guardar_pressed() -> void:
+	$"../..".esconder_todo()

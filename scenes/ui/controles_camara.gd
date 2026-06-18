@@ -78,10 +78,11 @@ func _on_guardar_pressed():
 	actualizar_input_map("Ascender", as_edit.text)
 	actualizar_input_map("Descender", des_edit.text)
 	actualizar_input_map("zoom_de_camara", zoom_edit.text)
-	
 	guardar_configuracion()
 	predeterminarEdit()
-
+	$"../../../..".esconder_todo()
+	
+	
 func aplicar_tecla_a_input_map(accion: String, tecla: String):
 	var keycode = buscar_keycode_por_texto(tecla)
 	if keycode == 0:

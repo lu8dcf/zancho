@@ -10,6 +10,7 @@ func _ready() -> void:
 
 
 func _on_check_button_pressed() -> void:
+	
 	Sonidos.error()
 
 
@@ -17,7 +18,9 @@ func _on_check_button_mouse_entered() -> void:
 	Sonidos.error()
 
 func _on_guardar_pressed() -> void:
+	
 	Piezas.color_piezas = color_elegido
+	$"../..".esconder_todo()
 
 
 func _on_restablecer_pressed() -> void:

@@ -484,7 +484,6 @@ label_settings = ExtResource("4_jvuow")
 metadata/_edit_use_anchors_ = true
 
 [node name="video_menu" type="MenuBar" parent="opciones" unique_id=689834738]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3250868
@@ -1286,6 +1285,7 @@ label_settings = ExtResource("4_jvuow")
 horizontal_alignment = 1
 
 [node name="accesibilidad_menu" type="MenuBar" parent="opciones" unique_id=183060484]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3250868
@@ -1647,8 +1647,10 @@ text = "Rechazar"
 [connection signal="pressed" from="opciones/controles" to="opciones" method="_on_controles_pressed"]
 [connection signal="pressed" from="opciones/accesibilidad" to="opciones" method="_on_accesibilidad_pressed"]
 [connection signal="pressed" from="opciones/volver" to="opciones" method="_on_volver_pressed"]
+[connection signal="pressed" from="opciones/video_menu/guardar" to="opciones/video_menu" method="_on_guardar_pressed"]
 [connection signal="pressed" from="opciones/controles_menu/boton_camara" to="opciones/controles_menu" method="_on_boton_camara_pressed"]
 [connection signal="pressed" from="opciones/controles_menu/boton_jugabilidad" to="opciones/controles_menu" method="_on_boton_jugabilidad_pressed"]
+[connection signal="pressed" from="opciones/controles_menu/guardar" to="opciones/controles_menu/boton_camara/controles_camara" method="_on_guardar_pressed"]
 [connection signal="mouse_entered" from="opciones/accesibilidad_menu/multi/CheckButton" to="opciones/accesibilidad_menu" method="_on_check_button_mouse_entered"]
 [connection signal="pressed" from="opciones/accesibilidad_menu/multi/CheckButton" to="opciones/accesibilidad_menu" method="_on_check_button_pressed"]
 [connection signal="item_selected" from="opciones/accesibilidad_menu/color_piezas/option_color" to="opciones/accesibilidad_menu" method="_on_option_color_item_selected"]
