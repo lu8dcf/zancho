@@ -2,23 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bfskyep7n4c1o" path="res://scenes/ui/monedas/mostrar_monedas.gd" id="1_xjmpt"]
 
-[sub_resource type="Gradient" id="Gradient_xjmpt"]
-colors = PackedColorArray(0.7490196, 0.6313726, 0.003921569, 1, 16.013172, 13.661975, 0.66267896, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_htoop"]
-gradient = SubResource("Gradient_xjmpt")
-width = 32
-height = 35
-fill = 1
-fill_from = Vector2(0.47008547, 0.48290598)
-fill_to = Vector2(0.23076923, 0.23076923)
-
 [node name="MostrarMonedas" type="Node2D" unique_id=220346310]
 scale = Vector2(5, 5)
 script = ExtResource("1_xjmpt")
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1782524122]
-amount = 116
-texture = SubResource("GradientTexture2D_htoop")
-lifetime = 0.26
-local_coords = true
