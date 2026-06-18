@@ -1,9 +1,9 @@
-[gd_scene format=3 uid="uid://jo3svada24fj"]
+[gd_scene format=3 uid="uid://cwyautajwpl1s"]
 
-[ext_resource type="Script" uid="uid://c2dai0gxnijq7" path="res://scenes/ui/components/ganaste_oleada.gd" id="1_e6gjl"]
-[ext_resource type="Texture2D" uid="uid://bjc5e7437lcjg" path="res://assets/ui/cartel.png" id="1_mrs6e"]
-[ext_resource type="FontFile" uid="uid://c6ngyfvifeml" path="res://assets/fuentes/startedbyamouse.ttf" id="2_q46lh"]
-[ext_resource type="PackedScene" uid="uid://dx2ufxs2ydj1b" path="res://scenes/ui/components/boton_main_largo.tscn" id="4_q46lh"]
+[ext_resource type="Script" uid="uid://b7lblj70fo2pl" path="res://scenes/ui/components/perdiste_oleada.gd" id="1_6148w"]
+[ext_resource type="Texture2D" uid="uid://bjc5e7437lcjg" path="res://assets/ui/cartel.png" id="2_mmttf"]
+[ext_resource type="FontFile" uid="uid://c6ngyfvifeml" path="res://assets/fuentes/startedbyamouse.ttf" id="3_mss2b"]
+[ext_resource type="PackedScene" uid="uid://dx2ufxs2ydj1b" path="res://scenes/ui/components/boton_main_largo.tscn" id="4_vt8xu"]
 
 [sub_resource type="Animation" id="Animation_aynca"]
 length = 0.001
@@ -68,19 +68,19 @@ point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_aynca"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.2140575, 0.3514377, 0.52396166, 0.686901, 1)
-colors = PackedColorArray(0.99999994, 0.8112437, 0.38780284, 1, 1, 0.22252941, 0.46458316, 1, 0.9684666, 0.0004978645, 0.9164701, 1, 7.70092e-07, 0.89758074, 0.8308528, 1, 0.5097611, 0.73748267, 0.9998073, 1, 0.98848814, 0.55177003, 0.3881044, 1)
+offsets = PackedFloat32Array(0, 0.2140575, 0.3514377, 0.52396166, 0.57712764, 0.686901, 1)
+colors = PackedColorArray(0.99999994, 0.8112437, 0.38780284, 1, 1, 0.22252941, 0.46458316, 1, 0.9684666, 0.0004978645, 0.9164701, 1, 7.70092e-07, 0.89758074, 0.8308528, 1, 0, 0.91764706, 0.83137256, 1, 0.5097611, 0.73748267, 0.9998073, 1, 0.98848814, 0.55177003, 0.3881044, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_n6w5e"]
 line_spacing = 9.84
-font = ExtResource("2_q46lh")
+font = ExtResource("3_mss2b")
 font_size = 130
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 31
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(8.075, 5.74)
 
-[node name="GanasteOleada" type="Control" unique_id=1830827380]
+[node name="PerdisteOleada" type="Control" unique_id=1830827380]
 z_index = -1
 layout_mode = 3
 anchors_preset = 15
@@ -91,7 +91,7 @@ offset_right = -1081.0
 offset_bottom = -648.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_e6gjl")
+script = ExtResource("1_6148w")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=892150953]
 libraries/ = SubResource("AnimationLibrary_w68fg")
@@ -103,10 +103,11 @@ offset_top = -146.0
 offset_right = 2162.4275
 offset_bottom = 1070.3655
 scale = Vector2(0.46203217, 0.46203217)
-texture = ExtResource("1_mrs6e")
+texture = ExtResource("2_mmttf")
 expand_mode = 1
 
 [node name="CPUParticles2D2" type="CPUParticles2D" parent="TextureRect" unique_id=1684619697]
+visible = false
 z_index = -1
 z_as_relative = false
 position = Vector2(1681.701, 644.9768)
@@ -151,18 +152,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -386.45703
-offset_top = -32.46527
-offset_right = -17.540894
-offset_bottom = 162.53473
+offset_left = -434.07275
+offset_top = -32.465332
+offset_right = -65.15662
+offset_bottom = 162.53467
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2.29978, 2.29978)
 theme_override_font_sizes/font_size = 15
-text = "VICTORIA"
+text = "PERDISTE"
 label_settings = SubResource("LabelSettings_n6w5e")
 
-[node name="continuar" parent="TextureRect" unique_id=1560458901 instance=ExtResource("4_q46lh")]
+[node name="reintentar" parent="TextureRect" unique_id=1560458901 instance=ExtResource("4_vt8xu")]
 z_index = 2
 layout_mode = 1
 anchors_preset = -1
@@ -177,23 +178,23 @@ offset_bottom = -53.38452
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Label" type="Label" parent="TextureRect/continuar" unique_id=100638714]
+[node name="Label" type="Label" parent="TextureRect/reintentar" unique_id=100638714]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.045
 anchor_top = 0.24400002
 anchor_right = 0.97800004
 anchor_bottom = 0.75100005
-offset_left = 50.584175
-offset_top = -36.317722
-offset_right = -210.48108
-offset_bottom = 40.06906
+offset_left = 44.091133
+offset_top = -40.6464
+offset_right = -216.97412
+offset_bottom = 35.740387
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.4115095, 0.82643807)
-text = "Continuar"
+text = "Reintentar"
 label_settings = SubResource("LabelSettings_n6w5e")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="TextureRect/continuar" to="." method="_on_continuar_pressed"]
+[connection signal="pressed" from="TextureRect/reintentar" to="." method="_on_reintentar_pressed"]

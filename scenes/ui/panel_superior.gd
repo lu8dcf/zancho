@@ -43,7 +43,7 @@ func _ready() -> void:
 	imagen_debilidades.texture = load("res://assets/ui/debilidades.png")
 	imagen_debilidades.visible=false
 	economia.monedas_cambiadas.connect(_actualizar_monedas)
-	_actualizar_monedas(economia.monedas_actual)
+	_actualizar_monedas(economia.monedas_visuales)
 	
 	posicion_visible = panel_superior.position
 	posicion_oculta = posicion_visible - Vector2(0, panel_superior.size.y + altura_boton_visible)
@@ -105,6 +105,10 @@ func _on_empezar_oleada_hover_exited():
 func _actualizar_monedas(nuevas_monedas: int) -> void:
 	if !GlobalJuego.debug:
 		monedas_valor.cambiar_texto(str(nuevas_monedas))
+		if monedas_valor.ver_texto() != str(nuevas_monedas):
+			var tween_efecto = create_tween()
+			tween_efecto.tween_property(monedas_valor, "scale", Vector2(1.2, 1.2), 0.05)
+			tween_efecto.tween_property(monedas_valor, "scale", Vector2(1, 1), 0.1)
 	else: 
 		monedas_valor.cambiar_texto(" ?")
 

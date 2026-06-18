@@ -42,6 +42,7 @@
 [ext_resource type="Texture2D" uid="uid://dla4h1n557y0c" path="res://assets/ui/boton_venta_hover.png" id="27_27rlx"]
 [ext_resource type="Texture2D" uid="uid://b4i6518ssjc0n" path="res://assets/ui/boton_compra_idle.png" id="28_vuvg6"]
 [ext_resource type="Texture2D" uid="uid://bmh06rynd4e0j" path="res://assets/ui/boton_compra_hover.png" id="29_emer0"]
+[ext_resource type="Texture2D" uid="uid://b1qtya6cbnfcl" path="res://assets/ui/vida3.png" id="31_sj4ew"]
 [ext_resource type="FontFile" uid="uid://dk0s5u1t3qgc8" path="res://assets/fuentes/DOMINICA.TTF" id="44_sj4ew"]
 [ext_resource type="Script" uid="uid://dt8gc504rybi4" path="res://scenes/tutorial/texto_tutorial.gd" id="45_83uk5"]
 
@@ -310,15 +311,15 @@ script = ExtResource("18_emer0")
 
 [node name="BarraFe" type="TextureProgressBar" parent="imagenBackInferior/PanelRey" unique_id=243798863]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -59.0
-offset_top = -113.214264
-offset_right = 3.0
-offset_bottom = 70.128586
+anchors_preset = -1
+anchor_left = 0.039
+anchor_top = -0.33200002
+anchor_right = 0.523
+anchor_bottom = 1.0
+offset_left = 0.007999897
+offset_top = -0.06226349
+offset_right = 0.055999756
+offset_bottom = 2.1285858
 grow_horizontal = 2
 grow_vertical = 2
 max_value = 20.0
@@ -327,6 +328,19 @@ fill_mode = 3
 nine_patch_stretch = true
 texture_under = ExtResource("18_vuvg6")
 texture_progress = ExtResource("19_b6swc")
+
+[node name="corona" type="TextureRect" parent="imagenBackInferior/PanelRey" unique_id=288681522]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.279
+anchor_right = 0.5
+anchor_bottom = 0.95500004
+offset_left = 5.0
+offset_top = -0.055999756
+offset_right = 7.0
+offset_bottom = -107.880005
+texture = ExtResource("31_sj4ew")
+expand_mode = 1
 
 [node name="PanelInferior" type="Panel" parent="." unique_id=1024435106]
 anchors_preset = 12

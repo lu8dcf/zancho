@@ -19,7 +19,7 @@ var max_mensajes: int = 50
 
 # escenas de victoria/derrota
 @export var escena_victoria: PackedScene = preload("res://scenes/ui/components/ganaste_oleada.tscn")
-@export var escena_derrota: PackedScene = preload("res://scenes/ui/derrota.tscn")
+@export var escena_derrota: PackedScene = preload("res://scenes/ui/components/perdiste_oleada.tscn")
 
 #tutorial
 @onready var pantallaNegra = $blackOut

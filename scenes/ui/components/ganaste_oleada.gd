@@ -13,5 +13,6 @@ func _ready() -> void:
 func _on_continuar_pressed() -> void:
 	GlobalJuego.siguiente_oleada()
 	$AnimationPlayer.play_backwards("ganaste la oldeada")
-	ganaste_oleada.visible = false
+	
+	#ganaste_oleada.visible = false
 	

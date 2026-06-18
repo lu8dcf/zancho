@@ -1,7 +1,6 @@
 extends Node
 
-var monedas_actual : int = 1200 # monedas inicial para la Oleada 1
-var monedas_antes_oleada : int = 0
+#var monedas_actual : int = 1200 # monedas inicial para la Oleada 1
 const NOMBRES_PIEZAS = ["Peon", "Alfil","Torre",  "Caballo", "Reina"]
 
 var inventario_actual: Dictionary = {}
@@ -41,6 +40,16 @@ var datos_piezas = {
 	}
 }
 
+# monedas
+var monedas_antes_oleada : int = 0 # por si pierde la oleada se resetea a las monedas antesriormente gastadas
+
+var monedas_actual: int = 0 # la cantidad actual
+var monedas_objetivo: int = 0 # la cantidad a sumar
+var monedas_visuales: int = 0 # lo que ve el usuario
+var tween_contador: Tween # para simular el contador
+
+
+
 # señales para modificar el hud
 signal monedas_cambiadas(nuevas_monedas: int) # Emite el cambio de moneda
 signal pieza_comprada(pieza:Dictionary)  # Emite la pieza comprada
@@ -76,10 +85,65 @@ func inicializar_diccionarios():
 		inventario_actual[nombre] = 0
 		piezas_colocadas[nombre] = 0
 		
-func añadir_monedas(cantidad: int) -> void:
+func añadir_monedas(cantidad: int, con_animacion: bool = true) -> void:
 	monedas_actual += cantidad
-	emit_signal("monedas_cambiadas", monedas_actual)  # Notificar al HUD que cambió
+	
+	if con_animacion:
+		_iniciar_conteo_animado()
+	else:
+		# Para debug o cuando no quieras animación
+		monedas_visuales = monedas_actual
+		emit_signal("monedas_cambiadas", monedas_visuales)
+		
+func _iniciar_conteo_animado():
+	# Detener animación anterior si existe
+	if tween_contador and tween_contador.is_running():
+		tween_contador.kill()
+	
+	tween_contador = create_tween()
+	
+	var diferencia = abs(monedas_actual - monedas_visuales)
+	var duracion = clamp(diferencia * 0.02, 0.3, 2.0) 
+	
+	if monedas_actual > monedas_visuales:
+		#empieza rápido y desacelera = ganar
+		tween_contador.tween_method(
+			_actualizar_valor_visual,
+			monedas_visuales,
+			monedas_actual,
+			duracion
+		).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	else:
+		# empieza lento y acelera  = gastar
+		tween_contador.tween_method(
+			_actualizar_valor_visual,
+			monedas_visuales,
+			monedas_actual,
+			duracion
+		).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	
+	tween_contador.tween_callback(_finalizar_conteo)
 
+func _actualizar_valor_visual(valor: float):
+	monedas_visuales = int(valor)
+	emit_signal("monedas_cambiadas", monedas_visuales)
+
+func _finalizar_conteo():
+	monedas_visuales = monedas_actual
+	emit_signal("monedas_cambiadas", monedas_visuales)
+
+func gastar_monedas(cantidad: int, con_animacion: bool = true) -> bool:
+	if monedas_actual >= cantidad:
+		monedas_actual -= cantidad
+		if con_animacion:
+			_iniciar_conteo_animado()
+		else:
+			monedas_visuales = monedas_actual
+			emit_signal("monedas_cambiadas", monedas_visuales)
+		return true
+	return false
+	
+	
 func obtener_inventario_dinero_despues_oleada(gano:bool):
 	
 	if gano:
@@ -155,12 +219,12 @@ func comprar_pieza(nombre_pieza:String) -> bool:
 	
 	# si todo fue bien. se hace la compra
 	if not GlobalJuego.debug:
-		monedas_actual -= datos["precio"]
+		gastar_monedas(datos["precio"])
+		#monedas_actual -= datos["precio"]
 	
 	inventario_actual[nombre_pieza] += 1
 	
-	# se mandan las señales para actualizar el hud
-	monedas_cambiadas.emit(monedas_actual)
+	
 	pieza_comprada.emit({"nombre": nombre_pieza, "cantidad": inventario_actual[nombre_pieza]})
 	inventario_actualizado.emit(inventario_actual)
 	GlobalSignal.mensaje_tienda.emit(true,nombre_pieza)
@@ -184,10 +248,9 @@ func vender_pieza(nombre_pieza:String) -> bool:
 	inventario_actual[nombre_pieza] -= 1
 	
 	if not GlobalJuego.debug:
-		monedas_actual += valor_venta
+		añadir_monedas(valor_venta)
+		#monedas_actual += valor_venta
 	
-	# se mandan las señales para actualizar el hud
-	monedas_cambiadas.emit(monedas_actual)
 	pieza_comprada.emit({"nombre": nombre_pieza, "cantidad": inventario_actual[nombre_pieza]})
 	pieza_vendida.emit()
 	GlobalSignal.mensaje_tienda.emit(false,nombre_pieza)
