@@ -50,6 +50,7 @@ var modelo : PackedScene
 var color="N"
 var pieza_colocada=false
 var pieza : Resource
+var eliminar_pieza=0
 #var secuencia_sfx = randi() % 3# secuencia de sonido
 
 # barra de vida
@@ -86,6 +87,8 @@ func _ready():
 	GlobalSignal.connect("piezaAtaca",ataque)
 	GlobalSignal.connect("piezaRecibeDanio",recibeDanio)
 	GlobalSignal.connect("finalizaOleada",finalizaOleada)
+	GlobalSignal.connect("clickFuera",clickFuera)
+
 
 func cargar_modelo():
 	modelo = load("res://assets/modelos/pieza_generica/pieza_"+ str(pieza_tipo)+".tscn")
@@ -350,18 +353,42 @@ func _al_evento_input(_viewport, event, _shape_idx,_a,_b):
 	# Detectar CLIC IZQUIERDO
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:  # Cuando se presiona el botón
+			GlobalSignal.clickFuera.emit(id) # avisa que se seleccionao este elemento			
 			if pieza_tipo==5 and pieza_blanca==true and GlobalJuego.empezo_oleada:
 				GlobalSignal.clickReina.emit()
+				brillar(true)
 			if pieza_blanca==true and GlobalJuego.empezo_oleada == false and pieza_tipo!=0:
-				if Piezas.eliminar_pieza(id):
-					GlobalSignal.cambioLugar.emit(pieza_tipo)
-					die()
+				eliminar_pieza+=1
+				brillar(true) # hace brillar la pieza antes de eliminarla
+				if eliminar_pieza>1:
+					brillar(false)
+					sacar_pieza()
 				#print("CLIC IZQUIERDO detectado en el Area2D ",pieza_tipo )
-			
+
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.pressed:  # Cuando se presiona el botón derecho
+			if pieza_tipo==5 and pieza_blanca==true and GlobalJuego.empezo_oleada:
+				#GlobalSignal.clickReina.emit()
+				brillar(false)
+				
+		if pieza_blanca==true and GlobalJuego.empezo_oleada == false and pieza_tipo!=0:
+				clickFuera(1000) # borra la seleccion y reinicia la variables
+				
+
+func clickFuera(idFuera): # detecta cuando es seleccionada otra pieza
+	if id==idFuera and GlobalJuego.empezo_oleada == false:
+		return
+	brillar(false)    
+	eliminar_pieza=0	
+
+func sacar_pieza(): # espera la confirmacion
+	if Piezas.eliminar_pieza(id):
+		GlobalSignal.cambioLugar.emit(pieza_tipo)
+		die()
 	
 func brillar(estado: bool):
+	
 	if estado:
-		
 		if cilindro_instanciado == null:
 			cilindro_instanciado = escena_cilindro_seleccion.instantiate()
 			add_child(cilindro_instanciado)
