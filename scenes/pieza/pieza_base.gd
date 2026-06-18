@@ -88,6 +88,7 @@ func _ready():
 	GlobalSignal.connect("piezaRecibeDanio",recibeDanio)
 	GlobalSignal.connect("finalizaOleada",finalizaOleada)
 	GlobalSignal.connect("clickFuera",clickFuera)
+	GlobalSignal.connect("comienzoOleada",comienzoOleada)
 
 
 func cargar_modelo():
@@ -385,6 +386,10 @@ func sacar_pieza(): # espera la confirmacion
 	if Piezas.eliminar_pieza(id):
 		GlobalSignal.cambioLugar.emit(pieza_tipo)
 		die()
+
+func comienzoOleada():
+	brillar(false)
+	eliminar_pieza=0
 	
 func brillar(estado: bool):
 	
