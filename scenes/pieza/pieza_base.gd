@@ -51,6 +51,7 @@ var color="N"
 var pieza_colocada=false
 var pieza : Resource
 var eliminar_pieza=0
+var clickIzquierdo=false
 #var secuencia_sfx = randi() % 3# secuencia de sonido
 
 # barra de vida
@@ -87,7 +88,7 @@ func _ready():
 	GlobalSignal.connect("piezaAtaca",ataque)
 	GlobalSignal.connect("piezaRecibeDanio",recibeDanio)
 	GlobalSignal.connect("finalizaOleada",finalizaOleada)
-	GlobalSignal.connect("clickFuera",clickFuera)
+	
 	GlobalSignal.connect("comienzoOleada",comienzoOleada)
 
 
@@ -348,18 +349,22 @@ func _al_entrar_mouse():
 #salir del over
 func _al_salir_mouse():
 	GlobalSignal.overPieza.emit(false,pieza_tipo,pieza_blanca,round(global_position/espaciado))
+
+
+
 	
 #click sobre la pieza emn esrte caso busca la reina blanca	o cambio de pieza
 func _al_evento_input(_viewport, event, _shape_idx,_a,_b):
 	# Detectar CLIC IZQUIERDO
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:  # Cuando se presiona el botón
-			GlobalSignal.clickFuera.emit(id) # avisa que se seleccionao este elemento			
+			clickIzquierdo=true			
 			if pieza_tipo==5 and pieza_blanca==true and GlobalJuego.empezo_oleada:
 				GlobalSignal.clickReina.emit()
 				brillar(true)
 			if pieza_blanca==true and GlobalJuego.empezo_oleada == false and pieza_tipo!=0:
 				eliminar_pieza+=1
+				print (eliminar_pieza)
 				brillar(true) # hace brillar la pieza antes de eliminarla
 				if eliminar_pieza>1:
 					brillar(false)
@@ -373,21 +378,29 @@ func _al_evento_input(_viewport, event, _shape_idx,_a,_b):
 				brillar(false)
 				
 		if pieza_blanca==true and GlobalJuego.empezo_oleada == false and pieza_tipo!=0:
-				clickFuera(1000) # borra la seleccion y reinicia la variables
-				
+				clickIzquierdo=false
+				verificacion_click()
 
-func clickFuera(idFuera): # detecta cuando es seleccionada otra pieza
-	if id==idFuera and GlobalJuego.empezo_oleada == false:
+func _unhandled_input(event: InputEvent) -> void:  # detecta cualquier clik d emouse
+	clickIzquierdo=false
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		# 2. Verificamos si es el clic izquierdo y si se acaba de presionar (atrapa el "click down")
+		if event.pressed:
+			await get_tree().create_timer(0.05).timeout
+			verificacion_click()
+	
+func verificacion_click():  # compara que el clik del boton es afuera o dentro de la pieza
+	if clickIzquierdo: # si fue en la pieza no causa efecto
 		return
-	brillar(false)    
+	brillar(false)    # Si fue fuera se apaga
 	eliminar_pieza=0	
 
-func sacar_pieza(): # espera la confirmacion
-	if Piezas.eliminar_pieza(id):
-		GlobalSignal.cambioLugar.emit(pieza_tipo)
+func sacar_pieza(): # Saca la pieza 
+	if Piezas.eliminar_pieza(id): #elimina la instancia en la BD
+		GlobalSignal.cambioLugar.emit(pieza_tipo) # Avisa al UI para que agrege el elemeto al panel
 		die()
 
-func comienzoOleada():
+func comienzoOleada(): # si comineza la oleada y estaba brillando lo apaga
 	brillar(false)
 	eliminar_pieza=0
 	

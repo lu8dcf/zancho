@@ -44,8 +44,7 @@ signal overPieza(activo:bool, tipo: int, blanca: bool, posicion: Vector3i) # si 
 signal clickReina()
 @warning_ignore("unused_signal")
 signal cambioLugar(tipo:int)
-@warning_ignore("unused_signal")
-signal clickFuera(id:int) # cuando el jugador toca en cualquier lado
+
 
 
 # mensajes para el log

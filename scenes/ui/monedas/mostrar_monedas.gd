@@ -17,7 +17,7 @@ func generar_lluvia_de_monedas() -> void:
 		add_child(nueva_moneda)
 		
 		# C. Calcular un tiempo de espera aleatorio entre 0.2 y 0.5 segundos para la próxima moneda
-		var tiempo_espera: float = randf_range(0.05, 0.2)
+		var tiempo_espera: float = randf_range(0.05, 0.1)
 		
 		# D. Pausar el bucle temporalmente sin congelar el resto del juego
 		await get_tree().create_timer(tiempo_espera).timeout

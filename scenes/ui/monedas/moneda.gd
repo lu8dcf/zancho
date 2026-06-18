@@ -8,13 +8,13 @@ func _ready() -> void:
 	espera_en_pantalla.timeout.connect(animar_vuelo_moneda)
 
 func posicionar_en_centro_aleatorio() -> void:
-	Sonidos.sonar_sfx("gano_moneda")
+	
 	# 1. Obtener la posición central exacta de la pantalla de juego
 	var centro_pantalla: Vector2 = get_viewport_rect().size / 2
 	
 	# 2. Generar un desvío aleatorio entre -100 y +100 para cada eje
-	var desvio_x: float = randf_range(-15.0, 15.0)
-	var desvio_y: float = randf_range(-15.0, 15.0)
+	var desvio_x: float = randf_range(-20.0, 20.0)
+	var desvio_y: float = randf_range(-20.0, 20.0)
 	var vector_desvio := Vector2(desvio_x, desvio_y)
 	
 	# 3. Asignar la posición final al Area2D
@@ -27,7 +27,7 @@ func animar_vuelo_moneda() -> void:
 	
 	# 2. Creamos una posición intermedia aleatoria para crear el efecto "arco" o explosión inicial
 	# Esto hace que cada moneda tome un camino ligeramente diferente
-	var desvio_inicial = Vector2(randf_range(-100, 100), randf_range(-100, 100))
+	var desvio_inicial = Vector2(randf_range(-40, 40), randf_range(-40, 40))
 	var posicion_intermedia = centro_pantalla + desvio_inicial
 	
 	# Variable para calcular un tiempo de viaje ligeramente único por moneda (entre 0.6 y 0.9 segundos)
@@ -63,6 +63,7 @@ func animar_vuelo_moneda() -> void:
 	tween.tween_callback(final)
 	
 func final():
+	Sonidos.sonar_sfx("gano_moneda")
 	GlobalSignal.conteoMonedas.emit()
 	queue_free()
 	#  Justo antes del queue_free ---- disparar una señal al HUD para que sume el número en el contador
