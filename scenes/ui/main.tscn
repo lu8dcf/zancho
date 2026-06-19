@@ -19,7 +19,8 @@
 [ext_resource type="Script" uid="uid://bg8oqunosc1by" path="res://scenes/ui/opciones.gd" id="16_26ekd"]
 [ext_resource type="Script" uid="uid://l85kexbiwntl" path="res://scenes/ui/video.gd" id="17_hfsfw"]
 [ext_resource type="Texture2D" uid="uid://b31jomv6yryp6" path="res://assets/menu/separador.png" id="18_hfsfw"]
-[ext_resource type="Script" uid="uid://diwb1fg2k6x1u" path="res://scenes/ui/sonido.gd" id="18_wweun"]
+[ext_resource type="Script" uid="uid://dl3v5dnlucpk" path="res://scenes/ui/sonido_menu.gd" id="19_7qwja"]
+[ext_resource type="Script" uid="uid://5xs67fpiaevd" path="res://scenes/ui/controles_menu.gd" id="19_txqnm"]
 [ext_resource type="Script" uid="uid://d184ng4dyotc3" path="res://scenes/ui/controles_camara.gd" id="20_wweun"]
 [ext_resource type="Script" uid="uid://by5rg4ddmdnti" path="res://scenes/ui/accesibilidad_menu.gd" id="21_aca1m"]
 [ext_resource type="Script" uid="uid://bomc1kavji17" path="res://scenes/ui/recompensa.gd" id="21_me51f"]
@@ -484,6 +485,7 @@ label_settings = ExtResource("4_jvuow")
 metadata/_edit_use_anchors_ = true
 
 [node name="video_menu" type="MenuBar" parent="opciones" unique_id=689834738]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3250868
@@ -602,17 +604,19 @@ metadata/_edit_use_anchors_ = true
 
 [node name="pantalla_lista" type="OptionButton" parent="opciones/video_menu/pantalla" unique_id=1208725293]
 layout_mode = 0
-offset_left = 228.0
-offset_top = 19.0
-offset_right = 408.0
-offset_bottom = 50.0
+offset_left = 188.0
+offset_top = 9.0
+offset_right = 388.0
+offset_bottom = 52.0
+theme_override_fonts/font = ExtResource("21_txqnm")
+theme_override_font_sizes/font_size = 20
 selected = 0
 item_count = 3
-popup/item_0/text = "pantalla completa"
+popup/item_0/text = "Pantalla completa"
 popup/item_0/id = 0
-popup/item_1/text = "ventana"
+popup/item_1/text = "Ventana"
 popup/item_1/id = 1
-popup/item_2/text = "ventana sin bordes"
+popup/item_2/text = "Ventana sin bordes"
 popup/item_2/id = 2
 
 [node name="resolucion" type="Label" parent="opciones/video_menu" unique_id=643609057]
@@ -632,10 +636,12 @@ metadata/_edit_use_anchors_ = true
 
 [node name="resolucion_lista" type="OptionButton" parent="opciones/video_menu/resolucion" unique_id=1213238140]
 layout_mode = 0
-offset_left = 228.0
-offset_top = 15.0
-offset_right = 408.0
-offset_bottom = 46.0
+offset_left = 208.0
+offset_top = 10.0
+offset_right = 388.0
+offset_bottom = 49.0
+theme_override_fonts/font = ExtResource("21_txqnm")
+theme_override_font_sizes/font_size = 20
 selected = 0
 item_count = 3
 popup/item_0/text = "1280 x 720"
@@ -680,14 +686,13 @@ label_settings = ExtResource("4_jvuow")
 horizontal_alignment = 1
 
 [node name="sonido_menu" type="MenuBar" parent="opciones" unique_id=1538344803]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3250868
 anchor_top = 0.019290123
 anchor_right = 0.48177087
 anchor_bottom = 0.48379624
-script = ExtResource("18_wweun")
+script = ExtResource("19_7qwja")
 metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect2" type="TextureRect" parent="opciones/sonido_menu" unique_id=1725610387]
@@ -702,6 +707,215 @@ texture = ExtResource("10_6ic3k")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="espaciador" type="TextureRect" parent="opciones/sonido_menu/TextureRect2" unique_id=803587494]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04710921
+anchor_top = 0.21013668
+anchor_right = 8.303399
+anchor_bottom = 2.303359
+scale = Vector2(0.110328235, 0.007244024)
+texture = ExtResource("18_hfsfw")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="espaciador2" type="TextureRect" parent="opciones/sonido_menu/TextureRect2" unique_id=1896600138]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04710921
+anchor_top = 0.29214126
+anchor_right = 8.303399
+anchor_bottom = 2.3853636
+scale = Vector2(0.110328235, 0.007244024)
+texture = ExtResource("18_hfsfw")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="espaciador3" type="TextureRect" parent="opciones/sonido_menu/TextureRect2" unique_id=448361678]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04710921
+anchor_top = 0.3741458
+anchor_right = 8.303399
+anchor_bottom = 2.4673681
+scale = Vector2(0.110328235, 0.007244024)
+texture = ExtResource("18_hfsfw")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="espaciador4" type="TextureRect" parent="opciones/sonido_menu/TextureRect2" unique_id=2048680477]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04710921
+anchor_top = 0.45615035
+anchor_right = 8.303399
+anchor_bottom = 2.5493727
+scale = Vector2(0.110328235, 0.007244024)
+texture = ExtResource("18_hfsfw")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Titulo" type="TextureButton" parent="opciones/sonido_menu" unique_id=394607148]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -9.606226
+anchor_top = -0.06656108
+anchor_right = -9.606224
+anchor_bottom = -0.066561066
+offset_left = -19.0
+offset_top = 30.0
+offset_right = 350.3333
+offset_bottom = 95.0
+scale = Vector2(0.94450027, 0.94450027)
+texture_normal = ExtResource("11_t1dln")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="opciones/sonido_menu/Titulo" unique_id=1038946763]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.005710477
+anchor_top = 0.048865862
+anchor_right = 0.005710477
+anchor_bottom = 0.048865862
+offset_left = 144.0
+offset_right = 302.0
+offset_bottom = 52.0
+text = "Sonidos"
+label_settings = ExtResource("4_jvuow")
+metadata/_edit_use_anchors_ = true
+
+[node name="general" type="Label" parent="opciones/sonido_menu" unique_id=1436422135]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -12.982994
+anchor_top = 0.25886583
+anchor_right = -12.982994
+anchor_bottom = 0.25886583
+offset_left = 144.0
+offset_right = 302.0
+offset_bottom = 52.0
+text = "General"
+label_settings = ExtResource("4_jvuow")
+metadata/_edit_use_anchors_ = true
+
+[node name="general_slider" type="HSlider" parent="opciones/sonido_menu/general" unique_id=85256311]
+layout_mode = 0
+offset_left = 148.0
+offset_top = 27.0
+offset_right = 364.0
+offset_bottom = 43.0
+value = 100.0
+
+[node name="Label_g" type="Label" parent="opciones/sonido_menu/general" unique_id=461338340]
+layout_mode = 0
+offset_left = 372.0
+offset_top = 18.0
+offset_right = 404.0
+offset_bottom = 49.0
+theme_override_fonts/font = ExtResource("21_txqnm")
+theme_override_font_sizes/font_size = 20
+text = "100"
+
+[node name="musica" type="Label" parent="opciones/sonido_menu" unique_id=1907725071]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -12.982994
+anchor_top = 0.4448241
+anchor_right = -12.982994
+anchor_bottom = 0.4448241
+offset_left = 144.0
+offset_right = 302.0
+offset_bottom = 52.0
+text = "Musica"
+label_settings = ExtResource("4_jvuow")
+metadata/_edit_use_anchors_ = true
+
+[node name="musica_slider" type="HSlider" parent="opciones/sonido_menu/musica" unique_id=1892914264]
+layout_mode = 0
+offset_left = 148.0
+offset_top = 27.0
+offset_right = 364.0
+offset_bottom = 43.0
+value = 100.0
+
+[node name="Label_m" type="Label" parent="opciones/sonido_menu/musica" unique_id=758884035]
+layout_mode = 0
+offset_left = 372.0
+offset_top = 15.0
+offset_right = 404.0
+offset_bottom = 46.0
+theme_override_fonts/font = ExtResource("21_txqnm")
+theme_override_font_sizes/font_size = 20
+text = "100"
+
+[node name="efectos" type="Label" parent="opciones/sonido_menu" unique_id=1153125512]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -12.982994
+anchor_top = 0.61290175
+anchor_right = -12.982994
+anchor_bottom = 0.61290175
+offset_left = 144.0
+offset_right = 302.0
+offset_bottom = 52.0
+text = "Efectos"
+label_settings = ExtResource("4_jvuow")
+metadata/_edit_use_anchors_ = true
+
+[node name="efectos_slider" type="HSlider" parent="opciones/sonido_menu/efectos" unique_id=1357321484]
+layout_mode = 0
+offset_left = 148.0
+offset_top = 27.0
+offset_right = 364.0
+offset_bottom = 43.0
+value = 100.0
+
+[node name="Label_e" type="Label" parent="opciones/sonido_menu/efectos" unique_id=366697477]
+layout_mode = 0
+offset_left = 372.0
+offset_top = 16.0
+offset_right = 404.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("21_txqnm")
+theme_override_font_sizes/font_size = 20
+text = "100"
+
+[node name="guardar" parent="opciones/sonido_menu" unique_id=1256887717 instance=ExtResource("11_txqnm")]
+layout_mode = 0
+offset_left = -578.3563
+offset_top = 509.38736
+offset_right = -427.35632
+offset_bottom = 574.3873
+
+[node name="Label2" type="Label" parent="opciones/sonido_menu/guardar" unique_id=250343586]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 52.0
+grow_horizontal = 2
+text = "Guardar"
+label_settings = ExtResource("4_jvuow")
+horizontal_alignment = 1
+
+[node name="restablecer" parent="opciones/sonido_menu" unique_id=1836107518 instance=ExtResource("11_txqnm")]
+layout_mode = 0
+offset_left = -352.35632
+offset_top = 509.38736
+offset_right = -201.35632
+offset_bottom = 574.3873
+
+[node name="Label2" type="Label" parent="opciones/sonido_menu/restablecer" unique_id=1496705042]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 52.0
+grow_horizontal = 2
+text = "Restablecer"
+label_settings = ExtResource("4_jvuow")
+horizontal_alignment = 1
+
 [node name="controles_menu" type="MenuBar" parent="opciones" unique_id=1123123891]
 visible = false
 layout_mode = 1
@@ -710,7 +924,7 @@ anchor_left = 0.3250868
 anchor_top = 0.019290123
 anchor_right = 0.48177087
 anchor_bottom = 0.48379624
-script = ExtResource("17_hfsfw")
+script = ExtResource("19_txqnm")
 metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="opciones/controles_menu" unique_id=2066934914]
@@ -1645,10 +1859,13 @@ text = "Rechazar"
 [connection signal="pressed" from="play/nueva_partida" to="play" method="_on_nueva_partida_pressed"]
 [connection signal="pressed" from="opciones/video" to="opciones" method="_on_video_pressed"]
 [connection signal="pressed" from="opciones/controles" to="opciones" method="_on_controles_pressed"]
+[connection signal="pressed" from="opciones/sonido" to="opciones" method="_on_sonido_pressed"]
 [connection signal="pressed" from="opciones/accesibilidad" to="opciones" method="_on_accesibilidad_pressed"]
 [connection signal="pressed" from="opciones/volver" to="opciones" method="_on_volver_pressed"]
 [connection signal="pressed" from="opciones/video_menu/guardar" to="opciones/video_menu" method="_on_guardar_pressed"]
-[connection signal="pressed" from="opciones/controles_menu/boton_camara" to="opciones/controles_menu" method="_on_boton_camara_pressed"]
+[connection signal="pressed" from="opciones/video_menu/restablecer" to="opciones/video_menu" method="_on_restablecer_pressed"]
+[connection signal="pressed" from="opciones/sonido_menu/guardar" to="opciones/sonido_menu" method="_on_guardar_pressed"]
+[connection signal="pressed" from="opciones/sonido_menu/restablecer" to="opciones/sonido_menu" method="_on_restablecer_pressed"]
 [connection signal="pressed" from="opciones/controles_menu/boton_jugabilidad" to="opciones/controles_menu" method="_on_boton_jugabilidad_pressed"]
 [connection signal="pressed" from="opciones/controles_menu/guardar" to="opciones/controles_menu/boton_camara/controles_camara" method="_on_guardar_pressed"]
 [connection signal="mouse_entered" from="opciones/accesibilidad_menu/multi/CheckButton" to="opciones/accesibilidad_menu" method="_on_check_button_mouse_entered"]

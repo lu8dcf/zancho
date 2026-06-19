@@ -156,13 +156,14 @@ func _on_boton_debilidades_pressed() -> void:
 func _on_empezar_oleada_pressed() -> void:
 	if !GlobalJuego.empezo_oleada and empezar_oleada.ver_texto() == "Empezar Oleada " + str(GlobalJuego.oleada_actual):
 		GlobalJuego.empezo_oleada = true
+		if Piezas.modo_colocacion:
+			Piezas.cancelar_modo_colocacion()
 		GlobalSignal.emit_signal("comienzoOleada")
 		GlobalSignal.emit_signal("mensaje_oleada",true)
 		await get_tree().create_timer(3).timeout
 		economia.monedas_antes_oleada = economia.monedas_actual
 		aparecer_botones_velocidades()
-		Piezas.cancelar_modo_colocacion()
-		Piezas.emit_signal("modo_colocacion_cancelado")
+		
 		
 
 

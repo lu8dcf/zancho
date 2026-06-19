@@ -10,7 +10,7 @@ extends Label
 @onready var zoom_edit: LineEdit = $Container_camera/zoom/zoom_edit
 
 @onready var guardar: TextureButton = $"../../guardar"
-const CONFIG_PATH = "user://controles.cfg"
+const CONFIG_PATH = "user://configuracion.cfg"
 
 
 func _ready() -> void:
@@ -18,7 +18,6 @@ func _ready() -> void:
 	predeterminarEdit()
 	personalizar_line_edits()
 	conectar_señales()
-	guardar.pressed.connect(_on_guardar_pressed)
 
 func conectar_señales():
 	der_edit.gui_input.connect(_on_line_edit_input.bind(der_edit, "Mover derecha"))
@@ -42,6 +41,8 @@ func cargar_configuracion():
 func guardar_configuracion():
 	var config = ConfigFile.new()
 	
+	if config.load(CONFIG_PATH) == OK:
+		pass
 	guardar_tecla_en_config(config, "Mover derecha", der_edit.text)
 	guardar_tecla_en_config(config, "Mover izquierda", izq_edit.text)
 	guardar_tecla_en_config(config, "Mover adelante", arr_edit.text)

@@ -3,7 +3,7 @@ extends Node
 # Variables de las piezas
 # 0 Rey , 1 Peon , 2 Alfil , 3 Torre , 4 Caballo , 5 Reina
 
-var vida = [10,80,100,250,120,400]
+var vida = [1000,80,100,250,120,400]
 var danio = [5,10,20,15,20,30]
 
 var bonus_cantidad = [1,1.3,1.3,1.5,1.5,1.5]
@@ -64,6 +64,7 @@ var pieza_seleccionada: Dictionary = {
 }
 var pieza_flotante : Node3D = null # la pieza que sostiene el mouse
 var modo_colocacion : bool = false # activar o desactivar el modo colcoacion
+var cancelando_modo : bool = false # bandera
 
 var piezas_ataques = [
 	{0:[Vector3i(-1,0,-1),Vector3i(0,0,-1),Vector3i(1,0,-1),Vector3i(-1,0,0),Vector3i(1,0,0),Vector3i(-1,0,1),Vector3i(0,0,1),Vector3i(1,0,1)]},
@@ -86,6 +87,13 @@ signal pieza_colocada_inventario(nombre_pieza: String)
 signal  pieza_flotante_actualizada(posicion_3d :Vector3, es_valido:bool)
 @warning_ignore("unused_signal")
 signal modo_colocacion_true()
+
+func _ready() -> void:
+	GlobalSignal.comienzoOleada.connect(_on_comienzo_oleada)
+
+func _on_comienzo_oleada():
+	if modo_colocacion:
+		cancelar_modo_colocacion()
 
 func reiniciar_variables():
 	pieza_negra=[]
@@ -117,16 +125,21 @@ func obtener_ataques_pieza(tipo: int,es_pieza_blanca:bool) -> Array:
 	return []
 	
 func iniciar_modo_colocacion(tipo_pieza: int, nombre_pieza: String) -> void:
-	modo_colocacion = true
-	pieza_seleccionada = {
-		"tipo": tipo_pieza,
-		"nombre": nombre_pieza,
-		"activa": true
-	}
-	modo_colocacion_inicia.emit(tipo_pieza, nombre_pieza)
+	if !GlobalJuego.empezo_oleada:
+		modo_colocacion = true
+		pieza_seleccionada = {
+			"tipo": tipo_pieza,
+			"nombre": nombre_pieza,
+			"activa": true
+		}
+		modo_colocacion_inicia.emit(tipo_pieza, nombre_pieza)
+	
 	
 
 func cancelar_modo_colocacion() -> void:
+	if cancelando_modo:
+		return
+	cancelando_modo = true
 	modo_colocacion = false
 	pieza_seleccionada = {
 		"tipo": -1,
@@ -134,16 +147,18 @@ func cancelar_modo_colocacion() -> void:
 		"activa": false
 	}
 	modo_colocacion_cancelado.emit()
+	cancelando_modo = false
 
 func colocar_pieza_en_posicion(posicion: Vector2i) -> bool:
 	if not modo_colocacion:
 		return false
-	
+	if GlobalJuego.empezo_oleada:
+		cancelar_modo_colocacion()
+		return false
 	var tipo = pieza_seleccionada["tipo"]
 	var nombre = pieza_seleccionada["nombre"]
 	
 	if nombre.is_empty():
-		print("Error: nombre de pieza vacío")
 		cancelar_modo_colocacion()
 		return false
 		

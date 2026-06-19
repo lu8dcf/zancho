@@ -18,10 +18,12 @@ func _ready():
 	Piezas.modo_colocacion_inicia.connect(_on_modo_colocacion_iniciado)
 	Piezas.modo_colocacion_cancelado.connect(_on_modo_colocacion_cancelado)
 	
+	
 	visible = false
 
 # funciones de señales
 func _on_modo_colocacion_iniciado(tipo: int, _nombre: String):
+	
 	tipo_pieza = tipo
 	cargar_escena_pieza(tipo)
 	visible = true
@@ -33,6 +35,8 @@ func _on_modo_colocacion_cancelado():
 	visible = false
 	set_process(false)
 	_limpiar_modelo()
+	baldosa_actual = null
+	#Piezas.cancelar_modo_colocacion()
 
 func cargar_escena_pieza(tipo: int):
 	_limpiar_modelo()

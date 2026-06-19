@@ -109,8 +109,8 @@ func _on_modo_colocacion_cancelado():
 	modo_colocacion_activo = false
 	es_valido_colocar = false
 	_ocultar_indicadores_colocacion()
-	if not esta_ocupada:
-		seleccionar(false)
+	#if not esta_ocupada:
+		#seleccionar(false)
 
 func configurar_indicadores():
 	if indicador_seleccion: # al pasar el mouse por encima
@@ -141,15 +141,19 @@ func _al_entrar_mouse():
 			_mostrar_indicador_invalido() # rojo invalido
 			
 	else:
-		if not esta_ocupada:
-			seleccionar(true) # seleccion 
+		if not modo_colocacion_activo:
+			seleccionar(true)
+		#if not esta_ocupada:
+			#seleccionar(true) # seleccion 
 
 func _al_salir_mouse():
 	if modo_colocacion_activo:
 		_ocultar_indicadores_colocacion()
 	else:
-		if not esta_ocupada:
+		if not modo_colocacion_activo:
 			seleccionar(false)
+		#if not esta_ocupada:
+			#seleccionar(false)
 		
 #signal overPieza(activo:bool, tipo: int,posicion: Vector3i)
  # si es activo: true tiene el mouse encima y si es false entocnes sale el mouse
@@ -194,6 +198,7 @@ func _on_pieza_colocada(_tipo:int, posicion:Vector2i):
 		#tipo_pieza_actual = _tipo
 		es_valido_colocar = false
 		_ocultar_indicadores_colocacion()
+		seleccionar(false)
 		
 #
 #func _al_evento_input(camara, evento, posicion_click, normal_click, indice_forma):

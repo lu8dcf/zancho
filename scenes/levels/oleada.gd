@@ -48,6 +48,9 @@ func get_oleada_actual():
 #	GlobalJuego.espaciado_baldosas
 	
 func ejecuto_oleada():
+	if Piezas.modo_colocacion:
+		Piezas.cancelar_modo_colocacion()
+	
 	if(GlobalJuego.debug == true):
 		nivel = 0
 	elif(GlobalJuego.tutorial == true):
