@@ -18,14 +18,7 @@ const VOLUMEN_EFECTOS_DEFECTO = 100.0
 
 
 func _ready() -> void:
-	print("=== DIAGNÓSTICO DE BUSES ===")
-	print("Número total de buses: ", AudioServer.bus_count)
-	for i in range(AudioServer.bus_count):
-		print("  Bus ", i, ": '", AudioServer.get_bus_name(i), "'")
 	
-	print("Índice 'Master': ", AudioServer.get_bus_index("Master"))
-	print("Índice 'Music': ", AudioServer.get_bus_index("Music"))
-	print("Índice 'SFX': ", AudioServer.get_bus_index("SFX"))
 	configurar_slider(general_slider)
 	configurar_slider(musica_slider)
 	configurar_slider(efectos_slider)

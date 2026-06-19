@@ -4,8 +4,10 @@ extends Control
 
 
 func _on_reintentar_pressed() -> void:
-	GlobalJuego.perder_fe(5)
 	control.visible = false
+	GlobalJuego.tutorial = false
+	GlobalJuego.reiniciar_variables()
+	get_tree().change_scene_to_file("res://scenes/levels/level.tscn")
 
 
 func _on_volver_pressed() -> void:

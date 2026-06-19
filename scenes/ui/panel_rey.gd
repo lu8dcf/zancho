@@ -22,7 +22,7 @@ func _actualizar_fe(fe_nueva):
 	
 	var progreso = barra_fe.value / barra_fe.max_value
 	
-	var nueva_pos_y = lerp(altura_minima_corona, altura_maxima_corona, progreso+0.1)
+	var nueva_pos_y = lerp(altura_minima_corona, altura_maxima_corona, progreso)
 	if tween_corona and tween_corona.is_running():
 		tween_corona.kill()
 	

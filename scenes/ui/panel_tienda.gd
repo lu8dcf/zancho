@@ -76,7 +76,6 @@ func _mostrar_tienda():
 	
 
 func _ocultar_tienda():
-	# Efecto suave al ocultar (sin rebote, más rápido)
 	if not tween or not is_instance_valid(tween) or not tween.is_valid():
 		tween = create_tween()
 	else:

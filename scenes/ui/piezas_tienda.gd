@@ -88,6 +88,7 @@ func actualizar_pieza(_nada=0):
 	# Todo bien, habilitar
 	bloqueos.visible = true
 	bloqueos.texture_normal = candado_abierto
+	bloqueos.texture_normal = null
 	pieza.disabled = false
 	venta.disabled = inventario_vacio(nombre_pieza)
 	compra.disabled = false

@@ -13,19 +13,15 @@ func crear_buses_audio():
 		AudioServer.add_bus()
 		music_idx = AudioServer.bus_count - 1
 		AudioServer.set_bus_name(music_idx, "Music")
-		# Ponerlo debajo de Master
 		AudioServer.set_bus_send(music_idx, "Master")
-		print("✅ Bus 'Music' creado")
 	
 	if sfx_idx == -1:
 		AudioServer.add_bus()
 		sfx_idx = AudioServer.bus_count - 1
 		AudioServer.set_bus_name(sfx_idx, "SFX")
 		AudioServer.set_bus_send(sfx_idx, "Master")
-		print("✅ Bus 'SFX' creado")
 
 		
-# 🆕 Función helper para crear sonidos en el bus correcto
 func crear_audio_player(tipo: String = "SFX") -> AudioStreamPlayer:
 	var player = AudioStreamPlayer.new()
 	player.bus = tipo  # "Master", "Music" o "SFX"
@@ -41,7 +37,6 @@ func crear_audio_player_3d(tipo: String = "SFX") -> AudioStreamPlayer3D:
 	player.bus = tipo
 	return player
 
-# 🆕 Modificar sonar_sfx para usar el bus SFX
 func sonar_sfx(archivo):
 	var sound = crear_audio_player_3d("SFX")
 	var direccion = "res://assets/sound/sfx/" + archivo + ".mp3"
@@ -72,7 +67,7 @@ func impacto():
 func menu(activar: bool):
 	if activar:
 		if musica_menu_global == null:
-			var music_player = crear_audio_player("Music")  # 🆕 Usa bus Music
+			var music_player = crear_audio_player("Music")  
 			music_player.stream = preload("res://assets/audio/music/TheTrueStoryofBeelzebub.ogg")
 			add_child(music_player)
 			

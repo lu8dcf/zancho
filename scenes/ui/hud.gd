@@ -21,6 +21,10 @@ var max_mensajes: int = 50
 @export var escena_victoria: PackedScene = preload("res://scenes/ui/components/ganaste_oleada.tscn")
 @export var escena_derrota: PackedScene = preload("res://scenes/ui/components/perdiste_oleada.tscn")
 
+# perder toda la fe
+@export var escena_derrota_final: PackedScene = preload("res://scenes/ui/derrota.tscn")
+
+
 #tutorial
 @onready var pantallaNegra = $blackOut
 # -------------------------------------------------------------
@@ -66,11 +70,17 @@ func mostrar_imagen(ganar: int) -> void:
 			#mostras_desaparecer_imagen()
 			#GlobalJuego.siguiente_oleada()
 		else:
-			if escena_derrota:
-				var instancia_derrota = escena_derrota.instantiate()
+			if (GlobalJuego.fe -5)<=0 and escena_derrota_final:
+				var instancia_derrota = escena_derrota_final.instantiate()
 				add_child(instancia_derrota)
-			#mostras_desaparecer_imagen()
-			#GlobalJuego.perder_fe(5)
+				GlobalJuego.perder_fe(5)				
+				
+			else:
+				if escena_derrota:
+					var instancia_derrota = escena_derrota.instantiate()
+					add_child(instancia_derrota)
+				#mostras_desaparecer_imagen()
+				GlobalJuego.perder_fe(5)
 
 # signal mensaje_oleada(empieza:bool,gano:bool) 
 func mensaje_oleada_log(empieza: bool, gano_oleada = null):
