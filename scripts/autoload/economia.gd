@@ -57,6 +57,8 @@ signal inventario_actualizado(inventario:Dictionary) # Emite el inventario actua
 signal pieza_vendida()
 
 func _ready() -> void:
+	GlobalSignal.cambioLugar.connect(_agregar_pieza_cambiada)
+
 	reiniciar_variables()
 
 
@@ -309,7 +311,16 @@ func verificar_orden_aparicion(nombre_pieza: String) -> bool:
 func obtener_nombre_pieza(tipo:int):
 	return NOMBRES_PIEZAS[tipo-1]
 
-
+func _agregar_pieza_cambiada(tipo:int):
+	var nombre = obtener_nombre_pieza(tipo)
+	for i in inventario_actual:
+		if i == nombre:
+			inventario_actual[i]+=1
+		economia.emit_signal("inventario_actualizado")
+			
+	
+	
+	
 # funcion para obtener los datos de las piezas
 func obtener_datos_pieza(nombre: String) -> Dictionary:
 	return datos_piezas.get(nombre, {})

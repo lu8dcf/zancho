@@ -30,7 +30,6 @@ func _ready():
 	economia.pieza_comprada.connect(_actualizar_inventario)
 	economia.pieza_vendida.connect(_actualizar_inventario)
 	economia.inventario_actualizado.connect(_actualizar_inventario)
-	
 	if not Piezas.pieza_colocada_inventario.is_connected(_on_pieza_colocada_desde_inventario):
 		Piezas.pieza_colocada_inventario.connect(_on_pieza_colocada_desde_inventario)
 		
@@ -47,14 +46,6 @@ func parpadeaPiezaComprada(): #tutorial
 		tween.tween_property(self, "modulate", Color(1.5, 1.5, 0.0, 0.973), 0.3)
 		tween.tween_property(self, "modulate", Color.WHITE, 0.2)
 
-#func esconder_botones():
-	#if GlobalJuego.empezo_oleada:
-#
-		#for boton in botones_piezas:
-			#boton.disabled = true
-	#else: 
-		#for boton in botones_piezas:
-			#boton.disabled = false
 
 func configurar_botones():
 	# agregar todos los botones al array
@@ -137,40 +128,10 @@ func _on_boton_pieza_presionado(boton: TextureButton):
 	
 	Piezas.iniciar_modo_colocacion(tipo_pieza, nombre_pieza)
 
-#func _on_pieza_colocada(nombre_pieza: String):
-	#print("Pieza colocada: ", nombre_pieza)
-	#
-	## aca se verificar si todavía quedan piezas del mismo tipo
-	#var cantidad_restante = economia.inventario_actual.get(nombre_pieza, 0)
-	##si aun queda se mantiene el modo colocación
-	#if cantidad_restante > 0:
-		#print("Quedan ", cantidad_restante, " piezas. Manteniendo modo colocación.")
-		#
-		#var tipo_pieza = _obtener_tipo_pieza(nombre_pieza)
-		#pieza_seleccionada_actual = {
-			#"nombre": nombre_pieza,
-			#"tipo": tipo_pieza,
-			#"cantidad": cantidad_restante,
-			#"precio": economia.datos_piezas.get(nombre_pieza, {}).get("precio", 0)
-		#}
-		#
-	#else:
-		## si ya no quedan más piezas, se cancela modo colocación
-		#print("No quedan más ", nombre_pieza, ". Cancelando modo colocación.")
-		#Piezas.cancelar_modo_colocacion()
-	#actualizar_textos_botones()
+
 
 func _on_pieza_colocada_desde_inventario(_nombre_pieza: String):	
 	actualizar_textos_botones()
-	#verifica si tiene mas piezas y hace un print( esto ya es innecesario)
-	#var cantidad_restante = economia.inventario_actual.get(nombre_pieza, 0)
-	
-	#if cantidad_restante > 0:
-		## Todavía hay piezas, el modo colocación se mantiene automáticamente
-		#print("Quedan ", cantidad_restante, " piezas de ", nombre_pieza)
-	#else:
-		## No quedan piezas, el modo colocación ya se canceló en Piezas
-		#print("No quedan más piezas de ", nombre_pieza)
 		
 func _obtener_tipo_pieza(nombre_pieza: String) -> int:
 	var tipos = {
