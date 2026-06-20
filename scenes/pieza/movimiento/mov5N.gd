@@ -68,7 +68,7 @@ func movimientoConPeso():
 	#print("MovEle:", movimientoElegido)
 	#print("imp:", impaciencia)
 	#print("agr:", agresividad)
-	
+	owner.verificar_reservadas(movimientoElegido)
 	moverPaso(movimientoElegido)
 
 	#var actual = calculoPosActual()

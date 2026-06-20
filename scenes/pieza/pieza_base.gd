@@ -188,7 +188,7 @@ func verificar_proximo_paso(cambio):
 	return true
 	#return false
 	
-func verificar_reservadas(cambio):
+func verificar_reservadas(cambio): #verifica y reserva
 	#var sitio3d = round(Vector3(pieza_sitio.x,0,pieza_sitio.y) + Vector3(cambio))# en 3d
 	var antiguoSitio3d  = round(global_position)/GlobalJuego.espaciado_baldosas #tambien la posicion actual
 	#var nuevo_sitio = Vector2i(cambio.x,cambio.z)  # en 2d
