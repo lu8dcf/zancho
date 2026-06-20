@@ -172,23 +172,30 @@ func create_dust_effect(): # Particulas al pegar con el tablero
 
 func verificar_proximo_paso(cambio):
 	# proximo sitio a ocupar
-	var sitio3d = round(global_position+cambio)/GlobalJuego.espaciado_baldosas # en 3d
-	var antiguoSitio3d  = round(global_position)/GlobalJuego.espaciado_baldosas #tambien la posicion actual
+	var sitio3d = round(global_position+Vector3(cambio))/GlobalJuego.espaciado_baldosas # en 3d
+	#var antiguoSitio3d  = round(global_position)/GlobalJuego.espaciado_baldosas #tambien la posicion actual
 	# convierto la proxima posicion en 2Di para 
 	var nuevo_sitio = Vector2i(sitio3d.x,sitio3d.z)  # en 2d
-	var sitioActual = Vector2i(antiguoSitio3d.x,antiguoSitio3d.z) #2d
-	if(GlobalJuego.verifico_casillas_reservadas(nuevo_sitio,sitioActual)
-	and GlobalJuego.verifica_obstaculos(nuevo_sitio) 
-	and GlobalJuego.verifica_extremos(nuevo_sitio)
-	and GlobalJuego.verifica_piezas_blanca(nuevo_sitio)
-	):
-		return true
-	return false
+#	if(!GlobalJuego.verifico_casillas_reservadas(nuevo_sitio,sitioActual)):
+#		print("xCasillaResrv")
+#		return false
+	if(!GlobalJuego.verifica_obstaculos(nuevo_sitio)):
+		return false 
+	if (!GlobalJuego.verifica_extremos(nuevo_sitio)):
+		return false
+	if (!GlobalJuego.verifica_piezas_blanca(nuevo_sitio)):
+		return false
+	return true
+	#return false
 	
+func verificar_reservadas(cambio):
+	#var sitio3d = round(Vector3(pieza_sitio.x,0,pieza_sitio.y) + Vector3(cambio))# en 3d
+	var antiguoSitio3d  = round(global_position)/GlobalJuego.espaciado_baldosas #tambien la posicion actual
+	#var nuevo_sitio = Vector2i(cambio.x,cambio.z)  # en 2d
+	#var sitioActual = Vector2i(antiguoSitio3d.x,antiguoSitio3d.z) #2d
+	return (GlobalJuego.verifico_casillas_reservadas(cambio, antiguoSitio3d))
 	
-		#print (pieza_sitio," ocupado")
-		#return false
-	#return true
+
 		
 func giro(angulo): #Gira la pieza en el eje horizontal (Y) usando Tween
 	brillar_ataque(false)

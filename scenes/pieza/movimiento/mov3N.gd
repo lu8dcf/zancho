@@ -59,7 +59,7 @@ func movimiento():
 	# actualizacion de posicion
 	var cambio = direccion*GlobalJuego.espaciado_baldosas # # vector de cambio de la pieza
 	
-	if owner.verificar_proximo_paso(cambio)==false:
+	if (owner.verificar_proximo_paso(cambio) and owner.verificar_reservadas(round(owner.global_position + cambio)/GlobalJuego.espaciado_baldosas)):
 		saltar_paso()
 		return
 	

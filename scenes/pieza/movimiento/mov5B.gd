@@ -83,7 +83,14 @@ func analizar_siguientePaso(inicio: Vector3i, fin: Vector3i): #
 	var mejor_dist = INF
 	for dir in DIRECCIONES: # de todas las direcciones
 		var vecino = actual + dir
-		if  not es_valido(vecino):
+		if(vecino == fin):
+			if(owner.verificar_reservadas(fin)): #hago esto para reservar baldosa fin
+				moverPaso(fin)
+			else:
+				moverPaso(calculoPosActual())
+				estado = Estado.INACTIVA
+			continue
+		if  not es_valido(vecino) and owner.verificar_reservadas((actual + Vector3i(vecino))/GlobalJuego.espaciado_baldosas):
 			continue
 		var dist = (fin - vecino).length_squared()
 		if dist < mejor_dist: #comparo
@@ -98,6 +105,7 @@ func analizar_siguientePaso(inicio: Vector3i, fin: Vector3i): #
 	else:
 		moverPaso(calculoPosActual())
 		estado = Estado.INACTIVA
+
 
 func moverPaso(destino:Vector3i): #desplazo la pieza a la sieguiente
 	if (en_movimiento):
@@ -147,6 +155,7 @@ func obtengo_posicion_baldosa() -> Vector3:
 		result.position.x / GlobalJuego.espaciado_baldosas,
 		owner.global_position.y,
 		result.position.z / GlobalJuego.espaciado_baldosas)
+		GlobalSignal.emit_signal("punteroReina",baldosaReal)
 		return round(baldosaReal)
 	return self.global_position #mantengo posicion si no selecciono baldosa
 

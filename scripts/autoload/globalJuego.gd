@@ -96,7 +96,7 @@ func lugar_disponible(sitio: Vector2i):
 	return true
 	
 	
-func verifico_casillas_reservadas(sitio: Vector2i, antiguoSitio: Vector2i): #le paso la nueva pos y al actual
+func verifico_casillas_reservadas(sitio, antiguoSitio): #le paso la nueva pos y al actual
 	if sitio in casillas_reservadas: #si esta reservada, no se puede ocupar
 		return false
 	else:
@@ -109,11 +109,16 @@ func verifico_casillas_reservadas(sitio: Vector2i, antiguoSitio: Vector2i): #le 
 				casillas_reservadas.pop_front() #elimino la priemra de la lista
 		return true
 		
-func borroPiezaSitio(sitio: Vector2i, antiguoSitio: Vector2i): #acualizo pos de pieza
+func borroPiezaSitio(sitio, antiguoSitio): #acualizo pos de pieza
 	for pieza in Piezas.pieza_negra:
-		if pieza.pieza_sitio == antiguoSitio:
-			pieza.pieza_sitio = sitio
-
+		if pieza.pieza_sitio == Vector2i(antiguoSitio.x, antiguoSitio.z):
+			pieza.pieza_sitio = Vector2i(sitio.x, sitio.z)
+			
+func esta_reservada(sitio):
+	if(sitio in casillas_reservadas):
+		return true
+	else: return false
+	
 func verifica_piezas(sitio: Vector2i):
 	if verifica_piezas_blanca(sitio)==false: return false
 	if verifica_piezas_negra(sitio)==false: return false

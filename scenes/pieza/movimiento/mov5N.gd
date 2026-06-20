@@ -68,6 +68,7 @@ func movimientoConPeso():
 	#print("MovEle:", movimientoElegido)
 	#print("imp:", impaciencia)
 	#print("agr:", agresividad)
+	
 	moverPaso(movimientoElegido)
 
 	#var actual = calculoPosActual()
@@ -97,7 +98,7 @@ func obtenerMovimientosValidos():
 
 	for mov in movimientosDisponibles:
 		var paso = (mov * GlobalJuego.espaciado_baldosas)
-		if !owner.verificar_proximo_paso(paso):
+		if !owner.verificar_proximo_paso(paso) and GlobalJuego.esta_reservada(paso):
 			continue
 		var peso = calcularPesoMovimiento(mov)
 		candidatos.append({

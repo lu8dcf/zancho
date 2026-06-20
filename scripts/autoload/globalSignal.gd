@@ -44,7 +44,8 @@ signal overPieza(activo:bool, tipo: int, blanca: bool, posicion: Vector3i) # si 
 signal clickReina()
 @warning_ignore("unused_signal")
 signal cambioLugar(tipo:int)
-
+@warning_ignore("unused_signal")
+signal punteroReina(positionSeleccionada : Vector3) 
 
 
 # mensajes para el log

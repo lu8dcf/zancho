@@ -61,7 +61,7 @@ func movimiento():
 				#validarPaso(cambio))
 		#else:
 			#PasoEsValido = validarPaso(cambio)
-		if (owner.verificar_proximo_paso(cambio)):
+		if (owner.verificar_proximo_paso(cambio) and owner.verificar_reservadas(round(owner.global_position + cambio)/GlobalJuego.espaciado_baldosas)):
 			mover(cambio)
 			return
 	#cambio_estado(0)

@@ -53,10 +53,10 @@ func movimiento():
 	for i in range(secuencia.size()): #es un sistema de prioridad
 		cambio_estado(secuencia[i]) #siempre muevea delante, si no, una casilla, si no a la derecha y asi
 		var cambio = direccion * GlobalJuego.espaciado_baldosas # vector de cambio de la pieza
-		if (owner.verificar_proximo_paso(cambio)):
+		if (owner.verificar_proximo_paso(cambio) and owner.verificar_reservadas(round(owner.global_position + cambio)/GlobalJuego.espaciado_baldosas)):
 			realizar_salto_parabolico(cambio)
 			return
-	#cambio_estado(0)
+	cambio_estado(0)
 	
 	#
 	#
@@ -73,31 +73,33 @@ func dar_paso():
 	paso+=1
 	if paso==len(secuencia): paso=1
 	cambio_estado(paso)
-	
-func saltar_paso(): # volver a iniciar en otra posicion d esalto
-	buscar_siguiente_valido()  	
-	
-func buscar_siguiente_valido():
-	for offset in range(1, len(secuencia) + 1):
-
-		var indice = (paso + offset) % len(secuencia)
-
-		cambio_estado(indice)
-
-		var cambio = direccion * GlobalJuego.espaciado_baldosas
-		var valido = owner.verificar_proximo_paso(cambio)
-		if owner.verificar_proximo_paso(cambio):
-
-			paso = indice
-
-			realizar_salto_parabolico(cambio)
-
-			dar_paso()
-
-			return
-
-	print("No hay movimientos válidos")
-	
+	#
+#func saltar_paso(): # volver a iniciar en otra posicion d esalto
+	#buscar_siguiente_valido()  	
+	#
+#func buscar_siguiente_valido():
+	#for offset in range(1, len(secuencia) + 1):
+#
+		#var indice = (paso + offset) % len(secuencia)
+#
+		#cambio_estado(indice)
+#
+		#var cambio = direccion * GlobalJuego.espaciado_baldosas
+		#var valido = owner.verificar_proximo_paso(cambio)
+		#if (owner.verificar_proximo_paso(cambio)):
+			#if (owner.verificar_reservadas(cambio)):
+				#print("caballo_casillaReserbada", cambio)
+#
+			#paso = indice
+#
+			#realizar_salto_parabolico(cambio)
+#
+			##dar_paso()
+#
+			#return
+#
+	#print("No hay movimientos válidos")
+	#
 
 	
 #func movimiento():
