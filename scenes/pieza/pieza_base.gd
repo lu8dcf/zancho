@@ -25,10 +25,10 @@ var movimiento_especifico = preload("res://scenes/pieza/movimiento/movimiento.ts
 var ataque_especifico = preload("res://scenes/pieza/ataque/Ataque.tscn")
 # Escena del cilindro de selección (Ajustá la ruta a la de tu proyecto)
 var escena_cilindro_seleccion = preload("res://scenes/pieza/seleccion.tscn") 
-
+var escena_cilindro_seleccion_ataque = preload("res://scenes/pieza/seleccion_ataque.tscn") 
 # Variable para guardar la referencia de la instancia activa
-var cilindro_instanciado: Node3D = null
-
+var cilindro_instanciado: Node3D = null # cilindro de seleccion amarillo
+var cilindro_instanciado_a: Node3D = null # colindro de ataque rojo
 # Nodos
 @onready var dust_particles = $DustParticles
 @onready var giro_inicial = $GiroInicial
@@ -191,6 +191,7 @@ func verificar_proximo_paso(cambio):
 	#return true
 		
 func giro(angulo): #Gira la pieza en el eje horizontal (Y) usando Tween
+	brillar_ataque(false)
 	angulo_frente=angulo
 	var tween = create_tween()
 	var _rotacion_actual = rotation_degrees.y
@@ -228,7 +229,7 @@ func Sonido(tipo): # funcion generica pra los sonidos de la pieza
 func ataque(idA):
 	if idA!=id:
 		return
-	
+	brillar_ataque(true)
 	animacion("Bataque")
 	await get_tree().create_timer(0.5).timeout
 	Sonido("espada2")
@@ -273,7 +274,7 @@ func _buscar_mesh(nodo: Node) -> MeshInstance3D:
 	return null
 
 func die():
-	
+	brillar_ataque(false)
 	# Efectos de muerte
 	if GlobalJuego.empezo_oleada:
 		GlobalSignal.piezaMuere.emit(id) # aviso que muere
@@ -314,7 +315,7 @@ func finalizaOleada(_estado):
 func giro_remoto(pieza_id,angulo): # angulo en radianes
 	if id!=pieza_id:
 		return
-	
+	brillar_ataque(false)
 	# señal que la batalla finalizo y esta pieza es la ganadora debe volver a la posicion inicial
 	if angulo==1000:  
 		giro(angulo_frente)
@@ -405,7 +406,6 @@ func comienzoOleada(): # si comineza la oleada y estaba brillando lo apaga
 	eliminar_pieza=0
 	
 func brillar(estado: bool):
-	
 	if estado:
 		if cilindro_instanciado == null:
 			cilindro_instanciado = escena_cilindro_seleccion.instantiate()
@@ -413,8 +413,18 @@ func brillar(estado: bool):
 			
 			cilindro_instanciado.transform.origin = Vector3.ZERO 
 	else:
-		
 		if cilindro_instanciado != null:
 			cilindro_instanciado.queue_free()
 			cilindro_instanciado = null
 			
+func brillar_ataque(estado: bool):
+	if estado:
+		if cilindro_instanciado_a == null:
+			cilindro_instanciado_a = escena_cilindro_seleccion_ataque.instantiate()
+			add_child(cilindro_instanciado_a)
+			
+			cilindro_instanciado_a.transform.origin = Vector3.ZERO 
+	else:
+		if cilindro_instanciado_a != null:
+			cilindro_instanciado_a.queue_free()
+			cilindro_instanciado_a = null
