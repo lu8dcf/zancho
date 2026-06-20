@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cbom0lg36x02d"]
+
+[ext_resource type="Material" uid="uid://ddtjpte13xa2x" path="res://assets/modelos/texturas/material_seleccion.tres" id="1_6hhvi"]
+[ext_resource type="ArrayMesh" uid="uid://duapoqcltpylf" path="res://assets/modelos/objetos/seleccion.obj" id="2_gcpic"]
+
+[node name="Node3D" type="Node3D" unique_id=343973907]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=724394037]
+transform = Transform3D(2.015, 0, 0, 0, 2.015, 0, 0, 0, 2.015, 0, 1.0892415, 0)
+material_override = ExtResource("1_6hhvi")
+mesh = ExtResource("2_gcpic")
