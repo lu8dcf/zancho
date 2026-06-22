@@ -49,6 +49,7 @@ func _input(event):
 			if(event.button_index == MOUSE_BUTTON_RIGHT):
 				estado = Estado.INACTIVA
 			fin = obtengo_posicion_baldosa()   #con click izqui	rdo
+			GlobalSignal.emit_signal("punteroReina",Vector3i(round(fin)))
 			tiene_objetivo = true #tiene un punto donde ir, es fin
 			estado = Estado.MOVIENDO
 			
@@ -155,7 +156,6 @@ func obtengo_posicion_baldosa() -> Vector3:
 		result.position.x / GlobalJuego.espaciado_baldosas,
 		owner.global_position.y,
 		result.position.z / GlobalJuego.espaciado_baldosas)
-		GlobalSignal.emit_signal("punteroReina",round(baldosaReal))
 		return round(baldosaReal)
 	return self.global_position #mantengo posicion si no selecciono baldosa
 
