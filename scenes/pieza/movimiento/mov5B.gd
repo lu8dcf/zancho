@@ -40,6 +40,11 @@ func _ready():
 	await pieza.ready
 	GlobalSignal.connect("marcaPaso", puedoAvanzar)
 	GlobalSignal.connect("clickReina",ReinaSeleccionada)
+	GlobalSignal.connect("punteroReina",punteroReina)
+
+func punteroReina(posicion): #apagar la reina
+	owner.brillar(false)
+	
 
 func _input(event):
 	if (estado != Estado.ESPERANDO_DESTINO):
