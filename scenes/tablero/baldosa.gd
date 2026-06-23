@@ -59,6 +59,7 @@ func _ready():
 	Piezas.modo_colocacion_cancelado.connect(_on_modo_colocacion_cancelado)
 	Piezas.pieza_colocada.connect(_on_pieza_colocada)
 	GlobalSignal.overPieza.connect(_mostrar_ataques_pieza) # se muestran los rangos de ataque de las piezas
+	GlobalSignal.punteroReina.connect(_indicacion_reina) # al hacer click en a reina
 
 func configurar_colision():
 	if cuerpo_estatico:
@@ -92,14 +93,11 @@ func cargar_modelo_glb():
 	else:
 		push_error("No se ha asignado modelo GLB para baldosa tipo: ", tipo)
 
-
-
 func conectar_señales():
 	if area_interaccion:
 		area_interaccion.mouse_entered.connect(_al_entrar_mouse)
 		area_interaccion.mouse_exited.connect(_al_salir_mouse)
 		#area_interaccion.input_event.connect(_al_evento_input)
-
 
 func _on_modo_colocacion_iniciado(_tipo_pieza: int, _nombre: String):
 	modo_colocacion_activo = true
@@ -112,6 +110,19 @@ func _on_modo_colocacion_cancelado():
 	#if not esta_ocupada:
 		#seleccionar(false)
 
+
+func _indicacion_reina(mostrar: bool, ubi: Vector3i):
+	mostrar = true
+	print("baldosa: ", ubi)
+	if mostrar:
+		if obtener_punto_colocacion() == Vector3(ubi):
+			indicador_seleccion.visible = true
+		else:
+			indicador_seleccion.visible = false
+	else:
+		indicador_seleccion.visible = false
+		
+
 func configurar_indicadores():
 	if indicador_seleccion: # al pasar el mouse por encima
 		indicador_seleccion.visible = false
@@ -119,6 +130,7 @@ func configurar_indicadores():
 		indicador_invalido.visible = false
 	if indicador_valido: # si es posible colocar la pieza
 		indicador_valido.visible = false
+	
 	
 
 func establecer_coordenadas(columna: int, fila: int):

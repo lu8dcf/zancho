@@ -25,7 +25,8 @@ func _ready():
 		#GlobalSignal.connect("obtenerBaldosa",obtener_baldosa_en_coordenadasSenial)
 	
 	GlobalSignal.finalizaOleada.connect(mostrar_oleada_actual) # si es true quiere decir que gano, si es false se reiniciaa
-
+	GlobalSignal.punteroReina.connect(_on_puntero_reina)
+	
 func generar_tablero():
 	# Limpiar tablero existente
 	for hijo in get_children():
@@ -94,7 +95,28 @@ func _limpiar_resaltado_ataque():
 		baldosa.seleccionar(false)
 		if not baldosa.esta_ocupada:  # Solo limpiar baldosas no ocupadas
 			baldosa.seleccionar(false)
-			
+
+func _on_puntero_reina(mostrar: bool, ubi: Vector3i):
+	mostrar = true
+	print("baldosa: ", ubi)
+	if mostrar:
+		_limpiar_seleccion_reina()
+		
+		var coordenadas_buscada = Vector2i(ubi.x, ubi.z)
+		
+		var baldosa_objetivo = obtener_baldosa_en_coordenadas(coordenadas_buscada)
+		
+		if baldosa_objetivo:
+			# verificar si NO es la baldosa donde está la reina
+			if baldosa_objetivo.tipo_pieza_actual != 5: 
+				baldosa_objetivo.indicador_seleccion.visible = true
+	else:
+		_limpiar_seleccion_reina()
+
+func _limpiar_seleccion_reina():
+	for baldosa in baldosas.values():
+		baldosa.indicador_seleccion.visible = false
+
 func obtener_baldosa_en_coordenadas(coordenadas: Vector2i) -> BaldosaBase:
 	return baldosas.get(coordenadas, null)
 #
