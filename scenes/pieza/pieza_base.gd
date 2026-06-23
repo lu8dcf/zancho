@@ -285,7 +285,7 @@ func die():
 	# Efectos de muerte
 	if GlobalJuego.empezo_oleada:
 		GlobalSignal.piezaMuere.emit(id) # aviso que muere
-		Sonidos.death()
+		Sonidos.sonar_sfx("muerte")
 	animacion_muerte()
 	
 func animacion_muerte():

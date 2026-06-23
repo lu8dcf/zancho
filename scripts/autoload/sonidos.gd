@@ -38,6 +38,9 @@ func crear_audio_player_3d(tipo: String = "SFX") -> AudioStreamPlayer3D:
 	return player
 
 func sonar_sfx(archivo):
+	if archivo=="muerte":
+		var opcion=randi() % 4
+		archivo = archivo+"/"+archivo + str(opcion)
 	var sound = crear_audio_player_3d("SFX")
 	var direccion = "res://assets/sound/sfx/" + archivo + ".mp3"
 	sound.stream = load(direccion)
@@ -46,13 +49,6 @@ func sonar_sfx(archivo):
 	await sound.finished
 	sound.queue_free()
 
-func death():
-	var death_sound = crear_audio_player_3d("SFX")
-	death_sound.stream = preload("res://assets/sound/sfx/death.mp3")
-	add_child(death_sound)
-	death_sound.play()
-	await death_sound.finished
-	death_sound.queue_free()
 	
 func impacto():
 	var impact_sound = crear_audio_player_3d("SFX")
