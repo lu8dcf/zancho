@@ -45,7 +45,7 @@ signal clickReina()
 @warning_ignore("unused_signal")
 signal cambioLugar(tipo:int)
 @warning_ignore("unused_signal")
-signal punteroReina(positionSeleccionada : Vector3i)  #retorna la posicion 
+signal punteroReina(positionSeleccionada : Vector3i, iluminarCasilla : bool)  #retorna la posicion 
 
 
 # mensajes para el log
