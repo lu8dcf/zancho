@@ -70,6 +70,43 @@ default_font_size = 20
 default_font = ExtResource("21_txqnm")
 default_font_size = 20
 
+[sub_resource type="Animation" id="Animation_jsg20"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(25, -36)]
+}
+
+[sub_resource type="Animation" id="Animation_x7mgp"]
+resource_name = "creditos"
+length = 135.63333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.29999995, 59.966667, 136.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(12.999983, 616), Vector2(10.98, -2291), Vector2(10.98, -2291)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y8602"]
+_data = {
+&"RESET": SubResource("Animation_jsg20"),
+&"creditos": SubResource("Animation_x7mgp")
+}
+
 [node name="main" type="Control" unique_id=1651978815]
 layout_mode = 3
 anchor_right = 2.0
@@ -235,6 +272,7 @@ grow_vertical = 2
 text = "Opciones"
 
 [node name="play" type="MenuBar" parent="." unique_id=1867162247]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3250868
@@ -328,6 +366,7 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="opciones" type="MenuBar" parent="." unique_id=1414264697]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3250868
@@ -1847,6 +1886,82 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Rechazar"
 
+[node name="creditos" type="TextureRect" parent="." unique_id=1890905457]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -10.534121
+anchor_top = -0.007916809
+anchor_right = -10.363113
+anchor_bottom = 0.44347203
+offset_left = 24990.613
+offset_top = -1.7398158
+offset_right = 24990.613
+offset_bottom = -1.7397461
+scale = Vector2(1, 1.1600001)
+texture = ExtResource("10_6ic3k")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="creditos" type="AnimationPlayer" parent="creditos" unique_id=1926908054]
+libraries/ = SubResource("AnimationLibrary_y8602")
+autoplay = &"creditos"
+
+[node name="Label" type="Label" parent="creditos" unique_id=1606573876]
+layout_mode = 0
+offset_left = 25.0
+offset_top = -36.0
+offset_right = 423.0
+offset_bottom = 2574.0
+text = "                    Gambito de zancho
+
+              -- Dirección y Producción --
+- Producción:	                            Heber Alonso
+
+      -- Programación y Desarrollo Técnico --
+- Programadora:                         Lucia Alonso
+- Programadora:                         Violeta Mortarini
+- Programador:	                         Heber Alonso
+
+
+
+               -- Arte y Diseño Visual 3D --
+- Directora de Arte 3D:                  Ramiro Alonso
+- Diseñadora de menu:                 Lucia Alonso
+- Modelador 3D:                            Ramiro Alonso
+- Diseñador de hud                       Ramiro Alonso
+- Diseñador de entorno 3D         Ramiro Alonso
+
+
+                  -- Sonido y Musica --
+- Sonidista:                              Violeta Mortarini
+- Sonidista:                               Ramiro Alonso
+- Sonidista:                               Heber Alonso
+- Sonidista:                               Lucia Alonso
+
+
+
+               -- Comunicación y Difusión --
+- Diseñadora de Interfaz:          Lucia Alonso
+- Community manager:             Heber Alonso
+- Marqueting:                              Heber Alonso
+
+                     -- Agradecimientos --
+Universidad Provincial del Sudoeste
+
+
+
+
+
+
+
+
+
+                      Gambito de zancho
+  
+                          IKURO GAME"
+label_settings = ExtResource("24_uoc8b")
+vertical_alignment = 1
+
 [connection signal="pressed" from="TextureRect/comoJugar" to="." method="_on_como_jugar_pressed"]
 [connection signal="mouse_entered" from="TextureRect/play" to="." method="_on_play_mouse_entered"]
 [connection signal="pressed" from="TextureRect/play" to="." method="_on_texture_button_2_pressed"]
@@ -1854,6 +1969,7 @@ text = "Rechazar"
 [connection signal="pressed" from="TextureRect/salir" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="TextureRect/salir" to="." method="_on_salir_pressed"]
 [connection signal="mouse_entered" from="TextureRect/creditos" to="." method="_on_creditos_mouse_entered"]
+[connection signal="pressed" from="TextureRect/creditos" to="." method="_on_creditos_pressed"]
 [connection signal="mouse_entered" from="TextureRect/Opciones" to="." method="_on_opciones_mouse_entered"]
 [connection signal="pressed" from="TextureRect/Opciones" to="." method="_on_opciones_pressed"]
 [connection signal="pressed" from="play/nueva_partida" to="play" method="_on_nueva_partida_pressed"]
