@@ -54,7 +54,7 @@ func _input(event):
 			if(event.button_index == MOUSE_BUTTON_RIGHT):
 				estado = Estado.INACTIVA
 			fin = obtengo_posicion_baldosa()   #con click izqui	rdo
-			GlobalSignal.emit_signal("punteroReina",Vector3i(round(fin)))
+			GlobalSignal.emit_signal("punteroReina",Vector3i(round(fin)),true)
 			tiene_objetivo = true #tiene un punto donde ir, es fin
 			estado = Estado.MOVIENDO
 			
@@ -91,6 +91,7 @@ func analizar_siguientePaso(inicio: Vector3i, fin: Vector3i): #
 		var vecino = actual + dir
 		if(vecino == fin):
 			if(owner.verificar_reservadas(fin)): #hago esto para reservar baldosa fin
+				GlobalSignal.emit_signal("punteroReina",Vector3i(round(fin)),false)
 				moverPaso(fin)
 			else:
 				moverPaso(calculoPosActual())
