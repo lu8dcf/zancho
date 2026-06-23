@@ -111,7 +111,7 @@ func _on_modo_colocacion_cancelado():
 		#seleccionar(false)
 
 
-func _indicacion_reina(mostrar: bool, ubi: Vector3i):
+func _indicacion_reina(ubi: Vector3i,mostrar:bool):
 	mostrar = true
 	print("baldosa: ", ubi)
 	if mostrar:

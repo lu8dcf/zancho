@@ -96,7 +96,7 @@ func _limpiar_resaltado_ataque():
 		if not baldosa.esta_ocupada:  # Solo limpiar baldosas no ocupadas
 			baldosa.seleccionar(false)
 
-func _on_puntero_reina(mostrar: bool, ubi: Vector3i):
+func _on_puntero_reina(ubi: Vector3i,mostrar: bool):
 	mostrar = true
 	print("baldosa: ", ubi)
 	if mostrar:
