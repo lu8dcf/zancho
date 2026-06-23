@@ -162,8 +162,9 @@ func obtengo_posicion_baldosa() -> Vector3:
 		result.position.x / GlobalJuego.espaciado_baldosas,
 		owner.global_position.y,
 		result.position.z / GlobalJuego.espaciado_baldosas)
-		return round(baldosaReal)
-	return self.global_position #mantengo posicion si no selecciono baldosa
+		if(es_valido(baldosaReal)):
+			return round(baldosaReal)
+	return calculoPosActual() #mantengo posicion si no selecciono baldosa
 
 
 func girar(direccion: Vector3i): #giro la reina en base a la direccion del objetivo

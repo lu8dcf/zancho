@@ -53,7 +53,7 @@ func movimiento():
 	for i in range(secuencia.size()): #es un sistema de prioridad
 		cambio_estado(secuencia[i]) #siempre muevea delante, si no, una casilla, si no a la derecha y asi
 		var cambio = direccion * GlobalJuego.espaciado_baldosas # vector de cambio de la pieza
-		if (owner.verificar_proximo_paso(cambio) and owner.verificar_reservadas(round(owner.global_position + cambio)/GlobalJuego.espaciado_baldosas)):
+		if (owner.verificar_proximo_paso(cambio) and owner.verificar_reservadas(Vector3i(round(owner.global_position + cambio)/GlobalJuego.espaciado_baldosas))):
 			realizar_salto_parabolico(cambio)
 			return
 	cambio_estado(0)
