@@ -24,4 +24,9 @@ func ver_texto():
 
 
 func _on_pressed() -> void:
-	Sonidos.boton1()
+	if self.name == "compra":
+		Sonidos.compra()
+	elif self.name == "venta":
+		Sonidos.venta()
+	else:
+		Sonidos.boton1()

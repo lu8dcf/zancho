@@ -106,7 +106,13 @@ func comienzoOleada():
 	
 func compra():
 	var compra_sound = crear_audio_player_3d("SFX")
-	compra_sound.stream = preload("res://assets/sound/sfx/compra.mp3")
+	var sonidos = [
+		preload("res://assets/sound/sfx/botones_compra/compra1.mp3"),
+		preload("res://assets/sound/sfx/botones_compra/compra2.mp3"),
+		preload("res://assets/sound/sfx/botones_compra/compra3.mp3")
+	]
+	
+	compra_sound.stream = sonidos.pick_random()
 	add_child(compra_sound)
 	compra_sound.play()
 	await compra_sound.finished
@@ -151,10 +157,22 @@ func error():
 	error_sound.play()
 	await error_sound.finished
 	error_sound.queue_free()
+
+func venta():
+	var venta_sound = crear_audio_player_2d("SFX")
+	venta_sound.stream = preload("res://assets/sound/sfx/botones_interfaz/venta.mp3")
+	add_child(venta_sound)
+	venta_sound.play()
+	await venta_sound.finished
+	venta_sound.queue_free()
 	
 func hover():
 	var hover_sound = crear_audio_player_2d("SFX")
-	hover_sound.stream = preload("res://assets/sound/sfx/botones_interfaz/hover.mp3")
+	var sonidos = [
+		preload("res://assets/sound/sfx/botones_interfaz/hover.mp3")
+	]
+	
+	hover_sound.stream = sonidos.pick_random()
 	add_child(hover_sound)
 	hover_sound.play()
 	await hover_sound.finished
