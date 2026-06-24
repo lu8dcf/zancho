@@ -312,9 +312,11 @@ func animacion_muerte():
 	
 	if GlobalJuego.empezo_oleada:
 		if Piezas.pieza_negra.size()==0:
+			Sonidos.sonar_sfx("triunfo")
 			GlobalSignal.finalizaOleada.emit(true)
 	
 		if pieza_tipo==0:
+			Sonidos.sonar_sfx("derrota")
 			GlobalSignal.finalizaOleada.emit(false)
 	queue_free()
 
