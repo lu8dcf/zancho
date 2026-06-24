@@ -38,7 +38,7 @@ func crear_audio_player_3d(tipo: String = "SFX") -> AudioStreamPlayer3D:
 	return player
 
 func sonar_sfx(archivo):
-	if archivo=="muerte":
+	if archivo=="muerte" or archivo=="caida":
 		var opcion=randi() % 4
 		archivo = archivo+"/"+archivo + str(opcion)
 	var sound = crear_audio_player_3d("SFX")
@@ -49,16 +49,7 @@ func sonar_sfx(archivo):
 	await sound.finished
 	sound.queue_free()
 
-	
-func impacto():
-	var impact_sound = crear_audio_player_3d("SFX")
-	impact_sound.stream = preload("res://assets/sound/sfx/caida.mp3")
-	add_child(impact_sound)
-	impact_sound.volume_db = -10 + randf_range(-5, 5)
-	impact_sound.pitch_scale = 0.8 + randf_range(-0.2, 0.2)
-	impact_sound.play()
-	await impact_sound.finished
-	impact_sound.queue_free()
+
 	
 func menu(activar: bool):
 	if activar:

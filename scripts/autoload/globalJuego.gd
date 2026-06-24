@@ -182,7 +182,3 @@ func reiniciar_variables():
 	economia.vacioVariables()
 	juego_pausa = false
 	ataque_en_proceso=false
-	
-	
-func mensaje(texto):
-	print (texto)
