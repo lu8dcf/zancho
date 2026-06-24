@@ -366,7 +366,7 @@ _data = {
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 script = ExtResource("2_8vo1n")
 
-[node name="Skeleton3D" parent="Esqueleto_007" parent_id_path=PackedInt32Array(900638445) index="0" unique_id=1077483599]
+[node name="Skeleton3D" parent="Esqueleto_007" parent_id_path=PackedInt32Array(572766305) index="0" unique_id=63431016]
 bones/5/rotation = Quaternion(-2.4584276e-07, 2.252332e-08, 0.88017213, -0.47465464)
 bones/8/rotation = Quaternion(9.72772e-09, 9.9366844e-08, -0.070417985, 0.9975176)
 bones/12/rotation = Quaternion(0.45190424, -0.4840048, 0.5092386, 0.54972535)
@@ -418,8 +418,8 @@ emission_sphere_radius = 0.05
 gravity = Vector3(0, 6.21, 0)
 scale_amount_curve = SubResource("Curve_30d8y")
 
-[node name="Círculo_039" parent="Esqueleto_007/Skeleton3D" index="1" unique_id=1445612946]
+[node name="Círculo_039" parent="Esqueleto_007/Skeleton3D" index="1" unique_id=79527421]
 material_override = ExtResource("2_4oolc")
 
-[node name="AnimationPlayer" parent="." index="1" unique_id=2121065175]
+[node name="AnimationPlayer" parent="." index="1" unique_id=1879940412]
 libraries/ = SubResource("AnimationLibrary_ya1pv")
