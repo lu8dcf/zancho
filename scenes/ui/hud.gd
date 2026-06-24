@@ -33,7 +33,7 @@ var tween: Tween
 
 func _ready():
 	mostrar_todos_paneles()
-	if GlobalJuego.debug:
+	if GlobalJuego.debug == true:
 		label_debug_temporal.text = "Debug: " + str(GlobalJuego.debug)
 	else:
 		label_debug_temporal.visible = false

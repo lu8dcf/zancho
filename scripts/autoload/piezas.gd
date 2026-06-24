@@ -15,7 +15,6 @@ var material_malo = "res://assets/modelos/texturas/material_malos.tres"
 
 var color_piezas = true # por defecto es true
 
-
 var material_muerte ="res://assets/modelos/texturas/material_muerte.tres"
 
 # las piezas que estan activas en la partida
@@ -181,6 +180,7 @@ func colocar_pieza_en_posicion(posicion: Vector2i) -> bool:
 		# cancelar modo colocación
 		cancelar_modo_colocacion()
 		return true
+	
 
 
 func contar_piezas_blancas() -> int:

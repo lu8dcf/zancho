@@ -335,10 +335,11 @@ anchors_preset = -1
 anchor_top = -0.279
 anchor_right = 0.5
 anchor_bottom = 0.95500004
-offset_left = 5.0
-offset_top = -0.055999756
-offset_right = 7.0
-offset_bottom = -107.880005
+offset_left = 3.0
+offset_top = -2.0559998
+offset_right = 5.0
+offset_bottom = -109.880005
+rotation = -0.08353847
 texture = ExtResource("31_sj4ew")
 expand_mode = 1
 

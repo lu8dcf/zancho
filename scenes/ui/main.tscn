@@ -272,7 +272,6 @@ grow_vertical = 2
 text = "Opciones"
 
 [node name="play" type="MenuBar" parent="." unique_id=1867162247]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3250868
@@ -341,6 +340,7 @@ grow_horizontal = 2
 text = "Nueva Partida"
 
 [node name="continuar" parent="play" unique_id=287634726 instance=ExtResource("11_txqnm")]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.047000002
@@ -366,7 +366,6 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="opciones" type="MenuBar" parent="." unique_id=1414264697]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3250868
@@ -989,7 +988,6 @@ label_settings = ExtResource("4_jvuow")
 horizontal_alignment = 1
 
 [node name="controles_menu" type="MenuBar" parent="opciones" unique_id=1123123891]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3250868
@@ -1730,6 +1728,41 @@ popup/item_0/id = 0
 popup/item_1/text = "Negras"
 popup/item_1/id = 1
 
+[node name="tamanio_mouse" type="Label" parent="opciones/accesibilidad_menu" unique_id=1689431688]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -12.982994
+anchor_top = 0.60932565
+anchor_right = -12.982994
+anchor_bottom = 0.60932565
+offset_left = 144.0
+offset_right = 302.0
+offset_bottom = 52.0
+text = "Tamaño Puntero"
+label_settings = ExtResource("4_jvuow")
+metadata/_edit_use_anchors_ = true
+
+[node name="tamanio" type="OptionButton" parent="opciones/accesibilidad_menu/tamanio_mouse" unique_id=2099395626]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.633
+anchor_bottom = 0.38500002
+offset_left = 231.0
+offset_top = 11.0
+offset_right = 230.986
+offset_bottom = 29.98
+theme = SubResource("Theme_o14an")
+selected = 0
+item_count = 4
+popup/item_0/text = "Chico"
+popup/item_0/id = 0
+popup/item_1/text = "Nomal"
+popup/item_1/id = 1
+popup/item_2/text = "Grande"
+popup/item_2/id = 2
+popup/item_3/text = "Muy Grande"
+popup/item_3/id = 3
+
 [node name="guardar" parent="opciones/accesibilidad_menu" unique_id=1934532811 instance=ExtResource("11_txqnm")]
 layout_mode = 0
 offset_left = -578.3563
@@ -1920,6 +1953,7 @@ grow_vertical = 2
 text = "Rechazar"
 
 [node name="creditos" type="TextureRect" parent="." unique_id=1890905457]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -10.534121
@@ -2015,11 +2049,13 @@ vertical_alignment = 1
 [connection signal="pressed" from="opciones/video_menu/restablecer" to="opciones/video_menu" method="_on_restablecer_pressed"]
 [connection signal="pressed" from="opciones/sonido_menu/guardar" to="opciones/sonido_menu" method="_on_guardar_pressed"]
 [connection signal="pressed" from="opciones/sonido_menu/restablecer" to="opciones/sonido_menu" method="_on_restablecer_pressed"]
+[connection signal="pressed" from="opciones/controles_menu/boton_camara" to="opciones/controles_menu" method="_on_boton_camara_pressed"]
 [connection signal="pressed" from="opciones/controles_menu/boton_jugabilidad" to="opciones/controles_menu" method="_on_boton_jugabilidad_pressed"]
 [connection signal="pressed" from="opciones/controles_menu/guardar" to="opciones/controles_menu/boton_camara/controles_camara" method="_on_guardar_pressed"]
 [connection signal="mouse_entered" from="opciones/accesibilidad_menu/multi/CheckButton" to="opciones/accesibilidad_menu" method="_on_check_button_mouse_entered"]
 [connection signal="pressed" from="opciones/accesibilidad_menu/multi/CheckButton" to="opciones/accesibilidad_menu" method="_on_check_button_pressed"]
 [connection signal="item_selected" from="opciones/accesibilidad_menu/color_piezas/option_color" to="opciones/accesibilidad_menu" method="_on_option_color_item_selected"]
+[connection signal="item_selected" from="opciones/accesibilidad_menu/tamanio_mouse/tamanio" to="opciones/accesibilidad_menu" method="_on_tamanio_item_selected"]
 [connection signal="pressed" from="opciones/accesibilidad_menu/guardar" to="opciones/accesibilidad_menu" method="_on_guardar_pressed"]
 [connection signal="pressed" from="opciones/accesibilidad_menu/restablecer" to="opciones/accesibilidad_menu" method="_on_restablecer_pressed"]
 [connection signal="pressed" from="recompensa/imagen_recompensa" to="recompensa" method="_on_imagen_recompensa_pressed"]
