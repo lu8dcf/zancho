@@ -1,4 +1,1 @@
-Zancho  - Tower defense - Supervivencia
-primer cambio
-
-este cambio en un stage
+Gambito de Zancho  - Tower defense - Supervivencia
