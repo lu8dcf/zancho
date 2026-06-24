@@ -485,7 +485,6 @@ label_settings = ExtResource("4_jvuow")
 metadata/_edit_use_anchors_ = true
 
 [node name="video_menu" type="MenuBar" parent="opciones" unique_id=689834738]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3250868
@@ -651,6 +650,39 @@ popup/item_1/id = 1
 popup/item_2/text = "2560 x 1440"
 popup/item_2/id = 2
 
+[node name="graficos" type="Label" parent="opciones/video_menu" unique_id=1875482494]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -12.982994
+anchor_top = 0.60932565
+anchor_right = -12.982994
+anchor_bottom = 0.60932565
+offset_left = 144.0
+offset_right = 302.0
+offset_bottom = 52.0
+text = "Gráficos"
+label_settings = ExtResource("4_jvuow")
+metadata/_edit_use_anchors_ = true
+
+[node name="graficos_lista" type="OptionButton" parent="opciones/video_menu/graficos" unique_id=1662480716]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 9.0
+offset_right = 388.0
+offset_bottom = 52.0
+theme_override_fonts/font = ExtResource("21_txqnm")
+theme_override_font_sizes/font_size = 20
+selected = 0
+item_count = 4
+popup/item_0/text = "Baja"
+popup/item_0/id = 0
+popup/item_1/text = "Media"
+popup/item_1/id = 1
+popup/item_2/text = "Alta sin bordes"
+popup/item_2/id = 2
+popup/item_3/text = "Ultra"
+popup/item_3/id = 3
+
 [node name="guardar" parent="opciones/video_menu" unique_id=1607816087 instance=ExtResource("11_txqnm")]
 layout_mode = 0
 offset_left = -578.3563
@@ -686,6 +718,7 @@ label_settings = ExtResource("4_jvuow")
 horizontal_alignment = 1
 
 [node name="sonido_menu" type="MenuBar" parent="opciones" unique_id=1538344803]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3250868

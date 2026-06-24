@@ -28,13 +28,13 @@ buses/default_bus_layout="uid://bvc55uhqxn66k"
 
 [autoload]
 
-globalJuego="uid://ddgt0astfx6o4"
 economia="*uid://bx3m3e00xreoa"
 mapas="*uid://cx3yodnfc5g1l"
 Sonidos="*uid://13ju4at2w07"
 Piezas="*uid://xy2bf4ofjrkl"
 GlobalSignal="*uid://d3c860m45uhol"
 GlobalJuego="*uid://ddgt0astfx6o4"
+LoadManager="*uid://csr0nfrim7k7u"
 
 [display]
 
