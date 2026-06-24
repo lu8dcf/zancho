@@ -31,7 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://c0n3huhvgy1ef" path="res://assets/ui/vida2.png" id="18_vuvg6"]
 [ext_resource type="Texture2D" uid="uid://bn52rgat260xi" path="res://assets/ui/avance2_pressed.png" id="19_83uk5"]
 [ext_resource type="Texture2D" uid="uid://dm4kdhgy7vn00" path="res://assets/ui/vida1.png" id="19_b6swc"]
-[ext_resource type="Script" uid="uid://b84j1w32cqx6n" path="res://scenes/ui/components/boton_tiempo_ui.gd" id="20_04enw"]
+[ext_resource type="Script" path="res://scenes/ui/components/boton_tiempo_ui.gd" id="20_04enw"]
 [ext_resource type="PackedScene" uid="uid://dw6tl6131xrlf" path="res://scenes/ui/components/label_grande.tscn" id="21_rvhgw"]
 [ext_resource type="Texture2D" uid="uid://4nx0iqswboev" path="res://assets/ui/boton_carrito_idle.png" id="22_b6swc"]
 [ext_resource type="Texture2D" uid="uid://b2ha5rnk3mmjb" path="res://assets/ui/boton_carrito_hover.png" id="23_27rlx"]

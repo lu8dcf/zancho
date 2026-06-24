@@ -8,7 +8,7 @@
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 script = ExtResource("2_bv000")
 
-[node name="Skeleton3D" parent="Esqueleto" parent_id_path=PackedInt32Array(2042854757) index="0" unique_id=1366642280]
+[node name="Skeleton3D" parent="Esqueleto" parent_id_path=PackedInt32Array(1285844143) index="0" unique_id=1117451481]
 bones/0/rotation = Quaternion(-0.60411423, 0.08799201, 0.046674974, 0.7906485)
 bones/1/rotation = Quaternion(-0.25073043, -0.029598886, 0.18282712, 0.950175)
 bones/2/rotation = Quaternion(-0.043606643, -0.13008691, 0.4106107, 0.90142924)
@@ -21,5 +21,5 @@ bones/6/rotation = Quaternion(0.5594364, -0.5594363, -0.43247083, -0.4324708)
 bones/7/rotation = Quaternion(-0.050878987, 0.7399106, 0.6684097, 0.056320842)
 bones/8/rotation = Quaternion(-0.24580236, 0.14098646, -0.5710262, 0.77047586)
 
-[node name="Círculo_001" parent="Esqueleto/Skeleton3D" index="0" unique_id=406548774]
+[node name="Círculo_001" parent="Esqueleto/Skeleton3D" index="0" unique_id=902825219]
 material_override = ExtResource("2_p7u6r")
