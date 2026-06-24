@@ -74,53 +74,7 @@ func dar_paso():
 	if paso==len(secuencia): paso=1
 	cambio_estado(paso)
 	#
-#func saltar_paso(): # volver a iniciar en otra posicion d esalto
-	#buscar_siguiente_valido()  	
-	#
-#func buscar_siguiente_valido():
-	#for offset in range(1, len(secuencia) + 1):
-#
-		#var indice = (paso + offset) % len(secuencia)
-#
-		#cambio_estado(indice)
-#
-		#var cambio = direccion * GlobalJuego.espaciado_baldosas
-		#var valido = owner.verificar_proximo_paso(cambio)
-		#if (owner.verificar_proximo_paso(cambio)):
-			#if (owner.verificar_reservadas(cambio)):
-				#print("caballo_casillaReserbada", cambio)
-#
-			#paso = indice
-#
-			#realizar_salto_parabolico(cambio)
-#
-			##dar_paso()
-#
-			#return
-#
-	#print("No hay movimientos válidos")
-	#
 
-	
-#func movimiento():
-	#if esta_saltando:
-		#print("El caballo ya está saltando, esperando...")
-		#return
-	#esValida = false
-	## Calcular paso actual
-	#paso += 1
-	#if paso == len(secuencia):
-		#paso = 1
-	#cambio_estado(paso)
-	#
-	## Verificar si el movimiento en L es válido
-	#var cambio = direccion * GlobalJuego.espaciado_baldosas
-	#
-	#if owner.verificar_proximo_paso(cambio):
-		#esValida = true
-		#realizar_salto_parabolico(cambio)
-	#else:
-		#saltar_pasos()
 
 	
 func realizar_salto_parabolico(cambio: Vector3):
@@ -151,6 +105,7 @@ func realizar_salto_parabolico(cambio: Vector3):
 	
 	# Esperar a que termine el salto
 	await tween_actual.finished
+	owner.Sonido("caida_caballo")
 	esta_saltando = false
 
 # Método para movimiento horizontal (lineal)
