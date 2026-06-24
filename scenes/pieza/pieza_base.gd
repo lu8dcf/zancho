@@ -185,7 +185,7 @@ func verificar_proximo_paso(cambio):
 		return false
 	if (!GlobalJuego.verifica_piezas_blanca(nuevo_sitio)):
 		return false
-	if (!GlobalJuego.verifica_piezas_negras(nuevo_sitio)):
+	if (!GlobalJuego.verifica_piezas_negra(nuevo_sitio)):
 		return false
 	return true
 	
