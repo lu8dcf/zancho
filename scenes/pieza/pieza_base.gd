@@ -161,7 +161,7 @@ func _on_body_entered(_body): #cuando la pieza se instancia y cae
 	if pieza_colocada : return # solo se ejecuta en el inicio
 	# este if es para que solo tenga un efecto de sonido cuando rebota 
 	create_dust_effect()# Efecto de polvo
-	Sonidos.impacto()# Sonido de golpe
+	Sonidos.sonar_sfx("caida")# Sonido de golpe
 	pieza_colocada=true # que no vuelva a generar el sonido de caida
 	
 func create_dust_effect(): # Particulas al pegar con el tablero
@@ -185,8 +185,10 @@ func verificar_proximo_paso(cambio):
 		return false
 	if (!GlobalJuego.verifica_piezas_blanca(nuevo_sitio)):
 		return false
+	if (!GlobalJuego.verifica_piezas_negras(nuevo_sitio)):
+		return false
 	return true
-	#return false
+	
 	
 func verificar_reservadas(cambio): #verifica y reserva
 	#var sitio3d = round(Vector3(pieza_sitio.x,0,pieza_sitio.y) + Vector3(cambio))# en 3d
