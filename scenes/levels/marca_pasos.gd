@@ -28,7 +28,9 @@ func control(activa):
 	
 	if activa:
 		start()
-		
+		if GlobalJuego.ataque_en_proceso:
+			return
+		GlobalSignal.marcaPaso.emit() # Señal que marcara a las piezas ejecucion del paso
 	else:
 		stop()
 		
@@ -38,5 +40,5 @@ func multiplicador(multi):
 	#wait_time = GlobalJuego.tiempo_pasos / multi
 
 
-	var escala = float(multi) * 0.5  # 1=1.0 (100%), 2=1.5 (150%), ..., 5=4.0 (400%)
+	var escala = float(multi) * 0.75  # 1=1.0 (100%), 2=1.5 (150%), ..., 5=4.0 (400%)
 	Engine.time_scale = escala
