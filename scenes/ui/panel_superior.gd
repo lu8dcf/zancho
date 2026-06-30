@@ -181,10 +181,12 @@ func _on_boton_play_pressed() -> void:
 
 func _on_boton_acelerar_1_pressed() -> void:
 	GlobalSignal.emit_signal("aceleraMarcaPaso",3)
+	GlobalSignal.emit_signal("controlMarcaPaso",true)
 	GlobalJuego.juego_pausa = false
 
 func _on_boton_acelerar_2_pressed() -> void:
 	GlobalSignal.emit_signal("aceleraMarcaPaso",5)
+	GlobalSignal.emit_signal("controlMarcaPaso",true)
 	GlobalJuego.juego_pausa = false
 	
 
