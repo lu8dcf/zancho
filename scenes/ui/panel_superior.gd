@@ -169,9 +169,9 @@ func _on_empezar_oleada_pressed() -> void:
 
 # botones de velocidad y pausa
 func _on_boton_pausar_pressed() -> void:
-	GlobalSignal.emit_signal("aceleraMarcaPaso",1)
+	#GlobalSignal.emit_signal("aceleraMarcaPaso",3)
 	GlobalSignal.emit_signal("controlMarcaPaso",false)
-	GlobalJuego.juego_pausa = true
+	GlobalJuego.juego_pausa = true  # Essto es para indicar que pare todo
 	
 
 func _on_boton_play_pressed() -> void:
