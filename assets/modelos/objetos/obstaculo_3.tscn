@@ -5,8 +5,8 @@
 
 [node name="obstaculo3" unique_id=48103314 instance=ExtResource("1_87ahx")]
 
-[node name="2" parent="." index="0" unique_id=39425257]
+[node name="2" parent="." index="0" unique_id=1646526986]
 material_override = ExtResource("2_d687r")
 
-[node name="2_001" parent="." index="1" unique_id=919204654]
+[node name="2_001" parent="." index="1" unique_id=1182925532]
 material_override = ExtResource("2_d687r")

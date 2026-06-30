@@ -202,7 +202,7 @@ colors = PackedColorArray(0.6958451, 0, 0.11442316, 1, 0.49802244, 0.21613488, 0
 [node name="pieza3B" unique_id=234914527 instance=ExtResource("1_m5kwi")]
 script = ExtResource("2_apso4")
 
-[node name="Skeleton3D" parent="Esqueleto_004" parent_id_path=PackedInt32Array(783766016) index="0" unique_id=1380425107]
+[node name="Skeleton3D" parent="Esqueleto_004" parent_id_path=PackedInt32Array(1827726085) index="0" unique_id=476667995]
 bones/0/position = Vector3(-4.750755e-07, 0.2687618, 2.4066373e-17)
 bones/0/rotation = Quaternion(1.1424234e-08, -5.555391e-08, 0.052125167, 0.99864054)
 bones/1/rotation = Quaternion(-3.4197438e-08, 4.0005858e-08, -0.74300355, 0.6692875)
@@ -211,11 +211,11 @@ bones/4/rotation = Quaternion(0.7052909, 0.702716, -0.055124115, 0.07560643)
 bones/5/rotation = Quaternion(0.7052909, 0.702716, -0.0551241, 0.07560643)
 bones/6/rotation = Quaternion(0.7052909, 0.702716, -0.0551241, 0.07560643)
 
-[node name="Círculo_003" parent="Esqueleto_004/Skeleton3D" index="0" unique_id=1738414091]
+[node name="Círculo_003" parent="Esqueleto_004/Skeleton3D" index="0" unique_id=1907618394]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 material_override = ExtResource("2_83a24")
 
-[node name="AnimationPlayer" parent="." index="1" unique_id=844425029]
+[node name="AnimationPlayer" parent="." index="1" unique_id=131197982]
 libraries/ = SubResource("AnimationLibrary_83a24")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="AnimationPlayer" index="0" unique_id=1894834540]

@@ -29,7 +29,7 @@ func _on_timer_timeout():
 	if GlobalJuego.juego_pausa:
 		return
 	if murio: # evita que siga atacando la pieza muerta
-		print ("murio")
+		#print ("murio")
 		return
 	# poner el potenciador de daño
 	if turno:

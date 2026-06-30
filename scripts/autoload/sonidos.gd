@@ -58,7 +58,8 @@ func menu(activar: bool):
 			music_player.stream = preload("res://assets/audio/music/TheTrueStoryofBeelzebub.ogg")
 			add_child(music_player)
 			
-			var volumen_objetivo = -20
+
+			var volumen_objetivo = -20.0
 			music_player.volume_db = -80.0
 			music_player.play()
 			
