@@ -43,11 +43,8 @@ func colocar_pieza(sitio: Vector2i, tipo: int , pieza_blanca: bool):
 	add_child(nueva_pieza)
 	
 	nueva_pieza.global_position = sitio3d
-	
-	
-		
-	
-	#print ((Piezas.pieza_activa[id].global_position)/GlobalJuego.espaciado_baldosas)
+				
+	GlobalSignal.piezaCreada.emit(tipo) # envia la señal de confirmacion d ecreacion
 	id += 1 # incrementador de nuemro de pieza
 	
 	
