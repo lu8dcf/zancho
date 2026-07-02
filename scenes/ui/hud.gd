@@ -31,6 +31,10 @@ var max_mensajes: int = 50
 
 var tween: Tween
 
+var mouse_sobre_hud: bool = false
+
+
+
 func _ready():
 	mostrar_todos_paneles()
 	if GlobalJuego.debug == true:
@@ -46,7 +50,50 @@ func _ready():
 	GlobalSignal.mensaje_tienda.connect(mensaje_tienda_log)
 	GlobalSignal.finAtaque.connect(mensaje_muerte_log)
 	Piezas.pieza_colocada.connect(mensaje_colocacion_log)
+	conectar_señales_mouse(self)
 
+
+func conectar_señales_mouse(node: Node):
+	if node is Control:
+		if not node.is_connected("mouse_entered", _on_hud_mouse_entered):
+			node.mouse_entered.connect(_on_hud_mouse_entered)
+		if not node.is_connected("mouse_exited", _on_hud_mouse_exited):
+			node.mouse_exited.connect(_on_hud_mouse_exited)
+	
+	for child in node.get_children():
+		conectar_señales_mouse(child)
+
+# avisar del hud a cursores que elmouse entro o salio
+func _on_hud_mouse_entered():
+	mouse_sobre_hud = true
+	if has_node("/root/Cursores"):
+		get_node("/root/Cursores").set_mouse_over_ui(true)
+	else:
+		print("ERROR No se encuentra cursoresss")
+
+func _on_hud_mouse_exited():
+	await get_tree().create_timer(0.05).timeout
+	if not is_mouse_inside_hud():
+		mouse_sobre_hud = false
+		
+		if has_node("/root/Cursores"):
+			get_node("/root/Cursores").set_mouse_over_ui(false)
+
+func is_mouse_inside_hud() -> bool:
+	var mouse_pos = get_viewport().get_mouse_position()
+	return _check_mouse_in_node(self, mouse_pos)
+
+func _check_mouse_in_node(node: Node, mouse_pos: Vector2) -> bool:
+	if node is Control and node.is_visible_in_tree():
+		if node.get_global_rect().has_point(mouse_pos):
+			return true
+	
+	for child in node.get_children():
+		if _check_mouse_in_node(child, mouse_pos):
+			return true
+	
+	return false
+	
 func mostrar_todos_paneles():
 	panel_inferior.visible = true
 	panel_superior.visible = true

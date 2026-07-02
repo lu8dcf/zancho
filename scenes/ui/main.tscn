@@ -107,7 +107,7 @@ _data = {
 &"creditos": SubResource("Animation_x7mgp")
 }
 
-[node name="main" type="Control" unique_id=1651978815]
+[node name="main" type="Control" unique_id=1651978815 groups=["ui"]]
 layout_mode = 3
 anchor_right = 2.0
 anchor_bottom = 2.0
@@ -1798,7 +1798,6 @@ label_settings = ExtResource("4_jvuow")
 horizontal_alignment = 1
 
 [node name="recompensa" type="Control" parent="." unique_id=455167008]
-visible = false
 layout_mode = 1
 anchor_left = 0.014
 anchor_top = 0.019000001

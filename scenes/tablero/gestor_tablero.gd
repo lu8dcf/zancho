@@ -72,7 +72,7 @@ func conectar_señales_baldosas():
 			baldosa.mostrar_ataques.connect(_on_mostrar_ataques)
 
 func _on_mostrar_ataques(coordenadas_base: Vector2i, ataques: Array, mostrar: bool):
-	if mostrar:
+	if mostrar and !Piezas.modo_colocacion:
 		_resaltar_casillas_ataque(coordenadas_base, ataques)
 	else:
 		_limpiar_resaltado_ataque()

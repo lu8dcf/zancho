@@ -26,6 +26,8 @@ func _process(delta):
 		brillo.scale = Vector2.ONE * brillo_scale
 
 		brillo.modulate.a = 0.8 + sin(tiempo * 2.0) * 0.2
+	if economia.recompensa:
+		self.visible = false
 
 func iniciar_animacion_recompensa():
 	while animar:
@@ -86,14 +88,17 @@ func _on_imagen_recompensa_pressed() -> void:
 	opciones.visible = false
 	play.visible = false
 	
+	
 
 
 func _on_continuar_pressed() -> void:
 	
 	Sonidos.claim()
 	economia.añadir_monedas(500)
-	
+	economia.recompensa = true
 	recompensa.visible = false	
 
 func _on_rechazar_pressed() -> void:
-	recompensa.visible = false	
+	economia.recompensa = true
+	recompensa.visible = false
+	

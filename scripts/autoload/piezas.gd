@@ -148,9 +148,14 @@ func cancelar_modo_colocacion() -> void:
 	modo_colocacion_cancelado.emit()
 	cancelando_modo = false
 
+
 func colocar_pieza_en_posicion(posicion: Vector2i) -> bool:
 	if not modo_colocacion:
 		return false
+		
+	if Cursores.is_mouse_over_ui():
+		return false
+		
 	if GlobalJuego.empezo_oleada:
 		cancelar_modo_colocacion()
 		return false

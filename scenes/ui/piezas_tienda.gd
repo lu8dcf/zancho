@@ -6,8 +6,8 @@ extends Panel
 @onready var compra: TextureButton = $compra
 
 @onready var bloqueos: TextureButton = $bloqueos
+@onready var panel_tienda: Panel = $"../../.."
 
-var candado_abierto = load("res://assets/ui/candado_abierto.png")
 var candado_cerrado = load("res://assets/ui/candado_cerrado.png")
 var sin_plata  = load("res://assets/ui/moneda.png")
 
@@ -25,7 +25,9 @@ func _ready() -> void:
 
 	bloqueos.visible = false
 	actualizar_pieza()
-	
+	economia.connect("monedas_cambiadas", actualizar_pieza)
+	GlobalJuego.connect("oleada_cambiada", actualizar_pieza)
+
 	hover.visible =false
 
 
@@ -51,27 +53,33 @@ func actualizar_pieza(_nada=0):
 	var nombre_pieza  = name  # esto devolverá "Peon"
 	var datos = economia.obtener_datos_pieza(nombre_pieza)
 	
-	# Si no hay datos, deshabilitar todo
+	# si no hay datos, deshabilitar todo
 	if datos.is_empty():
-		deshabilitar_todo("Error")
+		deshabilitar_todo()
+		print("error no hay datos")
 		return
 	
-	# Si la oleada empezó, bloquear todo
+	# si la oleada empezó, bloquear todo
+	
 	if GlobalJuego.empezo_oleada:
 		deshabilitar_todo_cerrado()
+		panel_tienda._ocultar_tienda()
 		return
-	
-	# Verificar si no hay suficientes monedas
-	if economia.monedas_actual < datos["precio"]:
+		
+	# bloquear si no estan habilitados aun segun su orden de aparición
+	if economia.verificar_orden_aparicion(nombre_pieza) and !GlobalJuego.debug:
+		deshabilitar_todo_cerrado()
+		return
+	elif economia.monedas_actual < datos["precio"]:
+		 # Verificar si no hay suficientes monedas
 		bloqueos.visible = true
 		bloqueos.texture_normal = sin_plata
 		pieza.disabled = true
 		venta.disabled = inventario_vacio(nombre_pieza)
 		compra.disabled = true
 		return
-	
-	# Verificar si llegó al límite
-	if economia.llego_al_limite(nombre_pieza):
+		
+	elif economia.llego_al_limite(nombre_pieza): # Verificar si llegó al límite
 		bloqueos.visible = true
 		bloqueos.texture_normal = null
 		bloqueos.cambiar_texto("MAX")
@@ -80,27 +88,20 @@ func actualizar_pieza(_nada=0):
 		compra.disabled = true
 		return
 	
-	# Verificar orden de aparición
-	if economia.verificar_orden_aparicion(nombre_pieza) and !GlobalJuego.debug:
-		deshabilitar_todo_cerrado()
-		return
-	
 	# Todo bien, habilitar
 	bloqueos.visible = true
-	bloqueos.texture_normal = candado_abierto
+	bloqueos.cambiar_texto("")
 	bloqueos.texture_normal = null
 	pieza.disabled = false
 	venta.disabled = inventario_vacio(nombre_pieza)
 	compra.disabled = false
 
-func deshabilitar_todo(mensaje: String = ""):
+func deshabilitar_todo():
 	pieza.disabled = true
 	venta.disabled = true
 	compra.disabled = true
 	bloqueos.visible = true
-	if mensaje:
-		bloqueos.texture_normal = null
-		bloqueos.cambiar_texto(mensaje)
+	
 
 func deshabilitar_todo_cerrado():
 	pieza.disabled = true
@@ -113,7 +114,6 @@ func inventario_vacio(nombre_pieza: String) -> bool:
 	return economia.inventario_actual.get(nombre_pieza, 0) <= 0
 
 func _on_pieza_mouse_entered() -> void:
-	actualizar_pieza()
 	hover.visible = true
 
 func _on_pieza_mouse_exited() -> void:
