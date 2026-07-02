@@ -28,7 +28,7 @@ func _ready():
 	GlobalSignal.punteroReina.connect(_on_puntero_reina)
 	
 func generar_tablero():
-	# Limpiar tablero existente
+	# limpiar tablero
 	for hijo in get_children():
 		if hijo is BaldosaBase:
 			hijo.queue_free()
@@ -148,6 +148,8 @@ func obtener_punto_colocacion_pieza(coordenadas: Vector2i) -> Vector3:
 
 func mostrar_oleada_actual(gano):
 	GlobalSignal.emit_signal("aceleraMarcaPaso",2)
+	_limpiar_seleccion_reina()
+	_limpiar_resaltado_ataque()
 	#GlobalSignal.emit_signal("controlMarcaPaso",true)
 	if gano:
 		await get_tree().create_timer(2.0).timeout
