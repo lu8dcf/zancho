@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b5d4fv4f6o5iw" path="res://assets/modelos/entorno_completo.glb" id="1_ewjn0"]
 [ext_resource type="Material" uid="uid://bg70lqvwct7ri" path="res://assets/modelos/texturas/material_entorno.tres" id="2_kbdlx"]
-[ext_resource type="Script" path="res://assets/modelos/entorno/entorno_completo.gd" id="2_rfulq"]
+[ext_resource type="Script" uid="uid://bp6pijs0eo7ox" path="res://assets/modelos/entorno/entorno_completo.gd" id="2_rfulq"]
 [ext_resource type="Script" uid="uid://crso8b6lp4s7b" path="res://assets/modelos/entorno/sonidos.gd" id="3_7uxme"]
 [ext_resource type="Texture2D" uid="uid://duvdwtvy7ouds" path="res://assets/modelos/entorno_completo_tejas.png" id="3_kbdlx"]
 [ext_resource type="Script" uid="uid://c1rjkia73bjsv" path="res://assets/modelos/entorno/sonido_taberna.gd" id="3_qsq01"]
@@ -89,8 +89,8 @@ max_distance = 20.0
 area_mask = 6
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." index="3" unique_id=1060672532]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 16
+collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0" unique_id=66790536]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0003426075, 0.086827524, -0.0012199879)
@@ -103,16 +103,16 @@ shape = SubResource("ConcavePolygonShape3D_rfulq")
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D" index="2" unique_id=1619127467]
 shape = SubResource("ConcavePolygonShape3D_7uxme")
 
-[node name="Cubo_009" parent="." index="5" unique_id=1696765900]
+[node name="Cubo_009" parent="." index="5" unique_id=204780355]
 material_override = ExtResource("2_kbdlx")
 
-[node name="estatua" parent="." index="6" unique_id=1707525703]
+[node name="estatua" parent="." index="6" unique_id=1426829991]
 material_override = SubResource("StandardMaterial3D_w00ve")
 
-[node name="tejas" parent="." index="8" unique_id=1189035234]
+[node name="tejas" parent="." index="8" unique_id=679454366]
 material_override = SubResource("StandardMaterial3D_3dm3b")
 
-[node name="Cubo_014" parent="." index="9" unique_id=2086278557]
+[node name="Cubo_014" parent="." index="9" unique_id=2024551933]
 material_override = SubResource("StandardMaterial3D_rfulq")
 
 [node name="Coliciones" type="MeshInstance3D" parent="." index="10" unique_id=1864908145]
