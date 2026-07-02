@@ -50,6 +50,10 @@ folder_colors={
 "res://scripts/": "purple"
 }
 
+[global_group]
+
+ui=""
+
 [input]
 
 ui_left={

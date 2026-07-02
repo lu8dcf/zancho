@@ -29,8 +29,6 @@ func _on_modo_colocacion_iniciado(tipo: int, _nombre: String):
 	visible = true
 	set_process(true)
 	
-	
-		
 func _on_modo_colocacion_cancelado():
 	visible = false
 	set_process(false)
@@ -63,17 +61,20 @@ func _limpiar_modelo():
 func _process(delta):
 	if not visible or not camara:
 		return
-	
+	if Cursores.is_mouse_over_ui():
+		return
+		
 	var baldosa = _obtener_baldosa()
 	if baldosa:
 		global_position = baldosa.obtener_punto_colocacion() + Vector3(0, altura_flotante, 0)
 		modelo_3d.rotate_y(delta * 2.0)
 		baldosa_actual = baldosa
 	
+
 func _obtener_baldosa() -> BaldosaBase:
 	if not camara or not gestor_tablero:
 		return null
-	
+		
 	var mouse_pos = get_viewport().get_mouse_position()
 	var origen = camara.project_ray_origin(mouse_pos)
 	var direccion = camara.project_ray_normal(mouse_pos)
@@ -82,7 +83,7 @@ func _obtener_baldosa() -> BaldosaBase:
 	var espacio = get_world_3d().direct_space_state
 	var query = PhysicsRayQueryParameters3D.new()
 	query.from = origen
-	query.to = origen + direccion * 1000.0
+	query.to = origen + direccion * 10000.0
 	query.collision_mask = 1  # Asegúrate de que las baldosas estén en capa 1
 	query.collide_with_areas = true
 	query.collide_with_bodies = true
@@ -91,7 +92,6 @@ func _obtener_baldosa() -> BaldosaBase:
 	
 	if resultado:
 		var collider = resultado.collider
-		# Buscar la baldosa (puede estar en el Area3D o en el padre)
 		if collider is Area3D:
 			var padre = collider.get_parent()
 			if padre is BaldosaBase:

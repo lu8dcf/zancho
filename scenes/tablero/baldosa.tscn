@@ -48,7 +48,7 @@ visible = false
 mesh = SubResource("PlaneMesh_ebrun")
 
 [node name="seleccionnaranja" parent="IndicadorSeleccion" unique_id=406961197 instance=ExtResource("4_lwq43")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.8540375, 0)
+transform = Transform3D(1.03, 0, 0, 0, 1.03, 0, 0, 0, 1.03, 0, -2.8540375, 0)
 
 [node name="seleccionroja" parent="IndicadorSeleccion" unique_id=1531857071 instance=ExtResource("4_e5ivh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.861033, 0)

@@ -212,30 +212,11 @@ func _on_pieza_colocada(_tipo:int, posicion:Vector2i):
 		_ocultar_indicadores_colocacion()
 		seleccionar(false)
 		
-#
-#func _al_evento_input(camara, evento, posicion_click, normal_click, indice_forma):
-	#print("Evento recibido en baldosa: ", coordenadas_tablero, " - Tipo: ", evento)
-#
-	#if evento is InputEventMouseButton:
-		#if evento.button_index == MOUSE_BUTTON_LEFT and evento.pressed:
-			#print("tratar de colocar: ", es_valido_colocar)
-			#if modo_colocacion_activo:
-				#if es_valido_colocar:
-					#_intentar_colocar_pieza()
-			#else:
-				#baldosa_presionada.emit(self)
-		#elif evento.button_index == MOUSE_BUTTON_RIGHT and evento.pressed:
-			#if modo_colocacion_activo:
-				#Piezas.cancelar_modo_colocacion()
-			#else:
-				#baldosa_click_derecho.emit(self)
-			#
 func _intentar_colocar_pieza():
 	if Piezas.colocar_pieza_en_posicion(coordenadas_tablero):
 		esta_ocupada = true
 		
-	else:
-		print("Error al colocar pieza")
+
 
 func obtener_punto_colocacion() -> Vector3:
 	return position + Vector3(0, 0.2, 0)  # Altura ajustable según el modelo

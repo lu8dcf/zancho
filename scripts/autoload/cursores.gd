@@ -13,7 +13,15 @@ var texturas_escaladas: Dictionary = {}
 var cursor_temporal_activo: bool = false
 var temporizador_cursor: Timer = null
 
+# para detectar el mouse en el hud
+var mouse_sobre_ui: bool = false
 
+func set_mouse_over_ui(estado: bool):
+	mouse_sobre_ui = estado
+
+func is_mouse_over_ui() -> bool:
+	return mouse_sobre_ui
+	
 func _ready():
 	temporizador_cursor = Timer.new()
 	temporizador_cursor.one_shot = true

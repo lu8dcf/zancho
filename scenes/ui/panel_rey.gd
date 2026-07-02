@@ -27,4 +27,4 @@ func _actualizar_fe(fe_nueva):
 		tween_corona.kill()
 	
 	tween_corona = create_tween()
-	tween_corona.tween_property(corona, "position:y", nueva_pos_y, 0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween_corona.tween_property(corona, "position:y", nueva_pos_y, 0.3).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)

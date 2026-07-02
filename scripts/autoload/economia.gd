@@ -7,6 +7,8 @@ var inventario_actual: Dictionary = {}
 var piezas_colocadas: Dictionary = {}
 var piezas_vivas: Array = []
 
+var recompensa = false
+
 var datos_piezas = {
 	"Peon": {
 		"precio": 100,
@@ -68,6 +70,7 @@ func reiniciar_variables():
 	else:
 		monedas_actual = 1200 
 	monedas_antes_oleada  = 0
+	recompensa = false
 	
 	# inicializar los diccionarios
 	inicializar_diccionarios()
@@ -317,9 +320,7 @@ func _agregar_pieza_cambiada(tipo:int):
 		if i == nombre:
 			inventario_actual[i]+=1
 		economia.emit_signal("inventario_actualizado")
-			
-	
-	
+
 	
 # funcion para obtener los datos de las piezas
 func obtener_datos_pieza(nombre: String) -> Dictionary:

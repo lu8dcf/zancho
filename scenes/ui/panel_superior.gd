@@ -120,6 +120,8 @@ func finaliza_oleada(_valor):
 	desaparecer_botones_velocidades()
 
 func _on_boton_menu_pressed() -> void:
+	GlobalSignal.emit_signal("aceleraMarcaPaso",3)
+	GlobalSignal.emit_signal("controlMarcaPaso",true)
 	get_tree().change_scene_to_file("res://scenes/ui/main.tscn")
 
 # aparecer o desaparecer los botones para evitar que se toque mal
@@ -175,17 +177,17 @@ func _on_boton_pausar_pressed() -> void:
 	
 
 func _on_boton_play_pressed() -> void:
-	GlobalSignal.emit_signal("aceleraMarcaPaso",1)
-	GlobalSignal.emit_signal("controlMarcaPaso",true)
-	GlobalJuego.juego_pausa = false
-
-func _on_boton_acelerar_1_pressed() -> void:
 	GlobalSignal.emit_signal("aceleraMarcaPaso",3)
 	GlobalSignal.emit_signal("controlMarcaPaso",true)
 	GlobalJuego.juego_pausa = false
 
-func _on_boton_acelerar_2_pressed() -> void:
+func _on_boton_acelerar_1_pressed() -> void:
 	GlobalSignal.emit_signal("aceleraMarcaPaso",5)
+	GlobalSignal.emit_signal("controlMarcaPaso",true)
+	GlobalJuego.juego_pausa = false
+
+func _on_boton_acelerar_2_pressed() -> void:
+	GlobalSignal.emit_signal("aceleraMarcaPaso",7)
 	GlobalSignal.emit_signal("controlMarcaPaso",true)
 	GlobalJuego.juego_pausa = false
 	
