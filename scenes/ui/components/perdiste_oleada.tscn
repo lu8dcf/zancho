@@ -164,7 +164,6 @@ text = "PERDISTE"
 label_settings = SubResource("LabelSettings_n6w5e")
 
 [node name="reintentar" parent="TextureRect" unique_id=1560458901 instance=ExtResource("4_vt8xu")]
-z_index = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.33100003

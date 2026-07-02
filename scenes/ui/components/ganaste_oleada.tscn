@@ -163,7 +163,6 @@ text = "VICTORIA"
 label_settings = SubResource("LabelSettings_n6w5e")
 
 [node name="continuar" parent="TextureRect" unique_id=1560458901 instance=ExtResource("4_q46lh")]
-z_index = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.33100003

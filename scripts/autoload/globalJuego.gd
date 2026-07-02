@@ -60,7 +60,7 @@ func perder_vida(cantidad: int = 1) -> void:
 func perder_fe(cantidad: int = 1) -> void:
 	fe -= cantidad
 	emit_signal("fe_cambiada", fe)
-	print("cuanta fe queda: ", fe, feMax)
+	#print("cuanta fe queda: ", fe, feMax)
 	
 	if fe <= 0:
 		print("se perdio toda la fe")
@@ -68,6 +68,7 @@ func perder_fe(cantidad: int = 1) -> void:
 func siguiente_oleada() -> void:
 	oleada_actual += 1
 	emit_signal("oleada_cambiada", oleada_actual)
+	mapas.siguiente_mapa()
 
 func alternar_tienda() -> void:
 	tienda_desplegada = !tienda_desplegada

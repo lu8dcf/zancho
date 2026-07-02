@@ -148,6 +148,7 @@ func obtener_punto_colocacion_pieza(coordenadas: Vector2i) -> Vector3:
 
 func mostrar_oleada_actual(gano):
 	GlobalSignal.emit_signal("aceleraMarcaPaso",2)
+	
 	_limpiar_seleccion_reina()
 	_limpiar_resaltado_ataque()
 	#GlobalSignal.emit_signal("controlMarcaPaso",true)
@@ -160,7 +161,8 @@ func mostrar_oleada_actual(gano):
 		# se crea otro rey aunque haya perdido
 		GlobalSignal.emit_signal("crearPieza",Vector2i(1,14),0,true)
 		economia.obtener_inventario_dinero_despues_oleada(false)
-		
+	
+	
 	await get_tree().process_frame
 	
 	var baldosa_rey = obtener_baldosa_en_coordenadas(Vector2i(1, 14))

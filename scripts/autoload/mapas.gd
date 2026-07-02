@@ -63,7 +63,7 @@ func siguiente_mapa():
 		var oleadas = datos_mapa[mapa]
 		if GlobalJuego.oleada_actual in oleadas:
 			GlobalJuego.mapa_actual = mapa
-			print("mapa acual e: ", GlobalJuego.mapa_actual)
+			print("mapa acual e: ", GlobalJuego.mapa_actual, " oleada en: ", GlobalJuego.oleada_actual)
 
 func cargar_cada_mapa(mapa_numero:int):
 	var posiciones = []
