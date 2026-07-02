@@ -3,6 +3,9 @@ extends Control
 @onready var control: Control = $"."
 
 
+func _ready() -> void:
+	Sonidos.sonar_sfx("derrota")
+
 func _on_reintentar_pressed() -> void:
 	control.visible = false
 	GlobalJuego.tutorial = false

@@ -4,6 +4,8 @@ extends Node
 # Crear las piezas sobre el tablero
 @warning_ignore("unused_signal")
 signal crearPieza (sitio:Vector2,tipo:int,blanca:bool)
+@warning_ignore("unused_signal")
+signal piezaCreada (tipo:int)
 
 # Pasos del juego
 @warning_ignore("unused_signal")
