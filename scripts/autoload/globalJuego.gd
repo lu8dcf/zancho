@@ -167,7 +167,10 @@ func colocar_blanca(sitio: Vector2i):
 		return false
 	
 	# sector de spawn negras
-	if (sitio.y<4 and sitio.x>7) or  (sitio.y<6 and sitio.x>8) or (sitio.y==6 and sitio.x>9) or (sitio.y==7 and sitio.x>11):
+	if (sitio.y<4 and sitio.x>7) or  (sitio.y<6 and sitio.x>8) or (sitio.y==6 and sitio.x>9) or (sitio.y==7 and sitio.x>11): 
+		return false
+	# sector alrededor del rey
+	if (sitio.y>10 and sitio.x<2) or  (sitio.y>11 and sitio.x==2) or (sitio.y>12 and sitio.x==3) or (sitio.y>13 and sitio.x==4):
 		return false
 	return true
 

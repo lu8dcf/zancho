@@ -1,7 +1,7 @@
 extends Timer
 class_name MarcaAtaque
 
-
+var piezas_moviendo=false
 
 func _ready():
 	# inicializar 
