@@ -35,10 +35,10 @@ func control(activa):
 		stop()
 		
 func multiplicador(multi):
-	if multi < 1 or multi >5:
+	if multi < 1 or multi >7:
 		return
 	#wait_time = GlobalJuego.tiempo_pasos / multi
 
 
-	var escala = float(multi) * 1  # 1=1.0 (100%), 2=1.5 (150%), ..., 5=4.0 (400%)
+	var escala = float(multi) * 0.5  # 1=1.0 (100%), 2=1.5 (150%), ..., 5=4.0 (400%)
 	Engine.time_scale = escala
