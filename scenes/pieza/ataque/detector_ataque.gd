@@ -36,5 +36,5 @@ func manejar_ataque(body):
 
 func marcaPaso():
 	self.disabled = true
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(GlobalJuego.tiempo_pasos/2).timeout
 	self.disabled = false
