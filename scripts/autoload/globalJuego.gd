@@ -5,7 +5,7 @@ extends Node
 
 ### - DEBUG SI ES TRUE ENTONCES TODO ESTA PERMITIDO
 
-var debug :bool = true
+var debug :bool = false
 
 var tutorial : bool = false
 

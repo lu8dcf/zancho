@@ -34,7 +34,7 @@ func manejar_ataque(body):
 	#print("⚔️ Ataque"," yo ",pieza_base.pieza_tipo," ",pieza_base.id," ata ",body.id," ", round(body.position/pieza_base.espaciado))
 		#pieza.recibir_ataque(atacante_tipo, get_meta("origen"))
 
-func marcaPaso():
+func marcaPaso(): # Desactiva la colision de deteccion de ataque mientras se mueve, en el medio de la teteccion se activa
 	self.disabled = true
 	await get_tree().create_timer(GlobalJuego.tiempo_pasos/2).timeout
 	self.disabled = false
