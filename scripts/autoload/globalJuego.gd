@@ -43,12 +43,15 @@ var ataque_en_proceso = false
 #lista piezas
 var casillas_reservadas = []
 
+# menu pausa
+var pausa_container = null
+
+
 signal vidas_cambiadas(nuevas_vidas)
 signal oleada_cambiada(nueva_oleada)
 signal tienda_estado_cambiado(desplegada)
 signal mapa_cambiado(nuevo_mapa: int)
 signal fe_cambiada(nueva_fe)
-
 func perder_vida(cantidad: int = 1) -> void:
 	vidas -= cantidad
 	emit_signal("vidas_cambiadas", vidas)

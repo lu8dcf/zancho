@@ -1,5 +1,6 @@
 extends Label
 
+# controles camara
 @onready var der_edit: LineEdit = $Container_camera/der/der_edit
 @onready var izq_edit: LineEdit = $Container_camera/izq/izq_edit
 @onready var arr_edit: LineEdit = $Container_camera/arriba/arr_edit
@@ -8,6 +9,16 @@ extends Label
 @onready var as_edit: LineEdit = $Container_camera/ascender/as_edit
 @onready var des_edit: LineEdit = $Container_camera/descender/des_edit
 @onready var zoom_edit: LineEdit = $Container_camera/zoom/zoom_edit
+
+# controles de jugabilidad
+@onready var pausar_edit: LineEdit = $"../../boton_jugabilidad/controles_jugabilidad/Container_jugabilidad/pausar_oleada/pausar_edit"
+@onready var ace_1_edit: LineEdit = $"../../boton_jugabilidad/controles_jugabilidad/Container_jugabilidad/acelerar_1_oleada2/ace1_edit"
+@onready var ace_2_edit: LineEdit = $"../../boton_jugabilidad/controles_jugabilidad/Container_jugabilidad/acelerar_2_oleada3/ace2_edit"
+@onready var empe_edit: LineEdit = $"../../boton_jugabilidad/controles_jugabilidad/Container_jugabilidad/empezar_oleada/empe_edit"
+@onready var pau_menu_edit: LineEdit = $"../../boton_jugabilidad/controles_jugabilidad/Container_jugabilidad/pausa_menu/pau_menu_edit"
+@onready var ocu_edit: LineEdit = $"../../boton_jugabilidad/controles_jugabilidad/Container_jugabilidad/ocultar_todo/ocu_edit"
+@onready var ocu_tienda_edit: LineEdit = $"../../boton_jugabilidad/controles_jugabilidad/Container_jugabilidad/ocultar_tienda/ocu_tienda_edit"
+
 
 @onready var guardar: TextureButton = $"../../guardar"
 const CONFIG_PATH = "user://configuracion.cfg"
@@ -20,6 +31,7 @@ func _ready() -> void:
 	conectar_señales()
 
 func conectar_señales():
+	# Cámara
 	der_edit.gui_input.connect(_on_line_edit_input.bind(der_edit, "Mover derecha"))
 	izq_edit.gui_input.connect(_on_line_edit_input.bind(izq_edit, "Mover izquierda"))
 	arr_edit.gui_input.connect(_on_line_edit_input.bind(arr_edit, "Mover adelante"))
@@ -28,7 +40,15 @@ func conectar_señales():
 	as_edit.gui_input.connect(_on_line_edit_input.bind(as_edit, "Ascender"))
 	des_edit.gui_input.connect(_on_line_edit_input.bind(des_edit, "Descender"))
 	zoom_edit.gui_input.connect(_on_line_edit_input.bind(zoom_edit, "zoom_de_camara"))
-
+	
+	# Jugabilidad
+	pausar_edit.gui_input.connect(_on_line_edit_input.bind(pausar_edit, "pausa_oleada"))
+	ace_1_edit.gui_input.connect(_on_line_edit_input.bind(ace_1_edit, "acelerar1"))
+	ace_2_edit.gui_input.connect(_on_line_edit_input.bind(ace_2_edit, "acelerar2"))
+	empe_edit.gui_input.connect(_on_line_edit_input.bind(empe_edit, "empezar_oleada"))
+	pau_menu_edit.gui_input.connect(_on_line_edit_input.bind(pau_menu_edit, "pausa_menu"))
+	ocu_edit.gui_input.connect(_on_line_edit_input.bind(ocu_edit, "ocultar_todo"))
+	ocu_tienda_edit.gui_input.connect(_on_line_edit_input.bind(ocu_tienda_edit, "ocultar_tienda"))
 
 func cargar_configuracion():
 	var config = ConfigFile.new()
@@ -43,6 +63,8 @@ func guardar_configuracion():
 	
 	if config.load(CONFIG_PATH) == OK:
 		pass
+	
+	# Cámara
 	guardar_tecla_en_config(config, "Mover derecha", der_edit.text)
 	guardar_tecla_en_config(config, "Mover izquierda", izq_edit.text)
 	guardar_tecla_en_config(config, "Mover adelante", arr_edit.text)
@@ -51,6 +73,15 @@ func guardar_configuracion():
 	guardar_tecla_en_config(config, "Ascender", as_edit.text)
 	guardar_tecla_en_config(config, "Descender", des_edit.text)
 	guardar_tecla_en_config(config, "zoom_de_camara", zoom_edit.text)
+	
+	# Jugabilidad
+	guardar_tecla_en_config(config, "pausa_oleada", pausar_edit.text)
+	guardar_tecla_en_config(config, "acelerar1", ace_1_edit.text)
+	guardar_tecla_en_config(config, "acelerar2", ace_2_edit.text)
+	guardar_tecla_en_config(config, "empezar_oleada", empe_edit.text)
+	guardar_tecla_en_config(config, "pausa_menu", pau_menu_edit.text)
+	guardar_tecla_en_config(config, "ocultar_todo", ocu_edit.text)
+	guardar_tecla_en_config(config, "ocultar_tienda", ocu_tienda_edit.text)
 	
 	config.save(CONFIG_PATH)
 
@@ -71,6 +102,7 @@ func _on_line_edit_input(event: InputEvent, edit: LineEdit, _accion: String):
 		edit.release_focus()
 
 func _on_guardar_pressed():
+	# Cámara
 	actualizar_input_map("Mover derecha", der_edit.text)
 	actualizar_input_map("Mover izquierda", izq_edit.text)
 	actualizar_input_map("Mover adelante", arr_edit.text)
@@ -79,6 +111,16 @@ func _on_guardar_pressed():
 	actualizar_input_map("Ascender", as_edit.text)
 	actualizar_input_map("Descender", des_edit.text)
 	actualizar_input_map("zoom_de_camara", zoom_edit.text)
+	
+	# Jugabilidad
+	actualizar_input_map("pausa_oleada", pausar_edit.text)
+	actualizar_input_map("acelerar1", ace_1_edit.text)
+	actualizar_input_map("acelerar2", ace_2_edit.text)
+	actualizar_input_map("empezar_oleada", empe_edit.text)
+	actualizar_input_map("pausa_menu", pau_menu_edit.text)
+	actualizar_input_map("ocultar_todo", ocu_edit.text)
+	actualizar_input_map("ocultar_tienda", ocu_tienda_edit.text)
+	
 	guardar_configuracion()
 	predeterminarEdit()
 	$"../../../..".esconder_todo()
@@ -88,6 +130,10 @@ func aplicar_tecla_a_input_map(accion: String, tecla: String):
 	var keycode = buscar_keycode_por_texto(tecla)
 	if keycode == 0:
 		return
+	
+	# Si la acción no existe, la creamos
+	if not InputMap.has_action(accion):
+		InputMap.add_action(accion)
 	
 	InputMap.action_erase_events(accion)
 	
@@ -105,6 +151,10 @@ func actualizar_input_map(accion: String, tecla_texto: String):
 	var keycode = buscar_keycode_por_texto(tecla_texto)
 	if keycode == 0:
 		return
+	
+	# Si la acción no existe, la creamos
+	if not InputMap.has_action(accion):
+		InputMap.add_action(accion)
 	
 	# Limpiar eventos anteriores de la acción
 	InputMap.action_erase_events(accion)
@@ -136,6 +186,7 @@ func buscar_keycode_por_texto(texto: String) -> int:
 	return key_map.get(texto, 0)
 
 func predeterminarEdit():
+	# Cámara
 	var der_events = InputMap.action_get_events("Mover derecha")
 	var izq_events = InputMap.action_get_events("Mover izquierda")
 	var arr_events = InputMap.action_get_events("Mover adelante")
@@ -145,7 +196,16 @@ func predeterminarEdit():
 	var des_events = InputMap.action_get_events("Descender")
 	var zoom_events = InputMap.action_get_events("zoom_de_camara")
 	
+	# Jugabilidad
+	var pausar_events = InputMap.action_get_events("pausa_oleada")
+	var ace1_events = InputMap.action_get_events("acelerar1")
+	var ace2_events = InputMap.action_get_events("acelerar2")
+	var empe_events = InputMap.action_get_events("empezar_oleada")
+	var pau_menu_events = InputMap.action_get_events("pausa_menu")
+	var ocu_events = InputMap.action_get_events("ocultar_todo")
+	var ocu_tienda_events = InputMap.action_get_events("ocultar_tienda")
 	
+	# Cámara
 	der_edit.placeholder_text = obtener_nombre_tecla(der_events)
 	izq_edit.placeholder_text = obtener_nombre_tecla(izq_events)
 	arr_edit.placeholder_text = obtener_nombre_tecla(arr_events)
@@ -155,7 +215,16 @@ func predeterminarEdit():
 	des_edit.placeholder_text = obtener_nombre_tecla(des_events)
 	zoom_edit.placeholder_text = obtener_nombre_tecla(zoom_events)
 	
-	# Asegurarse de que el texto del LineEdit esté vacío para mostrar el placeholder
+	# Jugabilidad
+	pausar_edit.placeholder_text = obtener_nombre_tecla(pausar_events)
+	ace_1_edit.placeholder_text = obtener_nombre_tecla(ace1_events)
+	ace_2_edit.placeholder_text = obtener_nombre_tecla(ace2_events)
+	empe_edit.placeholder_text = obtener_nombre_tecla(empe_events)
+	pau_menu_edit.placeholder_text = obtener_nombre_tecla(pau_menu_events)
+	ocu_edit.placeholder_text = obtener_nombre_tecla(ocu_events)
+	ocu_tienda_edit.placeholder_text = obtener_nombre_tecla(ocu_tienda_events)
+	
+	# Limpiar todos los textos
 	der_edit.text = ""
 	izq_edit.text = ""
 	arr_edit.text = ""
@@ -165,9 +234,18 @@ func predeterminarEdit():
 	des_edit.text = ""
 	zoom_edit.text = ""
 	
+	pausar_edit.text = ""
+	ace_1_edit.text = ""
+	ace_2_edit.text = ""
+	empe_edit.text = ""
+	pau_menu_edit.text = ""
+	ocu_edit.text = ""
+	ocu_tienda_edit.text = ""
+	
 
 func personalizar_line_edits():
-	var line_edits = [der_edit, izq_edit, arr_edit, aba_edit,reini_edit,as_edit,des_edit,zoom_edit]
+	var line_edits = [der_edit, izq_edit, arr_edit, aba_edit, reini_edit, as_edit, des_edit, zoom_edit,
+					  pausar_edit, ace_1_edit, ace_2_edit, empe_edit, pau_menu_edit, ocu_edit, ocu_tienda_edit]
 	
 	for edit in line_edits:
 		# Colores

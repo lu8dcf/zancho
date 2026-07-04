@@ -22,6 +22,10 @@ extends Panel
 @onready var panel_superior: Panel = $"."
 @onready var boton_esconder_superior: TextureButton = $botonEsconderSuperior
 
+#panel hud padre
+@onready var hud: CanvasLayer = $".."
+
+
 # para ocultar el hud superior
 var tween: Tween
 var panel_visible: bool = true
@@ -120,9 +124,9 @@ func finaliza_oleada(_valor):
 	desaparecer_botones_velocidades()
 
 func _on_boton_menu_pressed() -> void:
-	GlobalSignal.emit_signal("aceleraMarcaPaso",3)
-	GlobalSignal.emit_signal("controlMarcaPaso",true)
-	get_tree().change_scene_to_file("res://scenes/ui/main.tscn")
+	hud.mostrar_pausa_ingame()
+	
+	
 
 # aparecer o desaparecer los botones para evitar que se toque mal
 func desaparecer_botones_velocidades():
@@ -165,31 +169,38 @@ func _on_empezar_oleada_pressed() -> void:
 		await get_tree().create_timer(3).timeout
 		economia.monedas_antes_oleada = economia.monedas_actual
 		aparecer_botones_velocidades()
+		$"../PanelTienda"._ocultar_tienda()
 		
-		
-
 
 # botones de velocidad y pausa
 func _on_boton_pausar_pressed() -> void:
-	#GlobalSignal.emit_signal("aceleraMarcaPaso",3)
-	GlobalSignal.emit_signal("controlMarcaPaso",false)
-	GlobalJuego.juego_pausa = true  # Essto es para indicar que pare todo
+	if GlobalJuego.empezo_oleada:
+		if !GlobalJuego.juego_pausa:
+			hud.mostrar_pausa_pantalla()
+		#GlobalSignal.emit_signal("aceleraMarcaPaso",3)
+		GlobalSignal.emit_signal("controlMarcaPaso",false)
+		GlobalJuego.juego_pausa = true  # Essto es para indicar que pare todo
 	
 
 func _on_boton_play_pressed() -> void:
-	GlobalSignal.emit_signal("aceleraMarcaPaso",2)
-	GlobalSignal.emit_signal("controlMarcaPaso",true)
-	GlobalJuego.juego_pausa = false
+	if GlobalJuego.empezo_oleada:
+		if GlobalJuego.juego_pausa:
+			hud.ocultar_pausa_pantalla()
+		GlobalSignal.emit_signal("aceleraMarcaPaso",2)
+		GlobalSignal.emit_signal("controlMarcaPaso",true)
+		GlobalJuego.juego_pausa = false
 
 func _on_boton_acelerar_1_pressed() -> void:
-	GlobalSignal.emit_signal("aceleraMarcaPaso",4)
-	GlobalSignal.emit_signal("controlMarcaPaso",true)
-	GlobalJuego.juego_pausa = false
+	if GlobalJuego.empezo_oleada:
+		GlobalSignal.emit_signal("aceleraMarcaPaso",4)
+		GlobalSignal.emit_signal("controlMarcaPaso",true)
+		GlobalJuego.juego_pausa = false
 
 func _on_boton_acelerar_2_pressed() -> void:
-	GlobalSignal.emit_signal("aceleraMarcaPaso",8)
-	GlobalSignal.emit_signal("controlMarcaPaso",true)
-	GlobalJuego.juego_pausa = false
+	if GlobalJuego.empezo_oleada:
+		GlobalSignal.emit_signal("aceleraMarcaPaso",8)
+		GlobalSignal.emit_signal("controlMarcaPaso",true)
+		GlobalJuego.juego_pausa = false
 	
 
 

@@ -35,11 +35,8 @@ func _ready():
 	imagen_tienda.position = posicion_oculta
 	
 	GlobalSignal.connect("tiendaHoverParpadea", parpadeaTutorial)
-	# Conectar las señales globales para actualizar la UI automáticamente
-	#economia.pieza_vendida.connect(_crear_botones_piezas_tienda)
 	
-	
-	#configurar_tienda()
+
 
 func parpadeaTutorial():
 

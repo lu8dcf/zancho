@@ -1,0 +1,250 @@
+[gd_scene format=3 uid="uid://bco7t2vgjxusi"]
+
+[ext_resource type="Script" uid="uid://bjytcj7xl3mkm" path="res://scenes/ui/components/pausa_in_game.gd" id="1_pcxgr"]
+[ext_resource type="Texture2D" uid="uid://bjc5e7437lcjg" path="res://assets/ui/cartel.png" id="2_pcfkg"]
+[ext_resource type="FontFile" uid="uid://c6ngyfvifeml" path="res://assets/fuentes/startedbyamouse.ttf" id="3_7m0vy"]
+[ext_resource type="PackedScene" uid="uid://dx2ufxs2ydj1b" path="res://scenes/ui/components/boton_main_largo.tscn" id="4_77li8"]
+
+[sub_resource type="Animation" id="Animation_aynca"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-146, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_3lj2e"]
+resource_name = "ganaste la oldeada"
+length = 2.4666667
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -1.6666667, 0, 0, 0),
+"times": PackedFloat32Array(0, 2.2000003)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-673, -0.048659537, -68.69105, 0.3, 423.5, -163.5, -0.7645335, 103, 0, 0, -173.5, -0.202667, -25, 0, 0),
+"times": PackedFloat32Array(0, 1.5312002, 1.9360003)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w68fg"]
+_data = {
+&"RESET": SubResource("Animation_aynca"),
+&"ganaste la oldeada": SubResource("Animation_3lj2e")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_n6w5e"]
+line_spacing = 9.84
+font = ExtResource("3_7m0vy")
+font_size = 70
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 31
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(8.075, 5.74)
+
+[node name="Pausa_in_game" type="Control" unique_id=1830827380]
+z_index = -1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 71.0
+offset_right = -1081.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pcxgr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=892150953]
+libraries/ = SubResource("AnimationLibrary_w68fg")
+autoplay = &"ganaste la oldeada"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1595600934]
+layout_mode = 0
+offset_top = -146.0
+offset_right = 2162.4275
+offset_bottom = 1070.3655
+scale = Vector2(0.46203217, 0.46203217)
+texture = ExtResource("2_pcfkg")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="TextureRect" unique_id=1246924648]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.38500002
+anchor_top = 0.48800004
+anchor_right = 0.637
+anchor_bottom = 0.63000005
+offset_left = -33.888916
+offset_top = -0.5541382
+offset_right = -341.82056
+offset_bottom = -94.278015
+grow_horizontal = 2
+scale = Vector2(2.29978, 2.29978)
+theme_override_font_sizes/font_size = 13
+text = "Estás en Pausa"
+label_settings = SubResource("LabelSettings_n6w5e")
+
+[node name="reanudar" parent="TextureRect" unique_id=1560458901 instance=ExtResource("4_77li8")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33100003
+anchor_top = 0.809
+anchor_right = 0.67
+anchor_bottom = 1.001
+offset_left = -107.58081
+offset_top = 7.2333374
+offset_right = -464.4754
+offset_bottom = -45.612183
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="TextureRect/reanudar" unique_id=100638714]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.293915
+offset_top = -39.5
+offset_right = 35.706085
+offset_bottom = 39.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.4115095, 0.82643807)
+text = "Reanudar"
+label_settings = SubResource("LabelSettings_n6w5e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="menu" parent="TextureRect" unique_id=602763189 instance=ExtResource("4_77li8")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33100003
+anchor_top = 0.809
+anchor_right = 0.67
+anchor_bottom = 1.001
+offset_left = -107.58075
+offset_top = -183.22961
+offset_right = -464.47528
+offset_bottom = -236.0752
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="TextureRect/menu" unique_id=1282225664]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.293915
+offset_top = -39.5
+offset_right = 35.706085
+offset_bottom = 39.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.4115095, 0.82643807)
+text = "Menú"
+label_settings = SubResource("LabelSettings_n6w5e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="reinicar" parent="TextureRect" unique_id=864275483 instance=ExtResource("4_77li8")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33100003
+anchor_top = 0.809
+anchor_right = 0.67
+anchor_bottom = 1.001
+offset_left = 465.97253
+offset_top = 7.2335205
+offset_right = 109.078
+offset_bottom = -45.61206
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="TextureRect/reinicar" unique_id=2067698404]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.293915
+offset_top = -39.5
+offset_right = 35.706085
+offset_bottom = 39.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.4115095, 0.82643807)
+text = "Reiniciar"
+label_settings = SubResource("LabelSettings_n6w5e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="opciones" parent="TextureRect" unique_id=1951025750 instance=ExtResource("4_77li8")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33100003
+anchor_top = 0.809
+anchor_right = 0.67
+anchor_bottom = 1.001
+offset_left = 465.97253
+offset_top = -183.22961
+offset_right = 109.078
+offset_bottom = -236.0752
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="TextureRect/opciones" unique_id=384442466]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.293915
+offset_top = -39.5
+offset_right = 35.706085
+offset_bottom = 39.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.4115095, 0.82643807)
+text = "Opciones"
+label_settings = SubResource("LabelSettings_n6w5e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="TextureRect/reanudar" to="." method="_on_reanudar_pressed"]
+[connection signal="pressed" from="TextureRect/menu" to="." method="_on_menu_pressed"]
