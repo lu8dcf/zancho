@@ -60,9 +60,6 @@
 
 [node name="Hud" type="CanvasLayer" unique_id=1280414328 groups=["ui"]]
 script = ExtResource("1_hqnrr")
-escena_victoria = null
-escena_derrota = null
-escena_derrota_final = null
 
 [node name="PanelSuperior" type="Panel" parent="." unique_id=66414413]
 anchors_preset = -1

@@ -20,14 +20,15 @@ var max_mensajes: int = 50
 @onready var panel_tienda: Panel = $PanelTienda
 
 # escenas de victoria/derrota
-@export var escena_victoria: PackedScene = preload("res://scenes/ui/components/ganaste_oleada.tscn")
-@export var escena_derrota: PackedScene = preload("res://scenes/ui/components/perdiste_oleada.tscn")
+var escena_victoria 
+var escena_derrota 
+
+# perder toda la fe
+var escena_derrota_final
 
 # insatancia pausa in game
 @export var escena_pausa: PackedScene = preload("res://scenes/ui/components/pausa_in_game.tscn")
 
-# perder toda la fe
-@export var escena_derrota_final: PackedScene = preload("res://scenes/ui/derrota.tscn")
 
 
 #tutorial
@@ -57,6 +58,11 @@ func _ready():
 	GlobalSignal.finAtaque.connect(mensaje_muerte_log)
 	Piezas.pieza_colocada.connect(mensaje_colocacion_log)
 	conectar_señales_mouse(self)
+	
+	
+	escena_victoria = load("res://scenes/ui/components/ganaste_oleada.tscn")
+	escena_derrota = load("res://scenes/ui/components/perdiste_oleada.tscn")
+	escena_derrota_final = load("res://scenes/ui/derrota.tscn")
 
 func _input(event):
 	
@@ -86,139 +92,158 @@ func mostrar_pausa_ingame():
 	add_child(instancia_pausa)
 
 func mostrar_pausa_pantalla():
+
+	if pausa_container_actual:
+		return
+
 	var pausa_container = Control.new()
 	pausa_container.name = "PausaContainer"
 	pausa_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	
-	# Crear 4 bordes
-	var bordes = []
-	var color_borde = Color(0.9, 0.1, 0.1, 0.85)  # Rojo intenso y nítido
-	
-	for i in 4:
-		var borde = ColorRect.new()
-		borde.color = color_borde
-		borde.modulate.a = 0.9  # Más nítido
-		borde.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		bordes.append(borde)
-		pausa_container.add_child(borde)
-	
-	# Configurar posiciones
-	var viewport_size = get_viewport().size
-	var grosor = 6  # Un poco más delgado para verse más elegante
-	
-	bordes[0].size = Vector2(viewport_size.x, grosor)  # Superior
-	bordes[0].position = Vector2(0, -grosor)
-	
-	bordes[1].size = Vector2(viewport_size.x, grosor)  # Inferior
-	bordes[1].position = Vector2(0, viewport_size.y)
-	
-	bordes[2].size = Vector2(grosor, viewport_size.y)  # Izquierdo
-	bordes[2].position = Vector2(-grosor, 0)
-	
-	bordes[3].size = Vector2(grosor, viewport_size.y)  # Derecho
-	bordes[3].position = Vector2(viewport_size.x, 0)
-	
-	# panel de pausa en la esquina derecha
+	pausa_container.set_anchors_preset(Control.PRESET_FULL_RECT)
+
+	# ============================
+	# MARCO ROJO
+	# ============================
+
+	var marco = Panel.new()
+	marco.set_anchors_preset(Control.PRESET_FULL_RECT)
+	marco.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var estilo_marco = StyleBoxFlat.new()
+	estilo_marco.bg_color = Color(0, 0, 0, 0)
+
+	estilo_marco.border_width_left = 6
+	estilo_marco.border_width_right = 6
+	estilo_marco.border_width_top = 6
+	estilo_marco.border_width_bottom = 6
+
+	estilo_marco.border_color = Color(0.9, 0.1, 0.1, 0.85)
+
+	marco.add_theme_stylebox_override("panel", estilo_marco)
+
+	pausa_container.add_child(marco)
+
+	# ============================
+	# OVERLAY OSCURO
+	# ============================
+
+	var overlay = ColorRect.new()
+	overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
+	overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var shader_material = ShaderMaterial.new()
+	var shader = Shader.new()
+
+	shader.code = """
+	shader_type canvas_item;
+
+	void fragment() {
+		vec2 center = UV - vec2(0.5);
+		float dist = length(center) * 1.5;
+		float vignette = smoothstep(0.8, 0.2, dist);
+
+		COLOR = vec4(0.0, 0.0, 0.0, vignette * 0.15);
+	}
+	"""
+
+	shader_material.shader = shader
+	overlay.material = shader_material
+
+	pausa_container.add_child(overlay)
+
 	var panel_pausa = Panel.new()
 	panel_pausa.size = Vector2(200, 50)
-	panel_pausa.position = Vector2(viewport_size.x - 220, 65)  # Bajado de 15 a 45
+
+	panel_pausa.anchor_left = 1
+	panel_pausa.anchor_right = 1
+
+	panel_pausa.offset_left = -220
+	panel_pausa.offset_right = -20
+
+	panel_pausa.offset_top = 65
+	panel_pausa.offset_bottom = 115
+
 	panel_pausa.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	
-	# Estilo del panel con degradé
+
 	var estilo = StyleBoxFlat.new()
-	estilo.bg_color = Color(0.8, 0.1, 0.1, 0.9)  # Rojo sólido
+	estilo.bg_color = Color(0.8, 0.1, 0.1, 0.9)
+
 	estilo.set_corner_radius_all(8)
+
 	estilo.border_width_left = 2
 	estilo.border_width_right = 2
 	estilo.border_width_top = 2
 	estilo.border_width_bottom = 2
-	estilo.border_color = Color(1, 0.3, 0.3, 0.8)  # Borde rojo más claro
+
+	estilo.border_color = Color(1, 0.3, 0.3, 0.8)
+
 	panel_pausa.add_theme_stylebox_override("panel", estilo)
+
 	pausa_container.add_child(panel_pausa)
-	
-	# Texto de pausa centrado directamente en el panel
+
 	var texto = Label.new()
+
 	texto.text = "PAUSA"
-	texto.add_theme_font_size_override("font_size", 28)
-	texto.modulate = Color.WHITE
-	texto.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+
+	texto.set_anchors_preset(Control.PRESET_FULL_RECT)
+
 	texto.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	texto.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	
-	# Ajustar el tamaño del texto al tamaño del panel para centrarlo perfectamente
-	texto.size = panel_pausa.size
-	texto.position = Vector2(0, 0)
-	
-	# Intentar cargar fuente personalizada (ajusta la ruta a tu fuente)
+	texto.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+
+	texto.modulate = Color.WHITE
+
+	texto.add_theme_font_size_override("font_size", 28)
+
 	var font_path = "res://assets/fuentes/Enchanted Land DS D.otf"
+
 	if ResourceLoader.exists(font_path):
 		var fuente = load(font_path)
 		texto.add_theme_font_override("font", fuente)
-	
+
 	panel_pausa.add_child(texto)
-	
-	
-	var overlay = ColorRect.new()
-	overlay.size = viewport_size
-	overlay.material = ShaderMaterial.new()
-	overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	
-	# Shader simple para viñeta/degradé
-	var shader_code = """
-		shader_type canvas_item;
-		
-		void fragment() {
-			vec2 center = UV - vec2(0.5);
-			float dist = length(center) * 1.5;
-			float vignette = smoothstep(0.8, 0.2, dist);
-			COLOR = vec4(0.0, 0.0, 0.0, vignette * 0.15);
-		}
-	"""
-	
-	var shader = Shader.new()
-	shader.code = shader_code
-	overlay.material.shader = shader
-	pausa_container.add_child(overlay)
-	
+
 	add_child(pausa_container)
-	
-	# Animación de bordes deslizándose
+
+
+	marco.modulate.a = 0
+	panel_pausa.modulate.a = 0
+
 	var tween = create_tween()
 	tween.set_parallel(true)
-	tween.tween_property(bordes[0], "position:y", 0, 0.4)
-	tween.tween_property(bordes[1], "position:y", viewport_size.y - grosor, 0.4)
-	tween.tween_property(bordes[2], "position:x", 0, 0.4)
-	tween.tween_property(bordes[3], "position:x", viewport_size.x - grosor, 0.4)
-	
-	# Animación del panel de pausa
-	panel_pausa.modulate.a = 0
-	panel_pausa.scale = Vector2(0.8, 0.8)
-	tween.tween_property(panel_pausa, "modulate:a", 1.0, 0.3)
-	tween.tween_property(panel_pausa, "scale", Vector2(1.0, 1.0), 0.3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-	
-	# Guardar referencia local
-	pausa_container_actual = pausa_container
 
-func ocultar_pausa_pantalla():
-	if pausa_container_actual:
-		var tween_pausa = create_tween()
-		tween_pausa.set_parallel(true)
-		
-		# Animar los bordes saliendo
-		for borde in pausa_container_actual.get_children():
-			if borde is ColorRect:
-				match borde.get_index():
-					0: tween_pausa.tween_property(borde, "position:y", -6, 0.3)  # Superior
-					1: tween_pausa.tween_property(borde, "position:y", get_viewport().size.y, 0.3)  # Inferior
-					2: tween_pausa.tween_property(borde, "position:x", -6, 0.3)  # Izquierdo
-					3: tween_pausa.tween_property(borde, "position:x", get_viewport().size.x, 0.3)  # Derecho
-		
-		# Desvanecer todo
-		tween_pausa.tween_property(pausa_container_actual, "modulate:a", 0.0, 0.3)
-		tween_pausa.tween_callback(pausa_container_actual.queue_free)
-		
-		pausa_container_actual = null
+	tween.tween_property(marco, "modulate:a", 1.0, 0.3)
+	tween.tween_property(panel_pausa, "modulate:a", 1.0, 0.3)
+
+	panel_pausa.scale = Vector2(0.8, 0.8)
+
+	tween.tween_property(
+		panel_pausa,
+		"scale",
+		Vector2.ONE,
+		0.3
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+	pausa_container_actual = pausa_container
 	
+func ocultar_pausa_pantalla():
+	if !pausa_container_actual:
+		return
+
+	var tween = create_tween()
+
+	tween.tween_property(
+		pausa_container_actual,
+		"modulate:a",
+		0.0,
+		0.25
+	)
+
+	tween.tween_callback(
+		pausa_container_actual.queue_free
+	)
+
+	pausa_container_actual = null
+
 func conectar_señales_mouse(node: Node):
 	if node is Control:
 		if not node.is_connected("mouse_entered", _on_hud_mouse_entered):
@@ -265,7 +290,7 @@ func mostrar_todos_paneles():
 	panel_superior.visible = true
 	panel_rey.visible = true
 	
-func mostrar_imagen(ganar: int) -> void:
+func mostrar_imagen(ganar: bool) -> void:
 	GlobalJuego.empezo_oleada = false
 	$PanelTienda._ocultar_tienda()
 	#si es el tutorial:
@@ -277,6 +302,7 @@ func mostrar_imagen(ganar: int) -> void:
 		GlobalSignal.emit_signal("PantallaNegra")
 	else:
 		if ganar:
+			
 			if escena_victoria:
 				var instancia_victoria = escena_victoria.instantiate()
 				add_child(instancia_victoria)
@@ -286,7 +312,8 @@ func mostrar_imagen(ganar: int) -> void:
 			if (GlobalJuego.fe -5)<=0 and escena_derrota_final:
 				var instancia_derrota = escena_derrota_final.instantiate()
 				add_child(instancia_derrota)
-				GlobalJuego.perder_fe(5)				
+				GlobalJuego.perder_fe(5)		
+			
 				
 			else:
 				if escena_derrota:
@@ -353,7 +380,7 @@ func mensaje_muerte_log(gano_pelea: int, color: bool, perdio_pelea: int):
 		
 	actualizar_log(texto_completo, 2)
 
-func actualizar_log(mensaje: String, tipo: int = 5):    
+func actualizar_log(mensaje: String, tipo: int = 5):	
 	var color = _obtener_color_por_tipo(tipo)
 	var icono = _obtener_icono_por_tipo(tipo)
 	var linea_log = "[color=%s]%s %s[/color]\n" % [color, icono, mensaje]

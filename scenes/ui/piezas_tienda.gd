@@ -26,13 +26,15 @@ func _ready() -> void:
 	bloqueos.visible = false
 	actualizar_pieza()
 	economia.connect("monedas_cambiadas", actualizar_pieza)
-	GlobalJuego.connect("oleada_cambiada", actualizar_pieza)
+	GlobalSignal.connect("comienzoOleada", actualizar_pieza)
+	#GlobalJuego.connect("oleada_cambiada", actualizar_pieza)
+	GlobalSignal.connect("finalizaOleada",actualizar_pieza)
+	GlobalSignal.connect("tiendaClick",actualizar_pieza)
 
 	hover.visible =false
 
 
 func _on_venta_pressed() -> void:
-	actualizar_pieza()
 	var nombre_pieza = name  # esto devolverá "Peon"
 	if economia.inventario_actual.get(nombre_pieza, 0) > 0:
 		economia.vender_pieza(nombre_pieza)
@@ -40,7 +42,6 @@ func _on_venta_pressed() -> void:
 
 
 func _on_compra_pressed() -> void:
-	actualizar_pieza()
 	var nombre_pieza = name  # Esto devolverá "Peon"
 	# intentar comprar esto ahora verifica: monedas y límites
 	if economia.comprar_pieza(nombre_pieza):
@@ -49,7 +50,7 @@ func _on_compra_pressed() -> void:
 		print("No se pudo comprar ", nombre_pieza)
 
 
-func actualizar_pieza(_nada=0):
+func actualizar_pieza(_nada=null):
 	var nombre_pieza  = name  # esto devolverá "Peon"
 	var datos = economia.obtener_datos_pieza(nombre_pieza)
 	
@@ -70,6 +71,8 @@ func actualizar_pieza(_nada=0):
 	if economia.verificar_orden_aparicion(nombre_pieza) and !GlobalJuego.debug:
 		deshabilitar_todo_cerrado()
 		return
+		
+		
 	elif economia.monedas_actual < datos["precio"]:
 		 # Verificar si no hay suficientes monedas
 		bloqueos.visible = true
@@ -87,9 +90,8 @@ func actualizar_pieza(_nada=0):
 		venta.disabled = inventario_vacio(nombre_pieza)
 		compra.disabled = true
 		return
-	
-	# Todo bien, habilitar
-	bloqueos.visible = true
+	#  habilitar
+	bloqueos.visible = false
 	bloqueos.cambiar_texto("")
 	bloqueos.texture_normal = null
 	pieza.disabled = false
@@ -101,7 +103,7 @@ func deshabilitar_todo():
 	venta.disabled = true
 	compra.disabled = true
 	bloqueos.visible = true
-	
+
 
 func deshabilitar_todo_cerrado():
 	pieza.disabled = true
