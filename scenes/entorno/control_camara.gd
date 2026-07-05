@@ -59,7 +59,6 @@ func zoom_de_camara():
 func _physics_process(_delta: float) -> void:
 
 	var delta_real = get_physics_process_delta_time()
-	print(delta_real)
 	var input_dir = Input.get_vector("Mover izquierda", "Mover derecha", "Mover adelante", "Mover atras")
 	var direccion = (global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
