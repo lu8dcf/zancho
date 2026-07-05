@@ -18,6 +18,7 @@ extends Label
 @onready var pau_menu_edit: LineEdit = $"../../boton_jugabilidad/controles_jugabilidad/Container_jugabilidad/pausa_menu/pau_menu_edit"
 @onready var ocu_edit: LineEdit = $"../../boton_jugabilidad/controles_jugabilidad/Container_jugabilidad/ocultar_todo/ocu_edit"
 @onready var ocu_tienda_edit: LineEdit = $"../../boton_jugabilidad/controles_jugabilidad/Container_jugabilidad/ocultar_tienda/ocu_tienda_edit"
+@onready var play_edit: LineEdit = $"../../boton_jugabilidad/controles_jugabilidad/Container_jugabilidad/play_oleada/play_edit"
 
 
 @onready var guardar: TextureButton = $"../../guardar"
@@ -49,6 +50,7 @@ func conectar_señales():
 	pau_menu_edit.gui_input.connect(_on_line_edit_input.bind(pau_menu_edit, "pausa_menu"))
 	ocu_edit.gui_input.connect(_on_line_edit_input.bind(ocu_edit, "ocultar_todo"))
 	ocu_tienda_edit.gui_input.connect(_on_line_edit_input.bind(ocu_tienda_edit, "ocultar_tienda"))
+	play_edit.gui_input.connect(_on_line_edit_input.bind(play_edit, "play_oleada"))
 
 func cargar_configuracion():
 	var config = ConfigFile.new()
@@ -82,6 +84,7 @@ func guardar_configuracion():
 	guardar_tecla_en_config(config, "pausa_menu", pau_menu_edit.text)
 	guardar_tecla_en_config(config, "ocultar_todo", ocu_edit.text)
 	guardar_tecla_en_config(config, "ocultar_tienda", ocu_tienda_edit.text)
+	guardar_tecla_en_config(config, "play_oleada", play_edit.text)
 	
 	config.save(CONFIG_PATH)
 
@@ -120,6 +123,7 @@ func _on_guardar_pressed():
 	actualizar_input_map("pausa_menu", pau_menu_edit.text)
 	actualizar_input_map("ocultar_todo", ocu_edit.text)
 	actualizar_input_map("ocultar_tienda", ocu_tienda_edit.text)
+	actualizar_input_map("play_oleada", play_edit.text)
 	
 	guardar_configuracion()
 	predeterminarEdit()
@@ -204,6 +208,7 @@ func predeterminarEdit():
 	var pau_menu_events = InputMap.action_get_events("pausa_menu")
 	var ocu_events = InputMap.action_get_events("ocultar_todo")
 	var ocu_tienda_events = InputMap.action_get_events("ocultar_tienda")
+	var play_oleada_events = InputMap.action_get_events("play_oleada")
 	
 	# Cámara
 	der_edit.placeholder_text = obtener_nombre_tecla(der_events)
@@ -223,6 +228,7 @@ func predeterminarEdit():
 	pau_menu_edit.placeholder_text = obtener_nombre_tecla(pau_menu_events)
 	ocu_edit.placeholder_text = obtener_nombre_tecla(ocu_events)
 	ocu_tienda_edit.placeholder_text = obtener_nombre_tecla(ocu_tienda_events)
+	play_edit.placeholder_text = obtener_nombre_tecla(play_oleada_events)
 	
 	# Limpiar todos los textos
 	der_edit.text = ""
@@ -241,11 +247,12 @@ func predeterminarEdit():
 	pau_menu_edit.text = ""
 	ocu_edit.text = ""
 	ocu_tienda_edit.text = ""
+	play_edit.text = ""
 	
 
 func personalizar_line_edits():
 	var line_edits = [der_edit, izq_edit, arr_edit, aba_edit, reini_edit, as_edit, des_edit, zoom_edit,
-					  pausar_edit, ace_1_edit, ace_2_edit, empe_edit, pau_menu_edit, ocu_edit, ocu_tienda_edit]
+					  pausar_edit, ace_1_edit, ace_2_edit, empe_edit, pau_menu_edit, ocu_edit, ocu_tienda_edit,play_edit]
 	
 	for edit in line_edits:
 		# Colores

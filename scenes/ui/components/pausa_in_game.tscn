@@ -32,7 +32,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_3lj2e"]
 resource_name = "ganaste la oldeada"
-length = 2.4666667
+length = 1.6333333
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -42,7 +42,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -1.6666667, 0, 0, 0),
-"times": PackedFloat32Array(0, 2.2000003)
+"times": PackedFloat32Array(0, 1.5333333)
 }
 tracks/1/type = "bezier"
 tracks/1/imported = false
@@ -53,7 +53,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0),
 "points": PackedFloat32Array(-673, -0.048659537, -68.69105, 0.3, 423.5, -163.5, -0.7645335, 103, 0, 0, -173.5, -0.202667, -25, 0, 0),
-"times": PackedFloat32Array(0, 1.5312002, 1.9360003)
+"times": PackedFloat32Array(0, 1.1333333, 1.3666667)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w68fg"]

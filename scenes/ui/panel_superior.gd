@@ -122,6 +122,8 @@ func _actualizar_oleada(nueva_oleada: int) -> void:
 	
 func finaliza_oleada(_valor):
 	desaparecer_botones_velocidades()
+	_on_empezar_oleada_hover_exited()
+	
 
 func _on_boton_menu_pressed() -> void:
 	hud.mostrar_pausa_ingame()
@@ -162,6 +164,7 @@ func _on_boton_debilidades_pressed() -> void:
 func _on_empezar_oleada_pressed() -> void:
 	if !GlobalJuego.empezo_oleada and empezar_oleada.ver_texto() == "Empezar Oleada " + str(GlobalJuego.oleada_actual):
 		GlobalJuego.empezo_oleada = true
+		_on_empezar_oleada_hover_entered()
 		if Piezas.modo_colocacion:
 			Piezas.cancelar_modo_colocacion()
 		GlobalSignal.emit_signal("comienzoOleada")
@@ -175,6 +178,7 @@ func _on_empezar_oleada_pressed() -> void:
 # botones de velocidad y pausa
 func _on_boton_pausar_pressed() -> void:
 	if GlobalJuego.empezo_oleada:
+		boton_pausar._on_self_pressed()
 		if !GlobalJuego.juego_pausa:
 			hud.mostrar_pausa_pantalla()
 		#GlobalSignal.emit_signal("aceleraMarcaPaso",3)
@@ -184,6 +188,7 @@ func _on_boton_pausar_pressed() -> void:
 
 func _on_boton_play_pressed() -> void:
 	if GlobalJuego.empezo_oleada:
+		boton_play._on_self_pressed()
 		if GlobalJuego.juego_pausa:
 			hud.ocultar_pausa_pantalla()
 		GlobalSignal.emit_signal("aceleraMarcaPaso",2)
@@ -192,12 +197,14 @@ func _on_boton_play_pressed() -> void:
 
 func _on_boton_acelerar_1_pressed() -> void:
 	if GlobalJuego.empezo_oleada:
+		boton_acelerar_1._on_self_pressed()
 		GlobalSignal.emit_signal("aceleraMarcaPaso",4)
 		GlobalSignal.emit_signal("controlMarcaPaso",true)
 		GlobalJuego.juego_pausa = false
 
 func _on_boton_acelerar_2_pressed() -> void:
 	if GlobalJuego.empezo_oleada:
+		boton_acelerar_2._on_self_pressed()
 		GlobalSignal.emit_signal("aceleraMarcaPaso",8)
 		GlobalSignal.emit_signal("controlMarcaPaso",true)
 		GlobalJuego.juego_pausa = false

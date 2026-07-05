@@ -402,7 +402,7 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.09476535
 anchor_top = 0.03076923
-anchor_right = 0.9480001
+anchor_right = 0.94800013
 anchor_bottom = 0.846
 offset_left = 122.0
 offset_top = -2.0
@@ -523,28 +523,30 @@ label_settings = ExtResource("4_jvuow")
 metadata/_edit_use_anchors_ = true
 
 [node name="video_menu" type="MenuBar" parent="opciones" unique_id=689834738]
+visible = false
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.3250868
-anchor_top = 0.019290123
-anchor_right = 0.48177087
-anchor_bottom = 0.48379624
+anchor_left = -1.432
+anchor_top = 0.025
+anchor_right = -0.125
+anchor_bottom = 0.99500006
+offset_left = 11.952026
+offset_top = -3.0499983
+offset_right = 4.125
+offset_bottom = -2.9899902
 script = ExtResource("17_hfsfw")
-metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="opciones/video_menu" unique_id=1160496099]
+[node name="TextureRect" type="TextureRect" parent="opciones/video_menu" unique_id=1109999087]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = -11.038258
-anchor_top = 0.0013852037
-anchor_right = -2.781968
-anchor_bottom = 2.0946074
-offset_right = -1.5258789e-05
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("10_6ic3k")
 expand_mode = 1
-metadata/_edit_use_anchors_ = true
 
-[node name="espaciador" type="TextureRect" parent="opciones/video_menu/TextureRect" unique_id=252263945]
+[node name="espaciador" type="TextureRect" parent="opciones/video_menu/TextureRect" unique_id=72998206]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.04710921
@@ -557,7 +559,7 @@ texture = ExtResource("18_hfsfw")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="espaciador2" type="TextureRect" parent="opciones/video_menu/TextureRect" unique_id=1011155994]
+[node name="espaciador2" type="TextureRect" parent="opciones/video_menu/TextureRect" unique_id=362192208]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.04710921
@@ -570,7 +572,7 @@ texture = ExtResource("18_hfsfw")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="espaciador3" type="TextureRect" parent="opciones/video_menu/TextureRect" unique_id=1070304057]
+[node name="espaciador3" type="TextureRect" parent="opciones/video_menu/TextureRect" unique_id=504605789]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.04710921
@@ -583,7 +585,7 @@ texture = ExtResource("18_hfsfw")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="espaciador4" type="TextureRect" parent="opciones/video_menu/TextureRect" unique_id=1136447362]
+[node name="espaciador4" type="TextureRect" parent="opciones/video_menu/TextureRect" unique_id=57414175]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.04710921
@@ -596,24 +598,22 @@ texture = ExtResource("18_hfsfw")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Titulo" type="TextureButton" parent="opciones/video_menu" unique_id=735699275]
+[node name="Titulo" type="TextureButton" parent="opciones/video_menu" unique_id=2020639339]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = -9.606226
-anchor_top = -0.06656108
-anchor_right = -9.606224
-anchor_bottom = -0.066561066
-offset_left = -19.0
-offset_top = 30.0
-offset_right = 350.3333
-offset_bottom = 95.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -171.66666
+offset_top = 11.0
+offset_right = 197.66666
+offset_bottom = 76.0
+grow_horizontal = 2
 scale = Vector2(0.94450027, 0.94450027)
 texture_normal = ExtResource("11_t1dln")
 ignore_texture_size = true
 stretch_mode = 0
-metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="opciones/video_menu/Titulo" unique_id=1658794604]
+[node name="Label" type="Label" parent="opciones/video_menu/Titulo" unique_id=1337364908]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.029783396
@@ -625,21 +625,21 @@ text = "Video"
 label_settings = ExtResource("4_jvuow")
 metadata/_edit_use_anchors_ = true
 
-[node name="pantalla" type="Label" parent="opciones/video_menu" unique_id=222722238]
+[node name="pantalla" type="Label" parent="opciones/video_menu" unique_id=1717047323]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -12.982994
 anchor_top = 0.25886583
 anchor_right = -12.982994
 anchor_bottom = 0.25886583
-offset_left = 144.0
-offset_right = 302.0
-offset_bottom = 52.0
+offset_left = 6052.1094
+offset_top = -76.17764
+offset_right = 6210.1094
+offset_bottom = -24.177643
 text = "Pantalla"
 label_settings = ExtResource("4_jvuow")
-metadata/_edit_use_anchors_ = true
 
-[node name="pantalla_lista" type="OptionButton" parent="opciones/video_menu/pantalla" unique_id=1208725293]
+[node name="pantalla_lista" type="OptionButton" parent="opciones/video_menu/pantalla" unique_id=962190182]
 layout_mode = 0
 offset_left = 188.0
 offset_top = 9.0
@@ -656,22 +656,21 @@ popup/item_1/id = 1
 popup/item_2/text = "Ventana sin bordes"
 popup/item_2/id = 2
 
-[node name="resolucion" type="Label" parent="opciones/video_menu" unique_id=643609057]
+[node name="resolucion" type="Label" parent="opciones/video_menu" unique_id=1852470711]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -12.982994
 anchor_top = 0.4448241
 anchor_right = -12.982994
 anchor_bottom = 0.4448241
-offset_left = 144.0
-offset_right = 302.0
-offset_bottom = 52.0
-text = "Resolución
-"
+offset_left = 6052.1094
+offset_top = -135.17764
+offset_right = 6210.1094
+offset_bottom = -64.77728
+text = "Resolución"
 label_settings = ExtResource("4_jvuow")
-metadata/_edit_use_anchors_ = true
 
-[node name="resolucion_lista" type="OptionButton" parent="opciones/video_menu/resolucion" unique_id=1213238140]
+[node name="resolucion_lista" type="OptionButton" parent="opciones/video_menu/resolucion" unique_id=872928065]
 layout_mode = 0
 offset_left = 208.0
 offset_top = 10.0
@@ -688,21 +687,21 @@ popup/item_1/id = 1
 popup/item_2/text = "2560 x 1440"
 popup/item_2/id = 2
 
-[node name="graficos" type="Label" parent="opciones/video_menu" unique_id=1875482494]
+[node name="graficos" type="Label" parent="opciones/video_menu" unique_id=116644757]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -12.982994
 anchor_top = 0.60932565
 anchor_right = -12.982994
 anchor_bottom = 0.60932565
-offset_left = 144.0
-offset_right = 302.0
-offset_bottom = 52.0
+offset_left = 6052.1094
+offset_top = -186.17764
+offset_right = 6210.1094
+offset_bottom = -134.17764
 text = "Gráficos"
 label_settings = ExtResource("4_jvuow")
-metadata/_edit_use_anchors_ = true
 
-[node name="graficos_lista" type="OptionButton" parent="opciones/video_menu/graficos" unique_id=1662480716]
+[node name="graficos_lista" type="OptionButton" parent="opciones/video_menu/graficos" unique_id=1288941168]
 layout_mode = 0
 offset_left = 188.0
 offset_top = 9.0
@@ -721,14 +720,14 @@ popup/item_2/id = 2
 popup/item_3/text = "Ultra"
 popup/item_3/id = 3
 
-[node name="guardar" parent="opciones/video_menu" unique_id=1607816087 instance=ExtResource("11_txqnm")]
+[node name="guardar" parent="opciones/video_menu" unique_id=1073133353 instance=ExtResource("11_txqnm")]
 layout_mode = 0
-offset_left = -578.3563
-offset_top = 509.38736
-offset_right = -427.35632
-offset_bottom = 574.3873
+offset_left = 44.0
+offset_top = 509.00003
+offset_right = 195.0
+offset_bottom = 574.0
 
-[node name="Label2" type="Label" parent="opciones/video_menu/guardar" unique_id=1667306879]
+[node name="Label2" type="Label" parent="opciones/video_menu/guardar" unique_id=925157494]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -738,14 +737,14 @@ text = "Guardar"
 label_settings = ExtResource("4_jvuow")
 horizontal_alignment = 1
 
-[node name="restablecer" parent="opciones/video_menu" unique_id=841529982 instance=ExtResource("11_txqnm")]
+[node name="restablecer" parent="opciones/video_menu" unique_id=1617419582 instance=ExtResource("11_txqnm")]
 layout_mode = 0
-offset_left = -352.35632
-offset_top = 509.38736
-offset_right = -201.35632
-offset_bottom = 574.3873
+offset_left = 270.0
+offset_top = 509.00003
+offset_right = 421.0
+offset_bottom = 574.0
 
-[node name="Label2" type="Label" parent="opciones/video_menu/restablecer" unique_id=2084687614]
+[node name="Label2" type="Label" parent="opciones/video_menu/restablecer" unique_id=731853547]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -759,10 +758,10 @@ horizontal_alignment = 1
 visible = false
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.3250868
-anchor_top = 0.019290123
-anchor_right = 0.48177087
-anchor_bottom = 0.48379624
+anchor_left = -2.0526316
+anchor_top = 0.14451829
+anchor_right = -1.8959476
+anchor_bottom = 0.6090244
 script = ExtResource("19_7qwja")
 metadata/_edit_use_anchors_ = true
 
@@ -773,10 +772,12 @@ anchor_left = -11.038258
 anchor_top = 0.0013852037
 anchor_right = -2.781968
 anchor_bottom = 2.0946074
-offset_right = -1.5258789e-05
+offset_left = 858.35614
+offset_top = -75.387344
+offset_right = 858.35614
+offset_bottom = -75.38733
 texture = ExtResource("10_6ic3k")
 expand_mode = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="espaciador" type="TextureRect" parent="opciones/sonido_menu/TextureRect2" unique_id=803587494]
 layout_mode = 1
@@ -788,7 +789,6 @@ anchor_bottom = 2.303359
 scale = Vector2(0.110328235, 0.007244024)
 texture = ExtResource("18_hfsfw")
 expand_mode = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="espaciador2" type="TextureRect" parent="opciones/sonido_menu/TextureRect2" unique_id=1896600138]
 layout_mode = 1
@@ -800,7 +800,6 @@ anchor_bottom = 2.3853636
 scale = Vector2(0.110328235, 0.007244024)
 texture = ExtResource("18_hfsfw")
 expand_mode = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="espaciador3" type="TextureRect" parent="opciones/sonido_menu/TextureRect2" unique_id=448361678]
 layout_mode = 1
@@ -812,7 +811,6 @@ anchor_bottom = 2.4673681
 scale = Vector2(0.110328235, 0.007244024)
 texture = ExtResource("18_hfsfw")
 expand_mode = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="espaciador4" type="TextureRect" parent="opciones/sonido_menu/TextureRect2" unique_id=2048680477]
 layout_mode = 1
@@ -824,7 +822,6 @@ anchor_bottom = 2.5493727
 scale = Vector2(0.110328235, 0.007244024)
 texture = ExtResource("18_hfsfw")
 expand_mode = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="Titulo" type="TextureButton" parent="opciones/sonido_menu" unique_id=394607148]
 layout_mode = 1
@@ -833,15 +830,14 @@ anchor_left = -9.606226
 anchor_top = -0.06656108
 anchor_right = -9.606224
 anchor_bottom = -0.066561066
-offset_left = -19.0
-offset_top = 30.0
-offset_right = 350.3333
-offset_bottom = 95.0
+offset_left = 839.3561
+offset_top = -45.387333
+offset_right = 1208.6895
+offset_bottom = 19.612663
 scale = Vector2(0.94450027, 0.94450027)
 texture_normal = ExtResource("11_t1dln")
 ignore_texture_size = true
 stretch_mode = 0
-metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="opciones/sonido_menu/Titulo" unique_id=1038946763]
 layout_mode = 1
@@ -855,7 +851,6 @@ offset_right = 302.0
 offset_bottom = 52.0
 text = "Sonidos"
 label_settings = ExtResource("4_jvuow")
-metadata/_edit_use_anchors_ = true
 
 [node name="general" type="Label" parent="opciones/sonido_menu" unique_id=1436422135]
 layout_mode = 1
@@ -864,12 +859,12 @@ anchor_left = -12.982994
 anchor_top = 0.25886583
 anchor_right = -12.982994
 anchor_bottom = 0.25886583
-offset_left = 144.0
-offset_right = 302.0
-offset_bottom = 52.0
+offset_left = 1002.35614
+offset_top = -75.387344
+offset_right = 1160.3562
+offset_bottom = -23.387344
 text = "General"
 label_settings = ExtResource("4_jvuow")
-metadata/_edit_use_anchors_ = true
 
 [node name="general_slider" type="HSlider" parent="opciones/sonido_menu/general" unique_id=85256311]
 layout_mode = 0
@@ -896,12 +891,12 @@ anchor_left = -12.982994
 anchor_top = 0.4448241
 anchor_right = -12.982994
 anchor_bottom = 0.4448241
-offset_left = 144.0
-offset_right = 302.0
-offset_bottom = 52.0
+offset_left = 1002.35614
+offset_top = -75.387344
+offset_right = 1160.3562
+offset_bottom = -23.387344
 text = "Musica"
 label_settings = ExtResource("4_jvuow")
-metadata/_edit_use_anchors_ = true
 
 [node name="musica_slider" type="HSlider" parent="opciones/sonido_menu/musica" unique_id=1892914264]
 layout_mode = 0
@@ -928,12 +923,12 @@ anchor_left = -12.982994
 anchor_top = 0.61290175
 anchor_right = -12.982994
 anchor_bottom = 0.61290175
-offset_left = 144.0
-offset_right = 302.0
-offset_bottom = 52.0
+offset_left = 1002.35614
+offset_top = -75.387344
+offset_right = 1160.3562
+offset_bottom = -23.387344
 text = "Efectos"
 label_settings = ExtResource("4_jvuow")
-metadata/_edit_use_anchors_ = true
 
 [node name="efectos_slider" type="HSlider" parent="opciones/sonido_menu/efectos" unique_id=1357321484]
 layout_mode = 0
@@ -955,10 +950,10 @@ text = "100"
 
 [node name="guardar" parent="opciones/sonido_menu" unique_id=1256887717 instance=ExtResource("11_txqnm")]
 layout_mode = 0
-offset_left = -578.3563
-offset_top = 509.38736
-offset_right = -427.35632
-offset_bottom = 574.3873
+offset_left = 279.99988
+offset_top = 434.0
+offset_right = 430.99988
+offset_bottom = 499.0
 
 [node name="Label2" type="Label" parent="opciones/sonido_menu/guardar" unique_id=250343586]
 layout_mode = 1
@@ -972,10 +967,10 @@ horizontal_alignment = 1
 
 [node name="restablecer" parent="opciones/sonido_menu" unique_id=1836107518 instance=ExtResource("11_txqnm")]
 layout_mode = 0
-offset_left = -352.35632
-offset_top = 509.38736
-offset_right = -201.35632
-offset_bottom = 574.3873
+offset_left = 505.99982
+offset_top = 434.0
+offset_right = 656.9998
+offset_bottom = 499.0
 
 [node name="Label2" type="Label" parent="opciones/sonido_menu/restablecer" unique_id=1496705042]
 layout_mode = 1
@@ -990,10 +985,10 @@ horizontal_alignment = 1
 [node name="controles_menu" type="MenuBar" parent="opciones" unique_id=1123123891]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.3250868
-anchor_top = 0.019290123
-anchor_right = 0.48177087
-anchor_bottom = 0.48379624
+anchor_left = -1.9861495
+anchor_top = 0.15780732
+anchor_right = -1.8294656
+anchor_bottom = 0.62231344
 script = ExtResource("19_txqnm")
 metadata/_edit_use_anchors_ = true
 
@@ -1004,10 +999,12 @@ anchor_left = -11.038258
 anchor_top = 0.0013852037
 anchor_right = -2.781968
 anchor_bottom = 2.0946074
-offset_right = -1.5258789e-05
+offset_left = 834.35614
+offset_top = -83.387344
+offset_right = 834.35614
+offset_bottom = -83.38733
 texture = ExtResource("10_6ic3k")
 expand_mode = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="espaciador" type="TextureRect" parent="opciones/controles_menu/TextureRect" unique_id=497689456]
 layout_mode = 1
@@ -1133,15 +1130,14 @@ anchor_left = -9.606226
 anchor_top = -0.06656108
 anchor_right = -9.606224
 anchor_bottom = -0.066561066
-offset_left = -19.0
-offset_top = 30.0
-offset_right = 350.3333
-offset_bottom = 95.0
+offset_left = 815.3561
+offset_top = -53.387333
+offset_right = 1184.6895
+offset_bottom = 11.612648
 scale = Vector2(0.94450027, 0.94450027)
 texture_normal = ExtResource("11_t1dln")
 ignore_texture_size = true
 stretch_mode = 0
-metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="opciones/controles_menu/Titulo" unique_id=408702065]
 layout_mode = 1
@@ -1159,10 +1155,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="boton_camara" type="Button" parent="opciones/controles_menu" unique_id=1794650112]
 layout_mode = 0
-offset_left = -594.3563
-offset_top = 83.387344
-offset_right = -504.0
-offset_bottom = 126.77469
+offset_left = 239.99982
+offset_right = 330.35614
+offset_bottom = 43.387344
 theme_override_styles/normal = SubResource("StyleBoxEmpty_wweun")
 theme_override_styles/hover = SubResource("StyleBoxFlat_wweun")
 
@@ -1279,11 +1274,12 @@ offset_bottom = 40.0
 alignment = 1
 
 [node name="reiniciar_camara" type="Label" parent="opciones/controles_menu/boton_camara/controles_camara/Container_camera" unique_id=1038636501]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
 anchor_left = -0.02007592
 anchor_top = 4.6926928
-anchor_right = 1.1263546
-anchor_bottom = 5.6926928
+anchor_right = 0.47866747
+anchor_bottom = 4.825845
 offset_left = 8.110671
 offset_top = -1549.9109
 offset_right = 4.9746704
@@ -1301,11 +1297,12 @@ offset_bottom = 40.0
 alignment = 1
 
 [node name="ascender" type="Label" parent="opciones/controles_menu/boton_camara/controles_camara/Container_camera" unique_id=1785342209]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
 anchor_left = -0.02007592
-anchor_top = 5.6157694
-anchor_right = 1.1263546
-anchor_bottom = 6.6157694
+anchor_top = 5.615769
+anchor_right = 0.3400536
+anchor_bottom = 5.756021
 offset_left = 8.110671
 offset_top = -1841.603
 offset_right = 4.9746704
@@ -1323,11 +1320,12 @@ offset_bottom = 40.0
 alignment = 1
 
 [node name="descender" type="Label" parent="opciones/controles_menu/boton_camara/controles_camara/Container_camera" unique_id=554482363]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
 anchor_left = -0.02007592
 anchor_top = 6.5196157
-anchor_right = 1.1263546
-anchor_bottom = 7.5196157
+anchor_right = 0.41926152
+anchor_bottom = 6.6625843
 offset_left = 8.110671
 offset_top = -2127.2185
 offset_right = 4.9746704
@@ -1349,8 +1347,8 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.02007592
 anchor_top = 7.4426928
-anchor_right = 1.1263546
-anchor_bottom = 8.442693
+anchor_right = 0.2410437
+anchor_bottom = 7.6074004
 offset_left = 8.110671
 offset_top = -2418.911
 offset_right = 4.9746704
@@ -1369,10 +1367,9 @@ alignment = 1
 
 [node name="boton_jugabilidad" type="Button" parent="opciones/controles_menu" unique_id=1670906487]
 layout_mode = 0
-offset_left = -461.35632
-offset_top = 83.387344
-offset_right = -338.35632
-offset_bottom = 126.77469
+offset_left = 372.99982
+offset_right = 495.99982
+offset_bottom = 43.387344
 theme_override_styles/normal = SubResource("StyleBoxEmpty_wweun")
 theme_override_styles/hover = SubResource("StyleBoxFlat_rvf5f")
 
@@ -1425,9 +1422,9 @@ alignment = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.019000001
-anchor_top = 1.0
+anchor_top = 1.48
 anchor_right = 0.358
-anchor_bottom = 1.24
+anchor_bottom = 1.72
 offset_left = 4.9439383
 offset_top = -8.0
 offset_right = 0.20805359
@@ -1447,9 +1444,9 @@ alignment = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.005999999
-anchor_top = 1.2
+anchor_top = 1.68
 anchor_right = 0.307
-anchor_bottom = 1.495
+anchor_bottom = 1.975
 offset_left = 10.455939
 offset_top = -1.0000153
 offset_right = -0.1680603
@@ -1470,9 +1467,9 @@ alignment = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.00032911435
-anchor_top = 0.5
+anchor_top = 0.98
 anchor_right = 0.43400002
-anchor_bottom = 0.7569365
+anchor_bottom = 1.2369365
 offset_left = 13.139483
 offset_top = -4.0
 offset_right = -4.0160675
@@ -1538,9 +1535,9 @@ alignment = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.005999999
-anchor_top = 1.46
-anchor_right = 0.307
-anchor_bottom = 1.755
+anchor_top = 0.48000008
+anchor_right = 0.36596227
+anchor_bottom = 0.775
 offset_left = 10.455939
 offset_top = -1.0000153
 offset_right = -0.1680603
@@ -1557,12 +1554,34 @@ offset_right = 382.5
 offset_bottom = 49.0
 alignment = 1
 
+[node name="play_oleada" type="Label" parent="opciones/controles_menu/boton_jugabilidad/controles_jugabilidad/Container_jugabilidad" unique_id=1359543994]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.019000001
+anchor_top = 1.255
+anchor_right = 0.358
+anchor_bottom = 1.495
+offset_left = 4.9439383
+offset_top = -8.0
+offset_right = 0.20805359
+text = "Acelerar x1"
+label_settings = ExtResource("4_jvuow")
+metadata/_edit_use_anchors_ = true
+
+[node name="play_edit" type="LineEdit" parent="opciones/controles_menu/boton_jugabilidad/controles_jugabilidad/Container_jugabilidad/play_oleada" unique_id=1463302868]
+layout_mode = 0
+offset_left = 314.0
+offset_top = 18.0
+offset_right = 382.5
+offset_bottom = 49.0
+alignment = 1
+
 [node name="guardar" parent="opciones/controles_menu" unique_id=1099261066 instance=ExtResource("11_txqnm")]
 layout_mode = 0
-offset_left = -578.3563
-offset_top = 509.38736
-offset_right = -427.35632
-offset_bottom = 574.3873
+offset_left = 255.99982
+offset_top = 426.0
+offset_right = 406.99982
+offset_bottom = 490.99997
 
 [node name="Label2" type="Label" parent="opciones/controles_menu/guardar" unique_id=599822185]
 layout_mode = 1
@@ -1576,10 +1595,10 @@ horizontal_alignment = 1
 
 [node name="restablecer" parent="opciones/controles_menu" unique_id=1280393672 instance=ExtResource("11_txqnm")]
 layout_mode = 0
-offset_left = -352.35632
-offset_top = 509.38736
-offset_right = -201.35632
-offset_bottom = 574.3873
+offset_left = 481.99982
+offset_top = 426.0
+offset_right = 632.9998
+offset_bottom = 490.99997
 
 [node name="Label2" type="Label" parent="opciones/controles_menu/restablecer" unique_id=620157016]
 layout_mode = 1
@@ -1595,10 +1614,10 @@ horizontal_alignment = 1
 visible = false
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.3250868
-anchor_top = 0.019290123
-anchor_right = 0.48177087
-anchor_bottom = 0.48379624
+anchor_left = -2.0083103
+anchor_top = 0.2906977
+anchor_right = -1.8516263
+anchor_bottom = 0.75520384
 script = ExtResource("21_aca1m")
 metadata/_edit_use_anchors_ = true
 
@@ -1609,10 +1628,12 @@ anchor_left = -11.038258
 anchor_top = 0.0013852037
 anchor_right = -2.781968
 anchor_bottom = 2.0946074
-offset_right = -1.5258789e-05
+offset_left = 842.35614
+offset_top = -163.38734
+offset_right = 842.35614
+offset_bottom = -163.38733
 texture = ExtResource("10_6ic3k")
 expand_mode = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="espaciador" type="TextureRect" parent="opciones/accesibilidad_menu/TextureRect" unique_id=1728226061]
 layout_mode = 1
@@ -1673,15 +1694,14 @@ anchor_left = -9.606226
 anchor_top = -0.06656108
 anchor_right = -9.606224
 anchor_bottom = -0.066561066
-offset_left = -19.0
-offset_top = 30.0
-offset_right = 350.3333
-offset_bottom = 95.0
+offset_left = 823.3561
+offset_top = -133.38733
+offset_right = 1192.6895
+offset_bottom = -68.38734
 scale = Vector2(0.94450027, 0.94450027)
 texture_normal = ExtResource("11_t1dln")
 ignore_texture_size = true
 stretch_mode = 0
-metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="opciones/accesibilidad_menu/Titulo" unique_id=922616855]
 layout_mode = 1
@@ -1693,7 +1713,6 @@ offset_right = 302.0
 offset_bottom = 52.0
 text = "Accesibilidad"
 label_settings = ExtResource("4_jvuow")
-metadata/_edit_use_anchors_ = true
 
 [node name="multi" type="Label" parent="opciones/accesibilidad_menu" unique_id=1052228799]
 layout_mode = 1
@@ -1702,12 +1721,12 @@ anchor_left = -12.982994
 anchor_top = 0.25886583
 anchor_right = -12.982994
 anchor_bottom = 0.25886583
-offset_left = 144.0
-offset_right = 302.0
-offset_bottom = 52.0
+offset_left = 986.35614
+offset_top = -163.38734
+offset_right = 1144.3562
+offset_bottom = -111.387344
 text = "Multijugador"
 label_settings = ExtResource("4_jvuow")
-metadata/_edit_use_anchors_ = true
 
 [node name="CheckButton" type="CheckButton" parent="opciones/accesibilidad_menu/multi" unique_id=2084168923]
 layout_mode = 0
@@ -1727,12 +1746,12 @@ anchor_left = -12.982994
 anchor_top = 0.43767184
 anchor_right = -12.982994
 anchor_bottom = 0.43767184
-offset_left = 144.0
-offset_right = 302.0
-offset_bottom = 52.0
+offset_left = 986.35614
+offset_top = -163.38734
+offset_right = 1144.3562
+offset_bottom = -111.387344
 text = "Elijo Piezas"
 label_settings = ExtResource("4_jvuow")
-metadata/_edit_use_anchors_ = true
 
 [node name="option_color" type="OptionButton" parent="opciones/accesibilidad_menu/color_piezas" unique_id=1302938135]
 layout_mode = 1
@@ -1758,12 +1777,12 @@ anchor_left = -12.982994
 anchor_top = 0.60932565
 anchor_right = -12.982994
 anchor_bottom = 0.60932565
-offset_left = 144.0
-offset_right = 302.0
-offset_bottom = 52.0
+offset_left = 986.35614
+offset_top = -163.38734
+offset_right = 1144.3562
+offset_bottom = -111.387344
 text = "Tamaño Puntero"
 label_settings = ExtResource("4_jvuow")
-metadata/_edit_use_anchors_ = true
 
 [node name="tamanio" type="OptionButton" parent="opciones/accesibilidad_menu/tamanio_mouse" unique_id=2099395626]
 layout_mode = 1
@@ -1788,10 +1807,10 @@ popup/item_3/id = 3
 
 [node name="guardar" parent="opciones/accesibilidad_menu" unique_id=1934532811 instance=ExtResource("11_txqnm")]
 layout_mode = 0
-offset_left = -578.3563
-offset_top = 509.38736
-offset_right = -427.35632
-offset_bottom = 574.3873
+offset_left = 263.99982
+offset_top = 346.0
+offset_right = 414.99982
+offset_bottom = 410.99997
 
 [node name="Label2" type="Label" parent="opciones/accesibilidad_menu/guardar" unique_id=327754701]
 layout_mode = 1
@@ -1805,10 +1824,10 @@ horizontal_alignment = 1
 
 [node name="restablecer" parent="opciones/accesibilidad_menu" unique_id=1270028872 instance=ExtResource("11_txqnm")]
 layout_mode = 0
-offset_left = -352.35632
-offset_top = 509.38736
-offset_right = -201.35632
-offset_bottom = 574.3873
+offset_left = 489.99982
+offset_top = 346.0
+offset_right = 640.9998
+offset_bottom = 410.99997
 
 [node name="Label2" type="Label" parent="opciones/accesibilidad_menu/restablecer" unique_id=1329772315]
 layout_mode = 1
@@ -2068,8 +2087,6 @@ vertical_alignment = 1
 [connection signal="pressed" from="opciones/sonido" to="opciones" method="_on_sonido_pressed"]
 [connection signal="pressed" from="opciones/accesibilidad" to="opciones" method="_on_accesibilidad_pressed"]
 [connection signal="pressed" from="opciones/volver" to="opciones" method="_on_volver_pressed"]
-[connection signal="pressed" from="opciones/video_menu/guardar" to="opciones/video_menu" method="_on_guardar_pressed"]
-[connection signal="pressed" from="opciones/video_menu/restablecer" to="opciones/video_menu" method="_on_restablecer_pressed"]
 [connection signal="pressed" from="opciones/sonido_menu/guardar" to="opciones/sonido_menu" method="_on_guardar_pressed"]
 [connection signal="pressed" from="opciones/sonido_menu/restablecer" to="opciones/sonido_menu" method="_on_restablecer_pressed"]
 [connection signal="pressed" from="opciones/controles_menu/boton_camara" to="opciones/controles_menu" method="_on_boton_camara_pressed"]

@@ -69,9 +69,12 @@ func _input(event):
 	if event.is_action_pressed("ocultar_tienda"):
 		panel_tienda._alternar_tienda()
 	elif event.is_action_pressed("ocultar_todo"):
-		imagen_back_inferior._on_boton_esconder_inferior_pressed()
-		panel_superior._on_boton_esconder_superior_pressed()
-		panel_tienda._alternar_tienda()
+		if imagen_back_inferior.panel_visible:
+			imagen_back_inferior._on_boton_esconder_inferior_pressed()
+		if panel_superior.panel_visible:
+			panel_superior._on_boton_esconder_superior_pressed()
+		if panel_tienda.tienda_visible:
+			panel_tienda._alternar_tienda()
 	elif event.is_action_pressed("empezar_oleada"):
 		panel_superior._on_empezar_oleada_pressed()
 	elif event.is_action_pressed("pausa_oleada"):
@@ -85,6 +88,9 @@ func _input(event):
 		panel_superior._on_boton_acelerar_1_pressed()
 	elif event.is_action_pressed("acelerar2"):
 		panel_superior._on_boton_acelerar_2_pressed()
+	elif event.is_action_pressed("play_oleada"):
+		panel_superior._on_boton_play_pressed()
+		
 		
 func mostrar_pausa_ingame():
 	panel_superior._on_boton_pausar_pressed()
