@@ -2,7 +2,6 @@ extends CharacterBody3D
 
 @onready var camera_3d: Camera3D = $Camera3D
 
-
 @export_group("Límites de Movimiento")
 @export var limite_y_min: float = 3
 @export var limite_y_max: float = 13
@@ -22,7 +21,6 @@ extends CharacterBody3D
 @onready var posicion_z: float = 31
 var boton_derecho_presionado: bool = false
 
-
 @export var zoom_distancia: float = 2.0  
 @export var zoom_velocidad: float = 10.0 
 var posicion_original_camara: Vector3
@@ -30,57 +28,46 @@ var posicion_original_camara: Vector3
 func _ready() -> void:
 	reiniciar_posicion()
 
-
 func _input(event: InputEvent) -> void:
-	#manejo con mouse
+	# Manejo con mouse
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		boton_derecho_presionado = event.pressed
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if event.pressed else Input.MOUSE_MODE_VISIBLE
 
-	#rotacion si el boton derecho es presionado, tengo que hacerlo con mapa por ahora esta asi
+	# Rotación si el botón derecho es presionado
 	if event is InputEventMouseMotion and boton_derecho_presionado:
 		rotate_y(deg_to_rad(-event.relative.x * sensibilidad_mouse))
 		var cambio_v = -event.relative.y * sensibilidad_mouse
 		camera_3d.rotation_degrees.x = clamp(camera_3d.rotation_degrees.x + cambio_v, limite_mirar_abajo, limite_mirar_arriba)
 		
-		
 	if event.is_action_pressed("zoom_de_camara"):
 		zoom_de_camara()
 
-	#reset de camara
+	# Reset de cámara
 	if event.is_action_pressed("resetear_camara"):
 		reiniciar_posicion()
 
 func reiniciar_posicion():
 	velocity = Vector3.ZERO 
 	global_position = Vector3(posicion_x, posicion_y, posicion_z)
-	
 	rotation_degrees.y = -45
-	
-	
 	camera_3d.rotation_degrees.x = -30
 	
 func zoom_de_camara():
 	pass
-	
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
+
+	var delta_real = get_physics_process_delta_time()
+	print(delta_real)
 	var input_dir = Input.get_vector("Mover izquierda", "Mover derecha", "Mover adelante", "Mover atras")
-	
-
 	var direccion = (global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
-
 	var movimiento_vertical = 0.0
-	
 	if Input.is_action_pressed("Descender"):
 		movimiento_vertical = rapidez_vuelo
-
 	if Input.is_action_pressed("Ascender"):
 		movimiento_vertical = -rapidez_vuelo
-		
-		
-
 
 	if direccion != Vector3.ZERO or movimiento_vertical != 0:
 		velocity.x = direccion.x * rapidez_movimiento
@@ -88,13 +75,19 @@ func _physics_process(delta: float) -> void:
 		velocity.z = direccion.z * rapidez_movimiento
 	else:
 
-		velocity.x = move_toward(velocity.x, 0, rapidez_movimiento * friccion * delta)
-		velocity.y = move_toward(velocity.y, 0, rapidez_movimiento * friccion * delta)
-		velocity.z = move_toward(velocity.z, 0, rapidez_movimiento * friccion * delta)
+		velocity.x = move_toward(velocity.x, 0, rapidez_movimiento * friccion * delta_real)
+		velocity.y = move_toward(velocity.y, 0, rapidez_movimiento * friccion * delta_real)
+		velocity.z = move_toward(velocity.z, 0, rapidez_movimiento * friccion * delta_real)
+
+
+	if Engine.time_scale > 0:
+		velocity = velocity / Engine.time_scale
 
 
 	move_and_slide()
 	
 
+
+	velocity = velocity * Engine.time_scale
+
 	global_position.y = clamp(global_position.y, limite_y_min, limite_y_max)
-	

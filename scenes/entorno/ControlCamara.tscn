@@ -8,6 +8,7 @@ radius = 0.40509033
 height = 0.81018066
 
 [node name="ControlCamara" type="CharacterBody3D" unique_id=1599564253]
+process_mode = 3
 collision_layer = 8
 collision_mask = 17
 motion_mode = 1
