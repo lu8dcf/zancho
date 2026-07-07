@@ -715,7 +715,7 @@ popup/item_0/text = "Baja"
 popup/item_0/id = 0
 popup/item_1/text = "Media"
 popup/item_1/id = 1
-popup/item_2/text = "Alta sin bordes"
+popup/item_2/text = "Alta"
 popup/item_2/id = 2
 popup/item_3/text = "Ultra"
 popup/item_3/id = 3
@@ -2087,6 +2087,8 @@ vertical_alignment = 1
 [connection signal="pressed" from="opciones/sonido" to="opciones" method="_on_sonido_pressed"]
 [connection signal="pressed" from="opciones/accesibilidad" to="opciones" method="_on_accesibilidad_pressed"]
 [connection signal="pressed" from="opciones/volver" to="opciones" method="_on_volver_pressed"]
+[connection signal="pressed" from="opciones/video_menu/guardar" to="opciones/video_menu" method="_on_guardar_pressed"]
+[connection signal="pressed" from="opciones/video_menu/restablecer" to="opciones/video_menu" method="_on_restablecer_pressed"]
 [connection signal="pressed" from="opciones/sonido_menu/guardar" to="opciones/sonido_menu" method="_on_guardar_pressed"]
 [connection signal="pressed" from="opciones/sonido_menu/restablecer" to="opciones/sonido_menu" method="_on_restablecer_pressed"]
 [connection signal="pressed" from="opciones/controles_menu/boton_camara" to="opciones/controles_menu" method="_on_boton_camara_pressed"]

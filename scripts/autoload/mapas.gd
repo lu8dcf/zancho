@@ -14,12 +14,18 @@ var tipo_obstaculo : Dictionary = {
 	6: "res://assets/modelos/objetos/obstaculo_6.tscn",
 }
 
+
+
+
 var datos_mapa : Dictionary={
 #  mapa : oleadas / nivel
 	1: [1,2,3,4,5],
 	2: [6,7,8,9,10],
 	3: [11,12,13,14,15],
-	4: [16,17,18,19,20]
+	4: [16,17,18,19,20],
+	5: [11, 12, 13, 14, 15],
+	6: [16, 17, 18, 19, 20]
+
 }
 
 func _ready():
@@ -123,20 +129,14 @@ func cargar_cada_mapa(mapa_numero:int):
 	mapas.append(posiciones)
 	obstaculos.append(tipos)
 
-func obtener_mapa_actual(indice_mapa: int = 0) -> Dictionary:	
+func obtener_mapa_actual(indice_mapa: int =1) -> Dictionary:	
+	var indice = indice_mapa - 1
+	if indice <0 or indice >= mapas.size():
+		return {
+			"posiciones": [],
+			"tipos": []
+		}
 	return {
-		"posiciones": mapas[indice_mapa],
-		"tipos": obstaculos[indice_mapa]
-	}
-
-#func es_posicion_bloqueada(posicion: Vector2i, indice_mapa: int = 0) -> bool:
-	#if indice_mapa < 0 or indice_mapa >= mapas.size():
-		#return false
-	#return posicion in mapas[indice_mapa]
-
-#func siguiente_mapa() -> void:
-	#var nuevo_mapa = (GlobalJuego.mapa_actual + 1)
-	#if nuevo_mapa == 6:
-		#nuevo_mapa = 1
-	#GlobalJuego.cambiar_mapa(nuevo_mapa)
-	#esiguiente_mapa()
+			"posiciones": mapas[indice],
+			"tipos": obstaculos[indice]
+		}
