@@ -240,8 +240,9 @@ func ataque(idA):
 		return
 	brillar_ataque(true)
 	animacion("Bataque")
-	await get_tree().create_timer(0.5).timeout
-	Sonido("espada2")
+	await get_tree().create_timer(GlobalJuego.tiempo_ataque/2).timeout
+	if GlobalJuego.tiempo_ataque==1.0:
+		Sonido("espada2")
 	
 # -------------------------------   esto hay que pasarlo a la barra d evida ------------------------
 func recibeDanio(idD: int,danio: int):
@@ -249,8 +250,9 @@ func recibeDanio(idD: int,danio: int):
 		return
 	nodo_sangre.visible=true
 	vida_actual -= danio
-	await get_tree().create_timer(0.7).timeout
-	Sonido("danio")
+	await get_tree().create_timer(GlobalJuego.tiempo_ataque*0.7).timeout
+	if GlobalJuego.tiempo_ataque==1.0:
+		Sonido("danio")
 	sangre.play("Sangre")
 	
 	actualizar_shader_danio()
