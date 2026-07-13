@@ -52,6 +52,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60533905, 0)
 shape = SubResource("CylinderShape3D_c11s1")
 
 [node name="DustParticles" type="GPUParticles3D" parent="." unique_id=725324837]
+visible = false
 emitting = false
 amount = 53
 lifetime = 0.3
