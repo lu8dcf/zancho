@@ -310,7 +310,7 @@ func verificar_orden_aparicion(nombre_pieza: String) -> bool:
 		return false
 	# verificar la oleada actual, dependendiendo del numero se van mostrando las piezas
 	var valor = GlobalJuego.oleada_actual < datos_piezas[nombre_pieza]["orden_aparicion"]
-	#print("verifica: ", valor, " pieza: ",nombre_pieza)
+	print("verifica: ", valor, " pieza: ",nombre_pieza)
 	return valor
 
 func obtener_nombre_pieza(tipo:int):

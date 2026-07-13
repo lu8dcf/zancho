@@ -113,7 +113,6 @@ func aplicar_calidad_graficos(index: int):
 	
 	_aplicar_calidad_particulas(index)
 	_ajustar_sombras_luces(get_tree().root, index)
-	_ajustar_camaras(get_tree().root,index)
 	
 func _on_guardar_pressed() -> void:
 	guardar_configuracion()
@@ -125,48 +124,27 @@ func _aplicar_configuracion_baja():
 	if viewport:
 		viewport.msaa_3d = Viewport.MSAA_DISABLED
 		viewport.scaling_3d_scale = 0.7  # Reducir escala de renderizado 3D
-		viewport.screen_space_aa = Viewport.SCREEN_SPACE_AA_DISABLED
-		viewport.use_taa = false
-		viewport.use_debanding = false
-		viewport.scaling_3d_scale = 0.6
-
+	
 	# VSync desactivado
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
-	Engine.max_fps = 60
-	quitar_todas_las_sombras(get_tree().root)
 	
-		
 
-func quitar_todas_las_sombras(nodo: Node) -> void:
-	if nodo is Light3D:
-		nodo.shadow_enabled = false
-	if nodo is GeometryInstance3D:
-		nodo.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	for hijo in nodo.get_children():
-		quitar_todas_las_sombras(hijo)
-		
-		
 func _aplicar_configuracion_media():
 	var viewport = get_viewport()
 	if viewport:
 		viewport.msaa_3d = Viewport.MSAA_2X
-		viewport.screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA
-		viewport.use_taa = false
-		viewport.scaling_3d_scale = 0.8
-	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
-	Engine.max_fps = 60
+		viewport.scaling_3d_scale = 0.85
+	
+	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 
 
 func _aplicar_configuracion_alta():
 	var viewport = get_viewport()
 	if viewport:
 		viewport.msaa_3d = Viewport.MSAA_4X
-		viewport.screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA
-		viewport.use_taa = true
 		viewport.scaling_3d_scale = 1.0
+	
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
-	Engine.max_fps = 120
-
 
 
 func _aplicar_configuracion_ultra():
@@ -186,58 +164,69 @@ func _aplicar_calidad_particulas(nivel: int):
 		# Conectar señal para aplicar a futuros nodos
 		if not arbol.node_added.is_connected(_on_nodo_añadido):
 			arbol.node_added.connect(_on_nodo_añadido)
-			
-func _guardar_valores_originales_particulas(p: Node) -> void:
-	if not p.has_meta("original_amount"):
-		p.set_meta("original_amount", p.amount)
-	if not p.has_meta("original_lifetime"):
-		p.set_meta("original_lifetime", p.lifetime)
-	if "fixed_fps" in p and not p.has_meta("original_fixed_fps"):
-		p.set_meta("original_fixed_fps", p.fixed_fps)
-	
+
 func _aplicar_particulas_recursivo(nodo: Node, nivel: int):
-	if nodo is GPUParticles3D or nodo is GPUParticles2D or nodo is CPUParticles3D:
-		_guardar_valores_originales_particulas(nodo)
-
-		var base_amount: int = nodo.get_meta("original_amount")
-		var base_lifetime: float = nodo.get_meta("original_lifetime")
-
+	# Ajustar GPUParticles3D
+	if nodo is GPUParticles3D:
+		var particulas = nodo as GPUParticles3D
 		match nivel:
 			CalidadGraficos.BAJA:
-				nodo.amount = max(1, int(base_amount * 0.25))
-				nodo.lifetime = base_lifetime * 0.7
-				if "fixed_fps" in nodo:
-					nodo.fixed_fps = 15
-
+				particulas.amount = max(1, int(particulas.amount * 0.25))
+				particulas.lifetime = particulas.lifetime * 0.7
+				particulas.fixed_fps = 15
 			CalidadGraficos.MEDIA:
-				nodo.amount = max(1, int(base_amount * 0.5))
-				nodo.lifetime = base_lifetime * 0.85
-				if "fixed_fps" in nodo:
-					nodo.fixed_fps = 30
-
+				particulas.amount = max(1, int(particulas.amount * 0.5))
+				particulas.lifetime = particulas.lifetime * 0.85
+				particulas.fixed_fps = 30
 			CalidadGraficos.ALTA:
-				nodo.amount = max(1, int(base_amount * 0.75))
-				nodo.lifetime = base_lifetime
-				if "fixed_fps" in nodo:
-					nodo.fixed_fps = 60
-
+				particulas.amount = max(1, int(particulas.amount * 0.75))
+				particulas.fixed_fps = 60
 			CalidadGraficos.ULTRA:
-				nodo.amount = base_amount
-				nodo.lifetime = base_lifetime
-				if "fixed_fps" in nodo:
-					nodo.fixed_fps = nodo.get_meta("original_fixed_fps", 0)
-
+				particulas.fixed_fps = 0  # Sin límite
+	
+	# Ajustar CPUParticles3D
+	if nodo is CPUParticles3D:
+		var particulas = nodo as CPUParticles3D
+		match nivel:
+			CalidadGraficos.BAJA:
+				particulas.amount = max(1, int(particulas.amount * 0.25))
+				particulas.lifetime = particulas.lifetime * 0.7
+			CalidadGraficos.MEDIA:
+				particulas.amount = max(1, int(particulas.amount * 0.5))
+				particulas.lifetime = particulas.lifetime * 0.85
+			CalidadGraficos.ALTA:
+				particulas.amount = max(1, int(particulas.amount * 0.75))
+	
+	# Ajustar GPUParticles2D
+	if nodo is GPUParticles2D:
+		var particulas = nodo as GPUParticles2D
+		match nivel:
+			CalidadGraficos.BAJA:
+				particulas.amount = max(1, int(particulas.amount * 0.25))
+				particulas.lifetime = particulas.lifetime * 0.7
+				particulas.fixed_fps = 15
+			CalidadGraficos.MEDIA:
+				particulas.amount = max(1, int(particulas.amount * 0.5))
+				particulas.lifetime = particulas.lifetime * 0.85
+				particulas.fixed_fps = 30
+			CalidadGraficos.ALTA:
+				particulas.amount = max(1, int(particulas.amount * 0.75))
+				particulas.fixed_fps = 60
+			CalidadGraficos.ULTRA:
+				particulas.fixed_fps = 0
+	
+	# Recursivamente aplicar a hijos
 	for hijo in nodo.get_children():
 		_aplicar_particulas_recursivo(hijo, nivel)
 
 func _ajustar_sombras_luces(nodo: Node, calidad: int):
-	if nodo is Light3D:
+	if nodo is DirectionalLight3D:
 		match calidad:
 			CalidadGraficos.BAJA:
 				nodo.shadow_enabled = false
 			CalidadGraficos.MEDIA:
-				nodo.shadow_enabled = nodo is DirectionalLight3D
-				#nodo.directional_shadow_size = 1024
+				nodo.shadow_enabled = true
+				nodo.directional_shadow_size = 1024
 			CalidadGraficos.ALTA:
 				nodo.shadow_enabled = true
 				nodo.directional_shadow_size = 2048
@@ -245,37 +234,8 @@ func _ajustar_sombras_luces(nodo: Node, calidad: int):
 				nodo.shadow_enabled = true
 				nodo.directional_shadow_size = 4096
 	
-	if nodo is GeometryInstance3D:
-		match calidad:
-			CalidadGraficos.BAJA:
-				nodo.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-
-			CalidadGraficos.MEDIA:
-				nodo.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
-
-			CalidadGraficos.ALTA:
-				nodo.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
-
-			CalidadGraficos.ULTRA:
-				nodo.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
 	for hijo in nodo.get_children():
 		_ajustar_sombras_luces(hijo, calidad)
-
-
-func _ajustar_camaras(nodo: Node, calidad: int):
-	if nodo is Camera3D:
-		match calidad:
-			CalidadGraficos.BAJA:
-				nodo.far = 150.0
-			CalidadGraficos.MEDIA:
-				nodo.far = 300.0
-			CalidadGraficos.ALTA:
-				nodo.far = 600.0
-			CalidadGraficos.ULTRA:
-				nodo.far = 1000.0
-
-	for hijo in nodo.get_children():
-		_ajustar_camaras(hijo, calidad)
 
 func _on_nodo_añadido(nodo: Node):
 	# Aplicar calidad de partículas a nuevos nodos que se añadan a la escena
