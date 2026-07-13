@@ -147,7 +147,7 @@ func obtener_punto_colocacion_pieza(coordenadas: Vector2i) -> Vector3:
 	return Vector3.ZERO
 
 func mostrar_oleada_actual(gano):
-	GlobalSignal.emit_signal("aceleraMarcaPaso",2)
+	GlobalSignal.emit_signal("aceleraMarcaPaso",3)
 	
 	_limpiar_seleccion_reina()
 	_limpiar_resaltado_ataque()
