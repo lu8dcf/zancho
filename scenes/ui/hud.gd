@@ -93,17 +93,8 @@ func _input(event):
 		
 		
 func mostrar_pausa_ingame():
-	# Buscar si ya existe una instancia de pausa
-	var pausa_existente = get_node_or_null("pausa_in_game")
-	
-	if pausa_existente:
-		pausa_existente.queue_free()
-		# Esperar un frame para que se elimine completamente
-		await get_tree().process_frame
-	
 	panel_superior._on_boton_pausar_pressed()
 	var instancia_pausa = escena_pausa.instantiate()
-	instancia_pausa.name = "pausa_in_game"  # Asignar nombre para futuras verificaciones
 	add_child(instancia_pausa)
 
 func mostrar_pausa_pantalla():
