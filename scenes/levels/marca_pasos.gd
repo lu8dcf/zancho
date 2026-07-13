@@ -54,6 +54,8 @@ func multiplicador(multi):
 		return
 	#wait_time = GlobalJuego.tiempo_pasos / multi
 
-
-	var escala = float(multi) * 0.5  # 1=1.0 (100%), 2=1.5 (150%), ..., 5=4.0 (400%)
-	Engine.time_scale = escala
+	GlobalJuego.tiempo_ataque=GlobalJuego.tiempo_ataque_ref/multi
+	GlobalJuego.tiempo_pasos=GlobalJuego.tiempo_pasos_ref/multi
+	wait_time = GlobalJuego.tiempo_pasos
+	#var escala = float(multi) * 0.5  # 1=1.0 (100%), 2=1.5 (150%), ..., 5=4.0 (400%)
+	#Engine.time_scale = escala

@@ -29,7 +29,8 @@ var espaciado_baldosas : float = 2.0
 
 
 # Oleadas
-var tiempo_pasos = 4.0   # tiempo entre cada movimento
+var tiempo_pasos_ref = 4.0
+var tiempo_pasos = tiempo_pasos_ref    # tiempo entre cada movimento
 var empezo_oleada = false # si es que empezo la oleada
 var valores_antes_empezar_oleada = []
 
@@ -37,7 +38,8 @@ var valores_antes_empezar_oleada = []
 var juego_pausa = false
 
 # Ataques
-var tiempo_ataque = 1 # timepo de cada ataque
+var tiempo_ataque_ref = 1.0
+var tiempo_ataque = tiempo_ataque_ref # timepo de cada ataque
 var ataque_en_proceso = false
 
 #lista piezas
@@ -189,3 +191,5 @@ func reiniciar_variables():
 	economia.vacioVariables()
 	juego_pausa = false
 	ataque_en_proceso=false
+	tiempo_pasos = tiempo_pasos_ref 
+	tiempo_ataque = tiempo_ataque_ref

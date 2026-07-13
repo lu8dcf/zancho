@@ -191,21 +191,21 @@ func _on_boton_play_pressed() -> void:
 		boton_play._on_self_pressed()
 		if GlobalJuego.juego_pausa:
 			hud.ocultar_pausa_pantalla()
-		GlobalSignal.emit_signal("aceleraMarcaPaso",2)
+		GlobalSignal.emit_signal("aceleraMarcaPaso",1)
 		GlobalSignal.emit_signal("controlMarcaPaso",true)
 		GlobalJuego.juego_pausa = false
 
 func _on_boton_acelerar_1_pressed() -> void:
 	if GlobalJuego.empezo_oleada:
 		boton_acelerar_1._on_self_pressed()
-		GlobalSignal.emit_signal("aceleraMarcaPaso",4)
+		GlobalSignal.emit_signal("aceleraMarcaPaso",2)
 		GlobalSignal.emit_signal("controlMarcaPaso",true)
 		GlobalJuego.juego_pausa = false
 
 func _on_boton_acelerar_2_pressed() -> void:
 	if GlobalJuego.empezo_oleada:
 		boton_acelerar_2._on_self_pressed()
-		GlobalSignal.emit_signal("aceleraMarcaPaso",8)
+		GlobalSignal.emit_signal("aceleraMarcaPaso",3)
 		GlobalSignal.emit_signal("controlMarcaPaso",true)
 		GlobalJuego.juego_pausa = false
 	

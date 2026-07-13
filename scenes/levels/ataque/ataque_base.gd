@@ -24,6 +24,7 @@ func _ready() -> void:
 	crear_timer()
 	GlobalSignal.connect("piezaMuere",piezaMuere) # una pieza murio
 	GlobalSignal.connect("finalizaOleada",finalizaOleada)
+	GlobalSignal.connect("aceleraMarcaPaso",cambioTimer)
 
 func _on_timer_timeout():
 	if GlobalJuego.juego_pausa:
@@ -60,6 +61,9 @@ func crear_timer(): # Tiempo entre ataques
 	
 	# Agregar a la escena
 	add_child(mi_timer)
+
+func cambioTimer(_valor):
+	mi_timer.wait_time = GlobalJuego.tiempo_ataque
 
 func piezaMuere(id):
 	if id==idA:
