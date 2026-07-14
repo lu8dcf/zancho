@@ -11,10 +11,21 @@ func _ready() -> void:
 	GlobalSignal.connect("finalizaOleada",finalizaOleada)
 	
 # A= Atacante  , D= defensor
-func iniciaAtaque(idA,idD,posicionA,posicionD,tipoA,tipoD):
+func iniciaAtaque(idA,idD,posicionA,posicionD,tipoA,tipoD,blanca):
 	if vive(idA)==false:return # aseguramos que estan las piezas vivas
 	if vive(idD)==false:return
 	
+	if blanca: # simepre la pieza A debe ser la balanca, estop cambia las ubicaciones
+		var id_intermedio=idA 
+		var posicion_intermedio =posicionA
+		var tipo_intermedio=tipoA
+		idA=idD
+		posicionA=posicionD
+		tipoA=tipoD
+		idD=id_intermedio
+		posicionD=posicion_intermedio
+		tipoD=tipo_intermedio
+		
 	if _crear_clave(idA, idD)==false:  # codigo del ataque y verifica que no eista anterirormente
 		return
 	GlobalJuego.ataque_en_proceso=true

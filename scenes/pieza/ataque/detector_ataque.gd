@@ -30,7 +30,7 @@ func manejar_ataque(body):
 		if pieza_base.pieza_blanca==false:
 			return
 				
-	GlobalSignal.ataque.emit(pieza_base.id,body.id,pieza_base.position,body.position,pieza_base.pieza_tipo,body.pieza_tipo)
+	GlobalSignal.ataque.emit(pieza_base.id,body.id,pieza_base.position,body.position,pieza_base.pieza_tipo,body.pieza_tipo,body.pieza_blanca)
 	#print("⚔️ Ataque"," yo ",pieza_base.pieza_tipo," ",pieza_base.id," ata ",body.id," ", round(body.position/pieza_base.espaciado))
 		#pieza.recibir_ataque(atacante_tipo, get_meta("origen"))
 

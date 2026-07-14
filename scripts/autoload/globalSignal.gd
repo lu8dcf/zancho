@@ -26,7 +26,7 @@ signal nuevaOleada(estado: bool) #true gano rey   false muere rey con diferencia
 
 # Secuencia de ataques
 @warning_ignore("unused_signal")
-signal ataque (idA:int,idD:int,posicionA:Vector3i,posicionD:Vector3i,tipoA:int,tipoD:int)#Senial que debe emitir cuando comienza la oleada
+signal ataque (idA:int,idD:int,posicionA:Vector3i,posicionD:Vector3i,tipoA:int,tipoD:int,color:bool)#Senial que debe emitir cuando comienza la oleada
 @warning_ignore("unused_signal")
 signal giro_pieza(id: int,angulo:float)
 @warning_ignore("unused_signal")
