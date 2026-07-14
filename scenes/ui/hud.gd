@@ -214,15 +214,15 @@ func mostrar_pausa_pantalla():
 	marco.modulate.a = 0
 	panel_pausa.modulate.a = 0
 
-	var tween = create_tween()
-	tween.set_parallel(true)
+	var tween2 = create_tween()
+	tween2.set_parallel(true)
 
-	tween.tween_property(marco, "modulate:a", 1.0, 0.3)
-	tween.tween_property(panel_pausa, "modulate:a", 1.0, 0.3)
+	tween2.tween_property(marco, "modulate:a", 1.0, 0.3)
+	tween2.tween_property(panel_pausa, "modulate:a", 1.0, 0.3)
 
 	panel_pausa.scale = Vector2(0.8, 0.8)
 
-	tween.tween_property(
+	tween2.tween_property(
 		panel_pausa,
 		"scale",
 		Vector2.ONE,
@@ -235,16 +235,16 @@ func ocultar_pausa_pantalla():
 	if !pausa_container_actual:
 		return
 
-	var tween = create_tween()
+	var tween3 = create_tween()
 
-	tween.tween_property(
+	tween3.tween_property(
 		pausa_container_actual,
 		"modulate:a",
 		0.0,
 		0.25
 	)
 
-	tween.tween_callback(
+	tween3.tween_callback(
 		pausa_container_actual.queue_free
 	)
 

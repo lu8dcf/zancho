@@ -15,7 +15,7 @@ func _ready() -> void:
 	# señales onectadas
 	economia.pieza_vendida.connect(actualizar_pieza)
 	economia.pieza_comprada.connect(actualizar_pieza)
-	GlobalSignal.finalizaOleada.connect(actualizar_pieza)
+	
 	
 	#conectar botones
 	venta.pressed.connect(_on_venta_pressed)
@@ -24,7 +24,7 @@ func _ready() -> void:
 	pieza.mouse_exited.connect(_on_pieza_mouse_exited)
 
 	bloqueos.visible = false
-	actualizar_pieza()
+	actualizar_pieza(true)
 	economia.connect("monedas_cambiadas", actualizar_pieza)
 	GlobalSignal.connect("comienzoOleada", actualizar_pieza)
 	#GlobalJuego.connect("oleada_cambiada", actualizar_pieza)
@@ -38,19 +38,19 @@ func _on_venta_pressed() -> void:
 	var nombre_pieza = name  # esto devolverá "Peon"
 	if economia.inventario_actual.get(nombre_pieza, 0) > 0:
 		economia.vender_pieza(nombre_pieza)
-		actualizar_pieza()
+		actualizar_pieza(true)
 
 
 func _on_compra_pressed() -> void:
 	var nombre_pieza = name  # Esto devolverá "Peon"
 	# intentar comprar esto ahora verifica: monedas y límites
 	if economia.comprar_pieza(nombre_pieza):
-		actualizar_pieza()
+		actualizar_pieza(true)
 	else:
 		print("No se pudo comprar ", nombre_pieza)
 
 
-func actualizar_pieza(_nada=null):
+func actualizar_pieza(_nada:bool):
 	var nombre_pieza  = name  # esto devolverá "Peon"
 	var datos = economia.obtener_datos_pieza(nombre_pieza)
 	
