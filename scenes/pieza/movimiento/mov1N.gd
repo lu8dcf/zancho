@@ -64,7 +64,7 @@ func movimiento():
 func mover(cambio):  # Efecto del cambio desplazamiento
 
 	var tween = create_tween()
-	tween.tween_property(owner, "global_position", owner.global_position + cambio , 1) \
+	tween.tween_property(owner, "global_position", owner.global_position + cambio , GlobalJuego.tiempo_pasos/4) \
 	.set_trans(Tween.TRANS_SINE) \
 	.set_ease(Tween.EASE_IN_OUT)
 

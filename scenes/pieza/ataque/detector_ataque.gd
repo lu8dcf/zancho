@@ -36,5 +36,5 @@ func manejar_ataque(body):
 
 func marcaPaso(): # Desactiva la colision de deteccion de ataque mientras se mueve, en el medio de la teteccion se activa
 	self.disabled = true
-	await get_tree().create_timer(GlobalJuego.tiempo_pasos/2).timeout
+	await get_tree().create_timer(GlobalJuego.tiempo_pasos/3).timeout
 	self.disabled = false
