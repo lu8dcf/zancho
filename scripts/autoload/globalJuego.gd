@@ -160,7 +160,7 @@ func verifica_extremos(sitio: Vector2i):
 	
 func verifica_obstaculos(sitio: Vector2i):
 	# Verificacion de obstaculos en el mapa
-	if sitio in mapas.mapas[GlobalJuego.mapa_actual]:
+	if sitio in mapas.mapas_base[GlobalJuego.mapa_actual]:
 		#mensaje("No se puede insertar sobre un obstaculo")
 		return false
 	return true

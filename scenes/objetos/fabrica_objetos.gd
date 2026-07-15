@@ -53,7 +53,7 @@ func producir_objetos_desde_mapa(indice_mapa: int = -1) -> void:
 	if indice_mapa == -1:
 		indice_mapa = GlobalJuego.mapa_actual 
 	
-	var datos_mapa = mapas.obtener_mapa_actual(indice_mapa)
+	var datos_mapa = mapas.obtener_mapa_para_oleada(GlobalJuego.oleada_actual)
 	var posiciones = datos_mapa["posiciones"]
 	var tipos = datos_mapa["tipos"]
 	
