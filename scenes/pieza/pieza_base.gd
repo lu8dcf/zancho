@@ -440,3 +440,7 @@ func brillar_ataque(estado: bool):
 		if cilindro_instanciado_a != null:
 			cilindro_instanciado_a.queue_free()
 			cilindro_instanciado_a = null
+			
+#Para el gestor de movimiento
+func comienzoAtaquePorOrden():
+	pieza.MovimientoPorOrden()

@@ -83,3 +83,8 @@ signal ultimoTexto
 # efectos
 @warning_ignore("unused_signal")
 signal conteoMonedas
+
+
+#Gestor de movimiento de piezas
+@warning_ignore("unused_signal")
+signal decision_terminada
