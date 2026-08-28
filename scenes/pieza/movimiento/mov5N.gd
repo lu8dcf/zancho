@@ -7,6 +7,7 @@ const DISTANCIA_ATAQUE := 3 #distancia al rey comienza acechp
 # Referencia a la pieza base (el RigidBody3D que contiene este componente)
 var pieza: PiezaBase
 var proxima_posicion : Vector3
+var movimientoElegido
 
 var objetivoRey = Vector3i(1,0,14)
 var ultimoMovimiento : Vector3i = Vector3i.ZERO
@@ -55,30 +56,27 @@ func _ready():
 	# Conectar señal después de que la pieza esté lista
 	await pieza.ready
 	piezasTotal = batallasCerca()
-	GlobalSignal.connect("marcaPaso",movimientoConPeso)
-	
+	#GlobalSignal.connect("marcaPaso",movimientoConPeso)
+	GlobalSignal.connect("listoParaMover", moverPaso)
 
-func movimientoConPeso():
+func movimientoPorOrden():
 
 	var candidatos = obtenerMovimientosValidos()
 	if candidatos.is_empty():
 		return
-	var movimientoElegido = elegirMovimiento(candidatos)
+	movimientoElegido = elegirMovimiento(candidatos)
 	ultimoMovimiento = movimientoElegido
-	#print("MovEle:", movimientoElegido)
-	#print("imp:", impaciencia)
-	#print("agr:", agresividad)
-	owner.verificar_reservadas(movimientoElegido)
-	moverPaso(movimientoElegido)
+	GestorMovimiento.ocupar_casilla(movimientoElegido)
+	#moverPaso(movimientoElegido)
 
 	#var actual = calculoPosActual()
 	#var distanciaActual = distanciaAlRey(actual)
 
-func moverPaso(destino:Vector3i): #desplazo la pieza a la sieguiente
+func moverPaso(): #desplazo la pieza a la sieguiente
 	var avanzo = Vector3(
-		destino.x * GlobalJuego.espaciado_baldosas,
+		movimientoElegido.x * GlobalJuego.espaciado_baldosas,
 		0,
-		destino.z * GlobalJuego.espaciado_baldosas
+		movimientoElegido.z * GlobalJuego.espaciado_baldosas
 	)
 	var tween = create_tween() #animacion y muevo
 	tween.tween_property(owner, "global_position", owner.global_position + avanzo , 1) \
@@ -98,7 +96,7 @@ func obtenerMovimientosValidos():
 
 	for mov in movimientosDisponibles:
 		var paso = (mov * GlobalJuego.espaciado_baldosas)
-		if !owner.verificar_proximo_paso(paso) and GlobalJuego.esta_reservada(paso):
+		if !GestorMovimiento.verifico_proximo(paso):
 			continue
 		var peso = calcularPesoMovimiento(mov)
 		candidatos.append({

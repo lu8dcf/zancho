@@ -36,6 +36,7 @@ GlobalSignal="*uid://d3c860m45uhol"
 GlobalJuego="*uid://ddgt0astfx6o4"
 LoadManager="*uid://csr0nfrim7k7u"
 Cursores="*uid://djhwegnat81e1"
+GestorMovimiento="*uid://80qwbqtgfiwa"
 
 [display]
 

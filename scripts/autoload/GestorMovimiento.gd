@@ -14,7 +14,7 @@ func _ready() -> void:
 	GlobalSignal.connect("marcaPaso", comienzoTurno)
 
 func comienzoTurno():
-	imprimir_tablero()
+	#imprimir_tablero()
 	if estadoActual != estadosGestor.ESPERANDO_MARCAPASO:
 		return
 	estadoActual = estadosGestor.DESIGNANDO_CASILLAS
@@ -26,44 +26,41 @@ func comienzoTurno():
 		listaPiezas.append(reinaPieza)
 	# Cada pieza decide su próximo movimiento
 	for pieza in listaPiezas:
-		if (pieza in Piezas.pieza_blanca and pieza.soyReina()) or pieza in Piezas.pieza_negra:
-			pieza.comienzoAtaquePorOrden()
-			await get_tree().create_timer(0.2).timeout
-			var se_mueve = GlobalSignal.decision_terminada
+		pieza.comienzoAtaquePorOrden()
+		await get_tree().create_timer(0.2).timeout
+		#var se_mueve = GlobalSignal.decision_terminada
 	estadoActual = estadosGestor.EN_TURNO
 	await get_tree().process_frame
 	GlobalSignal.emit_signal("listoParaMover")
 	limpiarCasillasOcupadas()
 
 
-# ============================================================
 # RESERVAS
-# ============================================================
 
-func ocupar_casilla(sitio: Vector2i) -> void:
-	if sitio not in casillas_ocupadas:
-		casillas_ocupadas.append(sitio)
+func ocupar_casilla(sitio) -> void:
+	var sitio2d := convertir_a_sitio2d(sitio)
+	if sitio2d not in casillas_ocupadas:
+		casillas_ocupadas.append(sitio2d)
+	#print("RESERVO:", sitio2d)
+	#print("CASILLAS:", casillas_ocupadas)
 
-
-func esta_ocupada(sitio: Vector2i) -> bool:
-	return sitio in casillas_ocupadas
-
+func esta_ocupada(sitio) -> bool:
+	var sitio2d = convertir_a_sitio2d(sitio)
+	if(sitio2d in casillas_ocupadas):
+		return true
+	return false
 
 func limpiarCasillasOcupadas() -> void:
-	print("casillasResr: ", casillas_ocupadas)
-
+	#print("casillasResr: ", casillas_ocupadas)
 	casillas_ocupadas.clear()
-
 	estadoActual = estadosGestor.ESPERANDO_MARCAPASO
 
 
-# ============================================================
-# PIEZAS ESTÁTICAS
-# ============================================================
+# PIEZAS ESTATICAS
 
 func agregoLasPiezasStaticas() -> void:
 
-	# Las piezas ya deberían tener su pieza_sitio actualizado
+	# Las piezas ya deberíian tener su pieza_sitio actualizado
 	# con un Vector2i.
 	var piezasStaticas = Piezas.pieza_blanca
 	for pieza in piezasStaticas:
@@ -71,73 +68,47 @@ func agregoLasPiezasStaticas() -> void:
 		ocupar_casilla(sitio)
 
 
-# ============================================================
-# COMPROBACIÓN DE CASILLA
-# ============================================================
+# COMPROBACIoN DE CASILLA
 
-func verifico_proximo(sitio: Vector2i) -> bool:
-
-	# Si hay una pieza blanca
-	if not verifica_piezas_blanca(sitio):
+func verifico_proximo(sitio) -> bool:
+	var sitio2d = convertir_a_sitio2d(sitio)
+	if hay_piezas_blancas_en_el_sitio(sitio2d):
 		return true
-
-	# Si hay una pieza negra
-	if not verifica_piezas_negra(sitio):
+	if hay_pieza_negra_en_el_sitio(sitio2d):
 		return true
-
-	# Si está fuera del tablero o hay obstáculo
-	if not verifico_externos(sitio):
+	if not verifico_externos(sitio2d):
 		return true
-
-	# Si ya fue reservada por otra pieza
-	if esta_ocupada(sitio):
+	if esta_ocupada(sitio2d):
 		return true
-
-	# La casilla está libre
 	return false
 
 
-func verifico_soloPiezas(sitio: Vector2i) -> bool:
+func verifico_soloPiezas(sitio) -> bool:
+	var sitio2d = convertir_a_sitio2d(sitio)
+	if hay_piezas_blancas_en_el_sitio(sitio2d):
+		return true
+	if hay_pieza_negra_en_el_sitio(sitio2d):
+		return true
+	return false
 
-	if not verifica_piezas_blanca(sitio):
-		return false
-
-	if not verifica_piezas_negra(sitio):
-		return false
-
-	return true
-
-
-# ============================================================
 # PIEZAS
-# ============================================================
-
-func verifica_piezas_blanca(sitio: Vector2i) -> bool:
-
-	for pieza in Piezas.pieza_blanca:
-
-		if pieza.pieza_sitio == sitio:
-			print("lugar ocupadoB", sitio)
-			return false
-
-	return true
+func hay_piezas_blancas_en_el_sitio(sitio: Vector2i) -> bool:
+	if sitio in casillas_ocupadas:
+			#print("lugar ocupadoB", sitio)
+			return true
+	return false
 
 
-func verifica_piezas_negra(sitio: Vector2i) -> bool:
-
-	for pieza in Piezas.pieza_negra:
-
-		if pieza.pieza_sitio == sitio:
-			print("lugar ocupadoN", sitio)
-			return false
-
-	return true
+func hay_pieza_negra_en_el_sitio(sitio: Vector2i) -> bool:
+	
+	if sitio in casillas_ocupadas:
+			#print("lugar ocupadoN", sitio)
+			return true
+	return false
 
 
 func proximaPiezaSeMueve(sitio: Vector2i) -> bool:
-
 	for pieza in Piezas.pieza_negra:
-
 		if pieza.pieza_sitio == sitio and pieza.yaElegiProx:
 			return true
 
@@ -147,40 +118,52 @@ func proximaPiezaSeMueve(sitio: Vector2i) -> bool:
 func resetearProxLugar(pieza) -> void:
 	pieza.yaElegiProx = false
 
-
-# ============================================================
 # TABLERO
-# ============================================================
 
-func verifico_externos(sitio: Vector2i) -> bool:
-
-	if not verifica_obstaculos(sitio):
+func verifico_externos(sitio) -> bool:
+	var sitio2d = convertir_a_sitio2d(sitio)
+	if not verifica_obstaculos(sitio2d):
 		return false
-
-	if not verifica_extremos(sitio):
+	if not verifica_extremos(sitio2d):
 		return false
-
 	return true
 
 
-func verifica_extremos(sitio: Vector2i) -> bool:
-
-	if sitio.x < 0 or sitio.x > 15:
+func verifica_extremos(sitio) -> bool:
+	var sitio2d = convertir_a_sitio2d(sitio)
+	if sitio2d.x < 0 or sitio2d.x > 15:
 		return false
-
-	if sitio.y < 0 or sitio.y > 15:
+	if sitio2d.y < 0 or sitio2d.y > 15:
 		return false
-
 	return true
 
 
-func verifica_obstaculos(sitio: Vector2i) -> bool:
-
-	if sitio in mapas.mapas[GlobalJuego.mapa_actual]:
+func verifica_obstaculos(sitio) -> bool:
+	var sitio2d = convertir_a_sitio2d(sitio)
+	if sitio2d in mapas.mapas[GlobalJuego.mapa_actual]:
 		return false
-
 	return true
-
+	
+func convertir_a_sitio2d(posicion) -> Vector2i:
+	if posicion is Vector2i:
+		return posicion
+	if posicion is Vector3i:
+		return Vector2i(
+			posicion.x,
+			posicion.z
+		)
+	if posicion is Vector2:
+		return Vector2i(
+			round(posicion.x),
+			round(posicion.y)
+		)
+	if posicion is Vector3:
+		return Vector2i(
+			round(posicion.x),
+			round(posicion.z)
+		)
+	push_error("GestorMovimiento: tipo de posición no reconocido: " + str(posicion))
+	return Vector2i.ZERO
 
 
 func imprimir_tablero() -> void:
@@ -199,32 +182,21 @@ func imprimir_tablero() -> void:
 		for x in range(ancho):
 			var sitio := Vector2i(x, y)
 			var simbolo := "."
-			# --------------------------------
-			# Obstáculo
-			# --------------------------------
+			# Obstaculo
 			if sitio in mapas.mapas[GlobalJuego.mapa_actual]:
 				simbolo = "X"
-			# --------------------------------
 			# Casillas reservadas
-			# --------------------------------
 			if sitio in casillas_ocupadas:
 				simbolo = "*"
-			# -------------------------------
 			# Piezas negras
-			# --------------------------------
 			for pieza in Piezas.pieza_negra:
 				if pieza.pieza_sitio == sitio:
 					simbolo = "N"
 					break
-			# --------------------------------
 			# Piezas blancas
-			# --------------------------------
 			for pieza in Piezas.pieza_blanca:
 				if pieza.pieza_sitio == sitio:
-					if pieza.soyReina():
-						simbolo = "R"
-					else:
-						simbolo = "B"
+					simbolo = "B"
 					break
 			fila += " " + simbolo + " "
 		print(fila)

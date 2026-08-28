@@ -5,6 +5,7 @@ var pasos = 0
 var pieza: PiezaBase
 var proxima_posicion: Vector3
 var esValida = false
+var cambio
 
 # Movimiento en L
 var direccion = Vector3i(0, 0, 0)
@@ -28,6 +29,7 @@ func _ready():
 	await pieza.ready
 	await get_tree().create_timer(1).timeout
 	var posicionActual = calculoPosActual()
+	GlobalSignal.connect("listoParaMover", realizar_salto_parabolico)
 	#var limite = GlobalJuego.tamano_tablero.x - 1 #seria una general
 	#depende del lado que este del tablero, cambia la secuencia
 	if(posicionActual.x+ posicionActual.z<15):
@@ -38,7 +40,7 @@ func _ready():
 		#diagonal
 		secuencia = [0,6,5]
 		
-	GlobalSignal.connect("marcaPaso",movimiento	)
+	#GlobalSignal.connect("marcaPaso",movimiento	)
 
 func calculoPosActual() -> Vector3i:
 	var actual = Vector3i(
@@ -49,35 +51,28 @@ func calculoPosActual() -> Vector3i:
 
 
 
-func movimiento():
+func movimientoPorOrden():
 	for i in range(secuencia.size()): #es un sistema de prioridad
 		cambio_estado(secuencia[i]) #siempre muevea delante, si no, una casilla, si no a la derecha y asi
-		var cambio = direccion * GlobalJuego.espaciado_baldosas # vector de cambio de la pieza
-		if (owner.verificar_proximo_paso(cambio) and owner.verificar_reservadas(Vector3i(round(owner.global_position + cambio)/GlobalJuego.espaciado_baldosas))):
-			realizar_salto_parabolico(cambio)
+		cambio = direccion * GlobalJuego.espaciado_baldosas # vector de cambio de la pieza
+		if !GestorMovimiento.verifico_proximo(obtengoPosSiguienteGlobal(cambio)):
+			GestorMovimiento.ocupar_casilla(obtengoPosSiguienteGlobal(cambio))
+			GlobalSignal.emit_signal("decision_terminada",true)
+			#realizar_salto_parabolico(cambio)
 			return
 	cambio_estado(0)
+
 	
-	#
-	#
-	#
-	#cambio_estado(paso)
-	#var cambio = direccion * GlobalJuego.espaciado_baldosas
-	#if owner.verificar_proximo_paso(cambio):
-		#realizar_salto_parabolico(cambio)
-		#dar_paso()
-	#else:
-		#buscar_siguiente_valido()
+func obtengoPosSiguienteGlobal(siguientePos):
+	return (round(owner.global_position + siguientePos)/GlobalJuego.espaciado_baldosas)
 
 func dar_paso():
 	paso+=1
 	if paso==len(secuencia): paso=1
 	cambio_estado(paso)
 	#
-
-
 	
-func realizar_salto_parabolico(cambio: Vector3):
+func realizar_salto_parabolico():
 	posicion_inicial = owner.global_position
 	posicion_final = owner.global_position + cambio
 	

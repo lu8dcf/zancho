@@ -6,6 +6,7 @@ var pasos=0 #cantidad dee pasos que dara para cambio de  secuencia
 # Referencia a la pieza base (el RigidBody3D que contiene este componente)
 var pieza: PiezaBase
 var proxima_posicion : Vector3
+var cambio
 
 # desplazamiento Torre
 var direccion= Vector3i(0,0,0)
@@ -27,7 +28,7 @@ func _ready():
 	await pieza.ready
 	
 	await get_tree().create_timer(1).timeout
-	
+	GlobalSignal.connect("listoParaMover", mover)
 	var posicionActual = calculoPosActual()
 	#var limite = GlobalJuego.tamano_tablero.x - 1 #seria una general
 	#depende del lado que este del tablero, cambia la secuencia
@@ -40,12 +41,9 @@ func _ready():
 	else:
 		#diagonal
 		secuencia = [0,3,4,3,4]
-		
-
-	GlobalSignal.connect("marcaPaso",movimiento	)
-
-
 	
+
+	#GlobalSignal.connect("marcaPaso",movimiento	)
 
 func calculoPosActual() -> Vector3i:
 	var actual = Vector3i(
@@ -54,34 +52,40 @@ func calculoPosActual() -> Vector3i:
 	round(pieza.global_position.z / GlobalJuego.espaciado_baldosas))
 	return actual
 
-func movimiento():
-	dar_paso()
-	# actualizacion de posicion
-	var cambio = direccion*GlobalJuego.espaciado_baldosas # # vector de cambio de la pieza
+func movimientoPorOrden():
+	var intentos := 3
+	while intentos > 0:
+		dar_paso()
+		cambio = direccion * GlobalJuego.espaciado_baldosas
+		if !GestorMovimiento.verifico_proximo(obtengoPosSiguienteGlobal(cambio)):
+
+			GestorMovimiento.ocupar_casilla(obtengoPosSiguienteGlobal(cambio))
+			GlobalSignal.emit_signal("decision_terminada",true)
+			return
+		intentos -= 1
+	direccion = Vector3i.ZERO
+	cambio = direccion * GlobalJuego.espaciado_baldosas
+	owner.giro(45)
+	GlobalSignal.emit_signal("decision_terminada",true)
 	
-	if (owner.verificar_proximo_paso(cambio) and owner.verificar_reservadas(round(owner.global_position + cambio)/GlobalJuego.espaciado_baldosas)):
-		saltar_paso()
-		return
+func obtengoPosSiguienteGlobal(siguientePos):
+	return (round(owner.global_position + siguientePos)/GlobalJuego.espaciado_baldosas)
+
+
+func dar_paso():
+	cambio_estado(secuencia[paso])
+	paso = (paso + 1) % secuencia.size()
 	
-	#owner.animacion_caminata("Bidle")
-	
+func mover():
 	var tween = create_tween()
 	tween.tween_property(owner, "global_position", owner.global_position + cambio , 1) \
 	.set_trans(Tween.TRANS_SINE) \
 	.set_ease(Tween.EASE_IN_OUT)
 	
-func dar_paso():
-	paso+=1
-	if paso==len(secuencia): paso=1
-	cambio_estado(paso)
-	
-func saltar_paso(): # volver a iniciar en otra posicion d esalto
-	movimiento()  	
-	
 # Estadod de la pieza
 func cambio_estado(cambio):
 	
-	match secuencia[cambio]:
+	match cambio:
 		0: # Quieto
 			direccion = Vector3i(0,0,0)
 			owner.giro(45)

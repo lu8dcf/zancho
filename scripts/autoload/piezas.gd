@@ -44,7 +44,13 @@ func eliminar_pieza(id_buscar):
 			return true
 	return false
 		
-		
+func buscoYRetornoReina(): #hago esta funcion para obtener la reina y manejar su movimiento
+	for pieza_b in pieza_blanca:
+		for hijo in pieza_b.get_children():
+			if hijo is ReinaB:
+				return pieza_b
+	return null
+	
 func informar_fin_ataque(ganador,perdedor): # Tipo ganador
 	if GlobalJuego.empezo_oleada:
 		GlobalSignal.finAtaque.emit(buscar_tipo(ganador),buscar_color(ganador),buscar_tipo(perdedor))

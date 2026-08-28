@@ -113,7 +113,6 @@ func _on_modo_colocacion_cancelado():
 
 func _indicacion_reina(ubi: Vector3i,mostrar:bool):
 	mostrar = true
-	print("baldosa: ", ubi)
 	if mostrar:
 		if obtener_punto_colocacion() == Vector3(ubi):
 			indicador_seleccion.visible = true

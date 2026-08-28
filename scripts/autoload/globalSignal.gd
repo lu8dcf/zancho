@@ -87,4 +87,8 @@ signal conteoMonedas
 
 #Gestor de movimiento de piezas
 @warning_ignore("unused_signal")
-signal decision_terminada
+#signal comenzaAtaque() #Esta señal se le enviara a cada pieza para elegir su movimiento
+@warning_ignore("unused_signal")
+signal listoParaMover()
+@warning_ignore("unused_signal")
+signal decision_terminada(se_mueve: bool)

@@ -19,7 +19,8 @@ var vida_actual: int
 var angulo_frente: int = 225 # por defecto la blanca
 var angulo_frente_negra: int = 45 # por defecto la negra
 
-
+var movimiento = null
+var yaElegiProx = false
 # Componentes
 var movimiento_especifico = preload("res://scenes/pieza/movimiento/movimiento.tscn")
 var ataque_especifico = preload("res://scenes/pieza/ataque/Ataque.tscn")
@@ -129,7 +130,7 @@ func get_animation_player() -> AnimationPlayer:
 	return animation_player
 	
 func cargar_movimiento(): # agrega el nodo movimiento con el script correspondiente a la pieza
-	var movimiento = movimiento_especifico.instantiate()
+	movimiento = movimiento_especifico.instantiate()
 	var movimiento_script = "res://scenes/pieza/movimiento/mov"+str(pieza_tipo)+ color+".gd"
 	var script = load(movimiento_script)
 	movimiento.set_script(script)
@@ -442,5 +443,8 @@ func brillar_ataque(estado: bool):
 			cilindro_instanciado_a = null
 			
 #Para el gestor de movimiento
-func comienzoAtaquePorOrden():
-	pieza.MovimientoPorOrden()
+func comienzoAtaquePorOrden(): #conector entre Gestor y pieza
+	movimiento.movimientoPorOrden()
+func proximoElegido(eleccion: bool):
+	yaElegiProx =  eleccion
+	
